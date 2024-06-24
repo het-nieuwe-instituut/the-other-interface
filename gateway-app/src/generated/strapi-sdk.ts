@@ -219,6 +219,14 @@ export type ComponentCoreStandAloneLink = {
   url?: Maybe<Scalars['String']>
 }
 
+export type ComponentCoreStandAloneLinkFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentCoreStandAloneLinkFiltersInput>>>
+  label?: InputMaybe<StringFilterInput>
+  not?: InputMaybe<ComponentCoreStandAloneLinkFiltersInput>
+  or?: InputMaybe<Array<InputMaybe<ComponentCoreStandAloneLinkFiltersInput>>>
+  url?: InputMaybe<StringFilterInput>
+}
+
 export type ComponentCoreTimeframe = {
   __typename?: 'ComponentCoreTimeframe'
   id: Scalars['ID']
@@ -347,6 +355,18 @@ export type ComponentModulesSideImageWithText = {
   image: UploadFileEntityResponse
   image_alt_text: Scalars['String']
   sideText: Scalars['String']
+}
+
+export type ComponentModulesStandaloneLinks = {
+  __typename?: 'ComponentModulesStandaloneLinks'
+  id: Scalars['ID']
+  standaloneLinks?: Maybe<Array<Maybe<ComponentCoreStandAloneLink>>>
+}
+
+export type ComponentModulesStandaloneLinksStandaloneLinksArgs = {
+  filters?: InputMaybe<ComponentCoreStandAloneLinkFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
 export type ComponentModulesSubtitle = {
@@ -601,6 +621,7 @@ export type GenericMorph =
   | ComponentModulesImageCarousel
   | ComponentModulesPullquote
   | ComponentModulesSideImageWithText
+  | ComponentModulesStandaloneLinks
   | ComponentModulesSubtitle
   | ComponentModulesTextModule
   | ComponentModulesTitleModule
@@ -1654,6 +1675,7 @@ export type StoryComponentsDynamicZone =
   | ComponentModulesImageCarousel
   | ComponentModulesPullquote
   | ComponentModulesSideImageWithText
+  | ComponentModulesStandaloneLinks
   | ComponentModulesSubtitle
   | ComponentModulesTextModule
   | ComponentModulesTitleModule
@@ -3261,6 +3283,42 @@ export type HighlightedHomepageThemesQuery = {
                             } | null
                           }
                         }
+                      | {
+                          __typename: 'ComponentModulesStandaloneLinks'
+                          id: string
+                          standaloneLinks?: Array<{
+                            __typename?: 'ComponentCoreStandAloneLink'
+                            id: string
+                            label: string
+                            url?: string | null
+                            attachment?: {
+                              __typename?: 'UploadFileEntityResponse'
+                              data?: {
+                                __typename?: 'UploadFileEntity'
+                                id?: string | null
+                                attributes?: {
+                                  __typename?: 'UploadFile'
+                                  hash: string
+                                  mime: string
+                                  name: string
+                                  provider: string
+                                  size: number
+                                  url: string
+                                  alternativeText?: string | null
+                                  caption?: string | null
+                                  createdAt?: any | null
+                                  ext?: string | null
+                                  formats?: any | null
+                                  height?: number | null
+                                  previewUrl?: string | null
+                                  provider_metadata?: any | null
+                                  updatedAt?: any | null
+                                  width?: number | null
+                                } | null
+                              } | null
+                            } | null
+                          } | null> | null
+                        }
                       | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                       | {
                           __typename: 'ComponentModulesTextModule'
@@ -3421,6 +3479,7 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentModulesImageCarousel' }
                             | { __typename: 'ComponentModulesPullquote' }
                             | { __typename: 'ComponentModulesSideImageWithText' }
+                            | { __typename: 'ComponentModulesStandaloneLinks' }
                             | { __typename: 'ComponentModulesSubtitle' }
                             | { __typename: 'ComponentModulesTextModule' }
                             | { __typename: 'ComponentModulesTitleModule' }
@@ -3534,6 +3593,7 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentModulesImageCarousel' }
                             | { __typename: 'ComponentModulesPullquote' }
                             | { __typename: 'ComponentModulesSideImageWithText' }
+                            | { __typename: 'ComponentModulesStandaloneLinks' }
                             | { __typename: 'ComponentModulesSubtitle' }
                             | { __typename: 'ComponentModulesTextModule' }
                             | { __typename: 'ComponentModulesTitleModule' }
@@ -3812,6 +3872,42 @@ export type HighlightedHomepageThemesQuery = {
                             } | null
                           }
                         }
+                      | {
+                          __typename: 'ComponentModulesStandaloneLinks'
+                          id: string
+                          standaloneLinks?: Array<{
+                            __typename?: 'ComponentCoreStandAloneLink'
+                            id: string
+                            label: string
+                            url?: string | null
+                            attachment?: {
+                              __typename?: 'UploadFileEntityResponse'
+                              data?: {
+                                __typename?: 'UploadFileEntity'
+                                id?: string | null
+                                attributes?: {
+                                  __typename?: 'UploadFile'
+                                  hash: string
+                                  mime: string
+                                  name: string
+                                  provider: string
+                                  size: number
+                                  url: string
+                                  alternativeText?: string | null
+                                  caption?: string | null
+                                  createdAt?: any | null
+                                  ext?: string | null
+                                  formats?: any | null
+                                  height?: number | null
+                                  previewUrl?: string | null
+                                  provider_metadata?: any | null
+                                  updatedAt?: any | null
+                                  width?: number | null
+                                } | null
+                              } | null
+                            } | null
+                          } | null> | null
+                        }
                       | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                       | {
                           __typename: 'ComponentModulesTextModule'
@@ -3972,6 +4068,7 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentModulesImageCarousel' }
                             | { __typename: 'ComponentModulesPullquote' }
                             | { __typename: 'ComponentModulesSideImageWithText' }
+                            | { __typename: 'ComponentModulesStandaloneLinks' }
                             | { __typename: 'ComponentModulesSubtitle' }
                             | { __typename: 'ComponentModulesTextModule' }
                             | { __typename: 'ComponentModulesTitleModule' }
@@ -4085,6 +4182,7 @@ export type HighlightedHomepageThemesQuery = {
                             | { __typename: 'ComponentModulesImageCarousel' }
                             | { __typename: 'ComponentModulesPullquote' }
                             | { __typename: 'ComponentModulesSideImageWithText' }
+                            | { __typename: 'ComponentModulesStandaloneLinks' }
                             | { __typename: 'ComponentModulesSubtitle' }
                             | { __typename: 'ComponentModulesTextModule' }
                             | { __typename: 'ComponentModulesTitleModule' }
@@ -6031,6 +6129,42 @@ export type StoriesQuery = {
                 } | null
               }
             }
+          | {
+              __typename: 'ComponentModulesStandaloneLinks'
+              id: string
+              standaloneLinks?: Array<{
+                __typename?: 'ComponentCoreStandAloneLink'
+                id: string
+                label: string
+                url?: string | null
+                attachment?: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                } | null
+              } | null> | null
+            }
           | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
           | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
           | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -6183,6 +6317,7 @@ export type StoriesQuery = {
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
                 | { __typename: 'ComponentModulesSideImageWithText' }
+                | { __typename: 'ComponentModulesStandaloneLinks' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -6296,6 +6431,7 @@ export type StoriesQuery = {
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
                 | { __typename: 'ComponentModulesSideImageWithText' }
+                | { __typename: 'ComponentModulesStandaloneLinks' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -6615,6 +6751,42 @@ export type StoryQuery = {
                 } | null
               }
             }
+          | {
+              __typename: 'ComponentModulesStandaloneLinks'
+              id: string
+              standaloneLinks?: Array<{
+                __typename?: 'ComponentCoreStandAloneLink'
+                id: string
+                label: string
+                url?: string | null
+                attachment?: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                } | null
+              } | null> | null
+            }
           | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
           | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
           | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -6767,6 +6939,7 @@ export type StoryQuery = {
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
                 | { __typename: 'ComponentModulesSideImageWithText' }
+                | { __typename: 'ComponentModulesStandaloneLinks' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -6880,6 +7053,7 @@ export type StoryQuery = {
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
                 | { __typename: 'ComponentModulesSideImageWithText' }
+                | { __typename: 'ComponentModulesStandaloneLinks' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -7197,6 +7371,42 @@ export type StoryByLocaleQuery = {
                 } | null
               }
             }
+          | {
+              __typename: 'ComponentModulesStandaloneLinks'
+              id: string
+              standaloneLinks?: Array<{
+                __typename?: 'ComponentCoreStandAloneLink'
+                id: string
+                label: string
+                url?: string | null
+                attachment?: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                } | null
+              } | null> | null
+            }
           | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
           | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
           | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -7496,6 +7706,42 @@ export type StoryByLocaleQuery = {
                         } | null
                       } | null
                     }
+                  }
+                | {
+                    __typename: 'ComponentModulesStandaloneLinks'
+                    id: string
+                    standaloneLinks?: Array<{
+                      __typename?: 'ComponentCoreStandAloneLink'
+                      id: string
+                      label: string
+                      url?: string | null
+                      attachment?: {
+                        __typename?: 'UploadFileEntityResponse'
+                        data?: {
+                          __typename?: 'UploadFileEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'UploadFile'
+                            hash: string
+                            mime: string
+                            name: string
+                            provider: string
+                            size: number
+                            url: string
+                            alternativeText?: string | null
+                            caption?: string | null
+                            createdAt?: any | null
+                            ext?: string | null
+                            formats?: any | null
+                            height?: number | null
+                            previewUrl?: string | null
+                            provider_metadata?: any | null
+                            updatedAt?: any | null
+                            width?: number | null
+                          } | null
+                        } | null
+                      } | null
+                    } | null> | null
                   }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
@@ -7815,6 +8061,42 @@ export type StoriesByLocaleQuery = {
                 } | null
               }
             }
+          | {
+              __typename: 'ComponentModulesStandaloneLinks'
+              id: string
+              standaloneLinks?: Array<{
+                __typename?: 'ComponentCoreStandAloneLink'
+                id: string
+                label: string
+                url?: string | null
+                attachment?: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                } | null
+              } | null> | null
+            }
           | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
           | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
           | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -8115,6 +8397,42 @@ export type StoriesByLocaleQuery = {
                       } | null
                     }
                   }
+                | {
+                    __typename: 'ComponentModulesStandaloneLinks'
+                    id: string
+                    standaloneLinks?: Array<{
+                      __typename?: 'ComponentCoreStandAloneLink'
+                      id: string
+                      label: string
+                      url?: string | null
+                      attachment?: {
+                        __typename?: 'UploadFileEntityResponse'
+                        data?: {
+                          __typename?: 'UploadFileEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'UploadFile'
+                            hash: string
+                            mime: string
+                            name: string
+                            provider: string
+                            size: number
+                            url: string
+                            alternativeText?: string | null
+                            caption?: string | null
+                            createdAt?: any | null
+                            ext?: string | null
+                            formats?: any | null
+                            height?: number | null
+                            previewUrl?: string | null
+                            provider_metadata?: any | null
+                            updatedAt?: any | null
+                            width?: number | null
+                          } | null
+                        } | null
+                      } | null
+                    } | null> | null
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -8300,6 +8618,7 @@ export type StoriesMetaByLocaleQuery = {
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
                 | { __typename: 'ComponentModulesSideImageWithText' }
+                | { __typename: 'ComponentModulesStandaloneLinks' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -8413,6 +8732,7 @@ export type StoriesMetaByLocaleQuery = {
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
                 | { __typename: 'ComponentModulesSideImageWithText' }
+                | { __typename: 'ComponentModulesStandaloneLinks' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -8611,6 +8931,7 @@ export type StoriesMetaByLocaleQuery = {
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
                       | { __typename: 'ComponentModulesSideImageWithText' }
+                      | { __typename: 'ComponentModulesStandaloneLinks' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -8724,6 +9045,7 @@ export type StoriesMetaByLocaleQuery = {
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
                       | { __typename: 'ComponentModulesSideImageWithText' }
+                      | { __typename: 'ComponentModulesStandaloneLinks' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -9123,6 +9445,42 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 } | null
               }
             }
+          | {
+              __typename: 'ComponentModulesStandaloneLinks'
+              id: string
+              standaloneLinks?: Array<{
+                __typename?: 'ComponentCoreStandAloneLink'
+                id: string
+                label: string
+                url?: string | null
+                attachment?: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    id?: string | null
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      hash: string
+                      mime: string
+                      name: string
+                      provider: string
+                      size: number
+                      url: string
+                      alternativeText?: string | null
+                      caption?: string | null
+                      createdAt?: any | null
+                      ext?: string | null
+                      formats?: any | null
+                      height?: number | null
+                      previewUrl?: string | null
+                      provider_metadata?: any | null
+                      updatedAt?: any | null
+                      width?: number | null
+                    } | null
+                  } | null
+                } | null
+              } | null> | null
+            }
           | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
           | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
           | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -9275,6 +9633,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
                 | { __typename: 'ComponentModulesSideImageWithText' }
+                | { __typename: 'ComponentModulesStandaloneLinks' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -9388,6 +9747,7 @@ export type StoriesLinkedToTriplyRecordExtendedQuery = {
                 | { __typename: 'ComponentModulesImageCarousel' }
                 | { __typename: 'ComponentModulesPullquote' }
                 | { __typename: 'ComponentModulesSideImageWithText' }
+                | { __typename: 'ComponentModulesStandaloneLinks' }
                 | { __typename: 'ComponentModulesSubtitle' }
                 | { __typename: 'ComponentModulesTextModule' }
                 | { __typename: 'ComponentModulesTitleModule' }
@@ -9548,6 +9908,7 @@ export type StoriesByIdsQuery = {
           | { __typename?: 'ComponentModulesImageCarousel' }
           | { __typename?: 'ComponentModulesPullquote' }
           | { __typename?: 'ComponentModulesSideImageWithText' }
+          | { __typename?: 'ComponentModulesStandaloneLinks' }
           | { __typename?: 'ComponentModulesSubtitle' }
           | { __typename?: 'ComponentModulesTextModule' }
           | { __typename?: 'ComponentModulesTitleModule' }
@@ -9947,6 +10308,42 @@ export type NestedStoryFragmentFragment = {
             } | null
           }
         }
+      | {
+          __typename: 'ComponentModulesStandaloneLinks'
+          id: string
+          standaloneLinks?: Array<{
+            __typename?: 'ComponentCoreStandAloneLink'
+            id: string
+            label: string
+            url?: string | null
+            attachment?: {
+              __typename?: 'UploadFileEntityResponse'
+              data?: {
+                __typename?: 'UploadFileEntity'
+                id?: string | null
+                attributes?: {
+                  __typename?: 'UploadFile'
+                  hash: string
+                  mime: string
+                  name: string
+                  provider: string
+                  size: number
+                  url: string
+                  alternativeText?: string | null
+                  caption?: string | null
+                  createdAt?: any | null
+                  ext?: string | null
+                  formats?: any | null
+                  height?: number | null
+                  previewUrl?: string | null
+                  provider_metadata?: any | null
+                  updatedAt?: any | null
+                  width?: number | null
+                } | null
+              } | null
+            } | null
+          } | null> | null
+        }
       | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
       | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
       | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -10248,6 +10645,42 @@ export type LocalizedStoryFragmentFragment = {
             } | null
           }
         }
+      | {
+          __typename: 'ComponentModulesStandaloneLinks'
+          id: string
+          standaloneLinks?: Array<{
+            __typename?: 'ComponentCoreStandAloneLink'
+            id: string
+            label: string
+            url?: string | null
+            attachment?: {
+              __typename?: 'UploadFileEntityResponse'
+              data?: {
+                __typename?: 'UploadFileEntity'
+                id?: string | null
+                attributes?: {
+                  __typename?: 'UploadFile'
+                  hash: string
+                  mime: string
+                  name: string
+                  provider: string
+                  size: number
+                  url: string
+                  alternativeText?: string | null
+                  caption?: string | null
+                  createdAt?: any | null
+                  ext?: string | null
+                  formats?: any | null
+                  height?: number | null
+                  previewUrl?: string | null
+                  provider_metadata?: any | null
+                  updatedAt?: any | null
+                  width?: number | null
+                } | null
+              } | null
+            } | null
+          } | null> | null
+        }
       | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
       | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
       | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -10548,6 +10981,42 @@ export type LocalizedStoryFragmentFragment = {
                   } | null
                 }
               }
+            | {
+                __typename: 'ComponentModulesStandaloneLinks'
+                id: string
+                standaloneLinks?: Array<{
+                  __typename?: 'ComponentCoreStandAloneLink'
+                  id: string
+                  label: string
+                  url?: string | null
+                  attachment?: {
+                    __typename?: 'UploadFileEntityResponse'
+                    data?: {
+                      __typename?: 'UploadFileEntity'
+                      id?: string | null
+                      attributes?: {
+                        __typename?: 'UploadFile'
+                        hash: string
+                        mime: string
+                        name: string
+                        provider: string
+                        size: number
+                        url: string
+                        alternativeText?: string | null
+                        caption?: string | null
+                        createdAt?: any | null
+                        ext?: string | null
+                        formats?: any | null
+                        height?: number | null
+                        previewUrl?: string | null
+                        provider_metadata?: any | null
+                        updatedAt?: any | null
+                        width?: number | null
+                      } | null
+                    } | null
+                  } | null
+                } | null> | null
+              }
             | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
             | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
             | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -10817,6 +11286,42 @@ export type StoryFragmentFragment = {
             } | null
           }
         }
+      | {
+          __typename: 'ComponentModulesStandaloneLinks'
+          id: string
+          standaloneLinks?: Array<{
+            __typename?: 'ComponentCoreStandAloneLink'
+            id: string
+            label: string
+            url?: string | null
+            attachment?: {
+              __typename?: 'UploadFileEntityResponse'
+              data?: {
+                __typename?: 'UploadFileEntity'
+                id?: string | null
+                attributes?: {
+                  __typename?: 'UploadFile'
+                  hash: string
+                  mime: string
+                  name: string
+                  provider: string
+                  size: number
+                  url: string
+                  alternativeText?: string | null
+                  caption?: string | null
+                  createdAt?: any | null
+                  ext?: string | null
+                  formats?: any | null
+                  height?: number | null
+                  previewUrl?: string | null
+                  provider_metadata?: any | null
+                  updatedAt?: any | null
+                  width?: number | null
+                } | null
+              } | null
+            } | null
+          } | null> | null
+        }
       | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
       | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
       | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -10969,6 +11474,7 @@ export type StoryFragmentFragment = {
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
             | { __typename: 'ComponentModulesSideImageWithText' }
+            | { __typename: 'ComponentModulesStandaloneLinks' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -11082,6 +11588,7 @@ export type StoryFragmentFragment = {
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
             | { __typename: 'ComponentModulesSideImageWithText' }
+            | { __typename: 'ComponentModulesStandaloneLinks' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -11263,6 +11770,7 @@ export type StoryMetaFragmentFragment = {
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
             | { __typename: 'ComponentModulesSideImageWithText' }
+            | { __typename: 'ComponentModulesStandaloneLinks' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -11376,6 +11884,7 @@ export type StoryMetaFragmentFragment = {
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
             | { __typename: 'ComponentModulesSideImageWithText' }
+            | { __typename: 'ComponentModulesStandaloneLinks' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -11540,6 +12049,7 @@ export type LocalizedStoryMetaFragmentFragment = {
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
             | { __typename: 'ComponentModulesSideImageWithText' }
+            | { __typename: 'ComponentModulesStandaloneLinks' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -11653,6 +12163,7 @@ export type LocalizedStoryMetaFragmentFragment = {
             | { __typename: 'ComponentModulesImageCarousel' }
             | { __typename: 'ComponentModulesPullquote' }
             | { __typename: 'ComponentModulesSideImageWithText' }
+            | { __typename: 'ComponentModulesStandaloneLinks' }
             | { __typename: 'ComponentModulesSubtitle' }
             | { __typename: 'ComponentModulesTextModule' }
             | { __typename: 'ComponentModulesTitleModule' }
@@ -11851,6 +12362,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
                   | { __typename: 'ComponentModulesSideImageWithText' }
+                  | { __typename: 'ComponentModulesStandaloneLinks' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -11964,6 +12476,7 @@ export type LocalizedStoryMetaFragmentFragment = {
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
                   | { __typename: 'ComponentModulesSideImageWithText' }
+                  | { __typename: 'ComponentModulesStandaloneLinks' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -12237,6 +12750,43 @@ type StoryComponentsFragment_ComponentModulesSideImageWithText_Fragment = {
   }
 }
 
+type StoryComponentsFragment_ComponentModulesStandaloneLinks_Fragment = {
+  __typename: 'ComponentModulesStandaloneLinks'
+  id: string
+  standaloneLinks?: Array<{
+    __typename?: 'ComponentCoreStandAloneLink'
+    id: string
+    label: string
+    url?: string | null
+    attachment?: {
+      __typename?: 'UploadFileEntityResponse'
+      data?: {
+        __typename?: 'UploadFileEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'UploadFile'
+          hash: string
+          mime: string
+          name: string
+          provider: string
+          size: number
+          url: string
+          alternativeText?: string | null
+          caption?: string | null
+          createdAt?: any | null
+          ext?: string | null
+          formats?: any | null
+          height?: number | null
+          previewUrl?: string | null
+          provider_metadata?: any | null
+          updatedAt?: any | null
+          width?: number | null
+        } | null
+      } | null
+    } | null
+  } | null> | null
+}
+
 type StoryComponentsFragment_ComponentModulesSubtitle_Fragment = {
   __typename: 'ComponentModulesSubtitle'
   id: string
@@ -12270,6 +12820,7 @@ export type StoryComponentsFragmentFragment =
   | StoryComponentsFragment_ComponentModulesImageCarousel_Fragment
   | StoryComponentsFragment_ComponentModulesPullquote_Fragment
   | StoryComponentsFragment_ComponentModulesSideImageWithText_Fragment
+  | StoryComponentsFragment_ComponentModulesStandaloneLinks_Fragment
   | StoryComponentsFragment_ComponentModulesSubtitle_Fragment
   | StoryComponentsFragment_ComponentModulesTextModule_Fragment
   | StoryComponentsFragment_ComponentModulesTitleModule_Fragment
@@ -12504,6 +13055,43 @@ export type ComponentModulesButtonsModuleFragmentFragment = {
     id: string
     text: string
     url: string
+  } | null> | null
+}
+
+export type ComponentModulesStandaloneLinksFragmentFragment = {
+  __typename: 'ComponentModulesStandaloneLinks'
+  id: string
+  standaloneLinks?: Array<{
+    __typename?: 'ComponentCoreStandAloneLink'
+    id: string
+    label: string
+    url?: string | null
+    attachment?: {
+      __typename?: 'UploadFileEntityResponse'
+      data?: {
+        __typename?: 'UploadFileEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'UploadFile'
+          hash: string
+          mime: string
+          name: string
+          provider: string
+          size: number
+          url: string
+          alternativeText?: string | null
+          caption?: string | null
+          createdAt?: any | null
+          ext?: string | null
+          formats?: any | null
+          height?: number | null
+          previewUrl?: string | null
+          provider_metadata?: any | null
+          updatedAt?: any | null
+          width?: number | null
+        } | null
+      } | null
+    } | null
   } | null> | null
 }
 
@@ -13176,6 +13764,42 @@ export type ThemeQuery = {
                       } | null
                     }
                   }
+                | {
+                    __typename: 'ComponentModulesStandaloneLinks'
+                    id: string
+                    standaloneLinks?: Array<{
+                      __typename?: 'ComponentCoreStandAloneLink'
+                      id: string
+                      label: string
+                      url?: string | null
+                      attachment?: {
+                        __typename?: 'UploadFileEntityResponse'
+                        data?: {
+                          __typename?: 'UploadFileEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'UploadFile'
+                            hash: string
+                            mime: string
+                            name: string
+                            provider: string
+                            size: number
+                            url: string
+                            alternativeText?: string | null
+                            caption?: string | null
+                            createdAt?: any | null
+                            ext?: string | null
+                            formats?: any | null
+                            height?: number | null
+                            previewUrl?: string | null
+                            provider_metadata?: any | null
+                            updatedAt?: any | null
+                            width?: number | null
+                          } | null
+                        } | null
+                      } | null
+                    } | null> | null
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -13328,6 +13952,7 @@ export type ThemeQuery = {
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
                       | { __typename: 'ComponentModulesSideImageWithText' }
+                      | { __typename: 'ComponentModulesStandaloneLinks' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -13441,6 +14066,7 @@ export type ThemeQuery = {
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
                       | { __typename: 'ComponentModulesSideImageWithText' }
+                      | { __typename: 'ComponentModulesStandaloneLinks' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -13746,6 +14372,42 @@ export type ThemesQuery = {
                       } | null
                     }
                   }
+                | {
+                    __typename: 'ComponentModulesStandaloneLinks'
+                    id: string
+                    standaloneLinks?: Array<{
+                      __typename?: 'ComponentCoreStandAloneLink'
+                      id: string
+                      label: string
+                      url?: string | null
+                      attachment?: {
+                        __typename?: 'UploadFileEntityResponse'
+                        data?: {
+                          __typename?: 'UploadFileEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'UploadFile'
+                            hash: string
+                            mime: string
+                            name: string
+                            provider: string
+                            size: number
+                            url: string
+                            alternativeText?: string | null
+                            caption?: string | null
+                            createdAt?: any | null
+                            ext?: string | null
+                            formats?: any | null
+                            height?: number | null
+                            previewUrl?: string | null
+                            provider_metadata?: any | null
+                            updatedAt?: any | null
+                            width?: number | null
+                          } | null
+                        } | null
+                      } | null
+                    } | null> | null
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -13898,6 +14560,7 @@ export type ThemesQuery = {
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
                       | { __typename: 'ComponentModulesSideImageWithText' }
+                      | { __typename: 'ComponentModulesStandaloneLinks' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -14011,6 +14674,7 @@ export type ThemesQuery = {
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
                       | { __typename: 'ComponentModulesSideImageWithText' }
+                      | { __typename: 'ComponentModulesStandaloneLinks' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -14324,6 +14988,42 @@ export type StoriesRelatedToThemeQuery = {
                       } | null
                     }
                   }
+                | {
+                    __typename: 'ComponentModulesStandaloneLinks'
+                    id: string
+                    standaloneLinks?: Array<{
+                      __typename?: 'ComponentCoreStandAloneLink'
+                      id: string
+                      label: string
+                      url?: string | null
+                      attachment?: {
+                        __typename?: 'UploadFileEntityResponse'
+                        data?: {
+                          __typename?: 'UploadFileEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'UploadFile'
+                            hash: string
+                            mime: string
+                            name: string
+                            provider: string
+                            size: number
+                            url: string
+                            alternativeText?: string | null
+                            caption?: string | null
+                            createdAt?: any | null
+                            ext?: string | null
+                            formats?: any | null
+                            height?: number | null
+                            previewUrl?: string | null
+                            provider_metadata?: any | null
+                            updatedAt?: any | null
+                            width?: number | null
+                          } | null
+                        } | null
+                      } | null
+                    } | null> | null
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -14476,6 +15176,7 @@ export type StoriesRelatedToThemeQuery = {
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
                       | { __typename: 'ComponentModulesSideImageWithText' }
+                      | { __typename: 'ComponentModulesStandaloneLinks' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -14589,6 +15290,7 @@ export type StoriesRelatedToThemeQuery = {
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
                       | { __typename: 'ComponentModulesSideImageWithText' }
+                      | { __typename: 'ComponentModulesStandaloneLinks' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -14882,6 +15584,42 @@ export type ThemeFragmentFragment = {
                   } | null
                 }
               }
+            | {
+                __typename: 'ComponentModulesStandaloneLinks'
+                id: string
+                standaloneLinks?: Array<{
+                  __typename?: 'ComponentCoreStandAloneLink'
+                  id: string
+                  label: string
+                  url?: string | null
+                  attachment?: {
+                    __typename?: 'UploadFileEntityResponse'
+                    data?: {
+                      __typename?: 'UploadFileEntity'
+                      id?: string | null
+                      attributes?: {
+                        __typename?: 'UploadFile'
+                        hash: string
+                        mime: string
+                        name: string
+                        provider: string
+                        size: number
+                        url: string
+                        alternativeText?: string | null
+                        caption?: string | null
+                        createdAt?: any | null
+                        ext?: string | null
+                        formats?: any | null
+                        height?: number | null
+                        previewUrl?: string | null
+                        provider_metadata?: any | null
+                        updatedAt?: any | null
+                        width?: number | null
+                      } | null
+                    } | null
+                  } | null
+                } | null> | null
+              }
             | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
             | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
             | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -15034,6 +15772,7 @@ export type ThemeFragmentFragment = {
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
                   | { __typename: 'ComponentModulesSideImageWithText' }
+                  | { __typename: 'ComponentModulesStandaloneLinks' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -15147,6 +15886,7 @@ export type ThemeFragmentFragment = {
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
                   | { __typename: 'ComponentModulesSideImageWithText' }
+                  | { __typename: 'ComponentModulesStandaloneLinks' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -15438,6 +16178,42 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   } | null
                 }
               }
+            | {
+                __typename: 'ComponentModulesStandaloneLinks'
+                id: string
+                standaloneLinks?: Array<{
+                  __typename?: 'ComponentCoreStandAloneLink'
+                  id: string
+                  label: string
+                  url?: string | null
+                  attachment?: {
+                    __typename?: 'UploadFileEntityResponse'
+                    data?: {
+                      __typename?: 'UploadFileEntity'
+                      id?: string | null
+                      attributes?: {
+                        __typename?: 'UploadFile'
+                        hash: string
+                        mime: string
+                        name: string
+                        provider: string
+                        size: number
+                        url: string
+                        alternativeText?: string | null
+                        caption?: string | null
+                        createdAt?: any | null
+                        ext?: string | null
+                        formats?: any | null
+                        height?: number | null
+                        previewUrl?: string | null
+                        provider_metadata?: any | null
+                        updatedAt?: any | null
+                        width?: number | null
+                      } | null
+                    } | null
+                  } | null
+                } | null> | null
+              }
             | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
             | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
             | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -15590,6 +16366,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
                   | { __typename: 'ComponentModulesSideImageWithText' }
+                  | { __typename: 'ComponentModulesStandaloneLinks' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -15703,6 +16480,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
                   | { __typename: 'ComponentModulesSideImageWithText' }
+                  | { __typename: 'ComponentModulesStandaloneLinks' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -15977,6 +16755,42 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   } | null
                 }
               }
+            | {
+                __typename: 'ComponentModulesStandaloneLinks'
+                id: string
+                standaloneLinks?: Array<{
+                  __typename?: 'ComponentCoreStandAloneLink'
+                  id: string
+                  label: string
+                  url?: string | null
+                  attachment?: {
+                    __typename?: 'UploadFileEntityResponse'
+                    data?: {
+                      __typename?: 'UploadFileEntity'
+                      id?: string | null
+                      attributes?: {
+                        __typename?: 'UploadFile'
+                        hash: string
+                        mime: string
+                        name: string
+                        provider: string
+                        size: number
+                        url: string
+                        alternativeText?: string | null
+                        caption?: string | null
+                        createdAt?: any | null
+                        ext?: string | null
+                        formats?: any | null
+                        height?: number | null
+                        previewUrl?: string | null
+                        provider_metadata?: any | null
+                        updatedAt?: any | null
+                        width?: number | null
+                      } | null
+                    } | null
+                  } | null
+                } | null> | null
+              }
             | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
             | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
             | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -16129,6 +16943,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
                   | { __typename: 'ComponentModulesSideImageWithText' }
+                  | { __typename: 'ComponentModulesStandaloneLinks' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -16242,6 +17057,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
                   | { __typename: 'ComponentModulesSideImageWithText' }
+                  | { __typename: 'ComponentModulesStandaloneLinks' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -16553,6 +17369,42 @@ export type TriplyRecordQuery = {
                       } | null
                     }
                   }
+                | {
+                    __typename: 'ComponentModulesStandaloneLinks'
+                    id: string
+                    standaloneLinks?: Array<{
+                      __typename?: 'ComponentCoreStandAloneLink'
+                      id: string
+                      label: string
+                      url?: string | null
+                      attachment?: {
+                        __typename?: 'UploadFileEntityResponse'
+                        data?: {
+                          __typename?: 'UploadFileEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'UploadFile'
+                            hash: string
+                            mime: string
+                            name: string
+                            provider: string
+                            size: number
+                            url: string
+                            alternativeText?: string | null
+                            caption?: string | null
+                            createdAt?: any | null
+                            ext?: string | null
+                            formats?: any | null
+                            height?: number | null
+                            previewUrl?: string | null
+                            provider_metadata?: any | null
+                            updatedAt?: any | null
+                            width?: number | null
+                          } | null
+                        } | null
+                      } | null
+                    } | null> | null
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -16705,6 +17557,7 @@ export type TriplyRecordQuery = {
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
                       | { __typename: 'ComponentModulesSideImageWithText' }
+                      | { __typename: 'ComponentModulesStandaloneLinks' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -16818,6 +17671,7 @@ export type TriplyRecordQuery = {
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
                       | { __typename: 'ComponentModulesSideImageWithText' }
+                      | { __typename: 'ComponentModulesStandaloneLinks' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -17120,6 +17974,42 @@ export type TriplyRecordsQuery = {
                       } | null
                     }
                   }
+                | {
+                    __typename: 'ComponentModulesStandaloneLinks'
+                    id: string
+                    standaloneLinks?: Array<{
+                      __typename?: 'ComponentCoreStandAloneLink'
+                      id: string
+                      label: string
+                      url?: string | null
+                      attachment?: {
+                        __typename?: 'UploadFileEntityResponse'
+                        data?: {
+                          __typename?: 'UploadFileEntity'
+                          id?: string | null
+                          attributes?: {
+                            __typename?: 'UploadFile'
+                            hash: string
+                            mime: string
+                            name: string
+                            provider: string
+                            size: number
+                            url: string
+                            alternativeText?: string | null
+                            caption?: string | null
+                            createdAt?: any | null
+                            ext?: string | null
+                            formats?: any | null
+                            height?: number | null
+                            previewUrl?: string | null
+                            provider_metadata?: any | null
+                            updatedAt?: any | null
+                            width?: number | null
+                          } | null
+                        } | null
+                      } | null
+                    } | null> | null
+                  }
                 | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
                 | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
                 | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -17272,6 +18162,7 @@ export type TriplyRecordsQuery = {
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
                       | { __typename: 'ComponentModulesSideImageWithText' }
+                      | { __typename: 'ComponentModulesStandaloneLinks' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -17385,6 +18276,7 @@ export type TriplyRecordsQuery = {
                       | { __typename: 'ComponentModulesImageCarousel' }
                       | { __typename: 'ComponentModulesPullquote' }
                       | { __typename: 'ComponentModulesSideImageWithText' }
+                      | { __typename: 'ComponentModulesStandaloneLinks' }
                       | { __typename: 'ComponentModulesSubtitle' }
                       | { __typename: 'ComponentModulesTextModule' }
                       | { __typename: 'ComponentModulesTitleModule' }
@@ -17686,6 +18578,42 @@ export type TriplyRecordFragmentFragment = {
                   } | null
                 }
               }
+            | {
+                __typename: 'ComponentModulesStandaloneLinks'
+                id: string
+                standaloneLinks?: Array<{
+                  __typename?: 'ComponentCoreStandAloneLink'
+                  id: string
+                  label: string
+                  url?: string | null
+                  attachment?: {
+                    __typename?: 'UploadFileEntityResponse'
+                    data?: {
+                      __typename?: 'UploadFileEntity'
+                      id?: string | null
+                      attributes?: {
+                        __typename?: 'UploadFile'
+                        hash: string
+                        mime: string
+                        name: string
+                        provider: string
+                        size: number
+                        url: string
+                        alternativeText?: string | null
+                        caption?: string | null
+                        createdAt?: any | null
+                        ext?: string | null
+                        formats?: any | null
+                        height?: number | null
+                        previewUrl?: string | null
+                        provider_metadata?: any | null
+                        updatedAt?: any | null
+                        width?: number | null
+                      } | null
+                    } | null
+                  } | null
+                } | null> | null
+              }
             | { __typename: 'ComponentModulesSubtitle'; id: string; text?: string | null }
             | { __typename: 'ComponentModulesTextModule'; Richtext?: string | null; id: string }
             | { __typename: 'ComponentModulesTitleModule'; Title?: string | null; id: string }
@@ -17838,6 +18766,7 @@ export type TriplyRecordFragmentFragment = {
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
                   | { __typename: 'ComponentModulesSideImageWithText' }
+                  | { __typename: 'ComponentModulesStandaloneLinks' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -17951,6 +18880,7 @@ export type TriplyRecordFragmentFragment = {
                   | { __typename: 'ComponentModulesImageCarousel' }
                   | { __typename: 'ComponentModulesPullquote' }
                   | { __typename: 'ComponentModulesSideImageWithText' }
+                  | { __typename: 'ComponentModulesStandaloneLinks' }
                   | { __typename: 'ComponentModulesSubtitle' }
                   | { __typename: 'ComponentModulesTextModule' }
                   | { __typename: 'ComponentModulesTitleModule' }
@@ -18615,6 +19545,16 @@ export const ComponentModulesSideImageWithTextFragmentFragmentDoc = gql`
   }
   ${UploadFileEntityResponseFragmentFragmentDoc}
 `
+export const ComponentModulesStandaloneLinksFragmentFragmentDoc = gql`
+  fragment ComponentModulesStandaloneLinksFragment on ComponentModulesStandaloneLinks {
+    id
+    __typename
+    standaloneLinks {
+      ...ComponentCoreStandAloneLinkFragment
+    }
+  }
+  ${ComponentCoreStandAloneLinkFragmentFragmentDoc}
+`
 export const StoryComponentsFragmentFragmentDoc = gql`
   fragment StoryComponentsFragment on StoryComponentsDynamicZone {
     __typename
@@ -18651,6 +19591,9 @@ export const StoryComponentsFragmentFragmentDoc = gql`
     ... on ComponentModulesButtonsModule {
       ...ComponentModulesButtonsModuleFragment
     }
+    ... on ComponentModulesStandaloneLinks {
+      ...ComponentModulesStandaloneLinksFragment
+    }
     ... on Error {
       ...ErrorFragment
     }
@@ -18666,6 +19609,7 @@ export const StoryComponentsFragmentFragmentDoc = gql`
   ${ComponentCoreMuxVideoFragmentFragmentDoc}
   ${ComponentModulesSideImageWithTextFragmentFragmentDoc}
   ${ComponentModulesButtonsModuleFragmentFragmentDoc}
+  ${ComponentModulesStandaloneLinksFragmentFragmentDoc}
   ${ErrorFragmentFragmentDoc}
 `
 export const NestedStoryFragmentFragmentDoc = gql`

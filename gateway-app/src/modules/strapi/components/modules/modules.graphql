@@ -1,105 +1,112 @@
 fragment ComponentModulesButtonsModuleFragment on ComponentModulesButtonsModule {
-    id
-    __typename
-    buttons {
-        ...ComponentCoreButtonFragment
-    }
+  id
+  __typename
+  buttons {
+    ...ComponentCoreButtonFragment
+  }
+}
+
+fragment ComponentModulesStandaloneLinksFragment on ComponentModulesStandaloneLinks {
+  id
+  __typename
+  standaloneLinks {
+    ...ComponentCoreStandAloneLinkFragment
+  }
 }
 
 fragment ComponentModulesCarouselFragment on ComponentModulesCarousel {
-    id
-    description
-    __typename
-    title
-    variant
-    images {
-        ...ComponentCoreCarouselImageFragment
-    }
-    explore_collection_button {
-        ...ComponentCoreButtonFragment
-    }
+  id
+  description
+  __typename
+  title
+  variant
+  images {
+    ...ComponentCoreCarouselImageFragment
+  }
+  explore_collection_button {
+    ...ComponentCoreButtonFragment
+  }
 }
 
 fragment ComponentModulesImageCarouselFragment on ComponentModulesImageCarousel {
-    id
-    description
-    __typename
-    images {
-        ...UploadFileRelationResponseCollectionFragment
-    }
+  id
+  description
+  __typename
+  images {
+    ...UploadFileRelationResponseCollectionFragment
+  }
 }
 
 fragment ComponentModulesImageFragment on ComponentModulesImage {
-    alt_text
-    caption
-    id
-    __typename
-    image {
-        ...UploadFileEntityResponseFragment
+  alt_text
+  caption
+  id
+  __typename
+  image {
+    ...UploadFileEntityResponseFragment
+  }
+  triplyRecord {
+    data {
+      ...BaseTriplyRecordFragment
     }
-    triplyRecord {
-        data {
-            ...BaseTriplyRecordFragment
-        }
+  }
+  story {
+    data {
+      ...StoryWithoutRelationsFragment
     }
-    story {
-        data {
-            ...StoryWithoutRelationsFragment
-        }
-    }
+  }
 }
 
 fragment ComponentModulesPullquoteFragment on ComponentModulesPullquote {
-    id
-    __typename
-    text
+  id
+  __typename
+  text
 }
 
 fragment ComponentModulesSubtitleFragment on ComponentModulesSubtitle {
-    id
-    __typename
-    text
+  id
+  __typename
+  text
 }
 
 fragment ComponentModulesTextModuleFragment on ComponentModulesTextModule {
-    Richtext
-    id
-    __typename
+  Richtext
+  id
+  __typename
 }
 
 fragment ComponentModulesTitleModuleFragment on ComponentModulesTitleModule {
-    Title
-    id
-    __typename
+  Title
+  id
+  __typename
 }
 
 fragment ComponentModulesGridModuleFragment on ComponentModulesGridModule {
-    __typename
-    id
-    description
-    pageSize
-    title
-    showMoreButtonTitle
-    fieldTitlesAreInverted
-    fieldTypes
-    buttons {
-        ...ComponentCoreButtonFragment
-    }
-    featuredFields {
-        ...ComponentCoreFeaturedFieldsFragment
-    }
-    fields {
-        ...ComponentCoreGridFeaturedFieldsFragment
-    }
+  __typename
+  id
+  description
+  pageSize
+  title
+  showMoreButtonTitle
+  fieldTitlesAreInverted
+  fieldTypes
+  buttons {
+    ...ComponentCoreButtonFragment
+  }
+  featuredFields {
+    ...ComponentCoreFeaturedFieldsFragment
+  }
+  fields {
+    ...ComponentCoreGridFeaturedFieldsFragment
+  }
 }
 
 fragment ComponentModulesSideImageWithTextFragment on ComponentModulesSideImageWithText {
-    __typename
-    id
-    sideText
-    image_alt_text
-    image {
-        ...UploadFileEntityResponseFragment
-    }
-
+  __typename
+  id
+  sideText
+  image_alt_text
+  image {
+    ...UploadFileEntityResponseFragment
+  }
 }
