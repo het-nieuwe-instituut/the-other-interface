@@ -57,6 +57,7 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad }) => {
         title={data?.title ?? undefined}
         description={data?.description ?? undefined}
         className="size-full"
+        color="blue"
       >
         <button
           tabIndex={0}
