@@ -1,27 +1,29 @@
 'use client'
 
+import { GenericCardGridWithClientPagination } from '@/features/editorial/components/GenericCardGridWithClientPagination'
 import { GenericCarouselGridWithClientPagination } from '@/features/editorial/components/GenericCarouselGridWithClientPagination'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { MainGalaxy } from '@/features/galaxyInterface/galaxies/MainGalaxy/MainGalaxy'
 import SuspenseLoader from '@/features/shared/components/SuspenseLoader/SuspenseLoader'
 import { HomepageQuery, ThemesQuery } from 'src/generated/graphql'
+import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
 
 export type Props = {
   homepage?: HomepageQuery
   themes?: ThemesQuery
   nextThemes?: ThemesQuery
   draftMode: boolean
+  isStoriesGalaxy?: boolean
 }
 
-export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
+export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }) => {
   const editorialData = homepage?.homepage?.data?.attributes
 
   return (
     <>
-      <GalaxyInterface>
-        <MainGalaxy />
-      </GalaxyInterface>
+      <GalaxyInterface>{isStoriesGalaxy ? <CategoryGalaxy /> : <MainGalaxy />}</GalaxyInterface>
+
       <div className="relative w-full bg-ivory-90 px-0 xl:px-6">
         <div className="mx-auto max-w-[1392px] px-6 pt-6">
           <div className="grid grid-cols-6 gap-3 lg:grid-cols-12">
@@ -35,11 +37,15 @@ export const HomepageContainer: React.FC<Props> = ({ homepage }) => {
                       constrainPreface={true}
                     />
 
-                    <div className="flex w-full">
+                    <div className="flex w-full flex-col">
                       {editorialData?.carousel && (
                         <GenericCarouselGridWithClientPagination
                           carousel={editorialData.carousel}
                         />
+                      )}
+
+                      {editorialData?.grid && (
+                        <GenericCardGridWithClientPagination grid={editorialData.grid} />
                       )}
                     </div>
                   </>

@@ -1,29 +1,33 @@
+import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
-import { EditorialLayer } from '@/features/shared/components/Layers/EditorialLayer/EditorialLayer'
+import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
+import { LayerWrapper } from '@/features/shared/components/Layers/LayerWrapper'
 import { CloudCategory } from '@/features/shared/utils/categories'
+import { LandingpageBySlugQuery } from 'src/generated/graphql'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
-import { HomeOrLadingType } from 'src/app/landingpage/page'
 
 interface Props {
   category: CloudCategory
-  editorialData?: HomeOrLadingType
-  description?: string | null
+  editorialData?: LandingpageBySlugQuery['landingpages']['data'][0]['attributes']
 }
 
-export const LandingpageContainer: React.FC<Props> = ({ editorialData, description }) => {
+export const LandingpageContainer: React.FC<Props> = ({ editorialData }) => {
   return (
     <div>
       <GalaxyInterface>
         <CategoryGalaxy />
       </GalaxyInterface>
 
-      {editorialData && (
-        <EditorialLayer
-          title={editorialData?.Title}
-          preface={description}
-          components={editorialData?.components}
-        />
-      )}
+      <LayerWrapper
+        LeftContent={
+          <PageHeader
+            title={editorialData?.Title || undefined}
+            preface={editorialData?.Description || undefined}
+            constrainPreface={true}
+          />
+        }
+        BottomContent={<DynamicComponentRenderer components={editorialData?.components} />}
+      />
     </div>
   )
 }

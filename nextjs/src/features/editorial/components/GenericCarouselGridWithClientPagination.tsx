@@ -10,13 +10,15 @@ import {
   CarouselGridTitle,
 } from '@/features/ui/components/carousel-grid/CarouselGrid'
 import { cn } from '@/features/ui/utils/cn'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import {
   ComponentModulesCarousel,
   EnumComponentmodulescarouselVariant,
 } from 'src/generated/graphql'
+import { useClientPagination } from './useClientPagination'
+import { getTriplyOrStoryHref } from './getTriplyOrStoryHref'
 
-type CarouselGrid = DeepPartial<ComponentModulesCarousel>
+export type CarouselGrid = DeepPartial<ComponentModulesCarousel>
 
 export const GenericCarouselGridWithClientPagination = ({
   carousel,
@@ -60,11 +62,10 @@ const Grid = ({
     }
     return 4
   }, [carousel.variant, forcedCols])
-
-  const lastPage = Math.ceil(items.length / cols) || 1
-  const limitedData = items.slice(0, cols)
-  const [page, setPage] = useState(1)
-  const [nodes, setNodes] = useState(limitedData)
+  const { nodes, page, lastPage, next, previous } = useClientPagination({
+    items,
+    itemsInPage: cols,
+  })
 
   if (!items || items.length === 0) {
     return <ErrorBox />
@@ -86,8 +87,8 @@ const Grid = ({
                 description={item.description ?? undefined}
                 image={item.image?.data?.attributes?.url ?? undefined}
                 href={getTriplyOrStoryHref({
-                  story: item.story,
-                  triply_record: item.triply_record,
+                  story: item.story ?? undefined,
+                  triply_record: item.triply_record ?? undefined,
                 })}
                 alt={item.alt_text ?? ''}
               ></CarouselGridCard>
@@ -106,25 +107,8 @@ const Grid = ({
         {items.length > cols && (
           <CarouselGridPagination
             className="ml-auto"
-            onNext={() => {
-              const newPage = page + 1
-              if (newPage > lastPage) {
-                return
-              }
-              const newNodes = items.slice((newPage - 1) * cols, newPage * cols)
-              console.log('newNodes', newPage)
-              setPage(newPage)
-              setNodes(newNodes)
-            }}
-            onPrevious={() => {
-              const newPage = page - 1
-              if (newPage < 1) {
-                return
-              }
-              const newNodes = items.slice((newPage - 1) * cols, newPage * cols)
-              setPage(newPage)
-              setNodes(newNodes)
-            }}
+            onNext={next}
+            onPrevious={previous}
             hidePrevious={page === 1}
             hideNext={page === lastPage || lastPage === 1}
           />
@@ -132,20 +116,4 @@ const Grid = ({
       </CarouselGridFooter>
     </CarouselGrid>
   )
-}
-
-function getTriplyOrStoryHref({
-  story,
-  triply_record,
-}: {
-  story?: NonNullable<NonNullable<CarouselGrid['images']>[number]>['story']
-  triply_record?: NonNullable<NonNullable<CarouselGrid['images']>[number]>['triply_record']
-}) {
-  if (triply_record && triply_record.data?.attributes) {
-    return `details/${triply_record.data.attributes.type}/${triply_record.data.attributes.recordId}`
-  }
-  if (story && story.data) {
-    return `details/stories/${story.data.id}`
-  }
-  return undefined
 }

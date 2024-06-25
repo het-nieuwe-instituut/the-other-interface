@@ -1,4 +1,5 @@
 'use client'
+import { useClientPagination } from '@/features/editorial/components/useClientPagination'
 import {
   CarouselGrid,
   CarouselGridCard,
@@ -9,7 +10,7 @@ import {
   CarouselGridPagination,
   CarouselGridTitle,
 } from '@/features/ui/components/carousel-grid/CarouselGrid'
-import { useState } from 'react'
+
 const stubData = [
   {
     id: 1,
@@ -75,10 +76,10 @@ export default function Demo() {
   )
 }
 export function Carousel({ cols, className }: { cols: 1 | 2 | 3 | 4; className?: string }) {
-  const lastPage = Math.ceil(stubData.length / cols) || 1
-  const limitedData = stubData.slice(0, cols)
-  const [page, setPage] = useState(1)
-  const [nodes, setNodes] = useState(limitedData)
+  const { nodes, lastPage, page, next, previous } = useClientPagination({
+    items: stubData,
+    itemsInPage: cols,
+  })
 
   return (
     <div className={className}>
@@ -105,24 +106,8 @@ export function Carousel({ cols, className }: { cols: 1 | 2 | 3 | 4; className?:
         <CarouselGridFooter>
           <CarouselGridLink href="">Explore this</CarouselGridLink>
           <CarouselGridPagination
-            onNext={() => {
-              const newPage = page + 1
-              if (newPage > lastPage) {
-                return
-              }
-              const newNodes = stubData.slice((newPage - 1) * cols, newPage * cols)
-              setPage(newPage)
-              setNodes(newNodes)
-            }}
-            onPrevious={() => {
-              const newPage = page - 1
-              if (newPage < 1) {
-                return
-              }
-              const newNodes = stubData.slice((newPage - 1) * cols, newPage * cols)
-              setPage(newPage)
-              setNodes(newNodes)
-            }}
+            onNext={next}
+            onPrevious={previous}
             hidePrevious={page === 1}
             hideNext={page === lastPage || lastPage === 1}
           />

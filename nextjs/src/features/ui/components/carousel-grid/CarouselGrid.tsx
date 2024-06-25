@@ -1,13 +1,13 @@
-import NextLink, { LinkProps } from 'next/link'
+import { LinkProps } from 'next/link'
+import React from 'react'
 import { cn } from '../../utils/cn'
-import { LightBoxNextImageByIcon } from '../lightbox/LightBoxNextImage'
+import { Card, CardProps } from '../card/card'
 import { LightboxProvider } from '../lightbox/LightboxProvider'
 import { NavLinkButton } from '../nav-link-button/component'
+import { Subtitle, SubtitleProps } from '../subtitle/Subtitle'
 import { TypographyVariants } from '../typography/variants'
 import NavArrowLeft from './nav-arrow-left.svg'
 import NavArrowRight from './nav-arrow-right.svg'
-import { Subtitle, SubtitleProps } from '../subtitle/Subtitle'
-import React from 'react'
 
 type SpecificChildren<T> =
   | React.ReactElement<T | null | undefined | string | Element>
@@ -31,7 +31,7 @@ export const CarouselGrid = ({ className, children }: CarouselGridProps) => {
 export interface CarouselGridCardWrapperProps {
   cols: 1 | 2 | 3 | 4
   className?: string
-  children: SpecificChildren<CarouselGridCardProps[] | null>
+  children: SpecificChildren<CardProps[] | null>
 }
 
 export const CarouselGridCardWrapper = ({
@@ -40,99 +40,22 @@ export const CarouselGridCardWrapper = ({
   children,
 }: CarouselGridCardWrapperProps) => {
   return (
-    <LightboxProvider>
-      <div
-        className={cn(
-          className,
-          'grid gap-4',
-          cols === 1 && 'grid-cols-1',
-          cols === 2 && 'grid-cols-2',
-          cols === 3 && 'grid-cols-3',
-          cols === 4 && 'grid-cols-4'
-        )}
-      >
-        {children}
-      </div>
-    </LightboxProvider>
+    <div
+      className={cn(
+        className,
+        'grid gap-4',
+        cols === 1 && 'grid-cols-1',
+        cols === 2 && 'grid-cols-2',
+        cols === 3 && 'grid-cols-3',
+        cols === 4 && 'grid-cols-4'
+      )}
+    >
+      {children}
+    </div>
   )
 }
 
-export interface CarouselGridCardProps {
-  title?: string
-  description?: string
-  image?: string
-  className?: string
-  href?: string
-  alt: string
-}
-export const CarouselGridCard = ({
-  title,
-  description,
-  image,
-  className,
-  href,
-  alt,
-}: CarouselGridCardProps) => {
-  if (href) {
-    return (
-      <NextLink href={href} className={cn(className, 'flex flex-col gap-4 group relative')}>
-        {renderContent()}
-      </NextLink>
-    )
-  }
-
-  return (
-    <div className={cn(className, 'flex flex-col gap-4 group relative')}>{renderContent()}</div>
-  )
-
-  function renderContent() {
-    return (
-      <>
-        <div className="h-[290px]">
-          {image && <LightBoxNextImageByIcon src={image} fill alt={alt} className="object-cover" />}
-        </div>
-        <div className="flex flex-col ">
-          {title && (
-            <div>
-              <p
-                className={TypographyVariants({
-                  socialLarge: 'xl',
-                  className: cn(
-                    'group-hover:text-white pb-1 inline-flex relative z-10',
-                    'after:absolute after:z-[-1]',
-                    'group-hover:after:bottom-0  group-hover:after:left-0 group-hover:after:bg-black-100 group-hover:after:content-[""]',
-                    'group-hover:after:ml-[-4px] group-hover:after:w-[calc(100%+8px)] group-hover:after:mb-[-4px] group-hover:after:h-[calc(100%+8px)]'
-                  ),
-                })}
-              >
-                {title}
-              </p>
-            </div>
-          )}
-          {description && (
-            <div
-              className={cn(
-                'group-hover:text-white pb-1 inline-flex relative z-10',
-                'after:absolute after:z-[-1]',
-                'group-hover:after:bottom-0  group-hover:after:left-0 group-hover:after:bg-black-100 group-hover:after:content-[""]',
-                'group-hover:after:ml-[-4px] group-hover:after:w-[calc(100%+8px)] group-hover:after:mb-[-4px] group-hover:after:h-[calc(100%+8px)]'
-              )}
-            >
-              <p
-                className={TypographyVariants({
-                  socialLarge: 'md',
-                  className: cn(' line-clamp-2'),
-                })}
-              >
-                {description}
-              </p>
-            </div>
-          )}
-        </div>
-      </>
-    )
-  }
-}
+export const CarouselGridCard = Card
 
 export interface CarouselGridFooterProps {
   children:
@@ -144,7 +67,7 @@ export const CarouselGridFooter = ({ children }: CarouselGridFooterProps) => {
 }
 
 export interface CarouselGridPaginationProps {
-  className: string
+  className?: string
   onNext?: () => void
   onPrevious?: () => void
   hideNext?: boolean
