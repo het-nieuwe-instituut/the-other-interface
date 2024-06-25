@@ -2,6 +2,7 @@ import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/Gala
 import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/DetailGalaxy/DetailGalaxy'
 import { RecordLayer } from '@/features/record/containers/RecordLayer/RecordLayer'
 import { StoryLayer } from '@/features/shared/components/Layers/StoryLayer/StoryLayer'
+import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import { isCloudCategory, isStoryCategory } from '@/features/shared/utils/categories'
 import { LandingpageBySlugQuery, StoryByIdQuery } from 'src/generated/graphql'
 
@@ -29,7 +30,9 @@ export const DetailpageContainer: React.FC<Props> = ({ category }) => {
   return (
     <div>
       <GalaxyInterface>
-        <DetailGalaxy />
+        <MobileOverlayProvider>
+          <DetailGalaxy />
+        </MobileOverlayProvider>
       </GalaxyInterface>
 
       <Layer />

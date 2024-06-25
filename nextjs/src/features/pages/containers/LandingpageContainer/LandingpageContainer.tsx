@@ -5,6 +5,7 @@ import { LayerWrapper } from '@/features/shared/components/Layers/LayerWrapper'
 import { CloudCategory } from '@/features/shared/utils/categories'
 import { LandingpageBySlugQuery } from 'src/generated/graphql'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
+import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 
 interface Props {
   category: CloudCategory
@@ -15,7 +16,9 @@ export const LandingpageContainer: React.FC<Props> = ({ editorialData }) => {
   return (
     <div>
       <GalaxyInterface>
-        <CategoryGalaxy />
+        <MobileOverlayProvider>
+          <CategoryGalaxy />
+        </MobileOverlayProvider>
       </GalaxyInterface>
 
       <LayerWrapper
