@@ -1,39 +1,15 @@
 fragment HomepageFragment on Homepage {
   __typename
   Title
+  text
   createdAt
-  locale
-  publishedAt
   updatedAt
-  description
-  components {
-    ... on ComponentModulesTextModule {
-      ...ComponentModulesTextModuleFragment
-    }
-    ... on ComponentModulesImage {
-      ...ComponentModulesImageFragment
-    }
-    ... on ComponentModulesGridModule {
-      ...ComponentModulesGridModuleFragment
-    }
-    ... on ComponentModulesPullquote {
-      ...ComponentModulesPullquoteFragment
-    }
-    ... on ComponentModulesSubtitle {
-      ...ComponentModulesSubtitleFragment
-    }
-    ... on ComponentModulesTitleModule {
-      ...ComponentModulesTitleModuleFragment
-    }
-    ... on ComponentModulesImageCarousel {
-      ...ComponentModulesImageCarouselFragment
-    }
-    ... on ComponentModulesButtonsModule {
-      ...ComponentModulesButtonsModuleFragment
-    }
-    ... on Error {
-      ...ErrorFragment
-    }
+  publishedAt
+  carousel {
+    ...ComponentModulesCarouselFragment
+  }
+  grid {
+    ...ComponentModulesGridModuleFragment
   }
 }
 

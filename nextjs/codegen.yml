@@ -14,7 +14,7 @@ generates:
         config:
             namingConvention:
                 typeNames: change-case-all#pascalCase
-                enumValues: change-case-all#capitalCase
+                enumValues: change-case-all#pascalCase
     ./graphql.schema.json:
         plugins:
             - 'introspection'
@@ -26,4 +26,4 @@ generates:
         config:
             namingConvention:
                 typeNames: change-case-all#pascalCase
-                enumValues: change-case-all#capitalCase
+                enumValues: change-case-all#pascalCase

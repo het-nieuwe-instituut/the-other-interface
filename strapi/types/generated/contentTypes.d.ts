@@ -745,36 +745,33 @@ export interface ApiHomepageHomepage extends Schema.SingleType {
     }
   }
   attributes: {
-    components: Attribute.DynamicZone<
-      [
-        'modules.text-module',
-        'modules.image',
-        'modules.pullquote',
-        'modules.subtitle',
-        'modules.title-module',
-        'modules.image-carousel',
-        'modules.buttons-module',
-        'modules.grid-module'
-      ]
-    > &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
     Title: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    description: Attribute.RichText &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
         }
       }>
     highlightedThemes: Attribute.Relation<'api::homepage.homepage', 'oneToMany', 'api::theme.theme'>
+    text: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    carousel: Attribute.Component<'modules.carousel'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    grid: Attribute.Component<'modules.grid-module'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime

@@ -31,24 +31,19 @@ export const Record: React.FC<Props> = ({ record, tooltipPlace }) => {
 
   return (
     <div className="relative">
-      {data === null ? (
-        RecordData(record, lang)
-      ) : (
-        <div className="absolute flex h-4/5 w-[70%]" style={{ ...record.position }}>
-          <ReadMoreTooltip
-            isLoading={isLoading}
-            error={isError ? t('couldNotFetchHover') : ''}
-            place={tooltipPlace}
-            isEmpty={!data?.description && !data?.title}
-            title={data?.title ?? undefined}
-            description={data?.description ?? undefined}
-            className="size-full"
-            color="blue"
-          >
-            {RecordData(record, lang)}
-          </ReadMoreTooltip>
-        </div>
-      )}
+      <div className="absolute flex h-4/5 w-[70%]" style={{ ...record.position }}>
+        <ReadMoreTooltip
+          isLoading={isLoading}
+          error={isError ? t('couldNotFetchHover') : ''}
+          place={tooltipPlace}
+          isEmpty={!data?.description && !data?.title}
+          title={data?.title ?? undefined}
+          description={data?.description ?? undefined}
+          className="size-full"
+        >
+          {RecordData(record, lang)}
+        </ReadMoreTooltip>
+      </div>
     </div>
   )
 }

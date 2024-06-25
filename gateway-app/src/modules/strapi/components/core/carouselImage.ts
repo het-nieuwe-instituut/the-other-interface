@@ -15,6 +15,9 @@ export class ComponentCoreCarouselImage {
   public alt_text?: string
 
   @Field({ nullable: true })
+  public title?: string
+
+  @Field({ nullable: true })
   public description?: string
 
   @Field(() => UploadFileEntityResponse, { nullable: true })
