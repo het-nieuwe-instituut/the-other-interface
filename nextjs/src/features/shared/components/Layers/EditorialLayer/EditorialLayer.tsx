@@ -20,6 +20,7 @@ export const EditorialLayer: React.FC<Props> = ({ title, preface, components }) 
           title={title || undefined}
           preface={preface || undefined}
           constrainPreface={true}
+          showReadMore={false}
         />
       }
       BottomContent={<DynamicComponentRenderer components={components} />}
