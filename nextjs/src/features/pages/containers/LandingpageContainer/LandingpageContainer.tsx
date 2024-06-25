@@ -10,7 +10,7 @@ import {
   LandingPagePeopleQuery,
   LandingPagePublicationQuery,
 } from 'src/generated/graphql'
-import { DynamicLandingPageComponentRenderer } from '@/features/modules/ModulesRenderer/LandingPageModulesRenderer'
+import { LandingPageComponentRenderer } from '@/features/modules/ModulesRenderer/LandingPageModulesRenderer'
 
 export interface LandingPageProps {
   editorialData?:
@@ -39,7 +39,7 @@ export const LandingpageContainer: React.FC<LandingPageProps> = ({ editorialData
           />
         }
         BottomContent={
-          <DynamicLandingPageComponentRenderer
+          <LandingPageComponentRenderer
             grid={editorialData?.attributes?.grid}
             highlight={editorialData?.attributes?.highlight}
           />
@@ -48,4 +48,3 @@ export const LandingpageContainer: React.FC<LandingPageProps> = ({ editorialData
     </div>
   )
 }
-// objectsLandingPage?.landingPageObject.data.attributes.grid
