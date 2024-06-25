@@ -40,6 +40,7 @@ export const Record: React.FC<Props> = ({ record, tooltipPlace }) => {
           title={data?.title ?? undefined}
           description={data?.description ?? undefined}
           className="size-full"
+          color="blue"
         >
           {RecordData(record, lang)}
         </ReadMoreTooltip>
