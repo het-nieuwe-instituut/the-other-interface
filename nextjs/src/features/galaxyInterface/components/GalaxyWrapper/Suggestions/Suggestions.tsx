@@ -47,14 +47,11 @@ export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter, type
 
   const items = useMemo(() => {
     const filteredSuggestions = suggestionsData.filter(
-      suggestion =>
-        !selectedFilters.find(
-          selected => selected.key === suggestion.key && selected.value === suggestion.value
-        )
+      s => !selectedFilters.some(f => f.key === s.key && f.value === s.value)
     )
 
     const filtersWithoutCollectionHighlights = selectedFilters.filter(
-      filter => filter.id !== COLLECTION_HILIGHT_ID
+      f => f.id !== COLLECTION_HILIGHT_ID
     )
 
     if (
@@ -62,10 +59,7 @@ export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter, type
       filtersWithoutCollectionHighlights.length === 0 &&
       searchCategory !== SEARCH_CATEGORIES.stories
     ) {
-      return [
-        { value: CollectionHighlightsFilter.value, key: CollectionHighlightsFilter.key },
-        ...filteredSuggestions,
-      ]
+      return [CollectionHighlightsFilter, ...filteredSuggestions]
     }
 
     return filteredSuggestions
@@ -106,14 +100,17 @@ export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter, type
   return <Suggestions suggestionsData={items} handleSelectFilter={handleSelectFilter} />
 }
 
+type SuggestionWithId = Suggestion & { id?: string }
+type Suggestion = NonNullable<
+  NonNullable<ReturnType<typeof useFilterSuggestionsQuery>['data']>['filterSuggestions']
+>[0]
+
 export const Suggestions = ({
   handleSelectFilter,
   suggestionsData,
 }: {
   handleSelectFilter: (filterSuggestion: Filter) => void
-  suggestionsData: NonNullable<
-    NonNullable<ReturnType<typeof useFilterSuggestionsQuery>['data']>['filterSuggestions']
-  >
+  suggestionsData: SuggestionWithId[]
 }) => {
   return (
     <>
@@ -123,7 +120,7 @@ export const Suggestions = ({
             <SearchFilterBox
               category={item.key}
               subCategory={item.value}
-              onClick={() => handleSelectFilter({ id: item.value, ...item })}
+              onClick={() => handleSelectFilter({ id: item.id || item.value, ...item })}
             />
           </div>
         )
