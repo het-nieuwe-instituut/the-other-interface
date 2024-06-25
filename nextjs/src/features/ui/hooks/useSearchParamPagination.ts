@@ -1,12 +1,8 @@
-import { usePathname, useRouter, useSearchParams, notFound } from 'next/navigation'
-import { useCallback, useEffect } from 'react'
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
+import { notFound, usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useCallback } from 'react'
 
-export const usePagination = (
-  pageAmount: number,
-  isResultAmountLoading = false,
-  isKeyPressDisabled = true
-) => {
+export const useSearchParamPagination = (pageAmount: number, isResultAmountLoading = false) => {
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -42,24 +38,6 @@ export const usePagination = (
       paginate(page - 1)
     }
   }, [page, paginate])
-
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (isKeyPressDisabled) return
-
-      if (e.key === 'ArrowRight') {
-        increasePageNumber()
-      } else if (e.key === 'ArrowLeft') {
-        decreasePageNumber()
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyPress)
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyPress)
-    }
-  }, [increasePageNumber, decreasePageNumber, isKeyPressDisabled])
 
   return {
     page,
