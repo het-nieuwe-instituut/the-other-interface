@@ -5,7 +5,6 @@ import { GalaxyTopRight } from '@/features/galaxyInterface/components/GalaxyWrap
 import { usePresenter } from './usePresenter'
 import { CSSProperties } from 'react'
 import { cn } from '@/features/ui/utils/cn'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
 
 export const StaticHeader = () => {
   const { tNavigation, userLooksOn, isMenuOpen, lang } = usePresenter()
@@ -22,24 +21,6 @@ export const StaticHeader = () => {
       >
         <div className="container mx-auto flex size-full max-w-[90em] items-center justify-between px-6">
           <div className="h-full items-center">
-            {/* <Link
-              href={lang ? `/?lang=${lang}` : '/?lang=nl'}
-              variant={isMenuOpen ? 'navigation' : 'navigationOnTopOfTheGalaxy'}
-              cursor="pointer"
-              whiteSpace={'nowrap'}
-              textOverflow={'ellipsis'}
-              overflow={'hidden'}
-              textStyle={
-                userLooksOn === USER_LOOKS_ON.GALAXY ? 'headingTimesLarge.lg' : 'impactNew.md'
-              }
-              margin={0}
-              height={'100%'}
-              display={'flex'}
-            >
-              <p className="mr-2">{tNavigation('theNewInstitute')}</p>
-              <p className="ml-2">{tNavigation('collectionPlatform')}</p>
-            </Link> */}
-
             <NextLink
               href={lang ? `/?lang=${lang}` : '/?lang=nl'}
               className={cn(
