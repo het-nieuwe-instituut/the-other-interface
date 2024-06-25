@@ -68,6 +68,7 @@ export const Record: React.FC<Props> = ({
           title={data?.title ?? undefined}
           description={data?.description ?? undefined}
           className="size-full"
+          color="blue"
         >
           <button
             ref={ref}
