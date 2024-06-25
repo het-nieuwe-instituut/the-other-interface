@@ -14,7 +14,7 @@ export class HomepageRelationResponseCollection {
 @ObjectType()
 export class Homepage {
   @Field()
-  public Title?: string
+  public Title: string
 
   @Field({ nullable: true })
   public createdAt?: Date
