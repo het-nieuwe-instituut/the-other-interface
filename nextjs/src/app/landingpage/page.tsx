@@ -1,7 +1,6 @@
 import { HomepageContainer } from '@/features/pages/containers/HomepageContainer/HomepageContainer'
 import { LandingpageContainer } from '@/features/pages/containers/LandingpageContainer/LandingpageContainer'
 import { ReduxSearchSync } from '@/features/shared/components/Redux/ReduxSearchSync'
-import { PublicationState } from '@/features/shared/types/enums'
 import { CloudCategory, SEARCH_CATEGORIES } from '@/features/shared/utils/categories'
 import initApiServerService from '@/features/shared/utils/initApiServerService'
 import { Metadata } from 'next'
@@ -30,20 +29,18 @@ export default async function Page({
   const api = initApiServerService()
   const isStories = category === SEARCH_CATEGORIES.stories
   let homepage: Awaited<ReturnType<typeof api.homepage>> | undefined
-  let landingPage: Awaited<ReturnType<typeof api.landingpageBySlug>> | undefined
+  let archiveLandingPage: Awaited<ReturnType<typeof api.landingPageArchive>> | undefined
 
   if (isStories) {
     const data = await api?.homepage({ locale: lang })
 
     homepage = data
   } else {
-    const data = await api?.landingpageBySlug({
-      slug: category,
+    const data = await api?.landingPageArchive({
       locale: lang,
-      publicationState: isEnabled ? PublicationState.Preview : PublicationState.Live,
     })
 
-    landingPage = data
+    archiveLandingPage = data
   }
 
   if (homepage) {
@@ -59,7 +56,7 @@ export default async function Page({
     <>
       <ReduxSearchSync />
       <LandingpageContainer
-        editorialData={landingPage?.landingpages.data[0]?.attributes}
+        editorialData={archiveLandingPage?.landingPageArchive.data}
         category={category as CloudCategory}
       />
     </>
