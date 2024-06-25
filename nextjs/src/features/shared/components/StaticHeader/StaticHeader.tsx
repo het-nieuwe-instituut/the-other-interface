@@ -24,8 +24,8 @@ export const StaticHeader = () => {
               href={lang ? `/?lang=${lang}` : '/?lang=nl'}
               className={cn(
                 userLooksOn === USER_LOOKS_ON.GALAXY
-                  ? 'font-times-dot text-[20px] leading-[105%_] lg:text-[32px]'
-                  : 'font-impact-large text-[20px] leading-[120%_] tracking-[-0.25px] lg:text-[25px]',
+                  ? 'font-times-dot text-[20px] leading-[105%_] md:text-[32px]'
+                  : 'font-impact-large text-[20px] leading-[120%_] tracking-[-0.25px] md:text-[25px]',
                 'cursor-pointer overflow-hidden h-full flex m-0 text-blue-100'
               )}
             >
