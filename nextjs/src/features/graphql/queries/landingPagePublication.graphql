@@ -15,9 +15,9 @@ fragment LandingPagePublicationFragment on LandingPagePublication {
   # carousels {
   #  ...carouselModuleFragment
   #}
-  #highlight {
-  # ...highlightModulesFragment
-  #}
+  highlight {
+    ...highlightModulesFragment
+  }
   grid {
     ...gridModuleFragment
   }

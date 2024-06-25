@@ -15,9 +15,9 @@ fragment LandingPageArchiveFragment on LandingPageArchive {
   # carousels {
   #  ...carouselModuleFragment
   #}
-  #highlight {
-  # ......highlightModulesFragment
-  #}
+  highlight {
+    ...highlightModulesFragment
+  }
   grid {
     ...gridModuleFragment
   }
