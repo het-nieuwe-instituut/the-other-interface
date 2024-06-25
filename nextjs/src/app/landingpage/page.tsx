@@ -1,7 +1,7 @@
 import { HomepageContainer } from '@/features/pages/containers/HomepageContainer/HomepageContainer'
 import { LandingpageContainer } from '@/features/pages/containers/LandingpageContainer/LandingpageContainer'
 import { ReduxSearchSync } from '@/features/shared/components/Redux/ReduxSearchSync'
-import { CloudCategory, SEARCH_CATEGORIES } from '@/features/shared/utils/categories'
+import { SEARCH_CATEGORIES } from '@/features/shared/utils/categories'
 import initApiServerService from '@/features/shared/utils/initApiServerService'
 import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
@@ -71,10 +71,7 @@ export default async function Page({
     return (
       <>
         <ReduxSearchSync />
-        <LandingpageContainer
-          editorialData={archiveLandingPage?.landingPageArchive.data}
-          category={category as CloudCategory}
-        />
+        <LandingpageContainer editorialData={archiveLandingPage?.landingPageArchive.data} />
       </>
     )
   }
@@ -83,10 +80,7 @@ export default async function Page({
     return (
       <>
         <ReduxSearchSync />
-        <LandingpageContainer
-          editorialData={objectsLandingPage?.landingPageObject.data}
-          category={category as CloudCategory}
-        />
+        <LandingpageContainer editorialData={objectsLandingPage?.landingPageObject.data} />
       </>
     )
   }
@@ -95,10 +89,7 @@ export default async function Page({
     return (
       <>
         <ReduxSearchSync />
-        <LandingpageContainer
-          editorialData={peopleLandingPage?.landingPagePeople.data}
-          category={category as CloudCategory}
-        />
+        <LandingpageContainer editorialData={peopleLandingPage?.landingPagePeople.data} />
       </>
     )
   }
@@ -109,7 +100,6 @@ export default async function Page({
         <ReduxSearchSync />
         <LandingpageContainer
           editorialData={publicationsLandingPage?.landingPagePublication.data}
-          category={category as CloudCategory}
         />
       </>
     )

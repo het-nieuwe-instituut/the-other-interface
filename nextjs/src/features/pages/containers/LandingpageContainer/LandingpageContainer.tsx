@@ -2,7 +2,6 @@ import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeade
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 // import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
 import { LayerWrapper } from '@/features/shared/components/Layers/LayerWrapper'
-import { CloudCategory } from '@/features/shared/utils/categories'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import {
@@ -11,9 +10,9 @@ import {
   LandingPagePeopleQuery,
   LandingPagePublicationQuery,
 } from 'src/generated/graphql'
+import { DynamicLandingPageComponentRenderer } from '@/features/modules/ModulesRenderer/LandingPageModulesRenderer'
 
-interface Props {
-  category: CloudCategory
+export interface LandingPageProps {
   editorialData?:
     | LandingPageArchiveQuery['landingPageArchive']['data']
     | LandingPageObjectQuery['landingPageObject']['data']
@@ -21,8 +20,7 @@ interface Props {
     | LandingPagePublicationQuery['landingPagePublication']['data']
 }
 
-export const LandingpageContainer: React.FC<Props> = ({ editorialData, category }) => {
-  console.log(category)
+export const LandingpageContainer: React.FC<LandingPageProps> = ({ editorialData }) => {
   return (
     <div>
       <GalaxyInterface>
@@ -40,8 +38,14 @@ export const LandingpageContainer: React.FC<Props> = ({ editorialData, category 
             showReadMore={false}
           />
         }
-        // BottomContent={<DynamicComponentRenderer components={editorialData?.components} />}
+        BottomContent={
+          <DynamicLandingPageComponentRenderer
+            grid={editorialData?.attributes?.grid}
+            highlight={editorialData?.attributes?.highlight}
+          />
+        }
       />
     </div>
   )
 }
+// objectsLandingPage?.landingPageObject.data.attributes.grid

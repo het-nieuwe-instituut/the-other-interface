@@ -1,4 +1,4 @@
-import { GenericCardGridWithClientPagination } from '@/features/editorial/components/GenericCardGridWithClientPagination'
+// import { GenericCardGridWithClientPagination } from '@/features/editorial/components/GenericCardGridWithClientPagination'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { ImageParagraph } from '@/features/ui/components/ImageParagraph/ImageParagraph'
 import {
@@ -10,7 +10,7 @@ import { MuxVideoPlayer } from '@/features/ui/components/mux-video/MuxVideoPlaye
 import { Title } from '@/features/ui/components/title/Title'
 import { cn } from '@/features/ui/utils/cn'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
-import { LandingpageBySlugQuery, StoryByIdQuery } from 'src/generated/graphql'
+import { StoryByIdQuery } from 'src/generated/graphql'
 import { Paragraph } from '../../ui/components/Paragraph/Paragraph'
 import { ButtonGroup, LinkButtonGroupItem } from '../../ui/components/button-group/component'
 import { Subtitle } from '../../ui/components/subtitle/Subtitle'
@@ -22,11 +22,9 @@ interface Props {
   isStoryPage?: boolean
 }
 
-export type DynamicComponents =
-  | NonNullable<
-      NonNullable<LandingpageBySlugQuery['landingpages']['data']>[0]['attributes']
-    >['components']
-  | NonNullable<NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']>['components']
+export type DynamicComponents = NonNullable<
+  NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']
+>['components']
 
 export function DynamicComponentRenderer({ components, isStoryPage = false }: Props) {
   const hasComponents = (components || []).length > 0
@@ -196,14 +194,15 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           //     )
           //   }
 
-          if (component?.__typename === 'ComponentModulesGridModule') {
-            return (
-              <GenericCardGridWithClientPagination
-                key={keyExtractor(component.id, index, array)}
-                grid={component}
-              />
-            )
-          }
+          // Grid not part of story page
+          // if (component?.__typename === 'ComponentModulesGridModule') {
+          //   return (
+          //     <GenericCardGridWithClientPagination
+          //       key={keyExtractor(component.id, index, array)}
+          //       grid={component}
+          //     />
+          //   )
+          // }
 
           if (component?.__typename === 'ComponentCoreStandAloneLink') {
             const href =
