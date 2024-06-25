@@ -1,5 +1,6 @@
 import { GenericCardGridWithClientPagination } from '@/features/editorial/components/GenericCardGridWithClientPagination'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
+import { ImageParagraph } from '@/features/ui/components/ImageParagraph/ImageParagraph'
 import {
   ImageCarousel,
   ImageCarouselItem,
@@ -254,6 +255,27 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
                   component.muxVideoRelation?.data?.attributes?.aspect_ratio?.replace(':', ' / ') ??
                   '16 / 9'
                 }
+                key={keyExtractor(component.id, index, array)}
+              />
+            )
+          }
+          if (component?.__typename === 'ComponentModulesSideImageWithText') {
+            if (
+              !component.sideText ||
+              !component.image.data?.attributes?.url ||
+              !component.image.data?.attributes?.height ||
+              !component.image.data?.attributes?.width ||
+              !component.image.data?.attributes?.caption
+            )
+              return null
+            return (
+              <ImageParagraph
+                sideText={component.sideText}
+                imageSrc={component.image.data?.attributes?.url}
+                imageHeight={component.image.data?.attributes?.height}
+                imageWidth={component.image.data?.attributes?.width}
+                imageCaption={component.image.data?.attributes?.caption}
+                imageAltText={component.image_alt_text}
                 key={keyExtractor(component.id, index, array)}
               />
             )
