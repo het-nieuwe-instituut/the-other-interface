@@ -35,6 +35,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }
                       title={editorialData?.Title || undefined}
                       preface={editorialData?.text || undefined}
                       constrainPreface={true}
+                      showReadMore={false}
                     />
 
                     <div className="flex w-full flex-col">

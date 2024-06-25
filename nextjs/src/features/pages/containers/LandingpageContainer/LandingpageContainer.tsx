@@ -24,6 +24,7 @@ export const LandingpageContainer: React.FC<Props> = ({ editorialData }) => {
             title={editorialData?.Title || undefined}
             preface={editorialData?.Description || undefined}
             constrainPreface={true}
+            showReadMore={false}
           />
         }
         BottomContent={<DynamicComponentRenderer components={editorialData?.components} />}
