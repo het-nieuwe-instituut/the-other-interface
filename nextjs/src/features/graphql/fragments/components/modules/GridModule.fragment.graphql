@@ -1,79 +1,81 @@
 fragment gridModuleFragment on ComponentModulesGridModule {
-    __typename
-    buttons {
-        id
-        url
-        text
-    }
-    description
-    featuredFields {
-        id
-        label
-        value
-    }
-    fields {
-        id
-        title
-        subtitle
-        thumbnail {
-            data {
-                id
-                attributes {
-                    url
-                    alternativeText
-                }
-            }
-        }
-        story {
-            data {
-                attributes {
-                    slug
-                    author {
-                        data {
-                            attributes {
-                                firstName
-                            }
-                        }
-                    }
-                    updatedAt
-                }
-            }
-        }
-        triplyRecord {
-            data {
-                attributes {
-                    createdAt
-                    updatedAt
-                    recordId
-                    archive (locale: $locale) {
-                        id
-                        type
-                        title
-                        objectNumber
-                    }
-                    object (locale: $locale) {
-                        description
-                        thumbnail
-                    }
-                    publication (locale: $locale) {
-                        id
-                        type
-                        title
-                        yearOfPublication
-                        objectNumber
-                    }
-                    people (locale: $locale) {
-                        name
-                        nameTypes
-                    }
-                }
-            }
-        }
-    }
-    fieldTitlesAreInverted
-    fieldTypes
+  __typename
+  buttons {
     id
-    pageSize
-    showMoreButtonTitle
+    url
+    text
+  }
+  description
+  featuredFields {
+    id
+    label
+    value
+  }
+  fields {
+    id
     title
+    subtitle
+    thumbnail {
+      data {
+        id
+        attributes {
+          url
+          alternativeText
+        }
+      }
+    }
+    story {
+      data {
+        id
+        attributes {
+          slug
+          author {
+            data {
+              attributes {
+                firstName
+              }
+            }
+          }
+          updatedAt
+        }
+      }
+    }
+    triplyRecord {
+      data {
+        attributes {
+          createdAt
+          updatedAt
+          recordId
+          type
+          archive(locale: $locale) {
+            id
+            type
+            title
+            objectNumber
+          }
+          object(locale: $locale) {
+            description
+            thumbnail
+          }
+          publication(locale: $locale) {
+            id
+            type
+            title
+            yearOfPublication
+            objectNumber
+          }
+          people(locale: $locale) {
+            name
+            nameTypes
+          }
+        }
+      }
+    }
+  }
+  fieldTitlesAreInverted
+  fieldTypes
+  id
+  pageSize
+  showMoreButtonTitle
+  title
 }

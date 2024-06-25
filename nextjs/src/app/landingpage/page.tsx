@@ -1,18 +1,13 @@
+import { HomepageContainer } from '@/features/pages/containers/HomepageContainer/HomepageContainer'
 import { LandingpageContainer } from '@/features/pages/containers/LandingpageContainer/LandingpageContainer'
+import { ReduxSearchSync } from '@/features/shared/components/Redux/ReduxSearchSync'
+import { PublicationState } from '@/features/shared/types/enums'
 import { CloudCategory, SEARCH_CATEGORIES } from '@/features/shared/utils/categories'
 import initApiServerService from '@/features/shared/utils/initApiServerService'
-import { draftMode } from 'next/headers'
-import { PublicationState } from '@/features/shared/types/enums'
-import { HomepageQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
-import { Locale } from 'src/generated/graphql'
-import { ReduxSearchSync } from '@/features/shared/components/Redux/ReduxSearchSync'
-import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
 import { Metadata } from 'next'
-
-export type HomeOrLadingType =
-  | HomepageQuery['homepage']['data']['attributes']
-  | LandingpageBySlugQuery['landingpages']['data'][0]['attributes']
-  | null
+import { draftMode } from 'next/headers'
+import { Locale } from 'src/generated/graphql'
+import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function generateMetadata(props: any): Promise<Metadata> {
@@ -34,30 +29,38 @@ export default async function Page({
   const { isEnabled } = draftMode()
   const api = initApiServerService()
   const isStories = category === SEARCH_CATEGORIES.stories
-  let editorialData: HomeOrLadingType
-  let description: string | null | undefined
+  let homepage: Awaited<ReturnType<typeof api.homepage>> | undefined
+  let landingPage: Awaited<ReturnType<typeof api.landingpageBySlug>> | undefined
 
   if (isStories) {
     const data = await api?.homepage({ locale: lang })
 
-    editorialData = data.homepage.data.attributes
+    homepage = data
   } else {
     const data = await api?.landingpageBySlug({
       slug: category,
       locale: lang,
       publicationState: isEnabled ? PublicationState.Preview : PublicationState.Live,
     })
-    editorialData = data?.landingpages?.data[0]?.attributes
-    description = editorialData?.Description
+
+    landingPage = data
+  }
+
+  if (homepage) {
+    return (
+      <>
+        <ReduxSearchSync />
+        <HomepageContainer isStoriesGalaxy={true} draftMode={isEnabled} homepage={homepage} />
+      </>
+    )
   }
 
   return (
     <>
       <ReduxSearchSync />
       <LandingpageContainer
-        editorialData={editorialData}
+        editorialData={landingPage?.landingpages.data[0]?.attributes}
         category={category as CloudCategory}
-        description={description}
       />
     </>
   )
