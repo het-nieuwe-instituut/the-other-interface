@@ -48,6 +48,7 @@ module.exports = {
       },
       borderColor: {
         blue: '#0051FF',
+        blue50: 'rgba(0, 81, 255, .5)',
         black: '#000000',
         brown: '#49280B',
       },
