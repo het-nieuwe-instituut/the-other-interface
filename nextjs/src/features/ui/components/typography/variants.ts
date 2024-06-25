@@ -7,7 +7,7 @@ export const TypographyVariants = cva('', {
     },
     timesDot: {
       '2xl': ['font-times-dot text-[96px] leading-[100%_]  tracking-[-1.92px]'],
-      lg: ['font-times-dot text-[32px]'],
+      lg: ['font-times-dot text-[32px] leading-[105%_]'],
     },
     times: {
       '2xl': ['font-times-large text-[96px] leading-[100%_]  tracking-[-1.92px]'],
