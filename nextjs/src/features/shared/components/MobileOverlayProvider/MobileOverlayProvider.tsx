@@ -28,12 +28,17 @@ const MobileOverlay = () => {
 
   return (
     <div
-      style={{ '--z-index': `${MOBILE_OVERLAY_Z_INDEX}` } as CSSProperties}
-      className="fixed right-0 top-0 z-[var(--z-index)] flex h-screen w-full overflow-hidden px-0 xl:px-6"
+      style={
+        {
+          '--z-index': `${MOBILE_OVERLAY_Z_INDEX}`,
+          'backdrop-filter': 'blur(20px)',
+        } as CSSProperties
+      }
+      className="fixed right-0 top-0 z-[var(--z-index)] flex h-screen w-full overflow-hidden bg-pink-60 px-0 xl:px-6"
     >
       <div
         style={{ '--z-index': `${MOBILE_OVERLAY_Z_INDEX + 1}` } as CSSProperties}
-        className="absolute z-[var(--z-index-minus-1)] h-screen w-screen bg-pink-60"
+        className="absolute z-[var(--z-index-minus-1)] h-screen w-screen "
       >
         <StaticHeader />
       </div>

@@ -15,7 +15,6 @@ export const StaticHeader = () => {
         style={{ '--z-index': `${STATIC_HEADER_Z_INDEX}` } as CSSProperties}
         className={cn(
           isMenuOpen || userLooksOn === USER_LOOKS_ON.GALAXY ? 'transparent' : 'bg-pink-100',
-
           'ease-in duration-200 fixed top-0 right-0 z-[var(--z-index)] h-auto overflow-hidden py-4 w-full pointer-events-auto'
         )}
       >
