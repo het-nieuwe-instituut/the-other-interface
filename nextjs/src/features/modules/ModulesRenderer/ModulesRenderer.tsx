@@ -1,3 +1,4 @@
+import { GenericCardGridWithClientPagination } from '@/features/editorial/components/GenericCardGridWithClientPagination'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import {
   ImageCarousel,
@@ -8,17 +9,12 @@ import { MuxVideoPlayer } from '@/features/ui/components/mux-video/MuxVideoPlaye
 import { Title } from '@/features/ui/components/title/Title'
 import { cn } from '@/features/ui/utils/cn'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
-import {
-  LandingpageBySlugQuery,
-  Maybe,
-  StoryByIdQuery,
-} from 'src/generated/graphql'
+import { LandingpageBySlugQuery, StoryByIdQuery } from 'src/generated/graphql'
 import { Paragraph } from '../../ui/components/Paragraph/Paragraph'
 import { ButtonGroup, LinkButtonGroupItem } from '../../ui/components/button-group/component'
 import { Subtitle } from '../../ui/components/subtitle/Subtitle'
 import { ImageModuleWrapper } from '../components/ImageModuleWrapper'
 import { Pullquote } from '../components/Pullquote/Pullquote'
-import { GenericCardGridWithClientPagination } from '@/features/editorial/components/GenericCardGridWithClientPagination'
 
 interface Props {
   components: DynamicComponents
