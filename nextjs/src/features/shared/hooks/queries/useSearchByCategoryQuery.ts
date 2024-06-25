@@ -87,12 +87,13 @@ function queryFn(args: QueryFnArgs) {
   return async () => {
     const { api, selectedFilters, decodedFilters, category, locale, page, fallback, text } = args
 
-    const selectedFiltersToInput = selectedFilters.map(filter => ({
-      key: filter.key,
-      value: filter.value,
-    }))
+    const selectedFiltersToInput = selectedFilters.map(f => ({ key: f.key, value: f.value }))
 
-    if (decodedFilters?.find(filter => filter.id === COLLECTION_HILIGHT_ID)) {
+    const collectionHighlightsActive =
+      decodedFilters.some(f => f.id === COLLECTION_HILIGHT_ID) ||
+      selectedFilters.some(f => f.id === COLLECTION_HILIGHT_ID)
+
+    if (collectionHighlightsActive) {
       const type = searchCategoryToTriplyCategory(category)
 
       const labelFilter: StringFilterInput = { containsi: text || undefined }
