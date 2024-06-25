@@ -5,14 +5,24 @@ import { LayerWrapper } from '@/features/shared/components/Layers/LayerWrapper'
 import { CloudCategory } from '@/features/shared/utils/categories'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
-import { LandingPageArchiveQuery } from 'src/generated/graphql'
+import {
+  LandingPageArchiveQuery,
+  LandingPageObjectQuery,
+  LandingPagePeopleQuery,
+  LandingPagePublicationQuery,
+} from 'src/generated/graphql'
 
 interface Props {
   category: CloudCategory
-  editorialData?: LandingPageArchiveQuery['landingPageArchive']['data']
+  editorialData?:
+    | LandingPageArchiveQuery['landingPageArchive']['data']
+    | LandingPageObjectQuery['landingPageObject']['data']
+    | LandingPagePeopleQuery['landingPagePeople']['data']
+    | LandingPagePublicationQuery['landingPagePublication']['data']
 }
 
-export const LandingpageContainer: React.FC<Props> = ({ editorialData }) => {
+export const LandingpageContainer: React.FC<Props> = ({ editorialData, category }) => {
+  console.log(category)
   return (
     <div>
       <GalaxyInterface>

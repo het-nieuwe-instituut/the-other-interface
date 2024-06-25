@@ -30,17 +30,33 @@ export default async function Page({
   const isStories = category === SEARCH_CATEGORIES.stories
   let homepage: Awaited<ReturnType<typeof api.homepage>> | undefined
   let archiveLandingPage: Awaited<ReturnType<typeof api.landingPageArchive>> | undefined
+  let objectsLandingPage: Awaited<ReturnType<typeof api.landingPageObject>> | undefined
+  let peopleLandingPage: Awaited<ReturnType<typeof api.landingPagePeople>> | undefined
+  let publicationsLandingPage: Awaited<ReturnType<typeof api.landingPagePublication>> | undefined
 
   if (isStories) {
     const data = await api?.homepage({ locale: lang })
-
     homepage = data
-  } else {
-    const data = await api?.landingPageArchive({
+  } else if (category === SEARCH_CATEGORIES.archives) {
+    const archiveData = await api?.landingPageArchive({
       locale: lang,
     })
-
-    archiveLandingPage = data
+    archiveLandingPage = archiveData
+  } else if (category === SEARCH_CATEGORIES.objects) {
+    const objectData = await api?.landingPageObject({
+      locale: lang,
+    })
+    objectsLandingPage = objectData
+  } else if (category === SEARCH_CATEGORIES.people) {
+    const peopleData = await api?.landingPagePeople({
+      locale: lang,
+    })
+    peopleLandingPage = peopleData
+  } else if (category === SEARCH_CATEGORIES.publications) {
+    const publicationData = await api?.landingPagePublication({
+      locale: lang,
+    })
+    publicationsLandingPage = publicationData
   }
 
   if (homepage) {
@@ -51,14 +67,51 @@ export default async function Page({
       </>
     )
   }
+  if (category === SEARCH_CATEGORIES.archives) {
+    return (
+      <>
+        <ReduxSearchSync />
+        <LandingpageContainer
+          editorialData={archiveLandingPage?.landingPageArchive.data}
+          category={category as CloudCategory}
+        />
+      </>
+    )
+  }
 
-  return (
-    <>
-      <ReduxSearchSync />
-      <LandingpageContainer
-        editorialData={archiveLandingPage?.landingPageArchive.data}
-        category={category as CloudCategory}
-      />
-    </>
-  )
+  if (category === SEARCH_CATEGORIES.objects) {
+    return (
+      <>
+        <ReduxSearchSync />
+        <LandingpageContainer
+          editorialData={objectsLandingPage?.landingPageObject.data}
+          category={category as CloudCategory}
+        />
+      </>
+    )
+  }
+
+  if (category === SEARCH_CATEGORIES.people) {
+    return (
+      <>
+        <ReduxSearchSync />
+        <LandingpageContainer
+          editorialData={peopleLandingPage?.landingPagePeople.data}
+          category={category as CloudCategory}
+        />
+      </>
+    )
+  }
+
+  if (category === SEARCH_CATEGORIES.publications) {
+    return (
+      <>
+        <ReduxSearchSync />
+        <LandingpageContainer
+          editorialData={publicationsLandingPage?.landingPagePublication.data}
+          category={category as CloudCategory}
+        />
+      </>
+    )
+  }
 }
