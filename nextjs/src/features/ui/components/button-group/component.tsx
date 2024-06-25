@@ -14,7 +14,7 @@ export interface ButtonGroupProps {
 }
 
 export const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, className }) => {
-  return <div className={cn(' w-full bg-inherit', className)}>{children}</div>
+  return <div className={cn('w-full bg-inherit', className)}>{children}</div>
 }
 
 export interface LinkButtonGroupItemProps {
