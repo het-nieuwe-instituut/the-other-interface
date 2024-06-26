@@ -8,7 +8,6 @@ import { cn } from '@/features/ui/utils/cn'
 
 export const StaticHeader = () => {
   const { tNavigation, userLooksOn, isMenuOpen, lang } = usePresenter()
-
   return (
     <>
       <div
@@ -23,10 +22,11 @@ export const StaticHeader = () => {
             <NextLink
               href={lang ? `/?lang=${lang}` : '/?lang=nl'}
               className={cn(
+                isMenuOpen ? 'text-white' : 'text-blue-100',
                 userLooksOn === USER_LOOKS_ON.GALAXY
                   ? 'font-times-dot text-[20px] leading-[105%_] md:text-[32px]'
                   : 'font-impact-large text-[20px] leading-[120%_] tracking-[-0.25px] md:text-[25px]',
-                'cursor-pointer overflow-hidden h-full flex m-0 text-blue-100'
+                'cursor-pointer overflow-hidden h-full flex m-0'
               )}
             >
               <p className="mr-2 sm:overflow-visible sm:whitespace-normal">
