@@ -1,5 +1,4 @@
 import { AppHead } from '@/features/shared/components/Head/AppHead'
-import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import { TestMenu } from '@/features/shared/components/TestMenu/TestMenu'
 import { ReduxStoreProvider } from '@/features/shared/components/providers/ReduxStoreProdivder'
 import { ThemeProvider } from '@/features/shared/components/providers/ThemeProvider'
@@ -65,16 +64,14 @@ function MyApp({ children }: { children: React.ReactNode }) {
             <ReactQueryProvider>
               <ThemeProvider>
                 <WelcomeOverlayProvider>
-                  <MobileOverlayProvider>
-                    <div>
-                      <AppHead />
-                      <TestMenu />
-                      <ReduxDraftModeSync isDraftMode={isEnabled} />
-                      {children}
-                      <ReactTooltipInitializer />
-                      <BaseElementWrapper />
-                    </div>
-                  </MobileOverlayProvider>
+                  <div>
+                    <AppHead />
+                    <TestMenu />
+                    <ReduxDraftModeSync isDraftMode={isEnabled} />
+                    {children}
+                    <ReactTooltipInitializer />
+                    <BaseElementWrapper />
+                  </div>
                 </WelcomeOverlayProvider>
               </ThemeProvider>
               <ReactQueryDevtools initialIsOpen={false} />
