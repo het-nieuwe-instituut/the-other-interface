@@ -101,7 +101,7 @@ export default function Demo() {
   )
 }
 export function Grid({ className }: { cols: 1 | 3; className?: string }) {
-  const { nodes, next } = useClientPagination({
+  const { nodes } = useClientPagination({
     items: stubData,
     itemsInPage: 6,
     preservePreviousLimitedData: true,

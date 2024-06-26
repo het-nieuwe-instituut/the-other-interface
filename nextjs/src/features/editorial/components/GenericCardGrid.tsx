@@ -14,7 +14,6 @@ import {
 import { cn } from '@/features/ui/utils/cn'
 import { ComponentModulesGridModule } from 'src/generated/graphql'
 import { getTriplyOrStoryHref } from './getTriplyOrStoryHref'
-import { useClientPagination } from './useClientPagination'
 
 type CardGrid = DeepPartial<ComponentModulesGridModule>
 
