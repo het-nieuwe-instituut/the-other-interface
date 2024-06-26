@@ -10,7 +10,7 @@ interface Props {
 
 export const LayerWrapper: React.FC<Props> = ({ LeftContent, RightContent, BottomContent }) => {
   return (
-    <div className="relative w-full bg-ivory-90 px-0 xl:px-6">
+    <div className="relative min-h-[600px] w-full bg-ivory-90 px-0 xl:px-6">
       <div className="mx-auto max-w-[90em] pt-9">
         <div
           className={cn(
