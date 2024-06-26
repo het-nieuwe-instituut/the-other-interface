@@ -23,7 +23,7 @@ export const StandaloneLink = ({
     <LinkButton
       href={variant === 'download' ? `/api/attachmentProxy?filename=${href}` : href}
       target="_blank"
-      className={cn('flex gap-2', className)}
+      className={cn('flex gap-2 px-1', className)}
       intent={'secondary'}
       size={'smallNoPadding'}
     >

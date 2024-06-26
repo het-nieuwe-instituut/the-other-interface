@@ -1,7 +1,7 @@
 fragment LandingPageArchiveFragment on LandingPageArchive {
   title
   text
-  carousels {
+  carousel {
     ...ComponentModulesCarouselFragment
   }
   highlight {
@@ -9,13 +9,16 @@ fragment LandingPageArchiveFragment on LandingPageArchive {
   }
   grid {
     ...ComponentModulesGridModuleFragment
+  }
+  imageCarousel {
+    ...ComponentModulesImageCarouselFragment
   }
 }
 
 fragment LandingPageObjectFragment on LandingPageObject {
   title
   text
-  carousels {
+  carousel {
     ...ComponentModulesCarouselFragment
   }
   highlight {
@@ -23,13 +26,16 @@ fragment LandingPageObjectFragment on LandingPageObject {
   }
   grid {
     ...ComponentModulesGridModuleFragment
+  }
+  imageCarousel {
+    ...ComponentModulesImageCarouselFragment
   }
 }
 
 fragment LandingPagePeopleFragment on LandingPagePeople {
   title
   text
-  carousels {
+  carousel {
     ...ComponentModulesCarouselFragment
   }
   highlight {
@@ -37,13 +43,16 @@ fragment LandingPagePeopleFragment on LandingPagePeople {
   }
   grid {
     ...ComponentModulesGridModuleFragment
+  }
+  imageCarousel {
+    ...ComponentModulesImageCarouselFragment
   }
 }
 
 fragment LandingPagePublicationFragment on LandingPagePublication {
   title
   text
-  carousels {
+  carousel {
     ...ComponentModulesCarouselFragment
   }
   highlight {
@@ -51,6 +60,9 @@ fragment LandingPagePublicationFragment on LandingPagePublication {
   }
   grid {
     ...ComponentModulesGridModuleFragment
+  }
+  imageCarousel {
+    ...ComponentModulesImageCarouselFragment
   }
 }
 

@@ -33,9 +33,9 @@
       },
       "type": "text"
     },
-    "carousels": {
+    "carousel": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -63,6 +63,16 @@
         }
       },
       "component": "modules.grid-module"
+    },
+    "imageCarousel": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "modules.image-carousel"
     }
   }
 }

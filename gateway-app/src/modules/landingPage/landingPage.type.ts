@@ -2,6 +2,7 @@ import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
 import { ComponentModulesGridModule } from '../strapi/components/modules/gridModule'
 import { ComponentModulesCarousel } from '../strapi/components/modules/carousel'
 import { ComponentModulesHighlight } from '../strapi/components/modules/highlight'
+import { ComponentModulesImageCarousel } from '../strapi/components/modules/imageCarousel'
 
 @ObjectType()
 class BaseLandingPage {
@@ -11,14 +12,17 @@ class BaseLandingPage {
   @Field({ nullable: true })
   public text?: string
 
-  @Field(() => [ComponentModulesCarousel], { nullable: true })
-  public carousels?: ComponentModulesCarousel[]
+  @Field(() => ComponentModulesCarousel, { nullable: true })
+  public carousel?: ComponentModulesCarousel
 
   @Field(() => ComponentModulesGridModule, { nullable: true })
   public grid?: ComponentModulesGridModule
 
   @Field(() => ComponentModulesHighlight, { nullable: true })
   public highlight?: ComponentModulesHighlight
+
+  @Field(() => ComponentModulesImageCarousel, { nullable: true })
+  public imageCarousel?: ComponentModulesImageCarousel
 }
 
 @ObjectType()

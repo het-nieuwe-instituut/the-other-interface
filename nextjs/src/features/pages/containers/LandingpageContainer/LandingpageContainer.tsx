@@ -42,6 +42,8 @@ export const LandingpageContainer: React.FC<LandingPageProps> = ({ editorialData
           <LandingPageComponentRenderer
             grid={editorialData?.attributes?.grid}
             highlight={editorialData?.attributes?.highlight}
+            carousel={editorialData?.attributes?.carousel}
+            imageCarousel={editorialData?.attributes?.imageCarousel}
           />
         }
       />

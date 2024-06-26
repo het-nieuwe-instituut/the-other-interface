@@ -311,17 +311,6 @@ export type ComponentModulesCarouselImagesArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
-export type ComponentModulesCarouselFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselFiltersInput>>>
-  description?: InputMaybe<StringFilterInput>
-  explore_collection_button?: InputMaybe<ComponentCoreButtonFiltersInput>
-  images?: InputMaybe<ComponentCoreCarouselImageFiltersInput>
-  not?: InputMaybe<ComponentModulesCarouselFiltersInput>
-  or?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselFiltersInput>>>
-  title?: InputMaybe<StringFilterInput>
-  variant?: InputMaybe<StringFilterInput>
-}
-
 export type ComponentModulesCarouselInput = {
   description?: InputMaybe<Scalars['String']>
   explore_collection_button?: InputMaybe<ComponentCoreButtonInput>
@@ -422,6 +411,12 @@ export type ComponentModulesImageCarouselImagesArgs = {
   filters?: InputMaybe<UploadFileFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
+}
+
+export type ComponentModulesImageCarouselInput = {
+  description?: InputMaybe<Scalars['String']>
+  id?: InputMaybe<Scalars['ID']>
+  images?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
 }
 
 export type ComponentModulesPullquote = {
@@ -889,21 +884,16 @@ export type JsonFilterInput = {
 
 export type LandingPageArchive = {
   __typename?: 'LandingPageArchive'
-  carousels?: Maybe<Array<Maybe<ComponentModulesCarousel>>>
+  carousel?: Maybe<ComponentModulesCarousel>
   createdAt?: Maybe<Scalars['DateTime']>
   grid?: Maybe<ComponentModulesGridModule>
   highlight?: Maybe<ComponentModulesHighlight>
+  imageCarousel?: Maybe<ComponentModulesImageCarousel>
   locale?: Maybe<Scalars['String']>
   localizations?: Maybe<LandingPageArchiveRelationResponseCollection>
   text?: Maybe<Scalars['String']>
   title: Scalars['String']
   updatedAt?: Maybe<Scalars['DateTime']>
-}
-
-export type LandingPageArchiveCarouselsArgs = {
-  filters?: InputMaybe<ComponentModulesCarouselFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
 export type LandingPageArchiveEntity = {
@@ -918,9 +908,10 @@ export type LandingPageArchiveEntityResponse = {
 }
 
 export type LandingPageArchiveInput = {
-  carousels?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselInput>>>
+  carousel?: InputMaybe<ComponentModulesCarouselInput>
   grid?: InputMaybe<ComponentModulesGridModuleInput>
   highlight?: InputMaybe<ComponentModulesHighlightInput>
+  imageCarousel?: InputMaybe<ComponentModulesImageCarouselInput>
   text?: InputMaybe<Scalars['String']>
   title?: InputMaybe<Scalars['String']>
 }
@@ -932,21 +923,16 @@ export type LandingPageArchiveRelationResponseCollection = {
 
 export type LandingPageObject = {
   __typename?: 'LandingPageObject'
-  carousels?: Maybe<Array<Maybe<ComponentModulesCarousel>>>
+  carousel?: Maybe<ComponentModulesCarousel>
   createdAt?: Maybe<Scalars['DateTime']>
   grid?: Maybe<ComponentModulesGridModule>
   highlight?: Maybe<ComponentModulesHighlight>
+  imageCarousel?: Maybe<ComponentModulesImageCarousel>
   locale?: Maybe<Scalars['String']>
   localizations?: Maybe<LandingPageObjectRelationResponseCollection>
   text?: Maybe<Scalars['String']>
   title: Scalars['String']
   updatedAt?: Maybe<Scalars['DateTime']>
-}
-
-export type LandingPageObjectCarouselsArgs = {
-  filters?: InputMaybe<ComponentModulesCarouselFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
 export type LandingPageObjectEntity = {
@@ -961,9 +947,10 @@ export type LandingPageObjectEntityResponse = {
 }
 
 export type LandingPageObjectInput = {
-  carousels?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselInput>>>
+  carousel?: InputMaybe<ComponentModulesCarouselInput>
   grid?: InputMaybe<ComponentModulesGridModuleInput>
   highlight?: InputMaybe<ComponentModulesHighlightInput>
+  imageCarousel?: InputMaybe<ComponentModulesImageCarouselInput>
   text?: InputMaybe<Scalars['String']>
   title?: InputMaybe<Scalars['String']>
 }
@@ -975,21 +962,16 @@ export type LandingPageObjectRelationResponseCollection = {
 
 export type LandingPagePeople = {
   __typename?: 'LandingPagePeople'
-  carousels?: Maybe<Array<Maybe<ComponentModulesCarousel>>>
+  carousel?: Maybe<ComponentModulesCarousel>
   createdAt?: Maybe<Scalars['DateTime']>
   grid?: Maybe<ComponentModulesGridModule>
   highlight?: Maybe<ComponentModulesHighlight>
+  imageCarousel?: Maybe<ComponentModulesImageCarousel>
   locale?: Maybe<Scalars['String']>
   localizations?: Maybe<LandingPagePeopleRelationResponseCollection>
   text?: Maybe<Scalars['String']>
   title: Scalars['String']
   updatedAt?: Maybe<Scalars['DateTime']>
-}
-
-export type LandingPagePeopleCarouselsArgs = {
-  filters?: InputMaybe<ComponentModulesCarouselFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
 export type LandingPagePeopleEntity = {
@@ -1004,9 +986,10 @@ export type LandingPagePeopleEntityResponse = {
 }
 
 export type LandingPagePeopleInput = {
-  carousels?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselInput>>>
+  carousel?: InputMaybe<ComponentModulesCarouselInput>
   grid?: InputMaybe<ComponentModulesGridModuleInput>
   highlight?: InputMaybe<ComponentModulesHighlightInput>
+  imageCarousel?: InputMaybe<ComponentModulesImageCarouselInput>
   text?: InputMaybe<Scalars['String']>
   title?: InputMaybe<Scalars['String']>
 }
@@ -1018,21 +1001,16 @@ export type LandingPagePeopleRelationResponseCollection = {
 
 export type LandingPagePublication = {
   __typename?: 'LandingPagePublication'
-  carousels?: Maybe<Array<Maybe<ComponentModulesCarousel>>>
+  carousel?: Maybe<ComponentModulesCarousel>
   createdAt?: Maybe<Scalars['DateTime']>
   grid?: Maybe<ComponentModulesGridModule>
   highlight?: Maybe<ComponentModulesHighlight>
+  imageCarousel?: Maybe<ComponentModulesImageCarousel>
   locale?: Maybe<Scalars['String']>
   localizations?: Maybe<LandingPagePublicationRelationResponseCollection>
   text?: Maybe<Scalars['String']>
   title: Scalars['String']
   updatedAt?: Maybe<Scalars['DateTime']>
-}
-
-export type LandingPagePublicationCarouselsArgs = {
-  filters?: InputMaybe<ComponentModulesCarouselFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
 export type LandingPagePublicationEntity = {
@@ -1047,9 +1025,10 @@ export type LandingPagePublicationEntityResponse = {
 }
 
 export type LandingPagePublicationInput = {
-  carousels?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselInput>>>
+  carousel?: InputMaybe<ComponentModulesCarouselInput>
   grid?: InputMaybe<ComponentModulesGridModuleInput>
   highlight?: InputMaybe<ComponentModulesHighlightInput>
+  imageCarousel?: InputMaybe<ComponentModulesImageCarouselInput>
   text?: InputMaybe<Scalars['String']>
   title?: InputMaybe<Scalars['String']>
 }
@@ -4294,7 +4273,7 @@ export type LandingPageArchiveFragmentFragment = {
   __typename?: 'LandingPageArchive'
   title: string
   text?: string | null
-  carousels?: Array<{
+  carousel?: {
     __typename: 'ComponentModulesCarousel'
     id: string
     description?: string | null
@@ -4359,7 +4338,7 @@ export type LandingPageArchiveFragmentFragment = {
       text: string
       url: string
     } | null
-  } | null> | null
+  } | null
   highlight?: {
     __typename?: 'ComponentModulesHighlight'
     id: string
@@ -4472,6 +4451,37 @@ export type LandingPageArchiveFragmentFragment = {
         } | null
       } | null
     } | null> | null
+  } | null
+  imageCarousel?: {
+    __typename: 'ComponentModulesImageCarousel'
+    id: string
+    description?: string | null
+    images?: {
+      __typename?: 'UploadFileRelationResponseCollection'
+      data: Array<{
+        __typename?: 'UploadFileEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'UploadFile'
+          hash: string
+          mime: string
+          name: string
+          provider: string
+          size: number
+          url: string
+          alternativeText?: string | null
+          caption?: string | null
+          createdAt?: any | null
+          ext?: string | null
+          formats?: any | null
+          height?: number | null
+          previewUrl?: string | null
+          provider_metadata?: any | null
+          updatedAt?: any | null
+          width?: number | null
+        } | null
+      }>
+    } | null
   } | null
 }
 
@@ -4479,7 +4489,7 @@ export type LandingPageObjectFragmentFragment = {
   __typename?: 'LandingPageObject'
   title: string
   text?: string | null
-  carousels?: Array<{
+  carousel?: {
     __typename: 'ComponentModulesCarousel'
     id: string
     description?: string | null
@@ -4544,7 +4554,7 @@ export type LandingPageObjectFragmentFragment = {
       text: string
       url: string
     } | null
-  } | null> | null
+  } | null
   highlight?: {
     __typename?: 'ComponentModulesHighlight'
     id: string
@@ -4657,6 +4667,37 @@ export type LandingPageObjectFragmentFragment = {
         } | null
       } | null
     } | null> | null
+  } | null
+  imageCarousel?: {
+    __typename: 'ComponentModulesImageCarousel'
+    id: string
+    description?: string | null
+    images?: {
+      __typename?: 'UploadFileRelationResponseCollection'
+      data: Array<{
+        __typename?: 'UploadFileEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'UploadFile'
+          hash: string
+          mime: string
+          name: string
+          provider: string
+          size: number
+          url: string
+          alternativeText?: string | null
+          caption?: string | null
+          createdAt?: any | null
+          ext?: string | null
+          formats?: any | null
+          height?: number | null
+          previewUrl?: string | null
+          provider_metadata?: any | null
+          updatedAt?: any | null
+          width?: number | null
+        } | null
+      }>
+    } | null
   } | null
 }
 
@@ -4664,7 +4705,7 @@ export type LandingPagePeopleFragmentFragment = {
   __typename?: 'LandingPagePeople'
   title: string
   text?: string | null
-  carousels?: Array<{
+  carousel?: {
     __typename: 'ComponentModulesCarousel'
     id: string
     description?: string | null
@@ -4729,7 +4770,7 @@ export type LandingPagePeopleFragmentFragment = {
       text: string
       url: string
     } | null
-  } | null> | null
+  } | null
   highlight?: {
     __typename?: 'ComponentModulesHighlight'
     id: string
@@ -4842,6 +4883,37 @@ export type LandingPagePeopleFragmentFragment = {
         } | null
       } | null
     } | null> | null
+  } | null
+  imageCarousel?: {
+    __typename: 'ComponentModulesImageCarousel'
+    id: string
+    description?: string | null
+    images?: {
+      __typename?: 'UploadFileRelationResponseCollection'
+      data: Array<{
+        __typename?: 'UploadFileEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'UploadFile'
+          hash: string
+          mime: string
+          name: string
+          provider: string
+          size: number
+          url: string
+          alternativeText?: string | null
+          caption?: string | null
+          createdAt?: any | null
+          ext?: string | null
+          formats?: any | null
+          height?: number | null
+          previewUrl?: string | null
+          provider_metadata?: any | null
+          updatedAt?: any | null
+          width?: number | null
+        } | null
+      }>
+    } | null
   } | null
 }
 
@@ -4849,7 +4921,7 @@ export type LandingPagePublicationFragmentFragment = {
   __typename?: 'LandingPagePublication'
   title: string
   text?: string | null
-  carousels?: Array<{
+  carousel?: {
     __typename: 'ComponentModulesCarousel'
     id: string
     description?: string | null
@@ -4914,7 +4986,7 @@ export type LandingPagePublicationFragmentFragment = {
       text: string
       url: string
     } | null
-  } | null> | null
+  } | null
   highlight?: {
     __typename?: 'ComponentModulesHighlight'
     id: string
@@ -5027,6 +5099,37 @@ export type LandingPagePublicationFragmentFragment = {
         } | null
       } | null
     } | null> | null
+  } | null
+  imageCarousel?: {
+    __typename: 'ComponentModulesImageCarousel'
+    id: string
+    description?: string | null
+    images?: {
+      __typename?: 'UploadFileRelationResponseCollection'
+      data: Array<{
+        __typename?: 'UploadFileEntity'
+        id?: string | null
+        attributes?: {
+          __typename?: 'UploadFile'
+          hash: string
+          mime: string
+          name: string
+          provider: string
+          size: number
+          url: string
+          alternativeText?: string | null
+          caption?: string | null
+          createdAt?: any | null
+          ext?: string | null
+          formats?: any | null
+          height?: number | null
+          previewUrl?: string | null
+          provider_metadata?: any | null
+          updatedAt?: any | null
+          width?: number | null
+        } | null
+      }>
+    } | null
   } | null
 }
 
@@ -5045,7 +5148,7 @@ export type LandingPageArchiveQuery = {
         __typename?: 'LandingPageArchive'
         title: string
         text?: string | null
-        carousels?: Array<{
+        carousel?: {
           __typename: 'ComponentModulesCarousel'
           id: string
           description?: string | null
@@ -5110,7 +5213,7 @@ export type LandingPageArchiveQuery = {
             text: string
             url: string
           } | null
-        } | null> | null
+        } | null
         highlight?: {
           __typename?: 'ComponentModulesHighlight'
           id: string
@@ -5223,6 +5326,37 @@ export type LandingPageArchiveQuery = {
               } | null
             } | null
           } | null> | null
+        } | null
+        imageCarousel?: {
+          __typename: 'ComponentModulesImageCarousel'
+          id: string
+          description?: string | null
+          images?: {
+            __typename?: 'UploadFileRelationResponseCollection'
+            data: Array<{
+              __typename?: 'UploadFileEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'UploadFile'
+                hash: string
+                mime: string
+                name: string
+                provider: string
+                size: number
+                url: string
+                alternativeText?: string | null
+                caption?: string | null
+                createdAt?: any | null
+                ext?: string | null
+                formats?: any | null
+                height?: number | null
+                previewUrl?: string | null
+                provider_metadata?: any | null
+                updatedAt?: any | null
+                width?: number | null
+              } | null
+            }>
+          } | null
         } | null
       } | null
     } | null
@@ -5244,7 +5378,7 @@ export type LandingPageObjectQuery = {
         __typename?: 'LandingPageObject'
         title: string
         text?: string | null
-        carousels?: Array<{
+        carousel?: {
           __typename: 'ComponentModulesCarousel'
           id: string
           description?: string | null
@@ -5309,7 +5443,7 @@ export type LandingPageObjectQuery = {
             text: string
             url: string
           } | null
-        } | null> | null
+        } | null
         highlight?: {
           __typename?: 'ComponentModulesHighlight'
           id: string
@@ -5422,6 +5556,37 @@ export type LandingPageObjectQuery = {
               } | null
             } | null
           } | null> | null
+        } | null
+        imageCarousel?: {
+          __typename: 'ComponentModulesImageCarousel'
+          id: string
+          description?: string | null
+          images?: {
+            __typename?: 'UploadFileRelationResponseCollection'
+            data: Array<{
+              __typename?: 'UploadFileEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'UploadFile'
+                hash: string
+                mime: string
+                name: string
+                provider: string
+                size: number
+                url: string
+                alternativeText?: string | null
+                caption?: string | null
+                createdAt?: any | null
+                ext?: string | null
+                formats?: any | null
+                height?: number | null
+                previewUrl?: string | null
+                provider_metadata?: any | null
+                updatedAt?: any | null
+                width?: number | null
+              } | null
+            }>
+          } | null
         } | null
       } | null
     } | null
@@ -5443,7 +5608,7 @@ export type LandingPagePeopleQuery = {
         __typename?: 'LandingPagePeople'
         title: string
         text?: string | null
-        carousels?: Array<{
+        carousel?: {
           __typename: 'ComponentModulesCarousel'
           id: string
           description?: string | null
@@ -5508,7 +5673,7 @@ export type LandingPagePeopleQuery = {
             text: string
             url: string
           } | null
-        } | null> | null
+        } | null
         highlight?: {
           __typename?: 'ComponentModulesHighlight'
           id: string
@@ -5621,6 +5786,37 @@ export type LandingPagePeopleQuery = {
               } | null
             } | null
           } | null> | null
+        } | null
+        imageCarousel?: {
+          __typename: 'ComponentModulesImageCarousel'
+          id: string
+          description?: string | null
+          images?: {
+            __typename?: 'UploadFileRelationResponseCollection'
+            data: Array<{
+              __typename?: 'UploadFileEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'UploadFile'
+                hash: string
+                mime: string
+                name: string
+                provider: string
+                size: number
+                url: string
+                alternativeText?: string | null
+                caption?: string | null
+                createdAt?: any | null
+                ext?: string | null
+                formats?: any | null
+                height?: number | null
+                previewUrl?: string | null
+                provider_metadata?: any | null
+                updatedAt?: any | null
+                width?: number | null
+              } | null
+            }>
+          } | null
         } | null
       } | null
     } | null
@@ -5642,7 +5838,7 @@ export type LandingPagePublicationQuery = {
         __typename?: 'LandingPagePublication'
         title: string
         text?: string | null
-        carousels?: Array<{
+        carousel?: {
           __typename: 'ComponentModulesCarousel'
           id: string
           description?: string | null
@@ -5707,7 +5903,7 @@ export type LandingPagePublicationQuery = {
             text: string
             url: string
           } | null
-        } | null> | null
+        } | null
         highlight?: {
           __typename?: 'ComponentModulesHighlight'
           id: string
@@ -5820,6 +6016,37 @@ export type LandingPagePublicationQuery = {
               } | null
             } | null
           } | null> | null
+        } | null
+        imageCarousel?: {
+          __typename: 'ComponentModulesImageCarousel'
+          id: string
+          description?: string | null
+          images?: {
+            __typename?: 'UploadFileRelationResponseCollection'
+            data: Array<{
+              __typename?: 'UploadFileEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'UploadFile'
+                hash: string
+                mime: string
+                name: string
+                provider: string
+                size: number
+                url: string
+                alternativeText?: string | null
+                caption?: string | null
+                createdAt?: any | null
+                ext?: string | null
+                formats?: any | null
+                height?: number | null
+                previewUrl?: string | null
+                provider_metadata?: any | null
+                updatedAt?: any | null
+                width?: number | null
+              } | null
+            }>
+          } | null
         } | null
       } | null
     } | null
@@ -19395,11 +19622,33 @@ export const ComponentModulesHighlightFragmentFragmentDoc = gql`
   ${ComponentCoreButtonFragmentFragmentDoc}
   ${UploadFileEntityResponseFragmentFragmentDoc}
 `
+export const UploadFileRelationResponseCollectionFragmentFragmentDoc = gql`
+  fragment UploadFileRelationResponseCollectionFragment on UploadFileRelationResponseCollection {
+    data {
+      id
+      attributes {
+        ...UploadFileFragment
+      }
+    }
+  }
+  ${UploadFileFragmentFragmentDoc}
+`
+export const ComponentModulesImageCarouselFragmentFragmentDoc = gql`
+  fragment ComponentModulesImageCarouselFragment on ComponentModulesImageCarousel {
+    id
+    description
+    __typename
+    images {
+      ...UploadFileRelationResponseCollectionFragment
+    }
+  }
+  ${UploadFileRelationResponseCollectionFragmentFragmentDoc}
+`
 export const LandingPageArchiveFragmentFragmentDoc = gql`
   fragment LandingPageArchiveFragment on LandingPageArchive {
     title
     text
-    carousels {
+    carousel {
       ...ComponentModulesCarouselFragment
     }
     highlight {
@@ -19408,16 +19657,20 @@ export const LandingPageArchiveFragmentFragmentDoc = gql`
     grid {
       ...ComponentModulesGridModuleFragment
     }
+    imageCarousel {
+      ...ComponentModulesImageCarouselFragment
+    }
   }
   ${ComponentModulesCarouselFragmentFragmentDoc}
   ${ComponentModulesHighlightFragmentFragmentDoc}
   ${ComponentModulesGridModuleFragmentFragmentDoc}
+  ${ComponentModulesImageCarouselFragmentFragmentDoc}
 `
 export const LandingPageObjectFragmentFragmentDoc = gql`
   fragment LandingPageObjectFragment on LandingPageObject {
     title
     text
-    carousels {
+    carousel {
       ...ComponentModulesCarouselFragment
     }
     highlight {
@@ -19426,16 +19679,20 @@ export const LandingPageObjectFragmentFragmentDoc = gql`
     grid {
       ...ComponentModulesGridModuleFragment
     }
+    imageCarousel {
+      ...ComponentModulesImageCarouselFragment
+    }
   }
   ${ComponentModulesCarouselFragmentFragmentDoc}
   ${ComponentModulesHighlightFragmentFragmentDoc}
   ${ComponentModulesGridModuleFragmentFragmentDoc}
+  ${ComponentModulesImageCarouselFragmentFragmentDoc}
 `
 export const LandingPagePeopleFragmentFragmentDoc = gql`
   fragment LandingPagePeopleFragment on LandingPagePeople {
     title
     text
-    carousels {
+    carousel {
       ...ComponentModulesCarouselFragment
     }
     highlight {
@@ -19444,16 +19701,20 @@ export const LandingPagePeopleFragmentFragmentDoc = gql`
     grid {
       ...ComponentModulesGridModuleFragment
     }
+    imageCarousel {
+      ...ComponentModulesImageCarouselFragment
+    }
   }
   ${ComponentModulesCarouselFragmentFragmentDoc}
   ${ComponentModulesHighlightFragmentFragmentDoc}
   ${ComponentModulesGridModuleFragmentFragmentDoc}
+  ${ComponentModulesImageCarouselFragmentFragmentDoc}
 `
 export const LandingPagePublicationFragmentFragmentDoc = gql`
   fragment LandingPagePublicationFragment on LandingPagePublication {
     title
     text
-    carousels {
+    carousel {
       ...ComponentModulesCarouselFragment
     }
     highlight {
@@ -19462,10 +19723,14 @@ export const LandingPagePublicationFragmentFragmentDoc = gql`
     grid {
       ...ComponentModulesGridModuleFragment
     }
+    imageCarousel {
+      ...ComponentModulesImageCarouselFragment
+    }
   }
   ${ComponentModulesCarouselFragmentFragmentDoc}
   ${ComponentModulesHighlightFragmentFragmentDoc}
   ${ComponentModulesGridModuleFragmentFragmentDoc}
+  ${ComponentModulesImageCarouselFragmentFragmentDoc}
 `
 export const LocationFragmentFragmentDoc = gql`
   fragment LocationFragment on LocationEntity {
@@ -19516,28 +19781,6 @@ export const ComponentModulesTitleModuleFragmentFragmentDoc = gql`
     id
     __typename
   }
-`
-export const UploadFileRelationResponseCollectionFragmentFragmentDoc = gql`
-  fragment UploadFileRelationResponseCollectionFragment on UploadFileRelationResponseCollection {
-    data {
-      id
-      attributes {
-        ...UploadFileFragment
-      }
-    }
-  }
-  ${UploadFileFragmentFragmentDoc}
-`
-export const ComponentModulesImageCarouselFragmentFragmentDoc = gql`
-  fragment ComponentModulesImageCarouselFragment on ComponentModulesImageCarousel {
-    id
-    description
-    __typename
-    images {
-      ...UploadFileRelationResponseCollectionFragment
-    }
-  }
-  ${UploadFileRelationResponseCollectionFragmentFragmentDoc}
 `
 export const StoryWithoutRelationsFragmentFragmentDoc = gql`
   fragment StoryWithoutRelationsFragment on StoryEntity {

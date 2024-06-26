@@ -12,13 +12,16 @@ query landingPageArchive($locale: Locale!) {
 fragment LandingPageArchiveFragment on LandingPageArchive {
   title
   text
-  # carousels {
-  #  ...carouselModuleFragment
-  #}
   highlight {
     ...highlightModulesFragment
   }
   grid {
     ...gridModuleFragment
+  }
+  carousel {
+    ...carouselModuleFragment
+  }
+  imageCarousel {
+    ...imageCarouselModuleFragment
   }
 }

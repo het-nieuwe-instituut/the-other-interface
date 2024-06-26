@@ -577,9 +577,10 @@ export const anIdFilterInput = (overrides?: Partial<IdFilterInput>, _relationshi
 export const aLandingPageArchive = (overrides?: Partial<LandingPageArchive>, _relationshipsToOmit: Array<string> = []): LandingPageArchive => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'LandingPageArchive']);
     return {
-        carousels: overrides && overrides.hasOwnProperty('carousels') ? overrides.carousels! : [relationshipsToOmit.includes('ComponentModulesCarousel') ? {} as ComponentModulesCarousel : aComponentModulesCarousel({}, relationshipsToOmit)],
+        carousel: overrides && overrides.hasOwnProperty('carousel') ? overrides.carousel! : relationshipsToOmit.includes('ComponentModulesCarousel') ? {} as ComponentModulesCarousel : aComponentModulesCarousel({}, relationshipsToOmit),
         grid: overrides && overrides.hasOwnProperty('grid') ? overrides.grid! : relationshipsToOmit.includes('ComponentModulesGridModule') ? {} as ComponentModulesGridModule : aComponentModulesGridModule({}, relationshipsToOmit),
         highlight: overrides && overrides.hasOwnProperty('highlight') ? overrides.highlight! : relationshipsToOmit.includes('ComponentModulesHighlight') ? {} as ComponentModulesHighlight : aComponentModulesHighlight({}, relationshipsToOmit),
+        imageCarousel: overrides && overrides.hasOwnProperty('imageCarousel') ? overrides.imageCarousel! : relationshipsToOmit.includes('ComponentModulesImageCarousel') ? {} as ComponentModulesImageCarousel : aComponentModulesImageCarousel({}, relationshipsToOmit),
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : 'omnis',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'distinctio',
     };
@@ -603,9 +604,10 @@ export const aLandingPageArchiveEntityResponse = (overrides?: Partial<LandingPag
 export const aLandingPageObject = (overrides?: Partial<LandingPageObject>, _relationshipsToOmit: Array<string> = []): LandingPageObject => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'LandingPageObject']);
     return {
-        carousels: overrides && overrides.hasOwnProperty('carousels') ? overrides.carousels! : [relationshipsToOmit.includes('ComponentModulesCarousel') ? {} as ComponentModulesCarousel : aComponentModulesCarousel({}, relationshipsToOmit)],
+        carousel: overrides && overrides.hasOwnProperty('carousel') ? overrides.carousel! : relationshipsToOmit.includes('ComponentModulesCarousel') ? {} as ComponentModulesCarousel : aComponentModulesCarousel({}, relationshipsToOmit),
         grid: overrides && overrides.hasOwnProperty('grid') ? overrides.grid! : relationshipsToOmit.includes('ComponentModulesGridModule') ? {} as ComponentModulesGridModule : aComponentModulesGridModule({}, relationshipsToOmit),
         highlight: overrides && overrides.hasOwnProperty('highlight') ? overrides.highlight! : relationshipsToOmit.includes('ComponentModulesHighlight') ? {} as ComponentModulesHighlight : aComponentModulesHighlight({}, relationshipsToOmit),
+        imageCarousel: overrides && overrides.hasOwnProperty('imageCarousel') ? overrides.imageCarousel! : relationshipsToOmit.includes('ComponentModulesImageCarousel') ? {} as ComponentModulesImageCarousel : aComponentModulesImageCarousel({}, relationshipsToOmit),
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : 'omnis',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'et',
     };
@@ -629,9 +631,10 @@ export const aLandingPageObjectEntityResponse = (overrides?: Partial<LandingPage
 export const aLandingPagePeople = (overrides?: Partial<LandingPagePeople>, _relationshipsToOmit: Array<string> = []): LandingPagePeople => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'LandingPagePeople']);
     return {
-        carousels: overrides && overrides.hasOwnProperty('carousels') ? overrides.carousels! : [relationshipsToOmit.includes('ComponentModulesCarousel') ? {} as ComponentModulesCarousel : aComponentModulesCarousel({}, relationshipsToOmit)],
+        carousel: overrides && overrides.hasOwnProperty('carousel') ? overrides.carousel! : relationshipsToOmit.includes('ComponentModulesCarousel') ? {} as ComponentModulesCarousel : aComponentModulesCarousel({}, relationshipsToOmit),
         grid: overrides && overrides.hasOwnProperty('grid') ? overrides.grid! : relationshipsToOmit.includes('ComponentModulesGridModule') ? {} as ComponentModulesGridModule : aComponentModulesGridModule({}, relationshipsToOmit),
         highlight: overrides && overrides.hasOwnProperty('highlight') ? overrides.highlight! : relationshipsToOmit.includes('ComponentModulesHighlight') ? {} as ComponentModulesHighlight : aComponentModulesHighlight({}, relationshipsToOmit),
+        imageCarousel: overrides && overrides.hasOwnProperty('imageCarousel') ? overrides.imageCarousel! : relationshipsToOmit.includes('ComponentModulesImageCarousel') ? {} as ComponentModulesImageCarousel : aComponentModulesImageCarousel({}, relationshipsToOmit),
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : 'qui',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'accusamus',
     };
@@ -655,9 +658,10 @@ export const aLandingPagePeopleEntityResponse = (overrides?: Partial<LandingPage
 export const aLandingPagePublication = (overrides?: Partial<LandingPagePublication>, _relationshipsToOmit: Array<string> = []): LandingPagePublication => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'LandingPagePublication']);
     return {
-        carousels: overrides && overrides.hasOwnProperty('carousels') ? overrides.carousels! : [relationshipsToOmit.includes('ComponentModulesCarousel') ? {} as ComponentModulesCarousel : aComponentModulesCarousel({}, relationshipsToOmit)],
+        carousel: overrides && overrides.hasOwnProperty('carousel') ? overrides.carousel! : relationshipsToOmit.includes('ComponentModulesCarousel') ? {} as ComponentModulesCarousel : aComponentModulesCarousel({}, relationshipsToOmit),
         grid: overrides && overrides.hasOwnProperty('grid') ? overrides.grid! : relationshipsToOmit.includes('ComponentModulesGridModule') ? {} as ComponentModulesGridModule : aComponentModulesGridModule({}, relationshipsToOmit),
         highlight: overrides && overrides.hasOwnProperty('highlight') ? overrides.highlight! : relationshipsToOmit.includes('ComponentModulesHighlight') ? {} as ComponentModulesHighlight : aComponentModulesHighlight({}, relationshipsToOmit),
+        imageCarousel: overrides && overrides.hasOwnProperty('imageCarousel') ? overrides.imageCarousel! : relationshipsToOmit.includes('ComponentModulesImageCarousel') ? {} as ComponentModulesImageCarousel : aComponentModulesImageCarousel({}, relationshipsToOmit),
         text: overrides && overrides.hasOwnProperty('text') ? overrides.text! : 'perspiciatis',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'ut',
     };

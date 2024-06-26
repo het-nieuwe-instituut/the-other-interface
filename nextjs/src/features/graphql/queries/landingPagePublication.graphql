@@ -12,13 +12,16 @@ query landingPagePublication($locale: Locale!) {
 fragment LandingPagePublicationFragment on LandingPagePublication {
   title
   text
-  # carousels {
-  #  ...carouselModuleFragment
-  #}
   highlight {
     ...highlightModulesFragment
   }
   grid {
     ...gridModuleFragment
+  }
+  carousel {
+    ...carouselModuleFragment
+  }
+  imageCarousel {
+    ...imageCarouselModuleFragment
   }
 }

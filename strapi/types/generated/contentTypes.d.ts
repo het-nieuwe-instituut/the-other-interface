@@ -818,7 +818,7 @@ export interface ApiLandingPageArchiveLandingPageArchive extends Schema.SingleTy
           localized: true
         }
       }>
-    carousels: Attribute.Component<'modules.carousel', true> &
+    carousel: Attribute.Component<'modules.carousel'> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
@@ -834,6 +834,12 @@ export interface ApiLandingPageArchiveLandingPageArchive extends Schema.SingleTy
         }
       }>
     grid: Attribute.Component<'modules.grid-module'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    imageCarousel: Attribute.Component<'modules.image-carousel'> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
@@ -892,7 +898,7 @@ export interface ApiLandingPageObjectLandingPageObject extends Schema.SingleType
           localized: true
         }
       }>
-    carousels: Attribute.Component<'modules.carousel', true> &
+    carousel: Attribute.Component<'modules.carousel'> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
@@ -908,6 +914,12 @@ export interface ApiLandingPageObjectLandingPageObject extends Schema.SingleType
         }
       }>
     grid: Attribute.Component<'modules.grid-module'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    imageCarousel: Attribute.Component<'modules.image-carousel'> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
@@ -966,7 +978,7 @@ export interface ApiLandingPagePeopleLandingPagePeople extends Schema.SingleType
           localized: true
         }
       }>
-    carousels: Attribute.Component<'modules.carousel', true> &
+    carousel: Attribute.Component<'modules.carousel'> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
@@ -982,6 +994,12 @@ export interface ApiLandingPagePeopleLandingPagePeople extends Schema.SingleType
         }
       }>
     grid: Attribute.Component<'modules.grid-module'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    imageCarousel: Attribute.Component<'modules.image-carousel'> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
@@ -1040,7 +1058,7 @@ export interface ApiLandingPagePublicationLandingPagePublication extends Schema.
           localized: true
         }
       }>
-    carousels: Attribute.Component<'modules.carousel', true> &
+    carousel: Attribute.Component<'modules.carousel'> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
@@ -1056,6 +1074,12 @@ export interface ApiLandingPagePublicationLandingPagePublication extends Schema.
         }
       }>
     grid: Attribute.Component<'modules.grid-module'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    imageCarousel: Attribute.Component<'modules.image-carousel'> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
