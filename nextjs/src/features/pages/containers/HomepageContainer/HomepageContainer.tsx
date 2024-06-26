@@ -20,7 +20,6 @@ export type Props = {
 export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }) => {
   const editorialData = homepage?.homepage?.data?.attributes
 
-  console.log(editorialData)
   return (
     <>
       <GalaxyInterface>{isStoriesGalaxy ? <CategoryGalaxy /> : <MainGalaxy />}</GalaxyInterface>
