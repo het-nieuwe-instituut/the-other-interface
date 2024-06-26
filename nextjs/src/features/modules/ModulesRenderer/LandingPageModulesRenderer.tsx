@@ -1,3 +1,4 @@
+'use client'
 import { cn } from '@/features/ui/utils/cn'
 import { Highlight } from '@/features/ui/components/highlight/Highlight'
 
@@ -13,6 +14,7 @@ import {
   ImageCarouselItem,
 } from '@/features/ui/components/image-carousel/ImageCarousel'
 import { GenericCardGrid } from '@/features/editorial/components/GenericCardGrid'
+import { GenericCarouselGridWithClientPagination } from '@/features/editorial/components/GenericCarouselGridWithClientPagination'
 
 interface Props {
   grid?: DeepPartial<ComponentModulesGridModule> | null
@@ -48,11 +50,7 @@ export function LandingPageComponentRenderer({ grid, highlight, imageCarousel, c
           }) ?? []}
         </ImageCarousel>
       )}
-      {/* {carousel &&
-        <CarouselModule
-          component={component as ComponentModulesCarousel}
-        />
-      } */}
+      {carousel && <GenericCarouselGridWithClientPagination carousel={carousel} />}
       {highlight && <Highlight component={highlight} />}
       {grid && <GenericCardGrid grid={grid} />}
     </div>
