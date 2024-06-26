@@ -4,6 +4,7 @@ import { GenericCarouselGridWithClientPagination } from '@/features/editorial/co
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { MainGalaxy } from '@/features/galaxyInterface/galaxies/MainGalaxy/MainGalaxy'
+import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import SuspenseLoader from '@/features/shared/components/SuspenseLoader/SuspenseLoader'
 import { HomepageQuery, ThemesQuery } from 'src/generated/graphql'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
@@ -22,7 +23,11 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }
 
   return (
     <>
-      <GalaxyInterface>{isStoriesGalaxy ? <CategoryGalaxy /> : <MainGalaxy />}</GalaxyInterface>
+      <GalaxyInterface>
+        <MobileOverlayProvider>
+          {isStoriesGalaxy ? <CategoryGalaxy /> : <MainGalaxy />}
+        </MobileOverlayProvider>
+      </GalaxyInterface>
 
       <div className="relative w-full bg-ivory-90 px-0 xl:px-6">
         <div className="mx-auto max-w-[1392px] px-6 pt-6">
