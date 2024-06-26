@@ -84,19 +84,11 @@ fragment ComponentModulesTitleModuleFragment on ComponentModulesTitleModule {
 fragment ComponentModulesGridModuleFragment on ComponentModulesGridModule {
   __typename
   id
-  description
-  pageSize
   title
-  showMoreButtonTitle
-  fieldTitlesAreInverted
-  fieldTypes
-  buttons {
+  exploreCollectionButton {
     ...ComponentCoreButtonFragment
   }
-  featuredFields {
-    ...ComponentCoreFeaturedFieldsFragment
-  }
-  fields {
+  cards {
     ...ComponentCoreGridFeaturedFieldsFragment
   }
 }

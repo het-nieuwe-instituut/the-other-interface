@@ -4,7 +4,6 @@ import {
   ComponentModulesImageCarousel,
   ComponentModulesTextModule,
   ComponentModulesTitleModule,
-  EnumComponentmodulesgridmoduleFieldtypes,
 } from 'src/generated/graphql'
 
 const uploadImageMock = {
@@ -82,9 +81,8 @@ const imageCarouselModuleMock: ComponentModulesImageCarousel = {
 
 const gridCompomentMock: ComponentModulesGridModule = {
   __typename: 'ComponentModulesGridModule',
-  description: null,
-  featuredFields: [{ id: '1', label: "Editor's pick", value: 'Keuze van de redactie' }],
-  fields: [
+
+  cards: [
     {
       id: '2',
       __typename: 'ComponentCoreGridFeaturedFields',
@@ -157,11 +155,9 @@ const gridCompomentMock: ComponentModulesGridModule = {
       triplyRecord: null,
     },
   ],
-  fieldTitlesAreInverted: false,
-  fieldTypes: EnumComponentmodulesgridmoduleFieldtypes.Stories,
+
   id: '1',
-  pageSize: 6,
-  showMoreButtonTitle: 'Show More',
+
   title: 'Uitgelichte verhalen',
 }
 

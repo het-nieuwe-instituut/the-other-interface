@@ -27,7 +27,8 @@
       "required": true
     },
     "subtitle": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "triplyRecord": {
       "type": "relation",

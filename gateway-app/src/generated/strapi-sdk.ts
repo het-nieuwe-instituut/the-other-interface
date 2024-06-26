@@ -157,25 +157,11 @@ export type ComponentCoreFeaturedFields = {
   value: Scalars['String']
 }
 
-export type ComponentCoreFeaturedFieldsFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<ComponentCoreFeaturedFieldsFiltersInput>>>
-  label?: InputMaybe<StringFilterInput>
-  not?: InputMaybe<ComponentCoreFeaturedFieldsFiltersInput>
-  or?: InputMaybe<Array<InputMaybe<ComponentCoreFeaturedFieldsFiltersInput>>>
-  value?: InputMaybe<StringFilterInput>
-}
-
-export type ComponentCoreFeaturedFieldsInput = {
-  id?: InputMaybe<Scalars['ID']>
-  label?: InputMaybe<Scalars['String']>
-  value?: InputMaybe<Scalars['String']>
-}
-
 export type ComponentCoreGridFeaturedFields = {
   __typename?: 'ComponentCoreGridFeaturedFields'
   id: Scalars['ID']
   story?: Maybe<StoryEntityResponse>
-  subtitle?: Maybe<Scalars['String']>
+  subtitle: Scalars['String']
   thumbnail?: Maybe<UploadFileEntityResponse>
   title: Scalars['String']
   triplyRecord?: Maybe<TriplyRecordEntityResponse>
@@ -323,46 +309,22 @@ export type ComponentModulesCarouselInput = {
 
 export type ComponentModulesGridModule = {
   __typename?: 'ComponentModulesGridModule'
-  buttons?: Maybe<Array<Maybe<ComponentCoreButton>>>
-  description?: Maybe<Scalars['String']>
-  featuredFields?: Maybe<Array<Maybe<ComponentCoreFeaturedFields>>>
-  fieldTitlesAreInverted: Scalars['Boolean']
-  fieldTypes: Enum_Componentmodulesgridmodule_Fieldtypes
-  fields?: Maybe<Array<Maybe<ComponentCoreGridFeaturedFields>>>
+  cards?: Maybe<Array<Maybe<ComponentCoreGridFeaturedFields>>>
+  exploreCollectionButton?: Maybe<ComponentCoreButton>
   id: Scalars['ID']
-  pageSize: Scalars['Int']
-  showMoreButtonTitle: Scalars['String']
   title?: Maybe<Scalars['String']>
 }
 
-export type ComponentModulesGridModuleButtonsArgs = {
-  filters?: InputMaybe<ComponentCoreButtonFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type ComponentModulesGridModuleFeaturedFieldsArgs = {
-  filters?: InputMaybe<ComponentCoreFeaturedFieldsFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type ComponentModulesGridModuleFieldsArgs = {
+export type ComponentModulesGridModuleCardsArgs = {
   filters?: InputMaybe<ComponentCoreGridFeaturedFieldsFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
 export type ComponentModulesGridModuleInput = {
-  buttons?: InputMaybe<Array<InputMaybe<ComponentCoreButtonInput>>>
-  description?: InputMaybe<Scalars['String']>
-  featuredFields?: InputMaybe<Array<InputMaybe<ComponentCoreFeaturedFieldsInput>>>
-  fieldTitlesAreInverted?: InputMaybe<Scalars['Boolean']>
-  fieldTypes?: InputMaybe<Enum_Componentmodulesgridmodule_Fieldtypes>
-  fields?: InputMaybe<Array<InputMaybe<ComponentCoreGridFeaturedFieldsInput>>>
+  cards?: InputMaybe<Array<InputMaybe<ComponentCoreGridFeaturedFieldsInput>>>
+  exploreCollectionButton?: InputMaybe<ComponentCoreButtonInput>
   id?: InputMaybe<Scalars['ID']>
-  pageSize?: InputMaybe<Scalars['Int']>
-  showMoreButtonTitle?: InputMaybe<Scalars['String']>
   title?: InputMaybe<Scalars['String']>
 }
 
@@ -592,11 +554,6 @@ export enum Enum_Componentmodulescarousel_Variant {
   FourUp = 'four_up',
   ThreeUp = 'three_up',
   TwoUp = 'two_up',
-}
-
-export enum Enum_Componentmodulesgridmodule_Fieldtypes {
-  Stories = 'Stories',
-  Triply = 'Triply',
 }
 
 export enum Enum_Contentreleasesreleaseaction_Type {
@@ -2470,28 +2427,17 @@ export type HomepageFragmentFragment = {
   grid?: {
     __typename: 'ComponentModulesGridModule'
     id: string
-    description?: string | null
-    pageSize: number
     title?: string | null
-    showMoreButtonTitle: string
-    fieldTitlesAreInverted: boolean
-    fieldTypes: Enum_Componentmodulesgridmodule_Fieldtypes
-    buttons?: Array<{
+    exploreCollectionButton?: {
       __typename?: 'ComponentCoreButton'
       id: string
       text: string
       url: string
-    } | null> | null
-    featuredFields?: Array<{
-      __typename?: 'ComponentCoreFeaturedFields'
-      id: string
-      label: string
-      value: string
-    } | null> | null
-    fields?: Array<{
+    } | null
+    cards?: Array<{
       __typename?: 'ComponentCoreGridFeaturedFields'
       id: string
-      subtitle?: string | null
+      subtitle: string
       title: string
       story?: {
         __typename?: 'StoryEntityResponse'
@@ -2643,28 +2589,17 @@ export type HomepageQuery = {
               grid?: {
                 __typename: 'ComponentModulesGridModule'
                 id: string
-                description?: string | null
-                pageSize: number
                 title?: string | null
-                showMoreButtonTitle: string
-                fieldTitlesAreInverted: boolean
-                fieldTypes: Enum_Componentmodulesgridmodule_Fieldtypes
-                buttons?: Array<{
+                exploreCollectionButton?: {
                   __typename?: 'ComponentCoreButton'
                   id: string
                   text: string
                   url: string
-                } | null> | null
-                featuredFields?: Array<{
-                  __typename?: 'ComponentCoreFeaturedFields'
-                  id: string
-                  label: string
-                  value: string
-                } | null> | null
-                fields?: Array<{
+                } | null
+                cards?: Array<{
                   __typename?: 'ComponentCoreGridFeaturedFields'
                   id: string
-                  subtitle?: string | null
+                  subtitle: string
                   title: string
                   story?: {
                     __typename?: 'StoryEntityResponse'
@@ -2786,28 +2721,17 @@ export type HomepageQuery = {
         grid?: {
           __typename: 'ComponentModulesGridModule'
           id: string
-          description?: string | null
-          pageSize: number
           title?: string | null
-          showMoreButtonTitle: string
-          fieldTitlesAreInverted: boolean
-          fieldTypes: Enum_Componentmodulesgridmodule_Fieldtypes
-          buttons?: Array<{
+          exploreCollectionButton?: {
             __typename?: 'ComponentCoreButton'
             id: string
             text: string
             url: string
-          } | null> | null
-          featuredFields?: Array<{
-            __typename?: 'ComponentCoreFeaturedFields'
-            id: string
-            label: string
-            value: string
-          } | null> | null
-          fields?: Array<{
+          } | null
+          cards?: Array<{
             __typename?: 'ComponentCoreGridFeaturedFields'
             id: string
-            subtitle?: string | null
+            subtitle: string
             title: string
             story?: {
               __typename?: 'StoryEntityResponse'
@@ -4127,28 +4051,17 @@ export type LandingpageFragmentFragment = {
     | {
         __typename: 'ComponentModulesGridModule'
         id: string
-        description?: string | null
-        pageSize: number
         title?: string | null
-        showMoreButtonTitle: string
-        fieldTitlesAreInverted: boolean
-        fieldTypes: Enum_Componentmodulesgridmodule_Fieldtypes
-        buttons?: Array<{
+        exploreCollectionButton?: {
           __typename?: 'ComponentCoreButton'
           id: string
           text: string
           url: string
-        } | null> | null
-        featuredFields?: Array<{
-          __typename?: 'ComponentCoreFeaturedFields'
-          id: string
-          label: string
-          value: string
-        } | null> | null
-        fields?: Array<{
+        } | null
+        cards?: Array<{
           __typename?: 'ComponentCoreGridFeaturedFields'
           id: string
-          subtitle?: string | null
+          subtitle: string
           title: string
           story?: {
             __typename?: 'StoryEntityResponse'
@@ -4353,28 +4266,17 @@ export type LandingpageEntityFragmentFragment = {
             | {
                 __typename: 'ComponentModulesGridModule'
                 id: string
-                description?: string | null
-                pageSize: number
                 title?: string | null
-                showMoreButtonTitle: string
-                fieldTitlesAreInverted: boolean
-                fieldTypes: Enum_Componentmodulesgridmodule_Fieldtypes
-                buttons?: Array<{
+                exploreCollectionButton?: {
                   __typename?: 'ComponentCoreButton'
                   id: string
                   text: string
                   url: string
-                } | null> | null
-                featuredFields?: Array<{
-                  __typename?: 'ComponentCoreFeaturedFields'
-                  id: string
-                  label: string
-                  value: string
-                } | null> | null
-                fields?: Array<{
+                } | null
+                cards?: Array<{
                   __typename?: 'ComponentCoreGridFeaturedFields'
                   id: string
-                  subtitle?: string | null
+                  subtitle: string
                   title: string
                   story?: {
                     __typename?: 'StoryEntityResponse'
@@ -4554,28 +4456,17 @@ export type LandingpageEntityFragmentFragment = {
       | {
           __typename: 'ComponentModulesGridModule'
           id: string
-          description?: string | null
-          pageSize: number
           title?: string | null
-          showMoreButtonTitle: string
-          fieldTitlesAreInverted: boolean
-          fieldTypes: Enum_Componentmodulesgridmodule_Fieldtypes
-          buttons?: Array<{
+          exploreCollectionButton?: {
             __typename?: 'ComponentCoreButton'
             id: string
             text: string
             url: string
-          } | null> | null
-          featuredFields?: Array<{
-            __typename?: 'ComponentCoreFeaturedFields'
-            id: string
-            label: string
-            value: string
-          } | null> | null
-          fields?: Array<{
+          } | null
+          cards?: Array<{
             __typename?: 'ComponentCoreGridFeaturedFields'
             id: string
-            subtitle?: string | null
+            subtitle: string
             title: string
             story?: {
               __typename?: 'StoryEntityResponse'
@@ -4790,28 +4681,17 @@ export type LandingPageQuery = {
                 | {
                     __typename: 'ComponentModulesGridModule'
                     id: string
-                    description?: string | null
-                    pageSize: number
                     title?: string | null
-                    showMoreButtonTitle: string
-                    fieldTitlesAreInverted: boolean
-                    fieldTypes: Enum_Componentmodulesgridmodule_Fieldtypes
-                    buttons?: Array<{
+                    exploreCollectionButton?: {
                       __typename?: 'ComponentCoreButton'
                       id: string
                       text: string
                       url: string
-                    } | null> | null
-                    featuredFields?: Array<{
-                      __typename?: 'ComponentCoreFeaturedFields'
-                      id: string
-                      label: string
-                      value: string
-                    } | null> | null
-                    fields?: Array<{
+                    } | null
+                    cards?: Array<{
                       __typename?: 'ComponentCoreGridFeaturedFields'
                       id: string
-                      subtitle?: string | null
+                      subtitle: string
                       title: string
                       story?: {
                         __typename?: 'StoryEntityResponse'
@@ -4991,28 +4871,17 @@ export type LandingPageQuery = {
           | {
               __typename: 'ComponentModulesGridModule'
               id: string
-              description?: string | null
-              pageSize: number
               title?: string | null
-              showMoreButtonTitle: string
-              fieldTitlesAreInverted: boolean
-              fieldTypes: Enum_Componentmodulesgridmodule_Fieldtypes
-              buttons?: Array<{
+              exploreCollectionButton?: {
                 __typename?: 'ComponentCoreButton'
                 id: string
                 text: string
                 url: string
-              } | null> | null
-              featuredFields?: Array<{
-                __typename?: 'ComponentCoreFeaturedFields'
-                id: string
-                label: string
-                value: string
-              } | null> | null
-              fields?: Array<{
+              } | null
+              cards?: Array<{
                 __typename?: 'ComponentCoreGridFeaturedFields'
                 id: string
-                subtitle?: string | null
+                subtitle: string
                 title: string
                 story?: {
                   __typename?: 'StoryEntityResponse'
@@ -5232,28 +5101,17 @@ export type LandingPagesQuery = {
                 | {
                     __typename: 'ComponentModulesGridModule'
                     id: string
-                    description?: string | null
-                    pageSize: number
                     title?: string | null
-                    showMoreButtonTitle: string
-                    fieldTitlesAreInverted: boolean
-                    fieldTypes: Enum_Componentmodulesgridmodule_Fieldtypes
-                    buttons?: Array<{
+                    exploreCollectionButton?: {
                       __typename?: 'ComponentCoreButton'
                       id: string
                       text: string
                       url: string
-                    } | null> | null
-                    featuredFields?: Array<{
-                      __typename?: 'ComponentCoreFeaturedFields'
-                      id: string
-                      label: string
-                      value: string
-                    } | null> | null
-                    fields?: Array<{
+                    } | null
+                    cards?: Array<{
                       __typename?: 'ComponentCoreGridFeaturedFields'
                       id: string
-                      subtitle?: string | null
+                      subtitle: string
                       title: string
                       story?: {
                         __typename?: 'StoryEntityResponse'
@@ -5433,28 +5291,17 @@ export type LandingPagesQuery = {
           | {
               __typename: 'ComponentModulesGridModule'
               id: string
-              description?: string | null
-              pageSize: number
               title?: string | null
-              showMoreButtonTitle: string
-              fieldTitlesAreInverted: boolean
-              fieldTypes: Enum_Componentmodulesgridmodule_Fieldtypes
-              buttons?: Array<{
+              exploreCollectionButton?: {
                 __typename?: 'ComponentCoreButton'
                 id: string
                 text: string
                 url: string
-              } | null> | null
-              featuredFields?: Array<{
-                __typename?: 'ComponentCoreFeaturedFields'
-                id: string
-                label: string
-                value: string
-              } | null> | null
-              fields?: Array<{
+              } | null
+              cards?: Array<{
                 __typename?: 'ComponentCoreGridFeaturedFields'
                 id: string
-                subtitle?: string | null
+                subtitle: string
                 title: string
                 story?: {
                   __typename?: 'StoryEntityResponse'
@@ -12771,7 +12618,7 @@ export type ComponentCoreFeaturedFieldsFragmentFragment = {
 export type ComponentCoreGridFeaturedFieldsFragmentFragment = {
   __typename?: 'ComponentCoreGridFeaturedFields'
   id: string
-  subtitle?: string | null
+  subtitle: string
   title: string
   story?: {
     __typename?: 'StoryEntityResponse'
@@ -13158,28 +13005,17 @@ export type ComponentModulesTitleModuleFragmentFragment = {
 export type ComponentModulesGridModuleFragmentFragment = {
   __typename: 'ComponentModulesGridModule'
   id: string
-  description?: string | null
-  pageSize: number
   title?: string | null
-  showMoreButtonTitle: string
-  fieldTitlesAreInverted: boolean
-  fieldTypes: Enum_Componentmodulesgridmodule_Fieldtypes
-  buttons?: Array<{
+  exploreCollectionButton?: {
     __typename?: 'ComponentCoreButton'
     id: string
     text: string
     url: string
-  } | null> | null
-  featuredFields?: Array<{
-    __typename?: 'ComponentCoreFeaturedFields'
-    id: string
-    label: string
-    value: string
-  } | null> | null
-  fields?: Array<{
+  } | null
+  cards?: Array<{
     __typename?: 'ComponentCoreGridFeaturedFields'
     id: string
-    subtitle?: string | null
+    subtitle: string
     title: string
     story?: {
       __typename?: 'StoryEntityResponse'
@@ -19071,13 +18907,6 @@ export const ComponentModulesCarouselFragmentFragmentDoc = gql`
   ${ComponentCoreCarouselImageFragmentFragmentDoc}
   ${ComponentCoreButtonFragmentFragmentDoc}
 `
-export const ComponentCoreFeaturedFieldsFragmentFragmentDoc = gql`
-  fragment ComponentCoreFeaturedFieldsFragment on ComponentCoreFeaturedFields {
-    id
-    label
-    value
-  }
-`
 export const ComponentCoreGridFeaturedFieldsFragmentFragmentDoc = gql`
   fragment ComponentCoreGridFeaturedFieldsFragment on ComponentCoreGridFeaturedFields {
     id
@@ -19107,24 +18936,15 @@ export const ComponentModulesGridModuleFragmentFragmentDoc = gql`
   fragment ComponentModulesGridModuleFragment on ComponentModulesGridModule {
     __typename
     id
-    description
-    pageSize
     title
-    showMoreButtonTitle
-    fieldTitlesAreInverted
-    fieldTypes
-    buttons {
+    exploreCollectionButton {
       ...ComponentCoreButtonFragment
     }
-    featuredFields {
-      ...ComponentCoreFeaturedFieldsFragment
-    }
-    fields {
+    cards {
       ...ComponentCoreGridFeaturedFieldsFragment
     }
   }
   ${ComponentCoreButtonFragmentFragmentDoc}
-  ${ComponentCoreFeaturedFieldsFragmentFragmentDoc}
   ${ComponentCoreGridFeaturedFieldsFragmentFragmentDoc}
 `
 export const HomepageFragmentFragmentDoc = gql`
@@ -19819,6 +19639,13 @@ export const ComponentCoreTimeframeFragmentFragmentDoc = gql`
     id
     yearEnd
     yearStart
+  }
+`
+export const ComponentCoreFeaturedFieldsFragmentFragmentDoc = gql`
+  fragment ComponentCoreFeaturedFieldsFragment on ComponentCoreFeaturedFields {
+    id
+    label
+    value
   }
 `
 export const PaginationFragmentFragmentDoc = gql`

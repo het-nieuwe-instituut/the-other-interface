@@ -7,8 +7,8 @@ import {
   CardGridCardWrapper,
   CardGridDescription,
   CardGridFooter,
+  CardGridLink,
   CardGridPlaceholder,
-  CardGridShowMore,
   CardGridTitle,
 } from '@/features/ui/components/card-grid/CardGrid'
 
@@ -101,7 +101,7 @@ export default function Demo() {
   )
 }
 export function Grid({ className }: { cols: 1 | 3; className?: string }) {
-  const { nodes, next } = useClientPagination({
+  const { nodes } = useClientPagination({
     items: stubData,
     itemsInPage: 6,
     preservePreviousLimitedData: true,
@@ -131,7 +131,7 @@ export function Grid({ className }: { cols: 1 | 3; className?: string }) {
           ))}
         </CardGridCardWrapper>
         <CardGridFooter>
-          <CardGridShowMore onClick={next}>Explore this</CardGridShowMore>
+          <CardGridLink href="/">Explore this</CardGridLink>
         </CardGridFooter>
       </CardGrid>
     </div>

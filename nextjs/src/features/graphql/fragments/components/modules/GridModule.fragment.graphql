@@ -1,17 +1,13 @@
 fragment gridModuleFragment on ComponentModulesGridModule {
   __typename
-  buttons {
+  id
+  title
+  exploreCollectionButton {
     id
-    url
     text
+    url
   }
-  description
-  featuredFields {
-    id
-    label
-    value
-  }
-  fields {
+  cards {
     id
     title
     subtitle
@@ -43,39 +39,9 @@ fragment gridModuleFragment on ComponentModulesGridModule {
     triplyRecord {
       data {
         attributes {
-          createdAt
-          updatedAt
           recordId
-          type
-          archive(locale: $locale) {
-            id
-            type
-            title
-            objectNumber
-          }
-          object(locale: $locale) {
-            description
-            thumbnail
-          }
-          publication(locale: $locale) {
-            id
-            type
-            title
-            yearOfPublication
-            objectNumber
-          }
-          people(locale: $locale) {
-            name
-            nameTypes
-          }
         }
       }
     }
   }
-  fieldTitlesAreInverted
-  fieldTypes
-  id
-  pageSize
-  showMoreButtonTitle
-  title
 }
