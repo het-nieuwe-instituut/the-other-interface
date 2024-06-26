@@ -1,4 +1,3 @@
-// import { GenericCardGridWithClientPagination } from '@/features/editorial/components/GenericCardGridWithClientPagination'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { ImageParagraph } from '@/features/ui/components/ImageParagraph/ImageParagraph'
 import {
@@ -16,6 +15,7 @@ import { ButtonGroup, LinkButtonGroupItem } from '../../ui/components/button-gro
 import { Subtitle } from '../../ui/components/subtitle/Subtitle'
 import { ImageModuleWrapper } from '../components/ImageModuleWrapper'
 import { Pullquote } from '../components/Pullquote/Pullquote'
+//import { GenericCardGrid } from '@/features/editorial/components/GenericCardGrid'
 
 interface Props {
   components: DynamicComponents
@@ -199,13 +199,9 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           //     )
           //   }
 
-          // Grid not part of story page
           // if (component?.__typename === 'ComponentModulesGridModule') {
           //   return (
-          //     <GenericCardGridWithClientPagination
-          //       key={keyExtractor(component.id, index, array)}
-          //       grid={component}
-          //     />
+          //     <GenericCardGrid key={keyExtractor(component.id, index, array)} grid={component} />
           //   )
           // }
 

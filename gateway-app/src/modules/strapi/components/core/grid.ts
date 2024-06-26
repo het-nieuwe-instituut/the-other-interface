@@ -1,17 +1,12 @@
-import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
-import { Enum_Componentmodulesgridmodule_Fieldtypes } from '../../../../generated/strapi-sdk'
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
+import { StoryEntityResponse } from 'src/modules/story/story.types.circular'
 import { StoryFiltersInput } from '../../../story/story.type'
 import {
   TriplyRecordEntityResponse,
   TriplyRecordFiltersInput,
 } from '../../../triplyRecord/triplyRecord.type'
-import { ComponentCoreButtonFiltersInput } from './button'
 import { PaginationArg, StringFilterInput, UploadFileEntityResponse } from '../../shared-types'
-import { StoryEntityResponse } from 'src/modules/story/story.types.circular'
-
-registerEnumType(Enum_Componentmodulesgridmodule_Fieldtypes, {
-  name: 'Enum_Componentmodulesgridmodule_Fieldtypes',
-})
+import { ComponentCoreButtonFiltersInput } from './button'
 
 @ObjectType()
 export class ComponentCoreFeaturedFields {
@@ -39,17 +34,17 @@ export class ComponentCoreGridFeaturedFields {
   @Field(() => ID)
   public id: string
 
+  @Field()
+  public title: string
+
+  @Field()
+  public subtitle: string
+
   @Field(() => StoryEntityResponse, { nullable: true })
   public story?: StoryEntityResponse
 
-  @Field({ nullable: true })
-  public subtitle?: string
-
   @Field(() => UploadFileEntityResponse, { nullable: true })
   public thumbnail?: UploadFileEntityResponse
-
-  @Field({ nullable: true })
-  public title?: string
 
   @Field(() => TriplyRecordEntityResponse, { nullable: true })
   public triplyRecord?: TriplyRecordEntityResponse

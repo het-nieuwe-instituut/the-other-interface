@@ -1,7 +1,6 @@
 import { cn } from '@/features/ui/utils/cn'
 import { Highlight } from '@/features/ui/components/highlight/Highlight'
 
-import { GenericCardGridWithClientPagination } from '@/features/editorial/components/GenericCardGridWithClientPagination'
 import {
   ComponentModulesCarousel,
   ComponentModulesGridModule,
@@ -13,6 +12,7 @@ import {
   ImageCarousel,
   ImageCarouselItem,
 } from '@/features/ui/components/image-carousel/ImageCarousel'
+import { GenericCardGrid } from '@/features/editorial/components/GenericCardGrid'
 
 interface Props {
   grid?: DeepPartial<ComponentModulesGridModule> | null
@@ -54,7 +54,7 @@ export function LandingPageComponentRenderer({ grid, highlight, imageCarousel, c
         />
       } */}
       {highlight && <Highlight component={highlight} />}
-      {grid && <GenericCardGridWithClientPagination grid={grid} />}
+      {grid && <GenericCardGrid grid={grid} />}
     </div>
   )
 }
