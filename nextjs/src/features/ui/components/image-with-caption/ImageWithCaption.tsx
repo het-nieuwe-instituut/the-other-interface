@@ -1,9 +1,10 @@
 'use client'
 import { imageBasePath } from '@/features/modules/modulesConstants'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import NextImage, { ImageProps } from 'next/image'
+import { ImageProps } from 'next/image'
 import { CSSProperties } from 'react'
 import { cn } from '../../utils/cn'
+import { LightBoxNextImageByIcon } from '../lightbox/LightBoxNextImage'
 import { TypographyVariants } from '../typography/variants'
 
 export interface ImageWithCaptionProps extends ImageProps {
@@ -30,9 +31,9 @@ export const ImageWithCaption = ({
   const { t: commonT } = useTypeSafeTranslation('common')
 
   return (
-    <figure className="relative flex flex-col gap-2">
+    <figure className="relative flex flex-col gap-2 ">
       <div
-        className={cn(className, 'relative max-w-[80rem] max-h-[85vh]')}
+        className={cn(className, 'relative max-w-[80rem] max-h-[600px] bg-ivory-60')}
         style={{ aspectRatio: `${width}/${height}` }}
       >
         {!imageSrc ? (
@@ -40,15 +41,15 @@ export const ImageWithCaption = ({
             className={cn(className, 'relative')}
             style={{ '--default-image-height': `${DEFAULT_IMAGE_HEIGHT}px` } as CSSProperties}
           >
-            <div className="flex h-[var(--default-image-height)] w-full items-center justify-center bg-gray-300">
+            <div className="flex h-[var(--default-image-height)] w-full items-center justify-center bg-gray-300 ">
               {commonT('somethingWentWrong')}
             </div>
           </div>
         ) : (
-          <NextImage
+          <LightBoxNextImageByIcon
             src={imageSrc}
             alt={alt}
-            className={cn('object-contain object-left', imageClassName)}
+            className={cn('object-contain object-center', imageClassName)}
             sizes="100vw"
             fill
             {...restProps}
