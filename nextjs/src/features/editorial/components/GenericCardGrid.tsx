@@ -7,32 +7,19 @@ import {
   CardGrid,
   CardGridCard,
   CardGridCardWrapper,
-  CardGridDescription,
   CardGridFooter,
-  CardGridShowMore,
+  CardGridLink,
   CardGridTitle,
 } from '@/features/ui/components/card-grid/CardGrid'
 import { cn } from '@/features/ui/utils/cn'
 import { ComponentModulesGridModule } from 'src/generated/graphql'
-import { useClientPagination } from './useClientPagination'
 import { getTriplyOrStoryHref } from './getTriplyOrStoryHref'
+import { useClientPagination } from './useClientPagination'
 
 type CardGrid = DeepPartial<ComponentModulesGridModule>
 
-export const GenericCardGridWithClientPagination = ({
-  grid,
-  className,
-}: {
-  grid: CardGrid
-  className?: string
-}) => {
-  const items = grid.fields ?? []
-  const itemsInPage = grid.pageSize || 6
-  const { nodes, page, lastPage, next } = useClientPagination({
-    items,
-    itemsInPage: itemsInPage,
-    preservePreviousLimitedData: true,
-  })
+export const GenericCardGrid = ({ grid, className }: { grid: CardGrid; className?: string }) => {
+  const items = grid.cards ?? []
 
   if (!items || items.length === 0) {
     return <ErrorBox />
@@ -41,10 +28,9 @@ export const GenericCardGridWithClientPagination = ({
   return (
     <CardGrid className={cn('w-full', className)}>
       {grid.title ? <CardGridTitle>{grid.title}</CardGridTitle> : undefined}
-      {grid.description ? <CardGridDescription>{grid.description}</CardGridDescription> : undefined}
-      {nodes && (
+      {items && (
         <CardGridCardWrapper>
-          {nodes.map(item => {
+          {items.map(item => {
             const imageSrc = imageBasePath(item?.thumbnail?.data?.attributes?.url)
             if (!item) {
               return null
@@ -67,8 +53,10 @@ export const GenericCardGridWithClientPagination = ({
       )}
 
       <CardGridFooter>
-        {grid.showMoreButtonTitle && (page !== lastPage || lastPage !== 1) && (
-          <CardGridShowMore onClick={next}>{grid.showMoreButtonTitle ?? ''}</CardGridShowMore>
+        {grid.exploreCollectionButton && grid.exploreCollectionButton?.url && (
+          <CardGridLink href={grid.exploreCollectionButton?.url}>
+            {grid.exploreCollectionButton?.text ?? ''}
+          </CardGridLink>
         )}
       </CardGridFooter>
     </CardGrid>

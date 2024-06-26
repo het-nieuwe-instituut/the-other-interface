@@ -1,12 +1,12 @@
+import NextImage from 'next/image'
+import NextLink from 'next/link'
 import React from 'react'
 import { cn } from '../../utils/cn'
 import { Card } from '../card/card'
 import { LightboxProvider } from '../lightbox/LightboxProvider'
-import { NavButton, NavButtonProps } from '../nav-button/component'
+import { NavLinkButton, NavLinkButtonProps } from '../nav-link-button/component'
 import { Subtitle, SubtitleProps } from '../subtitle/Subtitle'
 import { TypographyVariants } from '../typography/variants'
-import NextImage from 'next/image'
-import NextLink from 'next/link'
 
 type SpecificChildren<T> =
   | React.ReactElement<T | null | undefined | string | Element>
@@ -43,11 +43,11 @@ export const CardGridFooter = ({ children }: CardGridFooterProps) => {
   return <div className="flex items-end justify-between">{children}</div>
 }
 
-export interface CardGridLinkProps extends NavButtonProps {
+export interface CardGridLinkProps extends NavLinkButtonProps {
   children: string
 }
-export const CardGridShowMore = (props: CardGridLinkProps) => {
-  return <NavButton variant={'textPrimary'} {...props} />
+export const CardGridLink = (props: CardGridLinkProps) => {
+  return <NavLinkButton variant={'textPrimary'} {...props} />
 }
 
 export interface CardGridTitleProps extends SubtitleProps {}

@@ -1,6 +1,5 @@
 'use client'
 
-import { GenericCardGridWithClientPagination } from '@/features/editorial/components/GenericCardGridWithClientPagination'
 import { GenericCarouselGridWithClientPagination } from '@/features/editorial/components/GenericCarouselGridWithClientPagination'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
@@ -8,6 +7,7 @@ import { MainGalaxy } from '@/features/galaxyInterface/galaxies/MainGalaxy/MainG
 import SuspenseLoader from '@/features/shared/components/SuspenseLoader/SuspenseLoader'
 import { HomepageQuery, ThemesQuery } from 'src/generated/graphql'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
+import { GenericCardGrid } from '@/features/editorial/components/GenericCardGrid'
 
 export type Props = {
   homepage?: HomepageQuery
@@ -20,6 +20,7 @@ export type Props = {
 export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }) => {
   const editorialData = homepage?.homepage?.data?.attributes
 
+  console.log(editorialData)
   return (
     <>
       <GalaxyInterface>{isStoriesGalaxy ? <CategoryGalaxy /> : <MainGalaxy />}</GalaxyInterface>
@@ -45,9 +46,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }
                         />
                       )}
 
-                      {editorialData?.grid && (
-                        <GenericCardGridWithClientPagination grid={editorialData.grid} />
-                      )}
+                      {editorialData?.grid && <GenericCardGrid grid={editorialData.grid} />}
                     </div>
                   </>
                 )}

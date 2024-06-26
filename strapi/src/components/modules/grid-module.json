@@ -9,44 +9,15 @@
     "title": {
       "type": "string"
     },
-    "description": {
-      "type": "text"
-    },
-    "featuredFields": {
-      "type": "component",
-      "repeatable": true,
-      "component": "core.featured-fields"
-    },
-    "fieldTypes": {
-      "type": "enumeration",
-      "enum": ["Triply", "Stories"],
-      "required": true,
-      "default": "Stories"
-    },
-    "fieldTitlesAreInverted": {
-      "type": "boolean",
-      "default": false,
-      "required": true
-    },
-    "fields": {
+    "cards": {
       "type": "component",
       "repeatable": true,
       "component": "core.grid-featured-fields"
     },
-    "buttons": {
+    "exploreCollectionButton": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "core.button"
-    },
-    "showMoreButtonTitle": {
-      "type": "string",
-      "default": "Show More",
-      "required": true
-    },
-    "pageSize": {
-      "type": "integer",
-      "default": 6,
-      "required": true
     }
   }
 }
