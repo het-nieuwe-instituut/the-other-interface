@@ -797,7 +797,7 @@ export interface ApiLandingPageArchiveLandingPageArchive extends Schema.SingleTy
     description: ''
   }
   options: {
-    draftAndPublish: true
+    draftAndPublish: false
   }
   pluginOptions: {
     i18n: {
@@ -841,7 +841,6 @@ export interface ApiLandingPageArchiveLandingPageArchive extends Schema.SingleTy
       }>
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
-    publishedAt: Attribute.DateTime
     createdBy: Attribute.Relation<
       'api::landing-page-archive.landing-page-archive',
       'oneToOne',
@@ -872,7 +871,7 @@ export interface ApiLandingPageObjectLandingPageObject extends Schema.SingleType
     description: ''
   }
   options: {
-    draftAndPublish: true
+    draftAndPublish: false
   }
   pluginOptions: {
     i18n: {
@@ -916,7 +915,6 @@ export interface ApiLandingPageObjectLandingPageObject extends Schema.SingleType
       }>
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
-    publishedAt: Attribute.DateTime
     createdBy: Attribute.Relation<
       'api::landing-page-object.landing-page-object',
       'oneToOne',
@@ -947,7 +945,7 @@ export interface ApiLandingPagePeopleLandingPagePeople extends Schema.SingleType
     description: ''
   }
   options: {
-    draftAndPublish: true
+    draftAndPublish: false
   }
   pluginOptions: {
     i18n: {
@@ -991,7 +989,6 @@ export interface ApiLandingPagePeopleLandingPagePeople extends Schema.SingleType
       }>
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
-    publishedAt: Attribute.DateTime
     createdBy: Attribute.Relation<
       'api::landing-page-people.landing-page-people',
       'oneToOne',
@@ -1022,7 +1019,7 @@ export interface ApiLandingPagePublicationLandingPagePublication extends Schema.
     description: ''
   }
   options: {
-    draftAndPublish: true
+    draftAndPublish: false
   }
   pluginOptions: {
     i18n: {
@@ -1066,7 +1063,6 @@ export interface ApiLandingPagePublicationLandingPagePublication extends Schema.
       }>
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
-    publishedAt: Attribute.DateTime
     createdBy: Attribute.Relation<
       'api::landing-page-publication.landing-page-publication',
       'oneToOne',
