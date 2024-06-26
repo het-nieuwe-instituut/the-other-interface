@@ -346,7 +346,7 @@ export const aComponentModulesGridModule = (overrides?: Partial<ComponentModules
 export const aComponentModulesHighlight = (overrides?: Partial<ComponentModulesHighlight>, _relationshipsToOmit: Array<string> = []): ComponentModulesHighlight => {
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ComponentModulesHighlight']);
     return {
-        buttons: overrides && overrides.hasOwnProperty('buttons') ? overrides.buttons! : relationshipsToOmit.includes('ComponentCoreButton') ? {} as ComponentCoreButton : aComponentCoreButton({}, relationshipsToOmit),
+        buttons: overrides && overrides.hasOwnProperty('buttons') ? overrides.buttons! : [relationshipsToOmit.includes('ComponentCoreButton') ? {} as ComponentCoreButton : aComponentCoreButton({}, relationshipsToOmit)],
         description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'tempore',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '29f172fb-6bb8-4d02-b650-18aa33f5f62e',
         image: overrides && overrides.hasOwnProperty('image') ? overrides.image! : relationshipsToOmit.includes('UploadFileEntityResponse') ? {} as UploadFileEntityResponse : anUploadFileEntityResponse({}, relationshipsToOmit),

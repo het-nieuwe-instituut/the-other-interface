@@ -147,7 +147,12 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
                     return null
                   }
                   return (
-                    <LinkButtonGroupItem key={button.id} href={button.url}>
+                    <LinkButtonGroupItem
+                      key={button.id}
+                      href={button.url}
+                      varient="jumbo"
+                      color={'ivoryNoBorder'}
+                    >
                       {button.text}
                     </LinkButtonGroupItem>
                   )

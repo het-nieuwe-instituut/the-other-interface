@@ -102,18 +102,16 @@ fragment ComponentModulesGridModuleFragment on ComponentModulesGridModule {
 }
 
 fragment ComponentModulesHighlightFragment on ComponentModulesHighlight {
-    id
-    title
-    description
-    image_alt_text
-    buttons {
-        ...ComponentCoreButtonFragment
-
-    }
-    image {
-        ...UploadFileEntityResponseFragment
-    }
-
+  id
+  title
+  description
+  image_alt_text
+  buttons {
+    ...ComponentCoreButtonFragment
+  }
+  image {
+    ...UploadFileEntityResponseFragment
+  }
 }
 
 fragment ComponentModulesSideImageWithTextFragment on ComponentModulesSideImageWithText {

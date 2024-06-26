@@ -5,6 +5,7 @@ fragment highlightModulesFragment on ComponentModulesHighlight {
   description
   image {
     data {
+      id
       attributes {
         url
         height
@@ -15,8 +16,6 @@ fragment highlightModulesFragment on ComponentModulesHighlight {
   }
   image_alt_text
   buttons {
-    id
-    text
-    url
+    ...ButtonFragment
   }
 }

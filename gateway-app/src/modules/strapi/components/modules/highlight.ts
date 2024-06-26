@@ -16,7 +16,7 @@ export class ComponentModulesHighlight {
   @Field()
   public image_alt_text: string
 
-  @Field(() => ComponentCoreButton, { nullable: true })
+  @Field(() => [ComponentCoreButton], { nullable: true })
   public buttons?: ComponentCoreButton[]
 
   @Field(() => UploadFileEntityResponse)

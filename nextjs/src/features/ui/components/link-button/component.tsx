@@ -13,7 +13,7 @@ const LinkButton = React.forwardRef<HTMLAnchorElement, LinkButtonProps>(
   ({ className, state, intent, children, size, ...props }, ref) => {
     return (
       <NextLink
-        className={cn(ButtonVariants({ className, intent, state, size }), 'px-0')}
+        className={cn(ButtonVariants({ className, state, size, intent }))}
         ref={ref}
         {...props}
       >

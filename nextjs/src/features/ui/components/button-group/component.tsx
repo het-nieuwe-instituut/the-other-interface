@@ -20,14 +20,39 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, className })
 export interface LinkButtonGroupItemProps {
   href: string
   children: string
+  varient?:
+    | 'jumbo'
+    | 'textPrimary'
+    | 'textSecondary'
+    | 'menuPrimary'
+    | 'menuSecondary'
+    | 'footerPrimary'
+    | 'footerSecondary'
+    | 'metaData'
+    | 'metaDataText'
+    | 'primary'
+    | null
+    | undefined
+  color?:
+    | 'black'
+    | 'white'
+    | 'ivoryNoBorder'
+    | 'inverted'
+    | 'invertedPinkHover'
+    | 'invertedPaleHover'
+    | 'blue'
+    | null
+    | undefined
 }
 export const LinkButtonGroupItem: React.FC<LinkButtonGroupItemProps> = ({
   href,
   children,
+  varient,
+  color = 'ivoryNoBorder',
 }: LinkButtonGroupItemProps) => {
   const isExternal = isExternalURL(href, process.env.parsed.NEXT_PUBLIC_URL ?? '')
   return (
-    <NavLinkButton href={href} variant={'jumbo'} color={'ivoryNoBorder'}>
+    <NavLinkButton href={href} variant={varient} color={color}>
       {children}
       {isExternal && <ExternalLink className="size-6" />}
     </NavLinkButton>

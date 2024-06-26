@@ -25,7 +25,7 @@ export const StandaloneLink = ({
       target="_blank"
       className={cn('flex gap-2', className)}
       intent={'secondary'}
-      size={'small'}
+      size={'smallNoPadding'}
     >
       {children}
       {variant === 'link' ? isExternal && <Icon className="size-5" /> : <Icon className="size-5" />}

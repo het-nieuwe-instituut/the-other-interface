@@ -15,7 +15,7 @@ export const ButtonVariants = cva(
         secondary: [
           'border-b border-black',
           'h-12 text-left font-social-large text-[16px] font-normal leading-tight tracking-tight text-black-100',
-          'hover:border-black hover:bg-black-100 hover:px-2',
+          'hover:border-black hover:bg-black-100',
         ],
         tertiary: [
           'h-12 border-none px-5',
@@ -34,6 +34,10 @@ export const ButtonVariants = cva(
       size: {
         large: ['h-[60px] px-5 font-social-large text-[21px] font-normal leading-7 tracking-tight'],
         small: ['h-12 px-5 font-social-large text-base font-normal leading-tight tracking-tight'],
+        smallNoPadding: [
+          'h-12 font-social-large text-base font-normal leading-tight tracking-tight',
+        ],
+
         xsmall: [
           'h-10 px-5 font-social-large text-[14px] font-normal leading-tight tracking-tight',
         ],

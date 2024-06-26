@@ -895,7 +895,6 @@ export type LandingPageArchive = {
   highlight?: Maybe<ComponentModulesHighlight>
   locale?: Maybe<Scalars['String']>
   localizations?: Maybe<LandingPageArchiveRelationResponseCollection>
-  publishedAt?: Maybe<Scalars['DateTime']>
   text?: Maybe<Scalars['String']>
   title: Scalars['String']
   updatedAt?: Maybe<Scalars['DateTime']>
@@ -905,10 +904,6 @@ export type LandingPageArchiveCarouselsArgs = {
   filters?: InputMaybe<ComponentModulesCarouselFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type LandingPageArchiveLocalizationsArgs = {
-  publicationState?: InputMaybe<PublicationState>
 }
 
 export type LandingPageArchiveEntity = {
@@ -926,7 +921,6 @@ export type LandingPageArchiveInput = {
   carousels?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselInput>>>
   grid?: InputMaybe<ComponentModulesGridModuleInput>
   highlight?: InputMaybe<ComponentModulesHighlightInput>
-  publishedAt?: InputMaybe<Scalars['DateTime']>
   text?: InputMaybe<Scalars['String']>
   title?: InputMaybe<Scalars['String']>
 }
@@ -944,7 +938,6 @@ export type LandingPageObject = {
   highlight?: Maybe<ComponentModulesHighlight>
   locale?: Maybe<Scalars['String']>
   localizations?: Maybe<LandingPageObjectRelationResponseCollection>
-  publishedAt?: Maybe<Scalars['DateTime']>
   text?: Maybe<Scalars['String']>
   title: Scalars['String']
   updatedAt?: Maybe<Scalars['DateTime']>
@@ -954,10 +947,6 @@ export type LandingPageObjectCarouselsArgs = {
   filters?: InputMaybe<ComponentModulesCarouselFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type LandingPageObjectLocalizationsArgs = {
-  publicationState?: InputMaybe<PublicationState>
 }
 
 export type LandingPageObjectEntity = {
@@ -975,7 +964,6 @@ export type LandingPageObjectInput = {
   carousels?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselInput>>>
   grid?: InputMaybe<ComponentModulesGridModuleInput>
   highlight?: InputMaybe<ComponentModulesHighlightInput>
-  publishedAt?: InputMaybe<Scalars['DateTime']>
   text?: InputMaybe<Scalars['String']>
   title?: InputMaybe<Scalars['String']>
 }
@@ -993,7 +981,6 @@ export type LandingPagePeople = {
   highlight?: Maybe<ComponentModulesHighlight>
   locale?: Maybe<Scalars['String']>
   localizations?: Maybe<LandingPagePeopleRelationResponseCollection>
-  publishedAt?: Maybe<Scalars['DateTime']>
   text?: Maybe<Scalars['String']>
   title: Scalars['String']
   updatedAt?: Maybe<Scalars['DateTime']>
@@ -1003,10 +990,6 @@ export type LandingPagePeopleCarouselsArgs = {
   filters?: InputMaybe<ComponentModulesCarouselFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type LandingPagePeopleLocalizationsArgs = {
-  publicationState?: InputMaybe<PublicationState>
 }
 
 export type LandingPagePeopleEntity = {
@@ -1024,7 +1007,6 @@ export type LandingPagePeopleInput = {
   carousels?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselInput>>>
   grid?: InputMaybe<ComponentModulesGridModuleInput>
   highlight?: InputMaybe<ComponentModulesHighlightInput>
-  publishedAt?: InputMaybe<Scalars['DateTime']>
   text?: InputMaybe<Scalars['String']>
   title?: InputMaybe<Scalars['String']>
 }
@@ -1042,7 +1024,6 @@ export type LandingPagePublication = {
   highlight?: Maybe<ComponentModulesHighlight>
   locale?: Maybe<Scalars['String']>
   localizations?: Maybe<LandingPagePublicationRelationResponseCollection>
-  publishedAt?: Maybe<Scalars['DateTime']>
   text?: Maybe<Scalars['String']>
   title: Scalars['String']
   updatedAt?: Maybe<Scalars['DateTime']>
@@ -1052,10 +1033,6 @@ export type LandingPagePublicationCarouselsArgs = {
   filters?: InputMaybe<ComponentModulesCarouselFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type LandingPagePublicationLocalizationsArgs = {
-  publicationState?: InputMaybe<PublicationState>
 }
 
 export type LandingPagePublicationEntity = {
@@ -1073,7 +1050,6 @@ export type LandingPagePublicationInput = {
   carousels?: InputMaybe<Array<InputMaybe<ComponentModulesCarouselInput>>>
   grid?: InputMaybe<ComponentModulesGridModuleInput>
   highlight?: InputMaybe<ComponentModulesHighlightInput>
-  publishedAt?: InputMaybe<Scalars['DateTime']>
   text?: InputMaybe<Scalars['String']>
   title?: InputMaybe<Scalars['String']>
 }
@@ -1736,22 +1712,18 @@ export type QueryI18NLocalesArgs = {
 
 export type QueryLandingPageArchiveArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
-  publicationState?: InputMaybe<PublicationState>
 }
 
 export type QueryLandingPageObjectArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
-  publicationState?: InputMaybe<PublicationState>
 }
 
 export type QueryLandingPagePeopleArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
-  publicationState?: InputMaybe<PublicationState>
 }
 
 export type QueryLandingPagePublicationArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
-  publicationState?: InputMaybe<PublicationState>
 }
 
 export type QueryLocationArgs = {
