@@ -15,6 +15,8 @@ export class StrapiUtils {
         return Enum_Triplyrecord_Type.Object
       case EntityNames.Media:
         return Enum_Triplyrecord_Type.Media
+      case EntityNames.Stories:
+        return EntityNames.Stories
       case EntityNames.External:
       default:
         throw CustomError.internalCritical(`type for entity ${name} not implemented`)

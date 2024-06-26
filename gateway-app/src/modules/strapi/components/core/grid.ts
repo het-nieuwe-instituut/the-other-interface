@@ -35,7 +35,7 @@ export class ComponentCoreGridFeaturedFields {
   public id: string
 
   @Field()
-  public title?: string
+  public title: string
 
   @Field()
   public subtitle: string
