@@ -2569,8 +2569,8 @@ export type HomepageFragmentFragment = {
   carousel?: {
     __typename: 'ComponentModulesCarousel'
     id: string
-    description?: string | null
     title: string
+    description?: string | null
     variant?: Enum_Componentmodulescarousel_Variant | null
     images: Array<{
       __typename?: 'ComponentCoreCarouselImage'
@@ -2742,8 +2742,8 @@ export type HomepageQuery = {
               carousel?: {
                 __typename: 'ComponentModulesCarousel'
                 id: string
-                description?: string | null
                 title: string
+                description?: string | null
                 variant?: Enum_Componentmodulescarousel_Variant | null
                 images: Array<{
                   __typename?: 'ComponentCoreCarouselImage'
@@ -2885,8 +2885,8 @@ export type HomepageQuery = {
         carousel?: {
           __typename: 'ComponentModulesCarousel'
           id: string
-          description?: string | null
           title: string
+          description?: string | null
           variant?: Enum_Componentmodulescarousel_Variant | null
           images: Array<{
             __typename?: 'ComponentCoreCarouselImage'
@@ -4276,8 +4276,8 @@ export type LandingPageArchiveFragmentFragment = {
   carousel?: {
     __typename: 'ComponentModulesCarousel'
     id: string
-    description?: string | null
     title: string
+    description?: string | null
     variant?: Enum_Componentmodulescarousel_Variant | null
     images: Array<{
       __typename?: 'ComponentCoreCarouselImage'
@@ -4492,8 +4492,8 @@ export type LandingPageObjectFragmentFragment = {
   carousel?: {
     __typename: 'ComponentModulesCarousel'
     id: string
-    description?: string | null
     title: string
+    description?: string | null
     variant?: Enum_Componentmodulescarousel_Variant | null
     images: Array<{
       __typename?: 'ComponentCoreCarouselImage'
@@ -4708,8 +4708,8 @@ export type LandingPagePeopleFragmentFragment = {
   carousel?: {
     __typename: 'ComponentModulesCarousel'
     id: string
-    description?: string | null
     title: string
+    description?: string | null
     variant?: Enum_Componentmodulescarousel_Variant | null
     images: Array<{
       __typename?: 'ComponentCoreCarouselImage'
@@ -4924,8 +4924,8 @@ export type LandingPagePublicationFragmentFragment = {
   carousel?: {
     __typename: 'ComponentModulesCarousel'
     id: string
-    description?: string | null
     title: string
+    description?: string | null
     variant?: Enum_Componentmodulescarousel_Variant | null
     images: Array<{
       __typename?: 'ComponentCoreCarouselImage'
@@ -5151,8 +5151,8 @@ export type LandingPageArchiveQuery = {
         carousel?: {
           __typename: 'ComponentModulesCarousel'
           id: string
-          description?: string | null
           title: string
+          description?: string | null
           variant?: Enum_Componentmodulescarousel_Variant | null
           images: Array<{
             __typename?: 'ComponentCoreCarouselImage'
@@ -5381,8 +5381,8 @@ export type LandingPageObjectQuery = {
         carousel?: {
           __typename: 'ComponentModulesCarousel'
           id: string
-          description?: string | null
           title: string
+          description?: string | null
           variant?: Enum_Componentmodulescarousel_Variant | null
           images: Array<{
             __typename?: 'ComponentCoreCarouselImage'
@@ -5611,8 +5611,8 @@ export type LandingPagePeopleQuery = {
         carousel?: {
           __typename: 'ComponentModulesCarousel'
           id: string
-          description?: string | null
           title: string
+          description?: string | null
           variant?: Enum_Componentmodulescarousel_Variant | null
           images: Array<{
             __typename?: 'ComponentCoreCarouselImage'
@@ -5841,8 +5841,8 @@ export type LandingPagePublicationQuery = {
         carousel?: {
           __typename: 'ComponentModulesCarousel'
           id: string
-          description?: string | null
           title: string
+          description?: string | null
           variant?: Enum_Componentmodulescarousel_Variant | null
           images: Array<{
             __typename?: 'ComponentCoreCarouselImage'
@@ -13380,8 +13380,8 @@ export type ComponentModulesStandaloneLinksFragmentFragment = {
 export type ComponentModulesCarouselFragmentFragment = {
   __typename: 'ComponentModulesCarousel'
   id: string
-  description?: string | null
   title: string
+  description?: string | null
   variant?: Enum_Componentmodulescarousel_Variant | null
   images: Array<{
     __typename?: 'ComponentCoreCarouselImage'
@@ -19518,9 +19518,9 @@ export const ComponentCoreButtonFragmentFragmentDoc = gql`
 export const ComponentModulesCarouselFragmentFragmentDoc = gql`
   fragment ComponentModulesCarouselFragment on ComponentModulesCarousel {
     id
-    description
     __typename
     title
+    description
     variant
     images {
       ...ComponentCoreCarouselImageFragment

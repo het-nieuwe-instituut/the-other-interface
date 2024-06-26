@@ -21,6 +21,7 @@ export interface LandingPageProps {
 }
 
 export const LandingpageContainer: React.FC<LandingPageProps> = ({ editorialData }) => {
+  console.log(editorialData)
   return (
     <div>
       <GalaxyInterface>

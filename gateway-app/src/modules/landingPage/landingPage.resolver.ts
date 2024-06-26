@@ -15,7 +15,8 @@ export class LandingPageResolver {
 
   @Query(() => LandingPageArchiveEntityResponse)
   public async landingPageArchive(@Args() { locale }: LocaleArgs) {
-    return (await this.strapiGqlSdk.landingPageArchive({ locale })).landingPageArchive
+    const data = (await this.strapiGqlSdk.landingPageArchive({ locale })).landingPageArchive
+    return data
   }
   @Query(() => LandingPageObjectEntityResponse)
   public async landingPageObject(@Args() { locale }: LocaleArgs) {

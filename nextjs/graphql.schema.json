@@ -2511,13 +2511,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "ENUM",
-                "name": "Enum_Componentmodulescarousel_Variant",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "Enum_Componentmodulescarousel_Variant",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
