@@ -12,7 +12,8 @@
     "cards": {
       "type": "component",
       "repeatable": true,
-      "component": "core.grid-featured-fields"
+      "component": "core.grid-featured-fields",
+      "max": 9
     },
     "exploreCollectionButton": {
       "type": "component",

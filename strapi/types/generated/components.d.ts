@@ -172,7 +172,10 @@ export interface ModulesGridModule extends Schema.Component {
   }
   attributes: {
     title: Attribute.String
-    cards: Attribute.Component<'core.grid-featured-fields', true>
+    cards: Attribute.Component<'core.grid-featured-fields', true> &
+      Attribute.SetMinMax<{
+        max: 9
+      }>
     exploreCollectionButton: Attribute.Component<'core.button'>
   }
 }
