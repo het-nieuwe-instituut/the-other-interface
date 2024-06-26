@@ -39,9 +39,6 @@ export const Footer = () => {
                 </Link>
                 <Link href={`mailto:info@nieuweinstituut.nl`}>
                   <p className="font-social-large text-[21px] tracking-[0.21px]">
-                    theotherinterface
-                  </p>
-                  <p className="font-social-large text-[21px] tracking-[0.21px]">
                     info@nieuweinstituut.nl
                   </p>
                 </Link>
