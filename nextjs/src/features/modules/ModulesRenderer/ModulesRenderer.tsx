@@ -15,7 +15,6 @@ import { ButtonGroup, LinkButtonGroupItem } from '../../ui/components/button-gro
 import { Subtitle } from '../../ui/components/subtitle/Subtitle'
 import { ImageModuleWrapper } from '../components/ImageModuleWrapper'
 import { Pullquote } from '../components/Pullquote/Pullquote'
-//import { GenericCardGrid } from '@/features/editorial/components/GenericCardGrid'
 
 interface Props {
   components: DynamicComponents
@@ -199,6 +198,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           //     )
           //   }
 
+          // not needed here
           // if (component?.__typename === 'ComponentModulesGridModule') {
           //   return (
           //     <GenericCardGrid key={keyExtractor(component.id, index, array)} grid={component} />
