@@ -9,7 +9,7 @@ import { LightboxContext } from './LightboxProvider'
 export interface LightBoxNextImageProps extends ImageProps {
   caption?: string
   // but will still register the image
-  disableOpeningLightbox: boolean
+  disableOpeningLightbox?: boolean
 }
 export const LightBoxNextImage = (props: LightBoxNextImageProps) => {
   const { src, caption, disableOpeningLightbox, ...restProps } = props
