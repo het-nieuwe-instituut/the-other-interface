@@ -28,16 +28,12 @@ export const ButtonVariants = cva(
           '*:text-white',
         ],
         invertedSecondary: [
-          'border-blue-100 hover:border-blue-100 active:border-blue-100 bg-blue-100 text-pink-100',
+          'border-blue bg-blue-100 text-pink-100 hover:border-blue active:border-blue',
         ],
       },
       size: {
         large: ['h-[60px] px-5 font-social-large text-[21px] font-normal leading-7 tracking-tight'],
         small: ['h-12 px-5 font-social-large text-base font-normal leading-tight tracking-tight'],
-        smallNoPadding: [
-          'h-12 font-social-large text-base font-normal leading-tight tracking-tight',
-        ],
-
         xsmall: [
           'h-10 px-5 font-social-large text-[14px] font-normal leading-tight tracking-tight',
         ],

@@ -149,8 +149,8 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
                     <LinkButtonGroupItem
                       key={button.id}
                       href={button.url}
-                      varient="jumbo"
-                      color={'ivoryNoBorder'}
+                      variant="jumbo"
+                      color={'jumboText'}
                     >
                       {button.text}
                     </LinkButtonGroupItem>
@@ -197,13 +197,6 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           //       />
           //     )
           //   }
-
-          // not needed here
-          // if (component?.__typename === 'ComponentModulesGridModule') {
-          //   return (
-          //     <GenericCardGrid key={keyExtractor(component.id, index, array)} grid={component} />
-          //   )
-          // }
 
           if (component?.__typename === 'ComponentCoreStandAloneLink') {
             const href =

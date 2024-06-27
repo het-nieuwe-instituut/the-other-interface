@@ -29,7 +29,7 @@ interface Props {
 export function LandingPageComponentRenderer({ grid, highlight, imageCarousel, carousel }: Props) {
   console.log(carousel)
   return (
-    <div className={cn('px-6 pt-0 flex flex-col gap-[40px]', 'pt-10')}>
+    <div className={cn('pt-10 flex flex-col gap-[40px] w-full')}>
       {imageCarousel && (
         <ImageCarousel>
           {imageCarousel.images?.data?.map(item => {
@@ -51,7 +51,15 @@ export function LandingPageComponentRenderer({ grid, highlight, imageCarousel, c
         </ImageCarousel>
       )}
       {carousel && <GenericCarouselGridWithClientPagination carousel={carousel} />}
-      {highlight && <Highlight component={highlight} />}
+      {highlight && (
+        <Highlight
+          buttons={highlight.buttons}
+          description={highlight.description}
+          title={highlight.title}
+          image={highlight.image}
+          altText={highlight.image_alt_text}
+        />
+      )}
       {grid && <GenericCardGrid grid={grid} />}
     </div>
   )
