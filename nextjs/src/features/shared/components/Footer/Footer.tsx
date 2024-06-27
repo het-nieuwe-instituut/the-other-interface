@@ -17,9 +17,9 @@ export const Footer = () => {
   return (
     <div
       style={{ '--z-index': `${FOOTER_Z_INDEX}` } as CSSProperties}
-      className="relative z-[var(--z-index)] flex w-full bg-ivory-90 pt-8 opacity-100 lg:pt-10 xl:pt-28 2xl:pt-40"
+      className="relative z-[var(--z-index)] flex w-full bg-ivory-90 opacity-100"
     >
-      <div className="container m-auto max-w-[1392px] p-6 pb-12">
+      <div className="container m-auto max-w-[1392px] p-6">
         <div className="grid gap-1 md:grid-cols-2 lg:grid-cols-3">
           <div>
             <Link href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}>
