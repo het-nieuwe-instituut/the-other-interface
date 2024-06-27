@@ -1,7 +1,5 @@
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
-// import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
-// import { LayerWrapper } from '@/features/shared/components/Layers/LayerWrapper'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import {
@@ -29,25 +27,6 @@ export const LandingpageContainer: React.FC<LandingPageProps> = ({ editorialData
           <CategoryGalaxy />
         </MobileOverlayProvider>
       </GalaxyInterface>
-
-      {/* <LayerWrapper
-        LeftContent={
-          <PageHeader
-            title={editorialData?.attributes?.title || undefined}
-            preface={editorialData?.attributes?.text || undefined}
-            constrainPreface={true}
-            showReadMore={false}
-          />
-        }
-        BottomContent={
-          <LandingPageComponentRenderer
-            grid={editorialData?.attributes?.grid}
-            highlight={editorialData?.attributes?.highlight}
-            carousel={editorialData?.attributes?.carousel}
-            imageCarousel={editorialData?.attributes?.imageCarousel}
-          />
-        }
-      /> */}
 
       <div className="relative w-full bg-ivory-90 px-0 xl:px-6">
         <div className="mx-auto max-w-[1392px] px-6 pt-6">
