@@ -2,7 +2,7 @@
 - name: backups | start postgres backup container production
   docker_container:
     name: postgres-backup
-    image: lifely/postgres-backup-container:cfed7a3dcce1944363af6738a143ba72dc2ab33f
+    image: lifely/postgres-backup-container:c9e45a54b214db2fb2da4ee07007bf31e3d54e08
     pull: true
     state: started
     restart_policy: always
@@ -27,7 +27,7 @@
 - name: backups | start postgres backup container staging/acc
   docker_container:
     name: postgres-backup
-    image: lifely/postgres-backup-container:cfed7a3dcce1944363af6738a143ba72dc2ab33f
+    image: lifely/postgres-backup-container:c9e45a54b214db2fb2da4ee07007bf31e3d54e08
     pull: true
     state: started
     restart_policy: always
