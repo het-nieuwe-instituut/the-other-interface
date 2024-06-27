@@ -31,7 +31,7 @@
           POSTGRES_USER: "{{ app.db.username }}"
           POSTGRES_PASSWORD: "{{ app.db.password }}"
           POSTGRES_DB: "{{ app.db.name }}"
-          POSTGRES_EXTRA_OPTS: --clean
+          POSTGRES_EXTRA_OPTS: --clean --no-owner -Fc
 
     - name: show information
       debug: msg="Backuped postgres"

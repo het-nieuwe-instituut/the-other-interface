@@ -13,7 +13,7 @@
     - name: start postgres restore container
       docker_container:
         name: postgres-restore-temp
-        image: lifely/postgres-restore-container:latest
+        image: lifely/postgres-restore-container:64d4f7bbc1a34c9d435bed70fa2e63c9513a0dc9
         pull: true
         state: started
         cleanup: true
@@ -30,6 +30,7 @@
           POSTGRES_USER: "{{ app.db.username }}"
           POSTGRES_PASSWORD: "{{ app.db.password }}"
           POSTGRES_DB: "{{ app.db.name }}"
+          POSTGRES_EXTRA_OPTS: --clean --no-owner -Fc
 
     - name: show information
       debug: msg="Restored postgres backup {{ backup_path }}"
