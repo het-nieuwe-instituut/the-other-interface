@@ -4,15 +4,12 @@ import { RecordLayer } from '@/features/record/containers/RecordLayer/RecordLaye
 import { StoryLayer } from '@/features/shared/components/Layers/StoryLayer/StoryLayer'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import { isCloudCategory, isStoryCategory } from '@/features/shared/utils/categories'
-import { LandingpageBySlugQuery, StoryByIdQuery } from 'src/generated/graphql'
+import { StoryByIdQuery } from 'src/generated/graphql'
 
 export interface DetailpageEditorialLayer {
   title?: string | null
   description?: string | null
   components:
-    | NonNullable<
-        NonNullable<LandingpageBySlugQuery['landingpages']['data']>[0]['attributes']
-      >['components']
     | NonNullable<NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']>['components']
     | null
 }
