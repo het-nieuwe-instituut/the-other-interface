@@ -9,13 +9,7 @@ export const ImageWithCaptionLink = ({
 }: ImageWithCaptionProps & { href: LinkProps['href'] }) => {
   return (
     <NextLink className={'group '} href={href}>
-      <ImageWithCaption
-        className={cn(
-          'border border-solid border-transparent border-is group-hover:border-black box-border',
-          className
-        )}
-        {...restProps}
-      />
+      <ImageWithCaption className={cn(className)} {...restProps} />
     </NextLink>
   )
 }
