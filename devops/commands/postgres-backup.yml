@@ -13,7 +13,7 @@
     - name: start postgres backup container
       docker_container:
         name: postgres-backup-temp
-        image: lifely/postgres-backup-container:latest
+        image: lifely/postgres-backup-container:c9e45a54b214db2fb2da4ee07007bf31e3d54e08
         pull: true
         state: started
         cleanup: true
