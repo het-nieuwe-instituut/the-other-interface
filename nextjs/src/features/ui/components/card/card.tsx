@@ -30,7 +30,7 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
         <div
           className={cn(
             'flex flex-col p-2',
-            'after:absolute after:z-[-1]',
+            'after:absolute',
             'group-hover:after:bottom-0  group-hover:after:left-0 group-hover:after:bg-black-100 group-hover:after:content-[""]',
             'group-hover:after:ml-[-4px] group-hover:after:w-[calc(100%+8px)] group-hover:after:mb-[-4px] group-hover:after:h-[calc(100%+8px)]'
           )}
