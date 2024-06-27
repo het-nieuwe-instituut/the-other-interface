@@ -50,7 +50,9 @@ export class ZoomLevel3Resolver {
     @Args('id') archiveId: string,
     @Args() { locale }: LocaleArgs
   ) {
-    return this.archivesService.getZoomLevel3RecordData(archiveId, locale)
+    const res = await this.archivesService.getZoomLevel3RecordData(archiveId, locale)
+
+    return res
   }
 
   @Query(() => [ObjectRecordZoomLevel3Type], { nullable: true })
