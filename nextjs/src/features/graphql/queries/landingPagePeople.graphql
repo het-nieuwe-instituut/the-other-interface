@@ -1,0 +1,27 @@
+query landingPagePeople($locale: Locale!) {
+  landingPagePeople(locale: $locale) {
+    data {
+      id
+      attributes {
+        ...LandingPagePeopleFragment
+      }
+    }
+  }
+}
+
+fragment LandingPagePeopleFragment on LandingPagePeople {
+  title
+  text
+  highlight {
+    ...highlightModulesFragment
+  }
+  grid {
+    ...gridModuleFragment
+  }
+  carousel {
+    ...carouselModuleFragment
+  }
+  imageCarousel {
+    ...imageCarouselModuleFragment
+  }
+}

@@ -1,0 +1,21 @@
+fragment highlightModulesFragment on ComponentModulesHighlight {
+  id
+  __typename
+  title
+  description
+  image {
+    data {
+      id
+      attributes {
+        url
+        height
+        width
+        caption
+      }
+    }
+  }
+  image_alt_text
+  buttons {
+    ...ButtonFragment
+  }
+}

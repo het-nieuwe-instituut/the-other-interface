@@ -1,0 +1,27 @@
+query landingPagePublication($locale: Locale!) {
+  landingPagePublication(locale: $locale) {
+    data {
+      id
+      attributes {
+        ...LandingPagePublicationFragment
+      }
+    }
+  }
+}
+
+fragment LandingPagePublicationFragment on LandingPagePublication {
+  title
+  text
+  highlight {
+    ...highlightModulesFragment
+  }
+  grid {
+    ...gridModuleFragment
+  }
+  carousel {
+    ...carouselModuleFragment
+  }
+  imageCarousel {
+    ...imageCarouselModuleFragment
+  }
+}

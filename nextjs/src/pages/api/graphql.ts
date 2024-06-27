@@ -2,10 +2,7 @@ import { JsonFileLoader } from '@graphql-tools/json-file-loader'
 import { loadSchemaSync } from '@graphql-tools/load'
 import { addResolversToSchema } from '@graphql-tools/schema'
 import { createYoga } from 'graphql-yoga'
-
 import '../../../graphql.schema.json'
-import { HomePageData } from '../../mocks/mockData/homepageData'
-import { LandingPagesData } from '../../mocks/mockData/landingpagesData'
 import { storyData } from '../../mocks/mockData/storyData'
 import {
   peopleZoomLevel2Data,
@@ -29,15 +26,6 @@ const schema = loadSchemaSync('./graphql.schema.json', {
 // Define your custom mock resolvers
 const customResolvers = {
   Query: {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    homepage(publicationState: string, locale: string) {
-      return HomePageData.homepage
-    },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    landingpages(slug: string, locale: string) {
-      return LandingPagesData.landingpages
-    },
-
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     zoomLevel2(
       root: unknown,
