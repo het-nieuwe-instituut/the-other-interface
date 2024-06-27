@@ -4,6 +4,8 @@ import ExternalLink from '@/features/ui/icons/external-link.svg'
 import { ReactElement } from 'react'
 import { cn } from '../../utils/cn'
 import { NavLinkButton } from '../nav-link-button/component'
+import { NavButtonVariants } from '../nav-button/variants'
+import { VariantProps } from 'class-variance-authority'
 
 export interface ButtonGroupProps {
   children:
@@ -17,33 +19,11 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, className })
   return <div className={cn('w-full bg-inherit', className)}>{children}</div>
 }
 
-export interface LinkButtonGroupItemProps {
+interface LinkButtonGroupItemProps extends VariantProps<typeof NavButtonVariants> {
   href: string
   children: string
-  variant?:
-    | 'jumbo'
-    | 'textPrimary'
-    | 'textSecondary'
-    | 'menuPrimary'
-    | 'menuSecondary'
-    | 'footerPrimary'
-    | 'footerSecondary'
-    | 'metaData'
-    | 'metaDataText'
-    | 'primary'
-    | null
-    | undefined
-  color?:
-    | 'black'
-    | 'white'
-    | 'jumboText'
-    | 'inverted'
-    | 'invertedPinkHover'
-    | 'invertedPaleHover'
-    | 'blue'
-    | null
-    | undefined
 }
+
 export const LinkButtonGroupItem: React.FC<LinkButtonGroupItemProps> = ({
   href,
   children,

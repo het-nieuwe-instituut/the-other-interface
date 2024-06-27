@@ -27,7 +27,6 @@ interface Props {
 }
 
 export function LandingPageComponentRenderer({ grid, highlight, imageCarousel, carousel }: Props) {
-  console.log(carousel)
   return (
     <div className={cn('pt-10 flex flex-col gap-[40px] w-full')}>
       {imageCarousel && (
