@@ -62,7 +62,7 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
           </div>
 
           <div className="relative flex">
-            <div className="scrollbar-hide overflow-x-scroll" ref={scrollContainerRef}>
+            <div className="overflow-x-scroll scrollbar-hide" ref={scrollContainerRef}>
               <div
                 className="flex flex-nowrap gap-4"
                 style={{
@@ -90,11 +90,21 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
               />
 
               <div className="flex h-full w-[116.32px] items-center justify-center gap-2">
-                <button onClick={prevPage}>
-                  <NavArrowLeft className={cn(!canScrollPrev && 'invisible')} />
+                <button onClick={prevPage} disabled={!canScrollPrev}>
+                  <NavArrowLeft
+                    className={cn(
+                      !canScrollPrev && 'opacity-20',
+                      canScrollPrev && 'hover:bg-black-100 hover:text-white'
+                    )}
+                  />
                 </button>
-                <button onClick={nextPage}>
-                  <NavArrowRight className={cn(!canScrollNext && 'invisible')} />
+                <button onClick={nextPage} disabled={!canScrollNext}>
+                  <NavArrowRight
+                    className={cn(
+                      !canScrollNext && 'opacity-20',
+                      canScrollNext && 'hover:bg-black-100 hover:text-white'
+                    )}
+                  />
                 </button>
               </div>
             </div>

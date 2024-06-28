@@ -104,7 +104,7 @@ const Grid = ({
           </CarouselGridLink>
         )}
 
-        {items.length > cols && (
+        {items.length > cols && items.length > 1 && (
           <CarouselGridPagination
             className="ml-auto"
             onNext={next}
