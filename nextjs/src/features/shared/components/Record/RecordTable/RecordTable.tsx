@@ -1,9 +1,9 @@
-import { Box, Text } from '@chakra-ui/react'
 import { TableModule } from '@/features/modules/components/TableModule/TableModule'
-import { useTableRecords } from './useTableRecords'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { CATEGORIES, Category } from '@/features/shared/utils/categories'
+import { NavButton } from '@/features/ui/components/nav-button/component'
 import { useMapRecordTableData } from './useMapRecordTableData'
-import { theme } from '@/features/shared/styles/theme/theme'
+import { useTableRecords } from './useTableRecords'
 interface PaginatedTableProps {
   data: {
     type: Category
@@ -45,7 +45,7 @@ export const RecordTable: React.FC = () => {
   const peoplenTableData = useMapRecordTableData(peopleData?.pages, CATEGORIES.people)
 
   return (
-    <Box maxW={theme.breakpoints.lg} pt={0}>
+    <div className="flex max-w-[64em] flex-col gap-20 pb-20 pt-0">
       {publicationTableData && (
         <PaginatedTable
           data={publicationTableData}
@@ -74,12 +74,13 @@ export const RecordTable: React.FC = () => {
           fetchNextPage={fetchNextPagePeople}
         />
       )}
-    </Box>
+    </div>
   )
 }
 
 const PaginatedTable: React.FC<PaginatedTableProps> = props => {
   const { data, fetchNextPage, hasNextPage } = props
+  const { t: commonT } = useTypeSafeTranslation('common')
   if (!data) return null
   return (
     <>
@@ -89,18 +90,9 @@ const PaginatedTable: React.FC<PaginatedTableProps> = props => {
         LoadMore={
           <>
             {hasNextPage && (
-              <Text
-                as={'button'}
-                textDecoration={'underline'}
-                textUnderlineOffset={'4px'}
-                _hover={{ textDecoration: 'none' }}
-                _disabled={{ color: 'grey', textDecoration: 'none', cursor: 'not-allowed' }}
-                marginTop={'16px'}
-                marginRight={'16px'}
-                onClick={fetchNextPage}
-              >
-                Load More
-              </Text>
+              <NavButton variant={'textPrimary'} onClick={fetchNextPage} className="mt-9">
+                {commonT('loadMore')}
+              </NavButton>
             )}
           </>
         }

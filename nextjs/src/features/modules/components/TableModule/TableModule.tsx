@@ -1,5 +1,3 @@
-import { Box, Text } from '@chakra-ui/react'
-import { modulesSpacingMapper } from '../../modulesSpacing'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 import React from 'react'
@@ -39,11 +37,7 @@ export const TableModule: React.FC<Props> = props => {
   }
 
   return (
-    <Box
-      backgroundColor={'inherit'}
-      pt={modulesSpacingMapper?.TableModule.spacingTop}
-      pb={modulesSpacingMapper?.TableModule.spacingBottom}
-    >
+    <div className="flex flex-col gap-4 bg-inherit">
       <div className="relative flex">
         <h2 className={cn(TypographyVariants({ responsive: 'title' }), 'mb-4')}>
           {component.name}
@@ -56,12 +50,11 @@ export const TableModule: React.FC<Props> = props => {
       </div>
 
       {component.description && (
-        <Text pb={'md'} textStyle={'socialLarge.lg'}>
-          {component.description}
-        </Text>
+        <p className={TypographyVariants({ responsive: 'paragraph' })}>{component.description}</p>
       )}
+
       <ResponsiveTable component={component} LoadMore={LoadMore} />
-    </Box>
+    </div>
   )
 }
 
