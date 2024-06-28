@@ -90,9 +90,6 @@ export const RecordMeta = ({
               <MetaField name={section.title}>
                 <RightsLogo value={section.value} />
               </MetaField>
-              <MetaField name={section.title}>
-                <RightsLinks value={section.value} />
-              </MetaField>
             </Fragment>
           )
         }
@@ -139,24 +136,6 @@ const MetaField = ({ name, children }: { name?: string; children: JSX.Element })
   )
 }
 
-function RightsLinks({ value }: { value?: string[] | null; key?: string }) {
-  const { t: recordMetaT } = useLooseTypeSafeTranslation('recordMeta')
-  const rightsInfo = value && value[0] ? recordRightsFieldMapper(value[0], recordMetaT) : null
-
-  if (!rightsInfo) return null
-
-  return (
-    <ReadMoreTooltip description={rightsInfo.description} place="bottom">
-      <NavLinkButton variant={'metaData'} href={rightsInfo.url} title={rightsInfo.text}>
-        {rightsInfo.text}
-        {isExternalURL(rightsInfo.url, process.env.parsed.NEXT_PUBLIC_URL ?? '') ? (
-          <ExternalLink className="size-5" />
-        ) : null}
-      </NavLinkButton>
-    </ReadMoreTooltip>
-  )
-}
-
 function RightsLogo({ value }: { value?: string[] | null; key?: string }) {
   const { t: recordMetaT } = useLooseTypeSafeTranslation('recordMeta')
   const rightsInfo = value && value[0] ? recordRightsFieldMapper(value[0], recordMetaT) : null
@@ -168,7 +147,7 @@ function RightsLogo({ value }: { value?: string[] | null; key?: string }) {
 
   return (
     <ReadMoreTooltip description={rightsInfo.description} place="bottom">
-      <a href={rightsInfo.url} className="flex flex-wrap items-center gap-1 ">
+      <a href={rightsInfo.url} className="flex flex-nowrap items-center gap-1">
         <div className="flex size-7 items-center">
           <Icon />
         </div>
