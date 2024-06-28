@@ -147,7 +147,12 @@ function RightsLogo({ value }: { value?: string[] | null; key?: string }) {
 
   return (
     <ReadMoreTooltip description={rightsInfo.description} place="bottom">
-      <a href={rightsInfo.url} className="flex flex-nowrap items-center gap-1">
+      <a
+        href={rightsInfo.url}
+        target="_blank"
+        className="flex flex-nowrap items-center gap-1"
+        rel="noreferrer"
+      >
         <div className="flex size-7 items-center">
           <Icon />
         </div>
@@ -170,20 +175,27 @@ function SuggestionSection() {
     <>
       <MetaField name={t('suggestionTitle')}>
         <div className="flex flex-col gap-1">
-          <SuggestionLink url={contributeLink} text={t('suggestionContributeLink')} />
+          <SuggestionLink external url={contributeLink} text={t('suggestionContributeLink')} />
           <SuggestionLink url={learnMoreLink} text={t('suggestionLearnMoreLink')} />
         </div>
       </MetaField>
     </>
   )
 
-  function SuggestionLink({ url, text }: { url: string; text?: string }) {
+  interface SuggestionLinkProps {
+    external?: boolean
+    url: string
+    text?: string
+  }
+
+  function SuggestionLink({ external, url, text }: SuggestionLinkProps) {
     return (
       <NavLinkButton
         variant="metaDataText"
         className="bg-[#DEE5EC] font-semibold text-[#6F7A9C] after:border-none hover:bg-[#DEE5EC] hover:text-[#6F7A9C]"
         href={url}
         title={text}
+        target={external ? '_blank' : undefined}
       >
         <Asterisk />
         {text}
