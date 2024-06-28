@@ -42,11 +42,11 @@ export const PageHeader: React.FC<Props> = props => {
             disableLineClamp={!constrainPrefaceState}
             ReadmoreComponent={
               <NavButton
-                onClick={() => setConstrainPreface(false)}
+                onClick={() => setConstrainPreface(!constrainPrefaceState)}
                 intent={'secondary'}
                 variant={'footerPrimary'}
               >
-                {commonT.t('readMore')}
+                {constrainPrefaceState ? commonT.t('readMore') : commonT.t('readLess')}
               </NavButton>
             }
           >

@@ -10,11 +10,6 @@
   "dimension": "Dimensions",
   "scale": "Scale",
   "creditLine": "Credit line",
-  "custodialHistory": "Custodial History",
-  "systemOfArrangement": "System of Arrangement",
-  "sources": "Sources",
-  "existence": "Existence and Location of Originals",
-  "existenceLocation": "Existence and Location of Reproductions",
   "referenceCode": "Reference Code",
   "descriptionLevel": "Description Level/Record Type",
   "size": "Size",
@@ -46,5 +41,11 @@
   "rightsStatusPublicText": "This work has been identified as being free of known restrictions under copyright law, including all related and neighboring rights.",
   "suggestionTitle": "Have a suggestion?",
   "suggestionContributeLink": "Contribute here",
-  "suggestionLearnMoreLink": "Learn about Asterisk"
+  "suggestionLearnMoreLink": "Learn about Asterisk",
+  "description": "Description",
+  "custodialHistory": "Custodial History",
+  "systemOfArrangement": "System of Arrangement",
+  "sources": "Sources",
+  "existence": "Existence and location of originals",
+  "existenceLocation": "Existence and location of reproductions"
 }
