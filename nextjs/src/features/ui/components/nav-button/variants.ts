@@ -46,16 +46,18 @@ export const NavButtonVariants = cva(
           'h-[22px]',
           'text-center font-social-large text-[14px] font-normal leading-4',
         ],
+        primary: ['h-[48px]', 'px-[20px] text-[16px]'],
       },
       color: {
         black: 'text-black-100 after:border-black after:text-black-100',
         white: 'text-white after:border-white after:text-white ',
-        ivoryNoBorder: 'text-ivory-100 hover:text-black-100',
+        jumboText: 'text-ivory-100 hover:text-black-100',
         inverted: 'text-pink-100 after:border-pink-100 after:text-pink-100',
         invertedPinkHover:
           'hover: text-pink-100 after:border-pink-100 after:text-pink-100 hover:bg-pink-100 hover:text-blue-100',
         invertedPaleHover:
           'hover: text-pink-100 after:border-pink-100 after:text-pink-100 hover:bg-transparent hover:text-pink-60 hover:after:border-transparent focus:w-fit focus:bg-pink-100 focus:text-blue-100 focus:outline-none',
+        blue: 'border border-blue text-blue-100 before:border-blue after:border-b-0 after:border-blue hover:border-blue hover:bg-blue-100 hover:text-white',
       },
       state: {
         error: [

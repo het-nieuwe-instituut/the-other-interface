@@ -83,10 +83,20 @@ export const CarouselGridPagination = ({
   return (
     <div className={cn('flex h-full items-center justify-center gap-2 -mr-3', className)}>
       <button onClick={onPrevious} disabled={hidePrevious}>
-        <NavArrowLeft className={cn(hidePrevious && 'invisible')} />
+        <NavArrowLeft
+          className={cn(
+            hidePrevious && 'opacity-20',
+            !hidePrevious && 'hover:bg-black-100 hover:text-white'
+          )}
+        />
       </button>
       <button onClick={onNext} disabled={hideNext}>
-        <NavArrowRight className={cn(hideNext && 'invisible')} />
+        <NavArrowRight
+          className={cn(
+            hideNext && 'opacity-20',
+            !hideNext && 'hover:bg-black-100 hover:text-white'
+          )}
+        />
       </button>
     </div>
   )

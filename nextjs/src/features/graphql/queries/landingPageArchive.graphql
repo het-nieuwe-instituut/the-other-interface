@@ -1,0 +1,27 @@
+query landingPageObject($locale: Locale!) {
+  landingPageObject(locale: $locale) {
+    data {
+      id
+      attributes {
+        ...LandingPageObjectFragment
+      }
+    }
+  }
+}
+
+fragment LandingPageObjectFragment on LandingPageObject {
+  title
+  text
+  highlight {
+    ...highlightModulesFragment
+  }
+  grid {
+    ...gridModuleFragment
+  }
+  carousel {
+    ...carouselModuleFragment
+  }
+  imageCarousel {
+    ...imageCarouselModuleFragment
+  }
+}

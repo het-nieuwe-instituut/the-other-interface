@@ -1,13 +1,19 @@
 'use client'
-import NextLink from 'next/link'
-import { STATIC_HEADER_Z_INDEX, USER_LOOKS_ON } from '../../constants/mainConstants'
 import { GalaxyTopRight } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
-import { usePresenter } from './usePresenter'
-import { CSSProperties } from 'react'
 import { cn } from '@/features/ui/utils/cn'
+import NextLink from 'next/link'
+import { CSSProperties } from 'react'
+import { useSelector } from 'react-redux'
+import { State } from '../../configs/store'
+import { STATIC_HEADER_Z_INDEX, USER_LOOKS_ON } from '../../constants/mainConstants'
+import { useLooseTypeSafeTranslation } from '../../hooks/translations'
+import { useLocale } from '../../hooks/useLocale'
 
 export const StaticHeader = () => {
-  const { tNavigation, userLooksOn, isMenuOpen, lang } = usePresenter()
+  const { t: tNavigation } = useLooseTypeSafeTranslation('navigation')
+  const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
+  const userLooksOn = useSelector((state: State) => state.shared.userLooksOn)
+  const lang = useLocale()
 
   return (
     <>
@@ -23,10 +29,11 @@ export const StaticHeader = () => {
             <NextLink
               href={lang ? `/?lang=${lang}` : '/?lang=nl'}
               className={cn(
+                isMenuOpen ? 'text-white' : 'text-blue-100',
                 userLooksOn === USER_LOOKS_ON.GALAXY
                   ? 'font-times-dot text-[20px] leading-[105%_] md:text-[32px]'
                   : 'font-impact-large text-[20px] leading-[120%_] tracking-[-0.25px] md:text-[25px]',
-                'cursor-pointer overflow-hidden h-full flex m-0 text-blue-100'
+                'cursor-pointer overflow-hidden h-full flex m-0'
               )}
             >
               <p className="mr-2 sm:overflow-visible sm:whitespace-normal">

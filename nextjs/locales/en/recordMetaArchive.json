@@ -9,5 +9,11 @@
   "photographCreator": "Photograph Creator",
   "rights": "Rights",
   "permanentLink": "Permanent Link",
-  "externalSource": "External Source"
+  "externalSource": "External Source",
+  "description": "Description",
+  "custodialHistory": "Custodial History",
+  "systemOfArrangement": "System of Arrangement",
+  "sources": "Sources",
+  "existence": "Existence and location of originals",
+  "existenceLocation": "Existence and location of reproductions"
 }

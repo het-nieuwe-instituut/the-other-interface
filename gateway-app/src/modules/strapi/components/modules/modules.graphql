@@ -16,9 +16,9 @@ fragment ComponentModulesStandaloneLinksFragment on ComponentModulesStandaloneLi
 
 fragment ComponentModulesCarouselFragment on ComponentModulesCarousel {
   id
-  description
   __typename
   title
+  description
   variant
   images {
     ...ComponentCoreCarouselImageFragment
@@ -90,6 +90,19 @@ fragment ComponentModulesGridModuleFragment on ComponentModulesGridModule {
   }
   cards {
     ...ComponentCoreGridFeaturedFieldsFragment
+  }
+}
+
+fragment ComponentModulesHighlightFragment on ComponentModulesHighlight {
+  id
+  title
+  description
+  image_alt_text
+  buttons {
+    ...ComponentCoreButtonFragment
+  }
+  image {
+    ...UploadFileEntityResponseFragment
   }
 }
 

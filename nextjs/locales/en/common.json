@@ -16,6 +16,7 @@
   "widthAbbr": "w",
   "depthAbbr": "d",
   "readMore": "Read more",
+  "readLess": "Read less",
   "switchToMockedServer": "Switch to mocked server",
   "switchToLiveServer": "Switch to test server",
   "go": "Search",
@@ -25,6 +26,7 @@
   "audio": "The audio is not ready yet, please try again later.",
   "video": "The video is not ready yet, please try again later.",
   "seeFullImage": "See full image",
-  "welcomeDescription": "The Collection platform by Nieuwe Instituut is the platform to discover the National Collection of Architecture and Urban Planning. Read stories, traverse records, and search the collection.",
+  "welcomeDescription": "The collectionplatform is the platform from the Nieuwe Instituut for discovering the National Collection of Dutch Architecture and Urban Planning online. Search the collection and read the stories.",
+  "welcomeWarning": "Please note that all collection data on the platform has been automatically translated into English.",
   "welcomeButton": "Begin exploring"
 }

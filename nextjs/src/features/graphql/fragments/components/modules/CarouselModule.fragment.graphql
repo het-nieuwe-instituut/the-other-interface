@@ -6,22 +6,23 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
   id
   __typename
   title
+  description
   variant
   explore_collection_button {
-    ...ButtonFragment
+    id
+    text
+    url
   }
   images {
     id
-    image {
-      data {
-        attributes {
-          url
-        }
-      }
-    }
     alt_text
     title
     description
+    image {
+      data {
+        ...UploadFileFragment
+      }
+    }
     triply_record {
       data {
         ...BaseTriplyRecordFragment
@@ -30,6 +31,9 @@ fragment carouselModuleFragment on ComponentModulesCarousel {
     story {
       data {
         id
+        attributes {
+          slug
+        }
       }
     }
   }
