@@ -1,8 +1,9 @@
+import { CLOUD_CATEGORIES } from '@/features/shared/utils/categories'
 import {
   recordMetaArchiveT,
-  recordMetaPublicationT,
   recordMetaObjectT,
   recordMetaPersonT,
+  recordMetaPublicationT,
 } from 'locales/locales'
 import {
   ArchivesRecordZoomLevel3Type,
@@ -11,12 +12,16 @@ import {
   PublicationRecordZoomLevel3Type,
 } from 'src/generated/graphql'
 import { categoryFieldsMapping } from '../configs/recordMetaFieldOrderConfig'
-import { CLOUD_CATEGORIES } from '@/features/shared/utils/categories'
 
 export function mapArchivesDataToSections(
   data: ArchivesRecordZoomLevel3Type | null | undefined,
   t: recordMetaArchiveT
-): Array<{ title: string | undefined; value: string[] | null; isLink: boolean; key: string }> {
+): Array<{
+  title: string | undefined
+  value: string[] | null
+  isLink: boolean
+  key: string
+}> {
   if (!data) return []
   const fields = categoryFieldsMapping[CLOUD_CATEGORIES.archives]
 
