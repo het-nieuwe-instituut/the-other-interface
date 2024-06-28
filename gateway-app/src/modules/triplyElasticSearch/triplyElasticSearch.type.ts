@@ -2,6 +2,7 @@ import { ArgsType, Field, Int, ObjectType } from '@nestjs/graphql'
 import { IsString } from 'class-validator'
 import { EntityNames } from '../util/entityNames.type'
 import { PaginationArgs } from '../util/paginationArgs.type'
+import { Locale } from '../util/locale.type'
 
 @ObjectType()
 export class SearchResultItemType {
@@ -36,7 +37,6 @@ export class SearchArgsType extends PaginationArgs {
   @IsString()
   public text: string
 
-  @Field(() => String)
-  @IsString()
-  public lang: string
+  @Field(() => Locale)
+  public lang: Locale
 }

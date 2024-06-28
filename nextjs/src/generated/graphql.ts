@@ -1406,7 +1406,7 @@ export type QueryRelationsArgs = {
 
 
 export type QuerySearchTriplyArgs = {
-  lang: Scalars['String']['input'];
+  lang: Locale;
   page: Scalars['Int']['input'];
   pageSize?: InputMaybe<Scalars['Int']['input']>;
   text: Scalars['String']['input'];
@@ -2144,7 +2144,7 @@ export type LandingPagePublicationFragmentFragment = { __typename?: 'LandingPage
 
 export type SearchAllQueryVariables = Exact<{
   text: Scalars['String']['input'];
-  lang: Scalars['String']['input'];
+  lang: Locale;
   page: Scalars['Int']['input'];
   pageSize?: InputMaybe<Scalars['Int']['input']>;
 }>;
@@ -3260,7 +3260,7 @@ export const LandingPagePublicationDocument = gql`
 }
     ${LandingPagePublicationFragmentFragmentDoc}`;
 export const SearchAllDocument = gql`
-    query searchAll($text: String!, $lang: String!, $page: Int!, $pageSize: Int) {
+    query searchAll($text: String!, $lang: Locale!, $page: Int!, $pageSize: Int) {
   searchTriply(page: $page, lang: $lang, pageSize: $pageSize, text: $text) {
     page
     nodes {
