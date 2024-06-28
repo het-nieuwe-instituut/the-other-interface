@@ -16,6 +16,7 @@
   "widthAbbr": "b",
   "depthAbbr": "d",
   "readMore": "Lees verder",
+  "readLess": "Lees minder",
   "switchToMockedServer": "Overschakelen naar mocked server",
   "switchToLiveServer": "Overschakelen naar live server",
   "go": "Zoek",

@@ -16,7 +16,7 @@ interface Props {
   showReadMore?: boolean
 }
 
-export const PageHeader: React.FC<Props> = props => {
+export const RecordDescription: React.FC<Props> = props => {
   const { title, preface, constrainPreface, splitByHtmlBreaks, showReadMore = true } = props
   const commonT = useTypeSafeTranslation('common')
   const [constrainPrefaceState, setConstrainPreface] = useState(constrainPreface)
@@ -33,11 +33,11 @@ export const PageHeader: React.FC<Props> = props => {
             disableLineClamp={!constrainPrefaceState}
             ReadmoreComponent={
               <NavButton
-                onClick={() => setConstrainPreface(false)}
+                onClick={() => setConstrainPreface(!constrainPrefaceState)}
                 intent={'secondary'}
                 variant={'footerPrimary'}
               >
-                {commonT.t('readMore')}
+                {constrainPrefaceState ? commonT.t('readMore') : commonT.t('readLess')}
               </NavButton>
             }
           >

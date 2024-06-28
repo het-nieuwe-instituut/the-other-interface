@@ -45,7 +45,7 @@ export const ParagraphWithLineClamp: React.FC<Props> = ({
       >
         {renderChildren()}
       </div>
-      <div className={cn(ReadmoreComponent && isClampin && !disableLineClamp ? 'block' : 'hidden')}>
+      <div className={cn(ReadmoreComponent && isClampin ? 'block' : 'hidden')}>
         {ReadmoreComponent}
       </div>
     </>

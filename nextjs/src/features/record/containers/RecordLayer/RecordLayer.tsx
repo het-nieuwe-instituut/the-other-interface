@@ -13,6 +13,7 @@ import { RecordMeta } from '../../components/RecordMeta/RecordMeta'
 import { useRecordDetailQuery } from '../../hooks/useRecordDetailQuery'
 import { useRecordMeta } from '../../hooks/useRecordMeta'
 import { RecordBottomContent } from '../RecordBottomContent/RecordBottomContent'
+import { RecordDescription } from '@/features/editorial/components/RecordDescription/RecordDescription'
 
 export const RecordLayer = () => {
   const params = useParams()
@@ -67,53 +68,48 @@ export const RecordLayer = () => {
 
 const ArchivesDescriptions = ({ meta }: { meta: ArchivesRecordZoomLevel3Type }) => {
   const { t: recordMetaT } = useTypeSafeTranslation('recordMeta')
-  console.log(meta)
+
   return (
     <div className="mt-10 flex flex-col gap-10 empty:mt-0">
       {meta.custodialHistory && (
-        <PageHeader
+        <RecordDescription
           title={recordMetaT('custodialHistory')}
           preface={meta.custodialHistory}
           constrainPreface={true}
           splitByHtmlBreaks
-          asTitle="h2"
-        ></PageHeader>
+        ></RecordDescription>
       )}
       {meta.systemOfArrangement && (
-        <PageHeader
+        <RecordDescription
           title={recordMetaT('systemOfArrangement')}
           preface={meta.systemOfArrangement}
           constrainPreface={true}
           splitByHtmlBreaks
-          asTitle="h2"
-        ></PageHeader>
+        ></RecordDescription>
       )}
       {meta.sources && (
-        <PageHeader
+        <RecordDescription
           title={recordMetaT('sources')}
           preface={meta.sources}
           constrainPreface={true}
           splitByHtmlBreaks
-          asTitle="h2"
-        ></PageHeader>
+        ></RecordDescription>
       )}
       {meta.existence && (
-        <PageHeader
+        <RecordDescription
           title={recordMetaT('existence')}
           preface={meta.existence}
           constrainPreface={true}
           splitByHtmlBreaks
-          asTitle="h2"
-        ></PageHeader>
+        ></RecordDescription>
       )}
       {meta.existenceLocation && (
-        <PageHeader
+        <RecordDescription
           title={recordMetaT('existenceLocation')}
           preface={meta.existenceLocation}
           constrainPreface={true}
           splitByHtmlBreaks
-          asTitle="h2"
-        ></PageHeader>
+        ></RecordDescription>
       )}
     </div>
   )
