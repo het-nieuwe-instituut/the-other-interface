@@ -4,10 +4,10 @@ import {
   GALAXY_EDITORIAL_LAYER_PART,
 } from '@/features/shared/constants/mainConstants'
 import { Grid, GridItem } from '@chakra-ui/react'
-import { GalaxyNavigation } from '../GalaxyNavigation/GalaxyNavigation'
 import { GalaxySearchBar } from '../GalaxySearchBar/GalaxySearchBar'
-import { usePresenter } from './usePresenter'
 import { CollpsedSearch } from '../GalaxySearchBar/fragments/CollpsedSearch'
+import { GalaxyZoomNavigation } from '../GalaxyZoomNavigation/GalaxyZoomNavigation'
+import { usePresenter } from './usePresenter'
 
 type Props = {
   galaxyPagination?: React.ReactNode
@@ -36,7 +36,9 @@ export const GalaxyFooter: React.FC<Props> = ({ galaxyPagination }) => {
           <GalaxySearchBar isNoActiveSearch={isNoActiveSearch} />
         )}
       </GridItem>
-      <GalaxyNavigation />
+      <div className="flex h-full items-center pl-4">
+        <GalaxyZoomNavigation />
+      </div>
     </Grid>
   )
 }

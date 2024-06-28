@@ -1,11 +1,16 @@
 'use client'
 import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
+import { State } from '@/features/shared/configs/store'
+import { useRecordRelationsCount } from '@/features/shared/hooks/queries/useRecordRelationsCount'
 import { GridParams } from '@/features/shared/types/position'
-import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
+import { CLOUD_CATEGORIES, Category, CloudCategory } from '@/features/shared/utils/categories'
+import { useParams } from 'next/navigation'
+import { useSelector } from 'react-redux'
 import { GalaxyFooter } from '../../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyPagination } from '../../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
 import { RelatedCategory, RelatedStories } from '../fragments'
-import { usePresenter } from '../usePresenter'
+import { useArrowNavigation } from '@/features/ui/hooks/useArrowNavigation'
+import { useSearchParamPagination } from '@/features/ui/hooks/useSearchParamPagination'
 
 const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = [
   { category: CLOUD_CATEGORIES.people, grid: { gridRow: '1 / 2', gridColumn: '1 / 2' } },
@@ -15,16 +20,22 @@ const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = 
 ]
 
 export const DetailGalaxy: React.FC = () => {
-  const {
-    category,
-    id,
-    isSearchModeActive,
-    currentPageNumber,
-    pageAmount,
-    increasePageNumber,
-    decreasePageNumber,
-    allRelationTotals,
-  } = usePresenter()
+  const params = useParams()
+  const category = params?.category as Category
+  const id = params?.id as string
+  const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
+
+  const { data } = useRecordRelationsCount(category, id)
+  const { page, pageAmount, increasePageNumber, decreasePageNumber } = useSearchParamPagination(
+    data?.totalPages ?? 0,
+    false
+  )
+
+  useArrowNavigation({
+    onLeft: decreasePageNumber,
+    onRight: increasePageNumber,
+    disabled: isSearchModeActive,
+  })
 
   if (!category || !id) return null
 
@@ -42,17 +53,17 @@ export const DetailGalaxy: React.FC = () => {
               category={cloudCategory}
               gridRow={grid.gridRow}
               gridColumn={grid.gridColumn}
-              allRelationTotals={allRelationTotals}
+              allRelationTotals={data?.allRelationTotals}
             />
           ))}
 
-          <RelatedStories allRelationTotals={allRelationTotals} />
+          <RelatedStories allRelationTotals={data?.allRelationTotals} />
         </div>
 
         <GalaxyFooter
           galaxyPagination={
             <GalaxyPagination
-              currentPageNumber={currentPageNumber}
+              currentPageNumber={page}
               pageAmount={Math.ceil(pageAmount / 2)}
               isResultAmountLoading={false}
               handleLeftClick={decreasePageNumber}
