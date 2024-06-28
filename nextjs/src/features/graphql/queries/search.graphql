@@ -1,4 +1,4 @@
-query searchAll($text: String!, $lang: String!, $page: Int!, $pageSize: Int) {
+query searchAll($text: String!, $lang: Locale!, $page: Int!, $pageSize: Int) {
   searchTriply(page: $page, lang: $lang, pageSize: $pageSize, text: $text) {
     page
     nodes {

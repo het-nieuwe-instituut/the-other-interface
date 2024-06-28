@@ -31,7 +31,7 @@ export const Navigation = () => {
       style={
         {
           '--z-index': `${NAVIGATION_OVERLAY_Z_INDEX}`,
-          'backdrop-filter': 'blur(100px)',
+          backdropFilter: 'blur(100px)',
         } as CSSProperties
       }
       className={cn(
