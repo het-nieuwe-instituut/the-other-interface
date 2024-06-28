@@ -69,7 +69,11 @@ export const anArchivesRecordZoomLevel3Type = (overrides?: Partial<ArchivesRecor
     const relationshipsToOmit = ([..._relationshipsToOmit, 'ArchivesRecordZoomLevel3Type']);
     return {
         access: overrides && overrides.hasOwnProperty('access') ? overrides.access! : 'sit',
+        custodialHistory: overrides && overrides.hasOwnProperty('custodialHistory') ? overrides.custodialHistory! : 'impedit',
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'ducimus',
         descriptionLevel: overrides && overrides.hasOwnProperty('descriptionLevel') ? overrides.descriptionLevel! : 'voluptatem',
+        existence: overrides && overrides.hasOwnProperty('existence') ? overrides.existence! : 'quidem',
+        existenceLocation: overrides && overrides.hasOwnProperty('existenceLocation') ? overrides.existenceLocation! : 'deserunt',
         externalSource: overrides && overrides.hasOwnProperty('externalSource') ? overrides.externalSource! : 'dolore',
         period: overrides && overrides.hasOwnProperty('period') ? overrides.period! : 'tempore',
         permanentLink: overrides && overrides.hasOwnProperty('permanentLink') ? overrides.permanentLink! : 'illo',
@@ -77,6 +81,8 @@ export const anArchivesRecordZoomLevel3Type = (overrides?: Partial<ArchivesRecor
         referenceCode: overrides && overrides.hasOwnProperty('referenceCode') ? overrides.referenceCode! : 'quia',
         rights: overrides && overrides.hasOwnProperty('rights') ? overrides.rights! : 'maxime',
         size: overrides && overrides.hasOwnProperty('size') ? overrides.size! : 'et',
+        sources: overrides && overrides.hasOwnProperty('sources') ? overrides.sources! : 'et',
+        systemOfArrangement: overrides && overrides.hasOwnProperty('systemOfArrangement') ? overrides.systemOfArrangement! : 'dicta',
         titleType: overrides && overrides.hasOwnProperty('titleType') ? overrides.titleType! : 'quis',
     };
 };

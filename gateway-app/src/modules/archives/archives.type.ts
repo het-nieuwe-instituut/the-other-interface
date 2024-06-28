@@ -199,6 +199,24 @@ export class ArchivesRecordZoomLevel3Type {
 
   @Field(() => String, { nullable: true })
   public externalSource?: string
+
+  @Field(() => String, { nullable: true })
+  public description?: string
+
+  @Field(() => String, { nullable: true })
+  public custodialHistory?: string
+
+  @Field(() => String, { nullable: true })
+  public systemOfArrangement?: string
+
+  @Field(() => String, { nullable: true })
+  public sources?: string
+
+  @Field(() => String, { nullable: true })
+  public existence?: string
+
+  @Field(() => String, { nullable: true })
+  public existenceLocation?: string
 }
 
 @ArgsType()

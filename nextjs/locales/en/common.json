@@ -16,6 +16,7 @@
   "widthAbbr": "w",
   "depthAbbr": "d",
   "readMore": "Read more",
+  "readLess": "Read less",
   "switchToMockedServer": "Switch to mocked server",
   "switchToLiveServer": "Switch to test server",
   "go": "Search",
