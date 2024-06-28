@@ -202,7 +202,7 @@ function SuggestionSection() {
     return (
       <NavLinkButton
         variant="metaDataText"
-        className="bg-[#DEE5EC] text-[#6F7A9C] after:border-none hover:bg-[#DEE5EC] hover:text-[#6F7A9C]"
+        className="bg-[#DEE5EC] font-semibold text-[#6F7A9C] after:border-none hover:bg-[#DEE5EC] hover:text-[#6F7A9C]"
         href={url}
         title={text}
       >
