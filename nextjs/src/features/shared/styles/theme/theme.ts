@@ -16,7 +16,10 @@ export type AppTheme = typeof foundations
 
 export const theme = extendTheme({
   direction,
-  fonts: { heading: `Univers bold`, body: `Univers` },
+  fonts: {
+    heading: `Impact`,
+    body: `Social`,
+  },
   ...foundations,
   config,
   styles,

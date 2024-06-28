@@ -36,7 +36,6 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
         hasComponents && 'pt-10'
       )}
     >
-      {/* {[...[componentMock, componentMock2, componentMock3], ...(props.components || [])].map( */}
       {[...(components || [])].map((component, index, array) => {
         const typeName = component?.__typename
 
