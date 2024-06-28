@@ -1,5 +1,4 @@
 import { AppHead } from '@/features/shared/components/Head/AppHead'
-import { TestMenu } from '@/features/shared/components/TestMenu/TestMenu'
 import { ReduxStoreProvider } from '@/features/shared/components/providers/ReduxStoreProdivder'
 import { ThemeProvider } from '@/features/shared/components/providers/ThemeProvider'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -66,7 +65,6 @@ function MyApp({ children }: { children: React.ReactNode }) {
                 <WelcomeOverlayProvider>
                   <div>
                     <AppHead />
-                    <TestMenu />
                     <ReduxDraftModeSync isDraftMode={isEnabled} />
                     {children}
                     <ReactTooltipInitializer />

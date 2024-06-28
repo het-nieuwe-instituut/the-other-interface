@@ -1,10 +1,10 @@
 import { ThemeProvider } from '@chakra-ui/react'
+import { theme } from '@/features/shared/styles/theme/theme'
 import { render, renderHook, RenderOptions } from '@testing-library/react'
 import React, { PropsWithChildren } from 'react'
 import { Provider } from 'react-redux'
 
 import { createStore } from '../configs/store'
-import { theme } from '../styles/theme/theme'
 
 const defaultStore = createStore()
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {

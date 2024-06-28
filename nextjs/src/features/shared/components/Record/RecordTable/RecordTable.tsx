@@ -2,8 +2,8 @@ import { Box, Text } from '@chakra-ui/react'
 import { TableModule } from '@/features/modules/components/TableModule/TableModule'
 import { useTableRecords } from './useTableRecords'
 import { CATEGORIES, Category } from '@/features/shared/utils/categories'
-import { theme } from '@/features/shared/styles/theme/theme'
 import { useMapRecordTableData } from './useMapRecordTableData'
+import { theme } from '@/features/shared/styles/theme/theme'
 interface PaginatedTableProps {
   data: {
     type: Category
