@@ -23,7 +23,7 @@ export const ImageParagraph = ({
 }: ParagraphProps) => {
   return (
     <div className={cn('flex flex-wrap', className)}>
-      <div className="w-full md:w-2/3">
+      <div className="w-full md:w-2/3 md:pr-16">
         <TailwindMarkdown className={cn('max-w-[808px] bg-inherit', className)}>
           {sideText}
         </TailwindMarkdown>
