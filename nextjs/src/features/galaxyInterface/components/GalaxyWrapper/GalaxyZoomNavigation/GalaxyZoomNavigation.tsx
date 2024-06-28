@@ -46,7 +46,7 @@ export const GalaxyZoomNavigation = () => {
   const searchParams = useSearchParams()
   const locale = useLocale()
 
-  const category = params?.category
+  const category = (params?.category as string) ?? searchParams?.get('category')
 
   const searchParam = searchParams?.get('search') || ''
 
@@ -63,13 +63,13 @@ export const GalaxyZoomNavigation = () => {
       <form className="relative flex items-center justify-center gap-3">
         <NextLink
           href="/"
-          className="flex w-[48px] flex-col flex-nowrap items-center justify-center  gap-2 whitespace-nowrap"
+          className="flex w-[48px] cursor-pointer flex-col flex-nowrap items-center  justify-center gap-2 whitespace-nowrap"
         >
           <label
             htmlFor="zoom-0"
             className={TypographyVariants({
               socialLarge: 'label',
-              className: 'text-blue-100 group flex flex-col gap-2',
+              className: 'text-blue-100 group flex flex-col gap-2 cursor-pointer',
             })}
           >
             <Radio
@@ -83,16 +83,23 @@ export const GalaxyZoomNavigation = () => {
             {t('collection')}
           </label>
         </NextLink>
+
         <NextLink
           aria-disabled={!zoom2Link}
           href={addLocaleToUrl(zoom2Link ?? '', locale)}
-          className="flex w-[45px] flex-col flex-nowrap items-center justify-center gap-2 whitespace-nowrap"
+          className={cn(
+            'flex w-[45px] flex-col flex-nowrap items-center justify-center gap-2 whitespace-nowrap',
+            !zoom2Link && 'cursor-not-allowed pointer-events-none'
+          )}
         >
           <label
             htmlFor="zoom-1"
             className={TypographyVariants({
               socialLarge: 'label',
-              className: 'text-blue-100 group flex flex-col gap-2',
+              className: cn(
+                'text-blue-100 group flex flex-col gap-2',
+                zoom2Link ? 'cursor-pointer' : 'cursor-not-allowed'
+              ),
             })}
           >
             <Radio
@@ -112,7 +119,10 @@ export const GalaxyZoomNavigation = () => {
             htmlFor="zoom-2"
             className={TypographyVariants({
               socialLarge: 'label',
-              className: 'text-blue-100 group flex flex-col gap-2',
+              className: cn(
+                'text-blue-100 group flex flex-col gap-2',
+                currentZoomNumber === 3 ? 'cursor-pointer' : 'cursor-not-allowed'
+              ),
             })}
           >
             <Radio
