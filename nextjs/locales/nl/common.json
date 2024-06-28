@@ -26,6 +26,7 @@
   "audio": "De audio is nog niet klaar, probeer het later opnieuw.",
   "video": "De video is nog niet klaar, probeer het later opnieuw.",
   "seeFullImage": "Bekijk volledige afbeelding",
-  "welcomeDescription": "Het Collectieplatform van Nieuwe Instituut is hét platform om de Nationale Collectie Architectuur en Stedenbouw te ontdekken. Lees verhalen, duik in records en doorzoek de collectie.",
+  "welcomeDescription": "Het collectieplatform is hét platform van het Nieuwe Instituut om de Rijkscollectie voor Nederlandse Architectuur en Stedenbouw online te ontdekken. Zoek in de collectie en lees de verhalen.",
+  "welcomeWarning": "Let op: alle collectiedata op het platform is automatisch naar het Engels vertaald.",
   "welcomeButton": "Start hier"
 }
