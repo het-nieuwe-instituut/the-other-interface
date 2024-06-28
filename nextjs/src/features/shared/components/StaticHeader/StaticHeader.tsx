@@ -1,84 +1,44 @@
 'use client'
-import { Flex, Link, Box } from '../../configs/chakra'
-
+import NextLink from 'next/link'
 import { STATIC_HEADER_Z_INDEX, USER_LOOKS_ON } from '../../constants/mainConstants'
 import { GalaxyTopRight } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
 import { usePresenter } from './usePresenter'
-import { keyframes } from '@emotion/react'
-
-const fadeIn = keyframes({
-  from: { backgroundColor: 'transparent' },
-  to: { backgroundColor: 'pinkAlpha.100' },
-})
-const fadeOut = keyframes({
-  from: { backgroundColor: 'pinkAlpha.100' },
-  to: { backgroundColor: 'transparent' },
-})
+import { CSSProperties } from 'react'
+import { cn } from '@/features/ui/utils/cn'
 
 export const StaticHeader = () => {
-  const { tNavigation, userLooksOn, isMenuOpen, lang, theme } = usePresenter()
-
+  const { tNavigation, userLooksOn, isMenuOpen, lang } = usePresenter()
   return (
     <>
-      <Flex
-        py={4}
-        height={'auto'}
-        overflow={'hidden'}
-        width={'100%'}
-        marginRight={4}
-        left={0}
-        right={0}
-        zIndex={STATIC_HEADER_Z_INDEX}
-        pointerEvents={'all'}
-        position={'fixed'}
-        backgroundColor={
-          isMenuOpen || userLooksOn === USER_LOOKS_ON.GALAXY ? 'transparent' : 'pinkAlpha.100'
-        }
-        animation={
-          userLooksOn === USER_LOOKS_ON.EDITORIAL && !isMenuOpen
-            ? `${fadeIn} 200ms linear`
-            : `${fadeOut}, 200ms linear`
-        }
+      <div
+        style={{ '--z-index': `${STATIC_HEADER_Z_INDEX}` } as CSSProperties}
+        className={cn(
+          isMenuOpen || userLooksOn === USER_LOOKS_ON.GALAXY ? 'transparent' : 'bg-pink-100',
+          'ease-in duration-200 fixed top-0 right-0 z-[var(--z-index)] h-auto overflow-hidden py-4 w-full pointer-events-auto'
+        )}
       >
-        <Flex
-          marginX={'auto'}
-          maxW={theme.breakpoints.xl}
-          justifyContent={'space-between'}
-          flexDirection={'row'}
-          alignItems={'center'}
-          width={'100%'}
-          px={6}
-          height={'100%'}
-        >
-          <Flex alignItems={'center'} h={'100%'}>
-            <Link
+        <div className="container mx-auto flex size-full max-w-[90em] items-center justify-between px-6">
+          <div className="h-full items-center">
+            <NextLink
               href={lang ? `/?lang=${lang}` : '/?lang=nl'}
-              variant={isMenuOpen ? 'navigation' : 'navigationOnTopOfTheGalaxy'}
-              cursor="pointer"
-              whiteSpace={'nowrap'}
-              textOverflow={'ellipsis'}
-              overflow={'hidden'}
-              textStyle={
-                userLooksOn === USER_LOOKS_ON.GALAXY ? 'headingTimesLarge.lg' : 'impactNew.md'
-              }
-              margin={0}
-              height={'100%'}
-              display={'flex'}
+              className={cn(
+                isMenuOpen ? 'text-white' : 'text-blue-100',
+                userLooksOn === USER_LOOKS_ON.GALAXY
+                  ? 'font-times-dot text-[20px] leading-[105%_] md:text-[32px]'
+                  : 'font-impact-large text-[20px] leading-[120%_] tracking-[-0.25px] md:text-[25px]',
+                'cursor-pointer overflow-hidden h-full flex m-0'
+              )}
             >
-              <Flex mr={'10px'} justifyContent={'center'}>
-                {tNavigation('theNewInstitute')}
-              </Flex>
-              <Flex ml={'10px'} justifyContent={'center'}>
-                {tNavigation('collectionPlatform')}
-              </Flex>
-            </Link>
-          </Flex>
-
-          <Box>
+              <p className="mr-2 sm:overflow-visible sm:whitespace-normal">
+                {tNavigation('headerTitle')}
+              </p>
+            </NextLink>
+          </div>
+          <div>
             <GalaxyTopRight />
-          </Box>
-        </Flex>
-      </Flex>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

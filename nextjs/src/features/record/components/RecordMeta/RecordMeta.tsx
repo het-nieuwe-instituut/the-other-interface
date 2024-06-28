@@ -9,9 +9,8 @@ import { isExternalURL } from '@/features/shared/utils/links'
 import { NavLinkButton } from '@/features/ui/components/nav-link-button/component'
 import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
-import ExternalLink from '@/features/ui/icons/external-link.svg'
 import Asterisk from '@/features/ui/icons/asterisk-thin.svg'
-import { useParams } from 'next/navigation'
+import ExternalLink from '@/features/ui/icons/external-link.svg'
 import { Fragment } from 'react'
 import {
   ArchivesRecordZoomLevel3Type,
@@ -28,17 +27,20 @@ import {
 } from '../../mappers/recordMetaDataMapper'
 import { recordRightsFieldMapper } from '../../mappers/recordRightsMapper'
 
-export const RecordMeta: React.FC = () => {
+export const RecordMeta = ({
+  data,
+  isLoading,
+  category,
+}: {
+  data: ReturnType<typeof useRecordMeta>['data']
+  isLoading: ReturnType<typeof useRecordMeta>['isLoading']
+  category: Category
+}) => {
   const { t: recordMetaPublicationT } = useTypeSafeTranslation('recordMetaPublication')
   const { t: recordMetaArchiveT } = useTypeSafeTranslation('recordMetaArchive')
   const { t: recordMetaObjectT } = useTypeSafeTranslation('recordMetaObject')
   const { t: recordMetaPersonT } = useTypeSafeTranslation('recordMetaPerson')
 
-  const params = useParams()
-  const id = params?.id as string
-  const category = params?.category as Category
-
-  const { data, isLoading } = useRecordMeta(category, id)
   let recordMetaSectionData
 
   if (category === CATEGORIES.archives && data) {

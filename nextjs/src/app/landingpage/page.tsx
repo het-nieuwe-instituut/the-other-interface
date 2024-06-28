@@ -1,18 +1,12 @@
+import { HomepageContainer } from '@/features/pages/containers/HomepageContainer/HomepageContainer'
 import { LandingpageContainer } from '@/features/pages/containers/LandingpageContainer/LandingpageContainer'
-import { CloudCategory, SEARCH_CATEGORIES } from '@/features/shared/utils/categories'
-import initApiServerService from '@/features/shared/utils/initApiServerService'
-import { draftMode } from 'next/headers'
-import { PublicationState } from '@/features/shared/types/enums'
-import { HomepageQuery, LandingpageBySlugQuery } from 'src/generated/graphql'
-import { Locale } from 'src/generated/graphql'
 import { ReduxSearchSync } from '@/features/shared/components/Redux/ReduxSearchSync'
-import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
+import { SEARCH_CATEGORIES } from '@/features/shared/utils/categories'
+import initApiServerService from '@/features/shared/utils/initApiServerService'
 import { Metadata } from 'next'
-
-export type HomeOrLadingType =
-  | HomepageQuery['homepage']['data']['attributes']
-  | LandingpageBySlugQuery['landingpages']['data'][0]['attributes']
-  | null
+import { draftMode } from 'next/headers'
+import { Locale } from 'src/generated/graphql'
+import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function generateMetadata(props: any): Promise<Metadata> {
@@ -34,31 +28,80 @@ export default async function Page({
   const { isEnabled } = draftMode()
   const api = initApiServerService()
   const isStories = category === SEARCH_CATEGORIES.stories
-  let editorialData: HomeOrLadingType
-  let description: string | null | undefined
+  let homepage: Awaited<ReturnType<typeof api.homepage>> | undefined
+  let archiveLandingPage: Awaited<ReturnType<typeof api.landingPageArchive>> | undefined
+  let objectsLandingPage: Awaited<ReturnType<typeof api.landingPageObject>> | undefined
+  let peopleLandingPage: Awaited<ReturnType<typeof api.landingPagePeople>> | undefined
+  let publicationsLandingPage: Awaited<ReturnType<typeof api.landingPagePublication>> | undefined
 
   if (isStories) {
     const data = await api?.homepage({ locale: lang })
-
-    editorialData = data.homepage.data.attributes
-  } else {
-    const data = await api?.landingpageBySlug({
-      slug: category,
+    homepage = data
+  } else if (category === SEARCH_CATEGORIES.archives) {
+    const archiveData = await api?.landingPageArchive({
       locale: lang,
-      publicationState: isEnabled ? PublicationState.Preview : PublicationState.Live,
     })
-    editorialData = data?.landingpages?.data[0]?.attributes
-    description = editorialData?.Description
+    archiveLandingPage = archiveData
+  } else if (category === SEARCH_CATEGORIES.objects) {
+    const objectData = await api?.landingPageObject({
+      locale: lang,
+    })
+    objectsLandingPage = objectData
+  } else if (category === SEARCH_CATEGORIES.people) {
+    const peopleData = await api?.landingPagePeople({
+      locale: lang,
+    })
+    peopleLandingPage = peopleData
+  } else if (category === SEARCH_CATEGORIES.publications) {
+    const publicationData = await api?.landingPagePublication({
+      locale: lang,
+    })
+    publicationsLandingPage = publicationData
   }
 
-  return (
-    <>
-      <ReduxSearchSync />
-      <LandingpageContainer
-        editorialData={editorialData}
-        category={category as CloudCategory}
-        description={description}
-      />
-    </>
-  )
+  if (homepage) {
+    return (
+      <>
+        <ReduxSearchSync />
+        <HomepageContainer isStoriesGalaxy={true} draftMode={isEnabled} homepage={homepage} />
+      </>
+    )
+  }
+  if (category === SEARCH_CATEGORIES.archives) {
+    return (
+      <>
+        <ReduxSearchSync />
+        <LandingpageContainer editorialData={archiveLandingPage?.landingPageArchive.data} />
+      </>
+    )
+  }
+
+  if (category === SEARCH_CATEGORIES.objects) {
+    return (
+      <>
+        <ReduxSearchSync />
+        <LandingpageContainer editorialData={objectsLandingPage?.landingPageObject.data} />
+      </>
+    )
+  }
+
+  if (category === SEARCH_CATEGORIES.people) {
+    return (
+      <>
+        <ReduxSearchSync />
+        <LandingpageContainer editorialData={peopleLandingPage?.landingPagePeople.data} />
+      </>
+    )
+  }
+
+  if (category === SEARCH_CATEGORIES.publications) {
+    return (
+      <>
+        <ReduxSearchSync />
+        <LandingpageContainer
+          editorialData={publicationsLandingPage?.landingPagePublication.data}
+        />
+      </>
+    )
+  }
 }

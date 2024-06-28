@@ -16,44 +16,50 @@
     }
   },
   "attributes": {
-    "components": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "dynamiczone",
-      "components": [
-        "modules.text-module",
-        "modules.image",
-        "modules.pullquote",
-        "modules.subtitle",
-        "modules.title-module",
-        "modules.image-carousel",
-        "modules.buttons-module",
-        "modules.grid-module"
-      ]
-    },
     "Title": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "type": "string"
-    },
-    "description": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "richtext"
+      "type": "string",
+      "required": true
     },
     "highlightedThemes": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::theme.theme"
+    },
+    "text": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "text",
+      "required": true
+    },
+    "carousel": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "modules.carousel",
+      "required": false
+    },
+    "grid": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "modules.grid-module",
+      "required": false
     }
   }
 }

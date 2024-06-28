@@ -15,7 +15,7 @@ export const ButtonVariants = cva(
         secondary: [
           'border-b border-black',
           'h-12 text-left font-social-large text-[16px] font-normal leading-tight tracking-tight text-black-100',
-          'hover:border-black hover:bg-black-100 hover:px-2',
+          'hover:border-black hover:bg-black-100',
         ],
         tertiary: [
           'h-12 border-none px-5',
@@ -28,7 +28,7 @@ export const ButtonVariants = cva(
           '*:text-white',
         ],
         invertedSecondary: [
-          'border-blue-100 hover:border-blue-100 active:border-blue-100 bg-blue-100 text-pink-100',
+          'border-blue bg-blue-100 text-pink-100 hover:border-blue active:border-blue',
         ],
       },
       size: {

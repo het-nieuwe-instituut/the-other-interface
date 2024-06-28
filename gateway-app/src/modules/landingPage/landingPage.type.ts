@@ -1,86 +1,100 @@
-import { createUnionType, Field, ID, InputType, ObjectType } from '@nestjs/graphql'
-import { PublicationState } from '../../generated/strapi-sdk'
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
 import { ComponentModulesGridModule } from '../strapi/components/modules/gridModule'
-import { ComponentModulesButtonsModule } from '../strapi/components/modules/buttonsModule'
+import { ComponentModulesCarousel } from '../strapi/components/modules/carousel'
+import { ComponentModulesHighlight } from '../strapi/components/modules/highlight'
 import { ComponentModulesImageCarousel } from '../strapi/components/modules/imageCarousel'
-import { ComponentModulesImage } from '../strapi/components/modules/imageModule'
-import { ComponentModulesPullquote } from '../strapi/components/modules/pullQuote'
-import { ComponentModulesSubtitle } from '../strapi/components/modules/subtitle'
-import { ComponentModulesTextModule } from '../strapi/components/modules/textModule'
-import { ComponentModulesTitleModule } from '../strapi/components/modules/titleModule'
-import { Error, PaginationArg, ResponseCollectionMeta } from '../strapi/shared-types'
-import {
-  LandingpageFiltersInput,
-  LandingpageRelationResponseCollection,
-} from './landingPage.type.circular'
 
 @ObjectType()
-export class Landingpage {
-  @Field({ nullable: true })
-  public Title?: string
+class BaseLandingPage {
+  @Field()
+  public title: string
 
   @Field({ nullable: true })
-  public Description?: string
+  public text?: string
 
-  @Field(() => [LandingpageComponentsDynamicZone], { nullable: true })
-  public components?: typeof LandingpageComponentsDynamicZone[]
+  @Field(() => ComponentModulesCarousel, { nullable: true })
+  public carousel?: ComponentModulesCarousel
 
-  @Field({ nullable: true })
-  public createdAt?: Date
+  @Field(() => ComponentModulesGridModule, { nullable: true })
+  public grid?: ComponentModulesGridModule
 
-  @Field({ nullable: true })
-  public locale?: string
+  @Field(() => ComponentModulesHighlight, { nullable: true })
+  public highlight?: ComponentModulesHighlight
 
-  @Field(() => LandingpageRelationResponseCollection, { nullable: true })
-  public localizations?: LandingpageRelationResponseCollection
-
-  @Field({ nullable: true })
-  public publishedAt?: Date
-
-  @Field({ nullable: true })
-  public slug?: string
-
-  @Field({ nullable: true })
-  public updatedAt?: Date
+  @Field(() => ComponentModulesImageCarousel, { nullable: true })
+  public imageCarousel?: ComponentModulesImageCarousel
 }
 
 @ObjectType()
-export class LandingpageEntity {
-  @Field(() => Landingpage, { nullable: true })
-  public attributes?: Landingpage
+class LandingPageArchive extends BaseLandingPage {}
+
+@ObjectType()
+class LandingPageObject extends BaseLandingPage {}
+
+@ObjectType()
+class LandingPagePeople extends BaseLandingPage {}
+
+@ObjectType()
+class LandingPagePublication extends BaseLandingPage {}
+
+@ObjectType()
+class LandingPageArchiveEntity {
+  @Field(() => LandingPageArchive, { nullable: true })
+  public attributes?: LandingPageArchive
 
   @Field(() => ID, { nullable: true })
   public id?: string
 }
 
 @ObjectType()
-export class LandingpageEntityResponse {
-  @Field(() => LandingpageEntity, { nullable: true })
-  public data?: LandingpageEntity
+export class LandingPageArchiveEntityResponse {
+  @Field(() => LandingPageArchiveEntity, { nullable: true })
+  public data?: LandingPageArchiveEntity
 }
 
 @ObjectType()
-export class LandingpageEntityResponseCollection {
-  @Field(() => [LandingpageEntity])
-  public data: LandingpageEntity[]
+class LandingPageObjectEntity {
+  @Field(() => LandingPageObject, { nullable: true })
+  public attributes?: LandingPageObject
 
-  @Field(() => ResponseCollectionMeta, { nullable: true })
-  public meta: ResponseCollectionMeta
+  @Field(() => ID, { nullable: true })
+  public id?: string
 }
 
-@InputType()
-export class LandingpageLocalizationsArgs {
-  @Field(() => LandingpageFiltersInput, { nullable: true })
-  public filters?: LandingpageFiltersInput
+@ObjectType()
+export class LandingPageObjectEntityResponse {
+  @Field(() => LandingPageObjectEntity, { nullable: true })
+  public data?: LandingPageObjectEntity
+}
 
-  @Field(() => PaginationArg, { nullable: true })
-  public pagination?: PaginationArg
+@ObjectType()
+class LandingPagePeopleEntity {
+  @Field(() => LandingPagePeople, { nullable: true })
+  public attributes?: LandingPagePeople
 
-  @Field(() => PublicationState, { nullable: true })
-  public publicationState?: PublicationState
+  @Field(() => ID, { nullable: true })
+  public id?: string
+}
 
-  @Field(() => [String], { nullable: true })
-  public sort?: string[]
+@ObjectType()
+export class LandingPagePeopleEntityResponse {
+  @Field(() => LandingPagePeopleEntity, { nullable: true })
+  public data?: LandingPagePeopleEntity
+}
+
+@ObjectType()
+class LandingPagePublicationEntity {
+  @Field(() => LandingPagePublication, { nullable: true })
+  public attributes?: LandingPagePublication
+
+  @Field(() => ID, { nullable: true })
+  public id?: string
+}
+
+@ObjectType()
+export class LandingPagePublicationEntityResponse {
+  @Field(() => LandingPagePublicationEntity, { nullable: true })
+  public data?: LandingPagePublicationEntity
 }
 
 @InputType()
@@ -91,37 +105,3 @@ export class QueryLandingpageArgs {
   @Field({ nullable: true })
   public locale?: string
 }
-
-@InputType()
-export class QueryLandingpagesArgs {
-  @Field(() => LandingpageFiltersInput, { nullable: true })
-  public filters?: LandingpageFiltersInput
-
-  @Field({ nullable: true })
-  public locale?: string
-
-  @Field(() => PaginationArg, { nullable: true })
-  public pagination?: PaginationArg
-
-  @Field(() => PublicationState, { nullable: true })
-  public publicationState?: PublicationState
-
-  @Field(() => [String], { nullable: true })
-  public sort?: string[]
-}
-
-export const LandingpageComponentsDynamicZone = createUnionType({
-  name: 'LandingpageComponentsDynamicZone',
-  types: () =>
-    [
-      ComponentModulesButtonsModule,
-      ComponentModulesGridModule,
-      ComponentModulesImage,
-      ComponentModulesImageCarousel,
-      ComponentModulesPullquote,
-      ComponentModulesSubtitle,
-      ComponentModulesTextModule,
-      ComponentModulesTitleModule,
-      Error,
-    ] as const,
-})

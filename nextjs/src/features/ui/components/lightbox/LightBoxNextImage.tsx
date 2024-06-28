@@ -1,3 +1,4 @@
+'use client'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import NextImage, { ImageProps } from 'next/image'
 import { useContext, useEffect, useRef } from 'react'
@@ -8,7 +9,7 @@ import { LightboxContext } from './LightboxProvider'
 export interface LightBoxNextImageProps extends ImageProps {
   caption?: string
   // but will still register the image
-  disableOpeningLightbox: boolean
+  disableOpeningLightbox?: boolean
 }
 export const LightBoxNextImage = (props: LightBoxNextImageProps) => {
   const { src, caption, disableOpeningLightbox, ...restProps } = props
@@ -70,8 +71,9 @@ export const LightBoxNextImageByIcon = (props: LightBoxNextImageByIconProps) => 
     <div className="group relative size-full">
       <NextImage {...props} />
       <Button
+        title={commonT('seeFullImage')}
         intent={'tertiary'}
-        className="absolute right-4 top-4 z-[9999]  opacity-0 transition-opacity group-hover:opacity-100"
+        className="absolute  right-0 z-[9999] p-2 opacity-0  transition-opacity group-hover:opacity-100"
         disabled={images.find(v => v.src === src) === undefined}
         size={'small'}
         onClick={e => {

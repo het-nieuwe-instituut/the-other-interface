@@ -1,0 +1,27 @@
+query landingPageArchive($locale: Locale!) {
+  landingPageArchive(locale: $locale) {
+    data {
+      id
+      attributes {
+        ...LandingPageArchiveFragment
+      }
+    }
+  }
+}
+
+fragment LandingPageArchiveFragment on LandingPageArchive {
+  title
+  text
+  highlight {
+    ...highlightModulesFragment
+  }
+  grid {
+    ...gridModuleFragment
+  }
+  carousel {
+    ...carouselModuleFragment
+  }
+  imageCarousel {
+    ...imageCarouselModuleFragment
+  }
+}

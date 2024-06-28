@@ -1,34 +1,33 @@
 import { Inject } from '@nestjs/common'
 import { Args, Query, Resolver } from '@nestjs/graphql'
-import { PublicationState, Sdk } from '../../generated/strapi-sdk'
-import { PaginationArg } from '../strapi/shared-types'
+import { Sdk } from '../../generated/strapi-sdk'
 import { LocaleArgs } from '../util/localeArgs.type'
 import {
-  LandingpageEntity,
-  LandingpageEntityResponse,
-  LandingpageEntityResponseCollection,
+  LandingPageArchiveEntityResponse,
+  LandingPageObjectEntityResponse,
+  LandingPagePeopleEntityResponse,
+  LandingPagePublicationEntityResponse,
 } from './landingPage.type'
-import { LandingpageFiltersInput } from './landingPage.type.circular'
 
-@Resolver(LandingpageEntity)
+@Resolver()
 export class LandingPageResolver {
   public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
-  @Query(() => LandingpageEntityResponse)
-  public async landingpage(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
-    return (await this.strapiGqlSdk.landingPage({ id, locale })).landingpage
+  @Query(() => LandingPageArchiveEntityResponse)
+  public async landingPageArchive(@Args() { locale }: LocaleArgs) {
+    const data = (await this.strapiGqlSdk.landingPageArchive({ locale })).landingPageArchive
+    return data
   }
-
-  @Query(() => LandingpageEntityResponseCollection)
-  public async landingpages(
-    @Args() { locale }: LocaleArgs,
-    @Args('filters', { nullable: true }) filters?: LandingpageFiltersInput,
-    @Args('pagination', { nullable: true }) pagination?: PaginationArg,
-    @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
-    @Args('sort', { nullable: true, type: () => [String] }) sort?: string[]
-  ) {
-    return (
-      await this.strapiGqlSdk.landingPages({ filters, pagination, sort, publicationState, locale })
-    ).landingpages
+  @Query(() => LandingPageObjectEntityResponse)
+  public async landingPageObject(@Args() { locale }: LocaleArgs) {
+    return (await this.strapiGqlSdk.landingPageObject({ locale })).landingPageObject
+  }
+  @Query(() => LandingPagePeopleEntityResponse)
+  public async landingPagePeople(@Args() { locale }: LocaleArgs) {
+    return (await this.strapiGqlSdk.landingPagePeople({ locale })).landingPagePeople
+  }
+  @Query(() => LandingPagePublicationEntityResponse)
+  public async landingPagePublication(@Args() { locale }: LocaleArgs) {
+    return (await this.strapiGqlSdk.landingPagePublication({ locale })).landingPagePublication
   }
 }

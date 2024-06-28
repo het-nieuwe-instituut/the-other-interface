@@ -28,12 +28,17 @@ export const Navigation = () => {
 
   return (
     <div
-      style={{ '--z-index': `${NAVIGATION_OVERLAY_Z_INDEX}` } as CSSProperties}
+      style={
+        {
+          '--z-index': `${NAVIGATION_OVERLAY_Z_INDEX}`,
+          'backdrop-filter': 'blur(100px)',
+        } as CSSProperties
+      }
       className={cn(
         isMenuOpen
           ? 'visible transition-opacity ease-out duration-300 opacity-95'
           : 'invisible transition-opacity ease-in duration-300 opacity-0',
-        'fixed right-0 top-0 h-screen w-full z-[var(--z-index)] md:overflow-hidden overflow-y-scroll bg-blue-95 backdrop-blur-3xl'
+        'fixed right-0 top-0 h-screen w-full z-[var(--z-index)] md:overflow-hidden overflow-y-scroll bg-blue-95'
       )}
       ref={ref}
     >
