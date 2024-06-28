@@ -24,7 +24,7 @@ const WelcomeOverlay = ({ className }: { className?: string }) => {
   const closeOverlay = useCallback(() => {
     setShowOverlay(false)
 
-    StorageService.setItem('hasSeenWelcomeOverlay', 'false')
+    StorageService.setItem('hasSeenWelcomeOverlay', 'true')
   }, [])
 
   return (
