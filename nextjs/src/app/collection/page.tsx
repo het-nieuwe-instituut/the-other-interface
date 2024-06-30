@@ -1,11 +1,9 @@
 import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
 import { Metadata } from 'next'
-import { LayerWrapper } from '@/features/shared/components/Layers/LayerWrapper'
-import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { StaticHeader } from '@/features/shared/components/StaticHeader/StaticHeader'
 import { MetaDataProps } from '../readmore/page'
 import {
+  StaticPageContainer,
   StaticPageParagraph,
   StaticPageSectionTitle,
 } from '@/features/shared/components/StaticPage/staticPageComponents'
@@ -34,28 +32,18 @@ export default async function Page() {
   const libraryParagraphs = [t('libraryDescription1'), t('libraryDescription2')]
 
   return (
-    <div className="h-full bg-ivory-100">
-      <div className="bg-ivory-100 pb-[42px]">
-        <StaticHeader />
-      </div>
-      <LayerWrapper
-        LeftContent={<PageHeader title={title} />}
-        BottomContent={
-          <div className={'mx-auto flex max-w-[90em] flex-col gap-[10px] px-6 pt-6'}>
-            <StaticPageParagraph>{t('intro')}</StaticPageParagraph>
+    <StaticPageContainer title={title || ''}>
+      <StaticPageParagraph>{t('intro')}</StaticPageParagraph>
 
-            <StaticPageSectionTitle>{t('archiveTitle')}</StaticPageSectionTitle>
-            {archiveParagraphs.map((p, i) => (
-              <StaticPageParagraph key={i}>{p}</StaticPageParagraph>
-            ))}
+      <StaticPageSectionTitle>{t('archiveTitle')}</StaticPageSectionTitle>
+      {archiveParagraphs.map((p, i) => (
+        <StaticPageParagraph key={i}>{p}</StaticPageParagraph>
+      ))}
 
-            <StaticPageSectionTitle>{t('libraryTitle')}</StaticPageSectionTitle>
-            {libraryParagraphs.map((p, i) => (
-              <StaticPageParagraph key={i}>{p}</StaticPageParagraph>
-            ))}
-          </div>
-        }
-      />
-    </div>
+      <StaticPageSectionTitle>{t('libraryTitle')}</StaticPageSectionTitle>
+      {libraryParagraphs.map((p, i) => (
+        <StaticPageParagraph key={i}>{p}</StaticPageParagraph>
+      ))}
+    </StaticPageContainer>
   )
 }
