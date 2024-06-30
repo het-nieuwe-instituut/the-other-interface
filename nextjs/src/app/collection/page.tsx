@@ -4,8 +4,11 @@ import { LayerWrapper } from '@/features/shared/components/Layers/LayerWrapper'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { StaticHeader } from '@/features/shared/components/StaticHeader/StaticHeader'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { MetaDataProps } from '../readmore/page'
+import {
+  StaticPageParagraph,
+  StaticPageSectionTitle,
+} from '@/features/shared/components/StaticPage/staticPageComponents'
 
 export async function generateMetadata(props: MetaDataProps): Promise<Metadata> {
   const { searchParams } = props
@@ -18,24 +21,38 @@ export async function generateMetadata(props: MetaDataProps): Promise<Metadata> 
 }
 
 export default async function Page() {
-  const { t } = useTypeSafeTranslation('navigation')
+  const title = useTypeSafeTranslation('navigation').t('theCollection')
+  const { t } = useTypeSafeTranslation('collection')
+
+  const archiveParagraphs = [
+    t('archiveDescription1'),
+    t('archiveDescription2'),
+    t('archiveDescription3'),
+    t('archiveDescription4'),
+  ]
+
+  const libraryParagraphs = [t('libraryDescription1'), t('libraryDescription2')]
+
   return (
     <div className="h-full bg-ivory-100">
       <div className="bg-ivory-100 pb-[42px]">
         <StaticHeader />
       </div>
       <LayerWrapper
-        LeftContent={<PageHeader title={t('theCollection')} />}
+        LeftContent={<PageHeader title={title} />}
         BottomContent={
           <div className={'mx-auto flex max-w-[90em] flex-col gap-[10px] px-6 pt-6'}>
-            <p className={TypographyVariants({ socialLarge: 'lg', className: 'font-bold' })}>
-              {'Placeholder: '}
-            </p>
-            <p className={TypographyVariants({ socialLarge: 'lg' })}>
-              {
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-              }
-            </p>
+            <StaticPageParagraph>{t('intro')}</StaticPageParagraph>
+
+            <StaticPageSectionTitle>{t('archiveTitle')}</StaticPageSectionTitle>
+            {archiveParagraphs.map((p, i) => (
+              <StaticPageParagraph key={i}>{p}</StaticPageParagraph>
+            ))}
+
+            <StaticPageSectionTitle>{t('libraryTitle')}</StaticPageSectionTitle>
+            {libraryParagraphs.map((p, i) => (
+              <StaticPageParagraph key={i}>{p}</StaticPageParagraph>
+            ))}
           </div>
         }
       />
