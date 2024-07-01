@@ -7,7 +7,7 @@ import { MenuButton } from '../../../../shared/components/MenuButton/MenuButton'
 
 import { State } from '@/features/shared/configs/store'
 import { useLocale } from '@/features/shared/hooks/useLocale'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { MenuTypogrpahyVariants } from '@/features/ui/components/typography/menuVariants'
 import { cn } from '@/features/ui/utils/cn'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useSelector } from 'react-redux'
@@ -43,18 +43,17 @@ export const GalaxyTopRight: React.FC = () => {
             <Fragment key={locale}>
               <NextLink
                 className={cn(
-                  'truncate mr-[10px] transition-colors hover:border-b-transparent',
-                  TypographyVariants({ socialLarge: 'lg' }),
+                  'truncate mr-[10px] transition-colors',
                   isMenuOpen &&
                     cn(
-                      'hover:text-pink-60 disabled:text-black-20 active:text-blue-100 active:bg-pink-100',
-                      lang !== locale ? 'text-pink-50' : 'text-pink-100',
+                      MenuTypogrpahyVariants({ inverted: 'small' }),
+                      lang !== locale && 'opacity-50',
                       lang === locale && 'border-b border-solid border-current'
                     ),
                   !isMenuOpen &&
                     cn(
-                      'hover:text-blue-50 disabled:text-black-20  active:bg-blue-100 active:text-pink-100',
-                      lang !== locale ? 'text-blue-50' : ' text-blue-100',
+                      MenuTypogrpahyVariants({ default: 'small' }),
+                      lang !== locale && 'opacity-50',
                       lang === locale && 'border-b border-solid border-current'
                     )
                 )}

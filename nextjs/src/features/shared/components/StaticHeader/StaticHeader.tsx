@@ -8,6 +8,7 @@ import { State } from '../../configs/store'
 import { STATIC_HEADER_Z_INDEX, USER_LOOKS_ON } from '../../constants/mainConstants'
 import { useLooseTypeSafeTranslation } from '../../hooks/translations'
 import { useLocale } from '../../hooks/useLocale'
+import { MenuTypogrpahyVariants } from '@/features/ui/components/typography/menuVariants'
 
 export const StaticHeader = () => {
   const { t: tNavigation } = useLooseTypeSafeTranslation('navigation')
@@ -29,11 +30,19 @@ export const StaticHeader = () => {
             <NextLink
               href={lang ? `/?lang=${lang}` : '/?lang=nl'}
               className={cn(
-                isMenuOpen ? 'text-white' : 'text-blue-100',
-                userLooksOn === USER_LOOKS_ON.GALAXY
-                  ? 'font-times-dot text-[20px] leading-[105%_] md:text-[32px]'
-                  : 'font-impact-large text-[20px] leading-[120%_] tracking-[-0.25px] md:text-[25px]',
-                'cursor-pointer overflow-hidden h-full flex m-0'
+                userLooksOn === USER_LOOKS_ON.GALAXY &&
+                  !isMenuOpen &&
+                  MenuTypogrpahyVariants({ default: 'primary' }),
+                userLooksOn === USER_LOOKS_ON.GALAXY &&
+                  isMenuOpen &&
+                  MenuTypogrpahyVariants({ inverted: 'primary' }),
+                userLooksOn !== USER_LOOKS_ON.GALAXY &&
+                  !isMenuOpen &&
+                  MenuTypogrpahyVariants({ default: 'secondary' }),
+                userLooksOn !== USER_LOOKS_ON.GALAXY &&
+                  isMenuOpen &&
+                  MenuTypogrpahyVariants({ inverted: 'secondary' }),
+                'cursor-pointer overflow-hidden h-full flex m-0 '
               )}
             >
               <p className="mr-2 sm:overflow-visible sm:whitespace-normal">
