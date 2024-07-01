@@ -1,4 +1,5 @@
 'use client'
+import { useClientPagination } from '@/features/editorial/components/useClientPagination'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useStoryMetaByIdQuery } from '@/features/shared/hooks/queries/useStoryMetaByIdQuery'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
@@ -6,14 +7,19 @@ import { useLocale } from '@/features/shared/hooks/useLocale'
 import { storiesToCarouselDataMapper } from '@/features/shared/mappers/storiesToCarouselDataMapper'
 import { CATEGORIES } from '@/features/shared/utils/categories'
 import {
-  ImageCarousel,
-  ImageCarouselItem,
-} from '@/features/ui/components/image-carousel/ImageCarousel'
+  CarouselGrid,
+  CarouselGridCard,
+  CarouselGridCardWrapper,
+  CarouselGridFooter,
+  CarouselGridPagination,
+  CarouselGridTitle,
+} from '@/features/ui/components/carousel-grid/CarouselGrid'
 import { useParams } from 'next/navigation'
 import { useMemo } from 'react'
 import ErrorBox from '../../Error/ErrorBox'
 import { ThemedSpinner } from '../../Loading/ThemedSpinner/ThemedSpinner'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
+
+const ITEMS_IN_PAGE = 4
 
 export const RelatedStoriesCarousel = () => {
   const params = useParams()
@@ -45,8 +51,11 @@ export const RelatedStoriesCarousel = () => {
       story?.attributes?.siblings,
     ]
   )
-
-  const stories = useMemo(() => storiesToCarouselDataMapper(relatedStories), [relatedStories])
+  const stories = useMemo(() => storiesToCarouselDataMapper(relatedStories) ?? [], [relatedStories])
+  const { nodes, lastPage, page, next, previous } = useClientPagination({
+    items: stories,
+    itemsInPage: ITEMS_IN_PAGE,
+  })
 
   if (isError) {
     return <ErrorBox />
@@ -60,33 +69,43 @@ export const RelatedStoriesCarousel = () => {
     )
   }
 
+  console.log('stories', stories)
+  console.log('nodes', nodes)
+
   return (
     <div>
       {stories && stories.length > 0 && (
-        <>
-          <h2 className={TypographyVariants({ responsive: 'title', className: 'mb-4' })}>
-            {tStories('relatedStories')} ({stories.length})
-          </h2>
-
-          <ImageCarousel>
-            {stories.map(item => {
-              const href = addLocaleToUrl(`/detail/${CATEGORIES.stories}/${item.id}`, lang)
-
-              if (!item || !item.height || !item.width || !item.url) {
-                return null
-              }
+        <CarouselGrid>
+          <CarouselGridTitle>{`${tStories('relatedStories')} (${
+            stories.length
+          })`}</CarouselGridTitle>
+          <CarouselGridCardWrapper cols={ITEMS_IN_PAGE}>
+            {nodes.map(item => {
+              const url = addLocaleToUrl(`/detail/${CATEGORIES.stories}/${item.id}`, lang)
               return (
-                <ImageCarouselItem
-                  href={href}
+                <CarouselGridCard
                   key={item.id}
-                  src={item.url}
-                  alt={item.description ?? ''}
-                  caption={item.description ?? undefined}
-                />
+                  title={item.title}
+                  description={item?.description}
+                  image={item.url}
+                  href={url}
+                  alt={item.title}
+                ></CarouselGridCard>
               )
-            }) ?? []}
-          </ImageCarousel>
-        </>
+            })}
+          </CarouselGridCardWrapper>
+          <CarouselGridFooter>
+            <div />
+            {stories.length > 4 && (
+              <CarouselGridPagination
+                onNext={next}
+                onPrevious={previous}
+                hidePrevious={page === 1}
+                hideNext={page === lastPage || lastPage === 1}
+              />
+            )}
+          </CarouselGridFooter>
+        </CarouselGrid>
       )}
     </div>
   )

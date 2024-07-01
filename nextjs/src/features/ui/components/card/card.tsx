@@ -39,7 +39,7 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
             <p
               className={TypographyVariants({
                 socialLarge: 'xl',
-                className: cn('group-hover:text-white pb-1 inline-flex relative z-10'),
+                className: cn('group-hover:text-white pb-1 z-10 break-all inline-flex'),
               })}
             >
               {title}
@@ -50,7 +50,7 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
               className={TypographyVariants({
                 socialLarge: 'md',
                 className: cn(
-                  'line-clamp-12 group-hover:text-white pb-1 inline-flex relative z-10'
+                  'line-clamp-12 group-hover:text-white pb-1 z-10 break-all inline-flex'
                 ),
               })}
             >
@@ -73,7 +73,7 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
                 className={TypographyVariants({
                   socialLarge: 'xl',
                   className: cn(
-                    'group-hover:text-white pb-1 inline-flex relative z-10',
+                    'group-hover:text-white pb-1 inline-flex relative z-10 break-all',
                     'after:absolute after:z-[-1]',
                     'group-hover:after:bottom-0  group-hover:after:left-0 group-hover:after:bg-black-100 group-hover:after:content-[""]',
                     'group-hover:after:ml-[-4px] group-hover:after:w-[calc(100%+8px)] group-hover:after:mb-[-4px] group-hover:after:h-[calc(100%+8px)]'
@@ -87,7 +87,7 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
           {description && (
             <div
               className={cn(
-                'group-hover:text-white pb-1 inline-flex relative z-10',
+                'group-hover:text-white pb-1 inline-flex relative z-10 break-all',
                 'after:absolute after:z-[-1]',
                 'group-hover:after:bottom-0  group-hover:after:left-0 group-hover:after:bg-black-100 group-hover:after:content-[""]',
                 'group-hover:after:ml-[-4px] group-hover:after:w-[calc(100%+8px)] group-hover:after:mb-[-4px] group-hover:after:h-[calc(100%+8px)]'
@@ -96,7 +96,7 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
               <p
                 className={TypographyVariants({
                   socialLarge: 'md',
-                  className: cn(' line-clamp-2'),
+                  className: cn('line-clamp-2'),
                 })}
               >
                 {description}
