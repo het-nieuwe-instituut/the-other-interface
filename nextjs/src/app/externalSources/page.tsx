@@ -1,6 +1,5 @@
 import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
 import { Metadata } from 'next'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { MetaDataProps } from '../readmore/page'
 import {
   StaticPageContainer,
@@ -12,6 +11,7 @@ import {
 } from '@/features/shared/components/StaticPage/staticPageComponents'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { getLocaleFromParams } from '@/features/shared/helpers/getLocaleFromParams'
+import { createTypeSafeTranslation } from '@/features/shared/utils/translations'
 
 export async function generateMetadata(props: MetaDataProps): Promise<Metadata> {
   const { searchParams } = props
@@ -28,8 +28,8 @@ export default async function Page({
 }: {
   searchParams: Record<string, string | string[] | undefined>
 }) {
-  const title = useTypeSafeTranslation('navigation').t('externalSources')
-  const { t } = useTypeSafeTranslation('externalSources')
+  const title = createTypeSafeTranslation('navigation').t('externalSources')
+  const { t } = createTypeSafeTranslation('externalSources')
   const locale = getLocaleFromParams(searchParams)
 
   const wikiUrl = 'https://www.wikidata.org/wiki/Wikidata:Main_Page'

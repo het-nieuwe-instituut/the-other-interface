@@ -1,6 +1,5 @@
 import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
 import { Metadata } from 'next'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { MetaDataProps } from '../readmore/page'
 import {
   StaticPageContainer,
@@ -9,6 +8,7 @@ import {
   StaticPageParagraph,
   StaticPageSectionTitle,
 } from '@/features/shared/components/StaticPage/staticPageComponents'
+import { createTypeSafeTranslation } from '@/features/shared/utils/translations'
 
 export async function generateMetadata(props: MetaDataProps): Promise<Metadata> {
   const { searchParams } = props
@@ -21,8 +21,8 @@ export async function generateMetadata(props: MetaDataProps): Promise<Metadata> 
 }
 
 export default async function Page() {
-  const title = useTypeSafeTranslation('navigation').t('contribute')
-  const { t } = useTypeSafeTranslation('contribute')
+  const title = createTypeSafeTranslation('navigation').t('contribute')
+  const { t } = createTypeSafeTranslation('contribute')
 
   const contactFormUrl =
     'https://forms.office.com/pages/responsepage.aspx?id=-nOvvAYyuU2cuMU4_1TahnU7jGT5k41AuJISCxkAcUdUNDdZRFQ5UjA4VDlUOVpISk1USzhHU0hMSi4u'

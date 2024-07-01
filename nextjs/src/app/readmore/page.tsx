@@ -1,11 +1,11 @@
 import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
 import { Metadata } from 'next'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import {
   StaticPageContainer,
   StaticPageLink,
   StaticPageParagraph,
 } from '@/features/shared/components/StaticPage/staticPageComponents'
+import { createTypeSafeTranslation } from '@/features/shared/utils/translations'
 
 export type MetaDataProps = {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -22,8 +22,8 @@ export async function generateMetadata(props: MetaDataProps): Promise<Metadata> 
 }
 
 export default async function Page() {
-  const title = useTypeSafeTranslation('navigation').t('readMore')
-  const { t } = useTypeSafeTranslation('readmore')
+  const title = createTypeSafeTranslation('navigation').t('readMore')
+  const { t } = createTypeSafeTranslation('readmore')
   const [p1, p2, p3] = [t('paragraph1'), t('paragraph2'), t('paragraph3')]
 
   return (
