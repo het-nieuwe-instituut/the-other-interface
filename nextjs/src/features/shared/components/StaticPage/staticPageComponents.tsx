@@ -2,6 +2,7 @@ import { TypographyVariants } from '@/features/ui/components/typography/variants
 import { StaticHeader } from '../StaticHeader/StaticHeader'
 import { LayerWrapper } from '../Layers/LayerWrapper'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
+import { Paragraph } from '@/features/ui/components/Paragraph/Paragraph'
 
 interface ParagraphProps {
   children: React.ReactNode
@@ -20,6 +21,16 @@ export const StaticPageSectionTitle = ({ children }: SectionTitleProps) => (
     {children}
   </p>
 )
+
+interface StaticPageListProps {
+  items: string[]
+  children?: never
+}
+export const StaticPageList = ({ items }: StaticPageListProps) => {
+  const listItems = items.map(i => `- ${i}`).join('\n')
+
+  return <Paragraph>{listItems}</Paragraph>
+}
 
 interface StaticPageContainerProps {
   title: string
@@ -40,4 +51,29 @@ export const StaticPageContainer = ({ children, title }: StaticPageContainerProp
       }
     />
   </div>
+)
+
+interface StaticPageMarkdownLinkProps {
+  href: string
+  label: string
+}
+
+export const getStaticPageMarkdownLink = ({ href, label }: StaticPageMarkdownLinkProps) =>
+  `<a class="prose text-blue-600" href="${href}" target="_blank" rel="noreferrer">${label}</a>`
+
+interface StaticPageLinkProps {
+  href: string
+  label: string
+  external?: boolean
+}
+
+export const StaticPageLink = ({ href, label, external }: StaticPageLinkProps) => (
+  <a
+    href={href}
+    target={external ? '_blank' : '_self'}
+    rel={external ? 'noreferrer' : ''}
+    className="text-blue-600"
+  >
+    {label}
+  </a>
 )

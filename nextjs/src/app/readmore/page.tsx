@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import {
   StaticPageContainer,
+  StaticPageLink,
   StaticPageParagraph,
 } from '@/features/shared/components/StaticPage/staticPageComponents'
 
@@ -31,10 +32,7 @@ export default async function Page() {
       <StaticPageParagraph>{p2}</StaticPageParagraph>
       <StaticPageParagraph>
         {p3}
-        <a href="mailto:info@nieuweinstituut.nl" className="text-blue-600">
-          info@nieuweinstituut.nl
-        </a>
-        .
+        <StaticPageLink href="mailto:info@nieuweinstituut.nl" label="info@nieuweinstituut.nl" />.
       </StaticPageParagraph>
     </StaticPageContainer>
   )

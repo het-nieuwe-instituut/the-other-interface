@@ -1,11 +1,14 @@
 import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
 import { Metadata } from 'next'
-import { LayerWrapper } from '@/features/shared/components/Layers/LayerWrapper'
-import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { StaticHeader } from '@/features/shared/components/StaticHeader/StaticHeader'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { MetaDataProps } from '../readmore/page'
+import {
+  StaticPageContainer,
+  StaticPageLink,
+  StaticPageList,
+  StaticPageParagraph,
+  StaticPageSectionTitle,
+} from '@/features/shared/components/StaticPage/staticPageComponents'
 
 export async function generateMetadata(props: MetaDataProps): Promise<Metadata> {
   const { searchParams } = props
@@ -18,27 +21,44 @@ export async function generateMetadata(props: MetaDataProps): Promise<Metadata> 
 }
 
 export default async function Page() {
-  const { t } = useTypeSafeTranslation('navigation')
+  const title = useTypeSafeTranslation('navigation').t('contribute')
+  const { t } = useTypeSafeTranslation('contribute')
+
+  const contactFormUrl =
+    'https://forms.office.com/pages/responsepage.aspx?id=-nOvvAYyuU2cuMU4_1TahnU7jGT5k41AuJISCxkAcUdUNDdZRFQ5UjA4VDlUOVpISk1USzhHU0hMSi4u'
+
   return (
-    <div className="h-full bg-ivory-100">
-      <div className="bg-ivory-100 pb-[42px]">
-        <StaticHeader />
-      </div>
-      <LayerWrapper
-        LeftContent={<PageHeader title={t('contribute')} />}
-        BottomContent={
-          <div className={'mx-auto flex max-w-[90em] flex-col gap-[10px] px-6 pt-6'}>
-            <p className={TypographyVariants({ socialLarge: 'lg', className: 'font-bold' })}>
-              {'Placeholder: '}
-            </p>
-            <p className={TypographyVariants({ socialLarge: 'lg' })}>
-              {
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-              }
-            </p>
-          </div>
-        }
+    <StaticPageContainer title={title || ''}>
+      <StaticPageParagraph>{t('introP1')}</StaticPageParagraph>
+      <StaticPageParagraph>{t('introP2')}</StaticPageParagraph>
+
+      <StaticPageSectionTitle>{t('howToTitle')}</StaticPageSectionTitle>
+      <StaticPageList items={[t('howTo1') || '', t('howTo2') || '', t('howTo3') || '']} />
+
+      <StaticPageSectionTitle>{t('guidelinesTitle')}</StaticPageSectionTitle>
+      <StaticPageList
+        items={[
+          t('guidelines1') || '',
+          t('guidelines2') || '',
+          t('guidelines3') || '',
+          t('guidelines4') || '',
+        ]}
       />
-    </div>
+
+      <StaticPageSectionTitle>{t('whyTitle')}</StaticPageSectionTitle>
+      <StaticPageList items={[t('why1') || '', t('why2') || '', t('why3') || '']} />
+      <StaticPageParagraph>
+        {t('whySection1')}
+        <StaticPageLink href="mailto:info@nieuweinstituut.nl" label="info@nieuweinstituut.nl" />
+        {t('whySection2')}
+      </StaticPageParagraph>
+
+      <StaticPageSectionTitle>{t('asteriskTitle')}</StaticPageSectionTitle>
+      <StaticPageParagraph>
+        {t('asteriskParagraphSection1')}
+        <StaticPageLink href={contactFormUrl} external label={t('asteriskFormLink') || ''} />
+        {t('asteriskParagraphSection2')}
+      </StaticPageParagraph>
+    </StaticPageContainer>
   )
 }

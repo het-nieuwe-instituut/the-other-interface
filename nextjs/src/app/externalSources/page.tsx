@@ -1,11 +1,17 @@
 import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
 import { Metadata } from 'next'
-import { LayerWrapper } from '@/features/shared/components/Layers/LayerWrapper'
-import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { StaticHeader } from '@/features/shared/components/StaticHeader/StaticHeader'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { MetaDataProps } from '../readmore/page'
+import {
+  StaticPageContainer,
+  StaticPageLink,
+  StaticPageList,
+  StaticPageParagraph,
+  StaticPageSectionTitle,
+  getStaticPageMarkdownLink,
+} from '@/features/shared/components/StaticPage/staticPageComponents'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { getLocaleFromParams } from '@/features/shared/helpers/getLocaleFromParams'
 
 export async function generateMetadata(props: MetaDataProps): Promise<Metadata> {
   const { searchParams } = props
@@ -17,28 +23,61 @@ export async function generateMetadata(props: MetaDataProps): Promise<Metadata> 
   }
 }
 
-export default async function Page() {
-  const { t } = useTypeSafeTranslation('navigation')
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Record<string, string | string[] | undefined>
+}) {
+  const title = useTypeSafeTranslation('navigation').t('externalSources')
+  const { t } = useTypeSafeTranslation('externalSources')
+  const locale = getLocaleFromParams(searchParams)
+
+  const wikiUrl = 'https://www.wikidata.org/wiki/Wikidata:Main_Page'
+  const rkdUrl = 'https://www.rkd.nl/en'
+  const gettyUrl = 'https://www.getty.edu/research/tools/vocabularies/aat/'
+  const suggestionUrl =
+    'https://forms.office.com/pages/responsepage.aspx?id=-nOvvAYyuU2cuMU4_1TahnU7jGT5k41AuJISCxkAcUdUNDdZRFQ5UjA4VDlUOVpISk1USzhHU0hMSi4u'
+  const triplyUrl = 'https://triply.cc/triplydb/'
+  const developersUrl = addLocaleToUrl('/developers', locale)
+
   return (
-    <div className="h-full bg-ivory-100">
-      <div className="bg-ivory-100 pb-[42px]">
-        <StaticHeader />
-      </div>
-      <LayerWrapper
-        LeftContent={<PageHeader title={t('externalSources')} />}
-        BottomContent={
-          <div className={'mx-auto flex max-w-[90em] flex-col gap-[10px] px-6 pt-6'}>
-            <p className={TypographyVariants({ socialLarge: 'lg', className: 'font-bold' })}>
-              {'Placeholder: '}
-            </p>
-            <p className={TypographyVariants({ socialLarge: 'lg' })}>
-              {
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-              }
-            </p>
-          </div>
-        }
+    <StaticPageContainer title={title || ''}>
+      <StaticPageParagraph>{t('intro')}</StaticPageParagraph>
+
+      <StaticPageSectionTitle>{t('whichSourceTitle')}</StaticPageSectionTitle>
+      <StaticPageParagraph>{t('whichSourceIntro')}</StaticPageParagraph>
+      <StaticPageList
+        items={[
+          getStaticPageMarkdownLink({ href: wikiUrl, label: t('sourceWiki') || '' }),
+          getStaticPageMarkdownLink({ href: rkdUrl, label: t('sourceRkd') || '' }),
+          getStaticPageMarkdownLink({ href: gettyUrl, label: t('sourceGetty') || '' }),
+        ]}
       />
-    </div>
+      <StaticPageParagraph>{t('whichSourceP1')}</StaticPageParagraph>
+      <StaticPageParagraph>
+        {t('whichSourceP2')}
+        <StaticPageLink href="mailto:info@nieuweinstituut.nl" label="info@nieuweinstituut.nl" />.
+      </StaticPageParagraph>
+
+      <StaticPageSectionTitle>{t('benefitsTile')}</StaticPageSectionTitle>
+      <StaticPageParagraph>{t('benefitsP1')}</StaticPageParagraph>
+      <StaticPageParagraph>{t('benefitsP2')}</StaticPageParagraph>
+      <StaticPageParagraph>
+        {t('benefitsP3Section1')}
+        <StaticPageLink href={suggestionUrl} external label={t('suggestionFormLink') || ''} />
+        {t('benefitsP3Section2')}
+      </StaticPageParagraph>
+
+      <StaticPageSectionTitle>{t('howTitle')}</StaticPageSectionTitle>
+      <StaticPageParagraph>
+        {t('howP1Section1')}
+        <StaticPageLink href={triplyUrl} external label={'TriplyDB'} />
+        {t('howP1Section2')}
+      </StaticPageParagraph>
+      <StaticPageParagraph>
+        {t('howP2')}
+        <StaticPageLink href={developersUrl} label={t('notesForDevs') || ''} />.
+      </StaticPageParagraph>
+    </StaticPageContainer>
   )
 }
