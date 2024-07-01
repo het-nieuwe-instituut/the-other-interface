@@ -19,89 +19,51 @@ export async function generateMetadata(props: any): Promise<Metadata> {
   }
 }
 
-export default async function Page({
-  searchParams,
-}: {
+interface PageProps {
   searchParams: { category: string; lang: Locale }
-}) {
-  const { category, lang } = searchParams
+}
+
+export default async function Page({ searchParams }: PageProps) {
+  const { category, lang: locale } = searchParams
   const { isEnabled } = draftMode()
   const api = initApiServerService()
-  const isStories = category === SEARCH_CATEGORIES.stories
-  let homepage: Awaited<ReturnType<typeof api.homepage>> | undefined
-  let archiveLandingPage: Awaited<ReturnType<typeof api.landingPageArchive>> | undefined
-  let objectsLandingPage: Awaited<ReturnType<typeof api.landingPageObject>> | undefined
-  let peopleLandingPage: Awaited<ReturnType<typeof api.landingPagePeople>> | undefined
-  let publicationsLandingPage: Awaited<ReturnType<typeof api.landingPagePublication>> | undefined
 
-  if (isStories) {
-    const data = await api?.homepage({ locale: lang })
-    homepage = data
-  } else if (category === SEARCH_CATEGORIES.archives) {
-    const archiveData = await api?.landingPageArchive({
-      locale: lang,
-    })
-    archiveLandingPage = archiveData
-  } else if (category === SEARCH_CATEGORIES.objects) {
-    const objectData = await api?.landingPageObject({
-      locale: lang,
-    })
-    objectsLandingPage = objectData
-  } else if (category === SEARCH_CATEGORIES.people) {
-    const peopleData = await api?.landingPagePeople({
-      locale: lang,
-    })
-    peopleLandingPage = peopleData
-  } else if (category === SEARCH_CATEGORIES.publications) {
-    const publicationData = await api?.landingPagePublication({
-      locale: lang,
-    })
-    publicationsLandingPage = publicationData
-  }
+  if (category === SEARCH_CATEGORIES.stories) {
+    const data = await api?.homepage({ locale })
 
-  if (homepage) {
     return (
       <>
         <ReduxSearchSync />
-        <HomepageContainer isStoriesGalaxy={true} draftMode={isEnabled} homepage={homepage} />
-      </>
-    )
-  }
-  if (category === SEARCH_CATEGORIES.archives) {
-    return (
-      <>
-        <ReduxSearchSync />
-        <LandingpageContainer editorialData={archiveLandingPage?.landingPageArchive.data} />
+        <HomepageContainer isStoriesGalaxy={true} draftMode={isEnabled} homepage={data} />
       </>
     )
   }
 
-  if (category === SEARCH_CATEGORIES.objects) {
-    return (
-      <>
-        <ReduxSearchSync />
-        <LandingpageContainer editorialData={objectsLandingPage?.landingPageObject.data} />
-      </>
-    )
-  }
+  const data = await getLandingPageData(category, locale, api)
 
-  if (category === SEARCH_CATEGORIES.people) {
-    return (
-      <>
-        <ReduxSearchSync />
-        <LandingpageContainer editorialData={peopleLandingPage?.landingPagePeople.data} />
-      </>
-    )
-  }
+  return (
+    <>
+      <ReduxSearchSync />
+      <LandingpageContainer editorialData={data} />
+    </>
+  )
+}
 
-  if (category === SEARCH_CATEGORIES.publications) {
-    return (
-      <>
-        <ReduxSearchSync />
-        <LandingpageContainer
-          editorialData={publicationsLandingPage?.landingPagePublication.data}
-        />
-      </>
-    )
+async function getLandingPageData(
+  category: string,
+  locale: Locale,
+  api: ReturnType<typeof initApiServerService>
+) {
+  switch (category) {
+    case SEARCH_CATEGORIES.archives:
+      return (await api.landingPageArchive({ locale }))?.landingPageArchive?.data
+    case SEARCH_CATEGORIES.objects:
+      return (await api.landingPageObject({ locale }))?.landingPageObject?.data
+    case SEARCH_CATEGORIES.people:
+      return (await api.landingPagePeople({ locale }))?.landingPagePeople?.data
+    case SEARCH_CATEGORIES.publications:
+      return (await api.landingPagePublication({ locale }))?.landingPagePublication?.data
+    default:
+      return null
   }
 }

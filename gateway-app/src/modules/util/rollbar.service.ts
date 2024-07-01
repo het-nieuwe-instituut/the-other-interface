@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { Config } from '../../config/config'
 import RollbarType from 'rollbar'
+import { get } from 'lodash'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Rollbar: typeof RollbarType = require('rollbar')
 
@@ -22,7 +23,8 @@ export class RollbarService {
       this.rollbar.error(arg)
     } catch (err) {
       console.log('Logging to rollbar failed', arg)
-      console.log('Error', JSON.stringify(err))
+      console.log('Error', JSON.stringify(get(err, 'message') || err))
+      console.log('Stack trace', JSON.stringify(get(err, 'stack') || 'No stack trace'))
     }
   }
 
@@ -31,7 +33,8 @@ export class RollbarService {
       this.rollbar.info(arg)
     } catch (err) {
       console.log('Logging to rollbar failed', arg)
-      console.log('Error', JSON.stringify(err))
+      console.log('Error', JSON.stringify(get(err, 'message') || err))
+      console.log('Stack trace', JSON.stringify(get(err, 'stack') || 'No stack trace'))
     }
   }
 }
