@@ -22,6 +22,8 @@ import collection from './en/collection.json'
 import asterisk from './en/asterisk.json'
 import externalSources from './en/externalSources.json'
 import contribute from './en/contribute.json'
+import developers from './en/developers.json'
+import disclaimer from './en/disclaimer.json'
 
 export type TranslationKeys = {
   common: Paths<typeof common>
@@ -43,6 +45,8 @@ export type TranslationKeys = {
   asterisk: Paths<typeof asterisk>
   externalSources: Paths<typeof externalSources>
   contribute: Paths<typeof contribute>
+  developers: Paths<typeof developers>
+  disclaimer: Paths<typeof disclaimer>
 }
 
 type GenericTranslateT<T> = (
