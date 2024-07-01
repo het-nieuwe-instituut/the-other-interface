@@ -41,6 +41,7 @@ type Props = {
 }
 
 export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }) => {
+  isNoActiveSearch = true
   const { t } = useTypeSafeTranslation('category')
   const filterInputRef = useRef<HTMLInputElement>(null)
   const searchBarRef = useRef<HTMLDivElement>(null)
@@ -152,8 +153,8 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
       <div className="flex h-[60px] items-center gap-[12px] self-end pt-1">
         {isSearchModeActive ? (
           <>
-            <GoButton handleClick={handleGoClick} />
-            <CloseButton handleClick={clearAllSearch} />
+            <GoButton onClick={handleGoClick} />
+            <CloseButton onClick={clearAllSearch} />
           </>
         ) : isNoActiveSearch ? (
           <div className={'ml-14'}>
@@ -162,7 +163,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
         ) : (
           <>
             <div className={'ml-14'}>
-              <CloseButton handleClick={clearAllSearch} />
+              <CloseButton onClick={clearAllSearch} />
             </div>
           </>
         )}
