@@ -1,0 +1,21 @@
+{
+  "intro": "The Collection platform provides access to data from the National Collection of Architecture and Urban Planning. In addition, this data is enriched by external sources, specifically collections from other cultural institutions that are connected to Nieuwe Instituut's collection.",
+  "whichSourceTitle": "Which external sources are currently used?",
+  "whichSourceIntro": "Currently, three external sources have been connected:",
+  "sourceWiki": "Wikidata",
+  "sourceRkd": "Dutch Institute of Art History (RkD)",
+  "sourceGetty": "Getty AAT",
+  "whichSourceP1": "Keep in mind that these three sources primarily contain data relevant to the People category. Nieuwe Instituut is currently exploring which datasets from other cultural institutions might be worth integrating in the future.",
+  "whichSourceP2": "Does your dataset have a relevant connection tot the collection of Nieuwe Instituut? Please contact us at ",
+  "benefitsTile": "What are the benefits of linking to external sources?",
+  "benefitsP1": "Whenever an item from Nieuwe Instituut's collection is also found in another collection, a permanent link to that external item is added. This is primarily done manually by the Heritage department staff. Nieuwe Instituut is also exploring automatically generated links using AI tools.",
+  "benefitsP2": "When you view that item on the Collection platform, external sources containing information about the item become visible. Additionally, if the external source has data not present in the Nieuwe Instituut's collection, that data is added to the record page and highlighted in blue. This allows you to see a complete overview of all available information on a specific person or object, even if the information comes from different sources.",
+  "benefitsP3Section1": "If you notice incorrect or incomplete data, please use our ",
+  "suggestionFormLink": "suggestion form",
+  "benefitsP3Section2": " to let us know.",
+  "howTitle": "How are external sources connected?",
+  "howP1Section1": "Data published through the Collection platform is compliant with Linked Open Data (LOD). LOD is a set of design principles that enable the connection of data from diverse sources, creating meaningful information networks. In this project, we use ",
+  "howP1Section2": " to store data as LOD and to query external sources on the fly.",
+  "howP2": "Interested in learning how to directly access and query Nieuwe Instituut's Collection data? Please refer to the ",
+  "notesForDevs": "notes for developers"
+}

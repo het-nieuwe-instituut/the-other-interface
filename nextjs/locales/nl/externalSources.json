@@ -1,0 +1,21 @@
+{
+  "intro": "Het Collectieplatform biedt toegang tot gegevens uit de Rijkscollectie voor Nederlandse Architectuur en Stedenbouw, die door Nieuwe Instituut wordt onderhouden. Daarnaast worden deze gegevens verrijkt met externe bronnen, met name collecties van andere culturele instellingen die verbonden zijn met de collectie van Nieuwe Instituut.",
+  "whichSourceTitle": "Welke externe bronnen worden momenteel gebruikt?",
+  "whichSourceIntro": "Op dit moment zijn er drie externe bronnen aangesloten:",
+  "sourceWiki": "Wikidata",
+  "sourceRkd": "Nederlands Instituut voor Kunstgeschiedenis (RkD)",
+  "sourceGetty": "Getty AAT",
+  "whichSourceP1": "Houd er rekening mee dat deze drie bronnen voornamelijk gegevens bevatten die relevant zijn voor de categorie Personen. Nieuwe Instituut onderzoekt momenteel welke datasets van andere culturele instellingen in de toekomst interessant zijn om te integreren.",
+  "whichSourceP2": "Vindt u een relevante koppeling met uw dataset? Neem dan contact met ons op via ",
+  "benefitsTile": "Wat zijn de voordelen van verbinden aan externe bronnen?",
+  "benefitsP1": "Wanneer een record uit de collectie van Nieuwe Instituut ook in een andere collectie wordt aangetroffen, wordt een permanente link naar dat externe record toegevoegd. Dit wordt voornamelijk handmatig gedaan door de medewerkers van de afdeling Collectie. Nieuwe Instituut onderzoekt ook automatisch gegenereerde links met behulp van AI-tools.",
+  "benefitsP2": "Als je dat record op het Collectieplatform bekijkt, kun je eventuele externe bronnen zien die ook informatie over het record bevatten en daar naartoe navigeren. Bovendien, als de externe bron gegevens heeft die niet aanwezig zijn in de collectie van het Nieuwe Instituut, worden die gegevens toegevoegd aan de recordpagina en blauw gemarkeerd. Zo krijg je een volledig overzicht van alle beschikbare informatie over een specifieke persoon of object, zelfs als de informatie uit verschillende bronnen komt.",
+  "benefitsP3Section1": "Als je onjuiste of onvolledige gegevens ziet, gebruik dan ons ",
+  "suggestionFormLink": "suggestieformulier",
+  "benefitsP3Section2": " om het ons te laten weten.",
+  "howTitle": "Hoe zijn externe bronnen verbonden?",
+  "howP1Section1": "Gegevens die worden gepubliceerd via het Collectieplatform voldoen aan Linked Open Data (LOD) standaarden. LOD is een verzameling ontwerpprincipes die het mogelijk maken om gegevens uit verschillende bronnen met elkaar te verbinden, zodat betekenisvolle informatienetwerken ontstaan. In dit project gebruiken we ",
+  "howP1Section2": " om gegevens op te slaan als LOD en om direct externe bronnen te bevragen.",
+  "howP2": "Wil je weten hoe je direct toegang kunt krijgen tot de collectiegegevens van Nieuwe Instituut en hoe je deze kunt bevragen? Raadpleeg dan de ",
+  "notesForDevs": "notities voor ontwikkelaars"
+}

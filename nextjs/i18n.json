@@ -5,6 +5,11 @@
   "pages": {
     "*": ["common", "navigation", "footer"],
     "/": ["homepage", "category"],
+    "/readmore": ["readmore"],
+    "/collection": ["collection"],
+    "/asterisk": ["asterisk"],
+    "/externalSources": ["externalSources"],
+    "/contribute": ["contribute"],
     "/landingpage": ["category"],
     "/detail/[category]/[id]": [
       "category",
