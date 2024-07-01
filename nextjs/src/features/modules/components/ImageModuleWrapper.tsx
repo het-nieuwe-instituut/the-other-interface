@@ -1,3 +1,4 @@
+import { getTriplyOrStoryHref } from '@/features/editorial/components/getTriplyOrStoryHref'
 import { ImageWithCaption } from '@/features/ui/components/image-with-caption/ImageWithCaption'
 import { ImageWithCaptionLink } from '@/features/ui/components/image-with-caption/ImageWithCaptionLink'
 import { DynamicComponents } from '../ModulesRenderer/ModulesRenderer'
@@ -14,20 +15,18 @@ export const ImageModuleWrapper = ({
   const alt = component.alt_text ?? component.caption ?? ' '
   const height = component.image?.data?.attributes?.height
   const width = component.image?.data?.attributes?.width
-  const recordHref = component.triplyRecord
-    ? getPathByTriplyRecord(component.triplyRecord)
-    : undefined
-  const storyHref = component.story
-    ? getPathByStory(component.story.data?.id ?? undefined)
-    : undefined
+  const href = getTriplyOrStoryHref({
+    story: component.story ?? undefined,
+    triply_record: component.triplyRecord ?? undefined,
+  })
   if (!src || !alt || !height || !width) {
     return null
   }
 
-  if (recordHref || storyHref) {
+  if (href) {
     return (
       <ImageWithCaptionLink
-        href={recordHref ?? storyHref ?? ''}
+        href={href}
         src={src}
         alt={alt}
         height={height}
@@ -45,25 +44,4 @@ export const ImageModuleWrapper = ({
       caption={component.caption ?? undefined}
     />
   )
-}
-
-function getPathByTriplyRecord(
-  triplyRecord: Extract<
-    NonNullable<DynamicComponents>[number],
-    { __typename: 'ComponentModulesImage' }
-  >['triplyRecord']
-) {
-  const type = triplyRecord?.data?.attributes?.type?.toLocaleLowerCase()
-  const recordId = triplyRecord?.data?.attributes?.recordId
-  if (!type || !recordId) {
-    return undefined
-  }
-  return `/detail/${type}/${recordId}`
-}
-
-function getPathByStory(id?: string) {
-  if (!id) {
-    return undefined
-  }
-  return `/detail/stories/${id}`
 }
