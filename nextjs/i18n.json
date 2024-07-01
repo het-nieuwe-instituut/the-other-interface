@@ -11,6 +11,8 @@
     "/externalSources": ["externalSources"],
     "/contribute": ["contribute"],
     "/landingpage": ["category"],
+    "/developers": ["developers"],
+    "/disclaimer": ["disclaimer"],
     "/detail/[category]/[id]": [
       "category",
       "record",
