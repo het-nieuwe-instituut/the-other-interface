@@ -11,6 +11,7 @@ import { sharedActions } from '../../stores/shared.store'
 import useDisableScroll from '../../hooks/ui/useDisableScroll'
 import { MAX_Z_INDEX, NAVIGATION_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
 import { CSSProperties } from 'react'
+import { MenuTypogrpahyVariants } from '@/features/ui/components/typography/menuVariants'
 
 const categories = [
   { name: 'archives', translationKey: 'archives' },
@@ -62,13 +63,12 @@ export const Navigation = () => {
                 onClick={() => closeMenu()}
                 className={cn(
                   navTextStyle === Fonts.Times
-                    ? TypographyVariants({
-                        timesDot: '2xl',
+                    ? MenuTypogrpahyVariants({
+                        menuItem: 'primary',
                       })
-                    : TypographyVariants({
-                        impact: 'xl',
-                      }),
-                  'mb-4 cursor-pointer text-pink-100 hover:text-pink-60 focus:bg-pink-100 focus:text-blue-100 focus:w-fit focus:outline-none'
+                    : MenuTypogrpahyVariants({
+                        menuItem: 'secondary',
+                      })
                 )}
                 key={category.name}
                 href={`/landingpage?category=${category.name}&lang=${lang}`}

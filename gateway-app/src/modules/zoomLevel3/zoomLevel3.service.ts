@@ -20,6 +20,7 @@ import { StoryService } from '../story/story.service'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { ZoomLevel3RelationsType } from './zoomLevel3.type'
 import { Locale } from '../util/locale.type'
+import { get } from 'lodash'
 
 interface ZoomLevel3RelationData {
   idRelation: string
@@ -217,7 +218,10 @@ export class ZoomLevel3Service {
               paginatedRelations: data.map(d => d?.idRelation).filter(d => !!d),
             }
           } catch (error) {
-            console.error(`Error fetching data for entity ${entityName}:`, error)
+            console.error(
+              `Error fetching data for entity ${entityName}:`,
+              get(error, 'message') || error
+            )
             return {
               id,
               type: entityName,

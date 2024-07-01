@@ -1,3 +1,4 @@
+import { get } from 'lodash'
 import { Enum_Triplyrecord_Type } from '../../generated/strapi-sdk'
 import { CustomError } from '../util/customError'
 import { EntityNames } from '../util/entityNames.type'
@@ -52,7 +53,7 @@ export class StrapiUtils {
     try {
       return new URL(url, process.env['STRAPI_URL']).toString()
     } catch (e) {
-      console.log(e)
+      console.log(get(e, 'message') || e)
     }
   }
 }

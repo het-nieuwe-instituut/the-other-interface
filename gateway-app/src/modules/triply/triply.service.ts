@@ -5,6 +5,7 @@ import { catchError, lastValueFrom, map } from 'rxjs'
 import { Config } from 'src/config/config'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { RollbarService } from '../util/rollbar.service'
+import { get } from 'lodash'
 
 /**
  * Due to typescript's limitations, we decided to use this approach to verify expected
@@ -93,7 +94,7 @@ export class TriplyService {
     return lastValueFrom(
       res.pipe(
         catchError(err => {
-          console.error(err)
+          console.error(get(err, 'message') || err)
           return []
         }),
         map(res => res.data)

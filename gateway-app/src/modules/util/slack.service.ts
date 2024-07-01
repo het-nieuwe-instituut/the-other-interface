@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { WebClient } from '@slack/web-api'
 import { Config } from '../../config/config'
+import { get } from 'lodash'
 
 interface SlackChannel {
   systemNotification: string
@@ -36,7 +37,7 @@ export class SlackService {
       return res
     } catch (err) {
       console.log('Post message to Slack channel failed', channel, text)
-      console.log('Error', JSON.stringify(err))
+      console.log('Error', JSON.stringify(get(err, 'message') || err))
     }
   }
 }
