@@ -67,7 +67,12 @@ const WelcomeOverlay = ({ className }: { className?: string }) => {
           >
             {tCommon('welcomeWarning')}
           </p>
-          <Button intent={'invertedSecondary'} className="mt-4 w-[185px]" onClick={closeOverlay}>
+          <Button
+            intent={'invertedSecondary'}
+            className="mt-4 w-[185px]"
+            onClick={closeOverlay}
+            tabIndex={0}
+          >
             {tCommon('welcomeButton')}
           </Button>
         </div>

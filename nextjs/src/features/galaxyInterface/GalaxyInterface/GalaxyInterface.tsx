@@ -1,43 +1,40 @@
 'use client'
-import { GALAXY_EDITORIAL_LAYER_PART } from '@/features/shared/constants/mainConstants'
-import { Box, Flex } from '@chakra-ui/react'
-import { usePresenter } from './usePresenter'
 import { StaticHeader } from '@/features/shared/components/StaticHeader/StaticHeader'
 
+import { USER_LOOKS_ON } from '@/features/shared/constants/mainConstants'
+import useScroll from '@/features/shared/hooks/ui/useScroll'
+import { sharedActions } from '@/features/shared/stores/shared.store'
+import { useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux'
+import { useResizeObserver } from 'usehooks-ts'
 interface Props {
   children: React.ReactNode
 }
 
 export const GalaxyInterface: React.FC<Props> = ({ children }) => {
-  const { theme, sizes, graphRef } = usePresenter()
+  const graphRef = useRef<HTMLDivElement | null>(null)
+  const sizes = useResizeObserver({ ref: graphRef })
+  const { scrollPosition } = useScroll()
+  const dispatch = useDispatch()
+  const HEADER_HEIGHT = 68
+
+  useEffect(() => {
+    if (sizes?.height && scrollPosition >= sizes?.height - HEADER_HEIGHT) {
+      dispatch(sharedActions?.userChangeLooksOn({ lookOn: USER_LOOKS_ON.EDITORIAL }))
+    } else {
+      dispatch(sharedActions?.userChangeLooksOn({ lookOn: USER_LOOKS_ON.GALAXY }))
+    }
+  }, [dispatch, scrollPosition, sizes?.height])
 
   return (
-    <Box display="block" position={'relative'}>
-      <Flex
-        maxW={theme.breakpoints.xl}
-        marginX={'auto'}
-        position="fixed"
-        left={0}
-        right={0}
-        top={0}
-        justifyContent={'space-between'}
-        zIndex={5}
-      >
-        <Flex alignItems={'center'} position="relative" zIndex={2} left={8} top={1}></Flex>
+    <div className="relative block">
+      <div className="fixed inset-x-0 top-0 z-[9999] mx-auto flex max-w-[90em] justify-between">
         <StaticHeader />
-      </Flex>
+      </div>
 
-      <Box
-        position="relative"
-        height={`calc(100vh - ${GALAXY_EDITORIAL_LAYER_PART})`}
-        bottom={0}
-        right={0}
-        left={0}
-        backgroundColor={'pinkAlpha.100'}
-        ref={graphRef}
-      >
-        {sizes?.height && sizes?.width && <Box position={'fixed'}>{children}</Box>}
-      </Box>
-    </Box>
+      <div className="relative inset-x-0 bottom-0 h-[calc(100vh-12vh)] bg-pink-100" ref={graphRef}>
+        <div className="fixed">{children}</div>
+      </div>
+    </div>
   )
 }
