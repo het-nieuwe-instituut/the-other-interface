@@ -15,6 +15,7 @@ import { ButtonGroup, LinkButtonGroupItem } from '../../ui/components/button-gro
 import { Subtitle } from '../../ui/components/subtitle/Subtitle'
 import { ImageModuleWrapper } from '../components/ImageModuleWrapper'
 import { Pullquote } from '../components/Pullquote/Pullquote'
+import { getTriplyOrStoryHref } from '@/features/editorial/components/getTriplyOrStoryHref'
 
 interface Props {
   components: DynamicComponents
@@ -74,12 +75,16 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               <ImageCarousel key={keyExtractor(component.id, index, array)}>
                 {component.items?.map(item => {
                   const attributes = item.image.data?.attributes
-
+                  const href = getTriplyOrStoryHref({
+                    story: item.story ?? undefined,
+                    triply_record: item.triply_record ?? undefined,
+                  })
                   if (!attributes || !attributes.height || !attributes.width) {
                     return null
                   }
                   return (
                     <ImageCarouselItem
+                      href={href}
                       key={item.id}
                       src={attributes.url}
                       // TODO: add alt text instead of caption
