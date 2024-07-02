@@ -3,7 +3,7 @@ import { State } from '@/features/shared/configs/store'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { PublicationState } from '@/features/shared/types/enums'
 import initApiClientService from '@/features/shared/utils/initApiClientService'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import { ThemesQuery } from 'src/generated/graphql'
 
