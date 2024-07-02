@@ -16,6 +16,9 @@ import { Subtitle } from '../../ui/components/subtitle/Subtitle'
 import { ImageModuleWrapper } from '../components/ImageModuleWrapper'
 import { Pullquote } from '../components/Pullquote/Pullquote'
 import { getTriplyOrStoryHref } from '@/features/editorial/components/getTriplyOrStoryHref'
+import { imageBasePath } from '../modulesConstants'
+import { useLocale } from '@/features/shared/hooks/useLocale'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 
 interface Props {
   components: DynamicComponents
@@ -28,6 +31,7 @@ export type DynamicComponents = NonNullable<
 
 export function DynamicComponentRenderer({ components, isStoryPage = false }: Props) {
   const hasComponents = (components || []).length > 0
+  const lang = useLocale()
 
   return (
     <div
@@ -74,19 +78,27 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
             return (
               <ImageCarousel key={keyExtractor(component.id, index, array)}>
                 {component.items?.map(item => {
+                  console.log(item)
                   const attributes = item.image.data?.attributes
-                  const href = getTriplyOrStoryHref({
-                    story: item.story ?? undefined,
-                    triply_record: item.triply_record ?? undefined,
-                  })
-                  if (!attributes || !attributes.height || !attributes.width) {
+                  const href = addLocaleToUrl(
+                    getTriplyOrStoryHref({
+                      story: item.story ?? undefined,
+                      triply_record: item.triply_record ?? undefined,
+                    }) ?? '',
+                    lang
+                  )
+                  const url = attributes?.url
+                    ? imageBasePath(attributes?.url.toString())
+                    : undefined
+
+                  if (!attributes || !attributes.height || !attributes.width || !url) {
                     return null
                   }
                   return (
                     <ImageCarouselItem
                       href={href}
                       key={item.id}
-                      src={attributes.url}
+                      src={url}
                       // TODO: add alt text instead of caption
                       alt={attributes.caption ?? ''}
                       caption={attributes.caption ?? undefined}

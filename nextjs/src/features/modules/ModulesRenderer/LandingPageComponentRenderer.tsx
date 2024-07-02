@@ -16,6 +16,9 @@ import {
 import { GenericCardGrid } from '@/features/editorial/components/GenericCardGrid'
 import { GenericCarouselGridWithClientPagination } from '@/features/editorial/components/GenericCarouselGridWithClientPagination'
 import { getTriplyOrStoryHref } from '@/features/editorial/components/getTriplyOrStoryHref'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { useLocale } from '@/features/shared/hooks/useLocale'
+import { imageBasePath } from '../modulesConstants'
 
 interface Props {
   grid?: DeepPartial<ComponentModulesGridModule> | null
@@ -28,24 +31,29 @@ interface Props {
 }
 
 export function LandingPageComponentRenderer({ grid, highlight, imageCarousel, carousel }: Props) {
+  const lang = useLocale()
   return (
     <div className={cn('pt-10 flex flex-col gap-[40px] w-full')}>
       {imageCarousel && (
         <ImageCarousel>
           {imageCarousel.items?.map(item => {
             const attributes = item?.image?.data?.attributes
-            const href = getTriplyOrStoryHref({
-              story: item?.story ?? undefined,
-              triply_record: item?.triply_record ?? undefined,
-            })
-            if (!attributes || !attributes.height || !attributes.width || !attributes.url) {
+            const href = addLocaleToUrl(
+              getTriplyOrStoryHref({
+                story: item?.story ?? undefined,
+                triply_record: item?.triply_record ?? undefined,
+              }) ?? '',
+              lang
+            )
+            const url = item?.url ? imageBasePath(item.url.toString()) : undefined
+            if (!attributes || !attributes.height || !attributes.width || !attributes.url || !url) {
               return null
             }
             return (
               <ImageCarouselItem
                 href={href}
                 key={item.id}
-                src={attributes.url}
+                src={url}
                 // TODO: add alt text instead of caption
                 alt={attributes.caption ?? ''}
                 caption={attributes.caption ?? undefined}
