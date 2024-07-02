@@ -8,6 +8,7 @@ import { SearchResultItemType, SearchResultType } from './triplyElasticSearch.ty
 import { TriplyUtils } from '../triply/triply.utils'
 import { map } from 'rxjs'
 import { Locale } from '../util/locale.type'
+import { get } from 'lodash'
 
 export interface ElasticsearchResult {
   hits: {
@@ -86,7 +87,7 @@ export class TriplyElasticSearchService {
     return lastValueFrom(
       res.pipe(
         catchError(err => {
-          console.error(err)
+          console.error(get(err, 'message') || err)
           return []
         }),
         map(res => res.data)
@@ -119,7 +120,7 @@ export class TriplyElasticSearchService {
         type,
       }
     } catch (e) {
-      console.error(e)
+      console.error(get(e, 'message') || e)
       return null
     }
   }

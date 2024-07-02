@@ -8,10 +8,8 @@ export default function BaseElementWrapper() {
 
   return (
     <>
-      <>
-        <Navigation />
-        <Footer />
-      </>
+      <Navigation />
+      <Footer />
     </>
   )
 }

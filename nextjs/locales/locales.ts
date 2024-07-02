@@ -17,6 +17,13 @@ import recordMetaObject from './en/recordMetaObject.json'
 import recordMetaPerson from './en/recordMetaPerson.json'
 import recordTable from './en/recordTable.json'
 import footer from './en/footer.json'
+import readmore from './en/readmore.json'
+import collection from './en/collection.json'
+import asterisk from './en/asterisk.json'
+import externalSources from './en/externalSources.json'
+import contribute from './en/contribute.json'
+import developers from './en/developers.json'
+import disclaimer from './en/disclaimer.json'
 
 export type TranslationKeys = {
   common: Paths<typeof common>
@@ -33,22 +40,17 @@ export type TranslationKeys = {
   recordMetaPerson: Paths<typeof recordMetaPerson>
   recordTable: Paths<typeof recordTable>
   footer: Paths<typeof footer>
+  readmore: Paths<typeof readmore>
+  collection: Paths<typeof collection>
+  asterisk: Paths<typeof asterisk>
+  externalSources: Paths<typeof externalSources>
+  contribute: Paths<typeof contribute>
+  developers: Paths<typeof developers>
+  disclaimer: Paths<typeof disclaimer>
 }
 
-export type navigationT = (
-  s: Paths<typeof navigation>,
-  q?: TranslationQuery | undefined,
-  o?:
-    | {
-        returnObjects?: boolean | undefined
-        fallback?: string | string[] | undefined
-        default?: string | undefined
-      }
-    | undefined
-) => string
-
-export type recordMetaT = (
-  s: Paths<typeof recordMeta>,
+type GenericTranslateT<T> = (
+  s: Paths<T>,
   q?: TranslationQuery | undefined,
   o?:
     | {
@@ -59,64 +61,12 @@ export type recordMetaT = (
     | undefined
 ) => string | undefined
 
-export type recordMetaArchiveT = (
-  s: Paths<typeof recordMetaArchive>,
-  q?: TranslationQuery | undefined,
-  o?:
-    | {
-        returnObjects?: boolean | undefined
-        fallback?: string | string[] | undefined
-        default?: string | undefined
-      }
-    | undefined
-) => string | undefined
-
-export type recordMetaPublicationT = (
-  s: Paths<typeof recordMetaPublication>,
-  q?: TranslationQuery | undefined,
-  o?:
-    | {
-        returnObjects?: boolean | undefined
-        fallback?: string | string[] | undefined
-        default?: string | undefined
-      }
-    | undefined
-) => string | undefined
-
-export type recordMetaObjectT = (
-  s: Paths<typeof recordMetaObject>,
-  q?: TranslationQuery | undefined,
-  o?:
-    | {
-        returnObjects?: boolean | undefined
-        fallback?: string | string[] | undefined
-        default?: string | undefined
-      }
-    | undefined
-) => string | undefined
-
-export type recordMetaPersonT = (
-  s: Paths<typeof recordMetaPerson>,
-  q?: TranslationQuery | undefined,
-  o?:
-    | {
-        returnObjects?: boolean | undefined
-        fallback?: string | string[] | undefined
-        default?: string | undefined
-      }
-    | undefined
-) => string | undefined
-
-export type recordTableT = (
-  s: Paths<typeof recordTable>,
-  q?: TranslationQuery | undefined,
-  o?:
-    | {
-        returnObjects?: boolean | undefined
-        fallback?: string | string[] | undefined
-        default?: string | undefined
-      }
-    | undefined
-) => string | undefined
+export type navigationT = GenericTranslateT<typeof navigation>
+export type recordMetaT = GenericTranslateT<typeof recordMeta>
+export type recordMetaArchiveT = GenericTranslateT<typeof recordMetaArchive>
+export type recordMetaPublicationT = GenericTranslateT<typeof recordMetaPublication>
+export type recordMetaObjectT = GenericTranslateT<typeof recordMetaObject>
+export type recordMetaPersonT = GenericTranslateT<typeof recordMetaPerson>
+export type recordTableT = GenericTranslateT<typeof recordTable>
 
 export type recordMetaType = Paths<typeof recordMeta>
