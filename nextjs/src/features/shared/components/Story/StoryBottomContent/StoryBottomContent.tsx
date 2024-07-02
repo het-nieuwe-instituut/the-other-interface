@@ -6,7 +6,7 @@ import ErrorBoundaryWrapper from '../../Error/ErrorBoundary/ErrorBoundary'
 export const StoryBottomContent = () => {
   return (
     <>
-      <div className="px-6">
+      <div className="flex flex-col gap-4 px-6 pb-10">
         <ErrorBoundaryWrapper>
           <RelatedStoriesCarousel />
         </ErrorBoundaryWrapper>
