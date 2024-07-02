@@ -25,18 +25,11 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   onLoad,
   className,
 }) => {
-  const [imageLoaded, setImageLoaded] = useState(true)
+  const [showFallback, setShowFallback] = useState(!src)
   const fallbackImageRef = useRef<string | null>(null)
 
   if (!fallbackImageRef.current) {
     fallbackImageRef.current = `/images/fallbacks/${Math.floor(Math.random() * 9) + 1}.svg`
-  }
-
-  const handleLoad = () => {
-    setImageLoaded(true)
-    if (onLoad) {
-      onLoad() // Call external onLoad callback
-    }
   }
 
   const processedSrc = limitCopyrightedImageResolution(src)
@@ -50,7 +43,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         sizes={size}
         style={{
           transition: 'opacity 0.5s ease-out',
-          opacity: imageLoaded ? 0 : 1,
+          opacity: !showFallback ? 0 : 1,
           position: 'absolute',
           top: 0,
           left: 0,
@@ -71,7 +64,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           onClick={onClick}
           style={{
             transition: 'opacity 0.5s ease-out',
-            opacity: imageLoaded ? 1 : 0,
+            opacity: !showFallback ? 1 : 0,
             position: 'absolute',
             top: 0,
             left: 0,
@@ -80,8 +73,11 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           }}
           fill={true}
           onContextMenu={e => e.preventDefault()}
-          onLoadingComplete={handleLoad}
-          onLoadStart={() => setImageLoaded(false)}
+          onLoad={onLoad}
+          onError={() => {
+            console.log('could not load image, showing fallback image instead.')
+            return src && setShowFallback(true)
+          }}
         />
       )}
     </div>

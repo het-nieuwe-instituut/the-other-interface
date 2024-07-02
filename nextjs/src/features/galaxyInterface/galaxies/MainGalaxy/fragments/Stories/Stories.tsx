@@ -19,13 +19,6 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
     originalTemplateIndex,
     pageNumber: currentPage,
   } = usePresenter(stories, nextStories)
-
-  const { handleImageLoaded, allImagesLoaded } = useImageLoader(
-    positionedStories,
-    currentPage,
-    stories
-  )
-
   const { animationState, conditions } = useContext(MainGalaxyAnimationContext)
   const svgRef = useDrawLines({
     hideLines: !!animationState,
@@ -35,12 +28,11 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
   })
 
   return (
-    <div className={cn('size-full', allImagesLoaded && 'invisible')}>
+    <div className={cn('size-full')}>
       <div
         className="absolute right-[18%] top-[13%] grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px] opacity-100"
         style={{
           zIndex: 20,
-          visibility: allImagesLoaded ? 'visible' : 'hidden',
         }}
       >
         {positionedStories.map(positionedStory => (
@@ -54,7 +46,6 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
             key={`${positionedStory.id}-${positionedStory.locale}-${currentPage}`}
             story={positionedStory}
             isMainGrid
-            onLoad={handleImageLoaded}
           />
         ))}
       </div>
@@ -67,18 +58,18 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
           opacity: 0,
           width: '100%',
           height: '100%',
-          visibility: allImagesLoaded ? 'visible' : 'hidden',
         }}
       />
       <div
         className={cn(
           'absolute right-[18%] top-[13%] grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px]',
           !animationState && 'blur-[10px]',
-          animationState === 'forward' && 'animate-toUnblur'
+          animationState === 'forward' && 'animate-toUnblur',
+          animationState === 'backwards' && 'animate-fromBlurredToHide',
+          conditions === 'previousAnimationWasForward' && 'animate-fromHideToShow'
         )}
         style={{
           zIndex: 10,
-          visibility: allImagesLoaded ? 'visible' : 'hidden',
         }}
       >
         {positionedNextStories.map(positionedStory => (

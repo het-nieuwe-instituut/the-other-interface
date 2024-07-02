@@ -13,8 +13,13 @@ module.exports = {
           to: { opacity: 0, filter: 'blur(10px)' },
         },
         fromHideToShow: {
+          initial: { opacity: 0 },
           from: { opacity: 0, filter: 'blur(10px)' },
           to: { opacity: 1, filter: 'blur(0px)' },
+        },
+        fromBlurredToHide: {
+          from: { opacity: 1, filter: 'blur(10px)' },
+          to: { opacity: 0, filter: 'blur(10px)' },
         },
         toBlur: {
           '0%': { filter: 'blur(0px)' },
@@ -30,6 +35,7 @@ module.exports = {
         toBlur: 'toBlur 0.5s ease-in-out forwards',
         toUnblur: 'toUnblur 0.5s ease-in-out forwards',
         fromHideToShow: 'fromHideToShow 0.5s ease-in-out forwards',
+        fromBlurredToHide: 'fromBlurredToHide 0.5s ease-in-out forwards',
       },
       gridTemplateAreas: {
         'editorial-large': ['left right', 'bottom right'],

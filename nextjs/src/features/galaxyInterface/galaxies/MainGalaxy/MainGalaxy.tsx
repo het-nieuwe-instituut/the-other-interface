@@ -7,7 +7,7 @@ import { TypographyVariants } from '@/features/ui/components/typography/variants
 import { useArrowNavigation } from '@/features/ui/hooks/useArrowNavigation'
 import { useSearchParamPagination } from '@/features/ui/hooks/useSearchParamPagination'
 import { usePathname, useSearchParams } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
@@ -91,16 +91,16 @@ export const MainGalaxy = () => {
   const [animationState, setAnimationState] = useState<Animations>()
   const pathname = usePathname()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (animationState === 'forward') setConditions('previousAnimationWasForward')
     if (animationState === 'backwards') setConditions('previousAnimationWasBackwards')
   }, [animationState])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (pathname !== prevPathName.current) {
       setAnimationState(undefined)
     }
-  }, [currentPage])
+  }, [currentPage, pathname])
 
   function handleAnimationState(animationState: Animations) {
     setAnimationState(animationState)
