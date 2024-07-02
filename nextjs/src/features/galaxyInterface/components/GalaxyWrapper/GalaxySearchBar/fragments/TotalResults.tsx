@@ -6,17 +6,23 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 
-const TotalResults = () => {
+interface Props {
+  text: string
+}
+
+export const TotalResults = ({ text }: Props) => {
   const selectedFilters = useSelectedFilters()
   const {
     data: total,
     isLoading: isTotalLoading,
     isError: isTotalError,
-  } = useTotalCounterQuery(selectedFilters)
+  } = useTotalCounterQuery(selectedFilters, text)
   const { t } = useTypeSafeTranslation('category')
 
   if (isTotalError) {
-    return <ErrorBox className={TypographyVariants({ socialLarge: 'sm' })} />
+    return (
+      <ErrorBox className={TypographyVariants({ socialLarge: 'sm', className: 'text-[9px]' })} />
+    )
   }
 
   if (isTotalLoading) {
@@ -38,5 +44,3 @@ const TotalResults = () => {
     </>
   )
 }
-
-export default TotalResults
