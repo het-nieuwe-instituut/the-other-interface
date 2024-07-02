@@ -1,15 +1,21 @@
 'use client'
+import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
 import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
+import { State } from '@/features/shared/configs/store'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { useArrowNavigation } from '@/features/ui/hooks/useArrowNavigation'
+import { useSearchParamPagination } from '@/features/ui/hooks/useSearchParamPagination'
 import { useSearchParams } from 'next/navigation'
+import { useSelector } from 'react-redux'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
-import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
 import { ThemeTitle } from '../../components/ThemeTitle/ThemeTitle'
 import { CategoryCloud, Cloud, Stories } from './fragments'
-import { useThemesQuery } from './hooks/useThemes'
-import { usePresenter } from './usePresenter'
+import { useThemesQuery } from './hooks/useThemesQuery'
+import { Pulse } from '../../components/Pulse/Pulse'
+import { useState } from 'react'
+import React from 'react'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -63,25 +69,49 @@ const categoryClouds: CategoryCloud[] = [
   },
 ]
 
+export const MainGalaxyAnimationContext = React.createContext<{
+  animationState?: 'forward' | 'backwards'
+  setAnimationState: React.Dispatch<React.SetStateAction<'forward' | 'backwards' | undefined>>
+}>({
+  animationState: undefined,
+  setAnimationState: () => undefined,
+})
+
 export const MainGalaxy = () => {
   const searchParams = useSearchParams()
   const currentPage = parseInt(searchParams?.get('page') ?? '1')
 
-  const {
-    stories,
-    pagination,
-    storyTitle,
-    isLoading: isMainLoading,
-    isError,
-  } = useThemesQuery(currentPage)
+  return <MainGalaxyContent key={currentPage} />
+}
 
-  const { increasePageNumber, decreasePageNumber, isSearchModeActive } = usePresenter(
-    pagination?.pageCount || 0
-  )
-
-  const { stories: nextStories, isLoading: isNextLoading } = useThemesQuery(currentPage + 1)
+const MainGalaxyContent = () => {
   const { t } = useTypeSafeTranslation('navigation')
-  const isLoading = isMainLoading || isNextLoading
+  const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
+  const searchParams = useSearchParams()
+  const currentPage = parseInt(searchParams?.get('page') ?? '1')
+  const [animationState, setAnimationState] = useState<'forward' | 'backwards' | undefined>()
+  const {
+    data: mainData,
+    isLoading: isMainLoading,
+    isFetching: isMainFetching,
+    isStale: isMainStale,
+    isError,
+  } = useThemesQuery({ page: currentPage })
+  const { data: nextData } = useThemesQuery({ page: currentPage + 1 })
+  const { data: prevData } = useThemesQuery({ page: currentPage - 1 })
+
+  const pagination = mainData?.pagination
+  const totalPages = pagination?.pageCount || 0
+  const storyTitle = mainData?.storyTitle
+  const stories = mainData?.stories ?? []
+  const nextStories = nextData?.stories ?? []
+
+  const { increasePageNumber, decreasePageNumber } = useSearchParamPagination(totalPages, false)
+  useArrowNavigation({
+    onLeft: handleLeftClick,
+    onRight: handleRightClick,
+    disabled: isSearchModeActive,
+  })
 
   const renderMainContent = () => {
     if (isError) {
@@ -92,7 +122,17 @@ export const MainGalaxy = () => {
       )
     }
 
-    if (isLoading) {
+    if (isMainLoading && prevData) {
+      return (
+        <>
+          <Pulse className="absolute" />
+          <Stories stories={prevData?.stories} nextStories={[]} />
+          <ThemeTitle title={storyTitle} />
+        </>
+      )
+    }
+
+    if (isMainLoading && isMainFetching && !isMainStale) {
       return (
         <div className="flex h-full  items-center justify-center">
           <ThemedSpinner />
@@ -109,29 +149,47 @@ export const MainGalaxy = () => {
   }
 
   return (
-    <div className={'w-screen bg-pink-100'}>
-      {isSearchModeActive && <BlurOverlay />}
-      <div className="relative mx-auto h-screen w-screen max-w-[1440px]">
-        {categoryClouds.map(cloud => (
-          <Cloud key={cloud.title} cloud={cloud} />
-        ))}
+    <MainGalaxyAnimationContext.Provider value={{ animationState, setAnimationState }}>
+      <div className={'w-screen bg-pink-100'}>
+        {isSearchModeActive && <BlurOverlay />}
+        <div className="relative mx-auto h-screen w-screen max-w-[1440px]">
+          {categoryClouds.map(cloud => (
+            <Cloud key={cloud.title} cloud={cloud} />
+          ))}
 
-        {renderMainContent()}
+          {renderMainContent()}
 
-        <GalaxyFooter
-          galaxyPagination={
-            <GalaxyPagination
-              currentPageNumber={pagination?.page || 0}
-              pageAmount={pagination?.pageCount || 0}
-              isResultAmountLoading={isMainLoading}
-              handleLeftClick={decreasePageNumber}
-              handleRightClick={increasePageNumber}
-              isResultEmpty={stories.length === 0}
-              text={t('theme')}
-            />
-          }
-        />
+          <GalaxyFooter
+            galaxyPagination={
+              <GalaxyPagination
+                currentPageNumber={pagination?.page || 0}
+                pageAmount={pagination?.pageCount || 0}
+                isResultAmountLoading={isMainLoading}
+                handleLeftClick={handleLeftClick}
+                handleRightClick={handleRightClick}
+                isResultEmpty={stories.length === 0}
+                text={t('theme')}
+              />
+            }
+          />
+        </div>
       </div>
-    </div>
+    </MainGalaxyAnimationContext.Provider>
   )
+
+  function handleLeftClick() {
+    setAnimationState('backwards')
+    //hacky, we should actually listen for event when the animation ends
+    setTimeout(() => {
+      decreasePageNumber()
+    }, 200)
+  }
+
+  function handleRightClick() {
+    setAnimationState('forward')
+    setTimeout(() => {
+      //hacky, we should actually listen for event when the animation ends
+      increasePageNumber()
+    }, 200)
+  }
 }

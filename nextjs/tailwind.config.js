@@ -4,8 +4,33 @@ const plugin = require('tailwindcss/plugin')
 module.exports = {
   important: true,
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
+
   theme: {
     extend: {
+      keyframes: {
+        toBlurAndHide: {
+          from: { opacity: 1, filter: 'blur(0px)' },
+          to: { opacity: 0, filter: 'blur(10px)' },
+        },
+        fromHideToShow: {
+          from: { opacity: 0, filter: 'blur(10px)' },
+          to: { opacity: 1, filter: 'blur(0px)' },
+        },
+        toBlur: {
+          '0%': { filter: 'blur(0px)' },
+          '100%': { filter: 'blur(10px)' },
+        },
+        toUnblur: {
+          '0%': { filter: 'blur(10px)' },
+          '100%': { filter: 'blur(0px)' },
+        },
+      },
+      animation: {
+        toBlurAndHide: 'toBlurAndHide 0.2s ease-in-out forwards',
+        toBlur: 'toBlur 0.2s ease-in-out forwards',
+        toUnblur: 'toUnblur 0.2s ease-in-out forwards',
+        fromHideToShow: 'fromHideToShow 0.2s ease-in-out forwards',
+      },
       gridTemplateAreas: {
         'editorial-large': ['left right', 'bottom right'],
         'editorial-small': ['right', 'left', 'bottom'],

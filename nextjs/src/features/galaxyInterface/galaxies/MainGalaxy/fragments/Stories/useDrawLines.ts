@@ -3,7 +3,17 @@ import { useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useRef } from 'react'
 import { PositionedStory } from '../types'
 
-export const useDrawLines = (selector: string, template: number, stories: PositionedStory[]) => {
+export const useDrawLines = ({
+  hideLines,
+  selector,
+  template,
+  stories,
+}: {
+  selector: string
+  template: number
+  stories: PositionedStory[]
+  hideLines?: boolean
+}) => {
   const svgRef = useRef<SVGSVGElement>(null)
 
   const searchParams = useSearchParams()
@@ -24,6 +34,7 @@ export const useDrawLines = (selector: string, template: number, stories: Positi
       const svg = svgRef.current
       if (!svg) return
       svg.innerHTML = ''
+      svg.style.transition = 'opacity 0.2s'
 
       const fragment = document.createDocumentFragment()
 
@@ -67,5 +78,14 @@ export const useDrawLines = (selector: string, template: number, stories: Positi
     }
   }, [template, drawLinesForTemplate, selector, page, lang, stories])
 
+  useEffect(() => {
+    if (hideLines) {
+      const svg = svgRef.current
+
+      if (svg) {
+        svg.style.opacity = '0'
+      }
+    }
+  }, [hideLines])
   return svgRef
 }
