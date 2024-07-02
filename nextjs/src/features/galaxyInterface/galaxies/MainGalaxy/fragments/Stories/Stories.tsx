@@ -65,7 +65,9 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
           !animationState && 'blur-[10px]',
           animationState === 'forward' && 'animate-toUnblur',
           animationState === 'backwards' && 'animate-fromBlurredToHide',
-          conditions === 'previousAnimationWasForward' && 'animate-fromHideToShow'
+          conditions === 'previousAnimationWasForward' &&
+            positionedNextStories.length &&
+            'animate-fromHideToShow'
         )}
         style={{
           zIndex: 10,

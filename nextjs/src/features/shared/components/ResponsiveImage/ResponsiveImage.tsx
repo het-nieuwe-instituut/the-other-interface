@@ -1,8 +1,9 @@
 'use client'
+import { cn } from '@/features/ui/utils/cn'
 import Image from 'next/image'
 import React, { CSSProperties, useRef, useState } from 'react'
+import { useTimeout } from 'usehooks-ts'
 import { limitCopyrightedImageResolution } from './limitCopyrightedImageResolution'
-import { cn } from '@/features/ui/utils/cn'
 
 type ResponsiveImageProps = {
   className: string
@@ -10,7 +11,6 @@ type ResponsiveImageProps = {
   alt?: string | null
   size?: string
   style?: CSSProperties
-  fit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
   onClick?: () => void
   onLoad?: () => void
 }
@@ -20,12 +20,12 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   alt = '',
   size = '200px',
   style,
-  fit = 'contain',
   onClick,
   onLoad,
   className,
 }) => {
   const [showFallback, setShowFallback] = useState(!src)
+  const [isLoaded, setIsLoaded] = useState(!src)
   const fallbackImageRef = useRef<string | null>(null)
 
   if (!fallbackImageRef.current) {
@@ -41,15 +41,11 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         src={fallbackImageRef.current}
         alt={alt || 'Fallback image'}
         sizes={size}
-        style={{
-          transition: 'opacity 0.5s ease-out',
-          opacity: !showFallback ? 0 : 1,
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          objectFit: 'contain',
-          objectPosition: 'center',
-        }}
+        className={cn(
+          'transition-opacity',
+          'absolute top-0 left-0 object-center object-contain opacity-100',
+          !showFallback && isLoaded && 'opacity-0'
+        )}
         onContextMenu={() => false}
         fill={true}
       />
@@ -57,23 +53,22 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
       {/* Actual Image */}
       {processedSrc && (
         <Image
+          className={cn(
+            'absolute top-0 left-0 object-center object-contain',
+            showFallback && 'opacity-0'
+          )}
           src={processedSrc}
           alt={alt || 'Actual image'}
           sizes={size}
           quality={100}
           onClick={onClick}
-          style={{
-            transition: 'opacity 0.5s ease-out',
-            opacity: !showFallback ? 1 : 0,
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            objectPosition: 'center',
-            objectFit: fit,
-          }}
           fill={true}
           onContextMenu={e => e.preventDefault()}
-          onLoad={onLoad}
+          onLoadingComplete={() => {
+            onLoad?.()
+            setIsLoaded(true)
+            setShowFallback(false)
+          }}
           onError={() => {
             console.log('could not load image, showing fallback image instead.')
             return src && setShowFallback(true)

@@ -69,6 +69,7 @@ export function useSearchByCategoryQuery({
   return useQuery(queryKey, queryFn(queryFnArgs), {
     enabled,
     refetchOnWindowFocus: false,
+    staleTime: Infinity,
   })
 }
 
