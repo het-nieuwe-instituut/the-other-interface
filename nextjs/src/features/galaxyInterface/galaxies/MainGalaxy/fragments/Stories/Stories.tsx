@@ -4,7 +4,6 @@ import { MainGalaxyAnimationContext } from '../../MainGalaxy'
 import { StoriesData } from '../../hooks/useThemesQuery'
 import { Story } from '../Story'
 import { useDrawLines } from './useDrawLines'
-import { useImageLoader } from './useImageLoader'
 import { usePresenter } from './usePresenter'
 
 type Props = {
