@@ -2,6 +2,7 @@ import { useLocale } from '@/features/shared/hooks/useLocale'
 import { useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useRef } from 'react'
 import { PositionedStory } from '../types'
+import { useTimeout } from 'usehooks-ts'
 
 export const useDrawLines = ({
   hideLines,
@@ -15,6 +16,12 @@ export const useDrawLines = ({
   hideLines?: boolean
 }) => {
   const svgRef = useRef<SVGSVGElement>(null)
+  useTimeout(() => {
+    const svg = svgRef.current
+    if (svg) {
+      svg.style.opacity = '100'
+    }
+  }, 200)
 
   const searchParams = useSearchParams()
 
@@ -34,7 +41,6 @@ export const useDrawLines = ({
       const svg = svgRef.current
       if (!svg) return
       svg.innerHTML = ''
-      svg.style.transition = 'opacity 0.2s'
 
       const fragment = document.createDocumentFragment()
 
@@ -62,6 +68,10 @@ export const useDrawLines = ({
   )
 
   useEffect(() => {
+    if (svgRef.current) {
+      svgRef.current.style.opacity = '0'
+      svgRef.current.style.transition = 'opacity 0.2s ease-in-out'
+    }
     const drawAfterLayout = () => {
       const gridElements = Array.from(document.querySelectorAll(selector))
       if (gridElements.length) {

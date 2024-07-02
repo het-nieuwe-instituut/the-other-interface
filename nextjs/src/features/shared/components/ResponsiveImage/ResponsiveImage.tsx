@@ -25,7 +25,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   onLoad,
   className,
 }) => {
-  const [imageLoaded, setImageLoaded] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(true)
   const fallbackImageRef = useRef<string | null>(null)
 
   if (!fallbackImageRef.current) {
@@ -80,7 +80,8 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           }}
           fill={true}
           onContextMenu={e => e.preventDefault()}
-          onLoad={handleLoad}
+          onLoadingComplete={handleLoad}
+          onLoadStart={() => setImageLoaded(false)}
         />
       )}
     </div>

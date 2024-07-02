@@ -6,16 +6,15 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { useArrowNavigation } from '@/features/ui/hooks/useArrowNavigation'
 import { useSearchParamPagination } from '@/features/ui/hooks/useSearchParamPagination'
-import { useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
+import { Pulse } from '../../components/Pulse/Pulse'
 import { ThemeTitle } from '../../components/ThemeTitle/ThemeTitle'
 import { CategoryCloud, Cloud, Stories } from './fragments'
 import { useThemesQuery } from './hooks/useThemesQuery'
-import { Pulse } from '../../components/Pulse/Pulse'
-import { useState } from 'react'
-import React from 'react'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -70,86 +69,120 @@ const categoryClouds: CategoryCloud[] = [
 ]
 
 export const MainGalaxyAnimationContext = React.createContext<{
-  animationState?: 'forward' | 'backwards'
-  setAnimationState: React.Dispatch<React.SetStateAction<'forward' | 'backwards' | undefined>>
+  animationState?: Animations
+  conditions?: 'previousAnimationWasBackwards' | 'previousAnimationWasForward' | 'firstRender'
+  setAnimationState: React.Dispatch<React.SetStateAction<Animations | undefined>>
 }>({
   animationState: undefined,
+  conditions: undefined,
   setAnimationState: () => undefined,
 })
-
+type Animations = 'forward' | 'backwards' | undefined
+type Conditions =
+  | 'previousAnimationWasBackwards'
+  | 'previousAnimationWasForward'
+  | 'firstRender'
+  | undefined
 export const MainGalaxy = () => {
+  const prevPathName = useRef<string | null>()
+  const [conditions, setConditions] = useState<Conditions>('firstRender')
   const searchParams = useSearchParams()
   const currentPage = parseInt(searchParams?.get('page') ?? '1')
+  const [animationState, setAnimationState] = useState<Animations>()
+  const pathname = usePathname()
 
-  return <MainGalaxyContent key={currentPage} />
+  useEffect(() => {
+    if (animationState === 'forward') setConditions('previousAnimationWasForward')
+    if (animationState === 'backwards') setConditions('previousAnimationWasBackwards')
+  }, [animationState])
+
+  useEffect(() => {
+    if (pathname !== prevPathName.current) {
+      setAnimationState(undefined)
+    }
+  }, [currentPage])
+
+  function handleAnimationState(animationState: Animations) {
+    setAnimationState(animationState)
+  }
+
+  return (
+    <MainGalaxyAnimationContext.Provider
+      value={{
+        animationState,
+        setAnimationState,
+        conditions,
+      }}
+    >
+      <MainGalaxyContent key={currentPage} onSetAnimationState={handleAnimationState} />
+    </MainGalaxyAnimationContext.Provider>
+  )
 }
 
-const MainGalaxyContent = () => {
-  const { t } = useTypeSafeTranslation('navigation')
-  const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
-  const searchParams = useSearchParams()
-  const currentPage = parseInt(searchParams?.get('page') ?? '1')
-  const [animationState, setAnimationState] = useState<'forward' | 'backwards' | undefined>()
-  const {
-    data: mainData,
-    isLoading: isMainLoading,
-    isFetching: isMainFetching,
-    isStale: isMainStale,
-    isError,
-  } = useThemesQuery({ page: currentPage })
-  const { data: nextData } = useThemesQuery({ page: currentPage + 1 })
-  const { data: prevData } = useThemesQuery({ page: currentPage - 1 })
+const MainGalaxyContent = React.memo(
+  ({ onSetAnimationState }: { onSetAnimationState: (animationState: Animations) => void }) => {
+    const { t } = useTypeSafeTranslation('navigation')
+    const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
+    const searchParams = useSearchParams()
+    const currentPage = parseInt(searchParams?.get('page') ?? '1')
 
-  const pagination = mainData?.pagination
-  const totalPages = pagination?.pageCount || 0
-  const storyTitle = mainData?.storyTitle
-  const stories = mainData?.stories ?? []
-  const nextStories = nextData?.stories ?? []
+    const {
+      data: mainData,
+      isLoading: isMainLoading,
+      isError,
+    } = useThemesQuery({ page: currentPage })
+    const { data: nextData } = useThemesQuery({ page: currentPage + 1 })
+    const { data: prevData } = useThemesQuery({ page: currentPage - 1 })
 
-  const { increasePageNumber, decreasePageNumber } = useSearchParamPagination(totalPages, false)
-  useArrowNavigation({
-    onLeft: handleLeftClick,
-    onRight: handleRightClick,
-    disabled: isSearchModeActive,
-  })
+    const pagination = mainData?.pagination
+    const totalPages = pagination?.pageCount || 0
+    const storyTitle = mainData?.storyTitle
+    const stories = mainData?.stories ?? []
+    const nextStories = nextData?.stories ?? []
 
-  const renderMainContent = () => {
-    if (isError) {
-      return (
-        <div className="flex h-full items-center justify-center">
-          <p className={TypographyVariants({ times: 'md' })}>{t('errorLoadingThemes')}</p>
-        </div>
-      )
-    }
+    const { increasePageNumber, decreasePageNumber } = useSearchParamPagination(totalPages, false)
+    useArrowNavigation({
+      onLeft: handleLeftClick,
+      onRight: handleRightClick,
+      disabled: isSearchModeActive,
+    })
 
-    if (isMainLoading && prevData) {
+    const renderMainContent = () => {
+      if (isError) {
+        return (
+          <div className="flex h-full items-center justify-center">
+            <p className={TypographyVariants({ times: 'md' })}>{t('errorLoadingThemes')}</p>
+          </div>
+        )
+      }
+
+      if (isMainLoading && prevData) {
+        return (
+          <>
+            <Pulse className="absolute" />
+            <Stories stories={prevData?.stories} nextStories={[]} />
+            <ThemeTitle title={storyTitle} />
+          </>
+        )
+      }
+
+      if (isMainLoading && !mainData) {
+        return (
+          <div className="flex h-full  items-center justify-center">
+            <ThemedSpinner />
+          </div>
+        )
+      }
+
       return (
         <>
-          <Pulse className="absolute" />
-          <Stories stories={prevData?.stories} nextStories={[]} />
+          <Stories stories={stories} nextStories={nextStories} />
           <ThemeTitle title={storyTitle} />
         </>
       )
     }
 
-    if (isMainLoading && isMainFetching && !isMainStale) {
-      return (
-        <div className="flex h-full  items-center justify-center">
-          <ThemedSpinner />
-        </div>
-      )
-    }
-
     return (
-      <>
-        <Stories stories={stories} nextStories={nextStories} />
-        <ThemeTitle title={storyTitle} />
-      </>
-    )
-  }
-
-  return (
-    <MainGalaxyAnimationContext.Provider value={{ animationState, setAnimationState }}>
       <div className={'w-screen bg-pink-100'}>
         {isSearchModeActive && <BlurOverlay />}
         <div className="relative mx-auto h-screen w-screen max-w-[1440px]">
@@ -174,22 +207,23 @@ const MainGalaxyContent = () => {
           />
         </div>
       </div>
-    </MainGalaxyAnimationContext.Provider>
-  )
+    )
 
-  function handleLeftClick() {
-    setAnimationState('backwards')
-    //hacky, we should actually listen for event when the animation ends
-    setTimeout(() => {
-      decreasePageNumber()
-    }, 200)
-  }
-
-  function handleRightClick() {
-    setAnimationState('forward')
-    setTimeout(() => {
+    function handleLeftClick() {
+      onSetAnimationState('backwards')
       //hacky, we should actually listen for event when the animation ends
-      increasePageNumber()
-    }, 200)
+      setTimeout(() => {
+        decreasePageNumber()
+      }, 500)
+    }
+
+    function handleRightClick() {
+      onSetAnimationState('forward')
+      setTimeout(() => {
+        //hacky, we should actually listen for event when the animation ends
+        increasePageNumber()
+      }, 500)
+    }
   }
-}
+)
+MainGalaxyContent.displayName = 'MainGalaxyContent'

@@ -26,10 +26,10 @@ module.exports = {
         },
       },
       animation: {
-        toBlurAndHide: 'toBlurAndHide 0.2s ease-in-out forwards',
-        toBlur: 'toBlur 0.2s ease-in-out forwards',
-        toUnblur: 'toUnblur 0.2s ease-in-out forwards',
-        fromHideToShow: 'fromHideToShow 0.2s ease-in-out forwards',
+        toBlurAndHide: 'toBlurAndHide 0.5s ease-in-out forwards',
+        toBlur: 'toBlur 0.5s ease-in-out forwards',
+        toUnblur: 'toUnblur 0.5s ease-in-out forwards',
+        fromHideToShow: 'fromHideToShow 0.5s ease-in-out forwards',
       },
       gridTemplateAreas: {
         'editorial-large': ['left right', 'bottom right'],

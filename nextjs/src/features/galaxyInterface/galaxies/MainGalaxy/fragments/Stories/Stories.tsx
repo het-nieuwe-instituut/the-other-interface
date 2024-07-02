@@ -1,4 +1,3 @@
-import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { cn } from '@/features/ui/utils/cn'
 import { useContext } from 'react'
 import { MainGalaxyAnimationContext } from '../../MainGalaxy'
@@ -27,7 +26,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
     stories
   )
 
-  const { animationState } = useContext(MainGalaxyAnimationContext)
+  const { animationState, conditions } = useContext(MainGalaxyAnimationContext)
   const svgRef = useDrawLines({
     hideLines: !!animationState,
     selector: '.story-grid-item',
@@ -36,15 +35,9 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
   })
 
   return (
-    <div className="size-full">
-      {animationState}
-      {!allImagesLoaded && (
-        <div className="flex h-full items-center justify-center">
-          <ThemedSpinner />
-        </div>
-      )}
+    <div className={cn('size-full', allImagesLoaded && 'invisible')}>
       <div
-        className="absolute right-[18%] top-[13%] grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-20 opacity-100"
+        className="absolute right-[18%] top-[13%] grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px] opacity-100"
         style={{
           zIndex: 20,
           visibility: allImagesLoaded ? 'visible' : 'hidden',
@@ -53,9 +46,10 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
         {positionedStories.map(positionedStory => (
           <Story
             className={cn(
-              'fromHideToShow',
+              conditions === 'previousAnimationWasBackwards' && 'animate-fromHideToShow',
               animationState === 'forward' && 'animate-toBlurAndHide',
-              animationState === 'backwards' && 'animate-toBlur'
+              animationState === 'backwards' && 'animate-toBlur',
+              conditions === 'firstRender' && 'animate-fromHideToShow'
             )}
             key={`${positionedStory.id}-${positionedStory.locale}-${currentPage}`}
             story={positionedStory}
@@ -64,23 +58,21 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
           />
         ))}
       </div>
-
       <svg
         ref={svgRef}
         style={{
           position: 'fixed',
           top: 0,
           left: 0,
+          opacity: 0,
           width: '100%',
           height: '100%',
           visibility: allImagesLoaded ? 'visible' : 'hidden',
         }}
       />
-
       <div
         className={cn(
-          'fromHideToShow',
-          'absolute left-1/2 top-[13%] grid h-[55%] w-[65vw] max-w-[936px] -translate-x-1/2 grid-cols-4 grid-rows-2 gap-[20px] ',
+          'absolute right-[18%] top-[13%] grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px]',
           !animationState && 'blur-[10px]',
           animationState === 'forward' && 'animate-toUnblur'
         )}

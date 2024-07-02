@@ -12,7 +12,7 @@ export const GalaxyInterface: React.FC<Props> = ({ children }) => {
   const { theme, sizes, graphRef } = usePresenter()
 
   return (
-    <Box display="block" position={'relative'}>
+    <div className="relative block">
       <Flex
         maxW={theme.breakpoints.xl}
         marginX={'auto'}
@@ -36,8 +36,8 @@ export const GalaxyInterface: React.FC<Props> = ({ children }) => {
         backgroundColor={'pinkAlpha.100'}
         ref={graphRef}
       >
-        {sizes?.height && sizes?.width && <Box position={'fixed'}>{children}</Box>}
+        {sizes?.height && sizes?.width && <div className="fixed">{children}</div>}
       </Box>
-    </Box>
+    </div>
   )
 }
