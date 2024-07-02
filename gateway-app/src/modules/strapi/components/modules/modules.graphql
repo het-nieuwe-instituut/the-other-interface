@@ -32,8 +32,8 @@ fragment ComponentModulesImageCarouselFragment on ComponentModulesImageCarousel 
   id
   description
   __typename
-  images {
-    ...UploadFileRelationResponseCollectionFragment
+  items {
+    ...ComponentCoreImageCarouselItemFragment
   }
 }
 

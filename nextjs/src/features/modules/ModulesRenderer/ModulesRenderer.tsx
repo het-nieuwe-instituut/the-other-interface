@@ -72,8 +72,8 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           if (component?.__typename === 'ComponentModulesImageCarousel') {
             return (
               <ImageCarousel key={keyExtractor(component.id, index, array)}>
-                {component.images?.data?.map(item => {
-                  const attributes = item?.attributes
+                {component.items?.map(item => {
+                  const attributes = item.image.data?.attributes
 
                   if (!attributes || !attributes.height || !attributes.width) {
                     return null

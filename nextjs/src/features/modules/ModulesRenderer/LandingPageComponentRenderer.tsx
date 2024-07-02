@@ -31,8 +31,8 @@ export function LandingPageComponentRenderer({ grid, highlight, imageCarousel, c
     <div className={cn('pt-10 flex flex-col gap-[40px] w-full')}>
       {imageCarousel && (
         <ImageCarousel>
-          {imageCarousel.images?.data?.map(item => {
-            const attributes = item?.attributes
+          {imageCarousel.items?.map(item => {
+            const attributes = item?.image?.data?.attributes
 
             if (!attributes || !attributes.height || !attributes.width || !attributes.url) {
               return null

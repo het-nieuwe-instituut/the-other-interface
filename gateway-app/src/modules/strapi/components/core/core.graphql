@@ -121,3 +121,25 @@ fragment ComponentCoreMuxVideoFragment on ComponentCoreMuxVideo {
     }
   }
 }
+
+fragment ComponentCoreImageCarouselItemFragment on ComponentCoreImageCarouselItem {
+  id
+  alt_text
+  url
+  image {
+    ...UploadFileEntityResponseFragment
+  }
+  triply_record {
+    data {
+      ...BaseTriplyRecordFragment
+    }
+  }
+  story {
+    data {
+      id
+      attributes {
+        slug
+      }
+    }
+  }
+}
