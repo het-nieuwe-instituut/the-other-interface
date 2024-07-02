@@ -15,6 +15,7 @@ import {
 } from '@/features/ui/components/image-carousel/ImageCarousel'
 import { GenericCardGrid } from '@/features/editorial/components/GenericCardGrid'
 import { GenericCarouselGridWithClientPagination } from '@/features/editorial/components/GenericCarouselGridWithClientPagination'
+import { getTriplyOrStoryHref } from '@/features/editorial/components/getTriplyOrStoryHref'
 
 interface Props {
   grid?: DeepPartial<ComponentModulesGridModule> | null
@@ -33,12 +34,16 @@ export function LandingPageComponentRenderer({ grid, highlight, imageCarousel, c
         <ImageCarousel>
           {imageCarousel.items?.map(item => {
             const attributes = item?.image?.data?.attributes
-
+            const href = getTriplyOrStoryHref({
+              story: item?.story ?? undefined,
+              triply_record: item?.triply_record ?? undefined,
+            })
             if (!attributes || !attributes.height || !attributes.width || !attributes.url) {
               return null
             }
             return (
               <ImageCarouselItem
+                href={href}
                 key={item.id}
                 src={attributes.url}
                 // TODO: add alt text instead of caption
