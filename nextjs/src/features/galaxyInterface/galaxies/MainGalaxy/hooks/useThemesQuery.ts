@@ -16,7 +16,14 @@ export type StoryComponentsDynamicZone = NonNullable<
   NonNullable<StoryData['attributes']>['components']
 >
 
-export function useThemesQuery(page: number) {
+export function getThemesQueryKey(
+  page: number,
+  lang: string,
+  isDraftMode: boolean
+): ['paginated-themes', number, string, boolean] {
+  return ['paginated-themes', page, lang, isDraftMode]
+}
+export function useThemesQuery({ page }: { page: number; fromCacheOnly?: boolean }) {
   const api = initApiClientService()
   const lang = useLocale()
   const { isDraftMode } = useSelector((state: State) => state.shared)
@@ -29,32 +36,36 @@ export function useThemesQuery(page: number) {
     })
   }
 
-  const queryFn = async () => fetchHighlightedThemes(page)
+  const queryFn = async () => {
+    const res = await fetchHighlightedThemes(page)
+    const storyTitle =
+      res.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
+        ?.name
+    const stories =
+      res.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
+        ?.stories?.data || []
+    const highlightedStories =
+      res.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
+        ?.highlightedStories?.data
 
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['paginated-highlighted-themes', page, lang, isDraftMode],
+    const pagination = res?.highlightedHomepageThemes.meta?.pagination
+
+    return {
+      storyTitle,
+      stories: highlightedStories && highlightedStories?.length > 0 ? highlightedStories : stories,
+      pagination,
+    }
+  }
+
+  const query = useQuery({
+    queryKey: getThemesQueryKey(page, lang, isDraftMode),
     queryFn,
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   })
 
-  const storyTitle =
-    data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
-      ?.name
-  const stories =
-    data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
-      ?.stories?.data || []
-  const highlightedStories =
-    data?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
-      ?.highlightedStories?.data
-
-  const pagination = data?.highlightedHomepageThemes.meta?.pagination
-
   return {
-    storyTitle,
-    stories: highlightedStories && highlightedStories?.length > 0 ? highlightedStories : stories,
-    pagination,
-    isLoading,
-    isError,
+    ...query,
     page,
   }
 }

@@ -1,0 +1,31 @@
+.pulse {
+  width: 100%;
+  aspect-ratio: 1/1;
+
+  flex-shrink: 0;
+  border-radius: 100%;
+  background: blue;
+  background: radial-gradient(50% 50% at 50% 50%, #0051ff 0%, rgba(249, 246, 238, 0) 100%);
+  animation: pulse infinite;
+  animation-duration: 1s;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0.2;
+    transform: scale(1.5296);
+  }
+}
+
+.container {
+  position: relative;
+  flex-shrink: 0;
+  margin-left: auto;
+  margin-right: auto;
+  height: calc(100% - 140px);
+  aspect-ratio: 1/1;
+}

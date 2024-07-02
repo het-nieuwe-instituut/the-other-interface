@@ -14,12 +14,13 @@ import { HOMEPAGE_Z_INDEXES } from './constants'
 import { PositionedStory } from './types'
 
 type Props = {
+  className?: string
   story: PositionedStory
   isMainGrid?: boolean
   onLoad?: (storyId: string) => void
 }
 
-export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad }) => {
+export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className }) => {
   const router = useRouter()
   const { t: hoverT } = useTypeSafeTranslation('category')
   const lang = useLocale()
@@ -48,7 +49,7 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad }) => {
   }, [onLoad, story.id])
 
   return (
-    <GridItem position="relative" css={{ ...grid }}>
+    <GridItem position="relative" css={{ ...grid }} className={cn(className)}>
       <ReadMoreTooltip
         isLoading={isLoadingHover}
         error={isLoadingHoverError ? hoverT('couldNotFetchHover') : ''}

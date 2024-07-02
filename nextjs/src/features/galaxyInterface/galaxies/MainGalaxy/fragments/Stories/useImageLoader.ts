@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import { PositionedStory } from '../types'
 import { useLocale } from '@/features/shared/hooks/useLocale'
-import { StoriesData } from '../../hooks/useThemes'
+import { StoriesData } from '../../hooks/useThemesQuery'
 
 export const useImageLoader = (
   positionedStories: PositionedStory[],

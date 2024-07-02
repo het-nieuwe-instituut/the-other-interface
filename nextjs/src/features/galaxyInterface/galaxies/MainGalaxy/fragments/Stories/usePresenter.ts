@@ -1,12 +1,10 @@
 import { useMemo } from 'react'
 
-import { ComponentModulesImage } from 'src/generated/graphql'
 import { imageBasePath } from '@/features/modules/modulesConstants'
+import { useHomepageTemplatesContext } from '@/features/shared/hooks/usePositioningTemplates'
+import { ComponentModulesImage } from 'src/generated/graphql'
+import { StoriesData, StoryComponentsDynamicZone, StoryData } from '../../hooks/useThemesQuery'
 import { PositionedStory } from '../types'
-import { storiesPositionsTemplates } from './positioningTemplates'
-import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
-import { usePositioningTemplates } from '@/features/shared/hooks/usePositioningTemplates'
-import { StoriesData, StoryComponentsDynamicZone, StoryData } from '../../hooks/useThemes'
 
 const findImageUrl = (components: StoryComponentsDynamicZone): string => {
   const imageComponent = components?.find(
@@ -32,12 +30,8 @@ const mapStory = (story: StoryData) => {
 }
 
 export const usePresenter = (stories: StoriesData, nextStories: StoriesData) => {
-  const { pageNumber } = usePageNumber()
-  const { currentTemplate, nextTemplate, originalTemplateIndex } = usePositioningTemplates(
-    storiesPositionsTemplates,
-    pageNumber
-  )
-
+  const { currentTemplate, nextTemplate, originalTemplateIndex, pageNumber } =
+    useHomepageTemplatesContext()
   const positionedStories = useMemo(() => {
     if (!stories) return []
 
@@ -85,8 +79,6 @@ export const usePresenter = (stories: StoriesData, nextStories: StoriesData) => 
   return {
     positionedStories,
     positionedNextStories,
-    isCurrentStoriesEmpty: stories?.length === 0,
-    isNextStoriesEmpty: nextStories?.length === 0,
     originalTemplateIndex,
     pageNumber,
   }
