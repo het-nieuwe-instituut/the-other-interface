@@ -13,6 +13,7 @@ export const usePositionedRecordsQuery = ({
   id,
   locale,
   page,
+  recordCategory,
   category,
   current,
 }: {
@@ -20,13 +21,21 @@ export const usePositionedRecordsQuery = ({
   locale: Locale
   page: number
   maxPages: number
+  recordCategory: CloudCategory
   category: CloudCategory
   current?: number
 }) => {
   const api = initApiClientService()
 
   const queryFn = async () => {
-    const data = await getZoom3RelationsTask({ type: category, id, page, locale, api, maxPages })
+    const data = await getZoom3RelationsTask({
+      type: recordCategory,
+      id,
+      page,
+      locale,
+      api,
+      maxPages,
+    })
     return getPositionedRecords(data?.currentData?.relations, category, current)
   }
 

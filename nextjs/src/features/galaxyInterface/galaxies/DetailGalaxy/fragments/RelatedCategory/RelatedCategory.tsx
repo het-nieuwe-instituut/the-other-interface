@@ -36,6 +36,7 @@ export const RelatedCategory: React.FC<Props> = ({
 }) => {
   const params = useParams()
   const locale = useLocale()
+  const recordCategory = params?.category as CloudCategory
   const searchParams = useSearchParams()
   const page = parseInt(searchParams?.get('page') || '1')
   const id = params?.id as string
@@ -49,7 +50,8 @@ export const RelatedCategory: React.FC<Props> = ({
     id,
     maxPages,
     current,
-    category,
+    category: category,
+    recordCategory: recordCategory,
   })
   const { data: nextData } = usePositionedRecordsQuery({
     locale,
@@ -57,7 +59,8 @@ export const RelatedCategory: React.FC<Props> = ({
     id,
     maxPages,
     current: next,
-    category,
+    recordCategory: recordCategory,
+    category: category,
   })
   const positionedRecords = data || []
   const nextPositionedRecords = nextData || []
