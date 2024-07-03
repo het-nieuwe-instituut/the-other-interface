@@ -6,19 +6,19 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { useArrowNavigation } from '@/features/ui/hooks/useArrowNavigation'
 import { useSearchParamPagination } from '@/features/ui/hooks/useSearchParamPagination'
-import { usePathname, useSearchParams } from 'next/navigation'
-import React, { useContext, useLayoutEffect, useRef, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+import React, { useContext } from 'react'
 import { useSelector } from 'react-redux'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
 import { Pulse } from '../../components/Pulse/Pulse'
 import { ThemeTitle } from '../../components/ThemeTitle/ThemeTitle'
-import { CategoryCloud, Cloud, Stories } from './fragments'
-import { useThemesQuery } from './hooks/useThemesQuery'
 import {
   GalaxyPaginationAnimationStateContext,
   GalaxyPaginationAnimationStateProvider,
 } from '../hooks/GalaxyPaginationAnimationStateProvider'
+import { CategoryCloud, Cloud, Stories } from './fragments'
+import { useThemesQuery } from './hooks/useThemesQuery'
 
 const categoryClouds: CategoryCloud[] = [
   {

@@ -33,18 +33,13 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
   return (
     <div className={cn('size-full')}>
       <div
-        className="absolute right-[18%] top-[13%] grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px] opacity-100"
-        style={{
-          zIndex: 20,
-        }}
+        className={cn(
+          'absolute right-[18%] top-[13%] grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px]',
+          getNextItemsAnimationClassNames(animationState, conditions, !!positionedStories?.length)
+        )}
       >
-        {positionedStories.map(positionedStory => (
-          <Story
-            className={getItemsAnimationClassNames(animationState, conditions)}
-            key={`${positionedStory.id}-${positionedStory.locale}-${currentPage}`}
-            story={positionedStory}
-            isMainGrid
-          />
+        {positionedNextStories.map(positionedStory => (
+          <Story key={`${positionedStory.id}-${positionedStory.locale}`} story={positionedStory} />
         ))}
       </div>
       <svg
@@ -58,17 +53,14 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
           height: '100%',
         }}
       />
-      <div
-        className={cn(
-          'absolute right-[18%] top-[13%] grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px]',
-          getNextItemsAnimationClassNames(animationState, conditions, !!positionedStories?.length)
-        )}
-        style={{
-          zIndex: 10,
-        }}
-      >
-        {positionedNextStories.map(positionedStory => (
-          <Story key={`${positionedStory.id}-${positionedStory.locale}`} story={positionedStory} />
+      <div className="absolute right-[18%] top-[13%] grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px] opacity-100">
+        {positionedStories.map(positionedStory => (
+          <Story
+            className={getItemsAnimationClassNames(animationState, conditions)}
+            key={`${positionedStory.id}-${positionedStory.locale}-${currentPage}`}
+            story={positionedStory}
+            isMainGrid
+          />
         ))}
       </div>
     </div>
