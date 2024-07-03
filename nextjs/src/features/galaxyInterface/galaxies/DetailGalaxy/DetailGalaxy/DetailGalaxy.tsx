@@ -49,7 +49,11 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
     countData?.totalPages ?? 0,
     false
   )
-  const isFetching = useIsFetching()
+  const isFetching = useIsFetching([
+    { queryKey: 'record-relations' },
+    { queryKey: 'record-relations-count' },
+    { queryKey: 'record-detail' },
+  ])
 
   useArrowNavigation({
     onLeft: decreasePageNumber,

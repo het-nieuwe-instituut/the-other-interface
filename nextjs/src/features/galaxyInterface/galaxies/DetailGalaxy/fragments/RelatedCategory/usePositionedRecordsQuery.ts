@@ -31,7 +31,7 @@ export const usePositionedRecordsQuery = ({
   }
 
   return useQuery({
-    queryKey: ['record-relations', category, id, page, locale, maxPages],
+    queryKey: ['record-relations-positons', category, id, page, locale, maxPages],
     queryFn,
     staleTime: Infinity,
     refetchOnWindowFocus: false,

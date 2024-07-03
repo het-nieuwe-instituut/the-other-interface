@@ -12,7 +12,7 @@ export function useRecordRelationsCountQuery(type: Category, id: string) {
   const queryFn = () => getZoom3CountsTask({ type, id, locale: lang, api })
 
   return useQuery({
-    queryKey: ['record-relations', id, type, lang],
+    queryKey: ['record-relations-count', id, type, lang],
     queryFn,
     staleTime: 60000, // 1 minute
     refetchOnWindowFocus: false,
