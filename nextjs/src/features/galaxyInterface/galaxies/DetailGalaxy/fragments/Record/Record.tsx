@@ -39,7 +39,12 @@ export const Record: React.FC<Props> = ({
     data: recordDetails,
     isLoading,
     isError,
-  } = useRecordDetailQuery({ type: category, id, options: { refetchOnWindowFocus: false } })
+  } = useRecordDetailQuery({
+    type: category,
+    id,
+    locale: lang,
+    options: { refetchOnWindowFocus: false },
+  })
 
   const {
     data,

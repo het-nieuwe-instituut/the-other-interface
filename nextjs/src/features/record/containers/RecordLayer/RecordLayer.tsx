@@ -14,10 +14,12 @@ import { useRecordDetailQuery } from '../../hooks/useRecordDetailQuery'
 import { useRecordMeta } from '../../hooks/useRecordMeta'
 import { RecordBottomContent } from '../RecordBottomContent/RecordBottomContent'
 import { RecordDescription } from '@/features/editorial/components/RecordDescription/RecordDescription'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 
 export const RecordLayer = () => {
   const params = useParams()
   const category = params?.category as Category
+  const locale = useLocale()
 
   const id = params?.id as string
   const { data: meta, isLoading } = useRecordMeta(category, id)
@@ -25,6 +27,7 @@ export const RecordLayer = () => {
     type: category,
     id,
     options: { refetchOnWindowFocus: false, suspense: true },
+    locale,
   })
 
   return (

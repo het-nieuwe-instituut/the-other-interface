@@ -1,6 +1,7 @@
 import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
 import { cn } from '@/features/ui/utils/cn'
@@ -16,11 +17,13 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
   const params = useParams()
   const category = params?.category as Category
   const id = params?.id as string
+  const locale = useLocale()
 
   const { data: record } = useRecordDetailQuery({
     type: category,
     id,
     options: { refetchOnWindowFocus: false },
+    locale,
   })
 
   return (

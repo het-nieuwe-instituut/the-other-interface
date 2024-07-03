@@ -1,6 +1,5 @@
 'use client'
 import { getZoom3RecordTask } from '@/features/pages/tasks/getZoom3Record'
-import { useLocale } from '@/features/shared/hooks/useLocale'
 import { UseBaseQueryOptions, useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import { Locale } from 'src/generated/graphql'
@@ -14,6 +13,7 @@ export function useRecordDetailQuery({
   type,
   id,
   options,
+  locale,
 }: {
   type: Category
   id: string
@@ -21,17 +21,17 @@ export function useRecordDetailQuery({
     UseBaseQueryOptions<() => typeof getZoom3RecordTask>,
     'suspense' | 'refetchOnWindowFocus'
   >
+  locale: Locale
 }) {
   const { isDraftMode } = useSelector((state: State) => state.shared)
   const api = initApiClientService()
-  const lang = useLocale()
 
   return useQuery({
-    queryKey: getRecordDetailQueryKey(id, lang),
+    queryKey: getRecordDetailQueryKey(id, locale),
     queryFn: async () => {
       const res = await getZoom3RecordTask(
         type,
-        { id, locale: Locale.Nl, publicationState: getPublicationState(isDraftMode) },
+        { id, locale, publicationState: getPublicationState(isDraftMode) },
         api,
         options?.suspense
       )
