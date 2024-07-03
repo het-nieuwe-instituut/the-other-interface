@@ -5,7 +5,7 @@ import { Category } from '../../utils/categories'
 import { getZoom3CountsTask } from '@/features/pages/tasks/getZoom3CountsTask'
 import { useLocale } from '../useLocale'
 
-export function useRecordRelationsCount(type: Category, id: string) {
+export function useRecordRelationsCountQuery(type: Category, id: string) {
   const api = initApiClientService()
   const lang = useLocale()
 

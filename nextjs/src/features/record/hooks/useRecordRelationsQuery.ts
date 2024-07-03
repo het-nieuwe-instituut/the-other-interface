@@ -6,7 +6,7 @@ import { Category } from '../../shared/utils/categories'
 import { useSearchParams } from 'next/navigation'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 
-export function useRecordRelations(type: Category, id: string, maxPages: number) {
+export function useRecordRelationsQuery(type: Category, id: string, maxPages: number) {
   const api = initApiClientService()
   const searchParams = useSearchParams()
   const lang = useLocale()

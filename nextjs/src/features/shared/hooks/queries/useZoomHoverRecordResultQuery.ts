@@ -18,7 +18,7 @@ export function useZoomHoverRecordResultQuery({
   const queryFn = () => getZoomRecordHoverTask({ id, category, api, locale })
 
   return useQuery({
-    queryKey: [id, category],
+    queryKey: ['zoom-hover-result', id, category],
     queryFn,
     refetchOnWindowFocus: false,
   })
