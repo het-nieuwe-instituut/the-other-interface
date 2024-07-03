@@ -1,3 +1,4 @@
+import { cn } from '@/features/ui/utils/cn'
 import { useSearchParams, usePathname } from 'next/navigation'
 import { useRef, useState, useLayoutEffect } from 'react'
 
@@ -53,5 +54,27 @@ export const GalaxyPaginationAnimationStateProvider = ({
     >
       {children}
     </GalaxyPaginationAnimationStateContext.Provider>
+  )
+}
+
+export const getItemsAnimationClassNames = (animationState: Animations, conditions: Conditions) => {
+  return cn(
+    conditions === 'previousAnimationWasBackwards' && 'animate-fromHideToShow',
+    animationState === 'forward' && 'animate-toBlurAndHide',
+    animationState === 'backwards' && 'animate-toBlur',
+    conditions === 'firstRender' && 'animate-fromHideToShow'
+  )
+}
+
+export const getNextItemsAnimationClassNames = (
+  animationState: Animations,
+  conditions: Conditions,
+  hasItems: boolean
+) => {
+  return cn(
+    !animationState && 'blur-[10px]',
+    animationState === 'forward' && 'animate-toUnblur',
+    animationState === 'backwards' && 'animate-fromBlurredToHide',
+    conditions === 'previousAnimationWasForward' && hasItems && 'animate-fromHideToShow'
   )
 }

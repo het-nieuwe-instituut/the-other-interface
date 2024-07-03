@@ -1,6 +1,10 @@
 import { cn } from '@/features/ui/utils/cn'
 import { useContext } from 'react'
-import { GalaxyPaginationAnimationStateContext } from '../../../hooks/GalaxyPaginationAnimationStateProvider'
+import {
+  GalaxyPaginationAnimationStateContext,
+  getItemsAnimationClassNames,
+  getNextItemsAnimationClassNames,
+} from '../../../hooks/GalaxyPaginationAnimationStateProvider'
 import { StoriesData } from '../../hooks/useThemesQuery'
 import { Story } from '../Story'
 import { useDrawLines } from './useDrawLines'
@@ -36,12 +40,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
       >
         {positionedStories.map(positionedStory => (
           <Story
-            className={cn(
-              conditions === 'previousAnimationWasBackwards' && 'animate-fromHideToShow',
-              animationState === 'forward' && 'animate-toBlurAndHide',
-              animationState === 'backwards' && 'animate-toBlur',
-              conditions === 'firstRender' && 'animate-fromHideToShow'
-            )}
+            className={getItemsAnimationClassNames(animationState, conditions)}
             key={`${positionedStory.id}-${positionedStory.locale}-${currentPage}`}
             story={positionedStory}
             isMainGrid
@@ -62,12 +61,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
       <div
         className={cn(
           'absolute right-[18%] top-[13%] grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px]',
-          !animationState && 'blur-[10px]',
-          animationState === 'forward' && 'animate-toUnblur',
-          animationState === 'backwards' && 'animate-fromBlurredToHide',
-          conditions === 'previousAnimationWasForward' &&
-            positionedNextStories.length &&
-            'animate-fromHideToShow'
+          getNextItemsAnimationClassNames(animationState, conditions, !!positionedStories?.length)
         )}
         style={{
           zIndex: 10,
