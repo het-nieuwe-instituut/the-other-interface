@@ -2,7 +2,6 @@
 import { cn } from '@/features/ui/utils/cn'
 import Image from 'next/image'
 import React, { CSSProperties, useRef, useState } from 'react'
-import { useTimeout } from 'usehooks-ts'
 import { limitCopyrightedImageResolution } from './limitCopyrightedImageResolution'
 
 type ResponsiveImageProps = {

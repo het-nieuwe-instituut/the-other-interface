@@ -51,7 +51,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
 
   const { closeSearchMode, clearAllSearch, openSearch, focus } = useSearchBarActions({
     filterInputRef,
-    isNoActiveSearch,
+    isNoActiveSearch: isNoActiveSearch,
   })
   const { syncInput } = useSyncSearchInputToStore()
   const { lang } = useZoom2Params()

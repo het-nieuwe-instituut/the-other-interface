@@ -79,7 +79,7 @@ export function useSearchBarActions({
   isNoActiveSearch?: boolean
 }) {
   const dispatch = useDispatch()
-  const { focus } = useFocusOnElement(filterInputRef, isNoActiveSearch ?? false)
+  const { focus } = useFocusOnElement(filterInputRef, !isNoActiveSearch)
   const search = useSearchValue()
   const { pageCategory } = usePageCategory()
   const { openSearch } = useOpenSearchModeOnInactiveSearch(filterInputRef, isNoActiveSearch)

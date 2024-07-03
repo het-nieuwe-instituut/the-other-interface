@@ -46,7 +46,7 @@ type Conditions =
   | undefined
 export const CategoryGalaxy = () => {
   const { pageNumber } = usePageNumber()
-  const { currentTemplate, nextTemplate, previousTemplate } = usePositioningTemplates(
+  const { currentTemplate, nextTemplate } = usePositioningTemplates(
     positioningTemplates,
     pageNumber
   )
@@ -80,7 +80,6 @@ export const CategoryGalaxy = () => {
         conditions,
         nextTemplate,
         currentTemplate,
-        previousTemplate,
       }}
     >
       <CategoryGalaxyContent key={currentPage} onSetAnimationState={handleAnimationState} />
@@ -194,7 +193,7 @@ export const CategoryGalaxyContent = React.memo(
     return (
       <div className={'w-screen bg-pink-100'}>
         <div className="relative mx-auto flex h-screen w-full max-w-[1440px] items-center justify-center px-[25px]">
-          {/* {isSearchModeActive && <BlurOverlay />} */}
+          {isSearchModeActive && <BlurOverlay />}
           {renderMainContent()}
 
           <GalaxyFooter
