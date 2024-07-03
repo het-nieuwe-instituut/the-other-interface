@@ -78,7 +78,6 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
             return (
               <ImageCarousel key={keyExtractor(component.id, index, array)}>
                 {component.items?.map(item => {
-                  console.log(item)
                   const attributes = item.image.data?.attributes
                   const href = addLocaleToUrl(
                     getTriplyOrStoryHref({
