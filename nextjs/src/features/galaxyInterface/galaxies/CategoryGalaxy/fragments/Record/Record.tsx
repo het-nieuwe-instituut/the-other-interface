@@ -14,6 +14,7 @@ import { RecordText } from '../RecordText'
 import { getTriplyRecordPathForTypeAndId } from '@/features/shared/utils/links'
 
 type Props = {
+  className?: string
   record: RecordProps
   tooltipPlace: PlacesType
 }
@@ -23,14 +24,14 @@ type RecordProps = SearchResultItemType & {
   category: EntityNames
 }
 
-export const Record: React.FC<Props> = ({ record, tooltipPlace }) => {
+export const Record: React.FC<Props> = ({ className, record, tooltipPlace }) => {
   const { id, category } = record
   const { t } = useTypeSafeTranslation('category')
   const { lang } = useZoom2Params()
   const { data, isLoading, isError } = useZoomHoverRecordResultQuery({ id, category })
 
   return (
-    <div className="relative">
+    <div className={cn('relative', className)}>
       <div className="absolute flex h-4/5 w-[70%]" style={{ ...record.position }}>
         <ReadMoreTooltip
           isLoading={isLoading}
@@ -42,14 +43,14 @@ export const Record: React.FC<Props> = ({ record, tooltipPlace }) => {
           className="size-full"
           color="blue"
         >
-          {RecordData(record, lang)}
+          <RecordData record={record} lang={lang} />
         </ReadMoreTooltip>
       </div>
     </div>
   )
 }
 
-const RecordData = (record: RecordProps, lang?: Locale | null) => {
+const RecordData = ({ record, lang }: { record: RecordProps; lang?: Locale | null }) => {
   const { id, thumbnail, category, title } = record
   const router = useRouter()
 

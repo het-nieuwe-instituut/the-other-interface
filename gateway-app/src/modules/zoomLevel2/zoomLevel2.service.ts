@@ -114,7 +114,7 @@ export class ZoomLevel2Service {
     text?: string | null,
     selectedFilterSuggestions?: SelectedFilterSuggestion[] | null
   ) {
-    const uri = this.getUriForLevel2TextSearch(type, { forCount: false })
+    const uri = this.getUriForLevel2Data(type, text, { forCount: false })
     const searchParams = this.getZoomLevel2SearchParams(selectedFilterSuggestions, text)
 
     const result = await this.triplyService.queryTriplyData<ResultData>(
@@ -141,7 +141,7 @@ export class ZoomLevel2Service {
     text?: string | null,
     selectedFilterSuggestions?: SelectedFilterSuggestion[] | null
   ) {
-    const uri = this.getUriForLevel2TextSearch(type, { forCount: true })
+    const uri = this.getUriForLevel2Data(type, text, { forCount: true })
     const searchParams = this.getZoomLevel2SearchParams(selectedFilterSuggestions, text)
 
     const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
@@ -155,6 +155,34 @@ export class ZoomLevel2Service {
 
     return {
       total,
+    }
+  }
+
+  private getUriForLevel2Data(
+    type: EntityNames,
+    text: string | null = '',
+    { forCount }: { forCount: boolean }
+  ) {
+    if (text) {
+      return this.getUriForLevel2TextSearch(type, { forCount })
+    }
+
+    const dataAmountUri = forCount ? '-count' : ''
+
+    switch (type) {
+      case EntityNames.People:
+        return `people-landingPage${dataAmountUri}/run`
+      case EntityNames.Archives:
+        return `archives-landingPage${dataAmountUri}/run`
+      case EntityNames.Publications:
+        return `publications-landingPage${dataAmountUri}/run`
+      case EntityNames.Objects:
+        return `objects-landingPage${dataAmountUri}/run`
+      case EntityNames.Media:
+      case EntityNames.Stories:
+      case EntityNames.External:
+      default:
+        throw CustomError.externalCritical(`uri for type ${type} not implemented`)
     }
   }
 

@@ -30,7 +30,7 @@ import { CloseButton, FilterInput } from './fragments'
 import { GoButton } from './fragments/GoButton'
 import { SearchButton } from './fragments/SearchButton'
 import SearchResults from './fragments/SearchResults'
-import TotalResults from './fragments/TotalResults'
+import { TotalResults } from './fragments/TotalResults'
 import { useSearchBarPosition } from './useSearchBarPosition'
 import { searchCategoryToTriplyCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
 
@@ -51,7 +51,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
 
   const { closeSearchMode, clearAllSearch, openSearch, focus } = useSearchBarActions({
     filterInputRef,
-    isNoActiveSearch,
+    isNoActiveSearch: isNoActiveSearch,
   })
   const { syncInput } = useSyncSearchInputToStore()
   const { lang } = useZoom2Params()
@@ -107,7 +107,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
       ref={searchBarRef}
     >
       <div className=" flex h-[60px] flex-col items-start justify-center self-end pt-1">
-        {isNoActiveSearch ? <TotalResults /> : <SearchResults />}
+        {isNoActiveSearch ? <TotalResults text={searchValue} /> : <SearchResults />}
       </div>
 
       <div ref={wrapRef} className="flex flex-wrap gap-0 p-0 transition-all">
