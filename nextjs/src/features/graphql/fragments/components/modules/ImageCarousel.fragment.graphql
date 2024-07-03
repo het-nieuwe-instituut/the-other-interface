@@ -1,17 +1,35 @@
 fragment imageCarouselModuleFragment on ComponentModulesImageCarousel {
   id
   __typename
-  images {
-    data {
-      id
-      attributes {
-        url
-        caption
-        width
-        height
-        size
+  description
+  items {
+    id
+    url
+    alt_text
+    triply_record {
+      data {
+        ...BaseTriplyRecordFragment
+      }
+    }
+    story {
+      data {
+        id
+        attributes {
+          slug
+        }
+      }
+    }
+    image {
+      data {
+        id
+        attributes {
+          url
+          caption
+          width
+          height
+          size
+        }
       }
     }
   }
-  description
 }

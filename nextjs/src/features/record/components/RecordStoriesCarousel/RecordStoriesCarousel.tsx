@@ -1,4 +1,5 @@
 'use client'
+import { imageBasePath } from '@/features/modules/modulesConstants'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
@@ -59,15 +60,15 @@ export const RecordStoriesCarousel = () => {
           <ImageCarousel>
             {stories.map(item => {
               const href = addLocaleToUrl(`/detail/${CATEGORIES.stories}/${item.id}`, lang)
-
-              if (!item || !item.height || !item.width || !item.url) {
+              const url = item?.url ? imageBasePath(item.url.toString()) : undefined
+              if (!item || !item.height || !item.width || !item.url || !url) {
                 return null
               }
               return (
                 <ImageCarouselItem
                   href={href}
                   key={item.id}
-                  src={item.url}
+                  src={url}
                   alt={item.description ?? ''}
                   caption={item.description ?? undefined}
                 />
