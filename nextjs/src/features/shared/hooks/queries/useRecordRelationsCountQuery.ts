@@ -14,6 +14,7 @@ export function useRecordRelationsCountQuery(type: Category, id: string) {
   return useQuery({
     queryKey: ['record-relations', id, type, lang],
     queryFn,
+    staleTime: 60000, // 1 minute
     refetchOnWindowFocus: false,
   })
 }

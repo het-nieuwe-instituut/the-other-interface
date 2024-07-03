@@ -1,54 +1,39 @@
 import { CloudCategory } from '@/features/shared/utils/categories'
-import { useEffect, useRef } from 'react'
 
 import { getZoom3RelationsTask } from '@/features/pages/tasks/getZoom3Relations'
-import { useLocale } from '@/features/shared/hooks/useLocale'
 import initApiClientService from '@/features/shared/utils/initApiClientService'
 import { useQuery } from '@tanstack/react-query'
-import { useParams, useSearchParams } from 'next/navigation'
-import { ZoomLevel3RelationsType } from 'src/generated/graphql'
+
+import { Locale, ZoomLevel3RelationsType } from 'src/generated/graphql'
 import { PositionedRecord } from '../types'
-import { AllRelationTotalsType } from './RelatedCategory'
 import { positioningTemplate } from './positioningTemplates'
 
-export const usePositionedRecordsQuery = (
-  category: CloudCategory,
-  allRelationTotals?: AllRelationTotalsType
-) => {
-  const params = useParams()
-  const locale = useLocale()
-  const searchParams = useSearchParams()
-  const page = parseInt(searchParams?.get('page') || '1')
-  const id = params?.id as string
-  const maxPages = Math.ceil((allRelationTotals?.[category] || 2) / 2)
-  const current = useRef(0)
-  const next = useRef(1)
+export const usePositionedRecordsQuery = ({
+  maxPages,
+  id,
+  locale,
+  page,
+  category,
+  current,
+}: {
+  id: string
+  locale: Locale
+  page: number
+  maxPages: number
+  category: CloudCategory
+  current?: number
+}) => {
   const api = initApiClientService()
-
-  useEffect(() => {
-    if (page <= maxPages) {
-      if (page % 2 === 0) {
-        current.current = 1
-        next.current = 0
-      } else {
-        current.current = 0
-        next.current = 1
-      }
-    }
-  }, [page, maxPages])
 
   const queryFn = async () => {
     const data = await getZoom3RelationsTask({ type: category, id, page, locale, api, maxPages })
-
-    return {
-      positionedRecords: getPositionedRecords(data?.currentData?.relations, category, current),
-      nextPositionedRecords: getPositionedRecords(data?.nextData?.relations, category, next),
-    }
+    return getPositionedRecords(data?.currentData?.relations, category, current)
   }
 
   return useQuery({
     queryKey: ['record-relations', category, id, page, locale, maxPages],
     queryFn,
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   })
 }
@@ -56,14 +41,14 @@ export const usePositionedRecordsQuery = (
 function getPositionedRecords(
   relations: ZoomLevel3RelationsType[] | null | undefined,
   category: CloudCategory,
-  current: { current: number }
+  current?: number
 ) {
-  if (!relations) return []
+  if (!relations || current === undefined) return []
 
   const positionedRecords: PositionedRecord[] = []
-  const categoryPositioningTemplate = positioningTemplate[category][current.current]
+  const categoryPositioningTemplate = positioningTemplate[category][current]
   const categoryRelations = relations.find(
-    relation => relation.type?.toLocaleLowerCase() === category
+    relation => getCloudCategoryByRelationType(relation.type) === category
   )?.paginatedRelations
 
   if (!categoryPositioningTemplate || !categoryRelations) return []
@@ -82,4 +67,21 @@ function getPositionedRecords(
   })
 
   return positionedRecords
+}
+
+export const getCloudCategoryByRelationType = (type: string): CloudCategory => {
+  const transformedType = type.toLocaleLowerCase()
+  if (transformedType === 'objects') {
+    return 'objects'
+  }
+  if (transformedType === 'people') {
+    return 'people'
+  }
+  if (transformedType === 'publications') {
+    return 'publications'
+  }
+  if (transformedType === 'archives') {
+    return 'archives'
+  }
+  throw new Error(`Unknown category from relation type, this should not happen! ${type}`)
 }

@@ -1,93 +1,42 @@
 import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
-import ErrorBox from '@/features/shared/components/Error/ErrorBox'
-import { Loader } from '@/features/shared/components/Loading/Loading'
-import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
-import { Flex, GridItem, Text } from '@chakra-ui/react'
+import { cn } from '@/features/ui/utils/cn'
+import { Text } from '@chakra-ui/react'
 import { useParams } from 'next/navigation'
 
 interface Props {
-  gridRow: string
-  gridColumn: string
+  className?: string
 }
 
-export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
+export const DetailedRecord: React.FC<Props> = ({ className }) => {
   const { t } = useLooseTypeSafeTranslation('category')
   const params = useParams()
   const category = params?.category as Category
   const id = params?.id as string
 
-  const {
-    data: record,
-    isLoading,
-    isError,
-  } = useRecordDetailQuery({
+  const { data: record } = useRecordDetailQuery({
     type: category,
     id,
     options: { refetchOnWindowFocus: false },
   })
 
-  if (isLoading) {
-    return (
-      <div className="absolute left-0 -ml-3 flex size-full items-center justify-center ">
-        <ThemedSpinner />
-      </div>
-    )
-  }
-
-  if (isError) {
-    return (
-      <div className="absolute left-0 -ml-3 flex size-full flex-col items-center justify-center text-black-100">
-        <ErrorBox className="flex items-center justify-center " />
-      </div>
-    )
-  }
-
   return (
-    <GridItem
-      gridRow={gridRow}
-      gridColumn={gridColumn}
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
+    <div
+      className={cn(
+        ' col-start-1 col-end-3 row-start-2 row-end-4 flex items-center justify-center',
+        className
+      )}
     >
-      <Flex
-        position="relative"
-        w="80%"
-        h="80%"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        gap="2px"
-      >
+      <div className="relative flex size-4/5 flex-col items-center justify-center gap-[2px]">
         {renderContent()}
-      </Flex>
-    </GridItem>
+      </div>
+    </div>
   )
 
   function renderContent() {
-    if (isLoading) {
-      return (
-        <div className="h-full items-center justify-center">
-          <Loader />
-        </div>
-      )
-    }
-
-    if (isError) {
-      return (
-        <div className="flex h-full items-center justify-center">
-          <p className={`${TypographyVariants({ times: 'md' })} text-black-100`}>
-            {t('errorLoadingDetail')}
-          </p>
-        </div>
-      )
-    }
-
     return (
       <>
         <ResponsiveImage
@@ -99,7 +48,7 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
             flex: `1 1 calc(100% - 3vw - 8px)`,
           }}
         />
-        <Flex w="100%" color="blueAlpha.100" direction="column" flex="1" mt={2}>
+        <div className="mt-2 flex w-full flex-1 flex-col text-blue-100">
           <Text
             align="center"
             isTruncated
@@ -118,7 +67,7 @@ export const DetailedRecord: React.FC<Props> = ({ gridRow, gridColumn }) => {
           >
             {t(toSingularCategory(category))}
           </Text>
-        </Flex>
+        </div>
       </>
     )
   }

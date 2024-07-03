@@ -1,7 +1,6 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 
 import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
-import { Loader } from '@/features/shared/components/Loading/Loading'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
@@ -22,6 +21,7 @@ type Props = {
   style?: React.CSSProperties
   tooltipPlace?: ReadMoreTooltipProps['place']
   isIdLoading?: boolean
+  className?: string
 }
 
 export const Record: React.FC<Props> = ({
@@ -29,6 +29,7 @@ export const Record: React.FC<Props> = ({
   style,
   tabIndex = 0,
   tooltipPlace = 'bottom',
+  className,
 }) => {
   const router = useRouter()
   const lang = useLocale()
@@ -48,18 +49,15 @@ export const Record: React.FC<Props> = ({
   const { coordinates, ref } = useCalculateLine()
   const { t } = useTypeSafeTranslation('category')
 
-  if (isLoading && tabIndex === 0) {
-    return (
-      <div className="h-full items-center justify-center">
-        <Loader />
-      </div>
-    )
-  }
-  if (!recordDetails || isError) return null
-
   return (
-    <div style={{ ...grid, ...style }}>
-      <div className="peer relative size-full">
+    <div className={cn(className)} style={{ ...grid, ...style }}>
+      <div
+        className={cn(
+          'peer relative size-full',
+          'transition-opacity opacity-0',
+          !isLoading && !isError && 'opacity-100'
+        )}
+      >
         <ReadMoreTooltip
           isLoading={isLoadingHover}
           error={isLoadingHoverError ? t('couldNotFetchHover') : ''}

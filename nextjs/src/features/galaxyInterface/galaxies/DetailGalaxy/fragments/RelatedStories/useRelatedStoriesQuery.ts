@@ -1,12 +1,10 @@
 import { PositioningTemplate } from '@/features/shared/types/position'
 import { CATEGORIES, CloudCategory, isStoryCategory } from '@/features/shared/utils/categories'
-import { useEffect, useRef } from 'react'
 
 import { getZoom3RelationsTask } from '@/features/pages/tasks/getZoom3Relations'
 import initApiClientService from '@/features/shared/utils/initApiClientService'
 import { useQuery } from '@tanstack/react-query'
 import { Locale, ZoomLevel3RelationsType } from 'src/generated/graphql'
-import { AllRelationTotalsType } from '../RelatedCategory'
 import { PositionedRecord } from '../types'
 
 const positioningTemplate: PositioningTemplate[][] = [
@@ -57,34 +55,21 @@ const positioningTemplate: PositioningTemplate[][] = [
 ]
 
 export const useRelatedStoriesQuery = ({
-  allRelationTotals,
+  maxPages,
   page,
   id,
   locale,
   category,
+  current,
 }: {
-  allRelationTotals?: AllRelationTotalsType
+  maxPages: number
   page: number
   id: string
   locale: Locale
   category: CloudCategory
+  current: number
 }) => {
-  const maxPages = Math.ceil((allRelationTotals?.[CATEGORIES.stories] || 2) / 2)
-  const current = useRef(0)
-  const next = useRef(1)
   const api = initApiClientService()
-
-  useEffect(() => {
-    if (page <= maxPages) {
-      if (page % 2 === 0) {
-        current.current = 1
-        next.current = 0
-      } else {
-        current.current = 0
-        next.current = 1
-      }
-    }
-  }, [page, maxPages])
 
   const queryFn = async () => {
     const res = await getZoom3RelationsTask({
@@ -96,16 +81,13 @@ export const useRelatedStoriesQuery = ({
       maxPages,
     })
 
-    return {
-      positionedStories: getPositionedStories(res?.currentData?.relations, current.current),
-      nextPositionedStories: getPositionedStories(res?.nextData?.relations, next.current),
-    }
+    return getPositionedStories(res?.currentData?.relations, current)
   }
 
   return useQuery({
-    queryKey: ['record-relations', id, category, page, locale],
+    queryKey: ['related-stories', id, category, page, locale],
     queryFn,
-    staleTime: 60000,
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   })
 }

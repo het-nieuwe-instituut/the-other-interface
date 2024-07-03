@@ -38,7 +38,7 @@ export function useRecordDetailQuery({
 
       return res
     },
-    staleTime: 60000, // 1 minute
+    staleTime: Infinity,
     suspense: options?.suspense ?? false,
     retry: 0,
   })
