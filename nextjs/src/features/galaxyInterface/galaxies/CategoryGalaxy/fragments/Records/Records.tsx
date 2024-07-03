@@ -9,6 +9,7 @@ import { useContext, useMemo } from 'react'
 import { SearchResultItemType } from 'src/generated/graphql'
 import { CategoryGalaxyAnimationContext } from '../../CategoryGalaxy'
 import { PositioningTemplate, positioningTemplates } from './positioningTemplates'
+import { GalaxyPaginationAnimationStateContext } from '../../../hooks/GalaxyPaginationAnimationStateProvider'
 
 type Props = {
   pageAmount: number
@@ -47,9 +48,8 @@ const getPositionedRecords = ({
 
 export const Records: React.FC<Props> = ({ pageAmount, records }) => {
   const { category, search } = useZoom2Params()
-  const { animationState, conditions, currentTemplate, nextTemplate } = useContext(
-    CategoryGalaxyAnimationContext
-  )
+  const { currentTemplate, nextTemplate } = useContext(CategoryGalaxyAnimationContext)
+  const { conditions, animationState } = useContext(GalaxyPaginationAnimationStateContext)
   const { pageNumber } = usePageNumber()
   const selectedFilters = useSelectedFilters()
 

@@ -1,6 +1,6 @@
 import { cn } from '@/features/ui/utils/cn'
 import { useContext } from 'react'
-import { MainGalaxyAnimationContext } from '../../MainGalaxy'
+import { GalaxyPaginationAnimationStateContext } from '../../../hooks/GalaxyPaginationAnimationStateProvider'
 import { StoriesData } from '../../hooks/useThemesQuery'
 import { Story } from '../Story'
 import { useDrawLines } from './useDrawLines'
@@ -18,7 +18,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
     originalTemplateIndex,
     pageNumber: currentPage,
   } = usePresenter(stories, nextStories)
-  const { animationState, conditions } = useContext(MainGalaxyAnimationContext)
+  const { animationState, conditions } = useContext(GalaxyPaginationAnimationStateContext)
   const svgRef = useDrawLines({
     hideLines: !!animationState,
     selector: '.story-grid-item',
