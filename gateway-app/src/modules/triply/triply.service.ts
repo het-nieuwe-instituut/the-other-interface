@@ -7,6 +7,12 @@ import { PaginationArgs } from '../util/paginationArgs.type'
 import { RollbarService } from '../util/rollbar.service'
 import { get } from 'lodash'
 
+export enum ExternalSource {
+  getty = 'getty',
+  wikidata = 'wikidata',
+  rkd = 'rkd',
+}
+
 /**
  * Due to typescript's limitations, we decided to use this approach to verify expected
  * keys in runtime. There are other solutions, but those require fundamental changes to

@@ -1,11 +1,11 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common'
-import { KeysToVerify, TriplyService } from '../triply/triply.service'
+import { Injectable } from '@nestjs/common'
+import { ExternalSource, KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from '../util/entityNames.type'
-import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 import { TriplyUtils } from '../triply/triply.utils'
 import { getHttpThumbnailOrNull } from '../util/helpers'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { Locale } from '../util/locale.type'
+import { EnrichedRecordBaseType } from '../triply/triply.type'
 
 interface PublicationsZoomLevel3Data {
   thumbnail?: string
@@ -56,147 +56,6 @@ const publicationsZoomLevel2HoverDataKeys: KeysToVerify<PublicationsZoomLevel2Ho
   authors: true,
   description: true,
 }
-
-interface PublicationsBooksDetailZoomLevel3Data {
-  thumbnail: true
-  id: true
-  typeOfPublication?: string
-  typeOfPublicationLabel?: string
-  title?: string
-  author?: string
-  authorLabel?: string
-  authorRole?: string
-  authorRoleLabel?: string
-  publisher?: string
-  publisherLabel?: string
-  yearOfPublication?: string
-  placeOfPublication?: string
-  placeOfPublicationLabel?: string
-  isbn?: string
-  description?: string
-  annotation?: string
-  codeOfArchive?: string
-  codeOfArchiveLabel?: string
-  edition?: string
-  illustration?: string
-  numberOfPages?: string
-  language?: string
-  languageLabel?: string
-  seriesLabel?: string
-  number?: string
-  geographicalKeyword?: string
-  geographicalKeywordLabel?: string
-  subject?: string
-  subjectLabel?: string
-  relatedPerInst?: string
-  relatedPerInstLabel?: string
-  objectNumber?: string
-  availability?: string
-  shelfmark?: string
-  permanentLink?: string
-}
-
-interface PublicationsSerialDetailZoomLevel3Data {
-  id: string
-  thumbnail?: string
-  typeOfPublication?: string
-  typeOfPublicationLabel?: string
-  title?: string
-  publisher?: string
-  publisherLabel?: string
-  yearOfPublication?: string
-  placeOfPublication?: string
-  placeOfPublicationLabel?: string
-  subject?: string
-  subjectLabel?: string
-  language?: string
-  languageLabel?: string
-  continuedFrom?: string
-  continuedAs?: string
-  remarks?: string
-  availability?: string
-  shelfmark?: string
-  holding?: string
-  permanentLink?: string
-}
-
-interface PublicationArticleDetailZoomLevel3Data {
-  id: string
-  thumbnail?: string
-  typeOfPublication?: string
-  typeOfPublicationLabel?: string
-  title?: string
-  author?: string
-  authorLabel?: string
-  authorRole?: string
-  authorRoleLabel?: string
-  sourceTitle?: string
-  sourceTitleLabel?: string
-  volume?: string
-  issue?: string
-  yearOfPublication?: string
-  page?: string
-  publisher?: string
-  publisherLabel?: string
-  abstract?: string
-  language?: string
-  languageLabel?: string
-  geographicalKeyword?: string
-  geographicalKeywordLabel?: string
-  subject?: string
-  subjectLabel?: string
-  relatedPerInst?: string
-  relatedPerInstLabel?: string
-  objectNumber?: string
-  availability?: string
-  shelfmark?: string
-  permanentLink?: string
-}
-
-interface PublicationsAudioVisualDetailZoomLevel3Data {
-  id: string
-  thumbnail?: string
-  typeOfPublication?: string
-  typeOfPublicationLabel?: string
-  title?: string
-  author?: string
-  authorLabel?: string
-  authorRole?: string
-  authorRoleLabel?: string
-  publisher?: string
-  publisherLabel?: string
-  yearOfPublication?: string
-  placeOfPublication?: string
-  placeOfPublicationLabel?: string
-  abstract?: string
-  annotation?: string
-  scope?: string
-  language?: string
-  languageLabel?: string
-  medium?: string
-  geographicalKeyword?: string
-  geographicalKeywordLabel?: string
-  subject?: string
-  subjectLabel?: string
-  relatedPerInst?: string
-  relatedPerInstLabel?: string
-  permanentLink?: string
-  objectNumber?: string
-  availability?: string
-  shelfmark?: string
-}
-export enum PublicationsZoomLevel3Types {
-  serial = 'serial',
-  book = 'book',
-  article = 'article',
-  audiovisual = 'audiovisual',
-}
-
-type PublicationsZoomLevel3DataTypes =
-  | PublicationsBooksDetailZoomLevel3Data
-  | PublicationsSerialDetailZoomLevel3Data
-  | PublicationArticleDetailZoomLevel3Data
-  | PublicationsAudioVisualDetailZoomLevel3Data
 
 export interface PublicationRecordZoomLevel3Data {
   objectNumber?: string
@@ -266,11 +125,13 @@ export class PublicationsService {
   private readonly ZoomLevel3RecordEndpoint = 'publications-recordPage-Editorial/run?'
   private readonly ZoomLevel2HoverEndpoint = 'publications-hoverState/run?'
 
-  public constructor(
-    private readonly triplyService: TriplyService,
-    @Inject(forwardRef(() => ZoomLevel3Service))
-    private readonly zoomLevel3Service: ZoomLevel3Service
-  ) {}
+  private readonly EnrichedSourceEndpoints: Record<ExternalSource, string> = {
+    [ExternalSource.getty]: 'publications-enrichment-getty/run',
+    [ExternalSource.wikidata]: 'publications-enrichment-wikidata/run',
+    [ExternalSource.rkd]: 'publications-enrichment-rkd/run',
+  }
+
+  public constructor(private readonly triplyService: TriplyService) {}
 
   public async getZoomLevel3Data(id: string, locale: Locale) {
     const result = await this.triplyService.queryTriplyData<PublicationsZoomLevel3Data>(
@@ -328,29 +189,7 @@ export class PublicationsService {
       { id, language: locale }
     )
 
-    return result.data
-  }
-
-  public resolveAuthor(publication: PublicationsZoomLevel3DataTypes, locale: Locale) {
-    if (!('author' in publication) || !publication.author) {
-      return
-    }
-
-    const type = TriplyUtils.getEntityNameFromUri(publication.author)
-    const id = TriplyUtils.getIdFromUri(publication.author)
-
-    return this.zoomLevel3Service.getDetail(id, type, locale)
-  }
-
-  public resolvePublisher(publication: PublicationsZoomLevel3DataTypes, locale: Locale) {
-    if (!('publisher' in publication) || !publication.publisher) {
-      return
-    }
-
-    const type = TriplyUtils.getEntityNameFromUri(publication.publisher)
-    const id = TriplyUtils.getIdFromUri(publication.publisher)
-
-    return this.zoomLevel3Service.getDetail(id, type, locale)
+    return { ...result.data, id }
   }
 
   public async getZoomRecordHover(id: string, locale: Locale) {
@@ -367,5 +206,31 @@ export class PublicationsService {
     }
 
     return { ...TriplyUtils.combineObjectArray(results.data) }
+  }
+
+  public async getEnrichedSources(id: string, locale: Locale): Promise<EnrichedRecordBaseType[]> {
+    const sources = Object.entries(this.EnrichedSourceEndpoints)
+    const params = { id, language: locale }
+
+    const enrichedSources = await Promise.all(
+      sources.map(async ([source, endpoint]) => {
+        const result = await this.triplyService.queryTriplyData(endpoint, {}, undefined, params)
+
+        const enrichedSource = TriplyUtils.combineObjectArray(result.data as object[])
+        const externalSourceUrl = TriplyUtils.getExternalSourceUrlFromData(
+          result.data,
+          source as ExternalSource
+        )
+
+        return {
+          ...enrichedSource,
+          id,
+          externalSourceType: source as ExternalSource,
+          externalSourceUrl,
+        }
+      })
+    )
+
+    return enrichedSources
   }
 }

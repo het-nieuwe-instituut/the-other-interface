@@ -1,13 +1,10 @@
 import { forwardRef, Module } from '@nestjs/common'
 import { ZoomLevel3Module } from '../zoomLevel3/zoomLevel3.module'
 import {
-  PublicationAuthorResolver,
+  PublicationRecordZoomLevel3Resolver,
   PublicationRelationsZoomLevel3Resolver,
-  PublicationsArticleResolver,
-  PublicationsAudioVisualResolver,
-  PublicationsBookResolver,
-  PublicationsSerialResolver,
   PublicationsZoomLevelRecordHoverResolver,
+  PublicationZoomLevel3DetailResolver,
 } from './publications.resolver'
 import { PublicationsService } from './publications.service'
 
@@ -15,23 +12,17 @@ import { PublicationsService } from './publications.service'
   imports: [forwardRef(() => ZoomLevel3Module)],
   providers: [
     PublicationsService,
-    PublicationsAudioVisualResolver,
-    PublicationsArticleResolver,
-    PublicationsBookResolver,
-    PublicationsSerialResolver,
-    PublicationAuthorResolver,
     PublicationRelationsZoomLevel3Resolver,
     PublicationsZoomLevelRecordHoverResolver,
+    PublicationZoomLevel3DetailResolver,
+    PublicationRecordZoomLevel3Resolver,
   ],
   exports: [
     PublicationsService,
-    PublicationsAudioVisualResolver,
-    PublicationsArticleResolver,
-    PublicationsBookResolver,
-    PublicationsSerialResolver,
-    PublicationAuthorResolver,
     PublicationRelationsZoomLevel3Resolver,
     PublicationsZoomLevelRecordHoverResolver,
+    PublicationZoomLevel3DetailResolver,
+    PublicationRecordZoomLevel3Resolver,
   ],
 })
 export class PublicationsModule {}
