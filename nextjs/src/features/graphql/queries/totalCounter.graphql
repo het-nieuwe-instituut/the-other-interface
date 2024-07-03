@@ -1,5 +1,38 @@
-query totalCounter($locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!]) {
-  stories(locale: $locale) {
+query totalCounter(
+  $locale: Locale!
+  $selectedFilterSuggestions: [SelectedFilterSuggestion!]
+  $locationsFilterTerm: ID
+  $themesFilterTerm: ID
+  $authorFilterTerm: ID
+  $searchTerm: String
+) {
+  stories(
+    filters: {
+      and: [
+        {
+          or: [
+            { locations: { id: { eq: $locationsFilterTerm } } }
+            { themes: { id: { eq: $themesFilterTerm } } }
+            { author: { id: { eq: $authorFilterTerm } } }
+          ]
+        }
+        {
+          or: [
+            { title: { containsi: $searchTerm } }
+            { description: { containsi: $searchTerm } }
+            { shortDescription: { containsi: $searchTerm } }
+          ]
+        }
+      ]
+      or: [
+        { title: { containsi: $searchTerm } }
+        { description: { containsi: $searchTerm } }
+        { shortDescription: { containsi: $searchTerm } }
+      ]
+    }
+    pagination: { page: 1, pageSize: 1 }
+    locale: $locale
+  ) {
     meta {
       pagination {
         total
@@ -10,6 +43,7 @@ query totalCounter($locale: Locale!, $selectedFilterSuggestions: [SelectedFilter
     entityName: Archives
     locale: $locale
     selectedFilterSuggestions: $selectedFilterSuggestions
+    text: $searchTerm
   ) {
     total
   }
@@ -17,6 +51,7 @@ query totalCounter($locale: Locale!, $selectedFilterSuggestions: [SelectedFilter
     entityName: Objects
     locale: $locale
     selectedFilterSuggestions: $selectedFilterSuggestions
+    text: $searchTerm
   ) {
     total
   }
@@ -24,6 +59,7 @@ query totalCounter($locale: Locale!, $selectedFilterSuggestions: [SelectedFilter
     entityName: People
     locale: $locale
     selectedFilterSuggestions: $selectedFilterSuggestions
+    text: $searchTerm
   ) {
     total
   }
@@ -31,6 +67,7 @@ query totalCounter($locale: Locale!, $selectedFilterSuggestions: [SelectedFilter
     entityName: Publications
     locale: $locale
     selectedFilterSuggestions: $selectedFilterSuggestions
+    text: $searchTerm
   ) {
     total
   }

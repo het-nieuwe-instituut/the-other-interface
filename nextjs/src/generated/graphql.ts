@@ -2229,6 +2229,10 @@ export type ThemesQuery = { __typename?: 'Query', themes: { __typename?: 'ThemeR
 export type TotalCounterQueryVariables = Exact<{
   locale: Locale;
   selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion> | SelectedFilterSuggestion>;
+  locationsFilterTerm?: InputMaybe<Scalars['ID']['input']>;
+  themesFilterTerm?: InputMaybe<Scalars['ID']['input']>;
+  authorFilterTerm?: InputMaybe<Scalars['ID']['input']>;
+  searchTerm?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -3649,8 +3653,12 @@ export const ThemesDocument = gql`
 }
     ${ThemeFragmentFragmentDoc}`;
 export const TotalCounterDocument = gql`
-    query totalCounter($locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!]) {
-  stories(locale: $locale) {
+    query totalCounter($locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!], $locationsFilterTerm: ID, $themesFilterTerm: ID, $authorFilterTerm: ID, $searchTerm: String) {
+  stories(
+    filters: {and: [{or: [{locations: {id: {eq: $locationsFilterTerm}}}, {themes: {id: {eq: $themesFilterTerm}}}, {author: {id: {eq: $authorFilterTerm}}}]}, {or: [{title: {containsi: $searchTerm}}, {description: {containsi: $searchTerm}}, {shortDescription: {containsi: $searchTerm}}]}], or: [{title: {containsi: $searchTerm}}, {description: {containsi: $searchTerm}}, {shortDescription: {containsi: $searchTerm}}]}
+    pagination: {page: 1, pageSize: 1}
+    locale: $locale
+  ) {
     meta {
       pagination {
         total
@@ -3661,6 +3669,7 @@ export const TotalCounterDocument = gql`
     entityName: Archives
     locale: $locale
     selectedFilterSuggestions: $selectedFilterSuggestions
+    text: $searchTerm
   ) {
     total
   }
@@ -3668,6 +3677,7 @@ export const TotalCounterDocument = gql`
     entityName: Objects
     locale: $locale
     selectedFilterSuggestions: $selectedFilterSuggestions
+    text: $searchTerm
   ) {
     total
   }
@@ -3675,6 +3685,7 @@ export const TotalCounterDocument = gql`
     entityName: People
     locale: $locale
     selectedFilterSuggestions: $selectedFilterSuggestions
+    text: $searchTerm
   ) {
     total
   }
@@ -3682,6 +3693,7 @@ export const TotalCounterDocument = gql`
     entityName: Publications
     locale: $locale
     selectedFilterSuggestions: $selectedFilterSuggestions
+    text: $searchTerm
   ) {
     total
   }
