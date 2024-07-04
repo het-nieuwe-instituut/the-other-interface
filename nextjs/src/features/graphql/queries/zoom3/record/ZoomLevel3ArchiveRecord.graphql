@@ -17,5 +17,27 @@ query ZoomLevel3ArchiveRecord($id: String!, $locale: Locale!) {
     sources
     existence
     existenceLocation
+    enrichedSources(locale: $locale) {
+      id
+      externalSourceType
+      externalSourceUrl
+      __typename
+      referenceCode
+      titleType
+      descriptionLevel
+      size
+      period
+      access
+      photographCreator
+      rights
+      permanentLink
+      externalSource
+      description
+      custodialHistory
+      systemOfArrangement
+      sources
+      existence
+      existenceLocation
+    }
   }
 }

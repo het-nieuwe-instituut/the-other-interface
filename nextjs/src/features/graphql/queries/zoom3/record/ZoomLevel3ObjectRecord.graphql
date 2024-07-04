@@ -15,5 +15,25 @@ query ZoomLevel3ObjectRecord($id: String!, $locale: Locale!) {
     rights
     permanentLink
     externalSource
+    enrichedSources(locale: $locale) {
+      id
+      externalSourceType
+      externalSourceUrl
+      objectNumber
+      titleType
+      objectName
+      archiveCode
+      date
+      relatedKeywords
+      materials
+      techniques
+      hasParts
+      dimension
+      scale
+      creditLine
+      rights
+      permanentLink
+      externalSource
+    }
   }
 }
