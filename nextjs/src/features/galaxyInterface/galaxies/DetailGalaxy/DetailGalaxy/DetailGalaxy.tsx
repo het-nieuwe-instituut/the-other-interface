@@ -52,7 +52,6 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
   const isFetching = useIsFetching({
     predicate: query => {
       const key = query.queryKey.at(0) as string
-      console.log('MY KEY', query.queryKey)
       return key
         ? ['record-relations', 'record-relations-count', 'record-detail'].includes(key)
         : false
