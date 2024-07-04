@@ -11,10 +11,11 @@ import { useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
+import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/components/DelayedNextLink/DelayedNextLinkWithZoomAnimationsContext'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
-import NextLink from 'next/link'
-import { CSSProperties } from 'react'
+import { CSSProperties, useContext, useState } from 'react'
+import { GalaxyZoomAnimationStateContext } from '../../../hooks/GalaxyZoomAnimationStateProvider'
 interface Props {
   cloud: CategoryCloud
 }
@@ -24,7 +25,6 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
   const { lang } = useZoom2Params()
   const { title: category, sizeClassNames, cloudClassNames, titleClassNames } = cloud
   const selectedFilters = useSelectedFilters()
-
   useSearchByCategoryQuery({
     category,
     enabled: true,
@@ -54,11 +54,14 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
   }
   const hoverTitleTranslation = hoverTitleTranslations[category]
   const hoverTranslation = hoverTranslations[category]
+  const { animationState } = useContext(GalaxyZoomAnimationStateContext)
+  const [clicked, setClicked] = useState(false)
 
   return (
     <>
       <Tooltip
         openDelay={300}
+        hidden={!!animationState}
         label={
           <>
             {hoverTitleTranslation && (
@@ -88,19 +91,29 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
         xAxis={placement.right}
         yAxis={placement.top}
       >
-        <NextLink
+        <DelayedNextLinkWithZoomAnimationsContext
+          delay={600}
           style={
             {
               zIndex: HOMEPAGE_Z_INDEXES.CLOUD,
             } as CSSProperties
           }
           className={cn(
-            'absolute size-[var(--size)] cursor-pointer rounded-[50%] bg-[url(/images/cloud.svg)] bg-cover bg-no-repeat transition-transform duration-[400] hover:scale-110',
+            'absolute size-[var(--size)] cursor-pointer rounded-[50%] bg-[url(/images/cloud.svg)] bg-cover bg-no-repeat',
             cloudClassNames,
-            sizeClassNames
+            sizeClassNames,
+            animationState !== 'forward' && 'transition-transform duration-[400] hover:scale-110',
+            animationState === 'forward' &&
+              clicked &&
+              'animate-[toScaleFullPage_0.5s_ease-in-out_forwards]',
+            animationState === 'forward' &&
+              !clicked &&
+              'animate-[toBlurAndHide_400ms_ease-in-out_forwards]'
           )}
-          href={url}
-        />
+          animation="forward"
+          onClick={() => setClicked(true)}
+          href={url} // delayed for animation
+        ></DelayedNextLinkWithZoomAnimationsContext>
       </Tooltip>
       <p
         className={cn(
@@ -113,7 +126,8 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
             ),
           }),
           'text-[20px] lg:text-[32px]',
-          'leading-[21px] lg:leading-[33.6px] xl:leading-[41.6px]'
+          'leading-[21px] lg:leading-[33.6px] xl:leading-[41.6px]',
+          animationState === 'forward' && 'animate-[toBlurAndHide_500ms_ease-in-out_forwards]'
         )}
       >
         {t(category)}

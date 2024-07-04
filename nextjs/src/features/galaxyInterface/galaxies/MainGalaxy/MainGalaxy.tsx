@@ -19,6 +19,7 @@ import {
 } from '../hooks/GalaxyPaginationAnimationStateProvider'
 import { CategoryCloud, Cloud, Stories } from './fragments'
 import { useThemesQuery } from './hooks/useThemesQuery'
+import { GalaxyZoomAnimationStateProvider } from '../hooks/GalaxyZoomAnimationStateProvider'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -58,7 +59,9 @@ export const MainGalaxy = () => {
 
   return (
     <GalaxyPaginationAnimationStateProvider>
-      <MainGalaxyContent key={currentPage} />
+      <GalaxyZoomAnimationStateProvider>
+        <MainGalaxyContent key={currentPage} />
+      </GalaxyZoomAnimationStateProvider>
     </GalaxyPaginationAnimationStateProvider>
   )
 }
