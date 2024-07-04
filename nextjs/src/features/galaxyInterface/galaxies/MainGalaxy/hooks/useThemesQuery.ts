@@ -6,6 +6,7 @@ import initApiClientService from '@/features/shared/utils/initApiClientService'
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import { ThemesQuery } from 'src/generated/graphql'
+import { GALAXY_QUERIES_STALE_TIME } from '../../galaxies.constants'
 
 export type ThemeData = NonNullable<ThemesQuery['themes']['data']>[0]
 export type StoriesData = NonNullable<
@@ -60,7 +61,7 @@ export function useThemesQuery({ page }: { page: number; fromCacheOnly?: boolean
   const query = useQuery({
     queryKey: getThemesQueryKey(page, lang, isDraftMode),
     queryFn,
-    staleTime: Infinity,
+    staleTime: GALAXY_QUERIES_STALE_TIME,
     refetchOnWindowFocus: false,
   })
 

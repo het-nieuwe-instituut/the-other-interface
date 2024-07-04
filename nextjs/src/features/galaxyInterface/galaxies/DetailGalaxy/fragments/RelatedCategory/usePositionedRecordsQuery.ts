@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Locale, ZoomLevel3RelationsType } from 'src/generated/graphql'
 import { PositionedRecord } from '../types'
 import { positioningTemplate } from './positioningTemplates'
+import { GALAXY_QUERIES_STALE_TIME } from '../../../galaxies.constants'
 
 export const usePositionedRecordsQuery = ({
   maxPages,
@@ -42,7 +43,7 @@ export const usePositionedRecordsQuery = ({
   return useQuery({
     queryKey: ['record-relations-positons', category, id, page, locale, maxPages],
     queryFn,
-    staleTime: Infinity,
+    staleTime: GALAXY_QUERIES_STALE_TIME,
     refetchOnWindowFocus: false,
   })
 }

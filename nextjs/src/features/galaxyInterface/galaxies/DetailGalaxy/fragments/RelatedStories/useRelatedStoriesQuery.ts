@@ -6,6 +6,7 @@ import initApiClientService from '@/features/shared/utils/initApiClientService'
 import { useQuery } from '@tanstack/react-query'
 import { Locale, ZoomLevel3RelationsType } from 'src/generated/graphql'
 import { PositionedRecord } from '../types'
+import { GALAXY_QUERIES_STALE_TIME } from '../../../galaxies.constants'
 
 const positioningTemplate: PositioningTemplate[][] = [
   [
@@ -87,7 +88,7 @@ export const useRelatedStoriesQuery = ({
   return useQuery({
     queryKey: ['related-stories', id, category, page, locale],
     queryFn,
-    staleTime: Infinity,
+    staleTime: GALAXY_QUERIES_STALE_TIME,
     refetchOnWindowFocus: false,
   })
 }
