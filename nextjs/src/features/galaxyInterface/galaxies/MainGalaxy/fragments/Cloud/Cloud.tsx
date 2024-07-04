@@ -1,45 +1,40 @@
-import { Box, PlacementWithLogical, useBreakpoint } from '@chakra-ui/react'
-import { CategoryCloud } from '../types'
+import { PlacementWithLogical, useBreakpoint } from '@chakra-ui/react'
 import { HOMEPAGE_Z_INDEXES } from '../constants'
-import { CloudTitle } from '../CloudTitle'
-import { Text } from '@chakra-ui/react'
-import { CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
-import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
+import { CategoryCloud } from '../types'
+
 import { CollectionHighlightsFilter } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
+import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { encodeFilters } from '@/features/shared/helpers/searchHelpers'
 import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
+import { useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import { useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
-
+import { CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { cn } from '@/features/ui/utils/cn'
+import NextLink from 'next/link'
+import { CSSProperties } from 'react'
 interface Props {
   cloud: CategoryCloud
 }
 
 export const Cloud: React.FC<Props> = ({ cloud }) => {
   const { t } = useTypeSafeTranslation('homepage')
-  const router = useRouter()
   const { lang } = useZoom2Params()
-  const [enabled, setEnabled] = useState(false)
-  const { title: category, size, cloudPosition, titlePosition } = cloud
+  const { title: category, sizeClassNames, cloudClassNames, titleClassNames } = cloud
   const selectedFilters = useSelectedFilters()
 
   useSearchByCategoryQuery({
     category,
-    enabled,
+    enabled: true,
     selectedFilters,
   })
 
-  const handleCloudClick = () => {
-    let url = `/landingpage?category=${category}&filters=${encodeFilters([
-      CollectionHighlightsFilter,
-    ])}&searchResult=true&fallback=true`
-    url = addLocaleToUrl(url, lang)
-    router.push(url)
-  }
+  let url = `/landingpage?category=${category}&filters=${encodeFilters([
+    CollectionHighlightsFilter,
+  ])}&searchResult=true&fallback=true`
+  url = addLocaleToUrl(url, lang)
 
   const breakpoint = useBreakpoint()
   const placement = tooltipPlacement(category, breakpoint)
@@ -57,56 +52,72 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
     objects: t('objects'),
     people: t('people'),
   }
+  const hoverTitleTranslation = hoverTitleTranslations[category]
+  const hoverTranslation = hoverTranslations[category]
 
   return (
     <>
       <Tooltip
+        openDelay={300}
         label={
           <>
-            <Text
-              fontFamily={'Social'}
-              fontSize={'12px'}
-              fontWeight={'700'}
-              paddingBottom={'4px'}
-              color={'pinkAlpha.100'}
-            >
-              {hoverTitleTranslations[category]}
-            </Text>
-            <Text
-              fontFamily={'Social'}
-              fontSize={'12px'}
-              fontWeight={'400'}
-              color={'pinkAlpha.100'}
-            >
-              {hoverTranslations[category]}
-            </Text>
+            {hoverTitleTranslation && (
+              <h2
+                className={TypographyVariants({
+                  socialLarge: 'sm',
+                  className: cn('text-pink-100 font-bold', hoverTranslation && 'pb-2'),
+                })}
+              >
+                {hoverTitleTranslation}
+              </h2>
+            )}
+
+            {hoverTranslation && (
+              <p
+                className={TypographyVariants({
+                  socialLarge: 'sm',
+                  className: cn('text-pink-100 line-clamp-[7]'),
+                })}
+              >
+                {hoverTranslation}
+              </p>
+            )}
           </>
         }
         placement={placement.placement}
         xAxis={placement.right}
         yAxis={placement.top}
       >
-        <Box
-          position="absolute"
-          w={size}
-          h={size}
-          backgroundImage="url(/images/cloud.svg)"
-          backgroundSize="cover"
-          backgroundRepeat="no-repeat"
-          left={cloudPosition.left ?? 'auto'}
-          right={cloudPosition.right ?? 'auto'}
-          top={cloudPosition.top ?? 'auto'}
-          bottom={cloudPosition.bottom ?? 'auto'}
-          borderRadius="50%"
-          zIndex={HOMEPAGE_Z_INDEXES.CLOUD}
-          cursor="pointer"
-          _hover={{ transform: 'scale(1.1)' }}
-          transition="all .4s ease-in-out"
-          onClick={handleCloudClick}
-          onMouseEnter={() => setEnabled(true)}
+        <NextLink
+          style={
+            {
+              zIndex: HOMEPAGE_Z_INDEXES.CLOUD,
+            } as CSSProperties
+          }
+          className={cn(
+            'absolute size-[var(--size)] cursor-pointer rounded-[50%] bg-[url(/images/cloud.svg)] bg-cover bg-no-repeat transition-transform duration-[400] hover:scale-110',
+            cloudClassNames,
+            sizeClassNames
+          )}
+          href={url}
         />
       </Tooltip>
-      <CloudTitle position={titlePosition}>{t(category) ?? ''}</CloudTitle>
+      <p
+        className={cn(
+          TypographyVariants({
+            timesDot: 'lg',
+            className: cn(
+              titleClassNames,
+              'text-blue-100 absolute',
+              'blur-[1.5px] pointer-events-none '
+            ),
+          }),
+          'text-[20px] lg:text-[32px]',
+          'leading-[21px] lg:leading-[33.6px] xl:leading-[41.6px]'
+        )}
+      >
+        {t(category)}
+      </p>
     </>
   )
 }
