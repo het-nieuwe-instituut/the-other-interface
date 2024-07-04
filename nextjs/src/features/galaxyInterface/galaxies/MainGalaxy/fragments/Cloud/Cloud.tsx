@@ -91,30 +91,40 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
         xAxis={placement.right}
         yAxis={placement.top}
       >
-        <DelayedNextLinkWithZoomAnimationsContext
-          delay={600}
+        <div
+          className={cn(sizeClassNames, cloudClassNames, 'absolute')}
           style={
             {
               zIndex: HOMEPAGE_Z_INDEXES.CLOUD,
             } as CSSProperties
           }
-          className={cn(
-            'absolute cursor-pointer rounded-[50%] bg-[url(/images/cloud.svg)] bg-cover bg-no-repeat',
-            cloudClassNames,
-            sizeClassNames,
-            animationState !== 'forward' && 'transition-transform duration-[400] hover:scale-110',
-            animationState === 'forward' &&
-              clicked &&
-              'animate-[toScaleFullPage_600ms_ease-in-out_forwards]',
-            animationState === 'forward' &&
-              !clicked &&
-              'animate-[toBlurAndHide_500ms_ease-in-out_forwards]'
-          )}
-          animation="forward"
-          onClick={() => setClicked(true)}
-          href={url} // delayed for animation
-        ></DelayedNextLinkWithZoomAnimationsContext>
+        >
+          <DelayedNextLinkWithZoomAnimationsContext
+            delay={600}
+            style={
+              {
+                zIndex: HOMEPAGE_Z_INDEXES.CLOUD,
+              } as CSSProperties
+            }
+            className={cn(
+              'size-full',
+              'absolute',
+              'cursor-pointer rounded-[50%] bg-[url(/images/cloud.svg)] bg-cover bg-no-repeat',
+              animationState !== 'forward' && 'transition-transform duration-[400] hover:scale-110',
+              animationState === 'forward' &&
+                clicked &&
+                'animate-[toScaleFullPage_600ms_ease-in-out_forwards]',
+              animationState === 'forward' &&
+                !clicked &&
+                'animate-[toBlurAndHide_500ms_ease-in-out_forwards]'
+            )}
+            animation="forward"
+            onClick={() => setClicked(true)}
+            href={url} // delayed for animation
+          ></DelayedNextLinkWithZoomAnimationsContext>
+        </div>
       </Tooltip>
+
       <p
         className={cn(
           TypographyVariants({
