@@ -208,29 +208,7 @@ export class PublicationsService {
     return { ...TriplyUtils.combineObjectArray(results.data) }
   }
 
-  public async getEnrichedSources(id: string, locale: Locale): Promise<EnrichedRecordBaseType[]> {
-    const sources = Object.entries(this.EnrichedSourceEndpoints)
-    const params = { id, language: locale }
-
-    const enrichedSources = await Promise.all(
-      sources.map(async ([source, endpoint]) => {
-        const result = await this.triplyService.queryTriplyData(endpoint, {}, undefined, params)
-
-        const enrichedSource = TriplyUtils.combineObjectArray(result.data as object[])
-        const externalSourceUrl = TriplyUtils.getExternalSourceUrlFromData(
-          result.data,
-          source as ExternalSource
-        )
-
-        return {
-          ...enrichedSource,
-          id,
-          externalSourceType: source as ExternalSource,
-          externalSourceUrl,
-        }
-      })
-    )
-
-    return enrichedSources
+  public getEnrichedSources(id: string, locale: Locale): Promise<EnrichedRecordBaseType[]> {
+    return this.triplyService.getEnrichedSourceData(this.EnrichedSourceEndpoints, id, locale)
   }
 }

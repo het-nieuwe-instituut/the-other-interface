@@ -4,7 +4,6 @@ import {
   ArchivesRecordZoomLevel3Type,
 } from '../archives/archives.type'
 import { ObjectRecordZoomLevel3Type, ObjectsZoomLevel3DetailType } from '../objects/objects.type'
-import { PeopleRecordZoomLevel3Type, PeopleZoomLevel3DetailType } from '../people/people.type'
 import { EntityNames } from '../util/entityNames.type'
 import { ZoomLevel3Service } from './zoomLevel3.service'
 import {
@@ -57,22 +56,9 @@ export class ZoomLevel3Resolver {
     return this.objectsService.getZoomLevel3RecordData(objectId, locale)
   }
 
-  @Query(() => [PeopleRecordZoomLevel3Type], { nullable: true })
-  public async peopleRecordZoomLevel3(
-    @Args('id') peopleId: string,
-    @Args() { locale }: LocaleArgs
-  ) {
-    return this.peopleService.getZoomLevel3RecordData(peopleId, locale)
-  }
-
   @Query(() => ObjectsZoomLevel3DetailType, { nullable: true })
   public zoomLevel3Object(@Args('id') objectId: string, @Args() { locale }: LocaleArgs) {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.Objects, locale)
-  }
-
-  @Query(() => PeopleZoomLevel3DetailType, { nullable: true })
-  public zoomLevel3Person(@Args('id') objectId: string, @Args() { locale }: LocaleArgs) {
-    return this.zoomLevel3Service.getDetail(objectId, EntityNames.People, locale)
   }
 
   @Query(() => ArchiveZoomLevel3DetailType, { nullable: true })
