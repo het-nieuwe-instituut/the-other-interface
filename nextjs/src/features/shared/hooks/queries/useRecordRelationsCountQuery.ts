@@ -4,6 +4,7 @@ import initApiClientService from '../../utils/initApiClientService'
 import { Category } from '../../utils/categories'
 import { getZoom3CountsTask } from '@/features/pages/tasks/getZoom3CountsTask'
 import { useLocale } from '../useLocale'
+import { GALAXY_QUERIES_STALE_TIME } from '@/features/galaxyInterface/galaxies/galaxies.constants'
 
 export function useRecordRelationsCountQuery(type: Category, id: string) {
   const api = initApiClientService()
@@ -14,7 +15,7 @@ export function useRecordRelationsCountQuery(type: Category, id: string) {
   return useQuery({
     queryKey: ['record-relations-count', id, type, lang],
     queryFn,
-    staleTime: 60000, // 1 minute
+    staleTime: GALAXY_QUERIES_STALE_TIME,
     refetchOnWindowFocus: false,
   })
 }
