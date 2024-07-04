@@ -14,6 +14,7 @@ import { useRecordDetailQuery } from '../../hooks/useRecordDetailQuery'
 import { useRecordMeta } from '../../hooks/useRecordMeta'
 import { RecordBottomContent } from '../RecordBottomContent/RecordBottomContent'
 import { RecordDescription } from '@/features/editorial/components/RecordDescription/RecordDescription'
+import { OmitEnrichedData } from '../../configs/recordMetaFieldOrderConfig'
 
 export const RecordLayer = () => {
   const params = useParams()
@@ -66,7 +67,11 @@ export const RecordLayer = () => {
   )
 }
 
-const ArchivesDescriptions = ({ meta }: { meta: ArchivesRecordZoomLevel3Type }) => {
+interface MetaDescriptionProps {
+  meta: OmitEnrichedData<ArchivesRecordZoomLevel3Type>
+}
+
+const ArchivesDescriptions = ({ meta }: MetaDescriptionProps) => {
   const { t: recordMetaT } = useTypeSafeTranslation('recordMeta')
 
   return (

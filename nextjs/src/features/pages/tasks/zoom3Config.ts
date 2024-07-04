@@ -4,7 +4,7 @@ import {
   Sdk,
   ZoomLevel3ArchiveQuery,
   ZoomLevel3ObjectQuery,
-  ZoomLevel3PersonQuery,
+  ZoomLevel3PeopleQuery,
   ZoomLevel3PublicationQuery,
 } from 'src/generated/graphql'
 
@@ -12,9 +12,9 @@ export const getZoom3Queries = (type: Category, api: Sdk) => {
   switch (type) {
     case CATEGORIES.people:
       return {
-        zoomLevelQuery: api.ZoomLevel3Person,
+        zoomLevelQuery: api.ZoomLevel3People,
         relationsQuery: api.PeopleRelations,
-        accesor: (data?: ZoomLevel3PersonQuery) => data?.zoomLevel3Person,
+        accesor: (data?: ZoomLevel3PeopleQuery) => data?.zoomLevel3People,
       }
     case CATEGORIES.archives:
       return {

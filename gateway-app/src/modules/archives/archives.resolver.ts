@@ -46,7 +46,7 @@ export class ArchivesZoomLevel3DetailResolver {
   public constructor(private readonly archivesService: ArchivesService) {}
 
   @Query(() => ArchiveZoomLevel3DetailType, { nullable: true })
-  public async zoomLevel3Archives(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
+  public async zoomLevel3Archive(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
     return this.archivesService.getZoomLevel3Data(id, locale)
   }
 
@@ -64,7 +64,7 @@ export class ArchivesRecordZoomLevel3Resolver {
   public constructor(private readonly archivesService: ArchivesService) {}
 
   @Query(() => [ArchivesRecordZoomLevel3Type], { nullable: true })
-  public async publicationsRecordZoomLevel3(
+  public async archivesRecordZoomLevel3(
     @Args('id') publicationId: string,
     @Args() { locale }: LocaleArgs
   ) {
