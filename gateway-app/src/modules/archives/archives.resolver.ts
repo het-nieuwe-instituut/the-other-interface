@@ -1,18 +1,14 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
-
 import {
   ArchiveRecordRelationArgs,
   ArchiveRelationsType,
-  ArchivesFondsCreatorType,
-  ArchivesFondsZoomLevel3DetailType,
   ArchivesRelationsCountType,
   ArchivesZoomLevel2HoverArgs,
   ArchivesZoomLevelHoverType,
   ArchiveRecordRelationCountArgs,
+  ArchiveZoomLevel3DetailType,
+  ArchivesRecordZoomLevel3Type,
 } from './archives.type'
-import { TriplyUtils } from '../triply/triply.utils'
-import { CustomError } from '../util/customError'
 import { ArchivesService } from './archives.service'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { LocaleArgs } from '../util/localeArgs.type'
@@ -35,34 +31,6 @@ export class ArchivesRelationsZoomLevel3Resolver {
   }
 }
 
-@Resolver(ArchivesFondsZoomLevel3DetailType)
-export class ArchivesOtherResolver {
-  @Query(() => ArchivesFondsZoomLevel3DetailType)
-  public archiveOther() {
-    throw CustomError.internal('not yet implemented')
-  }
-}
-
-@Resolver(ArchivesFondsCreatorType)
-export class ArchivesFondsCreatorResolver {
-  public constructor(private readonly zoomLevel3Service: ZoomLevel3Service) {}
-
-  @ResolveField()
-  public populatedCreator(
-    @Parent() archiveCreator: ArchivesFondsCreatorType,
-    @Args() { locale }: LocaleArgs
-  ) {
-    if (!archiveCreator.creator) {
-      return
-    }
-
-    const type = TriplyUtils.getEntityNameFromUri(archiveCreator.creator)
-    const id = TriplyUtils.getIdFromUri(archiveCreator.creator)
-
-    return this.zoomLevel3Service.getDetail(id, type, locale)
-  }
-}
-
 @Resolver(ArchivesZoomLevelHoverType)
 export class ArchivesZoomLevelRecordHoverResolver {
   public constructor(private readonly archivesService: ArchivesService) {}
@@ -70,5 +38,44 @@ export class ArchivesZoomLevelRecordHoverResolver {
   @Query(() => ArchivesZoomLevelHoverType)
   public async archivesZoomRecordHover(@Args() args: ArchivesZoomLevel2HoverArgs) {
     return this.archivesService.getZoomRecordHover(args.id, args.locale)
+  }
+}
+
+@Resolver(ArchiveZoomLevel3DetailType)
+export class ArchivesZoomLevel3DetailResolver {
+  public constructor(private readonly archivesService: ArchivesService) {}
+
+  @Query(() => ArchiveZoomLevel3DetailType, { nullable: true })
+  public async zoomLevel3Archives(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
+    return this.archivesService.getZoomLevel3Data(id, locale)
+  }
+
+  @ResolveField()
+  public enrichedSources(
+    @Parent() record: ArchiveZoomLevel3DetailType,
+    @Args() { locale }: LocaleArgs
+  ) {
+    return this.archivesService.getEnrichedSources(record.id, locale)
+  }
+}
+
+@Resolver(ArchivesRecordZoomLevel3Type)
+export class ArchivesRecordZoomLevel3Resolver {
+  public constructor(private readonly archivesService: ArchivesService) {}
+
+  @Query(() => [ArchivesRecordZoomLevel3Type], { nullable: true })
+  public async publicationsRecordZoomLevel3(
+    @Args('id') publicationId: string,
+    @Args() { locale }: LocaleArgs
+  ) {
+    return this.archivesService.getZoomLevel3RecordData(publicationId, locale)
+  }
+
+  @ResolveField()
+  public enrichedSources(
+    @Parent() record: ArchivesRecordZoomLevel3Type,
+    @Args() { locale }: LocaleArgs
+  ) {
+    return this.archivesService.getEnrichedSources(record.id, locale)
   }
 }

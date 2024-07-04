@@ -1,6 +1,5 @@
-import { Module, forwardRef } from '@nestjs/common'
+import { Module } from '@nestjs/common'
 import { PeopleService } from './people.service'
-import { ZoomLevel3Module } from '../zoomLevel3/zoomLevel3.module'
 import {
   PeopleZoomLevelRecordHoverResolver,
   PeopleZoomLevel3Resolver,
@@ -9,7 +8,6 @@ import {
 } from './people.resolver'
 
 @Module({
-  imports: [forwardRef(() => ZoomLevel3Module)],
   providers: [
     PeopleService,
     PeopleService,

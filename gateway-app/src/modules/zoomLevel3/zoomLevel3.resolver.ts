@@ -1,8 +1,4 @@
 import { Args, Query, Resolver } from '@nestjs/graphql'
-import {
-  ArchiveZoomLevel3DetailType,
-  ArchivesRecordZoomLevel3Type,
-} from '../archives/archives.type'
 import { ObjectRecordZoomLevel3Type, ObjectsZoomLevel3DetailType } from '../objects/objects.type'
 import { EntityNames } from '../util/entityNames.type'
 import { ZoomLevel3Service } from './zoomLevel3.service'
@@ -38,16 +34,6 @@ export class ZoomLevel3Resolver {
     return this.zoomLevel3Service.storyRelationsCount(args.storyId, args.locale)
   }
 
-  @Query(() => [ArchivesRecordZoomLevel3Type], { nullable: true })
-  public async archivesRecordZoomLevel3(
-    @Args('id') archiveId: string,
-    @Args() { locale }: LocaleArgs
-  ) {
-    const res = await this.archivesService.getZoomLevel3RecordData(archiveId, locale)
-
-    return res
-  }
-
   @Query(() => [ObjectRecordZoomLevel3Type], { nullable: true })
   public async objectsRecordZoomLevel3(
     @Args('id') objectId: string,
@@ -59,11 +45,6 @@ export class ZoomLevel3Resolver {
   @Query(() => ObjectsZoomLevel3DetailType, { nullable: true })
   public zoomLevel3Object(@Args('id') objectId: string, @Args() { locale }: LocaleArgs) {
     return this.zoomLevel3Service.getDetail(objectId, EntityNames.Objects, locale)
-  }
-
-  @Query(() => ArchiveZoomLevel3DetailType, { nullable: true })
-  public async zoomLevel3Archive(@Args('id') objectId: string, @Args() { locale }: LocaleArgs) {
-    return this.zoomLevel3Service.getDetail(objectId, EntityNames.Archives, locale)
   }
 
   @Query(() => ZoomLevel3StoriesRelatedToRecordType, { nullable: true })

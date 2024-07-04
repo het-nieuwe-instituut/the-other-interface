@@ -1,5 +1,4 @@
-import { forwardRef, Module } from '@nestjs/common'
-import { ZoomLevel3Module } from '../zoomLevel3/zoomLevel3.module'
+import { Module } from '@nestjs/common'
 import {
   PublicationRecordZoomLevel3Resolver,
   PublicationRelationsZoomLevel3Resolver,
@@ -9,7 +8,6 @@ import {
 import { PublicationsService } from './publications.service'
 
 @Module({
-  imports: [forwardRef(() => ZoomLevel3Module)],
   providers: [
     PublicationsService,
     PublicationRelationsZoomLevel3Resolver,
