@@ -6,66 +6,25 @@ import { TriplyUtils } from '../triply/triply.utils'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { Locale } from '../util/locale.type'
 import { EnrichedRecordBaseType } from '../triply/triply.type'
+import { PeopleZoomLevel3DetailAsteriskType } from './people.type'
 
 interface PeopleDetailZoomLevel3Data {
   thumbnail?: string
   title?: string
   id: string
-  nameType?: string
-  nameVariation?: string
-  birthDate?: string
-  birthPlace?: string
-  birthPlaceLabel?: string
-  deathDate?: string
-  deathPlace?: string
-  deathPlaceLabel?: string
-  place?: string
-  placeLabel?: string
-  startDate?: string
-  endDate?: string
-  nationality?: string
-  nationalityLabel?: string
-  institution?: string
-  institutionLabel?: string
-  profession?: string
-  professionLabel?: string
-  gender?: string
-  association?: string
-  associationLabel?: string
-  relatedItem?: string
-  relatedItemLabel?: string
   description?: string
-  permanentLink?: string
+  asterisk_subject_description?: string
+  asterisk_date_description?: string
+  asterisk_name_description?: string
 }
 const peopleDetailZoomLevel3DataKeys: KeysToVerify<PeopleDetailZoomLevel3Data> = {
   thumbnail: true,
   title: true,
   id: true,
-  nameType: true,
-  nameVariation: true,
-  birthDate: true,
-  birthPlace: true,
-  birthPlaceLabel: true,
-  deathDate: true,
-  deathPlace: true,
-  deathPlaceLabel: true,
-  place: true,
-  placeLabel: true,
-  startDate: true,
-  endDate: true,
-  nationality: true,
-  nationalityLabel: true,
-  institution: true,
-  institutionLabel: true,
-  profession: true,
-  professionLabel: true,
-  gender: true,
-  association: true,
-  associationLabel: true,
-  relatedItem: true,
-  relatedItemLabel: true,
   description: true,
-  permanentLink: true,
+  asterisk_date_description: true,
+  asterisk_name_description: true,
+  asterisk_subject_description: true,
 }
 
 export interface PeopleRelationsType {
@@ -163,8 +122,11 @@ export class PeopleService {
       { id, locale }
     )
 
+    const asteriskSuggestions = this.formatAsteriskSuggestions(result.data)
+
     return {
       ...TriplyUtils.combineObjectArray(result.data),
+      asteriskSuggestions,
       type: EntityNames.People,
       id,
       thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
@@ -233,5 +195,26 @@ export class PeopleService {
 
   public getEnrichedSources(id: string, locale: Locale): Promise<EnrichedRecordBaseType[]> {
     return this.triplyService.getEnrichedSourceData(this.EnrichedSourceEndpoints, id, locale)
+  }
+
+  private formatAsteriskSuggestions(data: PeopleDetailZoomLevel3Data[]) {
+    return data.reduce<PeopleZoomLevel3DetailAsteriskType[]>((acc, cur) => {
+      const { asterisk_subject_description, asterisk_date_description, asterisk_name_description } =
+        cur
+
+      if (asterisk_subject_description || asterisk_date_description || asterisk_name_description) {
+        acc.push({
+          asterisk_subject_description,
+          asterisk_date_description,
+          asterisk_name_description,
+        })
+      }
+
+      delete cur.asterisk_subject_description
+      delete cur.asterisk_date_description
+      delete cur.asterisk_name_description
+
+      return acc
+    }, [])
   }
 }
