@@ -1,15 +1,14 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { ZoomLevel3Service } from '../zoomLevel3/zoomLevel3.service'
 import {
-  ObjectMakerType,
   ObjectRecordRelationArgs,
   ObjectRecordRelationCountArgs,
+  ObjectRecordZoomLevel3Type,
   ObjectRelationsCountType,
   ObjectRelationsType,
   ObjectsZoomLevel2HoverArgs,
+  ObjectsZoomLevel3DetailType,
   ObjectsZoomLevelHoverType,
 } from './objects.type'
-import { TriplyUtils } from '../triply/triply.utils'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { ObjectsService } from './objects.service'
 import { LocaleArgs } from '../util/localeArgs.type'
@@ -32,22 +31,6 @@ export class ObjectRelationstZoomLevel3Resolver {
   }
 }
 
-@Resolver(ObjectMakerType)
-export class ObjectMakerResolver {
-  public constructor(private readonly zoomLevel3Service: ZoomLevel3Service) {}
-  @ResolveField()
-  public populatedMaker(@Parent() object: ObjectMakerType, @Args() { locale }: LocaleArgs) {
-    if (!object.maker) {
-      return
-    }
-
-    const type = TriplyUtils.getEntityNameFromUri(object.maker)
-    const id = TriplyUtils.getIdFromUri(object.maker)
-
-    return this.zoomLevel3Service.getDetail(id, type, locale)
-  }
-}
-
 @Resolver(ObjectsZoomLevelHoverType)
 export class ObjectsZoomLevelRecordHoverResolver {
   public constructor(private readonly objectsService: ObjectsService) {}
@@ -55,5 +38,44 @@ export class ObjectsZoomLevelRecordHoverResolver {
   @Query(() => ObjectsZoomLevelHoverType)
   public async objectsZoomRecordHover(@Args() args: ObjectsZoomLevel2HoverArgs) {
     return this.objectsService.getZoomRecordHover(args.id, args.locale)
+  }
+}
+
+@Resolver(ObjectsZoomLevel3DetailType)
+export class ObjectsZoomLevel3DetailResolver {
+  public constructor(private readonly objectsService: ObjectsService) {}
+
+  @Query(() => ObjectsZoomLevel3DetailType, { nullable: true })
+  public async zoomLevel3Objects(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
+    return this.objectsService.getZoomLevel3Data(id, locale)
+  }
+
+  @ResolveField()
+  public enrichedSources(
+    @Parent() record: ObjectsZoomLevel3DetailType,
+    @Args() { locale }: LocaleArgs
+  ) {
+    return this.objectsService.getEnrichedSources(record.id, locale)
+  }
+}
+
+@Resolver(ObjectRecordZoomLevel3Type)
+export class ObjectsRecordZoomLevel3Resolver {
+  public constructor(private readonly objectsService: ObjectsService) {}
+
+  @Query(() => [ObjectRecordZoomLevel3Type], { nullable: true })
+  public async publicationsRecordZoomLevel3(
+    @Args('id') publicationId: string,
+    @Args() { locale }: LocaleArgs
+  ) {
+    return this.objectsService.getZoomLevel3RecordData(publicationId, locale)
+  }
+
+  @ResolveField()
+  public enrichedSources(
+    @Parent() record: ObjectRecordZoomLevel3Type,
+    @Args() { locale }: LocaleArgs
+  ) {
+    return this.objectsService.getEnrichedSources(record.id, locale)
   }
 }
