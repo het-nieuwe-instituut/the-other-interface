@@ -11,6 +11,7 @@ import { IsString } from 'class-validator'
 import { EntityNames } from '../util/entityNames.type'
 import { Locale } from '../util/locale.type'
 import { EnrichedRecordBaseType } from '../triply/triply.type'
+import { ExternalSource } from '../triply/triply.service'
 
 @ObjectType()
 class BaseArchiveZoomLevel3DetailType {
@@ -34,12 +35,24 @@ class BaseArchiveZoomLevel3DetailType {
 }
 
 @ObjectType()
+class EnrichedBaseArchiveZoomLevel3DetailType extends BaseArchiveZoomLevel3DetailType {
+  @Field()
+  public id: string
+
+  @Field(() => ExternalSource)
+  public externalSourceType: ExternalSource
+
+  @Field()
+  public externalSourceUrl: string
+}
+
+@ObjectType()
 export class ArchiveZoomLevel3DetailType extends IntersectionType(
   EnrichedRecordBaseType,
   BaseArchiveZoomLevel3DetailType
 ) {
-  @Field(() => [BaseArchiveZoomLevel3DetailType], { nullable: true })
-  public enrichedSources?: BaseArchiveZoomLevel3DetailType[]
+  @Field(() => [EnrichedBaseArchiveZoomLevel3DetailType], { nullable: true })
+  public enrichedSources?: EnrichedBaseArchiveZoomLevel3DetailType[]
 }
 
 @ObjectType()
@@ -135,12 +148,24 @@ class BaseArchivesRecordZoomLevel3Type {
 }
 
 @ObjectType()
+class EnrichedBaseArchivesRecordZoomLevel3Type extends BaseArchivesRecordZoomLevel3Type {
+  @Field()
+  public id: string
+
+  @Field(() => ExternalSource)
+  public externalSourceType: ExternalSource
+
+  @Field()
+  public externalSourceUrl: string
+}
+
+@ObjectType()
 export class ArchivesRecordZoomLevel3Type extends IntersectionType(
   EnrichedRecordBaseType,
   BaseArchivesRecordZoomLevel3Type
 ) {
-  @Field(() => [BaseArchivesRecordZoomLevel3Type], { nullable: true })
-  public enrichedSources?: BaseArchivesRecordZoomLevel3Type[]
+  @Field(() => [EnrichedBaseArchivesRecordZoomLevel3Type], { nullable: true })
+  public enrichedSources?: EnrichedBaseArchivesRecordZoomLevel3Type[]
 }
 
 @ArgsType()

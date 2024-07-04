@@ -4,6 +4,7 @@ import { PeopleZoomLevel3DetailType } from '../people/people.type'
 import { IsString } from 'class-validator'
 import { Locale } from '../util/locale.type'
 import { EnrichedRecordBaseType } from '../triply/triply.type'
+import { ExternalSource } from '../triply/triply.service'
 
 @ObjectType()
 class ObjectMakerType {
@@ -150,12 +151,24 @@ class BaseObjectsZoomLevel3DetailType {
 }
 
 @ObjectType()
+class EnrichedBaseObjectsZoomLevel3DetailType extends BaseObjectsZoomLevel3DetailType {
+  @Field()
+  public id: string
+
+  @Field(() => ExternalSource)
+  public externalSourceType: ExternalSource
+
+  @Field()
+  public externalSourceUrl: string
+}
+
+@ObjectType()
 export class ObjectsZoomLevel3DetailType extends IntersectionType(
   EnrichedRecordBaseType,
   BaseObjectsZoomLevel3DetailType
 ) {
-  @Field(() => [BaseObjectsZoomLevel3DetailType], { nullable: true })
-  public enrichedSources?: BaseObjectsZoomLevel3DetailType[]
+  @Field(() => [EnrichedBaseObjectsZoomLevel3DetailType], { nullable: true })
+  public enrichedSources?: EnrichedBaseObjectsZoomLevel3DetailType[]
 }
 
 @ObjectType()
@@ -231,12 +244,24 @@ class BaseObjectRecordZoomLevel3Type {
 }
 
 @ObjectType()
+class EnrichedBaseObjectRecordZoomLevel3Type extends BaseObjectRecordZoomLevel3Type {
+  @Field()
+  public id: string
+
+  @Field(() => ExternalSource)
+  public externalSourceType: ExternalSource
+
+  @Field()
+  public externalSourceUrl: string
+}
+
+@ObjectType()
 export class ObjectRecordZoomLevel3Type extends IntersectionType(
   EnrichedRecordBaseType,
   BaseObjectRecordZoomLevel3Type
 ) {
-  @Field(() => [BaseObjectRecordZoomLevel3Type], { nullable: true })
-  public enrichedSources?: BaseObjectRecordZoomLevel3Type[]
+  @Field(() => [EnrichedBaseObjectRecordZoomLevel3Type], { nullable: true })
+  public enrichedSources?: EnrichedBaseObjectRecordZoomLevel3Type[]
 }
 
 @ArgsType()

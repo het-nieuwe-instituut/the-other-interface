@@ -3,6 +3,7 @@ import { EntityNames } from '../util/entityNames.type'
 import { IsString } from 'class-validator'
 import { Locale } from '../util/locale.type'
 import { EnrichedRecordBaseType } from '../triply/triply.type'
+import { ExternalSource } from '../triply/triply.service'
 
 @ObjectType()
 class PeopleAssociationType {
@@ -104,12 +105,24 @@ class BasePeopleZoomLevel3DetailType {
 }
 
 @ObjectType()
+class EnrichedBasePeopleZoomLevel3DetailType extends BasePeopleZoomLevel3DetailType {
+  @Field()
+  public id: string
+
+  @Field(() => ExternalSource)
+  public externalSourceType: ExternalSource
+
+  @Field()
+  public externalSourceUrl: string
+}
+
+@ObjectType()
 export class PeopleZoomLevel3DetailType extends IntersectionType(
   EnrichedRecordBaseType,
   BasePeopleZoomLevel3DetailType
 ) {
-  @Field(() => [BasePeopleZoomLevel3DetailType], { nullable: true })
-  public enrichedSources?: BasePeopleZoomLevel3DetailType[]
+  @Field(() => [EnrichedBasePeopleZoomLevel3DetailType], { nullable: true })
+  public enrichedSources?: EnrichedBasePeopleZoomLevel3DetailType[]
 }
 
 @ObjectType()
@@ -155,12 +168,24 @@ class BasePeopleRecordZoomLevel3Type {
 }
 
 @ObjectType()
+class EnrichedBasePeopleRecordZoomLevel3Type extends BasePeopleRecordZoomLevel3Type {
+  @Field()
+  public id: string
+
+  @Field(() => ExternalSource)
+  public externalSourceType: ExternalSource
+
+  @Field()
+  public externalSourceUrl: string
+}
+
+@ObjectType()
 export class PeopleRecordZoomLevel3Type extends IntersectionType(
   EnrichedRecordBaseType,
   BasePeopleRecordZoomLevel3Type
 ) {
-  @Field(() => [BasePeopleRecordZoomLevel3Type], { nullable: true })
-  public enrichedSources?: BasePeopleRecordZoomLevel3Type[]
+  @Field(() => [EnrichedBasePeopleRecordZoomLevel3Type], { nullable: true })
+  public enrichedSources?: EnrichedBasePeopleRecordZoomLevel3Type[]
 }
 
 @ObjectType()
