@@ -37,7 +37,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
     <div
       className={cn(
         'size-full',
-        zoomAnimationState === 'forward' && 'animate-[toBlurAndHide_400ms_ease-in-out_forwards]'
+        zoomAnimationState === 'forward' && 'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
       )}
     >
       <div

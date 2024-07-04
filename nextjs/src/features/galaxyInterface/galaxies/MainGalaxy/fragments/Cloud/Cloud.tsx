@@ -99,16 +99,16 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
             } as CSSProperties
           }
           className={cn(
-            'absolute size-[var(--size)] cursor-pointer rounded-[50%] bg-[url(/images/cloud.svg)] bg-cover bg-no-repeat',
+            'absolute cursor-pointer rounded-[50%] bg-[url(/images/cloud.svg)] bg-cover bg-no-repeat',
             cloudClassNames,
             sizeClassNames,
             animationState !== 'forward' && 'transition-transform duration-[400] hover:scale-110',
             animationState === 'forward' &&
               clicked &&
-              'animate-[toScaleFullPage_0.5s_ease-in-out_forwards]',
+              'animate-[toScaleFullPage_600ms_ease-in-out_forwards]',
             animationState === 'forward' &&
               !clicked &&
-              'animate-[toBlurAndHide_400ms_ease-in-out_forwards]'
+              'animate-[toBlurAndHide_500ms_ease-in-out_forwards]'
           )}
           animation="forward"
           onClick={() => setClicked(true)}

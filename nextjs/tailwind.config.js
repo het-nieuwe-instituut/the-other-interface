@@ -31,8 +31,8 @@ module.exports = {
         },
         toScaleFullPage: {
           '0%': { transform: 'scale(1.1)', opacity: 1 },
-          '75%': { transform: 'scale(5)', opacity: 0.5 },
-          '100%': { transform: 'scale(6)', opacity: 0 },
+          '75%': { transform: 'scale(3)', opacity: 0.5 },
+          '100%': { transform: 'scale(4)', opacity: 0 },
         },
       },
       gridTemplateAreas: {

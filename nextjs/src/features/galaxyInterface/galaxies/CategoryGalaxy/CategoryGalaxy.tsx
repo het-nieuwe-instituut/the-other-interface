@@ -138,8 +138,8 @@ export const CategoryGalaxyContent = React.memo(() => {
 
     if (isMainLoading) {
       return (
-        <div className="flex h-full  items-center justify-center">
-          <ThemedSpinner />
+        <div className="absolute mx-auto flex h-full w-screen items-center justify-center ">
+          <Pulse className="absolute mx-auto bg-red-100" />
         </div>
       )
     }
