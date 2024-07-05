@@ -1,11 +1,9 @@
 'use client'
-import {
-  Animations,
-  GalaxyZoomAnimationStateContext,
-} from '@/features/galaxyInterface/galaxies/hooks/GalaxyZoomAnimationStateProvider'
+import { GalaxyZoomAnimationStateContext } from '@/features/galaxyInterface/galaxies/hooks/GalaxyZoomAnimationStateProvider'
 import { LinkProps } from 'next/link'
 import { useContext } from 'react'
 import { DelayedNextLink } from './DelayedNextLink'
+import { Animations } from '@/features/galaxyInterface/galaxies/hooks/useGalaxyAnimationState'
 
 export const DelayedNextLinkWithZoomAnimationsContext = (
   props: LinkProps &
