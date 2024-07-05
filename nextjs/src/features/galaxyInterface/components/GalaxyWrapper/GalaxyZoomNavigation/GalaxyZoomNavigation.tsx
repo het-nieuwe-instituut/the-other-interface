@@ -1,14 +1,13 @@
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { getCurrentZoomNumber } from '@/features/shared/helpers/getCurrentZoomNumber'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 import { isCloudCategory, isSearchCategory } from '@/features/shared/utils/categories'
-import { useParams, usePathname, useSearchParams } from 'next/navigation'
-import NextLink from 'next/link'
+import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/components/DelayedNextLink/DelayedNextLinkWithZoomAnimationsContext'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
+import { useParams, usePathname, useSearchParams } from 'next/navigation'
 import { InputHTMLAttributes } from 'react'
-import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { useLocale } from '@/features/shared/hooks/useLocale'
-import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/components/DelayedNextLink/DelayedNextLinkWithZoomAnimationsContext'
 const getZoom2Link = (searchParam: string, category?: string) => {
   const search = searchParam ? `&search=${searchParam}` : ''
 

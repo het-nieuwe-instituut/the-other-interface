@@ -58,8 +58,7 @@ export const Records: React.FC<Props> = ({ pageAmount, records }) => {
     conditions: galaxyPaginationAnimationConditions,
     animationState: galaxyPaginationAnimationState,
   } = useContext(GalaxyPaginationAnimationStateContext)
-  const { animationState: galaxyZoomAnimationState, conditions: galaxyZoomAnimationConditions } =
-    useContext(GalaxyZoomAnimationStateContext)
+  const { animationState: galaxyZoomAnimationState } = useContext(GalaxyZoomAnimationStateContext)
   const { pageNumber } = usePageNumber()
   const selectedFilters = useSelectedFilters()
 
