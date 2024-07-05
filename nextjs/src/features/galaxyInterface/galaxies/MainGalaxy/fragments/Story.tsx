@@ -1,16 +1,20 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
-import { Box, Flex, GridItem, Text } from '@chakra-ui/react'
-import { useRouter } from 'next/navigation'
 
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { CATEGORIES } from '@/features/shared/utils/categories'
+import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/components/DelayedNextLink/DelayedNextLinkWithZoomAnimationsContext'
 import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
-import { useCallback } from 'react'
-import { HOMEPAGE_Z_INDEXES } from './constants'
+import { useCallback, useContext, useState } from 'react'
+import {
+  GalaxyZoomAnimationStateContext,
+  useMoveElementToCenterValues,
+} from '../../hooks/GalaxyZoomAnimationStateProvider'
+import { useSetStoryOrRecordImageToCache } from '../hooks/useStoryOrRecordImageQuery'
 import { PositionedStory } from './types'
 
 type Props = {
@@ -21,7 +25,6 @@ type Props = {
 }
 
 export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className }) => {
-  const router = useRouter()
   const { t: hoverT } = useTypeSafeTranslation('category')
   const lang = useLocale()
 
@@ -35,12 +38,17 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
 
   const isClickable = !!title
 
-  const handleClick = () => {
-    if (!title) return
-    let url = `/detail/stories/${id}`
-    url = addLocaleToUrl(url, lang)
-    router.push(url)
-  }
+  let url = `/detail/stories/${id}`
+  url = addLocaleToUrl(url, lang)
+
+  const { animationState } = useContext(GalaxyZoomAnimationStateContext)
+
+  const [clicked, setClicked] = useState(false)
+  const setStoryOrRecorImageToCache = useSetStoryOrRecordImageToCache()
+  const [animationCssVariables, positionRef] = useMoveElementToCenterValues({
+    scale: 2.39,
+    offsetTop: -62,
+  })
 
   const handleImageLoad = useCallback(() => {
     if (onLoad) {
@@ -49,8 +57,9 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
   }, [onLoad, story.id])
 
   return (
-    <GridItem position="relative" css={{ ...grid }} className={cn(className)}>
+    <div className={cn('relative', className)} style={{ ...grid }}>
       <ReadMoreTooltip
+        hideTooltip={animationState === 'forward'}
         isLoading={isLoadingHover}
         error={isLoadingHoverError ? hoverT('couldNotFetchHover') : ''}
         place={'bottom'}
@@ -60,58 +69,64 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
         className="size-full"
         color="blue"
       >
-        <button
-          tabIndex={0}
+        <div
           className={cn(
-            'ease-in-out duration-[.4] transition-all absolute flex size-4/5 cursor-pointer flex-col items-center justify-center gap-[2px] hover:scale-105',
+            'absolute flex size-4/5 cursor-pointer flex-col items-center justify-center gap-[2px]',
+            !animationState &&
+              isClickable &&
+              'hover:scale-105 ease-in-out duration-[.4] transition-transform ',
             'use-calculate-line-element',
-            'group-hover-blur-item'
+            !animationState && 'group-hover-blur-item'
           )}
-          onClick={handleClick}
-          style={{ ...position }}
         >
-          <Flex
-            position="absolute"
-            style={{ ...position }}
-            w={'154px'}
-            h={'198px'}
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            gap="5px"
-            zIndex={HOMEPAGE_Z_INDEXES.STORY}
-            cursor={isClickable ? 'pointer' : 'default'}
-            onClick={handleClick}
-            _hover={isClickable ? { transform: 'scale(1.05)' } : undefined}
-            transition="all .4s ease-in-out"
-            // eslint-disable-next-line tailwindcss/no-custom-classname
-            className={isMainGrid ? 'story-grid-item' : ''}
+          <DelayedNextLinkWithZoomAnimationsContext
+            delay={600}
+            animation="forward"
+            ref={positionRef}
+            href={url}
+            className={cn(
+              'absolute w-[154px] h-[198px] flex-col items-center justify-center gap-[5px] z-[20] transition-transform duration-[400ms] ease-in-out ',
+              isMainGrid ? 'story-grid-item' : '',
+              animationState === 'forward' &&
+                !clicked &&
+                'animate-[toBlurAndHide_300ms_ease-in-out_forwards]',
+              animationState === 'forward' &&
+                clicked &&
+                'animate-[toCenterOfGalaxy_500ms_ease-in-out_forwards] z-[1000]'
+            )}
+            style={{ ...position, ...animationCssVariables }}
+            onClick={() => {
+              setStoryOrRecorImageToCache({ id: story.id, image })
+              setClicked(true)
+            }}
           >
             <ResponsiveImage
               src={image}
               alt={title}
-              className="max-h-[calc(100%-2vw-5px)]" // where 2vw is a title's line height, 5px is gap
+              className="size-full max-h-[calc(100%-2vw-5px)]" // where 2vw is a title's line height, 5px is gap
               size={'12vw'}
               style={{
                 flex: `1 1 calc(100% - 2vw - 5px)`,
               }}
               onLoad={handleImageLoad}
             />
-            <Box w="100%" flex="1" mt={2}>
-              <Text
-                align="center"
-                isTruncated
-                textStyle="headingTimesLarge.md"
-                color="blueAlpha.100"
-                fontSize={{ base: '12px', lg: '20px' }}
-                lineHeight={{ base: '12px', lg: '21px' }}
+            <div className="mt-1 w-full flex-1">
+              <p
+                className={cn(
+                  animationState === 'forward' &&
+                    'animate-[toBlurAndHide_300ms_ease-in-out_forwards]',
+                  TypographyVariants({
+                    responsive: 'storyOrRecordTitle',
+                    className: 'line-clamp-1 overflow-hidden items-center text-blue-100 w-full',
+                  })
+                )}
               >
                 {title}
-              </Text>
-            </Box>
-          </Flex>
-        </button>
+              </p>
+            </div>
+          </DelayedNextLinkWithZoomAnimationsContext>
+        </div>
       </ReadMoreTooltip>
-    </GridItem>
+    </div>
   )
 }

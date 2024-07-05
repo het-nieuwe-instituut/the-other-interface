@@ -70,6 +70,10 @@ export const TypographyVariants = cva('', {
         'md:font-social-large md:text-[21px] md:tracking-[0.21px]',
       ],
       title: ['font-impact-large text-[80px] leading-[100%_] tracking-[-0.8px] ', 'lg:text-[54px]'],
+      storyOrRecordTitle: [
+        'font-times-large text-[12px] leading-[100%_] tracking-[0.04em]',
+        'lg:font-times-large lg:text-[20px] lg:leading-[105%_] lg:tracking-[0.01em]',
+      ],
     },
   },
 })

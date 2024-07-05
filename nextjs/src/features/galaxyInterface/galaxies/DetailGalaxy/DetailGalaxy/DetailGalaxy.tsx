@@ -18,6 +18,7 @@ import {
 import { RelatedCategory, RelatedStories } from '../fragments'
 import { useIsFetching } from '@tanstack/react-query'
 import { Pulse } from '@/features/galaxyInterface/components/Pulse/Pulse'
+import { DetailedRecord } from '../fragments/DetailedRecord'
 
 const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = [
   { category: CLOUD_CATEGORIES.people, grid: { gridRow: '1 / 2', gridColumn: '1 / 2' } },
@@ -66,7 +67,18 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
 
   const renderMainContent = () => {
     if (isLoading) {
-      return <Pulse hide={!isFetching} className="absolute" />
+      return (
+        <>
+          <Pulse hide={!isFetching} className="absolute size-full" />
+          <div className=" absolute inset-x-[2vw] top-[6%] grid size-full h-[calc(80%-1rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-3 grid-rows-2 min-[1440px]:inset-x-[28.8px]">
+            <div className="pointer-events-none col-start-2 col-end-2 row-start-1 row-end-3 text-white">
+              <div className="grid h-full grid-cols-2 grid-rows-4">
+                <DetailedRecord />
+              </div>
+            </div>
+          </div>
+        </>
+      )
     }
     return (
       <>
