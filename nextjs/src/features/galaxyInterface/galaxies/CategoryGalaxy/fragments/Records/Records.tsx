@@ -110,7 +110,7 @@ export const Records: React.FC<Props> = ({ pageAmount, records }) => {
         })}
       </div>
 
-      <div className="absolute inset-x-[2vw] top-[7%] grid h-[calc(80%-1.7rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-4 grid-rows-3">
+      <div className="relative inset-x-[2vw] top-[7%] grid h-[calc(80%-1.7rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-4 grid-rows-3">
         {currentPositionedRecords?.map((r, i) => {
           return (
             <Record
