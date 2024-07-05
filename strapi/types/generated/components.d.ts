@@ -63,6 +63,24 @@ export interface CoreGridFeaturedFields extends Schema.Component {
   }
 }
 
+export interface CoreImageCarouselItem extends Schema.Component {
+  collectionName: 'components_core_image_carousel_items'
+  info: {
+    displayName: 'Image carousel item'
+  }
+  attributes: {
+    image: Attribute.Media & Attribute.Required
+    alt_text: Attribute.String & Attribute.Required
+    story: Attribute.Relation<'core.image-carousel-item', 'oneToOne', 'api::story.story'>
+    triply_record: Attribute.Relation<
+      'core.image-carousel-item',
+      'oneToOne',
+      'api::triply-record.triply-record'
+    >
+    url: Attribute.String
+  }
+}
+
 export interface CoreMuxAudio extends Schema.Component {
   collectionName: 'components_core_mux_audios'
   info: {
@@ -208,6 +226,7 @@ export interface ModulesImageCarousel extends Schema.Component {
   attributes: {
     images: Attribute.Media
     description: Attribute.Text
+    items: Attribute.Component<'core.image-carousel-item', true> & Attribute.Required
   }
 }
 
@@ -310,6 +329,7 @@ declare module '@strapi/types' {
       'core.carousel-image': CoreCarouselImage
       'core.featured-fields': CoreFeaturedFields
       'core.grid-featured-fields': CoreGridFeaturedFields
+      'core.image-carousel-item': CoreImageCarouselItem
       'core.mux-audio': CoreMuxAudio
       'core.mux-video': CoreMuxVideo
       'core.publication-date': CorePublicationDate

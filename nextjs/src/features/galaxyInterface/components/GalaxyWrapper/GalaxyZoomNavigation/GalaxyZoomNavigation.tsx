@@ -55,7 +55,7 @@ export const GalaxyZoomNavigation = () => {
   const zoom2Link = getZoom2Link(searchParam, category as string)
 
   return (
-    <div className="flex flex-col gap-2 ">
+    <div className="flex flex-col gap-2">
       <p className={TypographyVariants({ socialLarge: 'label', className: 'text-blue-100' })}>
         {t('zoom')}
       </p>
