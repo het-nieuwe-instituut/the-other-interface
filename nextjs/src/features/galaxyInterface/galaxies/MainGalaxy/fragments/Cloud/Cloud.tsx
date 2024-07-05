@@ -16,6 +16,7 @@ import { TypographyVariants } from '@/features/ui/components/typography/variants
 import { cn } from '@/features/ui/utils/cn'
 import { CSSProperties, useContext, useState } from 'react'
 import { GalaxyZoomAnimationStateContext } from '../../../hooks/GalaxyZoomAnimationStateProvider'
+import { GalaxyPaginationAnimationStateContext } from '../../../hooks/GalaxyPaginationAnimationStateProvider'
 interface Props {
   cloud: CategoryCloud
 }
@@ -56,6 +57,9 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
   const hoverTranslation = hoverTranslations[category]
   const { animationState } = useContext(GalaxyZoomAnimationStateContext)
   const [clicked, setClicked] = useState(false)
+  const { conditions: paginationAnimationConditions } = useContext(
+    GalaxyPaginationAnimationStateContext
+  )
 
   return (
     <>
@@ -110,6 +114,8 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
               'size-full',
               'absolute',
               'cursor-pointer rounded-[50%] bg-[url(/images/cloud.svg)] bg-cover bg-no-repeat',
+              paginationAnimationConditions === 'firstRender' &&
+                'animate-[fromHideToShow_1000ms_ease-in-out_forwards]',
               animationState !== 'forward' && 'transition-transform duration-[400] hover:scale-110',
               animationState === 'forward' &&
                 clicked &&
@@ -132,7 +138,9 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
             className: cn(
               titleClassNames,
               'text-blue-100 absolute',
-              'blur-[1.5px] pointer-events-none '
+              'blur-[1.5px] pointer-events-none ',
+              paginationAnimationConditions === 'firstRender' &&
+                'animate-[fromHideToShow_1000ms_ease-in-out_forwards]'
             ),
           }),
           'text-[20px] lg:text-[32px]',

@@ -71,7 +71,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
       />
       <div
         className={cn(
-          'absolute right-[18%] top-[13%] grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px] z-10 animate-[fromHideToShow_1000ms_ease-in-out_forwards]',
+          'absolute right-[18%] top-[13%] grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px] z-10',
           getNextItemsAnimationClassNames(
             paginationAnimationState,
             paginationAnimationConditions,
@@ -80,7 +80,14 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
         )}
       >
         {positionedNextStories.map(positionedStory => (
-          <Story key={`${positionedStory.id}-${positionedStory.locale}`} story={positionedStory} />
+          <Story
+            className={cn(
+              paginationAnimationConditions === 'firstRender' &&
+                'animate-[fromHideToShow_1000ms_ease-in-out_forwards]'
+            )}
+            key={`${positionedStory.id}-${positionedStory.locale}`}
+            story={positionedStory}
+          />
         ))}
       </div>
     </div>
