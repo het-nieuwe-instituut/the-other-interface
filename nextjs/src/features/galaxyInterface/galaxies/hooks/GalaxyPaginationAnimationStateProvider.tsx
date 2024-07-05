@@ -33,22 +33,13 @@ export const GalaxyPaginationAnimationStateProvider = ({
   )
 }
 
-export const getItemsAnimationClassNames = (
-  animationState: Animations,
-  conditions: Conditions,
-  options: {
-    disableFirstRenderAnimation?: boolean
-  }
-) => {
-  const { disableFirstRenderAnimation } = options
+export const getItemsAnimationClassNames = (animationState: Animations, conditions: Conditions) => {
   return cn(
     conditions === 'previousAnimationWasBackwards' &&
       'animate-[fromHideToShow_500ms_ease-in-out_forwards]',
     animationState === 'forward' && 'animate-[toBlurAndHide_500ms_ease-in-out_forwards]',
     animationState === 'backwards' && 'animate-[toBlur_500ms_ease-in-out_forwards]',
-    conditions === 'firstRender' &&
-      !disableFirstRenderAnimation &&
-      'animate-[fromHideToShow_500ms_ease-in-out_forwards]'
+    conditions === 'firstRender' && 'animate-[fromHideToShow_500ms_ease-in-out_forwards]'
   )
 }
 

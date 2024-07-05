@@ -1,6 +1,5 @@
 'use client'
 import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
-import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { State } from '@/features/shared/configs/store'
 import { ZOOM2_RECORDS_PER_PAGE } from '@/features/shared/constants/mainConstants'
 import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
@@ -27,7 +26,7 @@ import { Records } from './fragments'
 import { PositioningTemplate, positioningTemplates } from './fragments/Records/positioningTemplates'
 import { useRemoveFallbackSearchParam } from './useRemoveFallbackSearchParam'
 
-export const CategoryGalaxyAnimationContext = React.createContext<{
+export const CategoryGalaxyTemplateContext = React.createContext<{
   previousTemplate?: PositioningTemplate
   currentTemplate?: PositioningTemplate
   nextTemplate?: PositioningTemplate
@@ -47,14 +46,14 @@ export const CategoryGalaxy = () => {
   const currentPage = parseInt(searchParams?.get('page') ?? '1')
   return (
     <GalaxyPaginationAnimationStateProvider>
-      <CategoryGalaxyAnimationContext.Provider
+      <CategoryGalaxyTemplateContext.Provider
         value={{
           nextTemplate,
           currentTemplate,
         }}
       >
         <CategoryGalaxyContent key={currentPage} />
-      </CategoryGalaxyAnimationContext.Provider>
+      </CategoryGalaxyTemplateContext.Provider>
     </GalaxyPaginationAnimationStateProvider>
   )
 }

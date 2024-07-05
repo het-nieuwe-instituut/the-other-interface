@@ -92,11 +92,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
         yAxis={placement.top}
       >
         <div
-          className={cn(
-            sizeClassNames,
-            cloudClassNames,
-            'absolute animate-[fromHideToShow_1000ms_ease-in-out_forwards]'
-          )}
+          className={cn(sizeClassNames, cloudClassNames, 'absolute')}
           style={
             {
               zIndex: HOMEPAGE_Z_INDEXES.CLOUD,
