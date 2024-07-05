@@ -8,12 +8,12 @@ import { useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { usePositioningTemplates } from '@/features/shared/hooks/usePositioningTemplates'
-import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
+import { useSearchParamCategory, useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { isSearchCategory } from '@/features/shared/utils/categories'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { useArrowNavigation } from '@/features/ui/hooks/useArrowNavigation'
 import { useSearchParamPagination } from '@/features/ui/hooks/useSearchParamPagination'
-import { notFound, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import React, { useContext } from 'react'
 import { useSelector } from 'react-redux'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
@@ -26,6 +26,7 @@ import {
 import { Records } from './fragments'
 import { PositioningTemplate, positioningTemplates } from './fragments/Records/positioningTemplates'
 import { useRemoveFallbackSearchParam } from './useRemoveFallbackSearchParam'
+import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 
 export const CategoryGalaxyAnimationContext = React.createContext<{
   previousTemplate?: PositioningTemplate
@@ -45,6 +46,12 @@ export const CategoryGalaxy = () => {
   )
   const searchParams = useSearchParams()
   const currentPage = parseInt(searchParams?.get('page') ?? '1')
+  const category = useSearchParamCategory()
+
+  if (!isSearchCategory(category)) {
+    return <ErrorBox />
+  }
+
   return (
     <GalaxyPaginationAnimationStateProvider>
       <CategoryGalaxyAnimationContext.Provider
@@ -65,10 +72,6 @@ export const CategoryGalaxyContent = React.memo(() => {
   const { pageNumber } = usePageNumber()
   const selectedFilters = useSelectedFilters()
   const { setAnimationState } = useContext(GalaxyPaginationAnimationStateContext)
-
-  if (!isSearchCategory(category)) {
-    notFound()
-  }
 
   const { data: prevData } = useSearchByCategoryQuery({
     category,
