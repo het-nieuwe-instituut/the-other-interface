@@ -8,6 +8,8 @@ import { cn } from '@/features/ui/utils/cn'
 import { Text } from '@chakra-ui/react'
 import { useParams } from 'next/navigation'
 import { useStoryOrRecordImageQuery } from '../../MainGalaxy/hooks/useStoryOrRecordImageQuery'
+import { useContext } from 'react'
+import { GalaxyZoomAnimationStateContext } from '../../hooks/GalaxyZoomAnimationStateProvider'
 
 interface Props {
   className?: string
@@ -19,6 +21,7 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
   const category = params?.category as Category
   const id = params?.id as string
   const locale = useLocale()
+  const { animationState } = useContext(GalaxyZoomAnimationStateContext)
 
   const { data: record } = useRecordDetailQuery({
     type: category,
@@ -34,7 +37,8 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
     <div
       className={cn(
         ' col-start-1 col-end-3 row-start-2 row-end-4 flex items-center justify-center',
-        className
+        className,
+        animationState === 'forward' && 'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
       )}
     >
       <div className="relative flex size-4/5 flex-col items-center justify-center gap-[2px]">

@@ -1,5 +1,6 @@
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/DetailGalaxy/DetailGalaxy'
+import { GalaxyZoomAnimationStateProvider } from '@/features/galaxyInterface/galaxies/hooks/GalaxyZoomAnimationStateProvider'
 import { RecordLayer } from '@/features/record/containers/RecordLayer/RecordLayer'
 import { StoryLayer } from '@/features/shared/components/Layers/StoryLayer/StoryLayer'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
@@ -26,11 +27,13 @@ export const DetailpageContainer: React.FC<Props> = ({ category }) => {
 
   return (
     <div>
-      <GalaxyInterface>
-        <MobileOverlayProvider>
-          <DetailGalaxy />
-        </MobileOverlayProvider>
-      </GalaxyInterface>
+      <GalaxyZoomAnimationStateProvider>
+        <GalaxyInterface>
+          <MobileOverlayProvider>
+            <DetailGalaxy />
+          </MobileOverlayProvider>
+        </GalaxyInterface>
+      </GalaxyZoomAnimationStateProvider>
 
       <Layer />
     </div>

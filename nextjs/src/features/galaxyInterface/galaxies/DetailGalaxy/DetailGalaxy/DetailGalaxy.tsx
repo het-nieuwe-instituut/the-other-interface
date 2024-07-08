@@ -86,7 +86,7 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
 
         <div
           id="detail-galaxy-grid"
-          className="group-hover-blur absolute inset-x-[2vw] top-[6%] grid h-[calc(80%-1rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-3 grid-rows-2 min-[1440px]:inset-x-[28.8px]"
+          className="group-hover-blur relative inset-x-[2vw] top-[6%] grid h-[calc(80%-1rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-3 grid-rows-2 min-[1440px]:inset-x-[28.8px]"
         >
           {relatedCategories.map(({ category: cloudCategory, grid }) => (
             <RelatedCategory
