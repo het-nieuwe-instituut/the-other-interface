@@ -114,7 +114,15 @@ export const Record = React.memo(
                   flex: '1 1 calc(100% - 2vw - 5px)',
                 }}
               />
-              <RecordText title={recordDetails?.title} categoryType={category} />
+              <RecordText
+                className={cn(
+                  'animate-[fromHideToShow_1000ms_ease-in-out_forwards]',
+                  animationState === 'forward' &&
+                    'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+                )}
+                title={recordDetails?.title}
+                categoryType={category}
+              />
             </DelayedNextLinkWithZoomAnimationsContext>
           </ReadMoreTooltip>
         </div>
@@ -131,7 +139,11 @@ export const Record = React.memo(
             marginLeft: `-${coordinates.offsetLeft ?? 0}px`,
             width: '100vw',
           }}
-          className="hidden h-[calc(100vh-12vh)] peer-hover:block"
+          className={cn(
+            'hidden h-[calc(100vh-12vh)] peer-hover:block',
+            (animationState === 'forward' || animationState === 'backwards') &&
+              'hidden peer-hover:hidden'
+          )}
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="size-full">
             <line

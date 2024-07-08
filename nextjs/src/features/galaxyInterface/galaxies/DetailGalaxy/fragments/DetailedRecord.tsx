@@ -59,7 +59,13 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
             flex: `1 1 calc(100% - 3vw - 8px)`,
           }}
         />
-        <div className="mt-2 flex w-full flex-1 flex-col text-blue-100">
+        <div
+          className={cn(
+            'mt-2 flex w-full flex-1 flex-col text-blue-100',
+            !(animationState === 'forward' || animationState === 'backwards') &&
+              'animate-[fromHideToShow_1000ms_ease-in-out_forwards]'
+          )}
+        >
           <Text
             align="center"
             isTruncated
