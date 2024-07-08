@@ -23,7 +23,7 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
   const locale = useLocale()
   const { animationState } = useContext(GalaxyZoomAnimationStateContext)
 
-  const { data: record } = useRecordDetailQuery({
+  const { data: record, isLoading } = useRecordDetailQuery({
     type: category,
     id,
     options: { refetchOnWindowFocus: false },
@@ -63,7 +63,9 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
           className={cn(
             'mt-2 flex w-full flex-1 flex-col text-blue-100',
             !(animationState === 'forward' || animationState === 'backwards') &&
-              'animate-[fromHideToShow_1000ms_ease-in-out_forwards]'
+              !isLoading &&
+              'animate-[fromHideToShow_1000ms_ease-in-out_forwards]',
+            isLoading && 'opacity-0'
           )}
         >
           <Text

@@ -25,8 +25,8 @@ export const useCalculateLine = () => {
         setCoordinates({
           x1: `${hoveredRect.left + hoveredElement.clientWidth / 2}`,
           y1: `${hoveredRect.top + hoveredElement.clientHeight / 2}`,
-          x2: `${rect.width / 2}`,
-          y2: `${rect.height / 2}`,
+          x2: `${window.innerWidth / 2}`,
+          y2: `${window.innerHeight / 2 - 80}`,
           offsetLeft: hoveredRect.left + window.scrollX,
           offsetTop: hoveredRect.top + window.scrollY,
         })
