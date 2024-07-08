@@ -128,7 +128,7 @@ export const CategoryGalaxyContent = React.memo(() => {
       return (
         <>
           <div className="absolute mx-auto flex h-full w-screen items-center justify-center ">
-            <Pulse className="absolute mx-auto bg-red-100" />
+            <Pulse />
           </div>
           <Records pageAmount={pageAmount} records={records} />
         </>
@@ -138,7 +138,7 @@ export const CategoryGalaxyContent = React.memo(() => {
     if (isMainLoading) {
       return (
         <div className="absolute mx-auto flex h-full w-screen items-center justify-center ">
-          <Pulse className="absolute mx-auto bg-red-100" />
+          <Pulse />
         </div>
       )
     }

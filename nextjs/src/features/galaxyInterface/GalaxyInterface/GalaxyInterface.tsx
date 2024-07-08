@@ -7,6 +7,7 @@ import { sharedActions } from '@/features/shared/stores/shared.store'
 import { useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { useResizeObserver } from 'usehooks-ts'
+import { PulseProvider, PulseVisual } from '../components/Pulse/Pulse'
 interface Props {
   children: React.ReactNode
 }
@@ -27,14 +28,22 @@ export const GalaxyInterface: React.FC<Props> = ({ children }) => {
   }, [dispatch, scrollPosition, sizes?.height])
 
   return (
-    <div className="relative block">
-      <div className="fixed inset-x-0 top-0 z-[9999] mx-auto flex max-w-[90em] justify-between">
-        <StaticHeader />
-      </div>
+    <PulseProvider>
+      <div className="relative block">
+        <div className="fixed inset-x-0 top-0 z-[9999] mx-auto flex max-w-[90em] justify-between">
+          <StaticHeader />
+        </div>
 
-      <div className="relative inset-x-0 bottom-0 h-[calc(100vh-12vh)] bg-pink-100" ref={graphRef}>
-        <div className="fixed">{children}</div>
+        <div
+          className="relative inset-x-0 bottom-0 h-[calc(100vh-12vh)] bg-pink-100"
+          ref={graphRef}
+        >
+          <div className="fixed">
+            <PulseVisual className=" fixed mx-auto translate-x-1/2" />
+            {children}
+          </div>
+        </div>
       </div>
-    </div>
+    </PulseProvider>
   )
 }

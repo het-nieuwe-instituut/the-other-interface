@@ -69,7 +69,7 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
     if (isLoading) {
       return (
         <>
-          <Pulse hide={!isFetching} className="absolute size-full" />
+          <Pulse hide={!isFetching} />
           <div className=" absolute inset-x-[2vw] top-[6%] grid size-full h-[calc(80%-1rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-3 grid-rows-2 min-[1440px]:inset-x-[28.8px]">
             <div className="pointer-events-none col-start-2 col-end-2 row-start-1 row-end-3 text-white">
               <div className="grid h-full grid-cols-2 grid-rows-4">
@@ -82,7 +82,7 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
     }
     return (
       <>
-        <Pulse hide={!isFetching} className="absolute" />
+        <Pulse hide={!isFetching} />
 
         <div
           id="detail-galaxy-grid"

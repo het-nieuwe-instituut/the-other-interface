@@ -17,9 +17,9 @@ import {
   GalaxyPaginationAnimationStateContext,
   GalaxyPaginationAnimationStateProvider,
 } from '../hooks/GalaxyPaginationAnimationStateProvider'
+import { GalaxyZoomAnimationStateProvider } from '../hooks/GalaxyZoomAnimationStateProvider'
 import { CategoryCloud, Cloud, Stories } from './fragments'
 import { useThemesQuery } from './hooks/useThemesQuery'
-import { GalaxyZoomAnimationStateProvider } from '../hooks/GalaxyZoomAnimationStateProvider'
 
 const categoryClouds: CategoryCloud[] = [
   {
@@ -93,7 +93,6 @@ const MainGalaxyContent = React.memo(() => {
     onRight: handleRightClick,
     disabled: isSearchModeActive,
   })
-
   const renderMainContent = () => {
     if (isError) {
       return (
@@ -106,7 +105,7 @@ const MainGalaxyContent = React.memo(() => {
     if (isMainLoading && prevData) {
       return (
         <>
-          <Pulse className="absolute" />
+          <Pulse />
           <Stories stories={prevData?.stories} nextStories={[]} />
           <ThemeTitle title={storyTitle} />
         </>
