@@ -51,7 +51,7 @@ export const Record: React.FC<Props> = ({ className, record, tooltipPlace, onFul
     <div className={cn('relative', className)}>
       <div
         ref={positionRef}
-        style={{ ...animationCssVariables } as CSSProperties}
+        style={{ ...animationCssVariables, ...record.position } as CSSProperties}
         className={cn(
           'absolute flex h-4/5 w-[70%]',
           animationState === 'forward' &&

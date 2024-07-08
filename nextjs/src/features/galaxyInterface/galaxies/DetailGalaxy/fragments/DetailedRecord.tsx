@@ -30,8 +30,6 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
     id,
   })
 
-  console.log(data)
-
   return (
     <div
       className={cn(
