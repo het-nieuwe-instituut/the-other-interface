@@ -49,7 +49,7 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
     return (
       <>
         <ResponsiveImage
-          src={record?.thumbnail?.[0] ?? data}
+          src={data ?? record?.thumbnail?.[0]}
           alt={record?.title}
           className="max-h-[calc(100%-3vw-8px)]"
           size={'25vw'}

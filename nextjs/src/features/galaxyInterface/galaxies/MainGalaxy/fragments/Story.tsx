@@ -1,5 +1,4 @@
-import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
-
+import { StoryOrRecordResponsiveImage } from '@/features/shared/components/ResponsiveImage/StoryOrRecordResponsiveImage'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
@@ -14,7 +13,6 @@ import {
   GalaxyZoomAnimationStateContext,
   useMoveElementToCenterValues,
 } from '../../hooks/GalaxyZoomAnimationStateProvider'
-import { useSetStoryOrRecordImageToCache } from '../hooks/useStoryOrRecordImageQuery'
 import { PositionedStory } from './types'
 
 type Props = {
@@ -44,7 +42,6 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
   const { animationState } = useContext(GalaxyZoomAnimationStateContext)
 
   const [clicked, setClicked] = useState(false)
-  const setStoryOrRecorImageToCache = useSetStoryOrRecordImageToCache()
   const [animationCssVariables, positionRef] = useMoveElementToCenterValues({
     scale: 2.39,
     offsetTop: -62,
@@ -96,11 +93,11 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
             )}
             style={{ ...position, ...animationCssVariables }}
             onClick={() => {
-              setStoryOrRecorImageToCache({ id: story.id, image })
               setClicked(true)
             }}
           >
-            <ResponsiveImage
+            <StoryOrRecordResponsiveImage
+              recordOrStoryId={story.id}
               src={image}
               alt={title}
               className="size-full max-h-[calc(100%-2vw-5px)]" // where 2vw is a title's line height, 5px is gap
