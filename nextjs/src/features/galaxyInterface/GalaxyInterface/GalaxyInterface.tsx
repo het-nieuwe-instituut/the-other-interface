@@ -39,7 +39,9 @@ export const GalaxyInterface: React.FC<Props> = ({ children }) => {
           ref={graphRef}
         >
           <div className="fixed">
-            <PulseVisual className=" fixed mx-auto translate-x-1/2" />
+            <div className="absolute w-full">
+              <PulseVisual className=" h-[calc(100vh-12vh)]" />
+            </div>
             {children}
           </div>
         </div>
