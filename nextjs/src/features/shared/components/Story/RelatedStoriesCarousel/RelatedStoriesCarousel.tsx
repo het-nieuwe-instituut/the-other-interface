@@ -69,9 +69,6 @@ export const RelatedStoriesCarousel = () => {
     )
   }
 
-  console.log('stories', stories)
-  console.log('nodes', nodes)
-
   return (
     <div>
       {stories && stories.length > 0 && (

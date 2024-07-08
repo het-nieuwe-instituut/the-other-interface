@@ -1,11 +1,19 @@
 'use client'
-import { Grid, GridItem } from '@chakra-ui/react'
 
 import { GridParams } from '@/features/shared/types/position'
 import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { keyExtractor } from '@/features/shared/utils/lists'
+import { useContext } from 'react'
+import {
+  GalaxyPaginationAnimationStateContext,
+  getItemsAnimationClassNames,
+  getNextItemsAnimationClassNames,
+} from '../../../hooks/GalaxyPaginationAnimationStateProvider'
 import { Record } from '../Record/Record'
-import { usePositionedRecords } from './usePositionedRecords'
+import { usePositionedRecordsQuery } from './usePositionedRecordsQuery'
+import { useSwapCurrentNext } from '../RelatedStories'
+import { useLocale } from '@/features/shared/hooks/useLocale'
+import { useParams, useSearchParams } from 'next/navigation'
 
 export interface AllRelationTotalsType {
   [CLOUD_CATEGORIES.archives]: number
@@ -21,45 +29,71 @@ interface Props extends GridParams {
 }
 
 export const RelatedCategory: React.FC<Props> = ({
-  gridRow,
-  gridColumn,
   category,
   allRelationTotals,
+  gridRow,
+  gridColumn,
 }) => {
-  const { positionedRecords, nextPositionedRecords } = usePositionedRecords(
-    category,
-    allRelationTotals
-  )
+  const params = useParams()
+  const locale = useLocale()
+  const recordCategory = params?.category as CloudCategory
+  const searchParams = useSearchParams()
+  const page = parseInt(searchParams?.get('page') || '1')
+  const id = params?.id as string
+
+  const maxPages = Math.ceil((allRelationTotals?.[category] || 2) / 2)
+  const { current, next } = useSwapCurrentNext(page, maxPages)
+  const { conditions, animationState } = useContext(GalaxyPaginationAnimationStateContext)
+  const { data } = usePositionedRecordsQuery({
+    locale,
+    page,
+    id,
+    maxPages,
+    current,
+    category: category,
+    recordCategory: recordCategory,
+  })
+  const { data: nextData } = usePositionedRecordsQuery({
+    locale,
+    page: page + 1,
+    id,
+    maxPages,
+    current: next,
+    recordCategory: recordCategory,
+    category: category,
+  })
+  const positionedRecords = data || []
+  const nextPositionedRecords = nextData || []
 
   return (
     <>
-      <GridItem color={'white'} gridRow={gridRow} gridColumn={gridColumn} css={{ zIndex: 20 }}>
-        <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(2, 1fr)">
-          {positionedRecords.map((record, index) => (
-            <Record key={keyExtractor(record.id, index, positionedRecords)} record={record} />
-          ))}
-        </Grid>
-      </GridItem>
-      <GridItem
-        color={'white'}
-        gridRow={gridRow}
-        gridColumn={gridColumn}
-        css={{
-          zIndex: 10,
-          opacity: 0.3,
-          filter: 'blur(10px)',
-        }}
-      >
-        <Grid height="100%" templateColumns="repeat(2, 1fr)" templateRows="repeat(2, 1fr)">
+      <div className=" text-white" style={{ gridRow, gridColumn }}>
+        <div className="grid h-full grid-cols-2 grid-rows-2">
           {nextPositionedRecords.map((record, index) => (
             <Record
+              className={getNextItemsAnimationClassNames(
+                animationState,
+                conditions,
+                nextPositionedRecords.length > 0
+              )}
               key={keyExtractor(record.id, index, positionedRecords)}
               record={record}
               tabIndex={-1}
             />
           ))}
-        </Grid>
-      </GridItem>
+        </div>
+      </div>
+      <div className="text-white" color={'white'} style={{ gridRow, gridColumn }}>
+        <div className="grid h-full grid-cols-2 grid-rows-2">
+          {positionedRecords.map((record, index) => (
+            <Record
+              className={getItemsAnimationClassNames(animationState, conditions)}
+              key={keyExtractor(record.id, index, positionedRecords)}
+              record={record}
+            />
+          ))}
+        </div>
+      </div>
     </>
   )
 }

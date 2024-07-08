@@ -1,4 +1,4 @@
-import { EntityNames } from 'src/generated/graphql'
+import { EntityNames, ZoomLevel3RelationsType } from 'src/generated/graphql'
 
 export const CLOUD_CATEGORIES = {
   archives: 'archives',
@@ -40,4 +40,23 @@ export const isSearchCategory = (category?: string | null) => {
   if (!category) return false
 
   return (SEARCH_CATEGORIES_ARRAY as string[]).includes(category)
+}
+
+export const getCloudCategoryByZoomLevel3RelationType = (
+  zoomLevel3Relatation: ZoomLevel3RelationsType
+): CloudCategory => {
+  const transformedType = zoomLevel3Relatation.type.toLocaleLowerCase()
+  if (transformedType === 'objects') {
+    return 'objects'
+  }
+  if (transformedType === 'people') {
+    return 'people'
+  }
+  if (transformedType === 'publications') {
+    return 'publications'
+  }
+  if (transformedType === 'archives') {
+    return 'archives'
+  }
+  throw new Error(`Unknown category from relation type, this should not happen! ${transformedType}`)
 }
