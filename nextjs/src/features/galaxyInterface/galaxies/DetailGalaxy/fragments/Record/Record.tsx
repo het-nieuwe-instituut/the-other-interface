@@ -1,3 +1,4 @@
+import React, { CSSProperties, useContext, useState } from 'react'
 import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
 import { StoryOrRecordResponsiveImage } from '@/features/shared/components/ResponsiveImage/StoryOrRecordResponsiveImage'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
@@ -10,7 +11,6 @@ import {
   ReadMoreTooltipProps,
 } from '@/features/ui/components/tooltip/ReadMoreTooltip'
 import { cn } from '@/features/ui/utils/cn'
-import React, { useContext, useState } from 'react'
 import {
   GalaxyZoomAnimationStateContext,
   useMoveElementToCenterValues,
@@ -82,7 +82,7 @@ export const Record = React.memo(
             color="blue"
           >
             <DelayedNextLinkWithZoomAnimationsContext
-              style={{ ...animationCssVariables, ...position }}
+              style={{ ...animationCssVariables, ...position } as CSSProperties}
               animation="forward"
               delay={600}
               ref={positionRef}
@@ -114,7 +114,6 @@ export const Record = React.memo(
                   flex: '1 1 calc(100% - 2vw - 5px)',
                 }}
               />
-
               <RecordText title={recordDetails?.title} categoryType={category} />
             </DelayedNextLinkWithZoomAnimationsContext>
           </ReadMoreTooltip>
@@ -128,10 +127,13 @@ export const Record = React.memo(
             right: 0,
             bottom: 0,
             zIndex: -80,
+            marginTop: `-${coordinates.offsetTop ?? 0}px`,
+            marginLeft: `-${coordinates.offsetLeft ?? 0}px`,
+            width: '100vw',
           }}
-          // className="hidden peer-hover:block"
+          className="hidden h-[calc(100vh-12vh)] peer-hover:block"
         >
-          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <svg xmlns="http://www.w3.org/2000/svg" className="size-full">
             <line
               x1={coordinates.x1}
               y1={coordinates.y1}
@@ -146,4 +148,5 @@ export const Record = React.memo(
     )
   }
 )
+
 Record.displayName = 'Record'
