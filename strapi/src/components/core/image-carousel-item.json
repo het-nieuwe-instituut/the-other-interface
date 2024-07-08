@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_core_image_carousel_items",
+  "info": {
+    "displayName": "Image carousel item"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "alt_text": {
+      "type": "string",
+      "required": true
+    },
+    "story": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::story.story"
+    },
+    "triply_record": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::triply-record.triply-record"
+    },
+    "url": {
+      "type": "string"
+    }
+  }
+}

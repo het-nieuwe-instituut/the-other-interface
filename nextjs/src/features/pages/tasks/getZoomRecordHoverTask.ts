@@ -3,6 +3,7 @@ import { Sdk, Locale, EntityNames } from 'src/generated/graphql'
 import { zoomRecordHoverQueryTooltipDataMapper } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/Record/zoomRecordHoverQueryTooltipDataMapper'
 import { zoomStoryHoverQueryTooltipDataMapper } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/fragments/Record/zoomStoryHoverQueryTooltipDataMapper'
 import { CATEGORIES, Category } from '@/features/shared/utils/categories'
+import sanitizeHtml from 'sanitize-html'
 
 export async function getZoomRecordHoverTask({
   id,
@@ -30,6 +31,10 @@ export async function getZoomRecordHoverTask({
   const result = await hoverConfig?.hoverData({ id, locale })
 
   const mappedResult = zoomRecordHoverQueryTooltipDataMapper(result)
+
+  if (mappedResult?.description) {
+    mappedResult.description = sanitizeHtml(mappedResult.description, { allowedTags: [] })
+  }
 
   return mappedResult
 }

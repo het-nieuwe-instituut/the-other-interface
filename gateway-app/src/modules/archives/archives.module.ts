@@ -1,28 +1,26 @@
-import { forwardRef, Module } from '@nestjs/common'
-import { ZoomLevel3Module } from '../zoomLevel3/zoomLevel3.module'
+import { Module } from '@nestjs/common'
 import {
-  ArchivesFondsCreatorResolver,
-  ArchivesOtherResolver,
+  ArchivesRecordZoomLevel3Resolver,
   ArchivesRelationsZoomLevel3Resolver,
+  ArchivesZoomLevel3DetailResolver,
   ArchivesZoomLevelRecordHoverResolver,
 } from './archives.resolver'
 import { ArchivesService } from './archives.service'
 
 @Module({
-  imports: [forwardRef(() => ZoomLevel3Module)],
   providers: [
     ArchivesService,
-    ArchivesOtherResolver,
-    ArchivesFondsCreatorResolver,
     ArchivesRelationsZoomLevel3Resolver,
     ArchivesZoomLevelRecordHoverResolver,
+    ArchivesZoomLevel3DetailResolver,
+    ArchivesRecordZoomLevel3Resolver,
   ],
   exports: [
     ArchivesService,
-    ArchivesOtherResolver,
-    ArchivesFondsCreatorResolver,
     ArchivesRelationsZoomLevel3Resolver,
     ArchivesZoomLevelRecordHoverResolver,
+    ArchivesZoomLevel3DetailResolver,
+    ArchivesRecordZoomLevel3Resolver,
   ],
 })
 export class ArchivesModule {}
