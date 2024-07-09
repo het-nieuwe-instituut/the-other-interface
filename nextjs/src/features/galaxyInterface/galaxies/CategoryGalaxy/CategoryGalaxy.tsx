@@ -1,6 +1,5 @@
 'use client'
 import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
-import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { State } from '@/features/shared/configs/store'
 import { ZOOM2_RECORDS_PER_PAGE } from '@/features/shared/constants/mainConstants'
 import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
@@ -28,7 +27,7 @@ import { PositioningTemplate, positioningTemplates } from './fragments/Records/p
 import { useRemoveFallbackSearchParam } from './useRemoveFallbackSearchParam'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 
-export const CategoryGalaxyAnimationContext = React.createContext<{
+export const CategoryGalaxyTemplateContext = React.createContext<{
   previousTemplate?: PositioningTemplate
   currentTemplate?: PositioningTemplate
   nextTemplate?: PositioningTemplate
@@ -54,14 +53,14 @@ export const CategoryGalaxy = () => {
 
   return (
     <GalaxyPaginationAnimationStateProvider>
-      <CategoryGalaxyAnimationContext.Provider
+      <CategoryGalaxyTemplateContext.Provider
         value={{
           nextTemplate,
           currentTemplate,
         }}
       >
         <CategoryGalaxyContent key={currentPage} />
-      </CategoryGalaxyAnimationContext.Provider>
+      </CategoryGalaxyTemplateContext.Provider>
     </GalaxyPaginationAnimationStateProvider>
   )
 }
@@ -141,8 +140,8 @@ export const CategoryGalaxyContent = React.memo(() => {
 
     if (isMainLoading) {
       return (
-        <div className="flex h-full  items-center justify-center">
-          <ThemedSpinner />
+        <div className="absolute mx-auto flex h-full w-screen items-center justify-center ">
+          <Pulse className="absolute mx-auto bg-red-100" />
         </div>
       )
     }

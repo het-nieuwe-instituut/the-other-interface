@@ -10,6 +10,7 @@ import {
 } from 'src/generated/graphql'
 import { LandingPageComponentRenderer } from '@/features/modules/ModulesRenderer/LandingPageComponentRenderer'
 import SuspenseLoader from '@/features/shared/components/SuspenseLoader/SuspenseLoader'
+import { GalaxyZoomAnimationStateProvider } from '@/features/galaxyInterface/galaxies/hooks/GalaxyZoomAnimationStateProvider'
 
 export interface LandingPageProps {
   editorialData?:
@@ -22,11 +23,13 @@ export interface LandingPageProps {
 export const LandingpageContainer: React.FC<LandingPageProps> = ({ editorialData }) => {
   return (
     <div>
-      <GalaxyInterface>
-        <MobileOverlayProvider>
-          <CategoryGalaxy />
-        </MobileOverlayProvider>
-      </GalaxyInterface>
+      <GalaxyZoomAnimationStateProvider>
+        <GalaxyInterface>
+          <MobileOverlayProvider>
+            <CategoryGalaxy />
+          </MobileOverlayProvider>
+        </GalaxyInterface>
+      </GalaxyZoomAnimationStateProvider>
 
       <div className="relative w-full bg-ivory-90 px-0 xl:px-6">
         <div className="mx-auto max-w-[1392px] px-6 pt-6">

@@ -12,11 +12,13 @@ import { PlacesType } from 'react-tooltip'
 import { Locale } from 'src/generated/graphql'
 import { RecordText } from '../RecordText'
 import { getTriplyRecordPathForTypeAndId } from '@/features/shared/utils/links'
+import { useEffect, useState } from 'react'
 
 type Props = {
   className?: string
   record: RecordProps
   tooltipPlace: PlacesType
+  onFullyLoaded?: () => void
 }
 
 type RecordProps = SearchResultItemType & {
@@ -24,11 +26,16 @@ type RecordProps = SearchResultItemType & {
   category: EntityNames
 }
 
-export const Record: React.FC<Props> = ({ className, record, tooltipPlace }) => {
+export const Record: React.FC<Props> = ({ className, record, tooltipPlace, onFullyLoaded }) => {
   const { id, category } = record
   const { t } = useTypeSafeTranslation('category')
   const { lang } = useZoom2Params()
   const { data, isLoading, isError } = useZoomHoverRecordResultQuery({ id, category })
+  const [imageLoaded, setImageLoaded] = useState(false)
+
+  useEffect(() => {
+    if (imageLoaded && !isLoading) onFullyLoaded?.()
+  }, [imageLoaded, isLoading])
 
   return (
     <div className={cn('relative', className)}>
@@ -43,14 +50,22 @@ export const Record: React.FC<Props> = ({ className, record, tooltipPlace }) => 
           className="size-full"
           color="blue"
         >
-          <RecordData record={record} lang={lang} />
+          <RecordData record={record} lang={lang} onLoad={() => setImageLoaded(true)} />
         </ReadMoreTooltip>
       </div>
     </div>
   )
 }
 
-const RecordData = ({ record, lang }: { record: RecordProps; lang?: Locale | null }) => {
+const RecordData = ({
+  record,
+  lang,
+  onLoad,
+}: {
+  record: RecordProps
+  lang?: Locale | null
+  onLoad: () => void
+}) => {
   const { id, thumbnail, category, title } = record
   const router = useRouter()
 
@@ -70,6 +85,7 @@ const RecordData = ({ record, lang }: { record: RecordProps; lang?: Locale | nul
       onClick={handleClick}
     >
       <ResponsiveImage
+        onLoad={onLoad}
         src={thumbnail}
         alt={title ?? ''}
         className="max-h-[calc(100%-2.6vw-7px)]" // where 2.6vw are a texts' line heights, 15px are gaps

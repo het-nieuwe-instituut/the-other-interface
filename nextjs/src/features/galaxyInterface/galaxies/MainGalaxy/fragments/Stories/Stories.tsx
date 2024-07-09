@@ -9,6 +9,7 @@ import { StoriesData } from '../../hooks/useThemesQuery'
 import { Story } from '../Story'
 import { useDrawLines } from './useDrawLines'
 import { usePresenter } from './usePresenter'
+import { GalaxyZoomAnimationStateContext } from '../../../hooks/GalaxyZoomAnimationStateProvider'
 
 type Props = {
   stories: StoriesData
@@ -22,20 +23,34 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
     originalTemplateIndex,
     pageNumber: currentPage,
   } = usePresenter(stories, nextStories)
-  const { animationState, conditions } = useContext(GalaxyPaginationAnimationStateContext)
+  const { animationState: paginationAnimationState, conditions: paginationAnimationConditions } =
+    useContext(GalaxyPaginationAnimationStateContext)
+  const { animationState: zoomAnimationState } = useContext(GalaxyZoomAnimationStateContext)
   const svgRef = useDrawLines({
-    hideLines: !!animationState,
+    hideLines: !!paginationAnimationState,
     selector: '.story-grid-item',
     template: originalTemplateIndex,
     stories: positionedStories,
   })
 
   return (
-    <div className={cn('size-full')}>
-      <div className="absolute right-[18%] top-[13%] z-20 grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px] opacity-100">
+    <div
+      className={cn(
+        'size-full',
+        zoomAnimationState === 'forward' && 'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+      )}
+    >
+      <div
+        className={cn(
+          'absolute right-[18%] top-[13%] z-20 grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px] opacity-100'
+        )}
+      >
         {positionedStories.map(positionedStory => (
           <Story
-            className={getItemsAnimationClassNames(animationState, conditions)}
+            className={getItemsAnimationClassNames(
+              paginationAnimationState,
+              paginationAnimationConditions
+            )}
             key={`${positionedStory.id}-${positionedStory.locale}-${currentPage}`}
             story={positionedStory}
             isMainGrid
@@ -45,6 +60,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
       <svg
         ref={svgRef}
         style={{
+          display: zoomAnimationState === 'forward' ? 'none' : 'block',
           position: 'fixed',
           top: 0,
           left: 0,
@@ -56,11 +72,22 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
       <div
         className={cn(
           'absolute right-[18%] top-[13%] grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px] z-10',
-          getNextItemsAnimationClassNames(animationState, conditions, !!positionedStories?.length)
+          getNextItemsAnimationClassNames(
+            paginationAnimationState,
+            paginationAnimationConditions,
+            !!positionedStories?.length
+          )
         )}
       >
         {positionedNextStories.map(positionedStory => (
-          <Story key={`${positionedStory.id}-${positionedStory.locale}`} story={positionedStory} />
+          <Story
+            className={cn(
+              paginationAnimationConditions === 'firstRender' &&
+                'animate-[fromHideToShow_1000ms_ease-in-out_forwards]'
+            )}
+            key={`${positionedStory.id}-${positionedStory.locale}`}
+            story={positionedStory}
+          />
         ))}
       </div>
     </div>

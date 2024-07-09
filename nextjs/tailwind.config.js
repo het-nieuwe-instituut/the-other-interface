@@ -29,13 +29,11 @@ module.exports = {
           '0%': { filter: 'blur(10px)' },
           '100%': { filter: 'blur(0px)' },
         },
-      },
-      animation: {
-        toBlurAndHide: 'toBlurAndHide 0.5s ease-in-out forwards',
-        toBlur: 'toBlur 0.5s ease-in-out forwards',
-        toUnblur: 'toUnblur 0.5s ease-in-out forwards',
-        fromHideToShow: 'fromHideToShow 0.5s ease-in-out forwards',
-        fromBlurredToHide: 'fromBlurredToHide 0.5s ease-in-out forwards',
+        toScaleFullPage: {
+          '0%': { transform: 'scale(1.1)', opacity: 1 },
+          '75%': { transform: 'scale(3)', opacity: 0.5 },
+          '100%': { transform: 'scale(4)', opacity: 0 },
+        },
       },
       gridTemplateAreas: {
         'editorial-large': ['left right', 'bottom right'],
