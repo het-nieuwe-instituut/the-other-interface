@@ -1,16 +1,8 @@
-import {
-  ArgsType,
-  Field,
-  IntersectionType,
-  ObjectType,
-  OmitType,
-  registerEnumType,
-} from '@nestjs/graphql'
+import { ArgsType, Field, ObjectType, OmitType, registerEnumType } from '@nestjs/graphql'
 import { ArchivesZoomLevel3Types } from './archives.service'
 import { IsString } from 'class-validator'
 import { EntityNames } from '../util/entityNames.type'
 import { Locale } from '../util/locale.type'
-import { EnrichedRecordBaseType } from '../triply/triply.type'
 import { ExternalSource } from '../triply/triply.service'
 
 @ObjectType()
@@ -47,10 +39,7 @@ class EnrichedBaseArchiveZoomLevel3DetailType extends BaseArchiveZoomLevel3Detai
 }
 
 @ObjectType()
-export class ArchiveZoomLevel3DetailType extends IntersectionType(
-  EnrichedRecordBaseType,
-  BaseArchiveZoomLevel3DetailType
-) {
+export class ArchiveZoomLevel3DetailType extends BaseArchiveZoomLevel3DetailType {
   @Field(() => [EnrichedBaseArchiveZoomLevel3DetailType], { nullable: true })
   public enrichedSources?: EnrichedBaseArchiveZoomLevel3DetailType[]
 }
@@ -160,10 +149,7 @@ class EnrichedBaseArchivesRecordZoomLevel3Type extends BaseArchivesRecordZoomLev
 }
 
 @ObjectType()
-export class ArchivesRecordZoomLevel3Type extends IntersectionType(
-  EnrichedRecordBaseType,
-  BaseArchivesRecordZoomLevel3Type
-) {
+export class ArchivesRecordZoomLevel3Type extends BaseArchivesRecordZoomLevel3Type {
   @Field(() => [EnrichedBaseArchivesRecordZoomLevel3Type], { nullable: true })
   public enrichedSources?: EnrichedBaseArchivesRecordZoomLevel3Type[]
 }

@@ -1,9 +1,8 @@
-import { ArgsType, Field, IntersectionType, ObjectType, OmitType } from '@nestjs/graphql'
+import { ArgsType, Field, ObjectType, OmitType } from '@nestjs/graphql'
 import { EntityNames } from '../util/entityNames.type'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
 import { IsString } from 'class-validator'
 import { Locale } from '../util/locale.type'
-import { EnrichedRecordBaseType } from '../triply/triply.type'
 import { ExternalSource } from '../triply/triply.service'
 
 @ObjectType()
@@ -43,10 +42,7 @@ class EnrichedBasePublicationZoomLevel3DetailType extends BasePublicationZoomLev
 }
 
 @ObjectType()
-export class PublicationZoomLevel3DetailType extends IntersectionType(
-  EnrichedRecordBaseType,
-  BasePublicationZoomLevel3DetailType
-) {
+export class PublicationZoomLevel3DetailType extends BasePublicationZoomLevel3DetailType {
   @Field(() => [EnrichedBasePublicationZoomLevel3DetailType], { nullable: true })
   public enrichedSources?: EnrichedBasePublicationZoomLevel3DetailType[]
 }
@@ -159,10 +155,7 @@ class EnrichedBasePublicationRecordZoomLevel3Type extends BasePublicationRecordZ
 }
 
 @ObjectType()
-export class PublicationRecordZoomLevel3Type extends IntersectionType(
-  EnrichedRecordBaseType,
-  BasePublicationRecordZoomLevel3Type
-) {
+export class PublicationRecordZoomLevel3Type extends BasePublicationRecordZoomLevel3Type {
   @Field(() => [EnrichedBasePublicationRecordZoomLevel3Type], { nullable: true })
   public enrichedSources?: EnrichedBasePublicationRecordZoomLevel3Type[]
 }
