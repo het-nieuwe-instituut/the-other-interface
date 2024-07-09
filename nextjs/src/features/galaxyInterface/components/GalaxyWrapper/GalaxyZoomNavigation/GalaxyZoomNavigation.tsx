@@ -75,7 +75,7 @@ export const GalaxyZoomNavigation = () => {
             })}
           >
             <Radio
-              checked={currentZoomNumber === 1}
+              defaultChecked={currentZoomNumber === 1}
               name="zoom"
               id="zoom-0"
               value="zoom-0"
@@ -107,7 +107,7 @@ export const GalaxyZoomNavigation = () => {
             })}
           >
             <Radio
-              checked={currentZoomNumber === 2}
+              defaultChecked={currentZoomNumber === 2}
               name="zoom"
               id="zoom-1"
               value="zoom-1"
@@ -130,7 +130,7 @@ export const GalaxyZoomNavigation = () => {
             })}
           >
             <Radio
-              checked={currentZoomNumber === 3}
+              defaultChecked={currentZoomNumber === 3}
               name="zoom"
               id="zoom-2"
               value="zoom-2"

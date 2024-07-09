@@ -8,6 +8,8 @@ import { cn } from '@/features/ui/utils/cn'
 import { Text } from '@chakra-ui/react'
 import { useParams } from 'next/navigation'
 import { useStoryOrRecordImageQuery } from '../../MainGalaxy/hooks/useStoryOrRecordImageQuery'
+import { useContext } from 'react'
+import { GalaxyZoomAnimationStateContext } from '../../hooks/GalaxyZoomAnimationStateProvider'
 
 interface Props {
   className?: string
@@ -19,8 +21,9 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
   const category = params?.category as Category
   const id = params?.id as string
   const locale = useLocale()
+  const { animationState } = useContext(GalaxyZoomAnimationStateContext)
 
-  const { data: record } = useRecordDetailQuery({
+  const { data: record, isLoading } = useRecordDetailQuery({
     type: category,
     id,
     options: { refetchOnWindowFocus: false },
@@ -34,7 +37,8 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
     <div
       className={cn(
         ' col-start-1 col-end-3 row-start-2 row-end-4 flex items-center justify-center',
-        className
+        className,
+        animationState === 'forward' && 'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
       )}
     >
       <div className="relative flex size-4/5 flex-col items-center justify-center gap-[2px]">
@@ -55,7 +59,15 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
             flex: `1 1 calc(100% - 3vw - 8px)`,
           }}
         />
-        <div className="mt-2 flex w-full flex-1 flex-col text-blue-100">
+        <div
+          className={cn(
+            'mt-2 flex w-full flex-1 flex-col text-blue-100',
+            !(animationState === 'forward' || animationState === 'backwards') &&
+              !isLoading &&
+              'animate-[fromHideToShow_1000ms_ease-in-out_forwards]',
+            isLoading && 'opacity-0'
+          )}
+        >
           <Text
             align="center"
             isTruncated

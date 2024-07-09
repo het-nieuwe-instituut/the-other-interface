@@ -1,4 +1,5 @@
 'use client'
+import { Pulse } from '@/features/galaxyInterface/components/Pulse/Pulse'
 import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
 import { State } from '@/features/shared/configs/store'
 import { useRecordRelationsCountQuery } from '@/features/shared/hooks/queries/useRecordRelationsCountQuery'
@@ -6,6 +7,8 @@ import { GridParams } from '@/features/shared/types/position'
 import { CLOUD_CATEGORIES, Category, CloudCategory } from '@/features/shared/utils/categories'
 import { useArrowNavigation } from '@/features/ui/hooks/useArrowNavigation'
 import { useSearchParamPagination } from '@/features/ui/hooks/useSearchParamPagination'
+import { cn } from '@/features/ui/utils/cn'
+import { useIsFetching } from '@tanstack/react-query'
 import { useParams, useSearchParams } from 'next/navigation'
 import React, { useContext } from 'react'
 import { useSelector } from 'react-redux'
@@ -15,10 +18,8 @@ import {
   GalaxyPaginationAnimationStateContext,
   GalaxyPaginationAnimationStateProvider,
 } from '../../hooks/GalaxyPaginationAnimationStateProvider'
+import { GalaxyZoomAnimationStateContext } from '../../hooks/GalaxyZoomAnimationStateProvider'
 import { RelatedCategory, RelatedStories } from '../fragments'
-import { useIsFetching } from '@tanstack/react-query'
-import { Pulse } from '@/features/galaxyInterface/components/Pulse/Pulse'
-import { DetailedRecord } from '../fragments/DetailedRecord'
 
 const relatedCategories: Array<{ category: CloudCategory; grid: GridParams }> = [
   { category: CLOUD_CATEGORIES.people, grid: { gridRow: '1 / 2', gridColumn: '1 / 2' } },
@@ -45,6 +46,7 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
   const id = params?.id as string
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
   const { setAnimationState } = useContext(GalaxyPaginationAnimationStateContext)
+  const { animationState: galaxyZoomAnimationState } = useContext(GalaxyZoomAnimationStateContext)
   const { data: countData, isLoading } = useRecordRelationsCountQuery(category, id)
   const { page, pageAmount, increasePageNumber, decreasePageNumber } = useSearchParamPagination(
     countData?.totalPages ?? 0,
@@ -66,27 +68,17 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
   })
 
   const renderMainContent = () => {
-    if (isLoading) {
-      return (
-        <>
-          <Pulse hide={!isFetching} />
-          <div className=" absolute inset-x-[2vw] top-[6%] grid size-full h-[calc(80%-1rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-3 grid-rows-2 min-[1440px]:inset-x-[28.8px]">
-            <div className="pointer-events-none col-start-2 col-end-2 row-start-1 row-end-3 text-white">
-              <div className="grid h-full grid-cols-2 grid-rows-4">
-                <DetailedRecord />
-              </div>
-            </div>
-          </div>
-        </>
-      )
-    }
     return (
       <>
         <Pulse hide={!isFetching} />
 
         <div
           id="detail-galaxy-grid"
-          className="group-hover-blur absolute inset-x-[2vw] top-[6%] grid h-[calc(80%-1rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-3 grid-rows-2 min-[1440px]:inset-x-[28.8px]"
+          className={cn(
+            'group-hover-blur relative inset-x-[2vw] top-[6%] grid h-[calc(80%-1rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-3 grid-rows-2 min-[1440px]:inset-x-[28.8px]',
+            galaxyZoomAnimationState === 'backwards' &&
+              'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+          )}
         >
           {relatedCategories.map(({ category: cloudCategory, grid }) => (
             <RelatedCategory
@@ -115,7 +107,7 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
             <GalaxyPagination
               currentPageNumber={page}
               pageAmount={Math.ceil(pageAmount / 2)}
-              isResultAmountLoading={false}
+              isResultAmountLoading={isLoading}
               handleLeftClick={handleLeftClick}
               handleRightClick={handleRightClick}
               isResultEmpty={false}

@@ -6,7 +6,7 @@ export const getStoryOrRecordImageQueryKey = (id: string) => ['story-or-record-i
 export const useStoryOrRecordImageQuery = ({ id }: { id: string }) => {
   const queryClient = useQueryClient()
   return useQuery(getStoryOrRecordImageQueryKey(id), async () => {
-    return queryClient.getQueryData(getStoryOrRecordImageQueryKey(id)) as string | undefined
+    return (queryClient.getQueryData(getStoryOrRecordImageQueryKey(id)) ?? null) as string | null
   })
 }
 
