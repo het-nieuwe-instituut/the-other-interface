@@ -1,6 +1,8 @@
 'use client'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
+import { RecordDescription } from '@/features/editorial/components/RecordDescription/RecordDescription'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 import { Category } from '@/features/shared/utils/categories'
 import {
   ThumbnailCarousel,
@@ -10,11 +12,10 @@ import { useParams } from 'next/navigation'
 import { ArchivesRecordZoomLevel3Type } from 'src/generated/graphql'
 import { LayerWrapper } from '../../../shared/components/Layers/LayerWrapper'
 import { RecordMeta } from '../../components/RecordMeta/RecordMeta'
+import { OmitEnrichedData } from '../../configs/recordMetaFieldOrderConfig'
 import { useRecordDetailQuery } from '../../hooks/useRecordDetailQuery'
 import { useRecordMeta } from '../../hooks/useRecordMeta'
 import { RecordBottomContent } from '../RecordBottomContent/RecordBottomContent'
-import { RecordDescription } from '@/features/editorial/components/RecordDescription/RecordDescription'
-import { useLocale } from '@/features/shared/hooks/useLocale'
 
 export const RecordLayer = () => {
   const params = useParams()
@@ -69,7 +70,11 @@ export const RecordLayer = () => {
   )
 }
 
-const ArchivesDescriptions = ({ meta }: { meta: ArchivesRecordZoomLevel3Type }) => {
+interface MetaDescriptionProps {
+  meta: OmitEnrichedData<ArchivesRecordZoomLevel3Type>
+}
+
+const ArchivesDescriptions = ({ meta }: MetaDescriptionProps) => {
   const { t: recordMetaT } = useTypeSafeTranslation('recordMeta')
 
   return (
