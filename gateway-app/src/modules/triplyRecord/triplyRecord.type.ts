@@ -13,6 +13,7 @@ import { ObjectsZoomLevel3DetailType } from '../objects/objects.type'
 import { PublicationZoomLevel3DetailType } from '../publications/publications.type'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
 import { EntityNames } from '../util/entityNames.type'
+import { ExternalSource } from '../triply/triply.service'
 
 registerEnumType(Enum_Triplyrecord_Type, { name: 'Enum_Triplyrecord_Type' })
 
@@ -120,3 +121,11 @@ export class TriplyRecordFiltersInput {
   @Field(() => BooleanFilterInput, { nullable: true })
   public subject_collectionHighlights?: BooleanFilterInput
 }
+
+export interface EnrichedRecordBaseType {
+  id: string
+  externalSourceType: ExternalSource
+  externalSourceUrl: string
+}
+
+registerEnumType(ExternalSource, { name: 'ExternalSource' })

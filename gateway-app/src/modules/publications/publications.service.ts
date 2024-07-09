@@ -5,7 +5,7 @@ import { TriplyUtils } from '../triply/triply.utils'
 import { getHttpThumbnailOrNull } from '../util/helpers'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { Locale } from '../util/locale.type'
-import { EnrichedRecordBaseType } from '../triply/triply.type'
+import { EnrichedRecordBaseType } from '../triplyRecord/triplyRecord.type'
 
 interface PublicationsZoomLevel3Data {
   thumbnail?: string
