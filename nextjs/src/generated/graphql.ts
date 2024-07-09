@@ -32,8 +32,6 @@ export type ArchiveZoomLevel3DetailType = {
   __typename?: 'ArchiveZoomLevel3DetailType';
   description?: Maybe<Scalars['String']['output']>;
   enrichedSources?: Maybe<Array<EnrichedBaseArchiveZoomLevel3DetailType>>;
-  externalSourceType: ExternalSource;
-  externalSourceUrl: Scalars['String']['output'];
   id: Scalars['String']['output'];
   objectNumber?: Maybe<Scalars['String']['output']>;
   thumbnail?: Maybe<Array<Scalars['String']['output']>>;
@@ -56,8 +54,6 @@ export type ArchivesRecordZoomLevel3Type = {
   existence?: Maybe<Scalars['String']['output']>;
   existenceLocation?: Maybe<Scalars['String']['output']>;
   externalSource?: Maybe<Scalars['String']['output']>;
-  externalSourceType: ExternalSource;
-  externalSourceUrl: Scalars['String']['output'];
   id: Scalars['String']['output'];
   period?: Maybe<Scalars['String']['output']>;
   permanentLink?: Maybe<Scalars['String']['output']>;
@@ -936,8 +932,6 @@ export type ObjectRecordZoomLevel3Type = {
   dimension?: Maybe<Scalars['String']['output']>;
   enrichedSources?: Maybe<Array<EnrichedBaseObjectRecordZoomLevel3Type>>;
   externalSource?: Maybe<Scalars['String']['output']>;
-  externalSourceType: ExternalSource;
-  externalSourceUrl: Scalars['String']['output'];
   hasParts?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   materials?: Maybe<Scalars['String']['output']>;
@@ -993,8 +987,6 @@ export type ObjectsZoomLevel3DetailType = {
   dimensionUnit?: Maybe<Scalars['String']['output']>;
   endDate?: Maybe<Scalars['String']['output']>;
   enrichedSources?: Maybe<Array<EnrichedBaseObjectsZoomLevel3DetailType>>;
-  externalSourceType: ExternalSource;
-  externalSourceUrl: Scalars['String']['output'];
   id: Scalars['String']['output'];
   imageLabel?: Maybe<Scalars['String']['output']>;
   makers?: Maybe<Array<ObjectMakerType>>;
@@ -1058,8 +1050,6 @@ export type PeopleRecordZoomLevel3Type = {
   deathPlace?: Maybe<Scalars['String']['output']>;
   enrichedSources?: Maybe<Array<EnrichedBasePeopleRecordZoomLevel3Type>>;
   externalSource?: Maybe<Scalars['String']['output']>;
-  externalSourceType: ExternalSource;
-  externalSourceUrl: Scalars['String']['output'];
   gender?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   nameVariation?: Maybe<Scalars['String']['output']>;
@@ -1102,8 +1092,6 @@ export type PeopleZoomLevel3DetailType = {
   description?: Maybe<Scalars['String']['output']>;
   endDate?: Maybe<Scalars['String']['output']>;
   enrichedSources?: Maybe<Array<EnrichedBasePeopleZoomLevel3DetailType>>;
-  externalSourceType: ExternalSource;
-  externalSourceUrl: Scalars['String']['output'];
   gender?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   institution?: Maybe<Scalars['String']['output']>;
@@ -1149,8 +1137,6 @@ export type PublicationRecordZoomLevel3Type = {
   edition?: Maybe<Scalars['String']['output']>;
   enrichedSources?: Maybe<Array<EnrichedBasePublicationRecordZoomLevel3Type>>;
   externalSource?: Maybe<Scalars['String']['output']>;
-  externalSourceType: ExternalSource;
-  externalSourceUrl: Scalars['String']['output'];
   geoKeyword?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   illustration?: Maybe<Scalars['String']['output']>;
@@ -1186,8 +1172,6 @@ export type PublicationZoomLevel3DetailType = {
   __typename?: 'PublicationZoomLevel3DetailType';
   description?: Maybe<Scalars['String']['output']>;
   enrichedSources?: Maybe<Array<EnrichedBasePublicationZoomLevel3DetailType>>;
-  externalSourceType: ExternalSource;
-  externalSourceUrl: Scalars['String']['output'];
   id: Scalars['String']['output'];
   objectNumber?: Maybe<Scalars['String']['output']>;
   thumbnail?: Maybe<Array<Scalars['String']['output']>>;

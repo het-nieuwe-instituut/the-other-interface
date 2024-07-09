@@ -8,7 +8,7 @@ import { RollbarService } from '../util/rollbar.service'
 import { get } from 'lodash'
 import { Locale } from '../util/locale.type'
 import { TriplyUtils } from './triply.utils'
-import { EnrichedRecordBaseType } from './triply.type'
+import { EnrichedRecordBaseType } from '../triplyRecord/triplyRecord.type'
 
 export enum ExternalSource {
   getty = 'getty',

@@ -5,8 +5,8 @@ import { TriplyUtils } from '../triply/triply.utils'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { EntityNames } from '../util/entityNames.type'
 import { Locale } from '../util/locale.type'
-import { EnrichedRecordBaseType } from '../triply/triply.type'
 import { ArchiveAsteriskType } from './archives.type'
+import { EnrichedRecordBaseType } from '../triplyRecord/triplyRecord.type'
 
 export interface ArchivesDetailZoomLevel3DataType {
   id?: string
