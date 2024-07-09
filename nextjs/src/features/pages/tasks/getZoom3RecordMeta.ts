@@ -17,12 +17,7 @@ export async function getZoom3RecordMeta(type: Category, payload: Payload, api: 
     const data = await configByType?.zoomLevelQuery?.(payload)
     const item = configByType?.accesor?.(data)
 
-    // TODO this might cause console errors 'Cannot return null for non-nullable field'
-    if (!item?.[0]) return null
-
-    return {
-      ...item[0],
-    }
+    return item
   } catch (e) {
     console.log(e, 'Error accured in zoom level 3 task')
   }

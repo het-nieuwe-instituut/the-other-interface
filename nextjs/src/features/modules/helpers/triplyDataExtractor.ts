@@ -38,7 +38,7 @@ const extractTriplyFields = (
       ...defaultFields,
       imageUrl: item?.thumbnail?.[0] ?? defaultFields.imageUrl,
       title: item?.title ?? defaultFields?.title,
-      description: item?.objectNumber ?? defaultFields?.description,
+      description: defaultFields?.description,
     }
   }
 
@@ -54,12 +54,10 @@ const extractTriplyFields = (
   }
 
   if (triplyType === 'People') {
-    const item = record.people
-
     return {
       ...defaultFields,
-      title: item?.name ?? defaultFields?.title,
-      description: item?.nameTypes?.join(', ') ?? defaultFields?.description,
+      title: defaultFields?.title,
+      description: defaultFields?.description,
     }
   }
 

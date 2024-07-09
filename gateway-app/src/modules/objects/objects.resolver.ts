@@ -63,7 +63,7 @@ export class ObjectsZoomLevel3DetailResolver {
 export class ObjectsRecordZoomLevel3Resolver {
   public constructor(private readonly objectsService: ObjectsService) {}
 
-  @Query(() => [ObjectRecordZoomLevel3Type], { nullable: true })
+  @Query(() => ObjectRecordZoomLevel3Type, { nullable: true })
   public async objectsRecordZoomLevel3(
     @Args('id') publicationId: string,
     @Args() { locale }: LocaleArgs

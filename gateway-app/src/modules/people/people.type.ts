@@ -5,12 +5,24 @@ import { Locale } from '../util/locale.type'
 import { ExternalSource } from '../triply/triply.service'
 
 @ObjectType()
-class PeopleAssociationType {
-  @Field(() => String)
-  public association: string
+export class PeopleZoomLevel3DetailAsteriskType {
+  @Field({
+    nullable: true,
+    description: 'asterisk value for the description field',
+  })
+  public asterisk_subject_description?: string
 
-  @Field(() => String, { nullable: true })
-  public associationLabel?: string | null
+  @Field({
+    nullable: true,
+    description: 'the date the asterisk value was added to the description field',
+  })
+  public asterisk_date_description?: string
+
+  @Field({
+    nullable: true,
+    description: 'the person that added the asterisk value for the description field',
+  })
+  public asterisk_name_description?: string
 }
 
 @ObjectType()
@@ -28,79 +40,7 @@ class BasePeopleZoomLevel3DetailType {
   public thumbnail: string
 
   @Field(() => String, { nullable: true })
-  public name: string
-
-  @Field(() => [String], { nullable: true })
-  public nameTypes?: string[]
-
-  @Field(() => String, { nullable: true })
-  public nameVariation?: string | null
-
-  @Field(() => String, { nullable: true })
-  public birthDate?: string | null
-
-  @Field(() => String, { nullable: true })
-  public birthPlace?: string | null
-
-  @Field(() => String, { nullable: true })
-  public birthPlaceLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public deathDate?: string | null
-
-  @Field(() => String, { nullable: true })
-  public deathPlace?: string | null
-
-  @Field(() => String, { nullable: true })
-  public deathPlaceLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public place?: string | null
-
-  @Field(() => String, { nullable: true })
-  public placeLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public startDate?: string | null
-
-  @Field(() => String, { nullable: true })
-  public endDate?: string | null
-
-  @Field(() => String, { nullable: true })
-  public nationality?: string | null
-
-  @Field(() => String, { nullable: true })
-  public nationalityLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public institution?: string | null
-
-  @Field(() => String, { nullable: true })
-  public institutionLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public profession?: string | null
-
-  @Field(() => String, { nullable: true })
-  public professionLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public gender?: string | null
-
-  @Field(() => [PeopleAssociationType], { nullable: true })
-  public associations?: PeopleAssociationType[]
-
-  @Field(() => String, { nullable: true })
-  public relatedItem?: string | null
-
-  @Field(() => String, { nullable: true })
-  public relatedItemLabel?: string | null
-
-  @Field(() => String, { nullable: true })
   public description?: string | null
-
-  @Field(() => String, { nullable: true })
-  public permanentLink?: string | null
 }
 
 @ObjectType()
@@ -119,6 +59,9 @@ class EnrichedBasePeopleZoomLevel3DetailType extends BasePeopleZoomLevel3DetailT
 export class PeopleZoomLevel3DetailType extends BasePeopleZoomLevel3DetailType {
   @Field(() => [EnrichedBasePeopleZoomLevel3DetailType], { nullable: true })
   public enrichedSources?: EnrichedBasePeopleZoomLevel3DetailType[]
+
+  @Field(() => [PeopleZoomLevel3DetailAsteriskType], { nullable: true })
+  public asteriskSuggestions?: PeopleZoomLevel3DetailAsteriskType[]
 }
 
 @ObjectType()
