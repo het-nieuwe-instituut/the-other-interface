@@ -20,19 +20,14 @@ export type Scalars = {
   Date: { input: any; output: any; }
 };
 
-export type ArchiveRelationsAsteriskType = {
-  __typename?: 'ArchiveRelationsAsteriskType';
+export type ArchiveRelationsType = {
+  __typename?: 'ArchiveRelationsType';
   /** the date the asterisk value was added to the person field */
   asterisk_date_person?: Maybe<Scalars['String']['output']>;
   /** the person that added the asterisk value for the person field */
   asterisk_name_person?: Maybe<Scalars['String']['output']>;
   /** asterisk value for the person field */
   asterisk_subject_person?: Maybe<Scalars['String']['output']>;
-};
-
-export type ArchiveRelationsType = {
-  __typename?: 'ArchiveRelationsType';
-  asteriskSuggestions?: Maybe<Array<ArchiveRelationsAsteriskType>>;
   idRelation?: Maybe<Scalars['String']['output']>;
   period?: Maybe<Scalars['String']['output']>;
   referenceNumber?: Maybe<Scalars['String']['output']>;
@@ -968,16 +963,6 @@ export type ObjectRecordZoomLevel3TypeEnrichedSourcesArgs = {
   locale: Locale;
 };
 
-export type ObjectRelationsAsteriskType = {
-  __typename?: 'ObjectRelationsAsteriskType';
-  /** the date the asterisk value was added to the person field */
-  asterisk_date_person?: Maybe<Scalars['String']['output']>;
-  /** the person that added the asterisk value for the person field */
-  asterisk_name_person?: Maybe<Scalars['String']['output']>;
-  /** asterisk value for the person field */
-  asterisk_subject_person?: Maybe<Scalars['String']['output']>;
-};
-
 export type ObjectRelationsCountType = {
   __typename?: 'ObjectRelationsCountType';
   total?: Maybe<Scalars['String']['output']>;
@@ -985,7 +970,12 @@ export type ObjectRelationsCountType = {
 
 export type ObjectRelationsType = {
   __typename?: 'ObjectRelationsType';
-  asteriskSuggestions?: Maybe<Array<ObjectRelationsAsteriskType>>;
+  /** the date the asterisk value was added to the person field */
+  asterisk_date_person?: Maybe<Scalars['String']['output']>;
+  /** the person that added the asterisk value for the person field */
+  asterisk_name_person?: Maybe<Scalars['String']['output']>;
+  /** asterisk value for the person field */
+  asterisk_subject_person?: Maybe<Scalars['String']['output']>;
   externalSource?: Maybe<Scalars['String']['output']>;
   idRelation?: Maybe<Scalars['String']['output']>;
   period?: Maybe<Scalars['String']['output']>;

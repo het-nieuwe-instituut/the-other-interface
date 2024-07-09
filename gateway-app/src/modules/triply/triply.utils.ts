@@ -139,10 +139,11 @@ export class TriplyUtils {
     return nullFlag ? null : (output as T)
   }
 
-  public static sanitizeObjectArray<T extends object>(results: T[], ...args: string[]): T[] | null {
-    return results.filter(result =>
-      Object.keys(result).some(k => get(result, k) !== null && !args.includes(k))
-    )
+  public static sanitizeObjectArray<T extends object>(results: T[], ...excludeKeys: string[]): T[] {
+    return results.filter(result => {
+      const keys = Object.keys(result)
+      return keys.some(k => get(result, k) !== null && !excludeKeys.includes(k))
+    })
   }
 
   public static getQueryParamsFromObject<T extends object>(obj: T): Record<keyof T, string> {

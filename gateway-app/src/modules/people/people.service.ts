@@ -163,7 +163,7 @@ export class PeopleService {
       { id, type }
     )
 
-    return TriplyUtils.combineObjectArray(result.data)
+    return result.data
   }
 
   public async getZoomLevel3RecordData(id: string, locale: Locale) {
@@ -174,7 +174,12 @@ export class PeopleService {
       { id, language: locale }
     )
 
-    return { ...TriplyUtils.combineObjectArray(result.data), id }
+    const data = TriplyUtils.combineObjectArray(result.data)
+    if (!data) {
+      return
+    }
+
+    return { ...data, id }
   }
 
   public async getZoomRecordHover(id: string, locale: Locale) {

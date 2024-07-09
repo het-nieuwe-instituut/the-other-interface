@@ -206,14 +206,7 @@ export class ArchivesService {
       { id, type, language: locale }
     )
 
-    const asteriskSuggestions = this.formatAsteriskSuggestions(result.data)
-    const data = TriplyUtils.sanitizeObjectArray(result.data, 'relation', 'idRelation', 'thumbnail')
-
-    return {
-      id,
-      ...data,
-      asteriskSuggestions,
-    }
+    return TriplyUtils.sanitizeObjectArray(result.data, 'relation', 'idRelation', 'thumbnail')
   }
 
   public async getRelationsDataCount(id: string, type: EntityNames) {
@@ -236,9 +229,13 @@ export class ArchivesService {
     )
 
     const asteriskSuggestions = this.formatAsteriskSuggestions(result.data)
+    const data = TriplyUtils.combineObjectArray(result.data)
+    if (!data) {
+      return
+    }
 
     return {
-      ...TriplyUtils.combineObjectArray(result.data),
+      ...data,
       id,
       asteriskSuggestions,
     }

@@ -109,7 +109,7 @@ class ObjectRelationsAsteriskType extends PickType(ObjectAsteriskType, [
 ]) {}
 
 @ObjectType()
-export class ObjectRelationsType {
+export class ObjectRelationsType extends ObjectRelationsAsteriskType {
   @Field(() => String, { nullable: true })
   public idRelation?: string | null
 
@@ -124,9 +124,6 @@ export class ObjectRelationsType {
 
   @Field(() => String, { nullable: true })
   public externalSource?: string | null
-
-  @Field(() => [ObjectRelationsAsteriskType], { nullable: true })
-  public asteriskSuggestions?: ObjectRelationsAsteriskType[]
 }
 
 @ObjectType()

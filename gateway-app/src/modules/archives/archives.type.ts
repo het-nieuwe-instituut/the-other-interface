@@ -134,7 +134,7 @@ class ArchiveRelationsAsteriskType extends PickType(ArchiveAsteriskType, [
 ]) {}
 
 @ObjectType()
-export class ArchiveRelationsType {
+export class ArchiveRelationsType extends ArchiveRelationsAsteriskType {
   @Field(() => String, { nullable: true })
   public idRelation?: string | null
 
@@ -146,9 +146,6 @@ export class ArchiveRelationsType {
 
   @Field(() => String, { nullable: true })
   public period?: string | null
-
-  @Field(() => [ArchiveRelationsAsteriskType], { nullable: true })
-  public asteriskSuggestions?: ArchiveRelationsAsteriskType[]
 }
 
 @ObjectType()
