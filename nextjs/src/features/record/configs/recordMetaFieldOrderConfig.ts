@@ -6,7 +6,17 @@ import {
   PublicationRecordZoomLevel3Type,
 } from 'src/generated/graphql'
 
-const objectFieldOrder: Array<keyof ObjectRecordZoomLevel3Type> = [
+export type OmitEnrichedData<T> = Omit<
+  T,
+  'enrichedSources' | 'externalSourceType' | 'externalSourceUrl' | 'id'
+>
+
+type BaseObjectRecordZoomLevel3Type = OmitEnrichedData<ObjectRecordZoomLevel3Type>
+type BaseArchivesRecordZoomLevel3Type = OmitEnrichedData<ArchivesRecordZoomLevel3Type>
+type BasePeopleRecordZoomLevel3Type = OmitEnrichedData<PeopleRecordZoomLevel3Type>
+type BasePublicationRecordZoomLevel3Type = OmitEnrichedData<PublicationRecordZoomLevel3Type>
+
+const objectFieldOrder: Array<keyof BaseObjectRecordZoomLevel3Type> = [
   'objectNumber',
   'titleType',
   'objectName',
@@ -23,7 +33,7 @@ const objectFieldOrder: Array<keyof ObjectRecordZoomLevel3Type> = [
   'externalSource',
 ]
 
-const archiveFieldOrder: Array<Partial<keyof ArchivesRecordZoomLevel3Type>> = [
+const archiveFieldOrder: Array<Partial<keyof BaseArchivesRecordZoomLevel3Type>> = [
   'referenceCode',
   'titleType',
   'descriptionLevel',
@@ -36,7 +46,7 @@ const archiveFieldOrder: Array<Partial<keyof ArchivesRecordZoomLevel3Type>> = [
   'externalSource',
 ]
 
-const peopleFieldOrder: Array<keyof PeopleRecordZoomLevel3Type> = [
+const peopleFieldOrder: Array<keyof BasePeopleRecordZoomLevel3Type> = [
   'type',
   'profession',
   'nameVariation',
@@ -52,7 +62,7 @@ const peopleFieldOrder: Array<keyof PeopleRecordZoomLevel3Type> = [
   'externalSource',
 ]
 
-const publicationFieldOrder: Array<keyof PublicationRecordZoomLevel3Type> = [
+const publicationFieldOrder: Array<keyof BasePublicationRecordZoomLevel3Type> = [
   'objectNumber',
   'subType',
   'authors',
@@ -77,10 +87,10 @@ const publicationFieldOrder: Array<keyof PublicationRecordZoomLevel3Type> = [
 ]
 
 type CategoryFieldsMapping = {
-  [CLOUD_CATEGORIES.objects]: Array<keyof ObjectRecordZoomLevel3Type>
-  [CLOUD_CATEGORIES.archives]: Array<keyof ArchivesRecordZoomLevel3Type>
-  [CLOUD_CATEGORIES.people]: Array<keyof PeopleRecordZoomLevel3Type>
-  [CLOUD_CATEGORIES.publications]: Array<keyof PublicationRecordZoomLevel3Type>
+  [CLOUD_CATEGORIES.objects]: Array<keyof BaseObjectRecordZoomLevel3Type>
+  [CLOUD_CATEGORIES.archives]: Array<keyof BaseArchivesRecordZoomLevel3Type>
+  [CLOUD_CATEGORIES.people]: Array<keyof BasePeopleRecordZoomLevel3Type>
+  [CLOUD_CATEGORIES.publications]: Array<keyof BasePublicationRecordZoomLevel3Type>
 }
 
 export const categoryFieldsMapping: CategoryFieldsMapping = {

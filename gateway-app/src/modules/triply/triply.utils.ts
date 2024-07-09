@@ -1,5 +1,7 @@
+import { get } from 'lodash'
 import { CustomError } from '../util/customError'
 import { EntityNames } from '../util/entityNames.type'
+import { ExternalSource } from './triply.service'
 
 export class TriplyUtils {
   public static getExternalEntityNameFromUri(uri: string) {
@@ -159,5 +161,31 @@ export class TriplyUtils {
     }
 
     return queryParams as Record<keyof T, string>
+  }
+
+  public static getExternalSourceUrlFromData(data: unknown, type: ExternalSource) {
+    if (!data || typeof data !== 'object') return ''
+
+    let key: string
+    switch (type) {
+      case ExternalSource.getty:
+        key = 'getty'
+        break
+      case ExternalSource.wikidata:
+        key = 'wikidata'
+        break
+      case ExternalSource.rkd:
+        key = 'rkd'
+        break
+      default:
+        throw CustomError.internalCritical(`external source ${type} not implemented`)
+    }
+
+    const keyValue = get(data, key)
+    if (typeof keyValue !== 'string') {
+      return ''
+    }
+
+    return keyValue
   }
 }
