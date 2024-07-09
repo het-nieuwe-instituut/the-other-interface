@@ -87,6 +87,9 @@ export class ArchiveRecordRelationCountArgs extends OmitType(ArchiveRecordRelati
 
 @ObjectType()
 class BaseArchivesRecordZoomLevel3Type {
+  @Field()
+  public id: string
+
   @Field(() => String, { nullable: true })
   public referenceCode?: string
 

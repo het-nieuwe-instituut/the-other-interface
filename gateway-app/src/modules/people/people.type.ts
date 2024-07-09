@@ -66,6 +66,9 @@ export class PeopleZoomLevel3DetailType extends BasePeopleZoomLevel3DetailType {
 
 @ObjectType()
 class BasePeopleRecordZoomLevel3Type {
+  @Field()
+  public id: string
+
   @Field(() => String, { nullable: true })
   public type?: string
 

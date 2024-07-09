@@ -163,7 +163,7 @@ export class PeopleService {
       { id, type }
     )
 
-    return result.data
+    return TriplyUtils.combineObjectArray(result.data)
   }
 
   public async getZoomLevel3RecordData(id: string, locale: Locale) {
@@ -174,7 +174,7 @@ export class PeopleService {
       { id, language: locale }
     )
 
-    return result.data
+    return { ...TriplyUtils.combineObjectArray(result.data), id }
   }
 
   public async getZoomRecordHover(id: string, locale: Locale) {
@@ -190,7 +190,7 @@ export class PeopleService {
       return {}
     }
 
-    return { ...TriplyUtils.combineObjectArray(results.data) }
+    return TriplyUtils.combineObjectArray(results.data)
   }
 
   public getEnrichedSources(id: string, locale: Locale): Promise<EnrichedRecordBaseType[]> {

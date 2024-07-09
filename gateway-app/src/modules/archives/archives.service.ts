@@ -175,7 +175,7 @@ export class ArchivesService {
       { id, language: locale }
     )
 
-    return result?.data
+    return { ...TriplyUtils.combineObjectArray(result?.data), id }
   }
 
   public async getZoomRecordHover(id: string, locale: Locale) {

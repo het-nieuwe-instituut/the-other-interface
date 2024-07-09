@@ -189,7 +189,7 @@ export class PublicationsService {
       { id, language: locale }
     )
 
-    return { ...result.data, id }
+    return { ...TriplyUtils.combineObjectArray(result.data), id }
   }
 
   public async getZoomRecordHover(id: string, locale: Locale) {
