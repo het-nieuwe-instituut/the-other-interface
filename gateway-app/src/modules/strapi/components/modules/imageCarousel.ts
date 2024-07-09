@@ -1,9 +1,6 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql'
-import {
-  PaginationArg,
-  UploadFileFiltersInput,
-  UploadFileRelationResponseCollection,
-} from '../../shared-types'
+import { PaginationArg, UploadFileFiltersInput } from '../../shared-types'
+import { ComponentCoreImageCarouselItem } from '../core/imageCarouselItem'
 
 @ObjectType()
 export class ComponentModulesImageCarousel {
@@ -13,8 +10,8 @@ export class ComponentModulesImageCarousel {
   @Field({ nullable: true })
   public description?: string
 
-  @Field(() => UploadFileRelationResponseCollection, { nullable: true })
-  public images?: UploadFileRelationResponseCollection
+  @Field(() => [ComponentCoreImageCarouselItem])
+  public items: ComponentCoreImageCarouselItem[]
 }
 
 @InputType()

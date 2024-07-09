@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common'
-import { KeysToVerify, TriplyService } from '../triply/triply.service'
+import { ExternalSource, KeysToVerify, TriplyService } from '../triply/triply.service'
 import { getHttpThumbnailOrNull } from '../util/helpers'
 import { TriplyUtils } from '../triply/triply.utils'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { EntityNames } from '../util/entityNames.type'
 import { Locale } from '../util/locale.type'
+import { EnrichedRecordBaseType } from '../triply/triply.type'
 
 export interface ArchivesDetailZoomLevel3DataType {
   id?: string
@@ -110,6 +111,12 @@ export class ArchivesService {
   private readonly ZoomLevel3RecordEndpoint = 'archives-recordPage-editorial/run?'
   private readonly ZoomLevel2HoverEndpoint = 'archives-hoverState/run?'
 
+  private readonly EnrichedSourceEndpoints: Record<ExternalSource, string> = {
+    [ExternalSource.getty]: 'archives-enrichment-getty/run',
+    [ExternalSource.wikidata]: 'archives-enrichment-wikidata/run',
+    [ExternalSource.rkd]: 'archives-enrichment-rkd/run',
+  }
+
   public constructor(private triplyService: TriplyService) {}
 
   public async getZoomLevel3Data(id: string, locale: Locale) {
@@ -185,5 +192,9 @@ export class ArchivesService {
     }
 
     return { ...TriplyUtils.combineObjectArray(results.data) }
+  }
+
+  public getEnrichedSources(id: string, locale: Locale): Promise<EnrichedRecordBaseType[]> {
+    return this.triplyService.getEnrichedSourceData(this.EnrichedSourceEndpoints, id, locale)
   }
 }

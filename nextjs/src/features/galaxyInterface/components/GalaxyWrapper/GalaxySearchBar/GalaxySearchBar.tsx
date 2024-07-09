@@ -99,7 +99,9 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
     <div
       style={{ '--z-index': FOOTER_Z_INDEX, '--offset': `${offset}px` } as CSSProperties}
       className={cn(
-        'grid pl-4 relative h-auto grid-cols-[160px,minmax(20px,1fr),minmax(95px,auto)] gap-4 bg-blue-100 z-[var(--z-index)] text-pink-100 bottom-[var(--offset)]',
+        `grid pl-4 relative h-auto grid-cols-[160px,minmax(20px,1fr),minmax(95px,auto)] gap-4 bg-blue-100 z-[var(--z-index)] text-pink-100 bottom-[var(--offset)]
+        max-[1280px]:gap-2 max-[1280px]:grid-cols-[100px,minmax(20px,1fr),minmax(95px,auto)]
+        `,
         !isSearchModeActive ? 'cursor-pointer' : 'cursor-default',
         className
       )}

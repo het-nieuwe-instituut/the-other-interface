@@ -1,25 +1,26 @@
-import { forwardRef, Module } from '@nestjs/common'
-import { ZoomLevel3Module } from '../zoomLevel3/zoomLevel3.module'
+import { Module } from '@nestjs/common'
 import {
   ObjectRelationstZoomLevel3Resolver,
-  ObjectMakerResolver,
+  ObjectsRecordZoomLevel3Resolver,
+  ObjectsZoomLevel3DetailResolver,
   ObjectsZoomLevelRecordHoverResolver,
 } from './objects.resolver'
 import { ObjectsService } from './objects.service'
 
 @Module({
-  imports: [forwardRef(() => ZoomLevel3Module)],
   providers: [
     ObjectsService,
-    ObjectMakerResolver,
     ObjectRelationstZoomLevel3Resolver,
     ObjectsZoomLevelRecordHoverResolver,
+    ObjectsZoomLevel3DetailResolver,
+    ObjectsRecordZoomLevel3Resolver,
   ],
   exports: [
     ObjectsService,
-    ObjectMakerResolver,
     ObjectRelationstZoomLevel3Resolver,
     ObjectsZoomLevelRecordHoverResolver,
+    ObjectsZoomLevel3DetailResolver,
+    ObjectsRecordZoomLevel3Resolver,
   ],
 })
 export class ObjectsModule {}

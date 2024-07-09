@@ -1,5 +1,5 @@
-query ZoomLevel3Person($id: String!, $locale: Locale!) {
-  zoomLevel3Person(id: $id, locale: $locale) {
+query ZoomLevel3People($id: String!, $locale: Locale!) {
+  zoomLevel3People(id: $id, locale: $locale) {
     __typename
     id
     title

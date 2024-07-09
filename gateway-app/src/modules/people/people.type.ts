@@ -1,10 +1,20 @@
-import { ArgsType, Field, ObjectType, OmitType } from '@nestjs/graphql'
+import { ArgsType, Field, IntersectionType, ObjectType, OmitType } from '@nestjs/graphql'
 import { EntityNames } from '../util/entityNames.type'
 import { IsString } from 'class-validator'
 import { Locale } from '../util/locale.type'
+import { EnrichedRecordBaseType } from '../triply/triply.type'
 
 @ObjectType()
-export class PeopleZoomLevel3DetailType {
+class PeopleAssociationType {
+  @Field(() => String)
+  public association: string
+
+  @Field(() => String, { nullable: true })
+  public associationLabel?: string | null
+}
+
+@ObjectType()
+class BasePeopleZoomLevel3DetailType {
   @Field()
   public id: string
 
@@ -94,7 +104,16 @@ export class PeopleZoomLevel3DetailType {
 }
 
 @ObjectType()
-export class PeopleRecordZoomLevel3Type {
+export class PeopleZoomLevel3DetailType extends IntersectionType(
+  EnrichedRecordBaseType,
+  BasePeopleZoomLevel3DetailType
+) {
+  @Field(() => [BasePeopleZoomLevel3DetailType], { nullable: true })
+  public enrichedSources?: BasePeopleZoomLevel3DetailType[]
+}
+
+@ObjectType()
+class BasePeopleRecordZoomLevel3Type {
   @Field(() => String, { nullable: true })
   public type?: string
 
@@ -136,13 +155,14 @@ export class PeopleRecordZoomLevel3Type {
 }
 
 @ObjectType()
-export class PeopleAssociationType {
-  @Field(() => String)
-  public association: string
-
-  @Field(() => String, { nullable: true })
-  public associationLabel?: string | null
+export class PeopleRecordZoomLevel3Type extends IntersectionType(
+  EnrichedRecordBaseType,
+  BasePeopleRecordZoomLevel3Type
+) {
+  @Field(() => [BasePeopleRecordZoomLevel3Type], { nullable: true })
+  public enrichedSources?: BasePeopleRecordZoomLevel3Type[]
 }
+
 @ObjectType()
 export class PeopleRelationsType {
   @Field(() => String, { nullable: true })

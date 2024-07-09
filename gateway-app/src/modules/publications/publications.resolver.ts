@@ -1,18 +1,14 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { CustomError } from '../util/customError'
 import { PublicationsService } from './publications.service'
 import {
-  PublicationsAudioVisualZoomLevel3DetailType,
-  PublicationsArticleZoomLevel3DetailType,
-  PublicationsBookZoomLevel3DetailType,
-  PublicationsSerialZoomLevel3DetailType,
-  PublicationAuthorType,
   PublicationRecordRelationArgs,
   PublicationRelationsType,
   PublicationsRelationsCountType,
   PublicationsZoomLevelHoverType,
   PublicationsZoomLevel2HoverArgs,
   PublicationRecordRelationCountArgs,
+  PublicationZoomLevel3DetailType,
+  PublicationRecordZoomLevel3Type,
 } from './publications.type'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { LocaleArgs } from '../util/localeArgs.type'
@@ -40,89 +36,6 @@ export class PublicationRelationsZoomLevel3Resolver {
   }
 }
 
-@Resolver(PublicationsAudioVisualZoomLevel3DetailType)
-export class PublicationsAudioVisualResolver {
-  public constructor(private readonly publicationsService: PublicationsService) {}
-
-  @Query(() => PublicationsAudioVisualZoomLevel3DetailType)
-  public publicationAudioVisual() {
-    throw CustomError.internal('not yet implemented')
-  }
-  public populatedPublisher(
-    @Parent() publication: PublicationsAudioVisualZoomLevel3DetailType,
-    @Args() { locale }: LocaleArgs
-  ) {
-    return this.publicationsService.resolvePublisher(publication, locale)
-  }
-}
-
-@Resolver(PublicationsArticleZoomLevel3DetailType)
-export class PublicationsArticleResolver {
-  public constructor(private readonly publicationsService: PublicationsService) {}
-
-  @Query(() => PublicationsArticleZoomLevel3DetailType)
-  public publicationArticle() {
-    throw CustomError.internal('not yet implemented')
-  }
-
-  @ResolveField()
-  public populatedPublisher(
-    @Parent() publication: PublicationsArticleZoomLevel3DetailType,
-    @Args() { locale }: LocaleArgs
-  ) {
-    return this.publicationsService.resolvePublisher(publication, locale)
-  }
-}
-
-@Resolver(PublicationsBookZoomLevel3DetailType)
-export class PublicationsBookResolver {
-  public constructor(private readonly publicationsService: PublicationsService) {}
-
-  @Query(() => PublicationsBookZoomLevel3DetailType)
-  public publicationBook() {
-    throw CustomError.internal('not yet implemented')
-  }
-
-  @ResolveField()
-  public populatedPublisher(
-    @Parent() publication: PublicationsBookZoomLevel3DetailType,
-    @Args() { locale }: LocaleArgs
-  ) {
-    return this.publicationsService.resolvePublisher(publication, locale)
-  }
-}
-
-@Resolver(PublicationsSerialZoomLevel3DetailType)
-export class PublicationsSerialResolver {
-  public constructor(private readonly publicationsService: PublicationsService) {}
-
-  @Query(() => PublicationsSerialZoomLevel3DetailType)
-  public publicationSerial() {
-    throw CustomError.internal('not yet implemented')
-  }
-
-  @ResolveField()
-  public populatedPublisher(
-    @Parent() publication: PublicationsSerialZoomLevel3DetailType,
-    @Args() { locale }: LocaleArgs
-  ) {
-    return this.publicationsService.resolvePublisher(publication, locale)
-  }
-}
-
-@Resolver(PublicationAuthorType)
-export class PublicationAuthorResolver {
-  public constructor(private readonly publicationsService: PublicationsService) {}
-
-  @ResolveField()
-  public populatedAuthor(
-    @Parent() publication: PublicationsBookZoomLevel3DetailType,
-    @Args() { locale }: LocaleArgs
-  ) {
-    return this.publicationsService.resolveAuthor(publication, locale)
-  }
-}
-
 @Resolver(PublicationsZoomLevelHoverType)
 export class PublicationsZoomLevelRecordHoverResolver {
   public constructor(private readonly publicationsService: PublicationsService) {}
@@ -133,5 +46,44 @@ export class PublicationsZoomLevelRecordHoverResolver {
     @Args() { locale }: LocaleArgs
   ) {
     return this.publicationsService.getZoomRecordHover(args.id, locale)
+  }
+}
+
+@Resolver(PublicationZoomLevel3DetailType)
+export class PublicationZoomLevel3DetailResolver {
+  public constructor(private readonly publicationsService: PublicationsService) {}
+
+  @Query(() => PublicationZoomLevel3DetailType, { nullable: true })
+  public async zoomLevel3Publication(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
+    return this.publicationsService.getZoomLevel3Data(id, locale)
+  }
+
+  @ResolveField()
+  public enrichedSources(
+    @Parent() record: PublicationZoomLevel3DetailType,
+    @Args() { locale }: LocaleArgs
+  ) {
+    return this.publicationsService.getEnrichedSources(record.id, locale)
+  }
+}
+
+@Resolver(PublicationRecordZoomLevel3Type)
+export class PublicationRecordZoomLevel3Resolver {
+  public constructor(private readonly publicationsService: PublicationsService) {}
+
+  @Query(() => [PublicationRecordZoomLevel3Type], { nullable: true })
+  public async publicationsRecordZoomLevel3(
+    @Args('id') publicationId: string,
+    @Args() { locale }: LocaleArgs
+  ) {
+    return this.publicationsService.getZoomLevel3RecordData(publicationId, locale)
+  }
+
+  @ResolveField()
+  public enrichedSources(
+    @Parent() record: PublicationRecordZoomLevel3Type,
+    @Args() { locale }: LocaleArgs
+  ) {
+    return this.publicationsService.getEnrichedSources(record.id, locale)
   }
 }

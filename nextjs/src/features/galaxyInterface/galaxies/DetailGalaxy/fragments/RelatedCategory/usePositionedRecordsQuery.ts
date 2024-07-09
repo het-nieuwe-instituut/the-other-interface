@@ -1,4 +1,7 @@
-import { CloudCategory } from '@/features/shared/utils/categories'
+import {
+  CloudCategory,
+  getCloudCategoryByZoomLevel3RelationType,
+} from '@/features/shared/utils/categories'
 
 import { getZoom3RelationsTask } from '@/features/pages/tasks/getZoom3Relations'
 import initApiClientService from '@/features/shared/utils/initApiClientService'
@@ -58,7 +61,7 @@ function getPositionedRecords(
   const positionedRecords: PositionedRecord[] = []
   const categoryPositioningTemplate = positioningTemplate[category][current]
   const categoryRelations = relations.find(
-    relation => getCloudCategoryByRelationType(relation.type) === category
+    relation => getCloudCategoryByZoomLevel3RelationType(relation) === category
   )?.paginatedRelations
 
   if (!categoryPositioningTemplate || !categoryRelations) return []
@@ -77,21 +80,4 @@ function getPositionedRecords(
   })
 
   return positionedRecords
-}
-
-export const getCloudCategoryByRelationType = (type: string): CloudCategory => {
-  const transformedType = type.toLocaleLowerCase()
-  if (transformedType === 'objects') {
-    return 'objects'
-  }
-  if (transformedType === 'people') {
-    return 'people'
-  }
-  if (transformedType === 'publications') {
-    return 'publications'
-  }
-  if (transformedType === 'archives') {
-    return 'archives'
-  }
-  throw new Error(`Unknown category from relation type, this should not happen! ${type}`)
 }
