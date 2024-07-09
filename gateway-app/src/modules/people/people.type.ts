@@ -41,9 +41,6 @@ class BasePeopleZoomLevel3DetailType {
 
   @Field(() => String, { nullable: true })
   public description?: string | null
-
-  @Field(() => [PeopleZoomLevel3DetailAsteriskType], { nullable: true })
-  public asteriskSuggestions?: PeopleZoomLevel3DetailAsteriskType[]
 }
 
 @ObjectType()
@@ -62,6 +59,9 @@ class EnrichedBasePeopleZoomLevel3DetailType extends BasePeopleZoomLevel3DetailT
 export class PeopleZoomLevel3DetailType extends BasePeopleZoomLevel3DetailType {
   @Field(() => [EnrichedBasePeopleZoomLevel3DetailType], { nullable: true })
   public enrichedSources?: EnrichedBasePeopleZoomLevel3DetailType[]
+
+  @Field(() => [PeopleZoomLevel3DetailAsteriskType], { nullable: true })
+  public asteriskSuggestions?: PeopleZoomLevel3DetailAsteriskType[]
 }
 
 @ObjectType()

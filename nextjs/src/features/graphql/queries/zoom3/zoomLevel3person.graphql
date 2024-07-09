@@ -5,6 +5,11 @@ query ZoomLevel3People($id: String!, $locale: Locale!) {
     title
     thumbnail
     description
+    asteriskSuggestions {
+      asterisk_subject_description
+      asterisk_date_description
+      asterisk_name_description
+    }
     enrichedSources(locale: $locale) {
       externalSourceType
       externalSourceUrl

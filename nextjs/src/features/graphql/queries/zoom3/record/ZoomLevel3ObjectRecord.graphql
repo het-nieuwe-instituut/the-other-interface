@@ -19,6 +19,14 @@ query ZoomLevel3ObjectRecord($id: String!, $locale: Locale!) {
     geoKeywords
     permanentLink
     externalSource
+    asteriskSuggestions {
+      asterisk_date_relatedKeyword
+      asterisk_name_relatedKeyword
+      asterisk_subject_relatedKeyword
+      asterisk_date_geoKeywords
+      asterisk_name_geoKeywords
+      asterisk_subject_geoKeywords
+    }
     enrichedSources(locale: $locale) {
       id
       title
