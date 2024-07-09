@@ -63,11 +63,11 @@ class BaseObjectsZoomLevel3DetailType {
   @Field(() => String, { nullable: true })
   public description?: string | null
 
-  @Field(() => String, { nullable: true })
-  public thumbnail: string
+  @Field(() => [String], { nullable: true })
+  public thumbnail?: string[]
 
   @Field(() => EntityNames, { nullable: true })
-  public type: EntityNames
+  public type?: EntityNames
 
   @Field(() => String, { nullable: true })
   public mediaType?: string

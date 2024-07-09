@@ -1,11 +1,14 @@
 query ZoomLevel3ObjectRecord($id: String!, $locale: Locale!) {
   objectsRecordZoomLevel3(id: $id, locale: $locale) {
+    id
+    title
     objectNumber
-    titleType
+    objectType
     objectName
     archiveCode
     date
     relatedKeywords
+    maker
     materials
     techniques
     hasParts
@@ -13,18 +16,19 @@ query ZoomLevel3ObjectRecord($id: String!, $locale: Locale!) {
     scale
     creditLine
     rights
+    geoKeywords
     permanentLink
     externalSource
     enrichedSources(locale: $locale) {
       id
-      externalSourceType
-      externalSourceUrl
+      title
       objectNumber
-      titleType
+      objectType
       objectName
       archiveCode
       date
       relatedKeywords
+      maker
       materials
       techniques
       hasParts
@@ -32,6 +36,7 @@ query ZoomLevel3ObjectRecord($id: String!, $locale: Locale!) {
       scale
       creditLine
       rights
+      geoKeywords
       permanentLink
       externalSource
     }

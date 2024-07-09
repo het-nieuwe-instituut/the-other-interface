@@ -11,14 +11,25 @@ export type OmitEnrichedData<T> = Omit<
   'enrichedSources' | 'externalSourceType' | 'externalSourceUrl' | 'id'
 >
 
-type BaseObjectRecordZoomLevel3Type = OmitEnrichedData<ObjectRecordZoomLevel3Type>
-type BaseArchivesRecordZoomLevel3Type = OmitEnrichedData<ArchivesRecordZoomLevel3Type>
-type BasePeopleRecordZoomLevel3Type = OmitEnrichedData<PeopleRecordZoomLevel3Type>
-type BasePublicationRecordZoomLevel3Type = OmitEnrichedData<PublicationRecordZoomLevel3Type>
+type OmitAsteriskSuggestions<T> = Omit<T, 'asteriskSuggestions'>
+
+type BaseObjectRecordZoomLevel3Type = Omit<
+  OmitAsteriskSuggestions<OmitEnrichedData<ObjectRecordZoomLevel3Type>>,
+  'geoKeywords' | 'maker' | 'objectType'
+>
+type BaseArchivesRecordZoomLevel3Type = OmitAsteriskSuggestions<
+  OmitEnrichedData<ArchivesRecordZoomLevel3Type>
+>
+type BasePeopleRecordZoomLevel3Type = OmitAsteriskSuggestions<
+  OmitEnrichedData<PeopleRecordZoomLevel3Type>
+>
+type BasePublicationRecordZoomLevel3Type = OmitAsteriskSuggestions<
+  OmitEnrichedData<PublicationRecordZoomLevel3Type>
+>
 
 const objectFieldOrder: Array<keyof BaseObjectRecordZoomLevel3Type> = [
   'objectNumber',
-  'titleType',
+  'title',
   'objectName',
   'archiveCode',
   'date',
