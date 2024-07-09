@@ -3,18 +3,28 @@ import { Flex, Text, BoxProps } from '@chakra-ui/react'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
+import { cn } from '@/features/ui/utils/cn'
 
 type Props = {
   categoryType: Category
   title?: string | null
   css?: BoxProps['css']
+  className?: string
 }
 
-export const RecordText: React.FC<Props> = ({ title = '', categoryType, css }) => {
+export const RecordText: React.FC<Props> = ({ title = '', categoryType, css, className }) => {
   const { t } = useLooseTypeSafeTranslation('category')
 
   return (
-    <Flex w="100%" color="blueAlpha.100" css={css} direction="column" flex="1" mt={2}>
+    <Flex
+      className={cn(className)}
+      w="100%"
+      color="blueAlpha.100"
+      css={css}
+      direction="column"
+      flex="1"
+      mt={2}
+    >
       <Text
         align="center"
         isTruncated

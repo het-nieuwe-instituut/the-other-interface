@@ -1,27 +1,37 @@
 import { useEffect, useRef, useState } from 'react'
 
 export const useCalculateLine = () => {
-  const ref = useRef<HTMLButtonElement>(null)
-  // need to know start and end
-  const [coordinates, setCoordinates] = useState({ x1: '0', y1: '0', x2: '0', y2: '0' })
+  const ref = useRef<HTMLDivElement>(null) // Change to HTMLDivElement to match usage in Record component
+  const [coordinates, setCoordinates] = useState({
+    x1: '0',
+    y1: '0',
+    x2: '0',
+    y2: '0',
+    offsetLeft: 0,
+    offsetTop: 0,
+  })
 
   useEffect(() => {
     const draw = () => {
-      const mainElement = Array.from(document.querySelectorAll('#detail-galaxy-grid'))[0]
-      const rect = mainElement.getBoundingClientRect()
+      const mainElement = document.querySelector('#detail-galaxy-grid')
+      if (!mainElement) return
+
       const hoveredElement = ref.current
 
-      if (hoveredElement && rect) {
+      if (hoveredElement) {
         const hoveredRect = hoveredElement.getBoundingClientRect()
 
         setCoordinates({
-          x1: `${hoveredRect.left - rect.left + hoveredElement.clientWidth / 2}`,
-          y1: `${hoveredRect.top - rect.top + hoveredElement.clientHeight / 2}`,
-          x2: `${(rect.right - rect.left) / 2}`,
-          y2: `${(rect.bottom - rect.top) / 2}`,
+          x1: `${hoveredRect.left + hoveredElement.clientWidth / 2}`,
+          y1: `${hoveredRect.top + hoveredElement.clientHeight / 2}`,
+          x2: `${window.innerWidth / 2}`,
+          y2: `${window.innerHeight / 2 - 80}`,
+          offsetLeft: hoveredRect.left + window.scrollX,
+          offsetTop: hoveredRect.top + window.scrollY,
         })
       }
     }
+
     draw()
 
     window.addEventListener('resize', draw)

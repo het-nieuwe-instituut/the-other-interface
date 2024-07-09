@@ -1,13 +1,13 @@
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { getCurrentZoomNumber } from '@/features/shared/helpers/getCurrentZoomNumber'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 import { isCloudCategory, isSearchCategory } from '@/features/shared/utils/categories'
-import { useParams, usePathname, useSearchParams } from 'next/navigation'
-import NextLink from 'next/link'
+import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/components/DelayedNextLink/DelayedNextLinkWithZoomAnimationsContext'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
+import { useParams, usePathname, useSearchParams } from 'next/navigation'
 import { InputHTMLAttributes } from 'react'
-import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { useLocale } from '@/features/shared/hooks/useLocale'
 const getZoom2Link = (searchParam: string, category?: string) => {
   const search = searchParam ? `&search=${searchParam}` : ''
 
@@ -61,7 +61,9 @@ export const GalaxyZoomNavigation = () => {
       </p>
 
       <form className="relative flex items-center justify-center gap-3">
-        <NextLink
+        <DelayedNextLinkWithZoomAnimationsContext
+          animation={'backwards'}
+          delay={300}
           href="/"
           className="flex w-[48px] cursor-pointer flex-col flex-nowrap items-center  justify-center gap-2 whitespace-nowrap"
         >
@@ -73,7 +75,7 @@ export const GalaxyZoomNavigation = () => {
             })}
           >
             <Radio
-              checked={currentZoomNumber === 1}
+              defaultChecked={currentZoomNumber === 1}
               name="zoom"
               id="zoom-0"
               value="zoom-0"
@@ -82,14 +84,16 @@ export const GalaxyZoomNavigation = () => {
 
             {t('collection')}
           </label>
-        </NextLink>
+        </DelayedNextLinkWithZoomAnimationsContext>
 
-        <NextLink
-          aria-disabled={!zoom2Link}
+        <DelayedNextLinkWithZoomAnimationsContext
+          animation={'backwards'}
+          delay={300}
+          aria-disabled={!zoom2Link && currentZoomNumber === 2}
           href={addLocaleToUrl(zoom2Link ?? '', locale)}
           className={cn(
             'flex w-[45px] flex-col flex-nowrap items-center justify-center gap-2 whitespace-nowrap',
-            !zoom2Link && 'cursor-not-allowed pointer-events-none'
+            !zoom2Link && currentZoomNumber === 2 && 'cursor-not-allowed pointer-events-none'
           )}
         >
           <label
@@ -103,7 +107,7 @@ export const GalaxyZoomNavigation = () => {
             })}
           >
             <Radio
-              checked={currentZoomNumber === 2}
+              defaultChecked={currentZoomNumber === 2}
               name="zoom"
               id="zoom-1"
               value="zoom-1"
@@ -113,7 +117,7 @@ export const GalaxyZoomNavigation = () => {
 
             {t('category')}
           </label>
-        </NextLink>
+        </DelayedNextLinkWithZoomAnimationsContext>
         <div className="flex w-[28px] flex-col flex-nowrap items-center justify-center gap-2 whitespace-nowrap">
           <label
             htmlFor="zoom-2"
@@ -126,7 +130,7 @@ export const GalaxyZoomNavigation = () => {
             })}
           >
             <Radio
-              checked={currentZoomNumber === 3}
+              defaultChecked={currentZoomNumber === 3}
               name="zoom"
               id="zoom-2"
               value="zoom-2"

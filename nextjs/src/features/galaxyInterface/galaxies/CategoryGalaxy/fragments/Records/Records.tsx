@@ -7,7 +7,13 @@ import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { cn } from '@/features/ui/utils/cn'
 import { useContext, useMemo } from 'react'
 import { SearchResultItemType } from 'src/generated/graphql'
-import { CategoryGalaxyAnimationContext } from '../../CategoryGalaxy'
+import {
+  GalaxyPaginationAnimationStateContext,
+  getItemsAnimationClassNames,
+  getNextItemsAnimationClassNames,
+} from '../../../hooks/GalaxyPaginationAnimationStateProvider'
+import { GalaxyZoomAnimationStateContext } from '../../../hooks/GalaxyZoomAnimationStateProvider'
+import { CategoryGalaxyTemplateContext } from '../../CategoryGalaxy'
 import { PositioningTemplate, positioningTemplates } from './positioningTemplates'
 
 type Props = {
@@ -47,9 +53,12 @@ const getPositionedRecords = ({
 
 export const Records: React.FC<Props> = ({ pageAmount, records }) => {
   const { category, search } = useZoom2Params()
-  const { animationState, conditions, currentTemplate, nextTemplate } = useContext(
-    CategoryGalaxyAnimationContext
-  )
+  const { currentTemplate, nextTemplate } = useContext(CategoryGalaxyTemplateContext)
+  const {
+    conditions: galaxyPaginationAnimationConditions,
+    animationState: galaxyPaginationAnimationState,
+  } = useContext(GalaxyPaginationAnimationStateContext)
+  const { animationState: galaxyZoomAnimationState } = useContext(GalaxyZoomAnimationStateContext)
   const { pageNumber } = usePageNumber()
   const selectedFilters = useSelectedFilters()
 
@@ -87,33 +96,38 @@ export const Records: React.FC<Props> = ({ pageAmount, records }) => {
       <div
         className={cn(
           'absolute inset-x-[2vw] top-[7%] grid h-[calc(80%-1.7rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-4 grid-rows-3',
-          !animationState && 'blur-[10px]',
-          animationState === 'forward' && 'animate-toUnblur',
-          animationState === 'backwards' && 'animate-fromBlurredToHide',
-          conditions === 'previousAnimationWasForward' &&
-            nextRecords.length &&
-            'animate-fromHideToShow'
+          getNextItemsAnimationClassNames(
+            galaxyPaginationAnimationState,
+            galaxyPaginationAnimationConditions,
+            nextRecords?.length > 0
+          ),
+          galaxyZoomAnimationState === 'backwards' &&
+            'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
         )}
       >
-        {nextPositionedRecords?.map((r, i) => (
-          <Record key={r.key} tooltipPlace={i >= 8 ? 'top' : 'bottom'} record={r} />
-        ))}
+        {nextPositionedRecords?.map((r, i) => {
+          return <Record key={r.key} tooltipPlace={i >= 8 ? 'top' : 'bottom'} record={r} />
+        })}
       </div>
 
-      <div className="absolute inset-x-[2vw] top-[7%] grid h-[calc(80%-1.7rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-4 grid-rows-3">
-        {currentPositionedRecords?.map((r, i) => (
-          <Record
-            className={cn(
-              conditions === 'previousAnimationWasBackwards' && 'animate-fromHideToShow',
-              animationState === 'forward' && 'animate-toBlurAndHide',
-              animationState === 'backwards' && 'animate-toBlur',
-              conditions === 'firstRender' && 'animate-fromHideToShow'
-            )}
-            key={r.key}
-            tooltipPlace={i >= 8 ? 'top' : 'bottom'}
-            record={r}
-          />
-        ))}
+      <div className="relative inset-x-[2vw] top-[7%] grid h-[calc(80%-1.7rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-4 grid-rows-3">
+        {currentPositionedRecords?.map((r, i) => {
+          return (
+            <Record
+              className={cn(
+                getItemsAnimationClassNames(
+                  galaxyPaginationAnimationState,
+                  galaxyPaginationAnimationConditions
+                ),
+                galaxyZoomAnimationState === 'backwards' &&
+                  'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+              )}
+              key={r.key}
+              tooltipPlace={i >= 8 ? 'top' : 'bottom'}
+              record={r}
+            />
+          )
+        })}
       </div>
     </div>
   )

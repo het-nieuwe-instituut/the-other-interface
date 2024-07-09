@@ -1,0 +1,1 @@
+export const GALAXY_QUERIES_STALE_TIME = 60000
