@@ -4,13 +4,14 @@ import {
   StoriesRelationForRecordQuery,
   StoryMetaByIdQuery,
 } from 'src/generated/graphql'
+import { joinNullableStrings } from '../utils/text'
 
 export type StoryImageInfo = {
   url: string | undefined
   height?: Maybe<number> | undefined
   width?: Maybe<number> | undefined
-  title: string
-  description: string
+  title?: string
+  description: string | null
   id?: Maybe<string> | undefined
 }
 
@@ -25,9 +26,8 @@ export const storiesToCarouselDataMapper = (
 ): StoryImageInfo[] | undefined => {
   const mappedStories = relatedStories
     ?.flatMap(story => {
-      const firstName = story?.attributes?.author?.data?.attributes?.firstName ?? ''
-      const lastName = story?.attributes?.author?.data?.attributes?.lastName ?? ''
-      const authorName = [firstName, lastName].filter(name => name).join(' ')
+      const { firstName, lastName } = story?.attributes?.author?.data?.attributes ?? {}
+      const authorName = joinNullableStrings(' ', firstName, lastName)
 
       const images = story?.attributes?.components
         ?.filter(
@@ -56,7 +56,7 @@ export const storiesToCarouselDataMapper = (
           id: story?.id,
           height: image.height,
           width: image.width,
-          title: story?.attributes?.title || '',
+          title: story?.attributes?.title,
           description: authorName,
         },
       ]

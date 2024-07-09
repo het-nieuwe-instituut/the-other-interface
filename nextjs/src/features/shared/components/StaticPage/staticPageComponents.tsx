@@ -59,7 +59,7 @@ interface StaticPageMarkdownLinkProps {
 }
 
 export const getStaticPageMarkdownLink = ({ href, label }: StaticPageMarkdownLinkProps) =>
-  `<a class="prose text-blue-600" href="${href}" target="_blank" rel="noreferrer">${label}</a>`
+  `<a class="prose underline" href="${href}" target="_blank" rel="noreferrer">${label}</a>`
 
 interface StaticPageLinkProps {
   href: string
@@ -72,7 +72,7 @@ export const StaticPageLink = ({ href, label, external }: StaticPageLinkProps) =
     href={href}
     target={external ? '_blank' : '_self'}
     rel={external ? 'noreferrer' : ''}
-    className="text-blue-600"
+    className="underline"
   >
     {label}
   </a>
