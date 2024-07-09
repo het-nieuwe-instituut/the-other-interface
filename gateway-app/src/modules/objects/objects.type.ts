@@ -1,8 +1,7 @@
-import { ArgsType, Field, IntersectionType, ObjectType, OmitType, PickType } from '@nestjs/graphql'
+import { ArgsType, Field, ObjectType, OmitType, PickType } from '@nestjs/graphql'
 import { EntityNames } from '../util/entityNames.type'
 import { IsString } from 'class-validator'
 import { Locale } from '../util/locale.type'
-import { EnrichedRecordBaseType } from '../triply/triply.type'
 import { ExternalSource } from '../triply/triply.service'
 
 @ObjectType()
@@ -94,10 +93,7 @@ export class EnrichedBaseObjectsZoomLevel3AsteriskDetailType extends PickType(Ob
 ]) {}
 
 @ObjectType()
-export class ObjectsZoomLevel3DetailType extends IntersectionType(
-  EnrichedRecordBaseType,
-  BaseObjectsZoomLevel3DetailType
-) {
+export class ObjectsZoomLevel3DetailType extends BaseObjectsZoomLevel3DetailType {
   @Field(() => [EnrichedBaseObjectsZoomLevel3DetailType], { nullable: true })
   public enrichedSources?: EnrichedBaseObjectsZoomLevel3DetailType[]
 
@@ -222,10 +218,7 @@ class BaseObjectRecordZoomLevel3AsteriskType extends PickType(ObjectAsteriskType
 ]) {}
 
 @ObjectType()
-export class ObjectRecordZoomLevel3Type extends IntersectionType(
-  EnrichedRecordBaseType,
-  BaseObjectRecordZoomLevel3Type
-) {
+export class ObjectRecordZoomLevel3Type extends BaseObjectRecordZoomLevel3Type {
   @Field(() => [EnrichedBaseObjectRecordZoomLevel3Type], { nullable: true })
   public enrichedSources?: EnrichedBaseObjectRecordZoomLevel3Type[]
 
