@@ -34,6 +34,15 @@ module.exports = {
           '75%': { transform: 'scale(3)', opacity: 0.5 },
           '100%': { transform: 'scale(4)', opacity: 0 },
         },
+        toCenterOfGalaxy: {
+          '0%': {
+            transform: 'translate(0, 0)',
+          },
+          '100%': {
+            transform:
+              'translate(var(--animation-translate-x), var(--animation-translate-y)) scale(var(--animation-scale))',
+          },
+        },
       },
       gridTemplateAreas: {
         'editorial-large': ['left right', 'bottom right'],

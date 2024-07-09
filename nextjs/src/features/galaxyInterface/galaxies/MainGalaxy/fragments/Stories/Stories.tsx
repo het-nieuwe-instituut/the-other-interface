@@ -34,29 +34,27 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
   })
 
   return (
-    <div
-      className={cn(
-        'size-full',
-        zoomAnimationState === 'forward' && 'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
-      )}
-    >
-      <div
-        className={cn(
-          'absolute right-[18%] top-[13%] z-20 grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px] opacity-100'
-        )}
-      >
-        {positionedStories.map(positionedStory => (
-          <Story
-            className={getItemsAnimationClassNames(
-              paginationAnimationState,
-              paginationAnimationConditions
-            )}
-            key={`${positionedStory.id}-${positionedStory.locale}-${currentPage}`}
-            story={positionedStory}
-            isMainGrid
-          />
-        ))}
+    <div className={cn('size-full')}>
+      <div className="absolute right-[18%] top-[13%] h-[55%] w-[65vw] max-w-[936px]">
+        <div
+          className={cn(
+            'relative size-full z-20 grid   grid-cols-4 grid-rows-2 gap-[20px] opacity-100  '
+          )}
+        >
+          {positionedStories.map(positionedStory => (
+            <Story
+              className={getItemsAnimationClassNames(
+                paginationAnimationState,
+                paginationAnimationConditions
+              )}
+              key={`${positionedStory.id}-${positionedStory.locale}-${currentPage}`}
+              story={positionedStory}
+              isMainGrid
+            />
+          ))}
+        </div>
       </div>
+
       <svg
         ref={svgRef}
         style={{

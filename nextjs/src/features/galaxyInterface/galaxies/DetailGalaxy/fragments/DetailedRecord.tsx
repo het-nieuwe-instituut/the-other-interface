@@ -7,6 +7,7 @@ import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
 import { cn } from '@/features/ui/utils/cn'
 import { Text } from '@chakra-ui/react'
 import { useParams } from 'next/navigation'
+import { useStoryOrRecordImageQuery } from '../../MainGalaxy/hooks/useStoryOrRecordImageQuery'
 
 interface Props {
   className?: string
@@ -24,6 +25,9 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
     id,
     options: { refetchOnWindowFocus: false },
     locale,
+  })
+  const { data } = useStoryOrRecordImageQuery({
+    id,
   })
 
   return (
@@ -43,7 +47,7 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
     return (
       <>
         <ResponsiveImage
-          src={record?.thumbnail?.[0] ?? ''}
+          src={data ?? record?.thumbnail?.[0]}
           alt={record?.title}
           className="max-h-[calc(100%-3vw-8px)]"
           size={'25vw'}
