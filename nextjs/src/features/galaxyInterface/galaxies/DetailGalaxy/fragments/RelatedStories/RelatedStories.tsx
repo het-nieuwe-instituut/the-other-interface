@@ -47,7 +47,7 @@ export const RelatedStories: React.FC<Props> = ({ allRelationTotals }) => {
   const recordCategory = params?.category as CloudCategory
   const maxPages = Math.ceil((allRelationTotals?.[CATEGORIES.stories] || 2) / 2)
   const { current, next } = useSwapCurrentNext(page, maxPages)
-  const { data } = useRelatedStoriesQuery({
+  const { data, isLoading: isRelatedStoriesLoading } = useRelatedStoriesQuery({
     maxPages,
     page,
     id,
@@ -55,7 +55,7 @@ export const RelatedStories: React.FC<Props> = ({ allRelationTotals }) => {
     category: recordCategory,
     current: current ?? 0,
   })
-  const { data: nextData } = useRelatedStoriesQuery({
+  const { data: nextData, isLoading: isNextRelatedStoriesLoading } = useRelatedStoriesQuery({
     maxPages,
     page: page + 1,
     id,
@@ -71,18 +71,19 @@ export const RelatedStories: React.FC<Props> = ({ allRelationTotals }) => {
     <>
       <div className="pointer-events-none col-start-2 col-end-2 row-start-1 row-end-3 text-white">
         <div className="grid h-full grid-cols-2 grid-rows-4">
-          {nextPositionedStories.map(story => (
-            <Record
-              className={getNextItemsAnimationClassNames(
-                animationState,
-                conditions,
-                nextPositionedStories.length > 0
-              )}
-              key={story.id}
-              record={story}
-              tabIndex={-1}
-            />
-          ))}
+          {!isNextRelatedStoriesLoading &&
+            nextPositionedStories.map(story => (
+              <Record
+                className={getNextItemsAnimationClassNames(
+                  animationState,
+                  conditions,
+                  nextPositionedStories.length > 0
+                )}
+                key={story.id}
+                record={story}
+                tabIndex={-1}
+              />
+            ))}
 
           <DetailedRecord />
         </div>
@@ -90,13 +91,14 @@ export const RelatedStories: React.FC<Props> = ({ allRelationTotals }) => {
 
       <div className="col-start-2 col-end-2 row-start-1 row-end-3 text-white">
         <div className="grid h-full grid-cols-2 grid-rows-4">
-          {positionedStories.map(story => (
-            <Record
-              className={getItemsAnimationClassNames(animationState, conditions)}
-              key={story.id}
-              record={story}
-            />
-          ))}
+          {!isRelatedStoriesLoading &&
+            positionedStories.map(story => (
+              <Record
+                className={getItemsAnimationClassNames(animationState, conditions)}
+                key={story.id}
+                record={story}
+              />
+            ))}
 
           <DetailedRecord />
         </div>

@@ -17,7 +17,7 @@ import {
 } from '../../../hooks/GalaxyZoomAnimationStateProvider'
 import { RecordText } from '../RecordText'
 
-type Props = {
+export type RecordComponentProps = {
   className?: string
   record: RecordProps
   tooltipPlace: PlacesType
