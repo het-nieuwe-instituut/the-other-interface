@@ -192,14 +192,14 @@ function SuggestionSection() {
     return (
       <NavLinkButton
         variant="metaDataText"
-        className="bg-[#DEE5EC] font-semibold text-[#6F7A9C] after:border-none hover:bg-[#DEE5EC] hover:text-[#6F7A9C]"
+        className=":hover:bg-[#DEE5EC] :hover:text-[#6F7A9C] bg-[#DEE5EC] font-semibold text-[#6F7A9C] after:border-none"
         href={url}
         title={text}
         target={external ? '_blank' : undefined}
       >
         <Asterisk />
         {text}
-        <ExternalLink className="size-[14px]" />
+        {external && <ExternalLink className="size-[14px]" />}
       </NavLinkButton>
     )
   }
