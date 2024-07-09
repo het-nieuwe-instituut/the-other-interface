@@ -16,7 +16,6 @@ export const useCalculateLine = () => {
       const mainElement = document.querySelector('#detail-galaxy-grid')
       if (!mainElement) return
 
-      const rect = mainElement.getBoundingClientRect()
       const hoveredElement = ref.current
 
       if (hoveredElement) {
