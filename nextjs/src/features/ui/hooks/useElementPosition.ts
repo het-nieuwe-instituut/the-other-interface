@@ -1,4 +1,5 @@
-import { useCallback, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useWindowSize } from 'usehooks-ts'
 
 type ElementPosition = {
   left: number | undefined
@@ -10,6 +11,8 @@ type ElementPosition = {
 }
 
 export const useElementPosition = () => {
+  const { width, height } = useWindowSize()
+  const ref = useRef<HTMLElement | null>(null)
   const [position, setPosition] = useState<ElementPosition>({
     left: undefined,
     right: undefined,
@@ -19,9 +22,9 @@ export const useElementPosition = () => {
     height: undefined,
   })
 
-  const ref = useCallback((node: HTMLElement | null) => {
-    if (node !== null) {
-      const rect = node.getBoundingClientRect()
+  useEffect(() => {
+    if (ref.current !== null) {
+      const rect = ref.current.getBoundingClientRect()
       setPosition({
         top: rect.top,
         bottom: rect.bottom,
@@ -31,7 +34,7 @@ export const useElementPosition = () => {
         height: rect.height,
       })
     }
-  }, [])
+  }, [width, height])
 
   return [position, ref] as const
 }
