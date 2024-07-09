@@ -167,7 +167,7 @@ export const CategoryGalaxyContent = React.memo(() => {
   return (
     <div className={'w-screen bg-pink-100'}>
       <div className="relative mx-auto flex h-screen w-full max-w-[1440px] items-center justify-center px-[25px]">
-        {isSearchModeActive && <BlurOverlay />}
+        <BlurOverlay hide={!isSearchModeActive} />
         {renderMainContent()}
 
         <GalaxyFooter
