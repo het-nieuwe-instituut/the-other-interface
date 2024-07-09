@@ -4,6 +4,7 @@ import { getZoomRecordHoverTask } from '@/features/pages/tasks/getZoomRecordHove
 import { EntityNames } from 'src/generated/graphql'
 import { useLocale } from '../useLocale'
 import { Category } from '../../utils/categories'
+import { GALAXY_QUERIES_STALE_TIME } from '@/features/galaxyInterface/galaxies/galaxies.constants'
 
 export function useZoomHoverRecordResultQuery({
   id,
@@ -18,7 +19,8 @@ export function useZoomHoverRecordResultQuery({
   const queryFn = () => getZoomRecordHoverTask({ id, category, api, locale })
 
   return useQuery({
-    queryKey: [id, category],
+    queryKey: ['zoom-hover-result', id, category],
+    staleTime: GALAXY_QUERIES_STALE_TIME,
     queryFn,
     refetchOnWindowFocus: false,
   })

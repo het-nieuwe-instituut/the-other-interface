@@ -1,14 +1,14 @@
 'use client'
 import { GalaxyTopRight } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
+import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/components/DelayedNextLink/DelayedNextLinkWithZoomAnimationsContext'
+import { MenuTypogrpahyVariants } from '@/features/ui/components/typography/menuVariants'
 import { cn } from '@/features/ui/utils/cn'
-import NextLink from 'next/link'
 import { CSSProperties } from 'react'
 import { useSelector } from 'react-redux'
 import { State } from '../../configs/store'
 import { STATIC_HEADER_Z_INDEX, USER_LOOKS_ON } from '../../constants/mainConstants'
 import { useLooseTypeSafeTranslation } from '../../hooks/translations'
 import { useLocale } from '../../hooks/useLocale'
-import { MenuTypogrpahyVariants } from '@/features/ui/components/typography/menuVariants'
 
 export const StaticHeader = () => {
   const { t: tNavigation } = useLooseTypeSafeTranslation('navigation')
@@ -27,7 +27,9 @@ export const StaticHeader = () => {
       >
         <div className="container mx-auto flex size-full max-w-[90em] items-center justify-between px-6">
           <div className="h-full items-center">
-            <NextLink
+            <DelayedNextLinkWithZoomAnimationsContext
+              animation={'backwards'}
+              delay={300}
               href={lang ? `/?lang=${lang}` : '/?lang=nl'}
               className={cn(
                 userLooksOn === USER_LOOKS_ON.GALAXY &&
@@ -48,7 +50,7 @@ export const StaticHeader = () => {
               <p className="mr-2 sm:overflow-visible sm:whitespace-normal">
                 {tNavigation('headerTitle')}
               </p>
-            </NextLink>
+            </DelayedNextLinkWithZoomAnimationsContext>
           </div>
           <div>
             <GalaxyTopRight />

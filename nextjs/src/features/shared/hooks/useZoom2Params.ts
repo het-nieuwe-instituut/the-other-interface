@@ -26,3 +26,8 @@ export const useZoom2Params = () => {
     fallback: !!fallback,
   }
 }
+
+export function useSearchParamCategory() {
+  const searchParams = useSearchParams()
+  return searchParams?.get('category') as SearchCategory
+}

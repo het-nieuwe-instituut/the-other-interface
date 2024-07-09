@@ -7,13 +7,15 @@ type Props = {
   categoryType: EntityNames
   title?: string | null
   css?: BoxProps['css']
+  className: string
 }
 
-export const RecordText: React.FC<Props> = ({ title = '', categoryType, css }) => {
+export const RecordText: React.FC<Props> = ({ title = '', categoryType, css, className }) => {
   const { t } = useLooseTypeSafeTranslation('category')
 
   return (
     <Flex
+      className={className}
       w="100%"
       color="blueAlpha.100"
       overflow={'hidden'}

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import React, { CSSProperties, useRef, useState } from 'react'
 import { limitCopyrightedImageResolution } from './limitCopyrightedImageResolution'
 
-type ResponsiveImageProps = {
+export type ResponsiveImageProps = {
   className: string
   src?: string | null
   alt?: string | null
