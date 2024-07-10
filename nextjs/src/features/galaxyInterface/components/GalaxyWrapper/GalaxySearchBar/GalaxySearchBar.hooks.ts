@@ -37,10 +37,13 @@ export function useCloseSearchOnPathnameChange() {
   }, [pathname, dispatch])
 }
 
-export function useOpenSearchModeOnInactiveSearch(
-  filterRef: React.RefObject<HTMLInputElement>,
+export function useOpenSearchModeOnInactiveSearch({
+  filterRef,
+  isSearchInactive,
+}: {
+  filterRef: React.RefObject<HTMLInputElement>
   isSearchInactive?: boolean
-) {
+}) {
   const dispatch = useDispatch()
   const { isSearchResult } = useZoom2Params()
 
@@ -82,7 +85,10 @@ export function useSearchBarActions({
   const { focus } = useFocusOnElement(filterInputRef, !isNoActiveSearch)
   const search = useSearchValue()
   const { pageCategory } = usePageCategory()
-  const { openSearch } = useOpenSearchModeOnInactiveSearch(filterInputRef, isNoActiveSearch)
+  const { openSearch } = useOpenSearchModeOnInactiveSearch({
+    filterRef: filterInputRef,
+    isSearchInactive: isNoActiveSearch,
+  })
   const { decodedFilters } = useDecodedSearchFilters()
   const { clearFilters } = useFilterActions({
     onSelectFilter: focus,

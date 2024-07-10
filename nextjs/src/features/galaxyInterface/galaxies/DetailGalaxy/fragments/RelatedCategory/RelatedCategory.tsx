@@ -44,7 +44,7 @@ export const RelatedCategory: React.FC<Props> = ({
   const maxPages = Math.ceil((allRelationTotals?.[category] || 2) / 2)
   const { current, next } = useSwapCurrentNext(page, maxPages)
   const { conditions, animationState } = useContext(GalaxyPaginationAnimationStateContext)
-  const { data } = usePositionedRecordsQuery({
+  const { data, isLoading: isPositionsedRecordLoading } = usePositionedRecordsQuery({
     locale,
     page,
     id,
@@ -53,7 +53,7 @@ export const RelatedCategory: React.FC<Props> = ({
     category: category,
     recordCategory: recordCategory,
   })
-  const { data: nextData } = usePositionedRecordsQuery({
+  const { data: nextData, isLoading: isNextPositionedRecordLoading } = usePositionedRecordsQuery({
     locale,
     page: page + 1,
     id,
@@ -69,29 +69,31 @@ export const RelatedCategory: React.FC<Props> = ({
     <>
       <div className=" text-white" style={{ gridRow, gridColumn }}>
         <div className="grid h-full grid-cols-2 grid-rows-2">
-          {nextPositionedRecords.map((record, index) => (
-            <Record
-              className={getNextItemsAnimationClassNames(
-                animationState,
-                conditions,
-                nextPositionedRecords.length > 0
-              )}
-              key={keyExtractor(record.id, index, positionedRecords)}
-              record={record}
-              tabIndex={-1}
-            />
-          ))}
+          {!isNextPositionedRecordLoading &&
+            nextPositionedRecords.map((record, index) => (
+              <Record
+                className={getNextItemsAnimationClassNames(
+                  animationState,
+                  conditions,
+                  nextPositionedRecords.length > 0
+                )}
+                key={keyExtractor(record.id, index, positionedRecords)}
+                record={record}
+                tabIndex={-1}
+              />
+            ))}
         </div>
       </div>
       <div className="text-white" color={'white'} style={{ gridRow, gridColumn }}>
         <div className="grid h-full grid-cols-2 grid-rows-2">
-          {positionedRecords.map((record, index) => (
-            <Record
-              className={getItemsAnimationClassNames(animationState, conditions)}
-              key={keyExtractor(record.id, index, positionedRecords)}
-              record={record}
-            />
-          ))}
+          {!isPositionsedRecordLoading &&
+            positionedRecords.map((record, index) => (
+              <Record
+                className={getItemsAnimationClassNames(animationState, conditions)}
+                key={keyExtractor(record.id, index, positionedRecords)}
+                record={record}
+              />
+            ))}
         </div>
       </div>
     </>
