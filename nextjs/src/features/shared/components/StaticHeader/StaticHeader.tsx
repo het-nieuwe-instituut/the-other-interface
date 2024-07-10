@@ -12,16 +12,18 @@ import { useLocale } from '../../hooks/useLocale'
 
 export const StaticHeader = () => {
   const { t: tNavigation } = useLooseTypeSafeTranslation('navigation')
-  const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
-  const userLooksOn = useSelector((state: State) => state.shared.userLooksOn)
   const lang = useLocale()
+
+  const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
+  const userLooksOnGalaxy =
+    useSelector((state: State) => state.shared.userLooksOn) === USER_LOOKS_ON.GALAXY
 
   return (
     <>
       <div
         style={{ '--z-index': `${STATIC_HEADER_Z_INDEX}` } as CSSProperties}
         className={cn(
-          isMenuOpen || userLooksOn === USER_LOOKS_ON.GALAXY ? 'transparent' : 'bg-pink-100',
+          isMenuOpen || userLooksOnGalaxy ? 'transparent' : 'bg-pink-100',
           'ease-in duration-200 fixed top-0 right-0 z-[var(--z-index)] h-auto overflow-hidden py-4 w-full pointer-events-auto'
         )}
       >
@@ -32,22 +34,18 @@ export const StaticHeader = () => {
               delay={300}
               href={lang ? `/?lang=${lang}` : '/?lang=nl'}
               className={cn(
-                userLooksOn === USER_LOOKS_ON.GALAXY &&
-                  !isMenuOpen &&
-                  MenuTypogrpahyVariants({ default: 'primary' }),
-                userLooksOn === USER_LOOKS_ON.GALAXY &&
-                  isMenuOpen &&
-                  MenuTypogrpahyVariants({ inverted: 'primary' }),
-                userLooksOn !== USER_LOOKS_ON.GALAXY &&
+                userLooksOnGalaxy && !isMenuOpen && MenuTypogrpahyVariants({ default: 'primary' }),
+                userLooksOnGalaxy && isMenuOpen && MenuTypogrpahyVariants({ inverted: 'primary' }),
+                !userLooksOnGalaxy &&
                   !isMenuOpen &&
                   MenuTypogrpahyVariants({ default: 'secondary' }),
-                userLooksOn !== USER_LOOKS_ON.GALAXY &&
+                !userLooksOnGalaxy &&
                   isMenuOpen &&
                   MenuTypogrpahyVariants({ inverted: 'secondary' }),
                 'cursor-pointer overflow-hidden h-full flex m-0 '
               )}
             >
-              <p className="mr-2 sm:overflow-visible sm:whitespace-normal">
+              <p className="mr-2 max-md:text-[20px] max-md:font-normal max-md:leading-[21px] max-sm:overflow-visible max-sm:whitespace-normal">
                 {tNavigation('headerTitle')}
               </p>
             </DelayedNextLinkWithZoomAnimationsContext>

@@ -10,7 +10,9 @@ export const TypographyVariants = cva('', {
       lg: ['font-times-dot text-[32px] leading-[105%_]'],
     },
     times: {
-      '2xl': ['font-times-large text-[96px] leading-[100%_]  tracking-[-1.92px]'],
+      '2xl': [
+        'font-times-large text-[70px] leading-[120%] tracking-[-1.92px] md:text-[96px]  md:leading-[100%_]',
+      ],
       xl: ['font-times-large text-[64px] leading-[100%_] tracking-[-1.28px]'],
       lg: ['font-times-large text-[32px] leading-[105%_]'],
       md: ['font-times-large text-[20px] leading-[105%_] tracking-[0.01em]'],
@@ -18,7 +20,9 @@ export const TypographyVariants = cva('', {
       xs: ['font-times-large text-[9px] leading-[100%_] tracking-[0.36px]'],
     },
     impact: {
-      xl: ['font-impact-large text-[80px] leading-[100%_] tracking-[-0.8px]'],
+      xl: [
+        'font-impact-large text-[55px] leading-[120%] tracking-[-0.8px] md:text-[80px] md:leading-[100%_]',
+      ],
       lg: ['font-impact-large text-[54px] leading-[120%_] tracking-[-0.54px]'],
       md: ['font-impact-large text-[32px] leading-[120%_] tracking-[-0.32px]'],
       sm: ['font-impact-large text-[25px] leading-[120%_] tracking-[-0.25px]'],
