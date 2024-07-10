@@ -99,7 +99,7 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
   return (
     <div className={'w-screen bg-pink-100'}>
       <div className="relative mx-auto h-screen w-screen max-w-[1440px] overflow-hidden">
-        {isSearchModeActive && <BlurOverlay />}
+        <BlurOverlay hide={!isSearchModeActive} />
         {renderMainContent()}
 
         <GalaxyFooter

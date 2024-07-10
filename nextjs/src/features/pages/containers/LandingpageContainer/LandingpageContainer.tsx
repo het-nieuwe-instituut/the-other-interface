@@ -1,16 +1,22 @@
+'use client'
+
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
+import { GalaxyZoomAnimationStateProvider } from '@/features/galaxyInterface/galaxies/hooks/GalaxyZoomAnimationStateProvider'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
-import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
+import { LandingPageComponentRenderer } from '@/features/modules/ModulesRenderer/LandingPageComponentRenderer'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
+import SuspenseLoader from '@/features/shared/components/SuspenseLoader/SuspenseLoader'
+import {
+  useSearchParamCategory,
+  useSearchParamSearchValue,
+} from '@/features/shared/hooks/useZoom2Params'
 import {
   LandingPageArchiveQuery,
   LandingPageObjectQuery,
   LandingPagePeopleQuery,
   LandingPagePublicationQuery,
 } from 'src/generated/graphql'
-import { LandingPageComponentRenderer } from '@/features/modules/ModulesRenderer/LandingPageComponentRenderer'
-import SuspenseLoader from '@/features/shared/components/SuspenseLoader/SuspenseLoader'
-import { GalaxyZoomAnimationStateProvider } from '@/features/galaxyInterface/galaxies/hooks/GalaxyZoomAnimationStateProvider'
+import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
 
 export interface LandingPageProps {
   editorialData?:
@@ -19,11 +25,13 @@ export interface LandingPageProps {
     | LandingPagePeopleQuery['landingPagePeople']['data']
     | LandingPagePublicationQuery['landingPagePublication']['data']
 }
-
 export const LandingpageContainer: React.FC<LandingPageProps> = ({ editorialData }) => {
+  const category = useSearchParamCategory()
+  const searchValue = useSearchParamSearchValue()
+
   return (
     <div>
-      <GalaxyZoomAnimationStateProvider>
+      <GalaxyZoomAnimationStateProvider key={`${searchValue}-${category}`}>
         <GalaxyInterface>
           <MobileOverlayProvider>
             <CategoryGalaxy />

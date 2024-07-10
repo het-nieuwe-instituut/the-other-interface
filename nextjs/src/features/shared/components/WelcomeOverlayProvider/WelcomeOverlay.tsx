@@ -55,7 +55,7 @@ const WelcomeOverlay = ({ className }: { className?: string }) => {
         className
       )}
     >
-      <BlurOverlay />
+      <BlurOverlay hide={false} />
       <div
         className="relative mx-auto h-screen w-screen max-w-[1440px] overflow-hidden"
         style={{ zIndex: WELCOME_PAGE_Z_INDEX }}
