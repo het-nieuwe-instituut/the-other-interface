@@ -68,7 +68,6 @@ export const TypographyVariants = cva('', {
         'self-stretch not-italic leading-[130%_]',
         'font-social-medium text-[32px] tracking-[0.32px]',
         'md:font-social-large md:text-[21px] md:tracking-[0.21px]',
-        'max-md:font-social-large max-md:text-[21px] max-md:tracking-[0.21px]',
       ],
       title: [
         'break-all font-impact-large text-[54px] leading-[100%_] tracking-[-0.8px]',
