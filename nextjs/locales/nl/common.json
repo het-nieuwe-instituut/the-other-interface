@@ -31,5 +31,8 @@
   "welcomeWarning": "Let op: alle collectiedata op het platform is automatisch naar het Engels vertaald.",
   "welcomeButton": "Start hier",
   "learnAboutAsterisk": "Lees meer over Asterisk",
-  "learnAboutExternalSources": "Lees meer over externe bronnen"
+  "learnAboutExternalSources": "Lees meer over externe bronnen",
+  "showAsterisk": "Toon asterisk* annotaties ({{count}})",
+  "hideAsterisk": "Verberg asterisk* annotaties ({{count}})",
+  "asteriskMeta": "Toegevoegd door {{author}} op {{date}}"
 }

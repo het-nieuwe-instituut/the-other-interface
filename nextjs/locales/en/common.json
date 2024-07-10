@@ -29,5 +29,8 @@
   "welcomeWarning": "Please note that all collection data on the platform has been automatically translated into English.",
   "welcomeButton": "Begin exploring",
   "learnAboutAsterisk": "Learn about Asterisk",
-  "learnAboutExternalSources": "Learn about external sources"
+  "learnAboutExternalSources": "Learn about external sources",
+  "showAsterisk": "Show asterisk* annotations ({{count}})",
+  "hideAsterisk": "Hide asterisk* annotations ({{count}})",
+  "asteriskMeta": "Added by {{author}} on {{date}}"
 }
