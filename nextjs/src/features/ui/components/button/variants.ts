@@ -28,7 +28,7 @@ export const ButtonVariants = cva(
           '*:text-white',
         ],
         invertedSecondary: [
-          'border-blue bg-blue-100 text-pink-100 hover:border-blue active:border-blue',
+          'border-blue bg-blue-100 text-pink-100 hover:border-blue hover:bg-pink-100 hover:text-blue-100 active:border-blue',
         ],
       },
       size: {

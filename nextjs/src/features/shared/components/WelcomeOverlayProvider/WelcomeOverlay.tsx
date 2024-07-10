@@ -7,12 +7,14 @@ import { WELCOME_PAGE_Z_INDEX } from '../../constants/mainConstants'
 import { useLooseTypeSafeTranslation } from '../../hooks/translations'
 import StorageService from '../../services/storageService'
 import BlurOverlay from '../BlurOverlay/BlurOverlay'
-import { StaticHeader } from '../StaticHeader/StaticHeader'
 import { Button } from '@/features/ui/components/button/component'
+import { useLocale } from '../../hooks/useLocale'
 
 const WelcomeOverlay = ({ className }: { className?: string }) => {
-  const { t: tCommon } = useLooseTypeSafeTranslation('common')
+  const { t: tCommon, lang } = useLooseTypeSafeTranslation('common')
   const [showOverlay, setShowOverlay] = useState(false)
+  const locale = useLocale()
+  const [, forceUpdate] = useState(0)
 
   useEffect(() => {
     const hasSeenOverlay = StorageService.getItem('hasSeenWelcomeOverlay')
@@ -26,6 +28,22 @@ const WelcomeOverlay = ({ className }: { className?: string }) => {
 
     StorageService.setItem('hasSeenWelcomeOverlay', 'true')
   }, [])
+
+  // disable scroll when overlay is open
+  useEffect(() => {
+    if (showOverlay) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+  }, [showOverlay])
+
+  // force re-render the component when the locales don't match
+  useEffect(() => {
+    if (locale !== lang) {
+      forceUpdate(prev => prev + 1)
+    }
+  }, [locale, lang])
 
   return (
     <div
@@ -42,8 +60,10 @@ const WelcomeOverlay = ({ className }: { className?: string }) => {
         className="relative mx-auto h-screen w-screen max-w-[1440px] overflow-hidden"
         style={{ zIndex: WELCOME_PAGE_Z_INDEX }}
       >
-        <StaticHeader />
-        <div className="relative inset-x-0 flex h-screen max-w-screen-xl flex-col justify-center px-6">
+        <div
+          key={`${locale}-${lang}`} // needed to force re-render the component when locale changes
+          className="relative inset-x-0 flex h-screen max-w-screen-xl flex-col justify-center px-6"
+        >
           <p
             className={
               'mb-4 font-times-large text-[32px] leading-[105%_] text-blue-100 lg:text-[64px] lg:leading-[100%_] lg:tracking-[-1.28px]'
