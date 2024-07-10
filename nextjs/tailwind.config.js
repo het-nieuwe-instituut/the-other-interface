@@ -29,6 +29,14 @@ module.exports = {
           '0%': { filter: 'blur(10px)' },
           '100%': { filter: 'blur(0px)' },
         },
+        toFadeIn: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+        toFadeOut: {
+          '0%': { opacity: 1 },
+          '100%': { opacity: 0 },
+        },
         toScaleFullPage: {
           '0%': { transform: 'scale(1.1)', opacity: 1 },
           '75%': { transform: 'scale(3)', opacity: 0.5 },

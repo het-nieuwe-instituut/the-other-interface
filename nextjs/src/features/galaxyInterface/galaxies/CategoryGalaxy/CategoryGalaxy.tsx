@@ -1,5 +1,6 @@
 'use client'
 import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
+import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { State } from '@/features/shared/configs/store'
 import { ZOOM2_RECORDS_PER_PAGE } from '@/features/shared/constants/mainConstants'
 import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
@@ -25,7 +26,6 @@ import {
 import { Records } from './fragments'
 import { PositioningTemplate, positioningTemplates } from './fragments/Records/positioningTemplates'
 import { useRemoveFallbackSearchParam } from './useRemoveFallbackSearchParam'
-import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 
 export const CategoryGalaxyTemplateContext = React.createContext<{
   previousTemplate?: PositioningTemplate
@@ -44,6 +44,7 @@ export const CategoryGalaxy = () => {
     pageNumber
   )
   const searchParams = useSearchParams()
+
   const currentPage = parseInt(searchParams?.get('page') ?? '1')
   const category = useSearchParamCategory()
 
@@ -130,9 +131,8 @@ export const CategoryGalaxyContent = React.memo(() => {
     if (isMainLoading && prevData) {
       return (
         <>
-          <div className="absolute mx-auto flex h-full w-screen items-center justify-center ">
-            <Pulse />
-          </div>
+          <Pulse />
+
           <Records pageAmount={pageAmount} records={records} />
         </>
       )
@@ -167,7 +167,7 @@ export const CategoryGalaxyContent = React.memo(() => {
   return (
     <div className={'w-screen bg-pink-100'}>
       <div className="relative mx-auto flex h-screen w-full max-w-[1440px] items-center justify-center px-[25px]">
-        {isSearchModeActive && <BlurOverlay />}
+        <BlurOverlay hide={!isSearchModeActive} />
         {renderMainContent()}
 
         <GalaxyFooter
