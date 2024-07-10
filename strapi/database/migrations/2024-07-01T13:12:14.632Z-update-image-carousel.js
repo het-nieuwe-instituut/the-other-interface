@@ -32,40 +32,40 @@ module.exports = {
      * - field: image
      */
 
-    const fileRelated = await knex.raw(
-      `
-      SELECT fr.* FROM stories_components sc
+    // const fileRelated = await knex.raw(
+    //   `
+    //   SELECT fr.* FROM stories_components sc
 
-      INNER JOIN components_modules_image_carousels ic ON ic.id = sc.component_id
-      INNER JOIN files_related_morphs fr ON fr.related_id = ic.id
+    //   INNER JOIN components_modules_image_carousels ic ON ic.id = sc.component_id
+    //   INNER JOIN files_related_morphs fr ON fr.related_id = ic.id
 
-      WHERE sc.component_type = 'modules.image-carousel'
-      AND fr.related_type = 'modules.image-carousel'
+    //   WHERE sc.component_type = 'modules.image-carousel'
+    //   AND fr.related_type = 'modules.image-carousel'
 
-      GROUP BY fr.id, ic.id;
-      `
-    )
+    //   GROUP BY fr.id, ic.id;
+    //   `
+    // )
 
-    for (const fr of fileRelated.rows) {
-      const [ici] = await knex('components_core_image_carousel_items')
-        .insert({ alt_text: 'image' })
-        .returning('*')
+    // for (const fr of fileRelated.rows) {
+    //   const [ici] = await knex('components_core_image_carousel_items')
+    //     .insert({ alt_text: 'image' })
+    //     .returning('*')
 
-      await knex('components_modules_image_carousels_components').insert({
-        entity_id: fr.related_id,
-        component_id: ici.id,
-        component_type: 'core.image-carousel-item',
-        field: 'items',
-        order: fr.order,
-      })
+    //   await knex('components_modules_image_carousels_components').insert({
+    //     entity_id: fr.related_id,
+    //     component_id: ici.id,
+    //     component_type: 'core.image-carousel-item',
+    //     field: 'items',
+    //     order: fr.order,
+    //   })
 
-      await knex('files_related_morphs')
-        .update({
-          related_id: ici.id,
-          related_type: 'core.image-carousel-item',
-          field: 'image',
-        })
-        .where({ id: fr.id })
-    }
+    //   await knex('files_related_morphs')
+    //     .update({
+    //       related_id: ici.id,
+    //       related_type: 'core.image-carousel-item',
+    //       field: 'image',
+    //     })
+    //     .where({ id: fr.id })
+    // }
   },
 }
