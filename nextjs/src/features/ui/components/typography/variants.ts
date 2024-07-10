@@ -69,9 +69,12 @@ export const TypographyVariants = cva('', {
         'font-social-medium text-[32px] tracking-[0.32px]',
         'md:font-social-large md:text-[21px] md:tracking-[0.21px]',
       ],
-      title: ['font-impact-large text-[80px] leading-[100%_] tracking-[-0.8px] ', 'lg:text-[54px]'],
+      title: [
+        'break-all font-impact-large text-[54px] leading-[100%_] tracking-[-0.8px]',
+        'lg:text-[80px]',
+      ],
       storyOrRecordTitle: [
-        'font-times-large text-[12px] leading-[100%_] tracking-[0.04em]',
+        'break-all font-times-large text-[12px] leading-[100%_] tracking-[0.04em]',
         'lg:font-times-large lg:text-[20px] lg:leading-[105%_] lg:tracking-[0.01em]',
       ],
     },
