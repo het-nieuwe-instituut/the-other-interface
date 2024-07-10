@@ -7,14 +7,15 @@ interface ExternalSourceBlockProps extends Pick<SourceBlockProps, 'children' | '
   href?: string
 }
 export const ExternalSourceBlock = ({ children, className, href }: ExternalSourceBlockProps) => {
+  const classNames = cn(
+    'bg-surface-lod text-surface-lod-dark font-arial-reboot-lines leading-[110%] text-[16px] font-[500] ',
+    className
+  )
+
   if (href) {
     return (
       <NextLink href={href}>
-        <SourceBlock
-          Icon={<Lod />}
-          isLink
-          className={cn(className, 'bg-surface-lod text-surface-lod-dark font-times-niw-rimmin')}
-        >
+        <SourceBlock Icon={<Lod />} isLink className={classNames}>
           {children}
         </SourceBlock>
       </NextLink>
@@ -22,10 +23,7 @@ export const ExternalSourceBlock = ({ children, className, href }: ExternalSourc
   }
 
   return (
-    <SourceBlock
-      Icon={<Lod />}
-      className={cn(className, 'bg-surface-lod text-surface-lod-dark font-times-niw-rimmin')}
-    >
+    <SourceBlock Icon={<Lod />} className={classNames}>
       {children}
     </SourceBlock>
   )

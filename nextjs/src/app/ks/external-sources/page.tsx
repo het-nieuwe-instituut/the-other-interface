@@ -6,6 +6,8 @@ import {
   ExternalSourceBlock,
   ExternalSourceBlockGroup,
 } from '@/features/ui/components/Sources/ExternalSource'
+import { AsteriskTooltip } from '@/features/ui/components/tooltip/AsteriskTooltip'
+import { ExternalSourceTooltip } from '@/features/ui/components/tooltip/ExternalSourceTooltip'
 import type { NextPage } from 'next'
 
 const Page: NextPage = () => {
@@ -14,7 +16,9 @@ const Page: NextPage = () => {
       <p>ExtenralSource </p>
 
       <ExternalSourceBlockGroup>
-        <ExternalSourceBlock>Some test </ExternalSourceBlock>
+        <ExternalSourceTooltip title="Some title" place={'right'}>
+          <ExternalSourceBlock>Some test </ExternalSourceBlock>
+        </ExternalSourceTooltip>
         <ExternalSourceBlock>This 1</ExternalSourceBlock>
         <ExternalSourceBlock>This 2 </ExternalSourceBlock>
         <ExternalSourceBlock>
@@ -24,7 +28,9 @@ const Page: NextPage = () => {
       </ExternalSourceBlockGroup>
 
       <AsteriskSourceBlockGroup>
-        <AsteriskSourceBlock>Some test </AsteriskSourceBlock>
+        <AsteriskTooltip title="Some title" place={'right'}>
+          <AsteriskSourceBlock>Some test </AsteriskSourceBlock>
+        </AsteriskTooltip>
         <AsteriskSourceBlock>This 1</AsteriskSourceBlock>
         <AsteriskSourceBlock>This 2 </AsteriskSourceBlock>
         <AsteriskSourceBlock>

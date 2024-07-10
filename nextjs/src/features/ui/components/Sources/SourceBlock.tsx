@@ -10,9 +10,9 @@ export interface SourceBlockProps {
 }
 export const SourceBlock = ({ isLink, children, Icon, className }: SourceBlockProps) => {
   return (
-    <div className={cn('relative flex-row gap-1 px-2 py-1 items-center   flex', className)}>
+    <div className={cn('relative flex-row gap-1 px-2 py-1 items-center flex', className)}>
       <span>{Icon}</span>
-      <span className="line-clamp-1 overflow-hidden text-ellipsis">{children}</span>
+      <div className="line-clamp-1 h-[22px] overflow-hidden text-ellipsis">{children}</div>
       {isLink && <ExternalSource />}
     </div>
   )

@@ -8,7 +8,7 @@ interface AsteriskSourceBlockProps extends Pick<SourceBlockProps, 'children' | '
 }
 export const AsteriskSourceBlock = ({ children, className, href }: AsteriskSourceBlockProps) => {
   const classNames = cn(
-    'bg-surface-asterisk text-surface-asterisk-dark font-arial-reboot-lines leading-[100%] text-[17px] font-semibold ',
+    'bg-surface-asterisk text-surface-asterisk-dark font-times-niw-rimmin leading-[100%] text-[17px] font-semibold ',
     className
   )
   if (href) {
