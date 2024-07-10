@@ -12,7 +12,8 @@ type ElementPosition = {
 
 export const useElementPosition = () => {
   const { width, height } = useWindowSize()
-  const ref = useRef<HTMLElement | null>(null)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ref = useRef<any | null>(null)
   const [position, setPosition] = useState<ElementPosition>({
     left: undefined,
     right: undefined,

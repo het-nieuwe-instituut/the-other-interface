@@ -29,7 +29,12 @@ type RecordProps = SearchResultItemType & {
   category: EntityNames
 }
 
-export const Record: React.FC<Props> = ({ className, record, tooltipPlace, onFullyLoaded }) => {
+export const Record: React.FC<RecordComponentProps> = ({
+  className,
+  record,
+  tooltipPlace,
+  onFullyLoaded,
+}) => {
   const { id, category } = record
   const { t } = useTypeSafeTranslation('category')
   const { lang } = useZoom2Params()
@@ -45,6 +50,7 @@ export const Record: React.FC<Props> = ({ className, record, tooltipPlace, onFul
 
   useEffect(() => {
     if (imageLoaded && !isLoading) onFullyLoaded?.()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageLoaded, isLoading])
 
   return (
