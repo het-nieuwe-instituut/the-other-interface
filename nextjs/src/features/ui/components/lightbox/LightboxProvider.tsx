@@ -58,7 +58,18 @@ export const LightboxProvider: React.FC<PropsWithChildren> = ({ children }) => {
       {children}
       <Lightbox
         on={{
-          view: ({ index }) => setIndex(index),
+          view: ({ index }) => {
+            setIndex(index)
+          },
+          entered: () => {
+            const lightboxImages = document.querySelectorAll('.yarl__slide_image')
+
+            lightboxImages.forEach(image => {
+              image.addEventListener('contextmenu', e => {
+                e.preventDefault()
+              })
+            })
+          },
         }}
         controller={{
           closeOnBackdropClick: true,

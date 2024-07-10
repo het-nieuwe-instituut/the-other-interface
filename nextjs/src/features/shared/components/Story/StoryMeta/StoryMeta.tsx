@@ -103,46 +103,17 @@ export const StoryMeta: React.FC = () => {
           </div>
         </MetaField>
       )}
-      {/* We decided to remove this for now, but still there is a possiblity that after test we will add it back, so we will keep it here for now. */}
-      {/* {siblingsRelation && siblingsRelation.length > 0 && (
-        <Box marginBottom={'md'}>
-          <p className={TypographyVariants({ socialLarge: 'md' })}>
-            {storiesT.t('siblingsStories')}
-          </p>
-          {siblingsRelation?.map((sibling, index, array) => {
-            const hasItemAfter = array.length - 1 !== index
-
-            return (
-              <p className={TypographyVariants({ socialLarge: 'md' })} key={sibling.id} mr={1} mt={1} mb={2}>
-                <Link
-                  href={`/detail/${CATEGORIES.stories}/${sibling.id}?lang=${lang}`}
-                  borderBottom={'1px solid'}
-                  borderColor={'blackAlpha.100'}
-                >
-                  {sibling?.attributes?.title}
-                  {hasItemAfter && ','}
-                </Link>
-              </p>
-            )
-          })}
-        </Box>
-      )} */}
       {themes && (
-        // <MetaField name={storiesT.t('themes')}>
-        //   <p className={TypographyVariants({ social: 'sm' })}>{themes}</p>
-        // </MetaField>
-
         <MetaField name={storiesT.t('themes')}>
           <div>
             {themes.map((theme, index, array) => {
-              // const hasItemAfter = array.length - 1 !== index
               return (
                 <NextLink
                   key={keyExtractor(theme, index, array)}
                   href={addLocaleToUrl(
                     `/landingpage?category=stories&filters=${encodeFilters([
                       {
-                        field: 'theme',
+                        key: 'theme',
                         value: theme.name ?? '',
                         id: theme.id ?? '',
                       },
@@ -162,18 +133,20 @@ export const StoryMeta: React.FC = () => {
       {!!linkedPeopleRecords.length && (
         <MetaField name={storiesT.t('people')}>
           <div className="flex flex-row flex-wrap gap-x-2 gap-y-1">
-            {linkedPeopleRecords.map(person => {
-              return (
-                <NavLinkButton
-                  title={person.title ?? ''}
-                  key={person.id}
-                  variant={'metaData'}
-                  href={person.url}
-                >
-                  {person.title}
-                </NavLinkButton>
-              )
-            })}
+            {linkedPeopleRecords
+              .filter(p => p.title)
+              .map(person => {
+                return (
+                  <NavLinkButton
+                    title={person.title ?? ''}
+                    key={person.id}
+                    variant={'metaData'}
+                    href={person.url}
+                  >
+                    {person.title}
+                  </NavLinkButton>
+                )
+              })}
           </div>
         </MetaField>
       )}
@@ -181,14 +154,13 @@ export const StoryMeta: React.FC = () => {
         <MetaField name={storiesT.t('locations')}>
           <div>
             {locations.map((location, index, array) => {
-              // const hasItemAfter = array.length - 1 !== index
               return (
                 <NextLink
                   key={keyExtractor(location, index, array)}
                   href={addLocaleToUrl(
                     `/landingpage?category=stories&filters=${encodeFilters([
                       {
-                        field: 'location',
+                        key: 'location',
                         value: location.name ?? '',
                         id: location.id ?? '',
                       },
@@ -210,25 +182,6 @@ export const StoryMeta: React.FC = () => {
           <p className={TypographyVariants({ socialLarge: 'md' })}>{timeframe}</p>
         </MetaField>
       )}
-
-      {/* Should be hidden for now */}
-      {/* {!!links?.length && (
-        <Box marginBottom={'md'}>
-          <p className={TypographyVariants({ socialLarge: 'md' })} mb={2}>
-            {storiesT.t('share')}
-          </p>
-
-          <ButtonsGrid
-            buttonLayoutStyle={{
-              whiteSpace: 'normal',
-              wordWrap: 'break-word',
-            }}
-            flexDirection="column"
-            buttons={links}
-            buttonStyle={EnumComponentmodulesbuttonmdoduleButtonstyle.Default}
-          />
-        </Box>
-      )} */}
     </div>
   )
 
@@ -252,7 +205,7 @@ export const StoryMeta: React.FC = () => {
               href={addLocaleToUrl(
                 `/landingpage?category=stories&filters=${encodeFilters([
                   {
-                    field: 'author',
+                    key: 'author',
                     value: authorFormatted.name || '',
                     id: authorFormatted.id || '',
                   },
@@ -289,7 +242,7 @@ export const StoryMeta: React.FC = () => {
               href={addLocaleToUrl(
                 `/landingpage?category=stories&filters=${encodeFilters([
                   {
-                    field: 'author',
+                    key: 'author',
                     value: authorFormatted.name || '',
                     id: authorFormatted.id || '',
                   },

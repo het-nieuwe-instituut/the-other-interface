@@ -7,6 +7,8 @@ import { PaginationArgs } from '../util/paginationArgs.type'
 import { SearchResultItemType, SearchResultType } from './triplyElasticSearch.type'
 import { TriplyUtils } from '../triply/triply.utils'
 import { map } from 'rxjs'
+import { Locale } from '../util/locale.type'
+import { get } from 'lodash'
 
 export interface ElasticsearchResult {
   hits: {
@@ -29,7 +31,7 @@ export interface ElasticsearchResult {
 @Injectable()
 export class TriplyElasticSearchService {
   private readonly apiKey: string
-  private readonly elasticSearchURL: string
+  private readonly elasticSearchURL: Record<Locale, string>
 
   public constructor(
     private readonly configService: ConfigService<Config>,
@@ -40,16 +42,22 @@ export class TriplyElasticSearchService {
     const env = configService.getOrThrow('ENV')
 
     if (env !== 'production') {
-      this.elasticSearchURL = `${endpointBaseURL}/datasets/the-other-interface-acceptance/knowledge-graph/services/knowledge-graph/_search`
+      this.elasticSearchURL = {
+        [Locale.nl]: `${endpointBaseURL}/datasets/the-other-interface-acceptance/knowledge-graph/services/knowledge-graph/_search`,
+        [Locale.en]: `${endpointBaseURL}/datasets/the-other-interface-acceptance/knowledge-graph-english/services/knowledge-graph-english/_search`,
+      }
     } else {
-      this.elasticSearchURL = `${endpointBaseURL}/datasets/the-other-interface/knowledge-graph/services/knowledge-graph-ES/_search`
+      this.elasticSearchURL = {
+        [Locale.nl]: `${endpointBaseURL}/datasets/the-other-interface/knowledge-graph/services/knowledge-graph-ES/_search`,
+        [Locale.en]: `${endpointBaseURL}/datasets/the-other-interface/knowledge-graph-english/services/knowledge-graph-english/_search`,
+      }
     }
   }
 
   // TODO: implement locale after ElasticSearch endpoint is updated - HNIT-1903
   public async search(
     search: string,
-    locale: string,
+    locale: Locale,
     { page = 1, pageSize = 12 }: PaginationArgs
   ): Promise<SearchResultType> {
     const elasticQuery = {
@@ -58,7 +66,10 @@ export class TriplyElasticSearchService {
       query: this.getQuery(search),
     }
 
-    const res = await this.post<ElasticsearchResult>(new URL(this.elasticSearchURL), elasticQuery)
+    const res = await this.post<ElasticsearchResult>(
+      new URL(this.elasticSearchURL[locale]),
+      elasticQuery
+    )
 
     const formattedResult = res.hits.hits.map(h => this.formatSearchResult(h))
 
@@ -76,7 +87,7 @@ export class TriplyElasticSearchService {
     return lastValueFrom(
       res.pipe(
         catchError(err => {
-          console.error(err)
+          console.error(get(err, 'message') || err)
           return []
         }),
         map(res => res.data)
@@ -109,7 +120,7 @@ export class TriplyElasticSearchService {
         type,
       }
     } catch (e) {
-      console.error(e)
+      console.error(get(e, 'message') || e)
       return null
     }
   }

@@ -1,9 +1,11 @@
 'use client'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { Box, Text, Flex, useBreakpoint } from '../../configs/chakra'
+import { useBreakpoint } from '../../configs/chakra'
 
 import { MOBILE_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
 import { StaticHeader } from '../StaticHeader/StaticHeader'
+import { CSSProperties } from 'react'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 
 interface Props {
   children: React.ReactNode
@@ -14,10 +16,10 @@ const MobileOverlayProvider = (props: Props) => {
   const isMobile = breakpoint === 'sm'
 
   return (
-    <Box overflow={'hidden'}>
+    <div className="overflow-hidden">
       {isMobile && <MobileOverlay />}
       {props.children}
-    </Box>
+    </div>
   )
 }
 
@@ -25,50 +27,30 @@ const MobileOverlay = () => {
   const { t: tCommon } = useLooseTypeSafeTranslation('common')
 
   return (
-    <Flex
-      width={'100%'}
-      height={'100vh'}
-      position={'fixed'}
-      px={{ xl: 6, base: 0 }}
-      top={0}
-      right={0}
-      zIndex={MOBILE_OVERLAY_Z_INDEX}
-      overflow={'hidden'}
-      _before={{
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100vh',
-        height: '100vh',
-        backgroundColor: '#CCCED0',
-        filter: 'blur(20px) opacity(0.6)',
-        zIndex: `${MOBILE_OVERLAY_Z_INDEX - 1}`,
-      }}
-      overflowY={'hidden'}
-      overflowX={'auto'}
+    <div
+      style={
+        {
+          '--z-index': `${MOBILE_OVERLAY_Z_INDEX}`,
+          backdropFilter: 'blur(60px)',
+        } as CSSProperties
+      }
+      className="fixed right-0 top-0 z-[var(--z-index)] flex h-screen w-full overflow-hidden bg-pink-60 px-0 xl:px-6"
     >
-      <StaticHeader />
-      <Flex
-        position={'relative'}
-        left={0}
-        paddingRight={'40px'}
-        alignSelf={'center'}
-        right={0}
-        marginLeft={5}
-        zIndex={MOBILE_OVERLAY_Z_INDEX}
-        justifyContent={'space-between'}
-        px={'8'}
-        marginX={'auto'}
-        maxWidth={'90em'}
-        flexWrap={'wrap'}
+      <div
+        style={{ '--z-index': `${MOBILE_OVERLAY_Z_INDEX + 1}` } as CSSProperties}
+        className="absolute z-[var(--z-index-minus-1)] h-screen w-screen "
       >
-        <Text variant={'body'} mb={5}>
-          {tCommon('theNewInstitueDescription')}
-        </Text>
-        <Text variant={'body'}>{tCommon('mobileVersionIsNotYetThere')}</Text>
-      </Flex>
-    </Flex>
+        <StaticHeader />
+      </div>
+      <div
+        style={{ '--z-index': `${MOBILE_OVERLAY_Z_INDEX}` } as CSSProperties}
+        className="relative inset-x-0 z-[var(--z-index)] mx-auto max-w-[90em] flex-wrap justify-between self-center px-8"
+      >
+        <p className={TypographyVariants({ timesDot: 'lg', className: 'text-blue-100' })}>
+          {tCommon('mobileVersionIsNotYetThere')}
+        </p>
+      </div>
+    </div>
   )
 }
 

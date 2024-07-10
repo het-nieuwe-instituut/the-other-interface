@@ -24,9 +24,14 @@ export const zoomRecordHoverQueryTooltipDataMapper = (initialData: TooltipData) 
     if (!title && !description) {
       return null
     }
+    const multipleTitles = title?.split(';')
 
     return {
-      title: joinNullableStrings(' ', title, `(${authors})`),
+      title: joinNullableStrings(
+        ' ',
+        multipleTitles && multipleTitles.length > 1 ? multipleTitles[0] : title,
+        `${authors ? `(${authors})` : ''}`
+      ),
       description,
     }
   }
@@ -36,9 +41,14 @@ export const zoomRecordHoverQueryTooltipDataMapper = (initialData: TooltipData) 
     if (!title && !description) {
       return null
     }
+    const multipleTitles = title?.split(';')
 
     return {
-      title: joinNullableStrings(' ', title, `(${creators})`),
+      title: joinNullableStrings(
+        ' ',
+        multipleTitles && multipleTitles.length > 1 ? multipleTitles[0] : title,
+        `${creators ? `(${creators})` : ''}`
+      ),
       description,
     }
   }
@@ -49,9 +59,14 @@ export const zoomRecordHoverQueryTooltipDataMapper = (initialData: TooltipData) 
     if (!title && !description) {
       return null
     }
+    const multipleTitles = title?.split(';')
 
     return {
-      title: joinNullableStrings(', ', title, profession),
+      title: joinNullableStrings(
+        ', ',
+        multipleTitles && multipleTitles.length > 1 ? multipleTitles[0] : title,
+        `${profession ? `(${profession})` : ''}`
+      ),
       description,
     }
   }
@@ -63,8 +78,14 @@ export const zoomRecordHoverQueryTooltipDataMapper = (initialData: TooltipData) 
       return null
     }
 
+    const multipleTitles = title?.split(';')
+
     return {
-      title: joinNullableStrings(' ', title, `(${maker})`),
+      title: joinNullableStrings(
+        ' ',
+        multipleTitles && multipleTitles.length > 1 ? multipleTitles[0] : title,
+        `${maker ? `(${maker})` : ''}`
+      ),
       description,
     }
   }

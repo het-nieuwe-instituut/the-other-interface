@@ -1,13 +1,15 @@
 import { getMetaDataTranslations } from 'src/getMetaDataTranslations'
 import { Metadata } from 'next'
-import { LayerWrapper } from '@/features/shared/components/Layers/LayerWrapper'
-import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { StaticHeader } from '@/features/shared/components/StaticHeader/StaticHeader'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { MetaDataProps } from '../readmore/page'
+import { createTypeSafeTranslation } from '@/features/shared/utils/translations'
+import {
+  StaticPageContainer,
+  StaticPageLink,
+  StaticPageParagraph,
+  StaticPageSectionTitle,
+} from '@/features/shared/components/StaticPage/staticPageComponents'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function generateMetadata(props: any): Promise<Metadata> {
+export async function generateMetadata(props: MetaDataProps): Promise<Metadata> {
   const { searchParams } = props
   const lang = searchParams.lang as string
   const metaData = getMetaDataTranslations(lang)
@@ -18,30 +20,68 @@ export async function generateMetadata(props: any): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const { t } = useTypeSafeTranslation('footer')
+  const title = createTypeSafeTranslation('footer').t('disclaimer') || ''
+  const { t } = createTypeSafeTranslation('disclaimer')
+
+  const lbaUrl = 'https://www.linkedbyair.net/about'
+  const lifelyUrl = 'https://lifely.nl/en/'
+  const triplyUrl = 'https://triply.cc/'
+
   return (
-    <div className="bg-ivory-100 h-full">
-      <div className="bg-ivory-100 pb-[42px]">
-        <StaticHeader />
-      </div>
-      <LayerWrapper
-        LeftContent={<PageHeader title={t('disclaimer')} />}
-        BottomContent={
-          <div className={'mx-auto flex max-w-[90em] flex-col gap-[10px] px-6 pt-6'}>
-            <p className={TypographyVariants({ socialLarge: 'lg', className: 'font-bold' })}>
-              {'Placeholder: '}
-            </p>
-            <p className={TypographyVariants({ socialLarge: 'lg', className: 'font-bold' })}>
-              {'Disclaimer: '}
-            </p>
-            <p className={TypographyVariants({ socialLarge: 'lg' })}>
-              {
-                'Nieuwe Instituut heeft ernaar gestreefd auteursrechten volgens de wettelijke bepalingen te regelen. Zij die menen nog zekere rechten te kunnen doen gelden, kunnen zich wenden tot het Nieuwe Instituut. De auteursrechten en andere intellectuele eigendomsrechten op de teksten, illustraties en ander beschermd materiaal op deze website berusten bij het Nieuwe Instituut respectievelijk de rechthebbenden van dat materiaal.'
-              }
-            </p>
-          </div>
-        }
-      />
-    </div>
+    <StaticPageContainer title={title}>
+      <StaticPageSectionTitle>{t('colophonTitle')}</StaticPageSectionTitle>
+      <StaticPageParagraph>
+        {t('designPartner')}
+        <StaticPageLink external href={lbaUrl} label="Linked by Air" />
+      </StaticPageParagraph>
+      <StaticPageParagraph>
+        {t('devPartner')}
+        <StaticPageLink external href={lifelyUrl} label="Lifely" />
+      </StaticPageParagraph>
+      <StaticPageParagraph>
+        {t('dataPartner')}
+        <StaticPageLink external href={triplyUrl} label="Triply" />
+      </StaticPageParagraph>
+      <StaticPageParagraph>{t('visualIdentity')}</StaticPageParagraph>
+      <StaticPageParagraph>
+        {t('editorial')}
+        <StaticPageLink
+          href="mailto:webredactie@nieuweinstituut.nl"
+          label="webredactie@nieuweinstituut.nl"
+        />
+      </StaticPageParagraph>
+
+      <StaticPageSectionTitle>{t('disclaierTitle')}</StaticPageSectionTitle>
+      <StaticPageParagraph>{t('disclaimerP1')}</StaticPageParagraph>
+      <StaticPageParagraph>
+        {t('disclaimerP2')}
+        <StaticPageLink
+          href="mailto:webredactie@nieuweinstituut.nl"
+          label="webredactie@nieuweinstituut.nl"
+        />
+      </StaticPageParagraph>
+      <StaticPageParagraph>
+        {t('disclaimerP3')}
+        <StaticPageLink
+          href="mailto:webredactie@nieuweinstituut.nl"
+          label="webredactie@nieuweinstituut.nl"
+        />
+      </StaticPageParagraph>
+
+      <StaticPageSectionTitle>{t('organizationTitle')}</StaticPageSectionTitle>
+      <StaticPageParagraph>Nieuwe Instituut</StaticPageParagraph>
+      <StaticPageParagraph>Museumpark 25 3015CB Rotterdam</StaticPageParagraph>
+      <StaticPageParagraph>
+        {t('telephone')} +31(0)10-4401200 email:&nbsp;
+        <StaticPageLink href="mailto:info@nieuweinstituut.nl" label="info@nieuweinstituut.nl" />
+      </StaticPageParagraph>
+      <StaticPageParagraph>Kamer van Koophandel Rotterdam: 54584353</StaticPageParagraph>
+      <StaticPageParagraph>{t('btw')} NL851360683B01</StaticPageParagraph>
+
+      <StaticPageSectionTitle>{t('privacyTitle')}</StaticPageSectionTitle>
+      <StaticPageParagraph>{t('privacyP1')}</StaticPageParagraph>
+      <StaticPageParagraph>{t('privacyP2')}</StaticPageParagraph>
+      <StaticPageParagraph>{t('privacyP3')}</StaticPageParagraph>
+    </StaticPageContainer>
   )
 }

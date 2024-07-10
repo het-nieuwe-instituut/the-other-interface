@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common'
-import { KeysToVerify, TriplyService } from '../triply/triply.service'
+import { ExternalSource, KeysToVerify, TriplyService } from '../triply/triply.service'
 import { EntityNames } from '../util/entityNames.type'
 import { getHttpThumbnailOrNull } from '../util/helpers'
 import { TriplyUtils } from '../triply/triply.utils'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { Locale } from '../util/locale.type'
+import { EnrichedRecordBaseType } from '../triply/triply.type'
 
 interface PeopleDetailZoomLevel3Data {
   thumbnail?: string
@@ -141,14 +142,16 @@ export class PeopleService {
   protected entityType = 'triply'
 
   private readonly ZoomLevel3Endpoint = 'people-recordPage/run?'
-
   private readonly ZoomLevel3RelationsEndpoint = 'people-recordRelations/run?'
-
   private readonly ZoomLevel3RelationsCountEndpoint = 'people-recordRelations-Count/run?'
-
   private readonly ZoomLevel3RecordEndpoint = 'people-recordPage-editorial/run?'
-
   private readonly ZoomLevel2HoverEndpoint = 'people-hoverState/run?'
+
+  private readonly EnrichedSourceEndpoints: Record<ExternalSource, string> = {
+    [ExternalSource.getty]: 'people-enrichment-getty/run',
+    [ExternalSource.wikidata]: 'people-enrichment-wikidata/run',
+    [ExternalSource.rkd]: 'people-enrichment-rkd/run',
+  }
 
   public constructor(private triplyService: TriplyService) {}
 
@@ -194,7 +197,7 @@ export class PeopleService {
     const result = await this.triplyService.queryTriplyData<PeopleRelationsCountType>(
       this.ZoomLevel3RelationsCountEndpoint,
       peopleRelationsCountKeys,
-      { page: 1, pageSize: 1 },
+      undefined,
       { id, type }
     )
 
@@ -226,5 +229,9 @@ export class PeopleService {
     }
 
     return { ...TriplyUtils.combineObjectArray(results.data) }
+  }
+
+  public getEnrichedSources(id: string, locale: Locale): Promise<EnrichedRecordBaseType[]> {
+    return this.triplyService.getEnrichedSourceData(this.EnrichedSourceEndpoints, id, locale)
   }
 }

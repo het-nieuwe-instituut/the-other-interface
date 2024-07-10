@@ -9,8 +9,8 @@ import { isExternalURL } from '@/features/shared/utils/links'
 import { NavLinkButton } from '@/features/ui/components/nav-link-button/component'
 import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import Asterisk from '@/features/ui/icons/asterisk-thin.svg'
 import ExternalLink from '@/features/ui/icons/external-link.svg'
-import { useParams } from 'next/navigation'
 import { Fragment } from 'react'
 import {
   ArchivesRecordZoomLevel3Type,
@@ -27,17 +27,20 @@ import {
 } from '../../mappers/recordMetaDataMapper'
 import { recordRightsFieldMapper } from '../../mappers/recordRightsMapper'
 
-export const RecordMeta: React.FC = () => {
+export const RecordMeta = ({
+  data,
+  isLoading,
+  category,
+}: {
+  data: ReturnType<typeof useRecordMeta>['data']
+  isLoading: ReturnType<typeof useRecordMeta>['isLoading']
+  category: Category
+}) => {
   const { t: recordMetaPublicationT } = useTypeSafeTranslation('recordMetaPublication')
   const { t: recordMetaArchiveT } = useTypeSafeTranslation('recordMetaArchive')
   const { t: recordMetaObjectT } = useTypeSafeTranslation('recordMetaObject')
   const { t: recordMetaPersonT } = useTypeSafeTranslation('recordMetaPerson')
 
-  const params = useParams()
-  const id = params?.id as string
-  const category = params?.category as Category
-
-  const { data, isLoading } = useRecordMeta(category, id)
   let recordMetaSectionData
 
   if (category === CATEGORIES.archives && data) {
@@ -87,9 +90,6 @@ export const RecordMeta: React.FC = () => {
               <MetaField name={section.title}>
                 <RightsLogo value={section.value} />
               </MetaField>
-              <MetaField name={section.title}>
-                <RightsLinks value={section.value} />
-              </MetaField>
             </Fragment>
           )
         }
@@ -122,6 +122,7 @@ export const RecordMeta: React.FC = () => {
           </MetaField>
         )
       })}
+      <SuggestionSection />
     </div>
   )
 }
@@ -132,24 +133,6 @@ const MetaField = ({ name, children }: { name?: string; children: JSX.Element })
       <p className={TypographyVariants({ socialLarge: 'md', className: 'font-bold' })}>{name}</p>
       {children}
     </div>
-  )
-}
-
-function RightsLinks({ value }: { value?: string[] | null; key?: string }) {
-  const { t: recordMetaT } = useLooseTypeSafeTranslation('recordMeta')
-  const rightsInfo = value && value[0] ? recordRightsFieldMapper(value[0], recordMetaT) : null
-
-  if (!rightsInfo) return null
-
-  return (
-    <ReadMoreTooltip description={rightsInfo.description} place="bottom">
-      <NavLinkButton variant={'metaData'} href={rightsInfo.url} title={rightsInfo.text}>
-        {rightsInfo.text}
-        {isExternalURL(rightsInfo.url, process.env.parsed.NEXT_PUBLIC_URL ?? '') ? (
-          <ExternalLink className="size-5" />
-        ) : null}
-      </NavLinkButton>
-    </ReadMoreTooltip>
   )
 }
 
@@ -164,7 +147,12 @@ function RightsLogo({ value }: { value?: string[] | null; key?: string }) {
 
   return (
     <ReadMoreTooltip description={rightsInfo.description} place="bottom">
-      <a href={rightsInfo.url} className="flex flex-wrap items-center gap-1 ">
+      <a
+        href={rightsInfo.url}
+        target="_blank"
+        className="flex flex-nowrap items-center gap-1"
+        rel="noreferrer"
+      >
         <div className="flex size-7 items-center">
           <Icon />
         </div>
@@ -175,4 +163,44 @@ function RightsLogo({ value }: { value?: string[] | null; key?: string }) {
       </a>
     </ReadMoreTooltip>
   )
+}
+
+function SuggestionSection() {
+  const { t } = useTypeSafeTranslation('recordMeta')
+
+  const contributeLink = 'https://forms.office.com/e/Y0bXYPicVw'
+  const learnMoreLink = '/asterisk'
+
+  return (
+    <>
+      <MetaField name={t('suggestionTitle')}>
+        <div className="flex flex-col gap-1">
+          <SuggestionLink external url={contributeLink} text={t('suggestionContributeLink')} />
+          <SuggestionLink url={learnMoreLink} text={t('suggestionLearnMoreLink')} />
+        </div>
+      </MetaField>
+    </>
+  )
+
+  interface SuggestionLinkProps {
+    external?: boolean
+    url: string
+    text?: string
+  }
+
+  function SuggestionLink({ external, url, text }: SuggestionLinkProps) {
+    return (
+      <NavLinkButton
+        variant="metaDataText"
+        className="bg-[#DEE5EC] font-semibold text-[#6F7A9C] after:border-none"
+        href={url}
+        title={text}
+        target={external ? '_blank' : undefined}
+      >
+        <Asterisk />
+        {text}
+        {external && <ExternalLink className="size-[14px]" />}
+      </NavLinkButton>
+    )
+  }
 }

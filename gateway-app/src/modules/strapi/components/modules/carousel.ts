@@ -19,10 +19,10 @@ export class ComponentModulesCarousel {
   public title: string
 
   @Field(() => [ComponentCoreCarouselImage], { nullable: true })
-  public items?: ComponentCoreCarouselImage[]
+  public images?: ComponentCoreCarouselImage[]
 
-  @Field(() => Enum_Componentmodulescarousel_Variant)
-  public variant: Enum_Componentmodulescarousel_Variant
+  @Field(() => Enum_Componentmodulescarousel_Variant, { nullable: true })
+  public variant?: Enum_Componentmodulescarousel_Variant
 
   @Field(() => ComponentCoreButton, { nullable: true })
   public explore_collection_button?: ComponentCoreButton

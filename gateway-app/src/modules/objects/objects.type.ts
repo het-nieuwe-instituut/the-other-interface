@@ -1,17 +1,66 @@
-import { ArgsType, Field, ObjectType, OmitType } from '@nestjs/graphql'
+import { ArgsType, Field, IntersectionType, ObjectType, OmitType } from '@nestjs/graphql'
 import { EntityNames } from '../util/entityNames.type'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
 import { IsString } from 'class-validator'
 import { Locale } from '../util/locale.type'
+import { EnrichedRecordBaseType } from '../triply/triply.type'
 
 @ObjectType()
-export class ObjectsZoomLevel3DetailType {
+class ObjectMakerType {
+  @Field(() => String)
+  public id: string
+
+  @Field(() => String, { nullable: true })
+  public maker: string | null
+
+  @Field(() => String, { nullable: true })
+  public makerLabel?: string | null
+
+  @Field(() => String, { nullable: true })
+  public makerRole?: string | null
+
+  @Field(() => String, { nullable: true })
+  public makerRoleLabel?: string | null
+
+  @Field(() => PeopleZoomLevel3DetailType, { nullable: true })
+  public populatedMaker?: PeopleZoomLevel3DetailType
+}
+
+@ObjectType()
+class ObjectMaterialType {
+  @Field(() => String)
+  public id: string
+
+  @Field(() => String)
+  public material: string
+
+  @Field(() => String, { nullable: true })
+  public materialLabel?: string | null
+}
+
+@ObjectType()
+class ObjectTechniqueType {
+  @Field(() => String)
+  public id: string
+
+  @Field(() => String)
+  public technique: string
+
+  @Field(() => String, { nullable: true })
+  public techniqueLabel?: string | null
+}
+
+@ObjectType()
+class BaseObjectsZoomLevel3DetailType {
   @Field()
   public id: string
+
   @Field(() => String, { nullable: true })
   public title: string
+
   @Field(() => EntityNames, { nullable: true })
   public type: EntityNames
+
   @Field(() => [String], { nullable: true })
   public thumbnail: string
 
@@ -101,9 +150,18 @@ export class ObjectsZoomLevel3DetailType {
 }
 
 @ObjectType()
+export class ObjectsZoomLevel3DetailType extends IntersectionType(
+  EnrichedRecordBaseType,
+  BaseObjectsZoomLevel3DetailType
+) {
+  @Field(() => [BaseObjectsZoomLevel3DetailType], { nullable: true })
+  public enrichedSources?: BaseObjectsZoomLevel3DetailType[]
+}
+
+@ObjectType()
 export class ObjectRelationsType {
   @Field(() => String, { nullable: true })
-  public id?: string | null
+  public idRelation?: string | null
 
   @Field(() => String, { nullable: true })
   public titleR?: string | null
@@ -125,7 +183,7 @@ export class ObjectRelationsCountType {
 }
 
 @ObjectType()
-export class ObjectRecordZoomLevel3Type {
+class BaseObjectRecordZoomLevel3Type {
   @Field(() => String, { nullable: true })
   public objectNumber?: string
 
@@ -173,48 +231,12 @@ export class ObjectRecordZoomLevel3Type {
 }
 
 @ObjectType()
-export class ObjectMakerType {
-  @Field(() => String)
-  public id: string
-
-  @Field(() => String, { nullable: true })
-  public maker: string | null
-
-  @Field(() => String, { nullable: true })
-  public makerLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public makerRole?: string | null
-
-  @Field(() => String, { nullable: true })
-  public makerRoleLabel?: string | null
-
-  @Field(() => PeopleZoomLevel3DetailType, { nullable: true })
-  public populatedMaker?: PeopleZoomLevel3DetailType
-}
-
-@ObjectType()
-export class ObjectMaterialType {
-  @Field(() => String)
-  public id: string
-
-  @Field(() => String)
-  public material: string
-
-  @Field(() => String, { nullable: true })
-  public materialLabel?: string | null
-}
-
-@ObjectType()
-export class ObjectTechniqueType {
-  @Field(() => String)
-  public id: string
-
-  @Field(() => String)
-  public technique: string
-
-  @Field(() => String, { nullable: true })
-  public techniqueLabel?: string | null
+export class ObjectRecordZoomLevel3Type extends IntersectionType(
+  EnrichedRecordBaseType,
+  BaseObjectRecordZoomLevel3Type
+) {
+  @Field(() => [BaseObjectRecordZoomLevel3Type], { nullable: true })
+  public enrichedSources?: BaseObjectRecordZoomLevel3Type[]
 }
 
 @ArgsType()

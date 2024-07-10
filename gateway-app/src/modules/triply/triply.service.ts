@@ -5,6 +5,16 @@ import { catchError, lastValueFrom, map } from 'rxjs'
 import { Config } from 'src/config/config'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { RollbarService } from '../util/rollbar.service'
+import { get } from 'lodash'
+import { Locale } from '../util/locale.type'
+import { TriplyUtils } from './triply.utils'
+import { EnrichedRecordBaseType } from './triply.type'
+
+export enum ExternalSource {
+  getty = 'getty',
+  wikidata = 'wikidata',
+  rkd = 'rkd',
+}
 
 /**
  * Due to typescript's limitations, we decided to use this approach to verify expected
@@ -86,6 +96,36 @@ export class TriplyService {
     return { data }
   }
 
+  public async getEnrichedSourceData(
+    enrichedSourceEndpoints: Record<ExternalSource, string>,
+    id: string,
+    locale: Locale
+  ): Promise<EnrichedRecordBaseType[]> {
+    const sources = Object.entries(enrichedSourceEndpoints)
+    const params = { id, language: locale }
+
+    const enrichedSources = await Promise.all(
+      sources.map(async ([source, endpoint]) => {
+        const result = await this.queryTriplyData(endpoint, {}, undefined, params)
+
+        const enrichedSource = TriplyUtils.combineObjectArray(result.data as object[])
+        const externalSourceUrl = TriplyUtils.getExternalSourceUrlFromData(
+          result.data,
+          source as ExternalSource
+        )
+
+        return {
+          ...enrichedSource,
+          id,
+          externalSourceType: source as ExternalSource,
+          externalSourceUrl,
+        }
+      })
+    )
+
+    return enrichedSources
+  }
+
   private fetch<ReturnDataType>(endpoint: URL) {
     const headers = { Authorization: `Bearer ${this.apiKey}` }
     const res = this.httpService.get<ReturnDataType[]>(endpoint.toString(), { headers })
@@ -93,7 +133,7 @@ export class TriplyService {
     return lastValueFrom(
       res.pipe(
         catchError(err => {
-          console.error(err)
+          console.error(get(err, 'message') || err)
           return []
         }),
         map(res => res.data)

@@ -1,7 +1,5 @@
-import {
-  Enum_Componentmodulesgridmodule_Fieldtypes,
-  Enum_Triplyrecord_Type,
-} from '../../generated/strapi-sdk'
+import { get } from 'lodash'
+import { Enum_Triplyrecord_Type } from '../../generated/strapi-sdk'
 import { CustomError } from '../util/customError'
 import { EntityNames } from '../util/entityNames.type'
 
@@ -19,7 +17,7 @@ export class StrapiUtils {
       case EntityNames.Media:
         return Enum_Triplyrecord_Type.Media
       case EntityNames.Stories:
-        return Enum_Componentmodulesgridmodule_Fieldtypes.Stories
+        return EntityNames.Stories
       case EntityNames.External:
       default:
         throw CustomError.internalCritical(`type for entity ${name} not implemented`)
@@ -55,7 +53,7 @@ export class StrapiUtils {
     try {
       return new URL(url, process.env['STRAPI_URL']).toString()
     } catch (e) {
-      console.log(e)
+      console.log(get(e, 'message') || e)
     }
   }
 }

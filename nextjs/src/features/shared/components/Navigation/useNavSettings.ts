@@ -1,0 +1,56 @@
+'use client'
+import { useEffect, useMemo, useRef } from 'react'
+
+import useTranslation from 'next-translate/useTranslation'
+import { State } from '../../configs/store'
+import { useSelector } from 'react-redux'
+import { useBreakpoint } from '../../configs/chakra'
+import { USER_LOOKS_ON } from '../../constants/mainConstants'
+import { useLocale } from '../../hooks/useLocale'
+
+export enum Fonts {
+  Times = 'times',
+  Impact = 'impact',
+}
+
+export const useNavSettings = () => {
+  const ref = useRef<HTMLDivElement | null>(null)
+  const isMenuOpen = useSelector((state: State) => state?.shared?.isMenuOpen)
+  const userLooksOn = useSelector((state: State) => state.shared.userLooksOn)
+  const breakpoint = useBreakpoint()
+  const { t: tNavigation } = useTranslation('navigation')
+  const isMobile = breakpoint === 'sm'
+  const lang = useLocale()
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'visible'
+    }
+
+    return () => {
+      document.body.style.overflow = 'visible'
+    }
+  }, [isMenuOpen])
+
+  const navTextStyle = useMemo(() => {
+    if (userLooksOn === USER_LOOKS_ON.EDITORIAL) {
+      return Fonts.Impact
+    }
+    if (userLooksOn === USER_LOOKS_ON.GALAXY) {
+      return Fonts.Times
+    }
+  }, [userLooksOn])
+
+  return {
+    tNavigation,
+    lang,
+    isMenuOpen,
+    ref,
+    isMobile,
+    breakpoint,
+    userLooksOn,
+    navTextStyle,
+  }
+}

@@ -20,9 +20,9 @@ export type CloudSize = {
 
 export type CategoryCloud = {
   title: CloudCategory
-  size: CloudSize
-  titlePosition: CloudPosition
-  cloudPosition: CloudPosition
+  sizeClassNames: string
+  titleClassNames: string
+  cloudClassNames: string
 }
 
 export type MappedStory = {

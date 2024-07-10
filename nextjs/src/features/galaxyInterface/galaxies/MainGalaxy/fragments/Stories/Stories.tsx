@@ -1,19 +1,20 @@
-import { Box, Flex, Grid, keyframes } from '@chakra-ui/react'
-
+import { cn } from '@/features/ui/utils/cn'
+import { useContext } from 'react'
+import {
+  GalaxyPaginationAnimationStateContext,
+  getItemsAnimationClassNames,
+  getNextItemsAnimationClassNames,
+} from '../../../hooks/GalaxyPaginationAnimationStateProvider'
+import { StoriesData } from '../../hooks/useThemesQuery'
 import { Story } from '../Story'
-import { usePresenter } from './usePresenter'
 import { useDrawLines } from './useDrawLines'
-import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
-import { useImageLoader } from './useImageLoader'
-import { StoriesData } from '../../hooks/useThemes'
+import { usePresenter } from './usePresenter'
+import { GalaxyZoomAnimationStateContext } from '../../../hooks/GalaxyZoomAnimationStateProvider'
 
 type Props = {
   stories: StoriesData
   nextStories: StoriesData
 }
-
-const currentPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 1 } })
-const nextPageFadeIn = keyframes({ from: { opacity: 0 }, to: { opacity: 0.2 } })
 
 export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
   const {
@@ -21,86 +22,72 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
     positionedNextStories,
     originalTemplateIndex,
     pageNumber: currentPage,
-    isCurrentStoriesEmpty,
-    isNextStoriesEmpty,
   } = usePresenter(stories, nextStories)
-
-  const { handleImageLoaded, allImagesLoaded } = useImageLoader(
-    positionedStories,
-    currentPage,
-    stories
-  )
-
-  const svgRef = useDrawLines('.story-grid-item', originalTemplateIndex, positionedStories)
+  const { animationState: paginationAnimationState, conditions: paginationAnimationConditions } =
+    useContext(GalaxyPaginationAnimationStateContext)
+  const { animationState: zoomAnimationState } = useContext(GalaxyZoomAnimationStateContext)
+  const svgRef = useDrawLines({
+    hideLines: !!paginationAnimationState,
+    selector: '.story-grid-item',
+    template: originalTemplateIndex,
+    stories: positionedStories,
+  })
 
   return (
-    <Box width={'100%'} height={'100%'}>
-      {!allImagesLoaded && (
-        <Flex justify={'center'} align={'center'} height={'100%'}>
-          <ThemedSpinner />
-        </Flex>
-      )}
-      <Grid
-        position="absolute"
-        top="13%"
-        right="18%"
-        maxW={'936px'}
-        w="65vw"
-        h="55%"
-        templateColumns="repeat(4, 1fr)"
-        templateRows="repeat(2, 1fr)"
-        gap="20px"
-        css={{
-          animation: isCurrentStoriesEmpty ? 'none' : `${currentPageFadeIn} 200ms linear`,
-          zIndex: 20,
-          visibility: allImagesLoaded ? 'visible' : 'hidden',
-        }}
-      >
-        {positionedStories.map(positionedStory => (
-          <Story
-            key={`${positionedStory.id}-${positionedStory.locale}-${currentPage}`}
-            story={positionedStory}
-            isMainGrid
-            onLoad={handleImageLoaded}
-          />
-        ))}
-      </Grid>
+    <div className={cn('size-full')}>
+      <div className="absolute right-[18%] top-[13%] h-[55%] w-[65vw] max-w-[936px]">
+        <div
+          className={cn(
+            'relative size-full z-20 grid   grid-cols-4 grid-rows-2 gap-[20px] opacity-100  '
+          )}
+        >
+          {positionedStories.map(positionedStory => (
+            <Story
+              className={getItemsAnimationClassNames(
+                paginationAnimationState,
+                paginationAnimationConditions
+              )}
+              key={`${positionedStory.id}-${positionedStory.locale}-${currentPage}`}
+              story={positionedStory}
+              isMainGrid
+            />
+          ))}
+        </div>
+      </div>
 
       <svg
         ref={svgRef}
         style={{
+          display: zoomAnimationState === 'forward' ? 'none' : 'block',
           position: 'fixed',
           top: 0,
           left: 0,
+          opacity: 0,
           width: '100%',
           height: '100%',
-          visibility: allImagesLoaded ? 'visible' : 'hidden',
         }}
       />
-
-      <Grid
-        position="absolute"
-        top="13%"
-        left={'50%'}
-        transform={'translateX(-50%)'}
-        w="65vw"
-        h="55%"
-        templateColumns="repeat(4, 1fr)"
-        templateRows="repeat(2, 1fr)"
-        gap="20px"
-        maxW={'936px'}
-        css={{
-          animation: isNextStoriesEmpty ? 'none' : `${nextPageFadeIn} 300ms linear`,
-          zIndex: 10,
-          opacity: 0.3,
-          filter: 'blur(10px)',
-          visibility: allImagesLoaded ? 'visible' : 'hidden',
-        }}
+      <div
+        className={cn(
+          'absolute right-[18%] top-[13%] grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px] z-10',
+          getNextItemsAnimationClassNames(
+            paginationAnimationState,
+            paginationAnimationConditions,
+            !!positionedStories?.length
+          )
+        )}
       >
         {positionedNextStories.map(positionedStory => (
-          <Story key={`${positionedStory.id}-${positionedStory.locale}`} story={positionedStory} />
+          <Story
+            className={cn(
+              paginationAnimationConditions === 'firstRender' &&
+                'animate-[fromHideToShow_1000ms_ease-in-out_forwards]'
+            )}
+            key={`${positionedStory.id}-${positionedStory.locale}`}
+            story={positionedStory}
+          />
         ))}
-      </Grid>
-    </Box>
+      </div>
+    </div>
   )
 }

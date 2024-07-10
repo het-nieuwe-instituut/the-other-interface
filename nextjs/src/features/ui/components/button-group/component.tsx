@@ -4,6 +4,8 @@ import ExternalLink from '@/features/ui/icons/external-link.svg'
 import { ReactElement } from 'react'
 import { cn } from '../../utils/cn'
 import { NavLinkButton } from '../nav-link-button/component'
+import { NavButtonVariants } from '../nav-button/variants'
+import { VariantProps } from 'class-variance-authority'
 
 export interface ButtonGroupProps {
   children:
@@ -14,20 +16,23 @@ export interface ButtonGroupProps {
 }
 
 export const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, className }) => {
-  return <div className={cn('flex w-full gap-4 bg-inherit', className)}>{children}</div>
+  return <div className={cn('w-full bg-inherit', className)}>{children}</div>
 }
 
-export interface LinkButtonGroupItemProps {
+interface LinkButtonGroupItemProps extends VariantProps<typeof NavButtonVariants> {
   href: string
   children: string
 }
+
 export const LinkButtonGroupItem: React.FC<LinkButtonGroupItemProps> = ({
   href,
   children,
+  variant,
+  color = 'jumboText',
 }: LinkButtonGroupItemProps) => {
   const isExternal = isExternalURL(href, process.env.parsed.NEXT_PUBLIC_URL ?? '')
   return (
-    <NavLinkButton href={href} variant={'footerPrimary'}>
+    <NavLinkButton href={href} variant={variant} color={color}>
       {children}
       {isExternal && <ExternalLink className="size-6" />}
     </NavLinkButton>

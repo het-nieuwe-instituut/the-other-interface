@@ -1,21 +1,27 @@
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
-import { EntityNames, SearchResultItemType } from 'src/generated/graphql'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { Position } from '@/features/shared/types/position'
+import { getTriplyRecordPathForTypeAndId } from '@/features/shared/utils/links'
+import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/components/DelayedNextLink/DelayedNextLinkWithZoomAnimationsContext'
 import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
 import { cn } from '@/features/ui/utils/cn'
-import { useRouter } from 'next/navigation'
+import { CSSProperties, useContext, useEffect, useState } from 'react'
 import { PlacesType } from 'react-tooltip'
-import { Locale } from 'src/generated/graphql'
+import { EntityNames, Locale, SearchResultItemType } from 'src/generated/graphql'
+import {
+  GalaxyZoomAnimationStateContext,
+  useMoveElementToCenterValues,
+} from '../../../hooks/GalaxyZoomAnimationStateProvider'
 import { RecordText } from '../RecordText'
-import { getTriplyRecordPathForTypeAndId } from '@/features/shared/utils/links'
 
-type Props = {
+export type RecordComponentProps = {
+  className?: string
   record: RecordProps
   tooltipPlace: PlacesType
+  onFullyLoaded?: () => void
 }
 
 type RecordProps = SearchResultItemType & {
@@ -23,55 +29,100 @@ type RecordProps = SearchResultItemType & {
   category: EntityNames
 }
 
-export const Record: React.FC<Props> = ({ record, tooltipPlace }) => {
+export const Record: React.FC<RecordComponentProps> = ({
+  className,
+  record,
+  tooltipPlace,
+  onFullyLoaded,
+}) => {
   const { id, category } = record
   const { t } = useTypeSafeTranslation('category')
   const { lang } = useZoom2Params()
   const { data, isLoading, isError } = useZoomHoverRecordResultQuery({ id, category })
+  const [imageLoaded, setImageLoaded] = useState(false)
+  const { animationState } = useContext(GalaxyZoomAnimationStateContext)
+
+  const [clicked, setClicked] = useState(false)
+  const [animationCssVariables, positionRef] = useMoveElementToCenterValues({
+    scale: 1.65,
+    offsetTop: -80,
+  })
+
+  useEffect(() => {
+    if (imageLoaded && !isLoading) onFullyLoaded?.()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imageLoaded, isLoading])
 
   return (
-    <div className="relative">
-      {data === null ? (
-        RecordData(record, lang)
-      ) : (
-        <div className="absolute flex h-4/5 w-[70%]" style={{ ...record.position }}>
-          <ReadMoreTooltip
-            isLoading={isLoading}
-            error={isError ? t('couldNotFetchHover') : ''}
-            place={tooltipPlace}
-            isEmpty={!data?.description && !data?.title}
-            title={data?.title ?? undefined}
-            description={data?.description ?? undefined}
-            className="size-full"
-          >
-            {RecordData(record, lang)}
-          </ReadMoreTooltip>
-        </div>
-      )}
+    <div className={cn('relative', className)}>
+      <div
+        ref={positionRef}
+        style={{ ...animationCssVariables, ...record.position } as CSSProperties}
+        className={cn(
+          'absolute flex h-4/5 w-[70%]',
+          animationState === 'forward' &&
+            !clicked &&
+            'animate-[toBlurAndHide_300ms_ease-in-out_forwards]',
+          animationState === 'forward' &&
+            clicked &&
+            'animate-[toCenterOfGalaxy_500ms_ease-in-out_forwards] z-[1000]'
+        )}
+      >
+        <ReadMoreTooltip
+          isLoading={isLoading}
+          hideTooltip={animationState === 'forward' || animationState === 'backwards'}
+          error={isError ? t('couldNotFetchHover') : ''}
+          place={tooltipPlace}
+          isEmpty={!data?.description && !data?.title}
+          title={data?.title ?? undefined}
+          description={data?.description ?? undefined}
+          className="size-full"
+          color="blue"
+        >
+          <RecordData
+            onClick={() => setClicked(true)}
+            record={record}
+            lang={lang}
+            onLoad={() => setImageLoaded(true)}
+          />
+        </ReadMoreTooltip>
+      </div>
     </div>
   )
 }
 
-const RecordData = (record: RecordProps, lang?: Locale | null) => {
+const RecordData = ({
+  record,
+  lang,
+  onLoad,
+  onClick,
+}: {
+  record: RecordProps
+  lang?: Locale | null
+  onLoad: () => void
+  onClick: () => void
+}) => {
   const { id, thumbnail, category, title } = record
-  const router = useRouter()
+  const { animationState } = useContext(GalaxyZoomAnimationStateContext)
 
-  const handleClick = () => {
-    let url = getTriplyRecordPathForTypeAndId(category, id, '/detail')
-    url = addLocaleToUrl(url, lang)
-
-    router.push(url)
-  }
+  let url = getTriplyRecordPathForTypeAndId(category, id, '/detail')
+  url = addLocaleToUrl(url, lang)
 
   return (
-    <button
+    <DelayedNextLinkWithZoomAnimationsContext
+      delay={600}
+      animation="forward"
+      href={url}
       className={cn(
-        'flex size-full cursor-pointer flex-col items-center justify-center gap-[5px] transition-all duration-300 ease-in-out hover:scale-105',
-        'group-hover-blur-item'
+        'flex size-full cursor-pointer flex-col items-center justify-center gap-[5px]',
+        animationState === 'forward' ||
+          (animationState === 'backwards' &&
+            'group-hover-blur-item transition-all duration-300 ease-in-out hover:scale-105')
       )}
-      onClick={handleClick}
+      onClick={onClick}
     >
       <ResponsiveImage
+        onLoad={onLoad}
         src={thumbnail}
         alt={title ?? ''}
         className="max-h-[calc(100%-2.6vw-7px)]" // where 2.6vw are a texts' line heights, 15px are gaps
@@ -81,7 +132,13 @@ const RecordData = (record: RecordProps, lang?: Locale | null) => {
         }}
       />
 
-      <RecordText title={title} categoryType={category} />
-    </button>
+      <RecordText
+        className={cn(
+          animationState === 'forward' && 'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+        )}
+        title={title}
+        categoryType={category}
+      />
+    </DelayedNextLinkWithZoomAnimationsContext>
   )
 }

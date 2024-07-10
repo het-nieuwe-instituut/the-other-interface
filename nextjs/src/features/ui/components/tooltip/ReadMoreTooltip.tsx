@@ -25,6 +25,7 @@ export interface ReadMoreTooltipProps extends PropsWithChildren {
   place: PlacesType
   error?: string
   className?: string
+  hideTooltip?: boolean
 }
 
 export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
@@ -41,6 +42,7 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
     error,
     isEmpty,
     className,
+    hideTooltip,
   } = props
   const content = useMemo(
     () =>
@@ -55,9 +57,21 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
           error={error}
           color={color}
           place={place}
+          hideTooltip={hideTooltip}
         />
       ),
-    [isLoading, title, description, isEmpty, readMoreHref, readMoreText, error, color, place]
+    [
+      isLoading,
+      title,
+      description,
+      isEmpty,
+      readMoreHref,
+      readMoreText,
+      error,
+      color,
+      place,
+      hideTooltip,
+    ]
   )
 
   return (
@@ -78,8 +92,12 @@ const ReadMoreTooltipContent = ({
   isEmpty,
   readMoreHref,
   readMoreText,
+  hideTooltip,
 }: ReadMoreTooltipProps) => {
   const { t } = useTypeSafeTranslation('common')
+  if (hideTooltip) {
+    return null
+  }
 
   if (error) {
     return (
@@ -143,7 +161,7 @@ const ReadMoreTooltipContent = ({
           <p
             className={TypographyVariants({
               socialLarge: 'sm',
-              className: cn('text-pink-100', readMoreHref && 'pb-2'),
+              className: cn('text-pink-100 line-clamp-[7]', readMoreHref && 'pb-2'),
             })}
           >
             {description}

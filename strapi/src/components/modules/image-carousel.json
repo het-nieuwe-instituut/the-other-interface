@@ -6,14 +6,15 @@
   },
   "options": {},
   "attributes": {
-    "images": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": ["images"]
-    },
     "description": {
       "type": "text"
+    },
+    "items": {
+      "displayName": "Image carousel item",
+      "type": "component",
+      "repeatable": true,
+      "component": "core.image-carousel-item",
+      "required": true
     }
   }
 }

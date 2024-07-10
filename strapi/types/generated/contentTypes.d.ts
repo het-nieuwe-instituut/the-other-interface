@@ -745,36 +745,33 @@ export interface ApiHomepageHomepage extends Schema.SingleType {
     }
   }
   attributes: {
-    components: Attribute.DynamicZone<
-      [
-        'modules.text-module',
-        'modules.image',
-        'modules.pullquote',
-        'modules.subtitle',
-        'modules.title-module',
-        'modules.image-carousel',
-        'modules.buttons-module',
-        'modules.grid-module'
-      ]
-    > &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
     Title: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    description: Attribute.RichText &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
         }
       }>
     highlightedThemes: Attribute.Relation<'api::homepage.homepage', 'oneToMany', 'api::theme.theme'>
+    text: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    carousel: Attribute.Component<'modules.carousel'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    grid: Attribute.Component<'modules.grid-module'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime
@@ -791,16 +788,16 @@ export interface ApiHomepageHomepage extends Schema.SingleType {
   }
 }
 
-export interface ApiLandingpageLandingpage extends Schema.CollectionType {
-  collectionName: 'landingpages'
+export interface ApiLandingPageArchiveLandingPageArchive extends Schema.SingleType {
+  collectionName: 'landing_page_archives'
   info: {
-    singularName: 'landingpage'
-    pluralName: 'landingpages'
-    displayName: 'Landingpage'
+    singularName: 'landing-page-archive'
+    pluralName: 'landing-page-archives'
+    displayName: 'Landing page - archive'
     description: ''
   }
   options: {
-    draftAndPublish: true
+    draftAndPublish: false
   }
   pluginOptions: {
     i18n: {
@@ -808,36 +805,41 @@ export interface ApiLandingpageLandingpage extends Schema.CollectionType {
     }
   }
   attributes: {
-    Title: Attribute.String &
+    title: Attribute.String &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
         }
       }>
-    components: Attribute.DynamicZone<
-      [
-        'modules.text-module',
-        'modules.subtitle',
-        'modules.title-module',
-        'modules.image-carousel',
-        'modules.image',
-        'modules.pullquote',
-        'modules.buttons-module',
-        'modules.grid-module'
-      ]
-    > &
+    text: Attribute.Text &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
         }
       }>
-    slug: Attribute.String &
+    carousel: Attribute.Component<'modules.carousel'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }> &
+      Attribute.SetMinMax<{
+        max: 2
+      }>
+    highlight: Attribute.Component<'modules.highlight'> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
         }
       }>
-    Description: Attribute.Text &
+    grid: Attribute.Component<'modules.grid-module'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    imageCarousel: Attribute.Component<'modules.image-carousel'> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
@@ -845,15 +847,262 @@ export interface ApiLandingpageLandingpage extends Schema.CollectionType {
       }>
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
-    publishedAt: Attribute.DateTime
-    createdBy: Attribute.Relation<'api::landingpage.landingpage', 'oneToOne', 'admin::user'> &
+    createdBy: Attribute.Relation<
+      'api::landing-page-archive.landing-page-archive',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private
-    updatedBy: Attribute.Relation<'api::landingpage.landingpage', 'oneToOne', 'admin::user'> &
+    updatedBy: Attribute.Relation<
+      'api::landing-page-archive.landing-page-archive',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private
     localizations: Attribute.Relation<
-      'api::landingpage.landingpage',
+      'api::landing-page-archive.landing-page-archive',
       'oneToMany',
-      'api::landingpage.landingpage'
+      'api::landing-page-archive.landing-page-archive'
+    >
+    locale: Attribute.String
+  }
+}
+
+export interface ApiLandingPageObjectLandingPageObject extends Schema.SingleType {
+  collectionName: 'landing_page_objects'
+  info: {
+    singularName: 'landing-page-object'
+    pluralName: 'landing-page-objects'
+    displayName: 'Landing page - object'
+    description: ''
+  }
+  options: {
+    draftAndPublish: false
+  }
+  pluginOptions: {
+    i18n: {
+      localized: true
+    }
+  }
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    text: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    carousel: Attribute.Component<'modules.carousel'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }> &
+      Attribute.SetMinMax<{
+        max: 2
+      }>
+    highlight: Attribute.Component<'modules.highlight'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    grid: Attribute.Component<'modules.grid-module'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    imageCarousel: Attribute.Component<'modules.image-carousel'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'api::landing-page-object.landing-page-object',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'api::landing-page-object.landing-page-object',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    localizations: Attribute.Relation<
+      'api::landing-page-object.landing-page-object',
+      'oneToMany',
+      'api::landing-page-object.landing-page-object'
+    >
+    locale: Attribute.String
+  }
+}
+
+export interface ApiLandingPagePeopleLandingPagePeople extends Schema.SingleType {
+  collectionName: 'landing_page_peoples'
+  info: {
+    singularName: 'landing-page-people'
+    pluralName: 'landing-page-peoples'
+    displayName: 'Landing page - people'
+    description: ''
+  }
+  options: {
+    draftAndPublish: false
+  }
+  pluginOptions: {
+    i18n: {
+      localized: true
+    }
+  }
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    text: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    carousel: Attribute.Component<'modules.carousel'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }> &
+      Attribute.SetMinMax<{
+        max: 2
+      }>
+    highlight: Attribute.Component<'modules.highlight'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    grid: Attribute.Component<'modules.grid-module'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    imageCarousel: Attribute.Component<'modules.image-carousel'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'api::landing-page-people.landing-page-people',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'api::landing-page-people.landing-page-people',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    localizations: Attribute.Relation<
+      'api::landing-page-people.landing-page-people',
+      'oneToMany',
+      'api::landing-page-people.landing-page-people'
+    >
+    locale: Attribute.String
+  }
+}
+
+export interface ApiLandingPagePublicationLandingPagePublication extends Schema.SingleType {
+  collectionName: 'landing_page_publications'
+  info: {
+    singularName: 'landing-page-publication'
+    pluralName: 'landing-page-publications'
+    displayName: 'Landing page - publication'
+    description: ''
+  }
+  options: {
+    draftAndPublish: false
+  }
+  pluginOptions: {
+    i18n: {
+      localized: true
+    }
+  }
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    text: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    carousel: Attribute.Component<'modules.carousel'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }> &
+      Attribute.SetMinMax<{
+        max: 2
+      }>
+    highlight: Attribute.Component<'modules.highlight'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    grid: Attribute.Component<'modules.grid-module'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    imageCarousel: Attribute.Component<'modules.image-carousel'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'api::landing-page-publication.landing-page-publication',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'api::landing-page-publication.landing-page-publication',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    localizations: Attribute.Relation<
+      'api::landing-page-publication.landing-page-publication',
+      'oneToMany',
+      'api::landing-page-publication.landing-page-publication'
     >
     locale: Attribute.String
   }
@@ -893,68 +1142,6 @@ export interface ApiLocationLocation extends Schema.CollectionType {
       'api::location.location',
       'oneToMany',
       'api::location.location'
-    >
-    locale: Attribute.String
-  }
-}
-
-export interface ApiMenupageMenupage extends Schema.CollectionType {
-  collectionName: 'menupages'
-  info: {
-    singularName: 'menupage'
-    pluralName: 'menupages'
-    displayName: 'Menupage'
-    description: ''
-  }
-  options: {
-    draftAndPublish: true
-  }
-  pluginOptions: {
-    i18n: {
-      localized: true
-    }
-  }
-  attributes: {
-    components: Attribute.DynamicZone<
-      [
-        'modules.pullquote',
-        'modules.text-module',
-        'modules.subtitle',
-        'modules.image-carousel',
-        'modules.image',
-        'modules.title-module',
-        'modules.buttons-module',
-        'modules.grid-module'
-      ]
-    > &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    Title: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    slug: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true
-        }
-      }>
-    createdAt: Attribute.DateTime
-    updatedAt: Attribute.DateTime
-    publishedAt: Attribute.DateTime
-    createdBy: Attribute.Relation<'api::menupage.menupage', 'oneToOne', 'admin::user'> &
-      Attribute.Private
-    updatedBy: Attribute.Relation<'api::menupage.menupage', 'oneToOne', 'admin::user'> &
-      Attribute.Private
-    localizations: Attribute.Relation<
-      'api::menupage.menupage',
-      'oneToMany',
-      'api::menupage.menupage'
     >
     locale: Attribute.String
   }
@@ -1003,7 +1190,9 @@ export interface ApiStoryStory extends Schema.CollectionType {
         'modules.buttons-module',
         'core.stand-alone-link',
         'core.mux-audio',
-        'core.mux-video'
+        'core.mux-video',
+        'modules.side-image-with-text',
+        'modules.standalone-links'
       ]
     > &
       Attribute.SetPluginOptions<{
@@ -1021,7 +1210,7 @@ export interface ApiStoryStory extends Schema.CollectionType {
     timeframe: Attribute.Component<'core.timeframe'> &
       Attribute.SetPluginOptions<{
         i18n: {
-          localized: true
+          localized: false
         }
       }>
     locations: Attribute.Relation<'api::story.story', 'manyToMany', 'api::location.location'>
@@ -1038,6 +1227,7 @@ export interface ApiStoryStory extends Schema.CollectionType {
         }
       }>
     shortDescription: Attribute.Text &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true
@@ -1153,9 +1343,11 @@ declare module '@strapi/types' {
       'plugin::mux-video-uploader.mux-asset': PluginMuxVideoUploaderMuxAsset
       'api::author.author': ApiAuthorAuthor
       'api::homepage.homepage': ApiHomepageHomepage
-      'api::landingpage.landingpage': ApiLandingpageLandingpage
+      'api::landing-page-archive.landing-page-archive': ApiLandingPageArchiveLandingPageArchive
+      'api::landing-page-object.landing-page-object': ApiLandingPageObjectLandingPageObject
+      'api::landing-page-people.landing-page-people': ApiLandingPagePeopleLandingPagePeople
+      'api::landing-page-publication.landing-page-publication': ApiLandingPagePublicationLandingPagePublication
       'api::location.location': ApiLocationLocation
-      'api::menupage.menupage': ApiMenupageMenupage
       'api::story.story': ApiStoryStory
       'api::theme.theme': ApiThemeTheme
       'api::triply-record.triply-record': ApiTriplyRecordTriplyRecord

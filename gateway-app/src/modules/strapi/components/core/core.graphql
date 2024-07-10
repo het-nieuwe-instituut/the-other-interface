@@ -7,6 +7,7 @@ fragment ComponentCoreButtonFragment on ComponentCoreButton {
 fragment ComponentCoreCarouselImageFragment on ComponentCoreCarouselImage {
   id
   alt_text
+  title
   description
   image {
     ...UploadFileEntityResponseFragment
@@ -116,6 +117,28 @@ fragment ComponentCoreMuxVideoFragment on ComponentCoreMuxVideo {
         aspect_ratio
         createdAt
         updatedAt
+      }
+    }
+  }
+}
+
+fragment ComponentCoreImageCarouselItemFragment on ComponentCoreImageCarouselItem {
+  id
+  alt_text
+  url
+  image {
+    ...UploadFileEntityResponseFragment
+  }
+  triply_record {
+    data {
+      ...BaseTriplyRecordFragment
+    }
+  }
+  story {
+    data {
+      id
+      attributes {
+        slug
       }
     }
   }

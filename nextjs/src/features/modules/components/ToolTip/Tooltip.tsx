@@ -10,7 +10,7 @@ export const Tooltip: React.FC<Props> = ({ children, xAxis, yAxis, ...rest }) =>
   return (
     <ChakraTooltip
       fontSize="sm"
-      backgroundColor={'black'}
+      backgroundColor={'blueAlpha.100'}
       padding={4}
       position="absolute"
       {...rest}

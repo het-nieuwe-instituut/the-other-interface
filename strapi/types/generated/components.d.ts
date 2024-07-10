@@ -54,12 +54,30 @@ export interface CoreGridFeaturedFields extends Schema.Component {
     story: Attribute.Relation<'core.grid-featured-fields', 'oneToOne', 'api::story.story'>
     thumbnail: Attribute.Media
     title: Attribute.String & Attribute.Required
-    subtitle: Attribute.String
+    subtitle: Attribute.String & Attribute.Required
     triplyRecord: Attribute.Relation<
       'core.grid-featured-fields',
       'oneToOne',
       'api::triply-record.triply-record'
     >
+  }
+}
+
+export interface CoreImageCarouselItem extends Schema.Component {
+  collectionName: 'components_core_image_carousel_items'
+  info: {
+    displayName: 'Image carousel item'
+  }
+  attributes: {
+    image: Attribute.Media & Attribute.Required
+    alt_text: Attribute.String & Attribute.Required
+    story: Attribute.Relation<'core.image-carousel-item', 'oneToOne', 'api::story.story'>
+    triply_record: Attribute.Relation<
+      'core.image-carousel-item',
+      'oneToOne',
+      'api::triply-record.triply-record'
+    >
+    url: Attribute.String
   }
 }
 
@@ -172,16 +190,30 @@ export interface ModulesGridModule extends Schema.Component {
   }
   attributes: {
     title: Attribute.String
+    cards: Attribute.Component<'core.grid-featured-fields', true> &
+      Attribute.SetMinMax<{
+        max: 9
+      }>
+    exploreCollectionButton: Attribute.Component<'core.button'>
+  }
+}
+
+export interface ModulesHighlight extends Schema.Component {
+  collectionName: 'components_modules_highlights'
+  info: {
+    displayName: 'Highlight'
+    icon: ''
+    description: ''
+  }
+  attributes: {
+    title: Attribute.String & Attribute.Required
     description: Attribute.Text
-    featuredFields: Attribute.Component<'core.featured-fields', true>
-    fieldTypes: Attribute.Enumeration<['Triply', 'Stories']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'Stories'>
-    fieldTitlesAreInverted: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>
-    fields: Attribute.Component<'core.grid-featured-fields', true>
-    buttons: Attribute.Component<'core.button', true>
-    showMoreButtonTitle: Attribute.String & Attribute.Required & Attribute.DefaultTo<'Show More'>
-    pageSize: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<6>
+    buttons: Attribute.Component<'core.button', true> &
+      Attribute.SetMinMax<{
+        max: 2
+      }>
+    image: Attribute.Media & Attribute.Required
+    image_alt_text: Attribute.String & Attribute.Required
   }
 }
 
@@ -192,8 +224,8 @@ export interface ModulesImageCarousel extends Schema.Component {
     description: ''
   }
   attributes: {
-    images: Attribute.Media
     description: Attribute.Text
+    items: Attribute.Component<'core.image-carousel-item', true> & Attribute.Required
   }
 }
 
@@ -225,6 +257,31 @@ export interface ModulesPullquote extends Schema.Component {
   }
   attributes: {
     text: Attribute.Text
+  }
+}
+
+export interface ModulesSideImageWithText extends Schema.Component {
+  collectionName: 'components_modules_side_image_with_texts'
+  info: {
+    displayName: 'Side Image with Text'
+    description: ''
+  }
+  attributes: {
+    sideText: Attribute.RichText & Attribute.Required
+    image: Attribute.Media & Attribute.Required
+    image_alt_text: Attribute.String & Attribute.Required
+  }
+}
+
+export interface ModulesStandaloneLinks extends Schema.Component {
+  collectionName: 'components_modules_standalone_links'
+  info: {
+    displayName: 'Standalone Links'
+    icon: 'cursor'
+    description: ''
+  }
+  attributes: {
+    standaloneLinks: Attribute.Component<'core.stand-alone-link', true>
   }
 }
 
@@ -271,6 +328,7 @@ declare module '@strapi/types' {
       'core.carousel-image': CoreCarouselImage
       'core.featured-fields': CoreFeaturedFields
       'core.grid-featured-fields': CoreGridFeaturedFields
+      'core.image-carousel-item': CoreImageCarouselItem
       'core.mux-audio': CoreMuxAudio
       'core.mux-video': CoreMuxVideo
       'core.publication-date': CorePublicationDate
@@ -279,9 +337,12 @@ declare module '@strapi/types' {
       'modules.buttons-module': ModulesButtonsModule
       'modules.carousel': ModulesCarousel
       'modules.grid-module': ModulesGridModule
+      'modules.highlight': ModulesHighlight
       'modules.image-carousel': ModulesImageCarousel
       'modules.image': ModulesImage
       'modules.pullquote': ModulesPullquote
+      'modules.side-image-with-text': ModulesSideImageWithText
+      'modules.standalone-links': ModulesStandaloneLinks
       'modules.subtitle': ModulesSubtitle
       'modules.text-module': ModulesTextModule
       'modules.title-module': ModulesTitleModule

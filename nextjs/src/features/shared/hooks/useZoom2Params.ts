@@ -26,3 +26,18 @@ export const useZoom2Params = () => {
     fallback: !!fallback,
   }
 }
+
+export function useSearchParamCategory() {
+  const searchParams = useSearchParams()
+  return searchParams?.get('category') as SearchCategory
+}
+
+export function useSearchParamSearchValue() {
+  const searchParams = useSearchParams()
+
+  const search = useMemo(() => {
+    return searchParams?.get('search')
+  }, [searchParams])
+
+  return search
+}

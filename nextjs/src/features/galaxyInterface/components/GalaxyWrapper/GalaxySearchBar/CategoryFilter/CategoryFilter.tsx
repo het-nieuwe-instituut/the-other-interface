@@ -15,9 +15,9 @@ export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOptio
 
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <div
+    <button
       className={cn(
-        'bg-transparent text-pink.100 border border-pink.100',
+        'bg-transparent text-pink-100 border border-pink-100 m-0 p-0 text-start flex flex-col',
         'w-fit max-w-full h-[52px]',
         'px-2'
       )}
@@ -27,11 +27,11 @@ export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOptio
         <p className={cn('truncate mr-1', TypographyVariants({ socialLarge: 'label' }))}>
           {t('category')}
         </p>
-        <ActionButton>{<ChangeButton isOpen={isOpen} />}</ActionButton>
+        <ActionButton className="mt-px">{<ChangeButton isOpen={isOpen} />}</ActionButton>
       </div>
       <p className={cn('truncate', TypographyVariants({ socialLarge: 'textfield' }))}>
         {selectedOption}
       </p>
-    </div>
+    </button>
   )
 }

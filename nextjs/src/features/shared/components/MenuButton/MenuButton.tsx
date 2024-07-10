@@ -1,41 +1,35 @@
 import MenuIconCloseHover from '@/icons/close-menu-hover.svg'
+import MenuIconClose from '@/icons/close-menu.svg'
 import MenuIconOpenHover from '@/icons/open-menu-hover.svg'
 import MenuIconOpen from '@/icons/open-menu.svg'
-import MenuIconClose from '@/icons/close-menu.svg'
-import { Flex, Box } from '@chakra-ui/react'
-import { MAX_Z_INDEX } from '../../constants/mainConstants'
-import { usePresenter } from './usePresenter'
+import { useDispatch, useSelector } from 'react-redux'
+import { State } from '../../configs/store'
+import { sharedActions } from '../../stores/shared.store'
+import { cn } from '@/features/ui/utils/cn'
 
 export const MenuButton = () => {
-  const { isMenuOpen, handleOpenMenu, isHovering, setIsHovering } = usePresenter()
+  const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
+  const dispatch = useDispatch()
 
-  const getIcon = () => {
-    if (isMenuOpen) {
-      return isHovering ? <MenuIconCloseHover /> : <MenuIconClose />
-    } else {
-      return isHovering ? <MenuIconOpenHover /> : <MenuIconOpen />
-    }
+  const handleOpenMenu = (flag: boolean) => {
+    dispatch(sharedActions.menuOpen({ isMenuOpen: flag }))
   }
 
   return (
-    <Flex
-      ml="8"
-      pointerEvents="auto"
-      cursor="pointer"
-      position="relative"
-      zIndex={MAX_Z_INDEX}
-      alignItems="center"
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
+    <button
+      aria-label={isMenuOpen ? 'menu close' : 'menu open'}
+      className={cn(
+        'group pointer-events-auto relative z-[9999] ml-8 flex  items-center px-px pt-px mt-2 ',
+        isMenuOpen
+          ? ' text-pink-100 active:bg-pink-100 active:text-blue-100 focus:bg-pink-100 focus:text-blue-100 pb-2 w-[42px]'
+          : ' text-blue-100 active:bg-blue-100 active:text-pink-100 focus:bg-blue-100 focus:text-pink-100 pb-2 w-[40px] '
+      )}
+      onClick={() => handleOpenMenu(!isMenuOpen)}
     >
-      <Box
-        as="button"
-        aria-label={isMenuOpen ? 'menu close' : 'menu open'}
-        onClick={() => handleOpenMenu(!isMenuOpen)}
-        w={'40px'}
-      >
-        {getIcon()}
-      </Box>
-    </Flex>
+      <MenuIconCloseHover className={cn('hidden', isMenuOpen && 'group-hover:block')} />
+      <MenuIconClose className={cn('hidden', isMenuOpen && 'block group-hover:hidden')} />
+      <MenuIconOpenHover className={cn('hidden', !isMenuOpen && 'group-hover:block')} />
+      <MenuIconOpen className={cn('hidden', !isMenuOpen && 'block group-hover:hidden')} />
+    </button>
   )
 }

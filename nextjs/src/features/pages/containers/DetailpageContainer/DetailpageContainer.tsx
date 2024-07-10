@@ -1,17 +1,16 @@
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
 import { DetailGalaxy } from '@/features/galaxyInterface/galaxies/DetailGalaxy/DetailGalaxy/DetailGalaxy'
+import { GalaxyZoomAnimationStateProvider } from '@/features/galaxyInterface/galaxies/hooks/GalaxyZoomAnimationStateProvider'
 import { RecordLayer } from '@/features/record/containers/RecordLayer/RecordLayer'
 import { StoryLayer } from '@/features/shared/components/Layers/StoryLayer/StoryLayer'
+import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import { isCloudCategory, isStoryCategory } from '@/features/shared/utils/categories'
-import { LandingpageBySlugQuery, StoryByIdQuery } from 'src/generated/graphql'
+import { StoryByIdQuery } from 'src/generated/graphql'
 
 export interface DetailpageEditorialLayer {
   title?: string | null
   description?: string | null
   components:
-    | NonNullable<
-        NonNullable<LandingpageBySlugQuery['landingpages']['data']>[0]['attributes']
-      >['components']
     | NonNullable<NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']>['components']
     | null
 }
@@ -28,9 +27,13 @@ export const DetailpageContainer: React.FC<Props> = ({ category }) => {
 
   return (
     <div>
-      <GalaxyInterface>
-        <DetailGalaxy />
-      </GalaxyInterface>
+      <GalaxyZoomAnimationStateProvider>
+        <GalaxyInterface>
+          <MobileOverlayProvider>
+            <DetailGalaxy />
+          </MobileOverlayProvider>
+        </GalaxyInterface>
+      </GalaxyZoomAnimationStateProvider>
 
       <Layer />
     </div>

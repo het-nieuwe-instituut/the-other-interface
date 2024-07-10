@@ -4,8 +4,54 @@ const plugin = require('tailwindcss/plugin')
 module.exports = {
   important: true,
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
+
   theme: {
     extend: {
+      keyframes: {
+        toBlurAndHide: {
+          from: { opacity: 1, filter: 'blur(0px)' },
+          to: { opacity: 0, filter: 'blur(10px)' },
+        },
+        fromHideToShow: {
+          initial: { opacity: 0 },
+          from: { opacity: 0, filter: 'blur(10px)' },
+          to: { opacity: 1, filter: 'blur(0px)' },
+        },
+        fromBlurredToHide: {
+          from: { opacity: 1, filter: 'blur(10px)' },
+          to: { opacity: 0, filter: 'blur(10px)' },
+        },
+        toBlur: {
+          '0%': { filter: 'blur(0px)' },
+          '100%': { filter: 'blur(10px)' },
+        },
+        toUnblur: {
+          '0%': { filter: 'blur(10px)' },
+          '100%': { filter: 'blur(0px)' },
+        },
+        toFadeIn: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+        toFadeOut: {
+          '0%': { opacity: 1 },
+          '100%': { opacity: 0 },
+        },
+        toScaleFullPage: {
+          '0%': { transform: 'scale(1.1)', opacity: 1 },
+          '75%': { transform: 'scale(3)', opacity: 0.5 },
+          '100%': { transform: 'scale(4)', opacity: 0 },
+        },
+        toCenterOfGalaxy: {
+          '0%': {
+            transform: 'translate(0, 0)',
+          },
+          '100%': {
+            transform:
+              'translate(var(--animation-translate-x), var(--animation-translate-y)) scale(var(--animation-scale))',
+          },
+        },
+      },
       gridTemplateAreas: {
         'editorial-large': ['left right', 'bottom right'],
         'editorial-small': ['right', 'left', 'bottom'],
@@ -21,10 +67,12 @@ module.exports = {
         pink: {
           100: 'rgba(255, 230, 221, 1)',
           60: 'rgba(255, 230, 221, .6)',
+          50: 'rgba(255, 230, 221, .5)',
           25: 'rgba(255, 230, 221, .25)',
         },
         blue: {
           100: 'rgba(0, 81, 255, 1)',
+          95: 'rgba(0, 81, 255, .95)',
           80: 'rgba(0, 81, 255, .8)',
           50: 'rgba(0, 81, 255, .5)',
           25: 'rgba(0, 81, 255, .25)',
@@ -47,10 +95,12 @@ module.exports = {
       },
       borderColor: {
         blue: '#0051FF',
+        blue50: 'rgba(0, 81, 255, .5)',
         black: '#000000',
         brown: '#49280B',
       },
       fontFamily: {
+        'times-dot': ['"Times Dot"', 'sans-serif'],
         'times-large': ['Times', 'sans-serif'],
         'impact-large': ['"Impact"', 'sans-serif'],
         'social-large': ['"Social"', 'sans-serif'],

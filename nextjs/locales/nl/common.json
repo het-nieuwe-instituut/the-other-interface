@@ -16,11 +16,18 @@
   "widthAbbr": "b",
   "depthAbbr": "d",
   "readMore": "Lees verder",
+  "readLess": "Lees minder",
+  "loadMore": "Laad meer",
   "switchToMockedServer": "Overschakelen naar mocked server",
   "switchToLiveServer": "Overschakelen naar live server",
   "go": "Zoek",
   "noDataFound": "Geen data gevonden",
+  "languageDisclaimer": "Alle collectiedata op het platform is automatisch naar het Engels vertaald.",
+  "noSuggestionsFound": "Geen suggesties gevonden",
   "audio": "De audio is nog niet klaar, probeer het later opnieuw.",
   "video": "De video is nog niet klaar, probeer het later opnieuw.",
-  "seeFullImage": "Bekijk volledige afbeelding"
+  "seeFullImage": "Bekijk volledige afbeelding",
+  "welcomeDescription": "Het collectieplatform is hét platform van het Nieuwe Instituut om de Rijkscollectie voor Nederlandse Architectuur en Stedenbouw online te ontdekken. Zoek in de collectie en lees de verhalen.",
+  "welcomeWarning": "Let op: alle collectiedata op het platform is automatisch naar het Engels vertaald.",
+  "welcomeButton": "Start hier"
 }

@@ -1,45 +1,37 @@
+import ErrorBox from '@/features/shared/components/Error/ErrorBox'
+import { ImageParagraph } from '@/features/ui/components/ImageParagraph/ImageParagraph'
 import {
   ImageCarousel,
   ImageCarouselItem,
 } from '@/features/ui/components/image-carousel/ImageCarousel'
+import { MuxAudioPlayer } from '@/features/ui/components/mux-audio/MuxAudioPlayer'
+import { MuxVideoPlayer } from '@/features/ui/components/mux-video/MuxVideoPlayer'
 import { Title } from '@/features/ui/components/title/Title'
 import { cn } from '@/features/ui/utils/cn'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
-import {
-  ComponentModulesGridModule,
-  HomepageComponentsDynamicZone,
-  HomepageQuery,
-  LandingpageBySlugQuery,
-  Maybe,
-  MenupageComponentsDynamicZone,
-  StoryByIdQuery,
-} from 'src/generated/graphql'
+import { StoryByIdQuery } from 'src/generated/graphql'
 import { Paragraph } from '../../ui/components/Paragraph/Paragraph'
 import { ButtonGroup, LinkButtonGroupItem } from '../../ui/components/button-group/component'
 import { Subtitle } from '../../ui/components/subtitle/Subtitle'
-import { GridModule } from '../components/GridModule/GridModule'
 import { ImageModuleWrapper } from '../components/ImageModuleWrapper'
 import { Pullquote } from '../components/Pullquote/Pullquote'
-import { MuxAudioPlayer } from '@/features/ui/components/mux-audio/MuxAudioPlayer'
-import { MuxVideoPlayer } from '@/features/ui/components/mux-video/MuxVideoPlayer'
-import ErrorBox from '@/features/shared/components/Error/ErrorBox'
+import { getTriplyOrStoryHref } from '@/features/editorial/components/getTriplyOrStoryHref'
+import { imageBasePath } from '../modulesConstants'
+import { useLocale } from '@/features/shared/hooks/useLocale'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 
 interface Props {
   components: DynamicComponents
   isStoryPage?: boolean
 }
 
-export type DynamicComponents =
-  | NonNullable<NonNullable<HomepageQuery['homepage']['data']>['attributes']>['components']
-  | NonNullable<
-      NonNullable<LandingpageBySlugQuery['landingpages']['data']>[0]['attributes']
-    >['components']
-  | Maybe<Array<HomepageComponentsDynamicZone>>
-  | NonNullable<NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']>['components']
-  | Maybe<Array<MenupageComponentsDynamicZone>>
+export type DynamicComponents = NonNullable<
+  NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']
+>['components']
 
 export function DynamicComponentRenderer({ components, isStoryPage = false }: Props) {
   const hasComponents = (components || []).length > 0
+  const lang = useLocale()
 
   return (
     <div
@@ -49,7 +41,6 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
         hasComponents && 'pt-10'
       )}
     >
-      {/* {[...[componentMock, componentMock2, componentMock3], ...(props.components || [])].map( */}
       {[...(components || [])].map((component, index, array) => {
         const typeName = component?.__typename
 
@@ -86,16 +77,27 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           if (component?.__typename === 'ComponentModulesImageCarousel') {
             return (
               <ImageCarousel key={keyExtractor(component.id, index, array)}>
-                {component.images?.data?.map(item => {
-                  const attributes = item?.attributes
+                {component.items?.map(item => {
+                  const attributes = item.image.data?.attributes
+                  const href = addLocaleToUrl(
+                    getTriplyOrStoryHref({
+                      story: item.story ?? undefined,
+                      triply_record: item.triply_record ?? undefined,
+                    }) ?? '',
+                    lang
+                  )
+                  const url = attributes?.url
+                    ? imageBasePath(attributes?.url.toString())
+                    : undefined
 
-                  if (!attributes || !attributes.height || !attributes.width) {
+                  if (!attributes || !attributes.height || !attributes.width || !url) {
                     return null
                   }
                   return (
                     <ImageCarouselItem
+                      href={href}
                       key={item.id}
-                      src={attributes.url}
+                      src={url}
                       // TODO: add alt text instead of caption
                       alt={attributes.caption ?? ''}
                       caption={attributes.caption ?? undefined}
@@ -150,15 +152,51 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               return null
             }
             return (
-              <ButtonGroup key={keyExtractor(component.id, index, array)}>
+              <ButtonGroup
+                key={keyExtractor(component.id, index, array)}
+                className={isStoryPage ? 'flex-wrap' : 'flex gap-4'}
+              >
                 {component.buttons.map(button => {
                   if (!button.text || !button.url) {
                     return null
                   }
                   return (
-                    <LinkButtonGroupItem key={button.id} href={button.url}>
+                    <LinkButtonGroupItem
+                      key={button.id}
+                      href={button.url}
+                      variant="jumbo"
+                      color={'jumboText'}
+                    >
                       {button.text}
                     </LinkButtonGroupItem>
+                  )
+                })}
+              </ButtonGroup>
+            )
+          }
+
+          if (component?.__typename === 'ComponentModulesStandaloneLinks') {
+            if (!component.standaloneLinks || component.standaloneLinks?.length === 0) {
+              return null
+            }
+            return (
+              <ButtonGroup key={keyExtractor(component.id, index, array)} className="flex gap-4">
+                {component.standaloneLinks.map(link => {
+                  if (!link.label || (!link.url && !link.attachment)) {
+                    return null
+                  }
+                  const href =
+                    (!link.attachment?.data ? link.url : link.attachment.data?.attributes?.url) ??
+                    undefined
+
+                  const variant = link.attachment?.data ? 'download' : 'link'
+
+                  if (!href) return null
+
+                  return (
+                    <StandaloneLink href={href} variant={variant} key={link.id}>
+                      {link.label}
+                    </StandaloneLink>
                   )
                 })}
               </ButtonGroup>
@@ -174,15 +212,6 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
           //       />
           //     )
           //   }
-
-          if (component?.__typename === 'ComponentModulesGridModule') {
-            return (
-              <GridModule
-                key={keyExtractor(component.id, index, array)}
-                component={component as ComponentModulesGridModule}
-              />
-            )
-          }
 
           if (component?.__typename === 'ComponentCoreStandAloneLink') {
             const href =
@@ -234,6 +263,27 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
                   component.muxVideoRelation?.data?.attributes?.aspect_ratio?.replace(':', ' / ') ??
                   '16 / 9'
                 }
+                key={keyExtractor(component.id, index, array)}
+              />
+            )
+          }
+          if (component?.__typename === 'ComponentModulesSideImageWithText') {
+            if (
+              !component.sideText ||
+              !component.image.data?.attributes?.url ||
+              !component.image.data?.attributes?.height ||
+              !component.image.data?.attributes?.width ||
+              !component.image.data?.attributes?.caption
+            )
+              return null
+            return (
+              <ImageParagraph
+                sideText={component.sideText}
+                imageSrc={component.image.data?.attributes?.url}
+                imageHeight={component.image.data?.attributes?.height}
+                imageWidth={component.image.data?.attributes?.width}
+                imageCaption={component.image.data?.attributes?.caption}
+                imageAltText={component.image_alt_text}
                 key={keyExtractor(component.id, index, array)}
               />
             )

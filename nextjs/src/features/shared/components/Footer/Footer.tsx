@@ -5,6 +5,8 @@ import { useLocale } from '../../hooks/useLocale'
 import { NavLinkButton } from '@/features/ui/components/nav-link-button/component'
 import ExternalLink from '@/features/ui/icons/external-link.svg'
 import { Locale } from 'src/generated/graphql'
+import { FOOTER_Z_INDEX } from '../../constants/mainConstants'
+import { CSSProperties } from 'react'
 
 export const Footer = () => {
   const lang = useLocale()
@@ -13,8 +15,11 @@ export const Footer = () => {
   const Icon = ExternalLink
 
   return (
-    <div className="bg-ivory-90 relative z-[FOOTER_Z_INDEX] flex w-full pt-8 opacity-100">
-      <div className="container m-auto max-w-[1392px] p-6 pb-12">
+    <div
+      style={{ '--z-index': `${FOOTER_Z_INDEX}` } as CSSProperties}
+      className="relative z-[var(--z-index)] flex w-full bg-ivory-90 opacity-100"
+    >
+      <div className="container m-auto max-w-[1392px] p-6">
         <div className="grid gap-1 md:grid-cols-2 lg:grid-cols-3">
           <div>
             <Link href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}>
@@ -33,9 +38,6 @@ export const Footer = () => {
                   </p>
                 </Link>
                 <Link href={`mailto:info@nieuweinstituut.nl`}>
-                  <p className="font-social-large text-[21px] tracking-[0.21px]">
-                    theotherinterface
-                  </p>
                   <p className="font-social-large text-[21px] tracking-[0.21px]">
                     info@nieuweinstituut.nl
                   </p>

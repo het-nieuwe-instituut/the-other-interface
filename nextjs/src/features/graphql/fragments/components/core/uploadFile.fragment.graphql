@@ -1,0 +1,21 @@
+fragment UploadFileFragment on UploadFileEntity {
+  id
+  attributes {
+    # hash
+    # mime
+    # name
+    # provider
+    size
+    url
+    alternativeText
+    caption
+    #  createdAt
+    #  ext
+    #  formats
+    height
+    #  previewUrl
+    #  provider_metadata
+    #  updatedAt
+    width
+  }
+}

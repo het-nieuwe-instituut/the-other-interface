@@ -36,6 +36,8 @@ import { StoryEntityResponse } from './story.types.circular'
 import { ComponentCoreStandAloneLink } from '../strapi/components/core/standAloneLink'
 import { ComponentCoreMuxAudio } from '../strapi/components/core/muxAudio'
 import { ComponentCoreMuxVideo } from '../strapi/components/core/muxVideo'
+import { ComponentModulesSideImageWithText } from '../strapi/components/modules/sideImageWithText'
+import { ComponentModulesStandaloneLinks } from '../strapi/components/modules/standAloneLinks'
 
 @ObjectType()
 export class StoryRelationResponseCollection {
@@ -129,6 +131,7 @@ export const StoryComponentsDynamicZone = createUnionType({
   name: 'StoryComponentsDynamicZone',
   types: () =>
     [
+      ComponentModulesStandaloneLinks,
       ComponentModulesButtonsModule,
       ComponentModulesImage,
       ComponentModulesImageCarousel,
@@ -139,6 +142,7 @@ export const StoryComponentsDynamicZone = createUnionType({
       ComponentCoreStandAloneLink,
       ComponentCoreMuxAudio,
       ComponentCoreMuxVideo,
+      ComponentModulesSideImageWithText,
       Error,
     ] as const,
   resolveType(value) {

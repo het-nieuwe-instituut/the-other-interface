@@ -1,29 +1,39 @@
 'use client'
-import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { useStoriesRelatedByTheme } from '@/features/shared/hooks/queries/useStoriesRelationWithinTheme'
 import { useLocale } from '@/features/shared/hooks/useLocale'
-import { storiesToCarouselDataMapper } from '@/features/shared/mappers/storiesToCarouselDataMapper'
-import { CATEGORIES } from '@/features/shared/utils/categories'
-import {
-  ImageCarousel,
-  ImageCarouselItem,
-} from '@/features/ui/components/image-carousel/ImageCarousel'
-
+import { useClientPagination } from '@/features/editorial/components/useClientPagination'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { useStoriesRelatedByThemeQuery } from '@/features/shared/hooks/queries/useStoriesRelationWithinThemeQuery'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { storiesToCarouselDataMapper } from '@/features/shared/mappers/storiesToCarouselDataMapper'
+import {
+  CarouselGrid,
+  CarouselGridCard,
+  CarouselGridCardWrapper,
+  CarouselGridFooter,
+  CarouselGridPagination,
+  CarouselGridTitle,
+} from '@/features/ui/components/carousel-grid/CarouselGrid'
 import { useParams } from 'next/navigation'
+import { useMemo } from 'react'
 import ErrorBox from '../../Error/ErrorBox'
 import { ThemedSpinner } from '../../Loading/ThemedSpinner/ThemedSpinner'
 
+const ITEMS_IN_PAGE = 4
 export const StoryWithinThemeCarousel = () => {
   const params = useParams()
   const id = params?.id as string
   const lang = useLocale()
 
-  const { data, isLoading, isError } = useStoriesRelatedByTheme(id)
+  const { data, isLoading, isError } = useStoriesRelatedByThemeQuery(id)
   const { t: tStories } = useTypeSafeTranslation('stories')
-
-  const stories = storiesToCarouselDataMapper(data?.storiesRealtedWithinTheme?.stories)
+  const stories = useMemo(
+    () => storiesToCarouselDataMapper(data?.storiesRealtedWithinTheme?.stories) ?? [],
+    [data?.storiesRealtedWithinTheme?.stories]
+  )
+  const { nodes, lastPage, page, next, previous } = useClientPagination({
+    items: stories,
+    itemsInPage: ITEMS_IN_PAGE,
+  })
 
   if (isError) {
     return <ErrorBox />
@@ -41,28 +51,37 @@ export const StoryWithinThemeCarousel = () => {
     <div>
       {stories && stories.length > 0 && (
         <>
-          <h1 className={TypographyVariants({ impact: 'lg', className: 'mb-4' })}>
-            {tStories('moreOnTheme')} ({stories.length})
-          </h1>
-
-          <ImageCarousel>
-            {stories.map(item => {
-              const href = addLocaleToUrl(`/detail/${CATEGORIES.stories}/${id}`, lang)
-
-              if (!item || !item.height || !item.width || !item.url) {
-                return null
-              }
-              return (
-                <ImageCarouselItem
-                  href={href}
-                  key={item.id}
-                  src={item.url}
-                  alt={item.description ?? ''}
-                  caption={item.description ?? undefined}
+          <CarouselGrid>
+            <CarouselGridTitle>{`${tStories('moreOnTheme')} (${
+              stories.length
+            })`}</CarouselGridTitle>
+            <CarouselGridCardWrapper cols={ITEMS_IN_PAGE}>
+              {nodes.map(item => {
+                const url = addLocaleToUrl(`/detail/stories/${item.id}`, lang)
+                return (
+                  <CarouselGridCard
+                    key={item.id}
+                    title={item.title}
+                    description={item?.description || ''}
+                    image={item.url}
+                    href={url}
+                    alt={item.title || 'image'}
+                  ></CarouselGridCard>
+                )
+              })}
+            </CarouselGridCardWrapper>
+            <CarouselGridFooter>
+              <div />
+              {stories.length > 4 && (
+                <CarouselGridPagination
+                  onNext={next}
+                  onPrevious={previous}
+                  hidePrevious={page === 1}
+                  hideNext={page === lastPage || lastPage === 1}
                 />
-              )
-            }) ?? []}
-          </ImageCarousel>
+              )}
+            </CarouselGridFooter>
+          </CarouselGrid>
         </>
       )}
     </div>

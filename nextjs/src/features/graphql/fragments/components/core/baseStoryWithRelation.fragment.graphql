@@ -22,6 +22,9 @@ fragment StoryFragment on StoryEntity {
       ... on ComponentModulesButtonsModule {
         ...buttonsModuleFragment
       }
+      ... on ComponentModulesStandaloneLinks {
+        ...standaloneLinksModuleFragment
+      }
       ... on ComponentModulesSubtitle {
         ...subtitleModuleFragment
       }
@@ -55,7 +58,6 @@ fragment StoryFragment on StoryEntity {
     }
     createdAt
     updatedAt
-    publishedAt
     localizations {
       data {
         id

@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_modules_highlights",
+  "info": {
+    "displayName": "Highlight",
+    "icon": "",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "buttons": {
+      "type": "component",
+      "repeatable": true,
+      "max": 2,
+      "component": "core.button"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "image_alt_text": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

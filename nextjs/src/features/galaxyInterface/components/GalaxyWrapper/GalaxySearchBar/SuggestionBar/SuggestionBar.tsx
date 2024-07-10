@@ -36,7 +36,7 @@ export const SuggestionBar: React.FC<Props> = ({
       templateColumns={'160px 1fr'}
       className={'gap-4 px-4 py-2'}
     >
-      <Flex width="146px" pt={4}>
+      <Flex width="146px" py={4}>
         <p className={cn('text-pink.100', TypographyVariants({ socialLarge: 'textfield' }))}>
           {label}
         </p>

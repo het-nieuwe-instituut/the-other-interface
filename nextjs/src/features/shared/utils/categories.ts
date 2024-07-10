@@ -28,6 +28,16 @@ export const CATEGORIES_TO_ENTITY_MAPPER = {
   [CATEGORIES.people]: EntityNames.People,
 } as const
 
+export const ENTITY_NAMES_TO_CATEGORY: Partial<
+  Record<EntityNames, (typeof CATEGORIES)[keyof typeof CATEGORIES]>
+> = {
+  [EntityNames.Stories]: CATEGORIES.stories,
+  [EntityNames.Archives]: CATEGORIES.archives,
+  [EntityNames.Publications]: CATEGORIES.publications,
+  [EntityNames.Objects]: CATEGORIES.objects,
+  [EntityNames.People]: CATEGORIES.people,
+}
+
 export const isStoryCategory = (category?: string | null) => category === CATEGORIES.stories
 
 export const isCloudCategory = (category?: string | null) => {

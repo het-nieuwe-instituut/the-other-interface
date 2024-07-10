@@ -1,12 +1,12 @@
 'use client'
-import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
-import { Grid } from '@chakra-ui/react'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { Loader } from '@/features/shared/components/Loading/Loading'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
+import { Loader } from '@/features/shared/components/Loading/Loading'
+import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
+import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { IconButton } from '@/features/ui/components/icon-button/component'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
-import { IconButton } from '@/features/ui/components/icon-button/component'
+import { CSSProperties } from 'react'
 import { ArrowIcon } from './fragments/ArrowIcon'
 
 type Props = {
@@ -76,18 +76,14 @@ export const GalaxyPagination: React.FC<Props> = ({
   }
 
   return (
-    <Grid
-      position={'relative'}
-      height="60px"
-      border={'1px solid'}
-      borderColor={'blueAlpha.100'}
-      padding={'4px'}
-      zIndex={FOOTER_Z_INDEX}
-      color={'blueAlpha.100'}
-      templateColumns={isResultAmountLoading || isResultError ? '1fr' : '36px 1fr 36px'}
-      gap="5px"
+    <div
+      style={{ '--z-index': FOOTER_Z_INDEX } as CSSProperties}
+      className={cn(
+        'relative z-[var(--z-index)] grid h-[60px] gap-[5px] border border-solid border-blue p-1 text-blue-100',
+        isResultAmountLoading || isResultError ? 'grid-cols-[1fr]' : 'grid-cols-[36px,1fr,36px]'
+      )}
     >
       {renderPaginationContent()}
-    </Grid>
+    </div>
   )
 }

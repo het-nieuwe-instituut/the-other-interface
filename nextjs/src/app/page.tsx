@@ -1,6 +1,7 @@
 import { HomepageContainer } from '@/features/pages/containers/HomepageContainer/HomepageContainer'
 import { ReduxSearchSync } from '@/features/shared/components/Redux/ReduxSearchSync'
 import { getLocaleFromParams } from '@/features/shared/helpers/getLocaleFromParams'
+import { HomepageTemplatesProvider } from '@/features/shared/hooks/usePositioningTemplates'
 import initApiServerService from '@/features/shared/utils/initApiServerService'
 import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
@@ -28,9 +29,9 @@ export default async function Page({
   const homepage = await api?.homepage({ locale })
 
   return (
-    <>
+    <HomepageTemplatesProvider>
       <ReduxSearchSync />
       <HomepageContainer homepage={homepage} draftMode={isEnabled} />
-    </>
+    </HomepageTemplatesProvider>
   )
 }

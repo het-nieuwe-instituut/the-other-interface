@@ -24,22 +24,14 @@ export async function getZoom3RelationsTask({
 
     if (isStoryCategory(type)) {
       const currentData = await api?.StoriesRelations({ id, locale, page })
-      if (page === maxPages) {
-        return { currentData, nextData: { relations: [] } }
-      }
-      const nextPage = page === maxPages ? maxPages : page + 1
-      const nextData = await api?.StoriesRelations({ id, locale, page: nextPage })
-
-      return { currentData, nextData }
+      return { currentData }
     } else {
       const currentData = await configByType?.relationsQuery?.({ id, locale, page })
       if (page === maxPages) {
-        return { currentData, nextData: { relations: [] } }
+        return { currentData }
       }
-      const nextPage = page === maxPages ? maxPages : page + 1
-      const nextData = await configByType?.relationsQuery?.({ id, locale, page: nextPage })
 
-      return { currentData, nextData }
+      return { currentData }
     }
   } catch (e) {
     console.log(e, 'Error accured in zoom level 3 task')

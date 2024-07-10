@@ -1,7 +1,4 @@
-import DisableScroll from '@/features/shared/components/DisableScroll/DisableScroll'
 import { AppHead } from '@/features/shared/components/Head/AppHead'
-import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
-import { TestMenu } from '@/features/shared/components/TestMenu/TestMenu'
 import { ReduxStoreProvider } from '@/features/shared/components/providers/ReduxStoreProdivder'
 import { ThemeProvider } from '@/features/shared/components/providers/ThemeProvider'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -17,6 +14,7 @@ import '../styles/globals.css'
 import bootstrap from './_bootstrap'
 import { Bootstrap } from './_bootstrap/Bootstrap'
 import { LightboxProvider } from '@/features/ui/components/lightbox/LightboxProvider'
+import WelcomeOverlayProvider from '@/features/shared/components/WelcomeOverlayProvider/WelcomeOverlayProvider'
 
 function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
@@ -42,23 +40,37 @@ function MyApp({ children }: { children: React.ReactNode }) {
             </Script>
           </>
         )}
+        {process.env.parsed.NEXT_PUBLIC_ENV === 'production' && (
+          <Script strategy="afterInteractive" id="matomo-tracker">
+            {`
+                var _paq = window._paq = window._paq || [];
+                /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+                _paq.push(['trackPageView']);
+                _paq.push(['enableLinkTracking']);
+                (function() {
+                    var u="https://stats.hetnieuweinstituut.nl/";
+                    _paq.push(['setTrackerUrl', u+'matomo.php']);
+                    _paq.push(['setSiteId', '7']);
+                    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+                })();
+            `}
+          </Script>
+        )}
         <Bootstrap />
         <LightboxProvider>
           <ReduxStoreProvider>
             <ReactQueryProvider>
               <ThemeProvider>
-                <DisableScroll>
-                  <MobileOverlayProvider>
-                    <div>
-                      <AppHead />
-                      <TestMenu />
-                      <ReduxDraftModeSync isDraftMode={isEnabled} />
-                      {children}
-                      <ReactTooltipInitializer />
-                      <BaseElementWrapper />
-                    </div>
-                  </MobileOverlayProvider>
-                </DisableScroll>
+                <WelcomeOverlayProvider>
+                  <div>
+                    <AppHead />
+                    <ReduxDraftModeSync isDraftMode={isEnabled} />
+                    {children}
+                    <ReactTooltipInitializer />
+                    <BaseElementWrapper />
+                  </div>
+                </WelcomeOverlayProvider>
               </ThemeProvider>
               <ReactQueryDevtools initialIsOpen={false} />
             </ReactQueryProvider>

@@ -3,6 +3,7 @@
 import { ScrollToContent } from '@/features/pages/utils/utils'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import useScroll from '@/features/shared/hooks/ui/useScroll'
+import { Paragraph } from '@/features/ui/components/Paragraph/Paragraph'
 import { ParagraphWithLineClamp } from '@/features/ui/components/Paragraph/ParagraphWithLineClamp'
 import { NavButton } from '@/features/ui/components/nav-button/component'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
@@ -13,9 +14,12 @@ interface Props {
   title?: string
   preface?: string
   constrainPreface?: boolean
+  splitByHtmlBreaks?: boolean
+  showReadMore?: boolean
 }
 
-export const PageHeader: React.FC<Props> = ({ title, preface, constrainPreface }) => {
+export const PageHeader: React.FC<Props> = props => {
+  const { title, preface, constrainPreface, splitByHtmlBreaks, showReadMore = true } = props
   const commonT = useTypeSafeTranslation('common')
   const { scrollPosition } = useScroll()
   const [constrainPrefaceState, setConstrainPreface] = useState(constrainPreface)
@@ -31,22 +35,28 @@ export const PageHeader: React.FC<Props> = ({ title, preface, constrainPreface }
       >
         {title && <h1 className={TypographyVariants({ responsive: 'title' })}>{title}</h1>}
       </button>
-      {preface && (
+      {preface && showReadMore && (
         <div className="relative flex flex-col items-start justify-start gap-5 ">
           <ParagraphWithLineClamp
+            splitByHtmlBreaks={splitByHtmlBreaks}
             disableLineClamp={!constrainPrefaceState}
             ReadmoreComponent={
               <NavButton
-                onClick={() => setConstrainPreface(false)}
+                onClick={() => setConstrainPreface(!constrainPrefaceState)}
                 intent={'secondary'}
                 variant={'footerPrimary'}
               >
-                {commonT.t('readMore')}
+                {constrainPrefaceState ? commonT.t('readMore') : commonT.t('readLess')}
               </NavButton>
             }
           >
             {preface}
           </ParagraphWithLineClamp>
+        </div>
+      )}
+      {preface && !showReadMore && (
+        <div className="relative flex flex-col items-start justify-start gap-5 ">
+          <Paragraph>{preface}</Paragraph>
         </div>
       )}
     </div>

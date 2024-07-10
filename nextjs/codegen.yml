@@ -14,16 +14,7 @@ generates:
         config:
             namingConvention:
                 typeNames: change-case-all#pascalCase
-                enumValues: change-case-all#capitalCase
+                enumValues: change-case-all#pascalCase
     ./graphql.schema.json:
         plugins:
             - 'introspection'
-    src/mocks/generated-mocks.ts:
-        plugins:
-            - typescript-mock-data:
-                  terminateCircularRelationships: true
-                  typesFile: '../generated/graphql.ts'
-        config:
-            namingConvention:
-                typeNames: change-case-all#pascalCase
-                enumValues: change-case-all#capitalCase
