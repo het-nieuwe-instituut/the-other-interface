@@ -1,6 +1,6 @@
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { DateService } from '@/features/shared/services/dates'
-import { capitalizeFirstLetter } from '@/features/shared/utils/text'
+import { capitalizeFirstLetter, joinNullableStrings } from '@/features/shared/utils/text'
 import {
   AuthorEntity,
   ComponentCoreTimeframe,
@@ -31,9 +31,11 @@ export function formatPublicationDate(
 export function formatAuthor(author?: AuthorEntity['attributes'] | null) {
   if (!author) return undefined
 
-  return `${capitalizeFirstLetter(author.firstName)}${
-    author.insertion ? ' ' + author.insertion : ''
-  }${' ' + capitalizeFirstLetter(author.lastName)}`
+  const firstName = author.firstName ? capitalizeFirstLetter(author.firstName) : ''
+  const insertion = author.insertion ? ' ' + author.insertion : ''
+  const lastName = author.lastName ? ' ' + capitalizeFirstLetter(author.lastName) : ''
+
+  return joinNullableStrings(' ', firstName, insertion, lastName)
 }
 
 export function formatTimeframe(timeframe?: ComponentCoreTimeframe | null) {
