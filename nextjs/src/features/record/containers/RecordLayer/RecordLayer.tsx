@@ -9,7 +9,10 @@ import {
   ThumbnailCarouselItem,
 } from '@/features/ui/components/thumbnail-carousel/ThumbnailCarousel'
 import { useParams } from 'next/navigation'
-import { ArchivesRecordZoomLevel3Type } from 'src/generated/graphql'
+import {
+  ArchivesRecordZoomLevel3Type,
+  PublicationZoomLevel3DetailType,
+} from 'src/generated/graphql'
 import { LayerWrapper } from '../../../shared/components/Layers/LayerWrapper'
 import { RecordMeta } from '../../components/RecordMeta/RecordMeta'
 import { OmitEnrichedData } from '../../configs/recordMetaFieldOrderConfig'
@@ -35,7 +38,6 @@ export const RecordLayer = () => {
     <LayerWrapper
       LeftContent={
         <>
-          {/* <ErrorBoundaryWrapper> */}
           <div className="flex flex-col gap-4">
             <PageHeader
               title={record?.title ?? undefined}
@@ -60,8 +62,10 @@ export const RecordLayer = () => {
             {meta?.__typename === 'ArchivesRecordZoomLevel3Type' ? (
               <ArchivesDescriptions meta={meta} />
             ) : null}
+            {record?.__typename === 'PublicationZoomLevel3DetailType' ? (
+              <PublicationsDescriptions data={record} />
+            ) : null}
           </div>
-          {/* </ErrorBoundaryWrapper> */}
         </>
       }
       RightContent={<RecordMeta data={meta} isLoading={isLoading} category={category} />}
@@ -70,55 +74,58 @@ export const RecordLayer = () => {
   )
 }
 
-interface MetaDescriptionProps {
+interface ArchiveMetaDescriptionProps {
   meta: OmitEnrichedData<ArchivesRecordZoomLevel3Type>
 }
 
-const ArchivesDescriptions = ({ meta }: MetaDescriptionProps) => {
+const ArchivesDescriptions = ({ meta }: ArchiveMetaDescriptionProps) => {
+  type DescriptionKey = keyof Omit<ArchiveMetaDescriptionProps['meta'], '__typename' | 'rights'>
+
   const { t: recordMetaT } = useTypeSafeTranslation('recordMeta')
+  const keys: DescriptionKey[] = [
+    'custodialHistory',
+    'systemOfArrangement',
+    'sources',
+    'existence',
+    'existenceLocation',
+  ]
 
   return (
     <div className="mt-10 flex flex-col gap-10 empty:mt-0">
-      {meta.custodialHistory && (
-        <RecordDescription
-          title={recordMetaT('custodialHistory')}
-          preface={meta.custodialHistory}
-          constrainPreface={true}
-          splitByHtmlBreaks
-        ></RecordDescription>
-      )}
-      {meta.systemOfArrangement && (
-        <RecordDescription
-          title={recordMetaT('systemOfArrangement')}
-          preface={meta.systemOfArrangement}
-          constrainPreface={true}
-          splitByHtmlBreaks
-        ></RecordDescription>
-      )}
-      {meta.sources && (
-        <RecordDescription
-          title={recordMetaT('sources')}
-          preface={meta.sources}
-          constrainPreface={true}
-          splitByHtmlBreaks
-        ></RecordDescription>
-      )}
-      {meta.existence && (
-        <RecordDescription
-          title={recordMetaT('existence')}
-          preface={meta.existence}
-          constrainPreface={true}
-          splitByHtmlBreaks
-        ></RecordDescription>
-      )}
-      {meta.existenceLocation && (
-        <RecordDescription
-          title={recordMetaT('existenceLocation')}
-          preface={meta.existenceLocation}
-          constrainPreface={true}
-          splitByHtmlBreaks
-        ></RecordDescription>
-      )}
+      {keys.map((k, i) => (
+        <Description key={i} title={recordMetaT(k)} preface={meta[k] ?? undefined}></Description>
+      ))}
     </div>
   )
 }
+
+interface PublicationsMetaDescriptionProps {
+  data: OmitEnrichedData<PublicationZoomLevel3DetailType>
+}
+
+const PublicationsDescriptions = ({ data }: PublicationsMetaDescriptionProps) => {
+  type DescriptionKey = keyof Omit<
+    PublicationsMetaDescriptionProps['data'],
+    '__typename' | 'title' | 'thumbnail' | 'yearOfPublication'
+  >
+
+  const { t: recordMetaT } = useTypeSafeTranslation('recordMeta')
+  const keys: DescriptionKey[] = ['description', 'holding', 'historyNotes', 'annotation']
+
+  return (
+    <div className="mt-10 flex flex-col gap-10 empty:mt-0">
+      {keys.map((k, i) => (
+        <Description key={i} title={recordMetaT(k)} preface={data[k] ?? undefined}></Description>
+      ))}
+    </div>
+  )
+}
+
+const Description = ({ title, preface }: { title?: string; preface?: string | null }) => (
+  <RecordDescription
+    title={title}
+    preface={preface ?? undefined}
+    constrainPreface={true}
+    splitByHtmlBreaks
+  ></RecordDescription>
+)
