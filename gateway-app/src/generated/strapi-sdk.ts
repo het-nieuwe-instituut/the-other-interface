@@ -395,14 +395,7 @@ export type ComponentModulesImageCarousel = {
   __typename?: 'ComponentModulesImageCarousel'
   description?: Maybe<Scalars['String']>
   id: Scalars['ID']
-  images?: Maybe<UploadFileRelationResponseCollection>
   items: Array<Maybe<ComponentCoreImageCarouselItem>>
-}
-
-export type ComponentModulesImageCarouselImagesArgs = {
-  filters?: InputMaybe<UploadFileFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
 export type ComponentModulesImageCarouselItemsArgs = {
@@ -414,7 +407,6 @@ export type ComponentModulesImageCarouselItemsArgs = {
 export type ComponentModulesImageCarouselInput = {
   description?: InputMaybe<Scalars['String']>
   id?: InputMaybe<Scalars['ID']>
-  images?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
   items?: InputMaybe<Array<InputMaybe<ComponentCoreImageCarouselItemInput>>>
 }
 

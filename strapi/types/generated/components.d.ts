@@ -224,7 +224,6 @@ export interface ModulesImageCarousel extends Schema.Component {
     description: ''
   }
   attributes: {
-    images: Attribute.Media
     description: Attribute.Text
     items: Attribute.Component<'core.image-carousel-item', true> & Attribute.Required
   }
