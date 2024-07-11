@@ -1,7 +1,4 @@
-import {
-  CloudCategory,
-  getCloudCategoryByZoomLevel3RelationType,
-} from '@/features/shared/utils/categories'
+import { CloudCategory, ENTITY_NAMES_TO_CATEGORY } from '@/features/shared/utils/categories'
 
 import { getZoom3RelationsTask } from '@/features/pages/tasks/getZoom3Relations'
 import initApiClientService from '@/features/shared/utils/initApiClientService'
@@ -58,16 +55,15 @@ function getPositionedRecords(
 ) {
   if (!relations || current === undefined) return []
 
-  const positionedRecords: PositionedRecord[] = []
   const categoryPositioningTemplate = positioningTemplate[category][current]
-  const categoryRelations = relations.find(
-    relation => getCloudCategoryByZoomLevel3RelationType(relation) === category
-  )?.paginatedRelations
+  const { paginatedRelations } =
+    relations.find(r => ENTITY_NAMES_TO_CATEGORY[r.type] === category) || {}
 
-  if (!categoryPositioningTemplate || !categoryRelations) return []
+  if (!categoryPositioningTemplate || !paginatedRelations) return []
 
+  const positionedRecords: PositionedRecord[] = []
   categoryPositioningTemplate.forEach((template, index) => {
-    const record = categoryRelations[index]
+    const record = paginatedRelations[index]
 
     if (record) {
       positionedRecords.push({

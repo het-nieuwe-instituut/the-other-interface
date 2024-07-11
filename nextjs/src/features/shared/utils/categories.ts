@@ -1,4 +1,4 @@
-import { EntityNames, ZoomLevel3RelationsType } from 'src/generated/graphql'
+import { EntityNames } from 'src/generated/graphql'
 
 export const CLOUD_CATEGORIES = {
   archives: 'archives',
@@ -28,6 +28,16 @@ export const CATEGORIES_TO_ENTITY_MAPPER = {
   [CATEGORIES.people]: EntityNames.People,
 } as const
 
+export const ENTITY_NAMES_TO_CATEGORY: Partial<
+  Record<EntityNames, (typeof CATEGORIES)[keyof typeof CATEGORIES]>
+> = {
+  [EntityNames.Stories]: CATEGORIES.stories,
+  [EntityNames.Archives]: CATEGORIES.archives,
+  [EntityNames.Publications]: CATEGORIES.publications,
+  [EntityNames.Objects]: CATEGORIES.objects,
+  [EntityNames.People]: CATEGORIES.people,
+}
+
 export const isStoryCategory = (category?: string | null) => category === CATEGORIES.stories
 
 export const isCloudCategory = (category?: string | null) => {
@@ -40,23 +50,4 @@ export const isSearchCategory = (category?: string | null) => {
   if (!category) return false
 
   return (SEARCH_CATEGORIES_ARRAY as string[]).includes(category)
-}
-
-export const getCloudCategoryByZoomLevel3RelationType = (
-  zoomLevel3Relatation: ZoomLevel3RelationsType
-): CloudCategory => {
-  const transformedType = zoomLevel3Relatation.type.toLocaleLowerCase()
-  if (transformedType === 'objects') {
-    return 'objects'
-  }
-  if (transformedType === 'people') {
-    return 'people'
-  }
-  if (transformedType === 'publications') {
-    return 'publications'
-  }
-  if (transformedType === 'archives') {
-    return 'archives'
-  }
-  throw new Error(`Unknown category from relation type, this should not happen! ${transformedType}`)
 }

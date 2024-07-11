@@ -1,3 +1,5 @@
+import { searchCategoryToTriplyCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
+import { GalaxyZoomAnimationStateContext } from '@/features/galaxyInterface/galaxies/hooks/GalaxyZoomAnimationStateProvider'
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { State } from '@/features/shared/configs/store'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
@@ -10,12 +12,12 @@ import {
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useEnterKey } from '@/features/shared/hooks/ui/useEnterKey'
 import { useOutsideClick } from '@/features/shared/hooks/ui/useOutsideClick'
-import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { cn } from '@/features/ui/utils/cn'
 import CloseIconSmall from '@/icons/close-icon-small.svg'
 import { useRouter } from 'next/navigation'
-import { CSSProperties, useCallback, useMemo, useRef, useState } from 'react'
+import React, { CSSProperties, useCallback, useContext, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { COLLECTION_HILIGHT_ID, SuggestionsContainer } from '../Suggestions/Suggestions'
@@ -32,67 +34,54 @@ import { SearchButton } from './fragments/SearchButton'
 import SearchResults from './fragments/SearchResults'
 import { TotalResults } from './fragments/TotalResults'
 import { useSearchBarPosition } from './useSearchBarPosition'
-import { searchCategoryToTriplyCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
 
 type Props = {
   total?: number
-  isNoActiveSearch?: boolean
   className?: string
+  isNoActiveSearch?: boolean
 }
 
-export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }) => {
+export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }) => {
   isNoActiveSearch = true
-  const { t } = useTypeSafeTranslation('category')
   const filterInputRef = useRef<HTMLInputElement>(null)
   const searchBarRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
-  const dispatch = useDispatch()
   const [isUserTyping, setIsUserTyping] = useState(false)
-
   const { closeSearchMode, clearAllSearch, openSearch, focus } = useSearchBarActions({
     filterInputRef,
-    isNoActiveSearch: isNoActiveSearch,
+    isNoActiveSearch,
   })
-  const { syncInput } = useSyncSearchInputToStore()
-  const { lang } = useZoom2Params()
+  const lang = useLocale()
   const { encodedFilters } = useEncodedSearchFilters()
   const selectedFilters = useSelectedFilters()
-  const { removeFilter, selectFilter } = useFilterActions({
-    onSelectFilter: focus,
-    onRemoveFilter: focus,
-  })
   const { offset, searchBarHeight, wrapRef } = useSearchBarPosition(selectedFilters)
-  const { isSearchModeActive, searchCategory, isCategorySuggestionsOpen, searchValue } =
-    useSelector((state: State) => state.shared)
+  const { isSearchModeActive, searchCategory, searchValue } = useSelector(
+    (state: State) => state.shared
+  )
+  const searchParam = searchValue ? `&search=${searchValue}` : ''
+  const filtersParam = encodedFilters ? `&filters=${encodedFilters}` : ''
+  let searchUrl = `/landingpage?category=${searchCategory}${searchParam}${filtersParam}&searchResult=true`
+  searchUrl = addLocaleToUrl(searchUrl, lang)
+
+  const { setAnimationState } = useContext(GalaxyZoomAnimationStateContext)
 
   const handleGoClick = useCallback(() => {
-    const searchParam = searchValue ? `&search=${searchValue}` : ''
-    const filtersParam = encodedFilters ? `&filters=${encodedFilters}` : ''
-    let url = `/landingpage?category=${searchCategory}${searchParam}${filtersParam}&searchResult=true`
-    url = addLocaleToUrl(url, lang)
-    router.push(url)
-
     setIsUserTyping(false)
     closeSearchMode(false)
-  }, [searchValue, encodedFilters, searchCategory, lang, router, closeSearchMode])
+  }, [closeSearchMode])
 
-  useEnterKey(handleGoClick)
+  useEnterKey(() => {
+    setAnimationState('forward')
+    setTimeout(() => {
+      router.push(searchUrl)
+    }, 600)
+
+    handleGoClick()
+  })
   useOutsideClick(searchBarRef, () => {
     closeSearchMode(true)
   })
   useCloseSearchOnPathnameChange()
-
-  const isUserInteracting = !!searchValue && isUserTyping && isSearchModeActive
-
-  const isCollectionHighlightsSelected: boolean = selectedFilters.some(
-    filter => filter.id === COLLECTION_HILIGHT_ID
-  )
-
-  const searchCategoryToTriplyEnum = useMemo(() => {
-    if (searchCategory) {
-      return searchCategoryToTriplyCategory(searchCategory)
-    }
-  }, [searchCategory])
 
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
@@ -112,50 +101,18 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
         {isNoActiveSearch ? <TotalResults text={searchValue} /> : <SearchResults />}
       </div>
 
-      <div ref={wrapRef} className="flex flex-wrap gap-0 p-0 transition-all">
-        <div className="mr-2 pt-1">
-          <CategoryFilter
-            onClick={() =>
-              dispatch(
-                sharedActions.categorySuggestionsOpen({
-                  categorySuggestionsOpen: !isCategorySuggestionsOpen,
-                })
-              )
-            }
-            isOpen={isCategorySuggestionsOpen}
-            selectedOption={searchCategory ? t(searchCategory) : ''}
-          />
-        </div>
-        {selectedFilters.map(filter => (
-          <div key={filter.id} className="mr-2 h-[60px] max-w-full pt-1">
-            <SearchFilterBox
-              category={filter.key}
-              subCategory={filter.value}
-              id={filter.id}
-              actionButton={<CloseIconSmall />}
-              actionButtonClick={removeFilter}
-            />
-          </div>
-        ))}
-        <div className={'h-[60px] min-w-[70px] grow py-1 pl-2'}>
-          <FilterInput
-            inputRef={filterInputRef}
-            onFocus={openSearch}
-            defaultValue={searchValue}
-            value={searchValue}
-            onChange={e => {
-              setIsUserTyping(true)
-              syncInput(e.target.value)
-            }}
-            placeholder={t('searchPlaceholder')}
-          />
-        </div>
-      </div>
+      <InputBar
+        onTyping={() => setIsUserTyping(true)}
+        openSearch={openSearch}
+        onFocus={focus}
+        ref={wrapRef}
+        filterInputRef={filterInputRef}
+      />
 
       <div className="flex h-[60px] items-center gap-[12px] self-end pt-1">
         {isSearchModeActive ? (
           <>
-            <GoButton onClick={handleGoClick} />
+            <GoButton href={searchUrl} onClick={handleGoClick} />
             <CloseButton onClick={clearAllSearch} />
           </>
         ) : isNoActiveSearch ? (
@@ -171,6 +128,110 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
         )}
       </div>
 
+      <SearchSuggestionsBar
+        onFocus={focus}
+        isUserTyping={isUserTyping}
+        searchBarHeight={searchBarHeight}
+      />
+    </div>
+  )
+}
+
+export const InputBar = React.forwardRef<
+  HTMLDivElement,
+  {
+    onTyping: () => void
+    openSearch: () => void
+    onFocus: () => void
+    filterInputRef: React.RefObject<HTMLInputElement>
+  }
+>(({ onTyping, openSearch, onFocus, filterInputRef }, ref) => {
+  const { t } = useTypeSafeTranslation('category')
+  const selectedFilters = useSelectedFilters()
+  const { searchCategory, isCategorySuggestionsOpen, searchValue } = useSelector(
+    (state: State) => state.shared
+  )
+  const dispatch = useDispatch()
+  const { syncInput } = useSyncSearchInputToStore()
+  const { removeFilter } = useFilterActions({
+    onSelectFilter: onFocus,
+    onRemoveFilter: onFocus,
+  })
+
+  return (
+    <div ref={ref} className="flex flex-wrap gap-0 p-0 transition-all">
+      <div className="mr-2 pt-1">
+        <CategoryFilter
+          onClick={() =>
+            dispatch(
+              sharedActions.categorySuggestionsOpen({
+                categorySuggestionsOpen: !isCategorySuggestionsOpen,
+              })
+            )
+          }
+          isOpen={isCategorySuggestionsOpen}
+          selectedOption={searchCategory ? t(searchCategory) : ''}
+        />
+      </div>
+      {selectedFilters.map(filter => (
+        <div key={filter.id} className="mr-2 h-[60px] max-w-full pt-1">
+          <SearchFilterBox
+            category={filter.key}
+            subCategory={filter.value}
+            id={filter.id}
+            actionButton={<CloseIconSmall />}
+            actionButtonClick={removeFilter}
+          />
+        </div>
+      ))}
+      <div className={'h-[60px] min-w-[70px] grow py-1 pl-2'}>
+        <FilterInput
+          inputRef={filterInputRef}
+          onFocus={openSearch}
+          defaultValue={searchValue}
+          onChange={e => {
+            onTyping?.()
+            syncInput(e.target.value)
+          }}
+          placeholder={t('searchPlaceholder')}
+        />
+      </div>
+    </div>
+  )
+})
+InputBar.displayName = 'InputBar'
+
+export const SearchSuggestionsBar = ({
+  isUserTyping,
+  searchBarHeight,
+  onFocus,
+}: {
+  isUserTyping: boolean
+  searchBarHeight: number
+  onFocus: () => void
+}) => {
+  const { isCategorySuggestionsOpen, searchCategory, searchValue, isSearchModeActive } =
+    useSelector((state: State) => state.shared)
+  const { t } = useTypeSafeTranslation('category')
+  const { selectFilter } = useFilterActions({
+    onSelectFilter: onFocus,
+    onRemoveFilter: onFocus,
+  })
+  const selectedFilters = useSelectedFilters()
+  const isCollectionHighlightsSelected: boolean = selectedFilters.some(
+    filter => filter.id === COLLECTION_HILIGHT_ID
+  )
+
+  const searchCategoryToTriplyEnum = useMemo(() => {
+    if (searchCategory) {
+      return searchCategoryToTriplyCategory(searchCategory)
+    }
+  }, [searchCategory])
+
+  const isUserInteracting = !!searchValue && isUserTyping && isSearchModeActive
+
+  return (
+    <>
       <SuggestionBar
         isOpen={isCategorySuggestionsOpen}
         label={t('searchCategory')}
@@ -191,6 +252,6 @@ export const GalaxySearchBar: React.FC<Props> = ({ isNoActiveSearch, className }
           />
         </SuggestionBar>
       )}
-    </div>
+    </>
   )
 }

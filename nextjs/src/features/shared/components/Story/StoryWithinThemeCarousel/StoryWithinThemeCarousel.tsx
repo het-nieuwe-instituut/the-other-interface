@@ -62,10 +62,10 @@ export const StoryWithinThemeCarousel = () => {
                   <CarouselGridCard
                     key={item.id}
                     title={item.title}
-                    description={item?.description}
+                    description={item?.description || ''}
                     image={item.url}
                     href={url}
-                    alt={item.title}
+                    alt={item.title || 'image'}
                   ></CarouselGridCard>
                 )
               })}

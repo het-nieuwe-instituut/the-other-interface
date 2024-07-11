@@ -19,7 +19,7 @@ export async function generateMetadata(props: MetaDataProps): Promise<Metadata> 
 }
 
 export default async function Page() {
-  const title = createTypeSafeTranslation('navigation').t('theCollection')
+  const title = createTypeSafeTranslation('navigation').t('asterisk')
   const { t } = createTypeSafeTranslation('asterisk')
   const introParagraphs = [t('introP1'), t('introP2')]
   const missionParagraphs = [t('missionP1'), t('missionP2')]
