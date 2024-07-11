@@ -85,3 +85,51 @@
   font-weight: 400;
   font-display: swap;
 }
+
+@font-face {
+  font-family: 'Arial Reboot Lines';
+  src: url('/Fonts/ArialRebootLines/ArialRebootLines.woff2') format('woff2');
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tim Niw Rimmin Crisp';
+  src: url('/Fonts/TimNewRimmin/TimNiwRimminCrisp.woff2') format('woff2');
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tim Niw Rimmin';
+  src: url('/Fonts/TimNewRimmin/TimNiwRimmin.woff2') format('woff2');
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tim Niw Rimmin';
+  src: url('/Fonts/TimNewRimmin/TimNiwRimmin-Light.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tim Niw Rimmin';
+  src: url('/Fonts/TimNewRimmin/TimNiwRimmin-Bold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tim Niw Rimmin';
+  src: url('/Fonts/TimNewRimmin/TimNiwRimmin-DemiBold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}

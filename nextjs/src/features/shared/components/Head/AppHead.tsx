@@ -45,6 +45,48 @@ export const AppHead: React.FunctionComponent = () => {
         type="font/woff2"
         crossOrigin=""
       />
+      <link
+        rel="preload"
+        href="/Fonts/ArialRebootLines/ArialRebootLines.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin=""
+      ></link>
+      <link
+        rel="preload"
+        href="TimNiwRimminCrisp.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin=""
+      ></link>
+      <link
+        rel="preload"
+        href="TimNiwRimmin.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin=""
+      ></link>
+      <link
+        rel="preload"
+        href="TimNiwRimmin-Light.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin=""
+      ></link>
+      <link
+        rel="preload"
+        href="TimNiwRimmin-Bold.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin=""
+      ></link>
+      <link
+        rel="preload"
+        href="TimNiwRimmin-DemiBold.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin=""
+      ></link>
     </Head>
   )
 }

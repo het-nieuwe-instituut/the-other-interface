@@ -8,7 +8,7 @@ import { RollbarService } from '../util/rollbar.service'
 import { get } from 'lodash'
 import { Locale } from '../util/locale.type'
 import { TriplyUtils } from './triply.utils'
-import { EnrichedRecordBaseType } from './triply.type'
+import { EnrichedRecordBaseType } from '../triplyRecord/triplyRecord.type'
 
 export enum ExternalSource {
   getty = 'getty',
@@ -109,6 +109,10 @@ export class TriplyService {
         const result = await this.queryTriplyData(endpoint, {}, undefined, params)
 
         const enrichedSource = TriplyUtils.combineObjectArray(result.data as object[])
+        if (!enrichedSource) {
+          return
+        }
+
         const externalSourceUrl = TriplyUtils.getExternalSourceUrlFromData(
           result.data,
           source as ExternalSource
@@ -123,7 +127,10 @@ export class TriplyService {
       })
     )
 
-    return enrichedSources
+    return enrichedSources.reduce<EnrichedRecordBaseType[]>(
+      (acc, curr) => (curr ? [...acc, curr] : acc),
+      []
+    )
   }
 
   private fetch<ReturnDataType>(endpoint: URL) {

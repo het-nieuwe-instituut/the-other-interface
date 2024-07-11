@@ -5,13 +5,17 @@ import { getHttpThumbnailOrNull } from '../util/helpers'
 import { TriplyUtils } from '../triply/triply.utils'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { Locale } from '../util/locale.type'
-import { EnrichedRecordBaseType } from '../triply/triply.type'
+import { ObjectAsteriskType } from './objects.type'
+import { EnrichedRecordBaseType } from '../triplyRecord/triplyRecord.type'
 
 export interface ObjectsDetailZoomLevel3Data {
   thumbnail?: string
   title?: string
   id: string
   description?: string
+  asterisk_date_title?: string
+  asterisk_name_title?: string
+  asterisk_subject_title?: string
 }
 
 const objectsDetailZoomLevel3DataKeys: KeysToVerify<ObjectsDetailZoomLevel3Data> = {
@@ -19,21 +23,36 @@ const objectsDetailZoomLevel3DataKeys: KeysToVerify<ObjectsDetailZoomLevel3Data>
   title: true,
   id: true,
   description: true,
+  asterisk_date_title: true,
+  asterisk_name_title: true,
+  asterisk_subject_title: true,
 }
 
 export interface ObjectsRelationsType {
   id?: string
-  titleR?: string
+  relation?: string
+  idRelation?: string
+  objectType?: string
   referenceNumber?: string
   period?: string
+  thumbnail?: string
+  asterisk_date_person?: string
+  asterisk_name_person?: string
+  asterisk_subject_person?: string
   externalSource?: string
 }
 
 const objectsRelationsKeys: KeysToVerify<ObjectsRelationsType> = {
   id: true,
-  titleR: true,
+  relation: true,
+  idRelation: true,
+  objectType: true,
   referenceNumber: true,
   period: true,
+  thumbnail: true,
+  asterisk_date_person: true,
+  asterisk_name_person: true,
+  asterisk_subject_person: true,
   externalSource: true,
 }
 
@@ -73,6 +92,12 @@ export interface ObjectRecordZoomLevel3Data {
   creditLine?: string
   rights?: string
   permanentLink?: string
+  asterisk_date_relatedKeyword?: string
+  asterisk_name_relatedKeyword?: string
+  asterisk_subject_relatedKeyword?: string
+  asterisk_date_geoKeywords?: string
+  asterisk_name_geoKeywords?: string
+  asterisk_subject_geoKeywords?: string
 }
 
 const objectRecordZoomLevel3DataKeys: KeysToVerify<ObjectRecordZoomLevel3Data> = {
@@ -90,6 +115,12 @@ const objectRecordZoomLevel3DataKeys: KeysToVerify<ObjectRecordZoomLevel3Data> =
   creditLine: true,
   rights: true,
   permanentLink: true,
+  asterisk_date_relatedKeyword: true,
+  asterisk_name_relatedKeyword: true,
+  asterisk_subject_relatedKeyword: true,
+  asterisk_date_geoKeywords: true,
+  asterisk_name_geoKeywords: true,
+  asterisk_subject_geoKeywords: true,
 }
 
 @Injectable()
@@ -108,6 +139,18 @@ export class ObjectsService {
     [ExternalSource.rkd]: 'archives-enrichment-rkd/run',
   }
 
+  private asteriskKeys: (keyof typeof ObjectAsteriskType.prototype)[] = [
+    'asterisk_subject_person',
+    'asterisk_date_person',
+    'asterisk_name_person',
+    'asterisk_date_geoKeywords',
+    'asterisk_name_geoKeywords',
+    'asterisk_subject_geoKeywords',
+    'asterisk_date_relatedKeyword',
+    'asterisk_name_relatedKeyword',
+    'asterisk_subject_relatedKeyword',
+  ]
+
   public constructor(private triplyService: TriplyService) {}
 
   public async getZoomLevel3Data(id: string, locale: Locale) {
@@ -118,11 +161,14 @@ export class ObjectsService {
       { id, language: locale }
     )
 
+    const asteriskSuggestions = this.formatAsteriskSuggestions(result.data)
+
     return {
       ...TriplyUtils.combineObjectArray(result.data),
       type: EntityNames.Objects,
       id,
       thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
+      asteriskSuggestions,
     }
   }
 
@@ -139,13 +185,7 @@ export class ObjectsService {
       { id, type, language: locale }
     )
 
-    const output = TriplyUtils.sanitizeObjectArray(
-      result.data,
-      'idRelation',
-      'relation',
-      'thumbnail'
-    )
-    return output
+    return TriplyUtils.sanitizeObjectArray(result.data, 'idRelation', 'relation', 'thumbnail')
   }
 
   public async getRelationsDataCount(id: string, type: EntityNames) {
@@ -167,7 +207,17 @@ export class ObjectsService {
       { id, language: locale }
     )
 
-    return result.data
+    const asteriskSuggestions = this.formatAsteriskSuggestions(result.data)
+    const data = TriplyUtils.combineObjectArray(result.data)
+    if (!data) {
+      return
+    }
+
+    return {
+      ...data,
+      id,
+      asteriskSuggestions,
+    }
   }
 
   public async getZoomRecordHover(id: string, locale: Locale) {
@@ -182,10 +232,23 @@ export class ObjectsService {
       return {}
     }
 
-    return { ...TriplyUtils.combineObjectArray(results.data) }
+    return TriplyUtils.combineObjectArray(results.data)
   }
 
   public getEnrichedSources(id: string, locale: Locale): Promise<EnrichedRecordBaseType[]> {
     return this.triplyService.getEnrichedSourceData(this.EnrichedSourceEndpoints, id, locale)
+  }
+
+  private formatAsteriskSuggestions(data: ObjectAsteriskType[]) {
+    return data.reduce<ObjectAsteriskType[]>((acc, cur) => {
+      const hasValue = this.asteriskKeys.some(key => cur[key] !== undefined)
+      if (hasValue) {
+        acc.push(cur)
+      }
+
+      this.asteriskKeys.forEach(key => delete cur[key])
+
+      return acc
+    }, [])
   }
 }

@@ -63,7 +63,7 @@ export class ArchivesZoomLevel3DetailResolver {
 export class ArchivesRecordZoomLevel3Resolver {
   public constructor(private readonly archivesService: ArchivesService) {}
 
-  @Query(() => [ArchivesRecordZoomLevel3Type], { nullable: true })
+  @Query(() => ArchivesRecordZoomLevel3Type, { nullable: true })
   public async archivesRecordZoomLevel3(
     @Args('id') publicationId: string,
     @Args() { locale }: LocaleArgs

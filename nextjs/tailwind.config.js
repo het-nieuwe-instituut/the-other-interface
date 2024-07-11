@@ -64,6 +64,13 @@ module.exports = {
         DEFAULT: '0px 4px 4px rgba(0, 0, 0, 0.25)',
       },
       colors: {
+        surface: {
+          lod: 'rgba(242, 233, 200, 1)',
+          'lod-dark': 'rgba(118, 87, 43, 1)',
+
+          asterisk: 'rgba(222, 229, 236, 1)',
+          'asterisk-dark': 'rgba(111, 122, 156, 1)',
+        },
         pink: {
           100: 'rgba(255, 230, 221, 1)',
           60: 'rgba(255, 230, 221, .6)',
@@ -100,6 +107,9 @@ module.exports = {
         brown: '#49280B',
       },
       fontFamily: {
+        'arial-reboot-lines': ['"Arial Reboot Lines"', 'sans-serif'],
+        'times-niw-rimmin': ['"Tim Niw Rimmin"', 'sans-serif'],
+        'times-niw-rimmin-crisp': ['"Tim Niw Rimmin-crisp"', 'sans-serif'],
         'times-dot': ['"Times Dot"', 'sans-serif'],
         'times-large': ['Times', 'sans-serif'],
         'impact-large': ['"Impact"', 'sans-serif'],

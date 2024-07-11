@@ -50,5 +50,6 @@
   "existenceLocation": "Existence and location of reproductions",
   "annotation": "Annotation",
   "historyNotes": "Remarks",
-  "holding": "Holding"
+  "holding": "Holding",
+  "asteriskSuggestions": "Asterisk suggestions"
 }

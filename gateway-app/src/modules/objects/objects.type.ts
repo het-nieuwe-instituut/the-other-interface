@@ -1,53 +1,55 @@
-import { ArgsType, Field, IntersectionType, ObjectType, OmitType } from '@nestjs/graphql'
+import { ArgsType, Field, ObjectType, OmitType, PickType } from '@nestjs/graphql'
 import { EntityNames } from '../util/entityNames.type'
-import { PeopleZoomLevel3DetailType } from '../people/people.type'
 import { IsString } from 'class-validator'
 import { Locale } from '../util/locale.type'
-import { EnrichedRecordBaseType } from '../triply/triply.type'
+import { ExternalSource } from '../triply/triply.service'
 
 @ObjectType()
-class ObjectMakerType {
-  @Field(() => String)
-  public id: string
+export class ObjectAsteriskType {
+  @Field({
+    nullable: true,
+    description: 'asterisk value for the person field',
+  })
+  public asterisk_subject_person?: string
 
-  @Field(() => String, { nullable: true })
-  public maker: string | null
+  @Field({
+    nullable: true,
+    description: 'the date the asterisk value was added to the person field',
+  })
+  public asterisk_date_person?: string
 
-  @Field(() => String, { nullable: true })
-  public makerLabel?: string | null
+  @Field({
+    nullable: true,
+    description: 'the person that added the asterisk value for the person field',
+  })
+  public asterisk_name_person?: string
 
-  @Field(() => String, { nullable: true })
-  public makerRole?: string | null
+  @Field({ nullable: true, description: 'asterisk value for the geoKeywords field' })
+  public asterisk_date_geoKeywords?: string
 
-  @Field(() => String, { nullable: true })
-  public makerRoleLabel?: string | null
+  @Field({ nullable: true, description: 'asterisk value for the geoKeywords field' })
+  public asterisk_name_geoKeywords?: string
 
-  @Field(() => PeopleZoomLevel3DetailType, { nullable: true })
-  public populatedMaker?: PeopleZoomLevel3DetailType
-}
+  @Field({ nullable: true, description: 'asterisk value for the geoKeywords field' })
+  public asterisk_subject_geoKeywords?: string
 
-@ObjectType()
-class ObjectMaterialType {
-  @Field(() => String)
-  public id: string
+  @Field({ nullable: true, description: 'asterisk value for the relatedKeyword field' })
+  public asterisk_date_relatedKeyword?: string
 
-  @Field(() => String)
-  public material: string
+  @Field({ nullable: true, description: 'asterisk value for the relatedKeyword field' })
+  public asterisk_name_relatedKeyword?: string
 
-  @Field(() => String, { nullable: true })
-  public materialLabel?: string | null
-}
+  @Field({ nullable: true, description: 'asterisk value for the relatedKeyword field' })
+  public asterisk_subject_relatedKeyword?: string
 
-@ObjectType()
-class ObjectTechniqueType {
-  @Field(() => String)
-  public id: string
+  @Field({ nullable: true, description: 'asterisk value for the title field' })
+  public asterisk_date_title?: string
 
-  @Field(() => String)
-  public technique: string
+  @Field({ nullable: true, description: 'asterisk value for the title field' })
+  public asterisk_name_title?: string
 
-  @Field(() => String, { nullable: true })
-  public techniqueLabel?: string | null
+  @Field({ nullable: true, description: 'asterisk value for the title field' })
+  public asterisk_subject_title?: string
 }
 
 @ObjectType()
@@ -58,108 +60,56 @@ class BaseObjectsZoomLevel3DetailType {
   @Field(() => String, { nullable: true })
   public title: string
 
-  @Field(() => EntityNames, { nullable: true })
-  public type: EntityNames
-
-  @Field(() => [String], { nullable: true })
-  public thumbnail: string
-
-  @Field(() => String, { nullable: true })
-  public imageLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public titleType?: string | null
-
-  @Field(() => String, { nullable: true })
-  public objectNumber?: string | null
-
-  @Field(() => String, { nullable: true })
-  public objectName?: string | null
-
-  @Field(() => String, { nullable: true })
-  public objectNameLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public archiveCollectionCode?: string | null
-
-  @Field(() => [ObjectMakerType], { nullable: true })
-  public makers?: ObjectMakerType[]
-
-  @Field(() => String, { nullable: true })
-  public startDate?: string | null
-
-  @Field(() => String, { nullable: true })
-  public endDate?: string | null
-
-  @Field(() => String, { nullable: true })
-  public numberOfParts?: string | null
-
-  @Field(() => String, { nullable: true })
-  public scale?: string | null
-
-  @Field(() => [ObjectTechniqueType], { nullable: true })
-  public techniques?: ObjectTechniqueType[]
-
-  @Field(() => [ObjectMaterialType], { nullable: true })
-  public materials?: ObjectMaterialType[]
-
-  @Field(() => String, { nullable: true })
-  public dimHeight?: string | null
-
-  @Field(() => String, { nullable: true })
-  public dimWidth?: string | null
-
-  @Field(() => String, { nullable: true })
-  public dimDepth?: string | null
-
-  @Field(() => String, { nullable: true })
-  public dimensionUnit?: string | null
-
   @Field(() => String, { nullable: true })
   public description?: string | null
 
-  @Field(() => String, { nullable: true })
-  public associationPerson?: string | null
+  @Field(() => [String], { nullable: true })
+  public thumbnail?: string[]
+
+  @Field(() => EntityNames, { nullable: true })
+  public type?: EntityNames
 
   @Field(() => String, { nullable: true })
-  public associationPersonLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public associationPersonType?: string | null
-
-  @Field(() => String, { nullable: true })
-  public relatedObjectTitle?: string | null
-
-  @Field(() => String, { nullable: true })
-  public creditLine?: string | null
-
-  @Field(() => String, { nullable: true })
-  public rights?: string | null
-
-  @Field(() => String, { nullable: true })
-  public rightsLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public creationPlace?: string | null
-
-  @Field(() => String, { nullable: true })
-  public creationPlaceLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public permanentLink?: string | null
+  public mediaType?: string
 }
 
 @ObjectType()
-export class ObjectsZoomLevel3DetailType extends IntersectionType(
-  EnrichedRecordBaseType,
-  BaseObjectsZoomLevel3DetailType
-) {
-  @Field(() => [BaseObjectsZoomLevel3DetailType], { nullable: true })
-  public enrichedSources?: BaseObjectsZoomLevel3DetailType[]
+class EnrichedBaseObjectsZoomLevel3DetailType extends BaseObjectsZoomLevel3DetailType {
+  @Field()
+  public id: string
+
+  @Field(() => ExternalSource)
+  public externalSourceType: ExternalSource
+
+  @Field()
+  public externalSourceUrl: string
 }
 
 @ObjectType()
-export class ObjectRelationsType {
+export class EnrichedBaseObjectsZoomLevel3AsteriskDetailType extends PickType(ObjectAsteriskType, [
+  'asterisk_date_title',
+  'asterisk_name_title',
+  'asterisk_subject_title',
+]) {}
+
+@ObjectType()
+export class ObjectsZoomLevel3DetailType extends BaseObjectsZoomLevel3DetailType {
+  @Field(() => [EnrichedBaseObjectsZoomLevel3DetailType], { nullable: true })
+  public enrichedSources?: EnrichedBaseObjectsZoomLevel3DetailType[]
+
+  @Field(() => [EnrichedBaseObjectsZoomLevel3AsteriskDetailType], { nullable: true })
+  public asteriskSuggestions?: EnrichedBaseObjectsZoomLevel3AsteriskDetailType[]
+}
+
+@ObjectType()
+class ObjectRelationsAsteriskType extends PickType(ObjectAsteriskType, [
+  'asterisk_date_person',
+  'asterisk_name_person',
+  'asterisk_subject_person',
+]) {}
+
+@ObjectType()
+export class ObjectRelationsType extends ObjectRelationsAsteriskType {
   @Field(() => String, { nullable: true })
   public idRelation?: string | null
 
@@ -184,11 +134,17 @@ export class ObjectRelationsCountType {
 
 @ObjectType()
 class BaseObjectRecordZoomLevel3Type {
+  @Field()
+  public id: string
+
+  @Field({ nullable: true })
+  public title?: string
+
   @Field(() => String, { nullable: true })
   public objectNumber?: string
 
-  @Field(() => String, { nullable: true })
-  public titleType?: string
+  @Field({ nullable: true })
+  public objectType?: string
 
   @Field(() => String, { nullable: true })
   public objectName?: string
@@ -201,6 +157,9 @@ class BaseObjectRecordZoomLevel3Type {
 
   @Field(() => String, { nullable: true })
   public relatedKeywords?: string
+
+  @Field({ nullable: true })
+  public maker?: string
 
   @Field(() => String, { nullable: true })
   public materials?: string
@@ -223,6 +182,9 @@ class BaseObjectRecordZoomLevel3Type {
   @Field(() => String, { nullable: true })
   public rights?: string
 
+  @Field({ nullable: true })
+  public geoKeywords?: string
+
   @Field(() => String, { nullable: true })
   public permanentLink?: string
 
@@ -231,12 +193,34 @@ class BaseObjectRecordZoomLevel3Type {
 }
 
 @ObjectType()
-export class ObjectRecordZoomLevel3Type extends IntersectionType(
-  EnrichedRecordBaseType,
-  BaseObjectRecordZoomLevel3Type
-) {
-  @Field(() => [BaseObjectRecordZoomLevel3Type], { nullable: true })
-  public enrichedSources?: BaseObjectRecordZoomLevel3Type[]
+class EnrichedBaseObjectRecordZoomLevel3Type extends BaseObjectRecordZoomLevel3Type {
+  @Field()
+  public id: string
+
+  @Field(() => ExternalSource)
+  public externalSourceType: ExternalSource
+
+  @Field()
+  public externalSourceUrl: string
+}
+
+@ObjectType()
+class BaseObjectRecordZoomLevel3AsteriskType extends PickType(ObjectAsteriskType, [
+  'asterisk_date_relatedKeyword',
+  'asterisk_name_relatedKeyword',
+  'asterisk_subject_relatedKeyword',
+  'asterisk_date_geoKeywords',
+  'asterisk_name_geoKeywords',
+  'asterisk_subject_geoKeywords',
+]) {}
+
+@ObjectType()
+export class ObjectRecordZoomLevel3Type extends BaseObjectRecordZoomLevel3Type {
+  @Field(() => [EnrichedBaseObjectRecordZoomLevel3Type], { nullable: true })
+  public enrichedSources?: EnrichedBaseObjectRecordZoomLevel3Type[]
+
+  @Field(() => [BaseObjectRecordZoomLevel3AsteriskType], { nullable: true })
+  public asteriskSuggestions?: BaseObjectRecordZoomLevel3AsteriskType[]
 }
 
 @ArgsType()

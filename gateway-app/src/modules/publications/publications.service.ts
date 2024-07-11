@@ -5,7 +5,7 @@ import { TriplyUtils } from '../triply/triply.utils'
 import { getHttpThumbnailOrNull } from '../util/helpers'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { Locale } from '../util/locale.type'
-import { EnrichedRecordBaseType } from '../triply/triply.type'
+import { EnrichedRecordBaseType } from '../triplyRecord/triplyRecord.type'
 
 interface PublicationsZoomLevel3Data {
   thumbnail?: string
@@ -195,7 +195,12 @@ export class PublicationsService {
       { id, language: locale }
     )
 
-    return { ...result.data, id }
+    const data = TriplyUtils.combineObjectArray(result.data)
+    if (!data) {
+      return
+    }
+
+    return { ...data, id }
   }
 
   public async getZoomRecordHover(id: string, locale: Locale) {

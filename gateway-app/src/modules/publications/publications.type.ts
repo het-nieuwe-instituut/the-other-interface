@@ -1,9 +1,9 @@
-import { ArgsType, Field, IntersectionType, ObjectType, OmitType } from '@nestjs/graphql'
+import { ArgsType, Field, ObjectType, OmitType } from '@nestjs/graphql'
 import { EntityNames } from '../util/entityNames.type'
 import { PeopleZoomLevel3DetailType } from '../people/people.type'
 import { IsString } from 'class-validator'
 import { Locale } from '../util/locale.type'
-import { EnrichedRecordBaseType } from '../triply/triply.type'
+import { ExternalSource } from '../triply/triply.service'
 
 @ObjectType()
 class BasePublicationZoomLevel3DetailType {
@@ -39,12 +39,21 @@ class BasePublicationZoomLevel3DetailType {
 }
 
 @ObjectType()
-export class PublicationZoomLevel3DetailType extends IntersectionType(
-  EnrichedRecordBaseType,
-  BasePublicationZoomLevel3DetailType
-) {
-  @Field(() => [BasePublicationZoomLevel3DetailType], { nullable: true })
-  public enrichedSources?: BasePublicationZoomLevel3DetailType[]
+class EnrichedBasePublicationZoomLevel3DetailType extends BasePublicationZoomLevel3DetailType {
+  @Field()
+  public id: string
+
+  @Field(() => ExternalSource)
+  public externalSourceType: ExternalSource
+
+  @Field()
+  public externalSourceUrl: string
+}
+
+@ObjectType()
+export class PublicationZoomLevel3DetailType extends BasePublicationZoomLevel3DetailType {
+  @Field(() => [EnrichedBasePublicationZoomLevel3DetailType], { nullable: true })
+  public enrichedSources?: EnrichedBasePublicationZoomLevel3DetailType[]
 }
 
 @ObjectType()
@@ -143,12 +152,21 @@ class BasePublicationRecordZoomLevel3Type {
 }
 
 @ObjectType()
-export class PublicationRecordZoomLevel3Type extends IntersectionType(
-  EnrichedRecordBaseType,
-  BasePublicationRecordZoomLevel3Type
-) {
-  @Field(() => [BasePublicationRecordZoomLevel3Type], { nullable: true })
-  public enrichedSources?: BasePublicationRecordZoomLevel3Type[]
+class EnrichedBasePublicationRecordZoomLevel3Type extends BasePublicationRecordZoomLevel3Type {
+  @Field()
+  public id: string
+
+  @Field(() => ExternalSource)
+  public externalSourceType: ExternalSource
+
+  @Field()
+  public externalSourceUrl: string
+}
+
+@ObjectType()
+export class PublicationRecordZoomLevel3Type extends BasePublicationRecordZoomLevel3Type {
+  @Field(() => [EnrichedBasePublicationRecordZoomLevel3Type], { nullable: true })
+  public enrichedSources?: EnrichedBasePublicationRecordZoomLevel3Type[]
 }
 
 @ArgsType()
