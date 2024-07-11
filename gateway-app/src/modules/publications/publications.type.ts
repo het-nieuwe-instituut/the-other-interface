@@ -27,6 +27,15 @@ class BasePublicationZoomLevel3DetailType {
 
   @Field(() => String, { nullable: true })
   public description: string
+
+  @Field({ nullable: true })
+  public holding?: string
+
+  @Field({ nullable: true })
+  public historyNotes?: string
+
+  @Field({ nullable: true })
+  public annotation?: string
 }
 
 @ObjectType()

@@ -595,9 +595,12 @@ export type EnrichedBasePublicationRecordZoomLevel3Type = {
 
 export type EnrichedBasePublicationZoomLevel3DetailType = {
   __typename?: 'EnrichedBasePublicationZoomLevel3DetailType';
+  annotation?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   externalSourceType: ExternalSource;
   externalSourceUrl: Scalars['String']['output'];
+  historyNotes?: Maybe<Scalars['String']['output']>;
+  holding?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   objectNumber?: Maybe<Scalars['String']['output']>;
   thumbnail?: Maybe<Array<Scalars['String']['output']>>;
@@ -1137,8 +1140,11 @@ export type PublicationRelationsType = {
 
 export type PublicationZoomLevel3DetailType = {
   __typename?: 'PublicationZoomLevel3DetailType';
+  annotation?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   enrichedSources?: Maybe<Array<EnrichedBasePublicationZoomLevel3DetailType>>;
+  historyNotes?: Maybe<Scalars['String']['output']>;
+  holding?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   objectNumber?: Maybe<Scalars['String']['output']>;
   thumbnail?: Maybe<Array<Scalars['String']['output']>>;
@@ -2580,7 +2586,7 @@ export type ZoomLevel3PublicationQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3PublicationQuery = { __typename?: 'Query', zoomLevel3Publication?: { __typename: 'PublicationZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null, enrichedSources?: Array<{ __typename: 'EnrichedBasePublicationZoomLevel3DetailType', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null }> | null } | null };
+export type ZoomLevel3PublicationQuery = { __typename?: 'Query', zoomLevel3Publication?: { __typename: 'PublicationZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null, holding?: string | null, historyNotes?: string | null, annotation?: string | null, enrichedSources?: Array<{ __typename: 'EnrichedBasePublicationZoomLevel3DetailType', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null }> | null } | null };
 
 export type ZoomLevel3PeopleQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -4412,6 +4418,9 @@ export const ZoomLevel3PublicationDocument = gql`
       thumbnail
       description
     }
+    holding
+    historyNotes
+    annotation
   }
 }
     `;

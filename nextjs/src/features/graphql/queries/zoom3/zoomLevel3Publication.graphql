@@ -14,5 +14,8 @@ query ZoomLevel3Publication($id: String!, $locale: Locale!) {
       thumbnail
       description
     }
+    holding
+    historyNotes
+    annotation
   }
 }

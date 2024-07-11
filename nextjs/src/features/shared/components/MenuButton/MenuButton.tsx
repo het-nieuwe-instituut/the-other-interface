@@ -19,9 +19,9 @@ export const MenuButton = () => {
     <button
       aria-label={isMenuOpen ? 'menu close' : 'menu open'}
       className={cn(
-        'group pointer-events-auto relative z-[9999] ml-8 flex  items-center px-px pt-px mt-2 ',
+        'group pointer-events-auto relative z-[9999] ml-8 max-md:ml-4 flex  items-center px-px pt-px mt-2 ',
         isMenuOpen
-          ? ' text-pink-100 active:bg-pink-100 active:text-blue-100 focus:bg-pink-100 focus:text-blue-100 pb-2 w-[42px]'
+          ? ' text-pink-100 active:bg-pink-100 active:text-blue-100 focus:bg-pink-100 focus:text-blue-100 pb-2 w-[42px] '
           : ' text-blue-100 active:bg-blue-100 active:text-pink-100 focus:bg-blue-100 focus:text-pink-100 pb-2 w-[40px] '
       )}
       onClick={() => handleOpenMenu(!isMenuOpen)}

@@ -47,7 +47,11 @@ const MobileOverlay = () => {
         className="relative inset-x-0 z-[var(--z-index)] mx-auto max-w-[90em] flex-wrap justify-between self-center px-8"
       >
         <p className={TypographyVariants({ timesDot: 'lg', className: 'text-blue-100' })}>
-          {tCommon('mobileVersionIsNotYetThere')}
+          {tCommon('mobileVersionIsNotYetThere1')}
+        </p>
+        <br />
+        <p className={TypographyVariants({ timesDot: 'lg', className: 'text-blue-100' })}>
+          {tCommon('mobileVersionIsNotYetThere2')}
         </p>
       </div>
     </div>
