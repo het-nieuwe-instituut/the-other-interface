@@ -71,6 +71,9 @@ class BaseObjectsZoomLevel3DetailType {
 
   @Field(() => String, { nullable: true })
   public mediaType?: string
+
+  @Field({ nullable: true })
+  public mediaReference?: string
 }
 
 @ObjectType()

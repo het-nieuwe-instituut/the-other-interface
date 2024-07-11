@@ -5,6 +5,8 @@ query ZoomLevel3Publication($id: String!, $locale: Locale!) {
     title
     thumbnail
     description
+    mediaType
+    mediaReference
     enrichedSources(locale: $locale) {
       externalSourceType
       externalSourceUrl

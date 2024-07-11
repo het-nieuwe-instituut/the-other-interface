@@ -90,6 +90,12 @@ class BaseArchiveZoomLevel3DetailType {
 
   @Field(() => String, { nullable: true })
   public description?: string | null
+
+  @Field({ nullable: true })
+  public mediaType?: string
+
+  @Field({ nullable: true })
+  public mediaReference?: string
 }
 
 @ObjectType()

@@ -36,6 +36,12 @@ class BasePublicationZoomLevel3DetailType {
 
   @Field({ nullable: true })
   public annotation?: string
+
+  @Field({ nullable: true })
+  public mediaType?: string
+
+  @Field({ nullable: true })
+  public mediaReference?: string
 }
 
 @ObjectType()

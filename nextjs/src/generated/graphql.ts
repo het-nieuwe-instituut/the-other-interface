@@ -40,6 +40,8 @@ export type ArchiveZoomLevel3DetailType = {
   description?: Maybe<Scalars['String']['output']>;
   enrichedSources?: Maybe<Array<EnrichedBaseArchiveZoomLevel3DetailType>>;
   id: Scalars['String']['output'];
+  mediaReference?: Maybe<Scalars['String']['output']>;
+  mediaType?: Maybe<Scalars['String']['output']>;
   objectNumber?: Maybe<Scalars['String']['output']>;
   thumbnail?: Maybe<Array<Scalars['String']['output']>>;
   title?: Maybe<Scalars['String']['output']>;
@@ -441,6 +443,8 @@ export type EnrichedBaseArchiveZoomLevel3DetailType = {
   externalSourceType: ExternalSource;
   externalSourceUrl: Scalars['String']['output'];
   id: Scalars['String']['output'];
+  mediaReference?: Maybe<Scalars['String']['output']>;
+  mediaType?: Maybe<Scalars['String']['output']>;
   objectNumber?: Maybe<Scalars['String']['output']>;
   thumbnail?: Maybe<Array<Scalars['String']['output']>>;
   title?: Maybe<Scalars['String']['output']>;
@@ -527,6 +531,7 @@ export type EnrichedBaseObjectsZoomLevel3DetailType = {
   externalSourceType: ExternalSource;
   externalSourceUrl: Scalars['String']['output'];
   id: Scalars['String']['output'];
+  mediaReference?: Maybe<Scalars['String']['output']>;
   mediaType?: Maybe<Scalars['String']['output']>;
   thumbnail?: Maybe<Array<Scalars['String']['output']>>;
   title?: Maybe<Scalars['String']['output']>;
@@ -602,6 +607,8 @@ export type EnrichedBasePublicationZoomLevel3DetailType = {
   historyNotes?: Maybe<Scalars['String']['output']>;
   holding?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
+  mediaReference?: Maybe<Scalars['String']['output']>;
+  mediaType?: Maybe<Scalars['String']['output']>;
   objectNumber?: Maybe<Scalars['String']['output']>;
   thumbnail?: Maybe<Array<Scalars['String']['output']>>;
   title?: Maybe<Scalars['String']['output']>;
@@ -991,6 +998,7 @@ export type ObjectsZoomLevel3DetailType = {
   description?: Maybe<Scalars['String']['output']>;
   enrichedSources?: Maybe<Array<EnrichedBaseObjectsZoomLevel3DetailType>>;
   id: Scalars['String']['output'];
+  mediaReference?: Maybe<Scalars['String']['output']>;
   mediaType?: Maybe<Scalars['String']['output']>;
   thumbnail?: Maybe<Array<Scalars['String']['output']>>;
   title?: Maybe<Scalars['String']['output']>;
@@ -1146,6 +1154,8 @@ export type PublicationZoomLevel3DetailType = {
   historyNotes?: Maybe<Scalars['String']['output']>;
   holding?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
+  mediaReference?: Maybe<Scalars['String']['output']>;
+  mediaType?: Maybe<Scalars['String']['output']>;
   objectNumber?: Maybe<Scalars['String']['output']>;
   thumbnail?: Maybe<Array<Scalars['String']['output']>>;
   title?: Maybe<Scalars['String']['output']>;
@@ -2392,7 +2402,7 @@ export type ZoomLevel3ArchiveQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3ArchiveQuery = { __typename?: 'Query', zoomLevel3Archive?: { __typename: 'ArchiveZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null, asteriskSuggestions?: Array<{ __typename?: 'EnrichedBaseOArchiveZoomLevel3AsteriskDetailType', asterisk_date_title?: string | null, asterisk_name_title?: string | null, asterisk_subject_title?: string | null, asterisk_date_description?: string | null, asterisk_name_description?: string | null, asterisk_subject_description?: string | null }> | null, enrichedSources?: Array<{ __typename: 'EnrichedBaseArchiveZoomLevel3DetailType', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null }> | null } | null };
+export type ZoomLevel3ArchiveQuery = { __typename?: 'Query', zoomLevel3Archive?: { __typename: 'ArchiveZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null, mediaType?: string | null, mediaReference?: string | null, asteriskSuggestions?: Array<{ __typename?: 'EnrichedBaseOArchiveZoomLevel3AsteriskDetailType', asterisk_date_title?: string | null, asterisk_name_title?: string | null, asterisk_subject_title?: string | null, asterisk_date_description?: string | null, asterisk_name_description?: string | null, asterisk_subject_description?: string | null }> | null, enrichedSources?: Array<{ __typename: 'EnrichedBaseArchiveZoomLevel3DetailType', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null }> | null } | null };
 
 export type ZoomLevel3ArchiveRecordQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -2578,7 +2588,7 @@ export type ZoomLevel3ObjectQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3ObjectQuery = { __typename?: 'Query', zoomLevel3Object?: { __typename: 'ObjectsZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null, asteriskSuggestions?: Array<{ __typename?: 'EnrichedBaseObjectsZoomLevel3AsteriskDetailType', asterisk_date_title?: string | null, asterisk_name_title?: string | null, asterisk_subject_title?: string | null }> | null, enrichedSources?: Array<{ __typename: 'EnrichedBaseObjectsZoomLevel3DetailType', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null }> | null } | null };
+export type ZoomLevel3ObjectQuery = { __typename?: 'Query', zoomLevel3Object?: { __typename: 'ObjectsZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null, mediaType?: string | null, mediaReference?: string | null, asteriskSuggestions?: Array<{ __typename?: 'EnrichedBaseObjectsZoomLevel3AsteriskDetailType', asterisk_date_title?: string | null, asterisk_name_title?: string | null, asterisk_subject_title?: string | null }> | null, enrichedSources?: Array<{ __typename: 'EnrichedBaseObjectsZoomLevel3DetailType', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null }> | null } | null };
 
 export type ZoomLevel3PublicationQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -2586,7 +2596,7 @@ export type ZoomLevel3PublicationQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3PublicationQuery = { __typename?: 'Query', zoomLevel3Publication?: { __typename: 'PublicationZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null, holding?: string | null, historyNotes?: string | null, annotation?: string | null, enrichedSources?: Array<{ __typename: 'EnrichedBasePublicationZoomLevel3DetailType', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null }> | null } | null };
+export type ZoomLevel3PublicationQuery = { __typename?: 'Query', zoomLevel3Publication?: { __typename: 'PublicationZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null, mediaType?: string | null, mediaReference?: string | null, holding?: string | null, historyNotes?: string | null, annotation?: string | null, enrichedSources?: Array<{ __typename: 'EnrichedBasePublicationZoomLevel3DetailType', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null }> | null } | null };
 
 export type ZoomLevel3PeopleQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -3956,6 +3966,8 @@ export const ZoomLevel3ArchiveDocument = gql`
     title
     thumbnail
     description
+    mediaType
+    mediaReference
     asteriskSuggestions {
       asterisk_date_title
       asterisk_name_title
@@ -4384,6 +4396,8 @@ export const ZoomLevel3ObjectDocument = gql`
     title
     thumbnail
     description
+    mediaType
+    mediaReference
     asteriskSuggestions {
       asterisk_date_title
       asterisk_name_title
@@ -4409,6 +4423,8 @@ export const ZoomLevel3PublicationDocument = gql`
     title
     thumbnail
     description
+    mediaType
+    mediaReference
     enrichedSources(locale: $locale) {
       externalSourceType
       externalSourceUrl

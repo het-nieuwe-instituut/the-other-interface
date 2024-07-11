@@ -19,6 +19,8 @@ export interface ArchivesDetailZoomLevel3DataType {
   asterisk_date_description?: string
   asterisk_name_description?: string
   asterisk_subject_description?: string
+  mediaType?: string
+  mediaReference?: string
 }
 const archivesDetailZoomLevel3DataKeys: KeysToVerify<ArchivesDetailZoomLevel3DataType> = {
   id: true,
@@ -31,6 +33,8 @@ const archivesDetailZoomLevel3DataKeys: KeysToVerify<ArchivesDetailZoomLevel3Dat
   asterisk_date_description: true,
   asterisk_name_description: true,
   asterisk_subject_description: true,
+  mediaReference: true,
+  mediaType: true,
 }
 
 export interface ArchiveRelationsType {

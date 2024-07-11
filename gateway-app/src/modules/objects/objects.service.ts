@@ -16,6 +16,8 @@ export interface ObjectsDetailZoomLevel3Data {
   asterisk_date_title?: string
   asterisk_name_title?: string
   asterisk_subject_title?: string
+  mediaType?: string
+  mediaReference?: string
 }
 
 const objectsDetailZoomLevel3DataKeys: KeysToVerify<ObjectsDetailZoomLevel3Data> = {
@@ -26,6 +28,8 @@ const objectsDetailZoomLevel3DataKeys: KeysToVerify<ObjectsDetailZoomLevel3Data>
   asterisk_date_title: true,
   asterisk_name_title: true,
   asterisk_subject_title: true,
+  mediaReference: true,
+  mediaType: true,
 }
 
 export interface ObjectsRelationsType {
