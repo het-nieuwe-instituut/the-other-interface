@@ -21,7 +21,7 @@ import { LayerWrapper } from '../../../shared/components/Layers/LayerWrapper'
 import { RecordMeta } from '../../components/RecordMeta/RecordMeta'
 import { OmitEnrichedData } from '../../configs/recordMetaFieldOrderConfig'
 import { useRecordDetailQuery } from '../../hooks/useRecordDetailQuery'
-import { useRecordMeta } from '../../hooks/useRecordMeta'
+import { useRecordMetaQuery } from '../../hooks/useRecordMetaQuery'
 import { RecordBottomContent } from '../RecordBottomContent/RecordBottomContent'
 
 export const RecordLayer = () => {
@@ -31,11 +31,11 @@ export const RecordLayer = () => {
   const locale = useLocale()
 
   const id = params?.id as string
-  const { data: meta, isLoading } = useRecordMeta(category, id)
+  const { data: meta, isLoading } = useRecordMetaQuery(category, id)
   const { data: record } = useRecordDetailQuery({
     type: category,
     id,
-    options: { refetchOnWindowFocus: false, suspense: true },
+    options: { refetchOnWindowFocus: false, suspense: false },
     locale,
   })
 

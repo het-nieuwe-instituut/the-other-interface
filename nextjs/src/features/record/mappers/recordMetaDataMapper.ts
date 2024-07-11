@@ -16,13 +16,7 @@ import { categoryFieldsMapping } from '../configs/recordMetaFieldOrderConfig'
 export function mapArchivesDataToSections(
   data: ArchivesRecordZoomLevel3Type | null | undefined,
   t: recordMetaArchiveT
-): Array<{
-  title: string | undefined
-  value: string[] | null
-  isLink: boolean
-  key: string
-  asteriskSuggestions?: { date: string; name: string; subject: string }[]
-}> {
+) {
   if (!data) return []
   const fields = categoryFieldsMapping[CLOUD_CATEGORIES.archives]
 
@@ -82,7 +76,7 @@ export function mapArchivesDataToSections(
       //   return { title, value: values, isLink, key, asteriskSuggestions }
       // }
 
-      return { title, value: values, isLink, key }
+      return { title, value: values, isLink, key, externalSources: data.enrichedSources }
     })
     .filter(section => section.value !== null)
 }
@@ -90,13 +84,7 @@ export function mapArchivesDataToSections(
 export function mapPublicationDataToSections(
   data: PublicationRecordZoomLevel3Type | null | undefined,
   t: recordMetaPublicationT
-): Array<{
-  title: string | undefined
-  value: string[] | null
-  isLink: boolean
-  key: string
-  asteriskSuggestions?: { date: string; name: string; subject: string }[]
-}> {
+) {
   if (!data) return []
   const fields = categoryFieldsMapping[CLOUD_CATEGORIES.publications]
 
@@ -106,7 +94,7 @@ export function mapPublicationDataToSections(
       const title = t(key)?.trim()
       const values = rawValue ? rawValue.split(';').filter(v => v.trim().length > 0) : null
       const isLink = key === 'permanentLink'
-      return { title, value: values, isLink, key }
+      return { title, value: values, isLink, key, externalSources: data.enrichedSources }
     })
     .filter(section => section.value !== null)
 }
@@ -114,13 +102,7 @@ export function mapPublicationDataToSections(
 export function mapObjectDataToSections(
   data: ObjectRecordZoomLevel3Type | null | undefined,
   t: recordMetaObjectT
-): Array<{
-  title: string | undefined
-  value: string[] | null
-  isLink: boolean
-  key: string
-  asteriskSuggestions?: { date: string; name: string; subject: string }[]
-}> {
+) {
   if (!data) return []
   const fields = categoryFieldsMapping[CLOUD_CATEGORIES.objects]
   return fields
@@ -143,7 +125,14 @@ export function mapObjectDataToSections(
             return v.date || v.name || v.subject
           })
 
-        return { title, value: values, isLink, key, asteriskSuggestions }
+        return {
+          title,
+          value: values,
+          isLink,
+          key,
+          asteriskSuggestions,
+          externalSources: data.enrichedSources,
+        }
       }
       // TODO: commented out till we support geoKeywords
       // if (key === 'geoKeywords') {
@@ -161,7 +150,7 @@ export function mapObjectDataToSections(
 
       //   return { title, value: values, isLink, key, asteriskSuggestions }
       // }
-      return { title, value: values, isLink, key }
+      return { title, value: values, isLink, key, externalSources: data.enrichedSources }
     })
     .filter(section => section.value !== null)
 }
@@ -169,13 +158,7 @@ export function mapObjectDataToSections(
 export function mapPersonDataToSections(
   data: PeopleRecordZoomLevel3Type | null | undefined,
   t: recordMetaPersonT
-): Array<{
-  title: string | undefined
-  value: string[] | null
-  isLink: boolean
-  key: string
-  asteriskSuggestions?: { date: string; name: string; subject: string }[]
-}> {
+) {
   if (!data) return []
   const fields = categoryFieldsMapping[CLOUD_CATEGORIES.people]
 
@@ -185,7 +168,7 @@ export function mapPersonDataToSections(
       const title = t(key)?.trim()
       const values = rawValue ? rawValue.split(';').filter(v => v.trim().length > 0) : null
       const isLink = key === 'permanentLink'
-      return { title, value: values, isLink, key }
+      return { title, value: values, isLink, key, externalSources: data.enrichedSources }
     })
     .filter(section => section.value !== null)
 }

@@ -33,5 +33,9 @@
   "learnAboutExternalSources": "Learn about external sources",
   "showAsterisk": "Show asterisk* annotations ({{count}})",
   "hideAsterisk": "Hide asterisk* annotations ({{count}})",
-  "asteriskMeta": "Added by {{author}} on {{date}}"
+  "asteriskMeta": "Added by {{author}} on {{date}}",
+  "pulledFromGetty": "Pulled from Getty ULAN",
+  "pulledFromRKD": "Pulled from RKD",
+  "pulledFromWikiData": "Pulled from WikiData",
+  "learnAboutExternalDataSources": "Learn about external sources"
 }

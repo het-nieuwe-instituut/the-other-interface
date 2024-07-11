@@ -5,15 +5,15 @@ query ZoomLevel3Publication($id: String!, $locale: Locale!) {
     title
     thumbnail
     description
-    # enrichedSources(locale: $locale) {
-    #   externalSourceType
-    #   externalSourceUrl
-    #   __typename
-    #   id
-    #   title
-    #   thumbnail
-    #   description
-    # }
+    enrichedSources(locale: $locale) {
+      externalSourceType
+      externalSourceUrl
+      __typename
+      id
+      title
+      thumbnail
+      description
+    }
     holding
     historyNotes
     annotation

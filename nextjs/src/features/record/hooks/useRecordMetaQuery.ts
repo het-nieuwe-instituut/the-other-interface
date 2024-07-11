@@ -5,13 +5,18 @@ import { Category } from '../../shared/utils/categories'
 import { getZoom3RecordMeta } from '@/features/pages/tasks/getZoom3RecordMeta'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 
-export function useRecordMeta(type: Category, id: string) {
+export function useRecordMetaQuery(type: Category, id: string) {
   const api = initApiClientService()
   const lang = useLocale()
 
   const queryFn = async () => {
-    const res = await getZoom3RecordMeta(type, { id, locale: lang ?? 'nl' }, api)
-    return res
+    try {
+      const res = await getZoom3RecordMeta(type, { id, locale: lang ?? 'nl' }, api)
+      return res
+    } catch (e) {
+      console.error('Error fetching record meta', e)
+      return
+    }
   }
 
   return useQuery({

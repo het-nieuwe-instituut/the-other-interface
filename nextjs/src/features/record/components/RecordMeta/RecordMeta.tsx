@@ -23,7 +23,9 @@ import {
   PeopleRecordZoomLevel3Type,
   PublicationRecordZoomLevel3Type,
 } from 'src/generated/graphql'
-import { useRecordMeta } from '../../hooks/useRecordMeta'
+
+import { ExternalSourceBlockGroup } from '@/features/ui/components/Sources/ExternalSource'
+import { useRecordMetaQuery } from '../../hooks/useRecordMetaQuery'
 import {
   mapArchivesDataToSections,
   mapObjectDataToSections,
@@ -31,14 +33,15 @@ import {
   mapPublicationDataToSections,
 } from '../../mappers/recordMetaDataMapper'
 import { recordRightsFieldMapper } from '../../mappers/recordRightsMapper'
+import { getExternalSourceTranslation } from '../../utils/enrichedSources'
 
 export const RecordMeta = ({
   data,
   isLoading,
   category,
 }: {
-  data: ReturnType<typeof useRecordMeta>['data']
-  isLoading: ReturnType<typeof useRecordMeta>['isLoading']
+  data: ReturnType<typeof useRecordMetaQuery>['data']
+  isLoading: ReturnType<typeof useRecordMetaQuery>['isLoading']
   category: Category
 }) => {
   const { t: recordMetaPublicationT } = useTypeSafeTranslation('recordMetaPublication')
@@ -123,20 +126,37 @@ export const RecordMeta = ({
                   </p>
                 )
               })}
-              {(section.asteriskSuggestions?.length ?? 0) > 0 && (
-                <AsteriskSourceBlockGroup>
-                  {section.asteriskSuggestions?.map((v, index) => {
+              {'asteriskSuggestions' in section &&
+                section.asteriskSuggestions &&
+                (section.asteriskSuggestions.length ?? 0) > 0 && (
+                  <AsteriskSourceBlockGroup>
+                    {section.asteriskSuggestions?.map((v, index) => {
+                      return (
+                        <AsteriskTooltip
+                          key={index}
+                          place="left"
+                          title={t('asteriskMeta', { date: v.date, author: v.name })}
+                        >
+                          <AsteriskSourceBlock key={v.date}>{v.subject}</AsteriskSourceBlock>
+                        </AsteriskTooltip>
+                      )
+                    })}
+                  </AsteriskSourceBlockGroup>
+                )}
+              {(section.externalSources?.length ?? 0) > 0 && (
+                <ExternalSourceBlockGroup>
+                  {section.externalSources?.map(v => {
                     return (
-                      <AsteriskTooltip
-                        key={index}
-                        place="left"
-                        title={t('asteriskMeta', { date: v.date, author: v.name })}
-                      >
-                        <AsteriskSourceBlock key={v.date}>{v.subject}</AsteriskSourceBlock>
-                      </AsteriskTooltip>
+                      <AsteriskSourceBlock href={v.externalSourceUrl} key={v.id}>
+                        {getExternalSourceTranslation(v.externalSourceType) ?? ''}
+                      </AsteriskSourceBlock>
                     )
                   })}
-                </AsteriskSourceBlockGroup>
+
+                  <AsteriskSourceBlock href="/external-sources">
+                    {t('learnAboutExternalDataSources') ?? ''}
+                  </AsteriskSourceBlock>
+                </ExternalSourceBlockGroup>
               )}
             </>
           </MetaField>

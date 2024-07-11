@@ -10,14 +10,14 @@ query ZoomLevel3Object($id: String!, $locale: Locale!) {
       asterisk_name_title
       asterisk_subject_title
     }
-    # enrichedSources(locale: $locale) {
-    #   externalSourceType
-    #   externalSourceUrl
-    #   __typename
-    #   id
-    #   title
-    #   thumbnail
-    #   description
-    # }
+    enrichedSources(locale: $locale) {
+      externalSourceType
+      externalSourceUrl
+      __typename
+      id
+      title
+      thumbnail
+      description
+    }
   }
 }
