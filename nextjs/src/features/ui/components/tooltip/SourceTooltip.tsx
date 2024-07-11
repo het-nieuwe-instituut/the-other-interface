@@ -1,7 +1,5 @@
 'use client'
-import { NavButton } from '@/features/ui/components/nav-button/component'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
-import ExternalLink from '@/features/ui/icons/external-link.svg'
 import NextLink, { LinkProps } from 'next/link'
 import { PropsWithChildren, useMemo } from 'react'
 import ReactDOMServer from 'react-dom/server'

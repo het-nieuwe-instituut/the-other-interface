@@ -85,7 +85,7 @@ export const AppHead: React.FunctionComponent = () => {
         href="TimNiwRimmin-DemiBold.woff2"
         as="font"
         type="font/woff2"
-        crossorigin
+        crossOrigin=""
       ></link>
     </Head>
   )

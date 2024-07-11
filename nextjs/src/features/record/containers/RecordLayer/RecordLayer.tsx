@@ -79,16 +79,14 @@ interface ArchiveMetaDescriptionProps {
 }
 
 const ArchivesDescriptions = ({ meta }: ArchiveMetaDescriptionProps) => {
-  type DescriptionKey = keyof Omit<ArchiveMetaDescriptionProps['meta'], '__typename' | 'rights'>
-
   const { t: recordMetaT } = useTypeSafeTranslation('recordMeta')
-  const keys: DescriptionKey[] = [
+  const keys = [
     'custodialHistory',
     'systemOfArrangement',
     'sources',
     'existence',
     'existenceLocation',
-  ]
+  ] as const
 
   return (
     <div className="mt-10 flex flex-col gap-10 empty:mt-0">
