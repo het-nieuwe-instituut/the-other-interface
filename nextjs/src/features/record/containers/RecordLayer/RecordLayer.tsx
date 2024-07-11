@@ -5,6 +5,10 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { Category } from '@/features/shared/utils/categories'
 import {
+  AsteriskAnnotationGroup,
+  AsteriskAnnotationItem,
+} from '@/features/ui/components/Sources/AsteriskAnnotations'
+import {
   ThumbnailCarousel,
   ThumbnailCarouselItem,
 } from '@/features/ui/components/thumbnail-carousel/ThumbnailCarousel'
@@ -21,6 +25,7 @@ import { useRecordMeta } from '../../hooks/useRecordMeta'
 import { RecordBottomContent } from '../RecordBottomContent/RecordBottomContent'
 
 export const RecordLayer = () => {
+  const { t } = useTypeSafeTranslation('common')
   const params = useParams()
   const category = params?.category as Category
   const locale = useLocale()
@@ -46,6 +51,64 @@ export const RecordLayer = () => {
               splitByHtmlBreaks
             ></PageHeader>
 
+            {record?.__typename === 'ArchiveZoomLevel3DetailType' ? (
+              <AsteriskAnnotationGroup count={record.asteriskSuggestions?.length ?? 0}>
+                {record.asteriskSuggestions?.map((suggestion, index) => {
+                  const name = suggestion.asterisk_name_title ?? suggestion.asterisk_name_title
+                  const date =
+                    suggestion.asterisk_date_title ?? suggestion.asterisk_date_description
+                  const subject =
+                    suggestion.asterisk_subject_title ?? suggestion.asterisk_subject_description
+
+                  return (
+                    <AsteriskAnnotationItem
+                      key={index}
+                      title={t('asteriskMeta', { author: name, date: date })}
+                    >
+                      {subject ?? ''}
+                    </AsteriskAnnotationItem>
+                  )
+                })}
+              </AsteriskAnnotationGroup>
+            ) : null}
+
+            {record?.__typename === 'ObjectsZoomLevel3DetailType' ? (
+              <AsteriskAnnotationGroup count={record.asteriskSuggestions?.length ?? 0}>
+                {record.asteriskSuggestions?.map((suggestion, index) => {
+                  const date = suggestion.asterisk_date_title ?? ''
+                  const name = suggestion.asterisk_name_title ?? ''
+                  const subject = suggestion.asterisk_subject_title ?? ''
+
+                  return (
+                    <AsteriskAnnotationItem
+                      title={t('asteriskMeta', { author: name, date })}
+                      key={index}
+                    >
+                      {subject ?? ''}
+                    </AsteriskAnnotationItem>
+                  )
+                })}
+              </AsteriskAnnotationGroup>
+            ) : null}
+
+            {record?.__typename === 'PeopleZoomLevel3DetailType' ? (
+              <AsteriskAnnotationGroup count={record.asteriskSuggestions?.length ?? 0}>
+                {record.asteriskSuggestions?.map((suggestion, index) => {
+                  const date = suggestion.asterisk_date_description ?? ''
+                  const name = suggestion.asterisk_name_description ?? ''
+                  const subject = suggestion.asterisk_subject_description ?? ''
+
+                  return (
+                    <AsteriskAnnotationItem
+                      title={t('asteriskMeta', { author: name, date })}
+                      key={index}
+                    >
+                      {subject ?? ''}
+                    </AsteriskAnnotationItem>
+                  )
+                })}
+              </AsteriskAnnotationGroup>
+            ) : null}
             {record?.thumbnail && (
               <ThumbnailCarousel>
                 {record?.thumbnail.map((item, index) => (
@@ -112,14 +175,19 @@ const PublicationsDescriptions = ({ data }: PublicationsMetaDescriptionProps) =>
 
   return (
     <div className="mt-10 flex flex-col gap-10 empty:mt-0">
-      {keys.map((k, i) => (
-        <Description key={i} title={recordMetaT(k)} preface={data[k] ?? undefined}></Description>
-      ))}
+      {keys.map((k, i) => {
+        const title = recordMetaT(k)
+        const preface = data[k] ?? undefined
+        if (!title || !preface) {
+          return null
+        }
+        return <Description key={i} title={title} preface={preface}></Description>
+      })}
     </div>
   )
 }
 
-const Description = ({ title, preface }: { title?: string; preface?: string | null }) => (
+const Description = ({ title, preface }: { title: string; preface: string | null }) => (
   <RecordDescription
     title={title}
     preface={preface ?? undefined}

@@ -16,6 +16,45 @@ export async function getZoom3RecordMeta(type: Category, payload: Payload, api: 
 
     const data = await configByType?.zoomLevelQuery?.(payload)
     const item = configByType?.accesor?.(data)
+    console.log(data)
+
+    if (item && item.__typename === 'ArchivesRecordZoomLevel3Type') {
+      item.asteriskSuggestions = [
+        {
+          asterisk_date_content: 'Date',
+          asterisk_date_location: 'Location',
+          asterisk_date_subject: 'Subject',
+          asterisk_name_content: 'Name',
+          asterisk_name_location: 'Location',
+          asterisk_name_subject: 'Subject',
+          asterisk_subject_content: 'Subject',
+          asterisk_subject_location: 'Location',
+          asterisk_subject_subject: 'Subject',
+        },
+      ]
+    }
+
+    if (item && item.__typename === 'ObjectRecordZoomLevel3Type') {
+      item.asteriskSuggestions = [
+        {
+          asterisk_date_geoKeywords: 'Geo Keywords',
+          asterisk_date_relatedKeyword: 'Related Keywords',
+          asterisk_name_geoKeywords: 'Geo Keywords',
+          asterisk_name_relatedKeyword: 'Related Keywords',
+          asterisk_subject_geoKeywords: 'Geo Keywords',
+          asterisk_subject_relatedKeyword: 'Related Keywords',
+        },
+      ]
+    }
+
+    // if (item && item.__typename === 'PeopleRecordZoomLevel3Type') {
+    //   item.
+    //   // item.asteriskSuggestions = [
+    //   //   {
+
+    //   //   },
+    //   // ]
+    // }
 
     return item
   } catch (e) {
