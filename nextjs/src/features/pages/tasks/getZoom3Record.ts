@@ -60,38 +60,5 @@ export async function getZoom3RecordTask(
 
   if (!item?.id) return null
 
-  if (item.__typename === 'ArchiveZoomLevel3DetailType') {
-    item.asteriskSuggestions = [
-      {
-        asterisk_date_title: 'Date',
-        asterisk_date_description: '2021-09-01',
-        asterisk_name_title: 'Name',
-        asterisk_name_description: 'John Doe',
-        asterisk_subject_title: 'Subject',
-        asterisk_subject_description: 'This is a description',
-      },
-    ]
-  }
-
-  if (item.__typename === 'ObjectsZoomLevel3DetailType') {
-    item.asteriskSuggestions = [
-      {
-        asterisk_date_title: 'Date',
-        asterisk_subject_title: 'Subject',
-        asterisk_name_title: 'Name',
-      },
-    ]
-  }
-
-  if (item.__typename === 'PeopleZoomLevel3DetailType') {
-    item.asteriskSuggestions = [
-      {
-        asterisk_date_description: 'Date',
-        asterisk_name_description: 'Name',
-        asterisk_subject_description: 'Subject',
-      },
-    ]
-  }
-
   return item
 }

@@ -106,19 +106,6 @@ export async function getZoom3RecordMeta(type: Category, payload: Payload, api: 
             existenceLocation: 'Existence Location',
           },
         ],
-        asteriskSuggestions: [
-          {
-            asterisk_date_content: 'Date',
-            asterisk_date_location: 'Location',
-            asterisk_date_subject: 'Subject',
-            asterisk_name_content: 'Name',
-            asterisk_name_location: 'Location',
-            asterisk_name_subject: 'Subject',
-            asterisk_subject_content: 'Subject',
-            asterisk_subject_location: 'Location',
-            asterisk_subject_subject: 'Subject',
-          },
-        ],
       }
     }
 
@@ -148,18 +135,9 @@ export async function getZoom3RecordMeta(type: Category, payload: Payload, api: 
             externalSource: 'External Source',
           },
         ],
-        asteriskSuggestions: [
-          {
-            asterisk_date_geoKeywords: '10-10-2021',
-            asterisk_date_relatedKeyword: '10-10-2021',
-            asterisk_name_geoKeywords: 'Name',
-            asterisk_name_relatedKeyword: 'Name',
-            asterisk_subject_geoKeywords: 'Subject',
-            asterisk_subject_relatedKeyword: 'Subject',
-          },
-        ],
       }
     }
+    console.log('item', item)
     return item
   } catch (e) {
     console.log(e, 'Error accured in zoom level 3 task')
