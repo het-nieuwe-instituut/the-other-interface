@@ -10,14 +10,14 @@ query ZoomLevel3People($id: String!, $locale: Locale!) {
       asterisk_date_description
       asterisk_name_description
     }
-    enrichedSources(locale: $locale) {
-      externalSourceType
-      externalSourceUrl
-      __typename
-      id
-      title
-      thumbnail
-      description
-    }
+    # enrichedSources(locale: $locale) {
+    #   externalSourceType
+    #   externalSourceUrl
+    #   __typename
+    #   id
+    #   title
+    #   thumbnail
+    #   description
+    # }
   }
 }

@@ -13,14 +13,14 @@ query ZoomLevel3Archive($id: String!, $locale: Locale!) {
       asterisk_name_description
       asterisk_subject_description
     }
-    enrichedSources(locale: $locale) {
-      externalSourceType
-      externalSourceUrl
-      __typename
-      id
-      title
-      thumbnail
-      description
-    }
+    # enrichedSources(locale: $locale) {
+    #   externalSourceType
+    #   externalSourceUrl
+    #   __typename
+    #   id
+    #   title
+    #   thumbnail
+    #   description
+    # }
   }
 }
