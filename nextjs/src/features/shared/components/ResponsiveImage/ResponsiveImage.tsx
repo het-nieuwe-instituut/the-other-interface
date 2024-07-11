@@ -1,7 +1,7 @@
 'use client'
 import { cn } from '@/features/ui/utils/cn'
 import Image from 'next/image'
-import React, { CSSProperties, useRef, useState } from 'react'
+import React, { CSSProperties, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { limitCopyrightedImageResolution } from './limitCopyrightedImageResolution'
 
 export type ResponsiveImageProps = {
@@ -25,13 +25,12 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
 }) => {
   const [showFallback, setShowFallback] = useState(!src)
   const [isLoaded, setIsLoaded] = useState(!src)
-  const fallbackImageRef = useRef<string | null>(null)
-
-  if (!fallbackImageRef.current) {
-    fallbackImageRef.current = `/images/fallbacks/${Math.floor(Math.random() * 9) + 1}.svg`
-  }
-
+  const fallbackImageRef = useRef<string>(`/images/fallbacks/1.svg`)
   const processedSrc = limitCopyrightedImageResolution(src)
+
+  useLayoutEffect(() => {
+    fallbackImageRef.current = `/images/fallbacks/${Math.floor(Math.random() * 9) + 1}.svg`
+  }, [])
 
   return (
     <div style={style} className={cn('relative max-h-[var(--height)] w-full', className)}>
