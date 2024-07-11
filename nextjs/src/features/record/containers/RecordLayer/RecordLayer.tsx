@@ -51,7 +51,8 @@ export const RecordLayer = () => {
               splitByHtmlBreaks
             ></PageHeader>
 
-            {record?.__typename === 'ArchiveZoomLevel3DetailType' ? (
+            {record?.__typename === 'ArchiveZoomLevel3DetailType' &&
+            (record?.asteriskSuggestions?.length ?? 0) > 0 ? (
               <AsteriskAnnotationGroup count={record.asteriskSuggestions?.length ?? 0}>
                 {record.asteriskSuggestions?.map((suggestion, index) => {
                   const name = suggestion.asterisk_name_title ?? suggestion.asterisk_name_title
@@ -72,7 +73,8 @@ export const RecordLayer = () => {
               </AsteriskAnnotationGroup>
             ) : null}
 
-            {record?.__typename === 'ObjectsZoomLevel3DetailType' ? (
+            {record?.__typename === 'ObjectsZoomLevel3DetailType' &&
+            (record?.asteriskSuggestions?.length ?? 0) > 0 ? (
               <AsteriskAnnotationGroup count={record.asteriskSuggestions?.length ?? 0}>
                 {record.asteriskSuggestions?.map((suggestion, index) => {
                   const date = suggestion.asterisk_date_title ?? ''
@@ -91,7 +93,8 @@ export const RecordLayer = () => {
               </AsteriskAnnotationGroup>
             ) : null}
 
-            {record?.__typename === 'PeopleZoomLevel3DetailType' ? (
+            {record?.__typename === 'PeopleZoomLevel3DetailType' &&
+            (record?.asteriskSuggestions?.length ?? 0) > 0 ? (
               <AsteriskAnnotationGroup count={record.asteriskSuggestions?.length ?? 0}>
                 {record.asteriskSuggestions?.map((suggestion, index) => {
                   const date = suggestion.asterisk_date_description ?? ''
@@ -109,6 +112,7 @@ export const RecordLayer = () => {
                 })}
               </AsteriskAnnotationGroup>
             ) : null}
+
             {record?.thumbnail && (
               <ThumbnailCarousel>
                 {record?.thumbnail.map((item, index) => (
@@ -153,9 +157,16 @@ const ArchivesDescriptions = ({ meta }: ArchiveMetaDescriptionProps) => {
 
   return (
     <div className="mt-10 flex flex-col gap-10 empty:mt-0">
-      {keys.map((k, i) => (
-        <Description key={i} title={recordMetaT(k)} preface={meta[k] ?? undefined}></Description>
-      ))}
+      {keys.map((k, i) => {
+        const title = recordMetaT(k)
+        const preface = meta[k] ?? undefined
+
+        if (!title || !preface) {
+          return null
+        }
+
+        return <Description key={i} title={title} preface={preface}></Description>
+      })}
     </div>
   )
 }
