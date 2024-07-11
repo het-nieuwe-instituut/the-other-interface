@@ -91,7 +91,7 @@ const ArchivesDescriptions = ({ meta }: ArchiveMetaDescriptionProps) => {
   return (
     <div className="mt-10 flex flex-col gap-10 empty:mt-0">
       {keys.map((k, i) => (
-        <Description key={i} title={recordMetaT(k)} preface={meta[k] ?? undefined}></Description>
+        <Description key={i} title={recordMetaT(k)} preface={meta[k]} />
       ))}
     </div>
   )
@@ -113,17 +113,20 @@ const PublicationsDescriptions = ({ data }: PublicationsMetaDescriptionProps) =>
   return (
     <div className="mt-10 flex flex-col gap-10 empty:mt-0">
       {keys.map((k, i) => (
-        <Description key={i} title={recordMetaT(k)} preface={data[k] ?? undefined}></Description>
+        <Description key={i} title={recordMetaT(k)} preface={data[k]} />
       ))}
     </div>
   )
 }
 
-const Description = ({ title, preface }: { title?: string; preface?: string | null }) => (
-  <RecordDescription
-    title={title}
-    preface={preface ?? undefined}
-    constrainPreface={true}
-    splitByHtmlBreaks
-  ></RecordDescription>
-)
+const Description = ({ title, preface }: { title?: string; preface?: string | null }) => {
+  if (!preface) return null
+  return (
+    <RecordDescription
+      title={title}
+      preface={preface ?? undefined}
+      constrainPreface={true}
+      splitByHtmlBreaks
+    ></RecordDescription>
+  )
+}
