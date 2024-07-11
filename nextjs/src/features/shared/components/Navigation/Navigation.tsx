@@ -77,7 +77,7 @@ export const Navigation = () => {
               </Link>
             ))}
           </div>
-          <div className="flex min-w-[388px] max-w-[398px] flex-col sm:pb-[50px]">
+          <div className="flex min-w-[200px] max-w-[398px] flex-col sm:pb-[50px] md:min-w-[388px]">
             <div className="mb-[63px] flex flex-col">
               <p
                 className={TypographyVariants({
@@ -90,7 +90,7 @@ export const Navigation = () => {
               <p
                 className={TypographyVariants({
                   socialLarge: 'md',
-                  className: 'text-pink-100 mb-3',
+                  className: 'text-pink-100 mb-3 ',
                 })}
               >
                 {tNavigation('aboutDescription')}

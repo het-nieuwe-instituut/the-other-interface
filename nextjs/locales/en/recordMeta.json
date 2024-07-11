@@ -47,5 +47,8 @@
   "systemOfArrangement": "System of Arrangement",
   "sources": "Sources",
   "existence": "Existence and location of originals",
-  "existenceLocation": "Existence and location of reproductions"
+  "existenceLocation": "Existence and location of reproductions",
+  "annotation": "Annotation",
+  "historyNotes": "Remarks",
+  "holding": "Holding"
 }
