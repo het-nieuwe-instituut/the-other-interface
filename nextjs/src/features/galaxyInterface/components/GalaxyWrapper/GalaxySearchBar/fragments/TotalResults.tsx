@@ -25,7 +25,7 @@ export const TotalResults = ({ text }: Props) => {
     )
   }
 
-  if (!isTotalLoading) {
+  if (isTotalLoading) {
     return (
       <p className={cn('text-pink-100', TypographyVariants({ socialLarge: 'textfield' }))}>
         {commonT('loadingResults')}
