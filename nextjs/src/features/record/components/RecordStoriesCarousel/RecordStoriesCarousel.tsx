@@ -63,15 +63,13 @@ export const RecordStoriesCarousel = () => {
   )
 }
 
-export const RecordStoriesCarouselContent = ({
+const RecordStoriesCarouselContent = ({
   stories,
   cols,
 }: {
   stories: NonNullable<ReturnType<typeof storiesToCarouselDataMapper>>
   cols: 1 | 2 | 3 | 4
 }) => {
-  const params = useParams()
-  const category = params?.category as Category
   const lang = useLocale()
 
   const { nodes, lastPage, page, next, previous } = useClientPagination({
