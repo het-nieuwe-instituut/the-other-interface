@@ -20,12 +20,11 @@ import {
 import { categoryFieldsMapping } from '../configs/recordMetaFieldOrderConfig'
 
 function mapArchivesEnrichedSources(
-  key: string,
+  key: (typeof categoryFieldsMapping)['archives'][number],
   enrichedSource: EnrichedBaseArchivesRecordZoomLevel3Type
 ) {
   if (key === 'access' && !!enrichedSource.access) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.access,
@@ -33,7 +32,6 @@ function mapArchivesEnrichedSources(
   }
   if (key === 'custodialHistory' && !!enrichedSource.custodialHistory) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.custodialHistory,
@@ -41,7 +39,6 @@ function mapArchivesEnrichedSources(
   }
   if (key === 'description' && !!enrichedSource.description) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.description,
@@ -49,7 +46,6 @@ function mapArchivesEnrichedSources(
   }
   if (key === 'existence' && !!enrichedSource.existence) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.existence,
@@ -57,7 +53,6 @@ function mapArchivesEnrichedSources(
   }
   if (key === 'existenceLocation' && !!enrichedSource.existenceLocation) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.existenceLocation,
@@ -65,7 +60,6 @@ function mapArchivesEnrichedSources(
   }
   if (key === 'period' && !!enrichedSource.period) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.period,
@@ -73,7 +67,6 @@ function mapArchivesEnrichedSources(
   }
   if (key === 'photographCreator' && !!enrichedSource.photographCreator) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.photographCreator,
@@ -81,7 +74,6 @@ function mapArchivesEnrichedSources(
   }
   if (key === 'referenceCode' && !!enrichedSource.referenceCode) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.referenceCode,
@@ -89,7 +81,6 @@ function mapArchivesEnrichedSources(
   }
   if (key === 'rights' && !!enrichedSource.rights) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.rights,
@@ -97,7 +88,6 @@ function mapArchivesEnrichedSources(
   }
   if (key === 'size' && !!enrichedSource.size) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.size,
@@ -105,7 +95,6 @@ function mapArchivesEnrichedSources(
   }
   if (key === 'sources' && !!enrichedSource.sources) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.sources,
@@ -113,7 +102,6 @@ function mapArchivesEnrichedSources(
   }
   if (key === 'systemOfArrangement' && !!enrichedSource.systemOfArrangement) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.systemOfArrangement,
@@ -121,23 +109,20 @@ function mapArchivesEnrichedSources(
   }
   if (key === 'descriptionLevel' && !!enrichedSource.descriptionLevel) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.descriptionLevel,
     }
   }
-  if (key === 'externalSource' && !!enrichedSource.externalSource) {
+  if (key === 'externalURI' && !!enrichedSource.externalURI) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
-      value: enrichedSource.externalSource,
+      value: enrichedSource.externalURI,
     }
   }
   if (key === 'permanentLink' && !!enrichedSource.permanentLink) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.permanentLink,
@@ -145,7 +130,6 @@ function mapArchivesEnrichedSources(
   }
   if (key === 'titleType' && !!enrichedSource.titleType) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.titleType,
@@ -185,41 +169,40 @@ export function mapArchivesDataToSections(
       //   return { title, value: values, isLink, key, asteriskSuggestions }
       // }
 
-      // if (key === 'location') {
-      //   const asteriskSuggestions = data.asteriskSuggestions
-      //     ?.map(suggestion => {
-      //       return {
-      //         date: suggestion.asterisk_date_location ?? '',
-      //         name: suggestion.asterisk_name_location ?? '',
-      //         subject: suggestion.asterisk_subject_location ?? '',
-      //       }
-      //     })
-      //     .filter(v => {
-      //         return v.date || v.name || v.subject
-      //     })
+      if (key === 'location') {
+        const asteriskSuggestions = data.asteriskSuggestions
+          ?.map(suggestion => {
+            return {
+              date: suggestion.asterisk_date_location ?? '',
+              name: suggestion.asterisk_name_location ?? '',
+              subject: suggestion.asterisk_subject_location ?? '',
+            }
+          })
+          .filter(v => {
+            return v.date || v.name || v.subject
+          })
 
-      //   return { title, value: values, isLink, key, asteriskSuggestions }
-      // }
+        return { title, value: values, isLink, key, asteriskSuggestions }
+      }
 
-      // if (key === 'subject') {
-      //   const asteriskSuggestions = data.asteriskSuggestions
-      //     ?.map(suggestion => {
-      //       return {
-      //         date: suggestion.asterisk_date_subject ?? '',
-      //         name: suggestion.asterisk_name_subject ?? '',
-      //         subject: suggestion.asterisk_subject_subject ?? '',
-      //       }
-      //     })
-      //     .filter(v => {
-      //         return v.date || v.name || v.subject
-      //     })
-      //
-      //   return { title, value: values, isLink, key, asteriskSuggestions }
-      // }
+      if (key === 'subject') {
+        const asteriskSuggestions = data.asteriskSuggestions
+          ?.map(suggestion => {
+            return {
+              date: suggestion.asterisk_date_subject ?? '',
+              name: suggestion.asterisk_name_subject ?? '',
+              subject: suggestion.asterisk_subject_subject ?? '',
+            }
+          })
+          .filter(v => {
+            return v.date || v.name || v.subject
+          })
+
+        return { title, value: values, isLink, key, asteriskSuggestions }
+      }
 
       const filterEnrichedSources = data.enrichedSources?.reduce<
         {
-          externalSource: Maybe<string> | undefined
           externalSourceType: ExternalSource | undefined
           externalSourceUrl: Maybe<string> | undefined
           value: string | null
@@ -239,20 +222,11 @@ export function mapArchivesDataToSections(
 }
 
 function mapPublicationEnrichedSources(
-  key: string,
+  key: (typeof categoryFieldsMapping)['publications'][number],
   enrichedSource: EnrichedBasePublicationRecordZoomLevel3Type
 ) {
-  if (key === 'annotation' && !!enrichedSource.annotation) {
-    return {
-      externalSource: enrichedSource.externalSource,
-      externalSourceType: enrichedSource.externalSourceType,
-      externalSourceUrl: enrichedSource.externalSourceUrl,
-      value: enrichedSource.annotation,
-    }
-  }
   if (key === 'authorRole' && !!enrichedSource.authorRole) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.authorRole,
@@ -260,7 +234,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'authors' && !!enrichedSource.authors) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.authors,
@@ -268,7 +241,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'availability' && !!enrichedSource.availability) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.availability,
@@ -276,7 +248,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'category' && !!enrichedSource.category) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.category,
@@ -284,7 +255,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'codeOfArchive' && !!enrichedSource.codeOfArchive) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.codeOfArchive,
@@ -292,7 +262,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'edition' && !!enrichedSource.edition) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.edition,
@@ -300,7 +269,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'illustration' && !!enrichedSource.illustration) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.illustration,
@@ -308,7 +276,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'isbn' && !!enrichedSource.isbn) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.isbn,
@@ -316,7 +283,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'language' && !!enrichedSource.language) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.language,
@@ -324,7 +290,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'number' && !!enrichedSource.number) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.number,
@@ -332,7 +297,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'pages' && !!enrichedSource.pages) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.pages,
@@ -340,7 +304,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'placeOfPublication' && !!enrichedSource.placeOfPublication) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.placeOfPublication,
@@ -348,7 +311,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'publisher' && !!enrichedSource.publisher) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.publisher,
@@ -356,7 +318,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'relatedKeyword' && !!enrichedSource.relatedKeyword) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.relatedKeyword,
@@ -364,7 +325,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'series' && !!enrichedSource.series) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.series,
@@ -372,7 +332,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'subType' && !!enrichedSource.subType) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.subType,
@@ -380,7 +339,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'yearOfPublication' && !!enrichedSource.yearOfPublication) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.yearOfPublication,
@@ -388,7 +346,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'geoKeyword' && !!enrichedSource.geoKeyword) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.geoKeyword,
@@ -396,7 +353,6 @@ function mapPublicationEnrichedSources(
   }
   if (key === 'permanentLink' && !!enrichedSource.permanentLink) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.permanentLink,
@@ -422,7 +378,6 @@ export function mapPublicationDataToSections(
 
       const filterEnrichedSources = data.enrichedSources?.reduce<
         {
-          externalSource: Maybe<string> | undefined
           externalSourceType: ExternalSource | undefined
           externalSourceUrl: Maybe<string> | undefined
           value: string | null
@@ -442,12 +397,11 @@ export function mapPublicationDataToSections(
 }
 
 function mapObjectEnrichedSources(
-  key: string,
+  key: (typeof categoryFieldsMapping)['objects'][number],
   enrichedSource: EnrichedBaseObjectRecordZoomLevel3Type
 ) {
   if (key === 'archiveCode' && !!enrichedSource.archiveCode) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.archiveCode,
@@ -455,7 +409,6 @@ function mapObjectEnrichedSources(
   }
   if (key === 'creditLine' && !!enrichedSource.creditLine) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.creditLine,
@@ -463,7 +416,6 @@ function mapObjectEnrichedSources(
   }
   if (key === 'date' && !!enrichedSource.date) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.date,
@@ -471,7 +423,6 @@ function mapObjectEnrichedSources(
   }
   if (key === 'dimension' && !!enrichedSource.dimension) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.dimension,
@@ -479,7 +430,6 @@ function mapObjectEnrichedSources(
   }
   if (key === 'geoKeywords' && !!enrichedSource.geoKeywords) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.geoKeywords,
@@ -487,7 +437,6 @@ function mapObjectEnrichedSources(
   }
   if (key === 'hasParts' && !!enrichedSource.hasParts) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.hasParts,
@@ -495,7 +444,6 @@ function mapObjectEnrichedSources(
   }
   if (key === 'maker' && !!enrichedSource.maker) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.maker,
@@ -503,7 +451,6 @@ function mapObjectEnrichedSources(
   }
   if (key === 'materials' && !!enrichedSource.materials) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.materials,
@@ -511,7 +458,6 @@ function mapObjectEnrichedSources(
   }
   if (key === 'objectName' && !!enrichedSource.objectName) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.objectName,
@@ -519,7 +465,6 @@ function mapObjectEnrichedSources(
   }
   if (key === 'objectNumber' && !!enrichedSource.objectNumber) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.objectNumber,
@@ -527,7 +472,6 @@ function mapObjectEnrichedSources(
   }
   if (key === 'objectType' && !!enrichedSource.objectType) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.objectType,
@@ -535,7 +479,6 @@ function mapObjectEnrichedSources(
   }
   if (key === 'relatedKeywords' && !!enrichedSource.relatedKeywords) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.relatedKeywords,
@@ -543,7 +486,6 @@ function mapObjectEnrichedSources(
   }
   if (key === 'rights' && !!enrichedSource.rights) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.rights,
@@ -551,7 +493,6 @@ function mapObjectEnrichedSources(
   }
   if (key === 'scale' && !!enrichedSource.scale) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.scale,
@@ -559,7 +500,6 @@ function mapObjectEnrichedSources(
   }
   if (key === 'techniques' && !!enrichedSource.techniques) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.techniques,
@@ -567,7 +507,6 @@ function mapObjectEnrichedSources(
   }
   if (key === 'title' && !!enrichedSource.title) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.title,
@@ -575,7 +514,6 @@ function mapObjectEnrichedSources(
   }
   if (key === 'permanentLink' && !!enrichedSource.permanentLink) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.permanentLink,
@@ -596,6 +534,21 @@ export function mapObjectDataToSections(
       const title = t(key)?.trim()
       const values = rawValue ? rawValue.split(';').filter(v => v.trim().length > 0) : null
       const isLink = key === 'permanentLink'
+
+      const filterEnrichedSources = data.enrichedSources?.reduce<
+        {
+          externalSourceType: ExternalSource | undefined
+          externalSourceUrl: Maybe<string> | undefined
+          value: string | null
+        }[]
+      >((acc, enrichedSource) => {
+        const mappedSource = mapObjectEnrichedSources(key, enrichedSource)
+
+        if (mappedSource) {
+          return [...acc, mappedSource]
+        }
+        return acc
+      }, [])
 
       if (key === 'relatedKeywords') {
         const asteriskSuggestions = data.asteriskSuggestions
@@ -619,50 +572,43 @@ export function mapObjectDataToSections(
           externalSources: data.enrichedSources,
         }
       }
-      // TODO: commented out till we support geoKeywords
-      // if (key === 'geoKeywords') {
-      //   const asteriskSuggestions = data.asteriskSuggestions
-      //     ?.map(suggestion => {
-      //       return {
-      //         date: suggestion.asterisk_date_geoKeywords ?? '',
-      //         name: suggestion.asterisk_name_geoKeywords ?? '',
-      //         subject: suggestion.asterisk_subject_geoKeywords ?? '',
-      //       }
-      //     })
-      //     .filter(v => {
-      //         return v.date || v.name || v.subject
-      //     })
 
       //   return { title, value: values, isLink, key, asteriskSuggestions }
       // }
-      const filterEnrichedSources = data.enrichedSources?.reduce<
-        {
-          externalSource: Maybe<string> | undefined
-          externalSourceType: ExternalSource | undefined
-          externalSourceUrl: Maybe<string> | undefined
-          value: string | null
-        }[]
-      >((acc, enrichedSource) => {
-        const mappedSource = mapObjectEnrichedSources(key, enrichedSource)
 
-        if (mappedSource) {
-          return [...acc, mappedSource]
+      if (key === 'geoKeywords') {
+        const asteriskSuggestions = data.asteriskSuggestions
+          ?.map(suggestion => {
+            return {
+              date: suggestion.asterisk_date_geoKeywords ?? '',
+              name: suggestion.asterisk_name_geoKeywords ?? '',
+              subject: suggestion.asterisk_subject_geoKeywords ?? '',
+            }
+          })
+          .filter(v => {
+            return v.date || v.name || v.subject
+          })
+
+        return {
+          title,
+          value: values,
+          isLink,
+          key,
+          asteriskSuggestions,
+          enrichedSources: filterEnrichedSources,
         }
-        return acc
-      }, [])
-
-      return { title, value: values, isLink, key, enrichedSources: filterEnrichedSources }
+      }
+      return { title, value: values, isLink, key }
     })
     .filter(section => section.value !== null)
 }
 
 function mapPeopleEnrichedSources(
-  key: string,
+  key: (typeof categoryFieldsMapping)['people'][number],
   enrichedSource: EnrichedBasePeopleRecordZoomLevel3Type
 ) {
   if (key === 'association' && !!enrichedSource.association) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.association,
@@ -670,7 +616,6 @@ function mapPeopleEnrichedSources(
   }
   if (key === 'birthDate' && !!enrichedSource.birthDate) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.birthDate,
@@ -678,7 +623,6 @@ function mapPeopleEnrichedSources(
   }
   if (key === 'birthPlace' && !!enrichedSource.birthPlace) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.birthPlace,
@@ -686,7 +630,6 @@ function mapPeopleEnrichedSources(
   }
   if (key === 'deathDate' && !!enrichedSource.deathDate) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.deathDate,
@@ -694,7 +637,6 @@ function mapPeopleEnrichedSources(
   }
   if (key === 'deathPlace' && !!enrichedSource.deathPlace) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.deathPlace,
@@ -702,7 +644,6 @@ function mapPeopleEnrichedSources(
   }
   if (key === 'externalSource' && !!enrichedSource.externalSource) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.externalSource,
@@ -710,23 +651,20 @@ function mapPeopleEnrichedSources(
   }
   if (key === 'gender' && !!enrichedSource.gender) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.gender,
     }
   }
-  if (key === 'nameVariation' && !!enrichedSource.nameVariation) {
+  if (key === 'nameVariations' && !!enrichedSource.nameVariations) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
-      value: enrichedSource.nameVariation,
+      value: enrichedSource.nameVariations,
     }
   }
   if (key === 'nationality' && !!enrichedSource.nationality) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.nationality,
@@ -734,7 +672,6 @@ function mapPeopleEnrichedSources(
   }
   if (key === 'period' && !!enrichedSource.period) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.period,
@@ -742,7 +679,6 @@ function mapPeopleEnrichedSources(
   }
   if (key === 'permanentLink' && !!enrichedSource.permanentLink) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.permanentLink,
@@ -750,7 +686,6 @@ function mapPeopleEnrichedSources(
   }
   if (key === 'profession' && !!enrichedSource.profession) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.profession,
@@ -758,7 +693,6 @@ function mapPeopleEnrichedSources(
   }
   if (key === 'type' && !!enrichedSource.type) {
     return {
-      externalSource: enrichedSource.externalSource,
       externalSourceType: enrichedSource.externalSourceType,
       externalSourceUrl: enrichedSource.externalSourceUrl,
       value: enrichedSource.type,
@@ -782,7 +716,6 @@ export function mapPersonDataToSections(
       const isLink = key === 'permanentLink'
       const filterEnrichedSources = data.enrichedSources?.reduce<
         {
-          externalSource: Maybe<string> | undefined
           externalSourceType: ExternalSource | undefined
           externalSourceUrl: Maybe<string> | undefined
           value: string | null

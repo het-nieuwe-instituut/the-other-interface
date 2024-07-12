@@ -2,7 +2,7 @@
   "__typename": "",
   "type": "Type",
   "profession": "Profession/Field of Work",
-  "nameVariation": "Name Variations",
+  "nameVariations": "Name Variations",
   "birthDate": "Birth Date",
   "birthPlace": "Birth Place",
   "deathDate": "Death Date",

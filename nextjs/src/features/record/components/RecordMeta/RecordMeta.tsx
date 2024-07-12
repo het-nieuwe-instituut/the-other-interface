@@ -16,14 +16,7 @@ import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreToolti
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import Asterisk from '@/features/ui/icons/asterisk-thin.svg'
 import ExternalLink from '@/features/ui/icons/external-link.svg'
-import { Fragment } from 'react'
-import {
-  ArchivesRecordZoomLevel3Type,
-  ObjectRecordZoomLevel3Type,
-  PeopleRecordZoomLevel3Type,
-  PublicationRecordZoomLevel3Type,
-} from 'src/generated/graphql'
-
+import { Fragment, useMemo } from 'react'
 import {
   ExternalSourceBlock,
   ExternalSourceBlockGroup,
@@ -54,34 +47,36 @@ export const RecordMeta = ({
   const { t: recordMetaPersonT } = useTypeSafeTranslation('recordMetaPerson')
   const { t } = useLooseTypeSafeTranslation('common')
 
-  let recordMetaSectionData
-  if (category === CATEGORIES.archives && data) {
-    recordMetaSectionData = mapArchivesDataToSections(
-      data as ArchivesRecordZoomLevel3Type,
-      recordMetaArchiveT
-    )
-  }
+  const recordMetaSectionData = useMemo(() => {
+    let recordMetaSectionData
+    if (category === CATEGORIES.archives && data?.__typename === 'ArchivesRecordZoomLevel3Type') {
+      recordMetaSectionData = mapArchivesDataToSections(data, recordMetaArchiveT)
+    }
 
-  if (category === CATEGORIES.publications) {
-    recordMetaSectionData = mapPublicationDataToSections(
-      data as PublicationRecordZoomLevel3Type,
-      recordMetaPublicationT
-    )
-  }
+    if (
+      category === CATEGORIES.publications &&
+      data?.__typename === 'PublicationRecordZoomLevel3Type'
+    ) {
+      recordMetaSectionData = mapPublicationDataToSections(data, recordMetaPublicationT)
+    }
 
-  if (category === CATEGORIES.objects) {
-    recordMetaSectionData = mapObjectDataToSections(
-      data as ObjectRecordZoomLevel3Type,
-      recordMetaObjectT
-    )
-  }
+    if (category === CATEGORIES.objects && data?.__typename === 'ObjectRecordZoomLevel3Type') {
+      recordMetaSectionData = mapObjectDataToSections(data, recordMetaObjectT)
+    }
 
-  if (category === CATEGORIES.people) {
-    recordMetaSectionData = mapPersonDataToSections(
-      data as PeopleRecordZoomLevel3Type,
-      recordMetaPersonT
-    )
-  }
+    if (category === CATEGORIES.people && data?.__typename === 'PeopleRecordZoomLevel3Type') {
+      recordMetaSectionData = mapPersonDataToSections(data, recordMetaPersonT)
+    }
+
+    return recordMetaSectionData
+  }, [
+    category,
+    data,
+    recordMetaArchiveT,
+    recordMetaObjectT,
+    recordMetaPersonT,
+    recordMetaPublicationT,
+  ])
 
   if (isLoading) {
     return <ThemedSpinner />

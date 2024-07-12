@@ -1,9 +1,10 @@
 query ZoomLevel3PeopleRecord($id: String!, $locale: Locale!) {
   peopleRecordZoomLevel3(id: $id, locale: $locale) {
     __typename
+    id
     type
     profession
-    nameVariation
+    nameVariations
     birthDate
     birthPlace
     deathDate
@@ -14,23 +15,23 @@ query ZoomLevel3PeopleRecord($id: String!, $locale: Locale!) {
     association
     permanentLink
     externalSource
-    # enrichedSources(locale: $locale) {
-    #   id
-    #   externalSourceType
-    #   externalSourceUrl
-    #   type
-    #   profession
-    #   nameVariation
-    #   birthDate
-    #   birthPlace
-    #   deathDate
-    #   deathPlace
-    #   nationality
-    #   gender
-    #   period
-    #   association
-    #   permanentLink
-    #   externalSource
-    # }
+    enrichedSources(locale: $locale) {
+      id
+      externalSourceType
+      externalSourceUrl
+      type
+      profession
+      nameVariations
+      birthDate
+      birthPlace
+      deathDate
+      deathPlace
+      nationality
+      gender
+      period
+      association
+      permanentLink
+      externalSource
+    }
   }
 }

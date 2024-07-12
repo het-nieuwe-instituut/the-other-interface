@@ -16,6 +16,8 @@ interface PublicationsZoomLevel3Data {
   holding?: string
   historyNotes?: string
   annotation?: string
+  mediaType?: string
+  mediaReference?: string
 }
 const publicationsDetailZoomLevel3DataKeys: KeysToVerify<PublicationsZoomLevel3Data> = {
   thumbnail: true,
@@ -26,6 +28,8 @@ const publicationsDetailZoomLevel3DataKeys: KeysToVerify<PublicationsZoomLevel3D
   holding: true,
   historyNotes: true,
   annotation: true,
+  mediaReference: true,
+  mediaType: true,
 }
 export interface PublicationRelationsType {
   idRelation?: string
@@ -72,7 +76,6 @@ export interface PublicationRecordZoomLevel3Data {
   yearOfPublication?: string
   placeOfPublication?: string
   isbn?: string
-  annotation?: string
   codeOfArchive?: string
   illustration?: string
   pages?: string
@@ -90,6 +93,11 @@ export interface PublicationRecordZoomLevel3Data {
   issue?: string
   year?: string
   subject?: string[]
+  edition?: string
+  continuedFrom?: string
+  continuedAs?: string
+  geographicalKeywords?: string
+  pysicalCarrier?: string
 }
 
 const publicationRecordZoomLevel3DataKeys: KeysToVerify<PublicationRecordZoomLevel3Data> = {
@@ -101,7 +109,6 @@ const publicationRecordZoomLevel3DataKeys: KeysToVerify<PublicationRecordZoomLev
   yearOfPublication: true,
   placeOfPublication: true,
   isbn: true,
-  annotation: true,
   codeOfArchive: true,
   illustration: true,
   pages: true,
@@ -119,6 +126,11 @@ const publicationRecordZoomLevel3DataKeys: KeysToVerify<PublicationRecordZoomLev
   issue: true,
   year: true,
   subject: true,
+  edition: true,
+  continuedFrom: true,
+  continuedAs: true,
+  geographicalKeywords: true,
+  pysicalCarrier: true,
 }
 
 @Injectable()

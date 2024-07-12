@@ -1,6 +1,7 @@
 query ZoomLevel3PublicationRecord($id: String!, $locale: Locale!) {
   publicationsRecordZoomLevel3(id: $id, locale: $locale) {
     __typename
+    id
     objectNumber
     subType
     authors
@@ -9,7 +10,6 @@ query ZoomLevel3PublicationRecord($id: String!, $locale: Locale!) {
     yearOfPublication
     placeOfPublication
     isbn
-    annotation
     codeOfArchive
     edition
     illustration
@@ -23,32 +23,45 @@ query ZoomLevel3PublicationRecord($id: String!, $locale: Locale!) {
     availability
     permanentLink
     externalSource
-    # enrichedSources(locale: $locale) {
-    #   id
-    #   externalSourceType
-    #   externalSourceUrl
-    #   objectNumber
-    #   subType
-    #   authors
-    #   authorRole
-    #   publisher
-    #   yearOfPublication
-    #   placeOfPublication
-    #   isbn
-    #   annotation
-    #   codeOfArchive
-    #   edition
-    #   illustration
-    #   pages
-    #   language
-    #   series
-    #   number
-    #   category
-    #   relatedKeyword
-    #   geoKeyword
-    #   availability
-    #   permanentLink
-    #   externalSource
-    # }
+    continuedFrom
+    continuedAs
+    geographicalKeywords
+    pysicalCarrier
+    volume
+    issue
+    year
+    enrichedSources(locale: $locale) {
+      id
+      externalSourceType
+      externalSourceUrl
+      objectNumber
+      subType
+      authors
+      authorRole
+      publisher
+      yearOfPublication
+      placeOfPublication
+      isbn
+      codeOfArchive
+      edition
+      illustration
+      pages
+      language
+      series
+      number
+      category
+      relatedKeyword
+      geoKeyword
+      availability
+      permanentLink
+      externalSource
+      continuedFrom
+      continuedAs
+      geographicalKeywords
+      pysicalCarrier
+      volume
+      issue
+      year
+    }
   }
 }

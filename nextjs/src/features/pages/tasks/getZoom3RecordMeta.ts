@@ -17,8 +17,6 @@ export async function getZoom3RecordMeta(type: Category, payload: Payload, api: 
     const data = await configByType?.zoomLevelQuery?.(payload)
     const item = configByType?.accesor?.(data)
 
-    console.log('the requested data', data, item)
-
     if (item && item.__typename === 'PeopleRecordZoomLevel3Type') {
       return {
         ...item,
@@ -87,7 +85,6 @@ export async function getZoom3RecordMeta(type: Category, payload: Payload, api: 
             id: '1',
             externalSourceType: ExternalSource.Getty,
             externalSourceUrl: 'External Source Url',
-            __typename: 'ExternalSource',
             referenceCode: 'Reference Code',
             titleType: 'Title Type',
             descriptionLevel: 'Description Level',
@@ -139,7 +136,7 @@ export async function getZoom3RecordMeta(type: Category, payload: Payload, api: 
         ],
       }
     }
-    console.log('item', item)
+
     return item
   } catch (e) {
     console.log(e, 'Error accured in zoom level 3 task')

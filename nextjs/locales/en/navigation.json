@@ -34,5 +34,10 @@
   "of": "of",
   "theme": "Theme",
 
-  "errorLoadingThemes": "Something went wrong while loading themes. Please try again later."
+  "errorLoadingThemes": "Something went wrong while loading themes. Please try again later.",
+  "error500Title": "This page isn't working",
+  "error500Description": "The server encountered an error and could not complete your request.",
+  "error404Title": "Page not found",
+  "error404Description": "Something went wrong. Please start over from the ",
+  "error404Link": "homepage"
 }

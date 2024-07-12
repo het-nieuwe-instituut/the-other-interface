@@ -27,6 +27,8 @@ import { OmitEnrichedData } from '../../configs/recordMetaFieldOrderConfig'
 import { useRecordDetailQuery } from '../../hooks/useRecordDetailQuery'
 import { useRecordMetaQuery } from '../../hooks/useRecordMetaQuery'
 import { RecordBottomContent } from '../RecordBottomContent/RecordBottomContent'
+import { VideoPlayer } from '@/features/ui/components/video/VideoPlayer'
+import { AudioPlayer } from '@/features/ui/components/audio/AudioPlayer'
 
 export const RecordLayer = () => {
   const { t } = useTypeSafeTranslation('common')
@@ -198,6 +200,10 @@ export const RecordLayer = () => {
               </ExternalSourceGroup>
             ) : null}
 
+            {record && 'mediaReference' in record && 'mediaType' in record && (
+              <MediaPlayer mediaReference={record?.mediaReference} mediaType={record?.mediaType} />
+            )}
+
             {record?.thumbnail && (
               <ThumbnailCarousel>
                 {record?.thumbnail.map((item, index) => (
@@ -224,6 +230,25 @@ export const RecordLayer = () => {
       BottomContent={<RecordBottomContent />}
     />
   )
+}
+
+interface MediaPlayerProps {
+  mediaType?: string | null
+  mediaReference?: string | null
+}
+
+const MediaPlayer = ({ mediaReference, mediaType }: MediaPlayerProps) => {
+  if (!mediaReference || !mediaType) return null
+
+  if (mediaType.startsWith('video')) {
+    return <VideoPlayer src={mediaReference} type={mediaType} />
+  }
+
+  if (mediaType.startsWith('audio')) {
+    return <AudioPlayer src={mediaReference} type={mediaType} />
+  }
+
+  return null
 }
 
 interface ArchiveMetaDescriptionProps {
@@ -263,11 +288,11 @@ interface PublicationsMetaDescriptionProps {
 const PublicationsDescriptions = ({ data }: PublicationsMetaDescriptionProps) => {
   type DescriptionKey = keyof Omit<
     PublicationsMetaDescriptionProps['data'],
-    '__typename' | 'title' | 'thumbnail' | 'yearOfPublication'
+    '__typename' | 'title' | 'thumbnail' | 'yearOfPublication' | 'mediaReference' | 'mediaType'
   >
 
   const { t: recordMetaT } = useTypeSafeTranslation('recordMeta')
-  const keys: DescriptionKey[] = ['description', 'holding', 'historyNotes', 'annotation']
+  const keys: DescriptionKey[] = ['holding', 'historyNotes', 'annotation']
 
   return (
     <div className="mt-10 flex flex-col gap-10 empty:mt-0">
@@ -283,11 +308,14 @@ const PublicationsDescriptions = ({ data }: PublicationsMetaDescriptionProps) =>
   )
 }
 
-const Description = ({ title, preface }: { title: string; preface: string | null }) => (
-  <RecordDescription
-    title={title}
-    preface={preface ?? undefined}
-    constrainPreface={true}
-    splitByHtmlBreaks
-  ></RecordDescription>
-)
+const Description = ({ title, preface }: { title?: string; preface?: string | null }) => {
+  if (!preface) return null
+  return (
+    <RecordDescription
+      title={title}
+      preface={preface ?? undefined}
+      constrainPreface={true}
+      splitByHtmlBreaks
+    ></RecordDescription>
+  )
+}

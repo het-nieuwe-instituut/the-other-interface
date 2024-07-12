@@ -28,26 +28,26 @@ query ZoomLevel3ObjectRecord($id: String!, $locale: Locale!) {
       asterisk_name_geoKeywords
       asterisk_subject_geoKeywords
     }
-    # enrichedSources(locale: $locale) {
-    #   id
-    #   title
-    #   objectNumber
-    #   objectType
-    #   objectName
-    #   archiveCode
-    #   date
-    #   relatedKeywords
-    #   maker
-    #   materials
-    #   techniques
-    #   hasParts
-    #   dimension
-    #   scale
-    #   creditLine
-    #   rights
-    #   geoKeywords
-    #   permanentLink
-    #   externalSource
-    # }
+    enrichedSources(locale: $locale) {
+      id
+      title
+      objectNumber
+      objectType
+      objectName
+      archiveCode
+      date
+      relatedKeywords
+      maker
+      materials
+      techniques
+      hasParts
+      dimension
+      scale
+      creditLine
+      rights
+      geoKeywords
+      permanentLink
+      externalSource
+    }
   }
 }

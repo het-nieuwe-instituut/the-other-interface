@@ -3,6 +3,7 @@ import { StaticHeader } from '../StaticHeader/StaticHeader'
 import { LayerWrapper } from '../Layers/LayerWrapper'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { Paragraph } from '@/features/ui/components/Paragraph/Paragraph'
+import { cn } from '@/features/ui/utils/cn'
 
 interface ParagraphProps {
   children: React.ReactNode
@@ -65,14 +66,15 @@ interface StaticPageLinkProps {
   href: string
   label: string
   external?: boolean
+  className?: string
 }
 
-export const StaticPageLink = ({ href, label, external }: StaticPageLinkProps) => (
+export const StaticPageLink = ({ href, label, external, className }: StaticPageLinkProps) => (
   <a
     href={href}
     target={external ? '_blank' : '_self'}
     rel={external ? 'noreferrer' : ''}
-    className="underline"
+    className={cn('underline', className)}
   >
     {label}
   </a>

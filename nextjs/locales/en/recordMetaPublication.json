@@ -8,7 +8,6 @@
   "yearOfPublication": "Year of Publication",
   "placeOfPublication": "Place of Publication",
   "isbn": "ISBN",
-  "annotation": "Annotation",
   "codeOfArchive": "Code of Archive",
   "edition": "Edition",
   "illustration": "Illustration",
@@ -21,5 +20,12 @@
   "geoKeyword": "Geographical Keywords",
   "availability": "Availability",
   "permanentLink": "Permanent Link",
-  "externalSource": "External Sources"
+  "externalSource": "External Sources",
+  "continuedFrom": "Continued from",
+  "continuedAs": "Continued as",
+  "volume": "Volume",
+  "issue": "Issue",
+  "year": "Year",
+  "geographicalKeywords": "Geographical keywords",
+  "pysicalCarrier": "Medium"
 }
