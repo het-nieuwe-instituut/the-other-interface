@@ -103,6 +103,16 @@ export async function getZoom3RecordTask(
         description:
           'some long description about some external information so i can test this and be happy',
       },
+      {
+        __typename: 'EnrichedBasePeopleZoomLevel3DetailType',
+        externalSourceType: ExternalSource.Getty,
+        externalSourceUrl: 'https://www.google.com',
+        id: '123',
+        title: 'Getty Images',
+        thumbnail: ['https://www.google.com'],
+        description:
+          'some long description about some external information so i can test this and be happy',
+      },
     ]
   }
 

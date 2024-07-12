@@ -12,7 +12,7 @@ import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import Loading from '@/features/ui/icons/loading.svg'
 
 export interface SourceTooltipProps extends PropsWithChildren {
-  title?: string
+  title?: string | React.ReactNode
   isLoading?: boolean
   isEmpty?: boolean
   readMoreHref?: LinkProps['href']

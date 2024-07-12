@@ -11,17 +11,17 @@ import {
   AsteriskSourceBlock,
   AsteriskSourceBlockGroup,
 } from '@/features/ui/components/Sources/AsteriskSource'
-import { AsteriskTooltip } from '@/features/ui/components/tooltip/AsteriskTooltip'
-import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
-import Asterisk from '@/features/ui/icons/asterisk-thin.svg'
-import ExternalLink from '@/features/ui/icons/external-link.svg'
-import { Fragment, useMemo } from 'react'
 import {
   ExternalSourceBlock,
   ExternalSourceBlockGroup,
+  ExternalSourceLink,
 } from '@/features/ui/components/Sources/ExternalSource'
+import { AsteriskTooltip } from '@/features/ui/components/tooltip/AsteriskTooltip'
 import { ExternalSourceTooltip } from '@/features/ui/components/tooltip/ExternalSourceTooltip'
+import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import ExternalLink from '@/features/ui/icons/external-link.svg'
+import { Fragment, useMemo } from 'react'
 import { useRecordMetaQuery } from '../../hooks/useRecordMetaQuery'
 import {
   mapArchivesDataToSections,
@@ -146,21 +146,32 @@ export const RecordMeta = ({
                 <ExternalSourceBlockGroup className="mt-1">
                   {section.enrichedSources?.map((v, i, array) => {
                     const externalSourceType = v.externalSourceType
+                    const externalSourceUrl = v.externalSourceUrl
 
                     if (!externalSourceType) {
                       return null
                     }
                     return (
                       <ExternalSourceTooltip
-                        place="left"
+                        place="right-start"
                         key={`${i}-${array.length}`}
-                        title={`${t('pulledFrom')} ${getExternalSourceTranslation(
-                          externalSourceType
-                        )}`}
+                        title={
+                          externalSourceUrl ? (
+                            <div className=" inline-block">
+                              {t('pulledFrom')}
+                              <div className="inline-block">
+                                <ExternalSourceLink
+                                  externalSourceType={externalSourceType}
+                                  externalSourceUrl={externalSourceUrl}
+                                />
+                              </div>
+                            </div>
+                          ) : (
+                            getExternalSourceTranslation(externalSourceType)
+                          )
+                        }
                       >
-                        <ExternalSourceBlock href={v.externalSourceUrl ?? undefined}>
-                          {v.value ?? ''}
-                        </ExternalSourceBlock>
+                        <ExternalSourceBlock>{v.value ?? ''}</ExternalSourceBlock>
                       </ExternalSourceTooltip>
                     )
                   })}
@@ -171,7 +182,7 @@ export const RecordMeta = ({
         )
       })}
       {(data?.enrichedSources?.length ?? 0) > 0 && (
-        <ExternalSourceBlockGroup>
+        <ExternalSourceBlockGroup className="mb-4">
           {data?.enrichedSources?.map(v => {
             return (
               <ExternalSourceBlock href={v.externalSourceUrl} key={v.id}>
@@ -237,33 +248,15 @@ function SuggestionSection() {
   return (
     <>
       <MetaField name={t('suggestionTitle')}>
-        <div className="flex flex-col gap-1">
-          <SuggestionLink external url={contributeLink} text={t('suggestionContributeLink')} />
-          <SuggestionLink url={learnMoreLink} text={t('suggestionLearnMoreLink')} />
-        </div>
+        <AsteriskSourceBlockGroup>
+          <AsteriskSourceBlock href={contributeLink} target={'_blank'}>
+            {t('suggestionContributeLink') ?? ''}
+          </AsteriskSourceBlock>
+          <AsteriskSourceBlock href={learnMoreLink} target={'_blank'}>
+            {t('suggestionLearnMoreLink') ?? ''}
+          </AsteriskSourceBlock>
+        </AsteriskSourceBlockGroup>
       </MetaField>
     </>
   )
-
-  interface SuggestionLinkProps {
-    external?: boolean
-    url: string
-    text?: string
-  }
-
-  function SuggestionLink({ external, url, text }: SuggestionLinkProps) {
-    return (
-      <NavLinkButton
-        variant="metaDataText"
-        className="bg-[#DEE5EC] font-semibold text-[#6F7A9C] after:border-none"
-        href={url}
-        title={text}
-        target={external ? '_blank' : undefined}
-      >
-        <Asterisk />
-        {text}
-        {external && <ExternalLink className="size-[14px]" />}
-      </NavLinkButton>
-    )
-  }
 }

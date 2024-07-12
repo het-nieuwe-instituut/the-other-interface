@@ -2,13 +2,10 @@
 'use client'
 import { createTypeSafeTranslation } from '@/features/shared/utils/translations'
 
+import { ExternalSource as ExternalSourceType } from 'src/generated/graphql'
 import { useBoolean } from 'usehooks-ts'
 import ExternalSource from '../../icons/lod.svg'
-import ExternalLink from '../../icons/external-link.svg'
-import { ExternalSourceBlock } from './ExternalSource'
-import { ExternalSource as ExternalSourceType } from 'src/generated/graphql'
-import { getExternalSourceTranslation } from '@/features/record/utils/enrichedSources'
-import NextLink from 'next/link'
+import { ExternalSourceBlock, ExternalSourceLink } from './ExternalSource'
 
 export interface ExternalSourceGroupProps {
   children: React.ReactNode
@@ -27,7 +24,7 @@ export const ExternalSourceGroup = ({ children, count }: ExternalSourceGroupProp
         }`}</ExternalSourceBlock>
       </button>
 
-      {value && children}
+      <div>{value && children}</div>
     </div>
   )
 }
@@ -41,8 +38,8 @@ export interface ExternalSourceItemProps {
 export const ExternalSourceItem = ({ children, externalSource, href }: ExternalSourceItemProps) => {
   const { t } = createTypeSafeTranslation('common')
   return (
-    <div className=" relative flex gap-[15px] pb-4">
-      <div className=" flex h-full items-center justify-center pt-4">
+    <div className="relative flex gap-[15px] pb-4 first:pt-4">
+      <div className=" flex h-full items-center justify-center">
         <div className="absolute top-0 h-full w-[3px] bg-surface-lod"></div>
         <div className="z-10 flex size-[30px] items-center justify-center rounded-full bg-surface-lod text-surface-lod-dark">
           <ExternalSource />
@@ -50,14 +47,13 @@ export const ExternalSourceItem = ({ children, externalSource, href }: ExternalS
       </div>
       <div className="flex flex-col gap-4">
         {externalSource && (
-          <p className=" mt-2 inline-block  font-arial-reboot-lines text-[12px] font-[600] leading-[15px] ">
+          <p className=" mt-2 inline-block font-arial-reboot-lines text-[12px] font-[600] leading-[15px] ">
             {t('pulledFrom')}{' '}
-            <NextLink href={href} className=" inline-block items-center underline">
-              <span className="flex items-center">
-                {getExternalSourceTranslation(externalSource)}{' '}
-                <ExternalLink className=" size-[18px]" />
-              </span>
-            </NextLink>
+            <ExternalSourceLink
+              className="items-center"
+              externalSourceUrl={href}
+              externalSourceType={externalSource}
+            />
           </p>
         )}
 
