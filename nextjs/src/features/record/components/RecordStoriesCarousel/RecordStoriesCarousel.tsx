@@ -28,10 +28,8 @@ export const RecordStoriesCarousel = () => {
   const category = params?.category as Category
   const id = params?.id as string
   const type = CATEGORIES_TO_ENTITY_MAPPER[category]
-  const lang = useLocale()
 
   const { data: recordRelatedStories, isLoading, isError } = useStoriesRelationForRecord(type, id)
-  const { t: tRecord } = useTypeSafeTranslation('record')
 
   const stories = useMemo(
     () =>
@@ -41,15 +39,6 @@ export const RecordStoriesCarousel = () => {
     [recordRelatedStories?.zoomLevel3StoriesRelationsForRecord?.stories]
   )
 
-  const { nodes, lastPage, page, next, previous } = useClientPagination({
-    items: stories ?? [],
-    itemsInPage: 4,
-  })
-
-  if (isError) {
-    return <ErrorBox />
-  }
-
   if (isLoading) {
     return (
       <div className="flex h-[600px] w-full items-center justify-center">
@@ -58,6 +47,40 @@ export const RecordStoriesCarousel = () => {
     )
   }
 
+  if (isError) {
+    return <ErrorBox />
+  }
+
+  return (
+    <>
+      <div className="block lg:hidden">
+        <RecordStoriesCarouselContent stories={stories ?? []} cols={1} />
+      </div>
+      <div className="hidden lg:block">
+        <RecordStoriesCarouselContent stories={stories ?? []} cols={4} />
+      </div>
+    </>
+  )
+}
+
+export const RecordStoriesCarouselContent = ({
+  stories,
+  cols,
+}: {
+  stories: NonNullable<ReturnType<typeof storiesToCarouselDataMapper>>
+  cols: 1 | 2 | 3 | 4
+}) => {
+  const params = useParams()
+  const category = params?.category as Category
+  const lang = useLocale()
+
+  const { nodes, lastPage, page, next, previous } = useClientPagination({
+    items: stories ?? [],
+    itemsInPage: cols,
+  })
+
+  const { t: tRecord } = useTypeSafeTranslation('record')
+
   const title = `${tRecord('relatedStoriesCarousel')} (${stories?.length})`
 
   return (
@@ -65,7 +88,7 @@ export const RecordStoriesCarousel = () => {
       {stories && stories.length > 0 && (
         <CarouselGrid>
           <CarouselGridTitle>{title}</CarouselGridTitle>
-          <CarouselGridCardWrapper cols={4}>
+          <CarouselGridCardWrapper cols={cols}>
             {nodes.map(item => {
               const url = addLocaleToUrl(`/detail/${CATEGORIES.stories}/${item.id}`, lang)
 
@@ -83,7 +106,7 @@ export const RecordStoriesCarousel = () => {
           </CarouselGridCardWrapper>
           <CarouselGridFooter>
             <div />
-            {stories.length > 4 && (
+            {stories.length > cols && (
               <CarouselGridPagination
                 onNext={next}
                 onPrevious={previous}

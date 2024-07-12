@@ -108,7 +108,7 @@ export const RelatedStoriesCarouselContent = ({
       </CarouselGridCardWrapper>
       <CarouselGridFooter>
         <div />
-        {stories.length > 4 && (
+        {stories.length > cols && (
           <CarouselGridPagination
             onNext={next}
             onPrevious={previous}
