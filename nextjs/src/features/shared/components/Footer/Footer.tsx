@@ -19,7 +19,7 @@ export const Footer = () => {
       style={{ '--z-index': `${FOOTER_Z_INDEX}` } as CSSProperties}
       className="relative z-[var(--z-index)] flex w-full bg-ivory-90 opacity-100"
     >
-      <div className="container m-auto max-w-[1392px] p-6">
+      <div className="container m-auto max-w-[1392px] p-6 min-[1428px]:px-0">
         <div className="grid gap-1 md:grid-cols-2 lg:grid-cols-3">
           <div>
             <Link href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}>
