@@ -1,6 +1,7 @@
+import { cn } from '@/features/ui/utils/cn'
 import React from 'react'
 import SuspenseLoader from '../SuspenseLoader/SuspenseLoader'
-import { cn } from '@/features/ui/utils/cn'
+import { EditorialSkeleton } from '@/features/ui/components/Skeletons/EditorialSkeleton'
 
 interface Props {
   LeftContent: React.ReactNode
@@ -20,11 +21,10 @@ export const LayerWrapper: React.FC<Props> = ({ LeftContent, RightContent, Botto
             RightContent ? 'gap-[3.75rem]' : 'gap-0'
           )}
         >
-          <SuspenseLoader>
+          <SuspenseLoader LoadingComponent={<EditorialSkeleton />}>
             <div className="px-6 grid-in-left">{LeftContent}</div>
             <div className="grid-in-bottom">{BottomContent}</div>
           </SuspenseLoader>
-
           {RightContent && <div className="px-6 grid-in-right">{RightContent}</div>}
         </div>
       </div>

@@ -1,5 +1,4 @@
 'use client'
-import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { useStoryMetaByIdQuery } from '@/features/shared/hooks/queries/useStoryMetaByIdQuery'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useLocale } from '@/features/shared/hooks/useLocale'
@@ -10,11 +9,12 @@ import { TypographyVariants } from '@/features/ui/components/typography/variants
 import { useParams } from 'next/navigation'
 import { EnumTriplyrecordType, TriplyRecord } from 'src/generated/graphql'
 
-import NextLink from 'next/link'
-import { encodeFilters } from '@/features/shared/helpers/searchHelpers'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { encodeFilters } from '@/features/shared/helpers/searchHelpers'
 import { keyExtractor } from '@/features/shared/utils/lists'
-import { formatPublicationDate, formatAuthor, formatTimeframe, getPeopleUrl } from './helpers'
+import { MetaSkeleton } from '@/features/ui/components/Skeletons/MetaSkeleton'
+import NextLink from 'next/link'
+import { formatAuthor, formatPublicationDate, formatTimeframe, getPeopleUrl } from './helpers'
 
 export const StoryMeta: React.FC = () => {
   const storiesT = useTypeSafeTranslation('stories')
@@ -61,7 +61,7 @@ export const StoryMeta: React.FC = () => {
   )
 
   if (isLoading) {
-    return <ThemedSpinner />
+    return <MetaSkeleton />
   }
 
   if (!story) return null

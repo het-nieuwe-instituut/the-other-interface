@@ -1,6 +1,5 @@
 'use client'
 import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
-import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { State } from '@/features/shared/configs/store'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
@@ -113,11 +112,7 @@ const MainGalaxyContent = React.memo(() => {
     }
 
     if (isMainLoading && !mainData) {
-      return (
-        <div className="flex h-full  items-center justify-center">
-          <ThemedSpinner />
-        </div>
-      )
+      return <Pulse />
     }
 
     return (
