@@ -32,8 +32,14 @@
   "welcomeWarning": "Let op: alle collectiedata op het platform is automatisch naar het Engels vertaald.",
   "welcomeButton": "Start hier",
   "learnAboutAsterisk": "Lees meer over Asterisk",
-  "learnAboutExternalSources": "Lees meer over externe bronnen",
+  "learnAboutExternalDataSources": "Lees meer over externe bronnen",
+  "showExternalSources": "Toon externe bronnen ({{count}})",
+  "hideExternalSources": "Verberg externe bronnen ({{count}})",
+  "asteriskMeta": "Toegevoegd door {{author}} op {{date}}",
+  "pulledFrom": "Pulled from",
+  "pulledFromGetty": "Getty ULAN",
+  "pulledFromRKD": "RKD",
+  "pulledFromWikiData": "WikiData",
   "showAsterisk": "Toon asterisk* annotaties ({{count}})",
-  "hideAsterisk": "Verberg asterisk* annotaties ({{count}})",
-  "asteriskMeta": "Toegevoegd door {{author}} op {{date}}"
+  "hideAsterisk": "Verberg asterisk* annotaties ({{count}})"
 }

@@ -9,6 +9,10 @@ import {
   AsteriskAnnotationItem,
 } from '@/features/ui/components/Sources/AsteriskAnnotations'
 import {
+  ExternalSourceGroup,
+  ExternalSourceItem,
+} from '@/features/ui/components/Sources/ExternalSourceAnnotations'
+import {
   ThumbnailCarousel,
   ThumbnailCarouselItem,
 } from '@/features/ui/components/thumbnail-carousel/ThumbnailCarousel'
@@ -72,6 +76,26 @@ export const RecordLayer = () => {
                 })}
               </AsteriskAnnotationGroup>
             ) : null}
+            {record?.__typename === 'ArchiveZoomLevel3DetailType' &&
+            (record?.enrichedSources?.length ?? 0) > 0 ? (
+              <ExternalSourceGroup count={record.enrichedSources?.length ?? 0}>
+                {record.enrichedSources?.map((source, index) => {
+                  const href = source.externalSourceUrl
+                  if (!href) {
+                    return null
+                  }
+                  return (
+                    <ExternalSourceItem
+                      href={href}
+                      key={index}
+                      externalSource={source.externalSourceType}
+                    >
+                      {source.description ?? ''}
+                    </ExternalSourceItem>
+                  )
+                })}
+              </ExternalSourceGroup>
+            ) : null}
 
             {record?.__typename === 'ObjectsZoomLevel3DetailType' &&
             (record?.asteriskSuggestions?.length ?? 0) > 0 ? (
@@ -92,6 +116,26 @@ export const RecordLayer = () => {
                 })}
               </AsteriskAnnotationGroup>
             ) : null}
+            {record?.__typename === 'ObjectsZoomLevel3DetailType' &&
+            (record?.enrichedSources?.length ?? 0) > 0 ? (
+              <ExternalSourceGroup count={record.enrichedSources?.length ?? 0}>
+                {record.enrichedSources?.map((source, index) => {
+                  const href = source.externalSourceUrl
+                  if (!href) {
+                    return null
+                  }
+                  return (
+                    <ExternalSourceItem
+                      href={href}
+                      key={index}
+                      externalSource={source.externalSourceType}
+                    >
+                      {source.description ?? ''}
+                    </ExternalSourceItem>
+                  )
+                })}
+              </ExternalSourceGroup>
+            ) : null}
 
             {record?.__typename === 'PeopleZoomLevel3DetailType' &&
             (record?.asteriskSuggestions?.length ?? 0) > 0 ? (
@@ -111,6 +155,47 @@ export const RecordLayer = () => {
                   )
                 })}
               </AsteriskAnnotationGroup>
+            ) : null}
+            {record?.__typename === 'PeopleZoomLevel3DetailType' &&
+            (record?.enrichedSources?.length ?? 0) > 0 ? (
+              <ExternalSourceGroup count={record.enrichedSources?.length ?? 0}>
+                {record.enrichedSources?.map((source, index) => {
+                  const href = source.externalSourceUrl
+                  if (!href) {
+                    return null
+                  }
+                  return (
+                    <ExternalSourceItem
+                      href={href}
+                      key={index}
+                      externalSource={source.externalSourceType}
+                    >
+                      {source.description ?? ''}
+                    </ExternalSourceItem>
+                  )
+                })}
+              </ExternalSourceGroup>
+            ) : null}
+
+            {record?.__typename === 'PublicationZoomLevel3DetailType' &&
+            (record?.enrichedSources?.length ?? 0) > 0 ? (
+              <ExternalSourceGroup count={record.enrichedSources?.length ?? 0}>
+                {record.enrichedSources?.map((source, index) => {
+                  const href = source.externalSourceUrl
+                  if (!href) {
+                    return null
+                  }
+                  return (
+                    <ExternalSourceItem
+                      href={href}
+                      key={index}
+                      externalSource={source.externalSourceType}
+                    >
+                      {source.description ?? ''}
+                    </ExternalSourceItem>
+                  )
+                })}
+              </ExternalSourceGroup>
             ) : null}
 
             {record?.thumbnail && (

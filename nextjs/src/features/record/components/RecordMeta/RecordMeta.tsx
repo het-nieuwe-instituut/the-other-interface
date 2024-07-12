@@ -24,7 +24,11 @@ import {
   PublicationRecordZoomLevel3Type,
 } from 'src/generated/graphql'
 
-import { ExternalSourceBlockGroup } from '@/features/ui/components/Sources/ExternalSource'
+import {
+  ExternalSourceBlock,
+  ExternalSourceBlockGroup,
+} from '@/features/ui/components/Sources/ExternalSource'
+import { ExternalSourceTooltip } from '@/features/ui/components/tooltip/ExternalSourceTooltip'
 import { useRecordMetaQuery } from '../../hooks/useRecordMetaQuery'
 import {
   mapArchivesDataToSections,
@@ -144,24 +148,43 @@ export const RecordMeta = ({
                   </AsteriskSourceBlockGroup>
                 )}
               {(section.externalSources?.length ?? 0) > 0 && (
-                <ExternalSourceBlockGroup>
+                <ExternalSourceBlockGroup className="mt-1">
                   {section.externalSources?.map(v => {
                     return (
-                      <AsteriskSourceBlock href={v.externalSourceUrl} key={v.id}>
-                        {getExternalSourceTranslation(v.externalSourceType) ?? ''}
-                      </AsteriskSourceBlock>
+                      <ExternalSourceTooltip
+                        place="left"
+                        key={v.id}
+                        title={`${t('pulledFrom')} ${getExternalSourceTranslation(
+                          v.externalSourceType
+                        )}`}
+                      >
+                        <ExternalSourceBlock href={v.externalSourceUrl}>
+                          {v.externalSource ?? ''}
+                        </ExternalSourceBlock>
+                      </ExternalSourceTooltip>
                     )
                   })}
-
-                  <AsteriskSourceBlock href="/external-sources">
-                    {t('learnAboutExternalDataSources') ?? ''}
-                  </AsteriskSourceBlock>
                 </ExternalSourceBlockGroup>
               )}
             </>
           </MetaField>
         )
       })}
+      {(data?.enrichedSources?.length ?? 0) > 0 && (
+        <ExternalSourceBlockGroup>
+          {data?.enrichedSources?.map(v => {
+            return (
+              <ExternalSourceBlock href={v.externalSourceUrl} key={v.id}>
+                {getExternalSourceTranslation(v.externalSourceType) ?? ''}
+              </ExternalSourceBlock>
+            )
+          })}
+
+          <ExternalSourceBlock href="/external-sources">
+            {t('learnAboutExternalDataSources') ?? ''}
+          </ExternalSourceBlock>
+        </ExternalSourceBlockGroup>
+      )}
       <SuggestionSection />
     </div>
   )
