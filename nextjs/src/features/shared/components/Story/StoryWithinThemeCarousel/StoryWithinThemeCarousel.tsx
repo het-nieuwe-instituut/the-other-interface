@@ -18,22 +18,14 @@ import { useMemo } from 'react'
 import ErrorBox from '../../Error/ErrorBox'
 import { ThemedSpinner } from '../../Loading/ThemedSpinner/ThemedSpinner'
 
-const ITEMS_IN_PAGE = 4
 export const StoryWithinThemeCarousel = () => {
   const params = useParams()
   const id = params?.id as string
-  const lang = useLocale()
-
   const { data, isLoading, isError } = useStoriesRelatedByThemeQuery(id)
-  const { t: tStories } = useTypeSafeTranslation('stories')
   const stories = useMemo(
     () => storiesToCarouselDataMapper(data?.storiesRealtedWithinTheme?.stories) ?? [],
     [data?.storiesRealtedWithinTheme?.stories]
   )
-  const { nodes, lastPage, page, next, previous } = useClientPagination({
-    items: stories,
-    itemsInPage: ITEMS_IN_PAGE,
-  })
 
   if (isError) {
     return <ErrorBox />
@@ -48,6 +40,34 @@ export const StoryWithinThemeCarousel = () => {
   }
 
   return (
+    <>
+      <div className="hidden lg:block">
+        <StoryWithinThemeCarouselContent cols={4} stories={stories} />
+      </div>
+      <div className="block lg:hidden">
+        <StoryWithinThemeCarouselContent cols={1} stories={stories} />
+      </div>
+    </>
+  )
+}
+
+export const StoryWithinThemeCarouselContent = ({
+  cols,
+  stories,
+}: {
+  cols: 1 | 2 | 3 | 4
+  stories: NonNullable<ReturnType<typeof storiesToCarouselDataMapper>>
+}) => {
+  const lang = useLocale()
+
+  const { t: tStories } = useTypeSafeTranslation('stories')
+
+  const { nodes, lastPage, page, next, previous } = useClientPagination({
+    items: stories,
+    itemsInPage: cols,
+  })
+
+  return (
     <div>
       {stories && stories.length > 0 && (
         <>
@@ -55,7 +75,7 @@ export const StoryWithinThemeCarousel = () => {
             <CarouselGridTitle>{`${tStories('moreOnTheme')} (${
               stories.length
             })`}</CarouselGridTitle>
-            <CarouselGridCardWrapper cols={ITEMS_IN_PAGE}>
+            <CarouselGridCardWrapper cols={cols}>
               {nodes.map(item => {
                 const url = addLocaleToUrl(`/detail/stories/${item.id}`, lang)
                 return (
@@ -71,7 +91,6 @@ export const StoryWithinThemeCarousel = () => {
               })}
             </CarouselGridCardWrapper>
             <CarouselGridFooter>
-              <div />
               {stories.length > 4 && (
                 <CarouselGridPagination
                   onNext={next}
