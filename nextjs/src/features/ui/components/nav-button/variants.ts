@@ -40,7 +40,7 @@ export const NavButtonVariants = cva(
         ],
         metaData: [
           'line-clamp-1 h-[26px] flex-nowrap rounded bg-[rgba(0,0,0,0.20)] px-2 py-1 after:border-none',
-          'text-center font-social-large text-sm font-normal leading-[18.20px]',
+          'break-all text-left font-social-large text-sm font-normal',
         ],
         metaDataText: [
           'h-[22px]',
