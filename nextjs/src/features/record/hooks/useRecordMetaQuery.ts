@@ -10,13 +10,8 @@ export function useRecordMetaQuery(type: Category, id: string) {
   const lang = useLocale()
 
   const queryFn = async () => {
-    try {
-      const res = await getZoom3RecordMeta(type, { id, locale: lang ?? 'nl' }, api)
-      return res
-    } catch (e) {
-      console.error('Error fetching record meta', e)
-      return
-    }
+    const res = await getZoom3RecordMeta(type, { id, locale: lang ?? 'nl' }, api)
+    return res
   }
 
   return useQuery({
