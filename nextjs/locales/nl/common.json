@@ -35,5 +35,7 @@
   "learnAboutExternalSources": "Lees meer over externe bronnen",
   "showAsterisk": "Toon asterisk* annotaties ({{count}})",
   "hideAsterisk": "Verberg asterisk* annotaties ({{count}})",
-  "asteriskMeta": "Toegevoegd door {{author}} op {{date}}"
+  "asteriskMeta": "Toegevoegd door {{author}} op {{date}}",
+  "loadingResults": "Laden resultaten voor",
+  "loadingSuggestions": "Suggesties laden"
 }

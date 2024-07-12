@@ -1,4 +1,3 @@
-import { InlineThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { State } from '@/features/shared/configs/store'
 import { useFilterSuggestionsQuery } from '@/features/shared/hooks/queries/useFilterSuggestionsQuery'
@@ -68,7 +67,9 @@ export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter, type
   if (isLoading) {
     return (
       <div className="my-4">
-        <InlineThemedSpinner />
+        <p className={cn('text-pink.100', TypographyVariants({ socialLarge: 'textfield' }))}>
+          {commonT('loadingSuggestions')}...
+        </p>
       </div>
     )
   }
