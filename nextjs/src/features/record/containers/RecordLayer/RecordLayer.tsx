@@ -50,7 +50,7 @@ export const RecordLayer = () => {
   return (
     <LayerWrapper
       LeftContent={
-        !isRecordError ? (
+        isRecordError ? (
           <ErrorBox />
         ) : (
           <>
@@ -236,7 +236,7 @@ export const RecordLayer = () => {
         )
       }
       RightContent={
-        !isMetaError ? (
+        isMetaError ? (
           <ErrorBox />
         ) : (
           <RecordMeta data={meta} isLoading={isLoading} category={category} />

@@ -116,6 +116,7 @@ function mapPeopleEnrichedSources(
     'period',
     'permanentLink',
   ]
+
   return getValidEnrichedSource(enrichedSource, key, keysToTry)
 }
 
@@ -134,6 +135,9 @@ function getValidEnrichedSource<S extends EnrichedSource, K extends keyof S>(
   }
   const value = enrichedSource[validKey]
   if (!value) {
+    return
+  }
+  if (!enrichedSource.externalSourceUrl || enrichedSource.externalSourceUrl === '') {
     return
   }
   return {
