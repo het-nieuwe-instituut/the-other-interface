@@ -1,7 +1,7 @@
 'use client'
 import { cn } from '@/features/ui/utils/cn'
 import Image from 'next/image'
-import React, { CSSProperties, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { CSSProperties, useLayoutEffect, useRef, useState } from 'react'
 import { limitCopyrightedImageResolution } from './limitCopyrightedImageResolution'
 
 export type ResponsiveImageProps = {
