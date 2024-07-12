@@ -147,19 +147,24 @@ export const RecordMeta = ({
                     })}
                   </AsteriskSourceBlockGroup>
                 )}
-              {(section.externalSources?.length ?? 0) > 0 && (
+              {(section.enrichedSources?.length ?? 0) > 0 && (
                 <ExternalSourceBlockGroup className="mt-1">
-                  {section.externalSources?.map(v => {
+                  {section.enrichedSources?.map((v, i, array) => {
+                    const externalSourceType = v.externalSourceType
+
+                    if (!externalSourceType) {
+                      return null
+                    }
                     return (
                       <ExternalSourceTooltip
                         place="left"
-                        key={v.id}
+                        key={`${i}-${array.length}`}
                         title={`${t('pulledFrom')} ${getExternalSourceTranslation(
-                          v.externalSourceType
+                          externalSourceType
                         )}`}
                       >
-                        <ExternalSourceBlock href={v.externalSourceUrl}>
-                          {v.externalSource ?? ''}
+                        <ExternalSourceBlock href={v.externalSourceUrl ?? undefined}>
+                          {v.value ?? ''}
                         </ExternalSourceBlock>
                       </ExternalSourceTooltip>
                     )

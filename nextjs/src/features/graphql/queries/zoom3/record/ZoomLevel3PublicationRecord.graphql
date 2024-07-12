@@ -23,32 +23,32 @@ query ZoomLevel3PublicationRecord($id: String!, $locale: Locale!) {
     availability
     permanentLink
     externalSource
-    enrichedSources(locale: $locale) {
-      id
-      externalSourceType
-      externalSourceUrl
-      objectNumber
-      subType
-      authors
-      authorRole
-      publisher
-      yearOfPublication
-      placeOfPublication
-      isbn
-      annotation
-      codeOfArchive
-      edition
-      illustration
-      pages
-      language
-      series
-      number
-      category
-      relatedKeyword
-      geoKeyword
-      availability
-      permanentLink
-      externalSource
-    }
+    # enrichedSources(locale: $locale) {
+    #   id
+    #   externalSourceType
+    #   externalSourceUrl
+    #   objectNumber
+    #   subType
+    #   authors
+    #   authorRole
+    #   publisher
+    #   yearOfPublication
+    #   placeOfPublication
+    #   isbn
+    #   annotation
+    #   codeOfArchive
+    #   edition
+    #   illustration
+    #   pages
+    #   language
+    #   series
+    #   number
+    #   category
+    #   relatedKeyword
+    #   geoKeyword
+    #   availability
+    #   permanentLink
+    #   externalSource
+    # }
   }
 }

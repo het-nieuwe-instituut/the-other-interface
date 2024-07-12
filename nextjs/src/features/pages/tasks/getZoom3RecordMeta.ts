@@ -1,5 +1,5 @@
 import { Category } from '@/features/shared/utils/categories'
-import { Locale, Sdk } from 'src/generated/graphql'
+import { ExternalSource, Locale, Sdk } from 'src/generated/graphql'
 import { PublicationState } from '@/features/shared/types/enums'
 import { zoom3RecordMetaConfig } from './zoom3RecordMetaConfig'
 
@@ -25,7 +25,7 @@ export async function getZoom3RecordMeta(type: Category, payload: Payload, api: 
         enrichedSources: [
           {
             id: '1',
-            externalSourceType: 'External Source Type',
+            externalSourceType: ExternalSource.Getty,
             externalSourceUrl: 'External Source Url',
             type: 'Type',
             profession: 'Profession',
@@ -51,7 +51,7 @@ export async function getZoom3RecordMeta(type: Category, payload: Payload, api: 
         enrichedSources: [
           {
             id: '1',
-            externalSourceType: 'External Source Type',
+            externalSourceType: ExternalSource.Getty,
             externalSourceUrl: 'External Source Url',
             objectNumber: 'Object Number',
             subType: 'Sub Type',
@@ -85,7 +85,7 @@ export async function getZoom3RecordMeta(type: Category, payload: Payload, api: 
         enrichedSources: [
           {
             id: '1',
-            externalSourceType: 'External Source Type',
+            externalSourceType: ExternalSource.Getty,
             externalSourceUrl: 'External Source Url',
             __typename: 'ExternalSource',
             referenceCode: 'Reference Code',
@@ -115,6 +115,8 @@ export async function getZoom3RecordMeta(type: Category, payload: Payload, api: 
         enrichedSources: [
           {
             id: '1',
+            externalSourceType: ExternalSource.Getty,
+            externalSourceUrl: 'External Source Url',
             title: 'Title',
             objectNumber: 'Object Number',
             objectType: 'Object Type',

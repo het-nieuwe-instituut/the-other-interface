@@ -3,6 +3,7 @@ import { PublicationState } from '@/features/shared/types/enums'
 import { Category, isStoryCategory } from '@/features/shared/utils/categories'
 import {
   ArchiveZoomLevel3DetailType,
+  ExternalSource,
   Locale,
   ObjectsZoomLevel3DetailType,
   PeopleZoomLevel3DetailType,
@@ -60,5 +61,64 @@ export async function getZoom3RecordTask(
 
   if (!item?.id) return null
 
+  if (item.__typename === 'ArchiveZoomLevel3DetailType') {
+    item.enrichedSources = [
+      {
+        __typename: 'EnrichedBaseArchiveZoomLevel3DetailType',
+        externalSourceType: ExternalSource.Getty,
+        externalSourceUrl: 'https://www.google.com',
+        id: '123',
+        title: 'Getty Images',
+        thumbnail: ['https://www.google.com'],
+        description:
+          'some long description about some external information so i can test this and be happy',
+      },
+    ]
+  }
+
+  if (item.__typename === 'ObjectsZoomLevel3DetailType') {
+    item.enrichedSources = [
+      {
+        __typename: 'EnrichedBaseObjectsZoomLevel3DetailType',
+        externalSourceType: ExternalSource.Getty,
+        externalSourceUrl: 'https://www.google.com',
+        id: '123',
+        title: 'Getty Images',
+        thumbnail: ['https://www.google.com'],
+        description:
+          'some long description about some external information so i can test this and be happy',
+      },
+    ]
+  }
+
+  if (item.__typename === 'PeopleZoomLevel3DetailType') {
+    item.enrichedSources = [
+      {
+        __typename: 'EnrichedBasePeopleZoomLevel3DetailType',
+        externalSourceType: ExternalSource.Getty,
+        externalSourceUrl: 'https://www.google.com',
+        id: '123',
+        title: 'Getty Images',
+        thumbnail: ['https://www.google.com'],
+        description:
+          'some long description about some external information so i can test this and be happy',
+      },
+    ]
+  }
+
+  if (item.__typename === 'PublicationZoomLevel3DetailType') {
+    item.enrichedSources = [
+      {
+        __typename: 'EnrichedBasePublicationZoomLevel3DetailType',
+        externalSourceType: ExternalSource.Getty,
+        externalSourceUrl: 'https://www.google.com',
+        id: '123',
+        title: 'Getty Images',
+        thumbnail: ['https://www.google.com'],
+        description:
+          'some long description about some external information so i can test this and be happy',
+      },
+    ]
+  }
   return item
 }
