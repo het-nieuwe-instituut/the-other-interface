@@ -16,6 +16,8 @@ interface PublicationsZoomLevel3Data {
   holding?: string
   historyNotes?: string
   annotation?: string
+  mediaType?: string
+  mediaReference?: string
 }
 const publicationsDetailZoomLevel3DataKeys: KeysToVerify<PublicationsZoomLevel3Data> = {
   thumbnail: true,
@@ -26,6 +28,8 @@ const publicationsDetailZoomLevel3DataKeys: KeysToVerify<PublicationsZoomLevel3D
   holding: true,
   historyNotes: true,
   annotation: true,
+  mediaReference: true,
+  mediaType: true,
 }
 export interface PublicationRelationsType {
   idRelation?: string

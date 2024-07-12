@@ -5,6 +5,8 @@ query ZoomLevel3Archive($id: String!, $locale: Locale!) {
     title
     thumbnail
     description
+    mediaType
+    mediaReference
     asteriskSuggestions {
       asterisk_date_title
       asterisk_name_title
