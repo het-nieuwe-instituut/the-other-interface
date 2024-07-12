@@ -18,6 +18,7 @@ export const TotalResults = ({ text }: Props) => {
     isError: isTotalError,
   } = useTotalCounterQuery(selectedFilters, text)
   const { t } = useTypeSafeTranslation('category')
+  const { t: commonT } = useTypeSafeTranslation('common')
 
   if (isTotalError) {
     return (
@@ -25,11 +26,11 @@ export const TotalResults = ({ text }: Props) => {
     )
   }
 
-  if (isTotalLoading) {
+  if (!isTotalLoading) {
     return (
-      <div className="ml-2 flex h-full items-center justify-center">
-        <Loader />
-      </div>
+      <p className={cn('text-pink-100', TypographyVariants({ socialLarge: 'textfield' }))}>
+        {commonT('loadingResults')}
+      </p>
     )
   }
 

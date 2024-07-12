@@ -68,7 +68,9 @@ export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter, type
   if (isLoading) {
     return (
       <div className="my-4">
-        <InlineThemedSpinner />
+        <p className={cn('text-pink.100', TypographyVariants({ socialLarge: 'textfield' }))}>
+          {commonT('loadingSuggestions')}...
+        </p>
       </div>
     )
   }

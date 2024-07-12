@@ -21,6 +21,7 @@ const SearchResults = () => {
     selectedFilters: selectedFilters.map(filter => ({ key: filter.key, value: filter.value })),
   })
   const { t } = useTypeSafeTranslation('category')
+  const { t: commonT } = useTypeSafeTranslation('common')
   const { total } = data || { total: 0 }
 
   if (isError) {
@@ -29,9 +30,9 @@ const SearchResults = () => {
 
   if (isLoading) {
     return (
-      <div className="ml-2 flex h-full items-center justify-center">
-        <Loader />
-      </div>
+      <p className={cn('text-pink-100', TypographyVariants({ socialLarge: 'textfield' }))}>
+        {commonT('loadingResults')}
+      </p>
     )
   }
 
