@@ -76,7 +76,6 @@ export interface PublicationRecordZoomLevel3Data {
   yearOfPublication?: string
   placeOfPublication?: string
   isbn?: string
-  annotation?: string
   codeOfArchive?: string
   illustration?: string
   pages?: string
@@ -94,6 +93,11 @@ export interface PublicationRecordZoomLevel3Data {
   issue?: string
   year?: string
   subject?: string[]
+  edition?: string
+  continuedFrom?: string
+  continuedAs?: string
+  geographicalKeywords?: string
+  pysicalCarrier?: string
 }
 
 const publicationRecordZoomLevel3DataKeys: KeysToVerify<PublicationRecordZoomLevel3Data> = {
@@ -105,7 +109,6 @@ const publicationRecordZoomLevel3DataKeys: KeysToVerify<PublicationRecordZoomLev
   yearOfPublication: true,
   placeOfPublication: true,
   isbn: true,
-  annotation: true,
   codeOfArchive: true,
   illustration: true,
   pages: true,
@@ -123,6 +126,11 @@ const publicationRecordZoomLevel3DataKeys: KeysToVerify<PublicationRecordZoomLev
   issue: true,
   year: true,
   subject: true,
+  edition: true,
+  continuedFrom: true,
+  continuedAs: true,
+  geographicalKeywords: true,
+  pysicalCarrier: true,
 }
 
 @Injectable()

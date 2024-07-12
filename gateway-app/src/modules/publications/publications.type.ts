@@ -115,9 +115,6 @@ class BasePublicationRecordZoomLevel3Type {
   public isbn?: string
 
   @Field(() => String, { nullable: true })
-  public annotation?: string
-
-  @Field(() => String, { nullable: true })
   public codeOfArchive?: string
 
   @Field(() => String, { nullable: true })
@@ -155,6 +152,26 @@ class BasePublicationRecordZoomLevel3Type {
 
   @Field(() => String, { nullable: true })
   public externalSource?: string
+
+  @Field({ nullable: true })
+  public continuedFrom?: string
+
+  @Field({ nullable: true })
+  public continuedAs?: string
+
+  @Field({ nullable: true })
+  public geographicalKeywords?: string
+  @Field({ nullable: true })
+  public pysicalCarrier?: string
+
+  @Field({ nullable: true })
+  public volume?: string
+
+  @Field({ nullable: true })
+  public issue?: string
+
+  @Field({ nullable: true })
+  public year?: string
 }
 
 @ObjectType()

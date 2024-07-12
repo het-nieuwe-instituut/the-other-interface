@@ -13,9 +13,8 @@ export type OmitEnrichedData<T> = Omit<
 
 type OmitAsteriskSuggestions<T> = Omit<T, 'asteriskSuggestions'>
 
-type BaseObjectRecordZoomLevel3Type = Omit<
-  OmitAsteriskSuggestions<OmitEnrichedData<ObjectRecordZoomLevel3Type>>,
-  'geoKeywords' | 'maker' | 'objectType'
+type BaseObjectRecordZoomLevel3Type = OmitAsteriskSuggestions<
+  OmitEnrichedData<ObjectRecordZoomLevel3Type>
 >
 type BaseArchivesRecordZoomLevel3Type = OmitAsteriskSuggestions<
   OmitEnrichedData<ArchivesRecordZoomLevel3Type>
@@ -31,9 +30,13 @@ const objectFieldOrder: Array<keyof BaseObjectRecordZoomLevel3Type> = [
   'objectNumber',
   'title',
   'objectName',
+  'objectType',
   'archiveCode',
+  'maker',
   'date',
   'relatedKeywords',
+  'geoKeywords',
+  'materials',
   'techniques',
   'hasParts',
   'dimension',
@@ -47,20 +50,23 @@ const objectFieldOrder: Array<keyof BaseObjectRecordZoomLevel3Type> = [
 const archiveFieldOrder: Array<Partial<keyof BaseArchivesRecordZoomLevel3Type>> = [
   'referenceCode',
   'titleType',
+  'creators',
   'descriptionLevel',
   'size',
   'period',
   'access',
+  'subject',
+  'location',
   'photographCreator',
   'rights',
   'permanentLink',
-  'externalSource',
+  'externalURI',
 ]
 
 const peopleFieldOrder: Array<keyof BasePeopleRecordZoomLevel3Type> = [
   'type',
   'profession',
-  'nameVariation',
+  'nameVariations',
   'birthDate',
   'birthPlace',
   'deathDate',
@@ -82,8 +88,8 @@ const publicationFieldOrder: Array<keyof BasePublicationRecordZoomLevel3Type> = 
   'yearOfPublication',
   'placeOfPublication',
   'isbn',
-  'annotation',
   'codeOfArchive',
+  'edition',
   'illustration',
   'pages',
   'language',
@@ -95,6 +101,13 @@ const publicationFieldOrder: Array<keyof BasePublicationRecordZoomLevel3Type> = 
   'availability',
   'permanentLink',
   'externalSource',
+  'continuedFrom',
+  'continuedAs',
+  'volume',
+  'issue',
+  'year',
+  'geographicalKeywords',
+  'pysicalCarrier',
 ]
 
 type CategoryFieldsMapping = {

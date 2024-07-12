@@ -2,7 +2,7 @@ query ZoomLevel3PeopleRecord($id: String!, $locale: Locale!) {
   peopleRecordZoomLevel3(id: $id, locale: $locale) {
     type
     profession
-    nameVariation
+    nameVariations
     birthDate
     birthPlace
     deathDate
@@ -19,7 +19,7 @@ query ZoomLevel3PeopleRecord($id: String!, $locale: Locale!) {
       externalSourceUrl
       type
       profession
-      nameVariation
+      nameVariations
       birthDate
       birthPlace
       deathDate

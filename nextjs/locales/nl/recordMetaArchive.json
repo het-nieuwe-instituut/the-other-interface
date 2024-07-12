@@ -9,11 +9,14 @@
   "photographCreator": "Foto Vervaardiger",
   "rights": "Rechten",
   "permanentLink": "Permanente Link",
-  "externalSource": "Externe Bron",
+  "externalURI": "Externe Bron",
   "description": "Beschrijving",
   "custodialHistory": "Geschiedenis van het archiefbeheer",
   "systemOfArrangement": "Manier van ordenen",
   "sources": "Bronnen",
   "existence": "Bestaan en locatie van originelen",
-  "existenceLocation": "Bestaan en locatie van reproducties"
+  "existenceLocation": "Bestaan en locatie van reproducties",
+  "creators": "Archiefvormer(s) ",
+  "subject": "Gerelateerde trefwoorden",
+  "location": "Geografische trefwoorden"
 }

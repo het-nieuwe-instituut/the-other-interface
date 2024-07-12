@@ -213,7 +213,7 @@ class BaseArchivesRecordZoomLevel3Type {
   public permanentLink?: string
 
   @Field(() => String, { nullable: true })
-  public externalSource?: string
+  public externalURI?: string
 
   @Field(() => String, { nullable: true })
   public description?: string
@@ -232,6 +232,15 @@ class BaseArchivesRecordZoomLevel3Type {
 
   @Field(() => String, { nullable: true })
   public existenceLocation?: string
+
+  @Field({ nullable: true })
+  public location?: string
+
+  @Field({ nullable: true })
+  public subject?: string
+
+  @Field({ nullable: true })
+  public creators?: string
 }
 
 @ObjectType()

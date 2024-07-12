@@ -84,9 +84,9 @@ export interface ObjectRecordZoomLevel3Data {
   objectNumber?: string
   titleType?: string
   objectName?: string
+  objectType?: string
   archiveCode?: string
-  // objectname?: string
-  // maker?: string
+  maker?: string
   date?: string
   materials?: string
   techniques?: string
@@ -96,6 +96,7 @@ export interface ObjectRecordZoomLevel3Data {
   creditLine?: string
   rights?: string
   permanentLink?: string
+  geoKeywords?: string
   asterisk_date_relatedKeyword?: string
   asterisk_name_relatedKeyword?: string
   asterisk_subject_relatedKeyword?: string
@@ -108,8 +109,9 @@ const objectRecordZoomLevel3DataKeys: KeysToVerify<ObjectRecordZoomLevel3Data> =
   objectNumber: true,
   titleType: true,
   objectName: true,
+  objectType: true,
   archiveCode: true,
-  // maker: true,
+  maker: true,
   date: true,
   materials: true,
   techniques: true,
@@ -119,6 +121,7 @@ const objectRecordZoomLevel3DataKeys: KeysToVerify<ObjectRecordZoomLevel3Data> =
   creditLine: true,
   rights: true,
   permanentLink: true,
+  geoKeywords: true,
   asterisk_date_relatedKeyword: true,
   asterisk_name_relatedKeyword: true,
   asterisk_subject_relatedKeyword: true,

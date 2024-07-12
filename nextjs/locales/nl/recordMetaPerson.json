@@ -2,7 +2,7 @@
   "__typename": "",
   "type": "Type",
   "profession": "Beroep/Werkveld",
-  "nameVariation": "Naamsvarianten",
+  "nameVariations": "Naamsvarianten",
   "birthDate": "Geboortedatum",
   "birthPlace": "Geboorteplaats",
   "deathDate": "Overlijdensdatum",
