@@ -16,8 +16,6 @@ export async function getZoom3RecordMeta(type: Category, payload: Payload, api: 
 
     const data = await configByType?.zoomLevelQuery?.(payload)
     const item = configByType?.accesor?.(data)
-
-    console.log('item', item)
     return item
   } catch (e) {
     console.log(e, 'Error accured in zoom level 3 task')
