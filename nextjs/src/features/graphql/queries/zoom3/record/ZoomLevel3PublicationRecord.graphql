@@ -1,5 +1,6 @@
 query ZoomLevel3PublicationRecord($id: String!, $locale: Locale!) {
   publicationsRecordZoomLevel3(id: $id, locale: $locale) {
+    __typename
     objectNumber
     subType
     authors

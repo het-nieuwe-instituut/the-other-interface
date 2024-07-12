@@ -64,7 +64,20 @@ export const SourceTooltip = (props: SourceTooltipProps) => {
           hideTooltip={hideTooltip}
         />
       ),
-    [isLoading, title, isEmpty, readMoreHref, readMoreText, error, place, hideTooltip]
+    [
+      isLoading,
+      title,
+      isEmpty,
+      readMoreHref,
+      readMoreText,
+      Icon,
+      titleClassName,
+      learnMoreClassName,
+      tooltipContainerClassName,
+      error,
+      place,
+      hideTooltip,
+    ]
   )
 
   return (

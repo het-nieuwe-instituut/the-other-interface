@@ -1,5 +1,6 @@
 query ZoomLevel3PeopleRecord($id: String!, $locale: Locale!) {
   peopleRecordZoomLevel3(id: $id, locale: $locale) {
+    __typename
     type
     profession
     nameVariations

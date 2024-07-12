@@ -28,14 +28,11 @@ export const AsteriskAnnotationGroup = ({ children, count }: AsteriskAnnotationG
 }
 
 export interface AsteriskAnnotationItemProps {
-  title: string
   children: string
-  author: string
-  date: string
+  title?: string
 }
 
-export const AsteriskAnnotationItem = ({ children, author, date }: AsteriskAnnotationItemProps) => {
-  const { t } = createTypeSafeTranslation('common')
+export const AsteriskAnnotationItem = ({ children, title }: AsteriskAnnotationItemProps) => {
   return (
     <div className=" relative flex gap-[15px] pb-4">
       <div className=" flex h-full items-center justify-center pt-4">
@@ -45,9 +42,12 @@ export const AsteriskAnnotationItem = ({ children, author, date }: AsteriskAnnot
         </div>
       </div>
       <div className="flex flex-col gap-4">
-        <p className=" mt-2 block font-times-niw-rimmin text-[12px] font-[600] leading-[15px] ">
-          {t('asteriskMeta', { author, date })}
-        </p>
+        {title && (
+          <p className=" mt-2 block font-times-niw-rimmin text-[12px] font-[600] leading-[15px] ">
+            {title}
+          </p>
+        )}
+
         <p className=" block font-times-niw-rimmin text-[22px] font-[600] leading-[22.7px] ">
           {children}
         </p>
