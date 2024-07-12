@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
   const parsedData = JSON.parse(data) as unknown as Data
   const { locale, slug, id } = parsedData
 
-  if (secret !== process.env.parsed.STRAPI_PREVIEW_SECRET) {
+  if (secret !== process.env.STRAPI_PREVIEW_SECRET) {
     return new Response('Invalid token', { status: 401 })
   }
 
