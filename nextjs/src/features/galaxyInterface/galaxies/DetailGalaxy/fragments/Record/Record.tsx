@@ -60,6 +60,7 @@ export const Record = React.memo(
         <div
           className={cn(
             'peer relative size-full opacity-0 transition-opacity',
+            clicked === true && 'opacity-100',
             clicked === false && isLoading === false && 'opacity-100',
             animationCssVariables
           )}
