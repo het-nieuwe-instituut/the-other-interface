@@ -1,5 +1,4 @@
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
-import { Loader } from '@/features/shared/components/Loading/Loading'
 import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
 import { useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'

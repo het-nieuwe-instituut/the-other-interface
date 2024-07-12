@@ -1,4 +1,3 @@
-import { InlineThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { State } from '@/features/shared/configs/store'
 import { useFilterSuggestionsQuery } from '@/features/shared/hooks/queries/useFilterSuggestionsQuery'

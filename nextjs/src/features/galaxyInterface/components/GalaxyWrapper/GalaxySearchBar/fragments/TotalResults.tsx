@@ -1,6 +1,5 @@
 import { useTotalCounterQuery } from '@/features/galaxyInterface/galaxies/MainGalaxy/hooks/useTotalCounterQuery'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
-import { Loader } from '@/features/shared/components/Loading/Loading'
 import { useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
