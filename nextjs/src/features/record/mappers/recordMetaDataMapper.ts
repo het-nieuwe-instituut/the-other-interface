@@ -50,37 +50,37 @@ export function mapArchivesDataToSections(
       //   return { title, value: values, isLink, key, asteriskSuggestions }
       // }
 
-      // if (key === 'location') {
-      //   const asteriskSuggestions = data.asteriskSuggestions
-      //     ?.map(suggestion => {
-      //       return {
-      //         date: suggestion.asterisk_date_location ?? '',
-      //         name: suggestion.asterisk_name_location ?? '',
-      //         subject: suggestion.asterisk_subject_location ?? '',
-      //       }
-      //     })
-      //     .filter(v => {
-      //         return v.date || v.name || v.subject
-      //     })
+      if (key === 'location') {
+        const asteriskSuggestions = data.asteriskSuggestions
+          ?.map(suggestion => {
+            return {
+              date: suggestion.asterisk_date_location ?? '',
+              name: suggestion.asterisk_name_location ?? '',
+              subject: suggestion.asterisk_subject_location ?? '',
+            }
+          })
+          .filter(v => {
+            return v.date || v.name || v.subject
+          })
 
-      //   return { title, value: values, isLink, key, asteriskSuggestions }
-      // }
+        return { title, value: values, isLink, key, asteriskSuggestions }
+      }
 
-      // if (key === 'subject') {
-      //   const asteriskSuggestions = data.asteriskSuggestions
-      //     ?.map(suggestion => {
-      //       return {
-      //         date: suggestion.asterisk_date_subject ?? '',
-      //         name: suggestion.asterisk_name_subject ?? '',
-      //         subject: suggestion.asterisk_subject_subject ?? '',
-      //       }
-      //     })
-      //     .filter(v => {
-      //         return v.date || v.name || v.subject
-      //     })
-      //
-      //   return { title, value: values, isLink, key, asteriskSuggestions }
-      // }
+      if (key === 'subject') {
+        const asteriskSuggestions = data.asteriskSuggestions
+          ?.map(suggestion => {
+            return {
+              date: suggestion.asterisk_date_subject ?? '',
+              name: suggestion.asterisk_name_subject ?? '',
+              subject: suggestion.asterisk_subject_subject ?? '',
+            }
+          })
+          .filter(v => {
+            return v.date || v.name || v.subject
+          })
+
+        return { title, value: values, isLink, key, asteriskSuggestions }
+      }
 
       return { title, value: values, isLink, key }
     })
@@ -145,22 +145,22 @@ export function mapObjectDataToSections(
 
         return { title, value: values, isLink, key, asteriskSuggestions }
       }
-      // TODO: commented out till we support geoKeywords
-      // if (key === 'geoKeywords') {
-      //   const asteriskSuggestions = data.asteriskSuggestions
-      //     ?.map(suggestion => {
-      //       return {
-      //         date: suggestion.asterisk_date_geoKeywords ?? '',
-      //         name: suggestion.asterisk_name_geoKeywords ?? '',
-      //         subject: suggestion.asterisk_subject_geoKeywords ?? '',
-      //       }
-      //     })
-      //     .filter(v => {
-      //         return v.date || v.name || v.subject
-      //     })
 
-      //   return { title, value: values, isLink, key, asteriskSuggestions }
-      // }
+      if (key === 'geoKeywords') {
+        const asteriskSuggestions = data.asteriskSuggestions
+          ?.map(suggestion => {
+            return {
+              date: suggestion.asterisk_date_geoKeywords ?? '',
+              name: suggestion.asterisk_name_geoKeywords ?? '',
+              subject: suggestion.asterisk_subject_geoKeywords ?? '',
+            }
+          })
+          .filter(v => {
+            return v.date || v.name || v.subject
+          })
+
+        return { title, value: values, isLink, key, asteriskSuggestions }
+      }
       return { title, value: values, isLink, key }
     })
     .filter(section => section.value !== null)
