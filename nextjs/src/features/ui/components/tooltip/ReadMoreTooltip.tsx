@@ -150,7 +150,7 @@ const ReadMoreTooltipContent = ({
           <h2
             className={TypographyVariants({
               socialLarge: 'sm',
-              className: cn('text-pink-100 font-bold', description && 'pb-2'),
+              className: cn('text-pink-100 font-bold line-clamp-[4]', description && 'pb-2'),
             })}
           >
             {title}
