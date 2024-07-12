@@ -40,8 +40,8 @@ export const LandingpageContainer: React.FC<LandingPageProps> = ({ editorialData
         </GalaxyInterface>
       </GalaxyZoomAnimationStateProvider>
 
-      <div className="relative w-full bg-ivory-90 px-0 xl:px-6">
-        <div className="mx-auto max-w-[1392px] px-6 pt-6">
+      <div className="relative w-full bg-ivory-90 px-6 min-[1428px]:px-0">
+        <div className="mx-auto max-w-[1392px] pt-6">
           <div className="grid grid-cols-6 gap-3 lg:grid-cols-12">
             <SuspenseLoader LoadingComponent={<EditorialSkeleton />}>
               <div className="col-span-12 flex flex-col gap-4">

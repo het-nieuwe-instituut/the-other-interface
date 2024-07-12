@@ -18,7 +18,7 @@ export const FilterInput: React.FC<Props> = ({
   return (
     <input
       className={cn(
-        'h-full border-none bg-transparent p-0 font-social-large text-xl',
+        'h-full w-full border-none bg-transparent p-0 font-social-large text-xl',
         'focus:shadow-none focus:outline-none'
       )}
       ref={inputRef}
