@@ -100,7 +100,10 @@ export interface ArchivesRecordZoomLevel3Data {
   photographCreator?: string
   rights?: string
   permanentLink?: string
-  externalSource?: string
+  externalURI?: string
+  location?: string
+  subject?: string
+  creators?: string
   asterisk_date_content?: string
   asterisk_name_content?: string
   asterisk_subject_content?: string
@@ -130,7 +133,10 @@ const archivesRecordZoomLevel3DataKeys: KeysToVerify<ArchivesRecordZoomLevel3Dat
   photographCreator: true,
   rights: true,
   permanentLink: true,
-  externalSource: true,
+  externalURI: true,
+  location: true,
+  subject: true,
+  creators: true,
   asterisk_date_subject: true,
   asterisk_name_subject: true,
   asterisk_subject_subject: true,

@@ -8,7 +8,6 @@ query ZoomLevel3PublicationRecord($id: String!, $locale: Locale!) {
     yearOfPublication
     placeOfPublication
     isbn
-    annotation
     codeOfArchive
     edition
     illustration
@@ -22,6 +21,13 @@ query ZoomLevel3PublicationRecord($id: String!, $locale: Locale!) {
     availability
     permanentLink
     externalSource
+    continuedFrom
+    continuedAs
+    geographicalKeywords
+    pysicalCarrier
+    volume
+    issue
+    year
     enrichedSources(locale: $locale) {
       id
       externalSourceType
@@ -34,7 +40,6 @@ query ZoomLevel3PublicationRecord($id: String!, $locale: Locale!) {
       yearOfPublication
       placeOfPublication
       isbn
-      annotation
       codeOfArchive
       edition
       illustration
@@ -48,6 +53,13 @@ query ZoomLevel3PublicationRecord($id: String!, $locale: Locale!) {
       availability
       permanentLink
       externalSource
+      continuedFrom
+      continuedAs
+      geographicalKeywords
+      pysicalCarrier
+      volume
+      issue
+      year
     }
   }
 }

@@ -10,13 +10,16 @@ query ZoomLevel3ArchiveRecord($id: String!, $locale: Locale!) {
     photographCreator
     rights
     permanentLink
-    externalSource
+    externalURI
     description
     custodialHistory
     systemOfArrangement
     sources
     existence
     existenceLocation
+    location
+    subject
+    creators
     asteriskSuggestions {
       asterisk_date_subject
       asterisk_name_subject
@@ -42,13 +45,16 @@ query ZoomLevel3ArchiveRecord($id: String!, $locale: Locale!) {
       photographCreator
       rights
       permanentLink
-      externalSource
+      externalURI
       description
       custodialHistory
       systemOfArrangement
       sources
+      location
       existence
+      subject
       existenceLocation
+      creators
     }
   }
 }

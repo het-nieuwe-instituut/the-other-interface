@@ -14,5 +14,8 @@
   "creditLine": "Creditline",
   "rights": "Rechten",
   "permanentLink": "Permanente link",
-  "externalSource": "Externe bron"
+  "externalSource": "Externe bron",
+  "objectType": "Recordtype",
+  "maker": "Vervaardiger(s)",
+  "geoKeywords": "Geografische trefwoorden"
 }

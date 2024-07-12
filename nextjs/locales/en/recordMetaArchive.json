@@ -9,11 +9,14 @@
   "photographCreator": "Photograph Creator",
   "rights": "Rights",
   "permanentLink": "Permanent Link",
-  "externalSource": "External Source",
+  "externalURI": "External Source",
   "description": "Description",
   "custodialHistory": "Custodial History",
   "systemOfArrangement": "System of Arrangement",
   "sources": "Sources",
   "existence": "Existence and location of originals",
-  "existenceLocation": "Existence and location of reproductions"
+  "existenceLocation": "Existence and location of reproductions",
+  "creators": "Creator(s)",
+  "subject": "Related keywords",
+  "location": "Geographical keywords"
 }
