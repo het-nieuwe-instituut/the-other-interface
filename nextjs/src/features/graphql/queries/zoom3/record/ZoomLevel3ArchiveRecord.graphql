@@ -10,13 +10,16 @@ query ZoomLevel3ArchiveRecord($id: String!, $locale: Locale!) {
     photographCreator
     rights
     permanentLink
-    externalSource
+    externalURI
     description
     custodialHistory
     systemOfArrangement
     sources
     existence
     existenceLocation
+    location
+    subject
+    creators
     asteriskSuggestions {
       asterisk_date_subject
       asterisk_name_subject
@@ -28,27 +31,30 @@ query ZoomLevel3ArchiveRecord($id: String!, $locale: Locale!) {
       asterisk_name_content
       asterisk_subject_content
     }
-    # enrichedSources(locale: $locale) {
-    #   id
-    #   externalSourceType
-    #   externalSourceUrl
-    #   __typename
-    #   referenceCode
-    #   titleType
-    #   descriptionLevel
-    #   size
-    #   period
-    #   access
-    #   photographCreator
-    #   rights
-    #   permanentLink
-    #   externalSource
-    #   description
-    #   custodialHistory
-    #   systemOfArrangement
-    #   sources
-    #   existence
-    #   existenceLocation
-    # }
+    enrichedSources(locale: $locale) {
+      id
+      externalSourceType
+      externalSourceUrl
+      __typename
+      referenceCode
+      titleType
+      descriptionLevel
+      size
+      period
+      access
+      photographCreator
+      rights
+      permanentLink
+      externalURI
+      description
+      custodialHistory
+      systemOfArrangement
+      sources
+      location
+      existence
+      subject
+      existenceLocation
+      creators
+    }
   }
 }

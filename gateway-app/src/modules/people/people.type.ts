@@ -76,7 +76,7 @@ class BasePeopleRecordZoomLevel3Type {
   public profession?: string
 
   @Field(() => String, { nullable: true })
-  public nameVariation?: string
+  public nameVariations?: string
 
   @Field(() => String, { nullable: true })
   public birthDate?: string
