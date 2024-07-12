@@ -1,6 +1,5 @@
 'use client'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
-import { Loader } from '@/features/shared/components/Loading/Loading'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { IconButton } from '@/features/ui/components/icon-button/component'
@@ -40,9 +39,31 @@ export const GalaxyPagination: React.FC<Props> = ({
 
     if (isResultAmountLoading) {
       return (
-        <div className="ml-2 flex h-full items-center justify-center">
-          <Loader />
-        </div>
+        <>
+          <IconButton
+            intent={'ghost'}
+            disabled={true}
+            size={'small'}
+            icon={<ArrowIcon rotation="rotate(180deg)" />}
+            className={'w-9 border-none px-2 py-1'}
+            onClick={handleLeftClick}
+          />
+
+          <div className={'flex flex-col items-center justify-center'}>
+            <span className={cn(TypographyVariants({ socialLarge: 'sm' }), 'text-center')}>
+              {text ? text : t('page')} {1} {t('of')} {1}
+            </span>
+          </div>
+
+          <IconButton
+            intent={'ghost'}
+            disabled={true}
+            size={'small'}
+            icon={<ArrowIcon />}
+            className={'w-9 border-none px-2 py-1'}
+            onClick={handleRightClick}
+          />
+        </>
       )
     }
 

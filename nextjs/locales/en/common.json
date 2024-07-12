@@ -40,5 +40,7 @@
   "pulledFromGetty": "Getty ULAN",
   "pulledFromRKD": "RKD",
   "pulledFromWikiData": "WikiData",
-  "learnAboutExternalDataSources": "Learn about external sources"
+  "learnAboutExternalDataSources": "Learn about external sources",
+  "loadingResults": "Loading results for",
+  "loadingSuggestions": "Loading suggestions"
 }

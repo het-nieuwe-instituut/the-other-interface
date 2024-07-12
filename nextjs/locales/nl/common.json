@@ -41,5 +41,7 @@
   "pulledFromRKD": "RKD",
   "pulledFromWikiData": "WikiData",
   "showAsterisk": "Toon asterisk* annotaties ({{count}})",
-  "hideAsterisk": "Verberg asterisk* annotaties ({{count}})"
+  "hideAsterisk": "Verberg asterisk* annotaties ({{count}})",
+  "loadingResults": "Laden resultaten voor",
+  "loadingSuggestions": "Suggesties laden"
 }

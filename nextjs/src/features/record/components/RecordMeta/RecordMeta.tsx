@@ -1,5 +1,4 @@
 'use client'
-import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import {
   useLooseTypeSafeTranslation,
   useTypeSafeTranslation,
@@ -7,6 +6,7 @@ import {
 import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import { isExternalURL } from '@/features/shared/utils/links'
 import { NavLinkButton } from '@/features/ui/components/nav-link-button/component'
+import { MetaSkeleton } from '@/features/ui/components/Skeletons/MetaSkeleton'
 import {
   AsteriskSourceBlock,
   AsteriskSourceBlockGroup,
@@ -79,7 +79,7 @@ export const RecordMeta = ({
   ])
 
   if (isLoading) {
-    return <ThemedSpinner />
+    return <MetaSkeleton />
   }
 
   if (!recordMetaSectionData) return null

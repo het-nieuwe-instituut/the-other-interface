@@ -5,14 +5,13 @@ import { LayerWrapper } from '../LayerWrapper'
 import { StoryBottomContent } from '../../Story/StoryBottomContent/StoryBottomContent'
 import { useStoryByIdQuery } from '@/features/shared/hooks/queries/useStoryByIdQuery'
 import { useParams } from 'next/navigation'
-
 import { useRedirectToErrorOnError } from '@/features/shared/hooks/useRedirectToErrorOnError'
-import { ThemedSpinner } from '../../Loading/ThemedSpinner/ThemedSpinner'
 import ErrorBoundaryWrapper from '../../Error/ErrorBoundary/ErrorBoundary'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { StoryMeta } from '../../Story/StoryMeta/StoryMeta'
 import { ButtonGroup } from '@/features/ui/components/button-group/component'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
+import { EditorialSkeleton } from '@/features/ui/components/Skeletons/EditorialSkeleton'
 
 export const StoryLayer = () => {
   const params = useParams()
@@ -23,11 +22,7 @@ export const StoryLayer = () => {
   useRedirectToErrorOnError(error)
 
   if (isLoading) {
-    return (
-      <div className="flex h-full w-screen items-center justify-center p-12">
-        <ThemedSpinner />
-      </div>
-    )
+    return <EditorialSkeleton />
   }
 
   return (

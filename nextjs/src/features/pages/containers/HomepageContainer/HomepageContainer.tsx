@@ -7,6 +7,7 @@ import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/Gala
 import { MainGalaxy } from '@/features/galaxyInterface/galaxies/MainGalaxy/MainGalaxy'
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import SuspenseLoader from '@/features/shared/components/SuspenseLoader/SuspenseLoader'
+import { EditorialSkeleton } from '@/features/ui/components/Skeletons/EditorialSkeleton'
 import { HomepageQuery, ThemesQuery } from 'src/generated/graphql'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
 
@@ -32,7 +33,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }
       <div className="relative w-full bg-ivory-90 px-0 xl:px-6">
         <div className="mx-auto max-w-[1392px] px-6 pt-6">
           <div className="grid grid-cols-6 gap-3 lg:grid-cols-12">
-            <SuspenseLoader>
+            <SuspenseLoader LoadingComponent={<EditorialSkeleton />}>
               <div className=" col-span-12 flex flex-col gap-4">
                 {editorialData && (
                   <>
