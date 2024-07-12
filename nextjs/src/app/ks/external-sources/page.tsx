@@ -46,16 +46,8 @@ const Page: NextPage = () => {
       </div>
       <div className="flex flex-col">
         <AsteriskAnnotationGroup count={0}>
-          <AsteriskAnnotationItem
-            author="Me"
-            date="22-12-2012"
-            title="Some title"
-          >{`Some test`}</AsteriskAnnotationItem>
-          <AsteriskAnnotationItem
-            author="Me"
-            date="22-12-2012"
-            title="Some title"
-          >{`Some test`}</AsteriskAnnotationItem>
+          <AsteriskAnnotationItem title="Some title">{`Some test`}</AsteriskAnnotationItem>
+          <AsteriskAnnotationItem title="Some title">{`Some test`}</AsteriskAnnotationItem>
         </AsteriskAnnotationGroup>
       </div>
     </>

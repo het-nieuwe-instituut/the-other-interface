@@ -33,5 +33,7 @@
   "learnAboutExternalSources": "Learn about external sources",
   "showAsterisk": "Show asterisk* annotations ({{count}})",
   "hideAsterisk": "Hide asterisk* annotations ({{count}})",
-  "asteriskMeta": "Added by {{author}} on {{date}}"
+  "asteriskMeta": "Added by {{author}} on {{date}}",
+  "loadingResults": "Loading results for",
+  "loadingSuggestions": "Loading suggestions"
 }

@@ -9,7 +9,10 @@ export function useRecordMeta(type: Category, id: string) {
   const api = initApiClientService()
   const lang = useLocale()
 
-  const queryFn = () => getZoom3RecordMeta(type, { id, locale: lang ?? 'nl' }, api)
+  const queryFn = async () => {
+    const res = await getZoom3RecordMeta(type, { id, locale: lang ?? 'nl' }, api)
+    return res
+  }
 
   return useQuery({
     queryKey: ['record-meta', id, lang],

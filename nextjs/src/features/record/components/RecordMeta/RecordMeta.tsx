@@ -7,6 +7,11 @@ import { CATEGORIES, Category } from '@/features/shared/utils/categories'
 import { isExternalURL } from '@/features/shared/utils/links'
 import { NavLinkButton } from '@/features/ui/components/nav-link-button/component'
 import { MetaSkeleton } from '@/features/ui/components/Skeletons/MetaSkeleton'
+import {
+  AsteriskSourceBlock,
+  AsteriskSourceBlockGroup,
+} from '@/features/ui/components/Sources/AsteriskSource'
+import { AsteriskTooltip } from '@/features/ui/components/tooltip/AsteriskTooltip'
 import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import Asterisk from '@/features/ui/icons/asterisk-thin.svg'
@@ -40,9 +45,9 @@ export const RecordMeta = ({
   const { t: recordMetaArchiveT } = useTypeSafeTranslation('recordMetaArchive')
   const { t: recordMetaObjectT } = useTypeSafeTranslation('recordMetaObject')
   const { t: recordMetaPersonT } = useTypeSafeTranslation('recordMetaPerson')
+  const { t } = useLooseTypeSafeTranslation('common')
 
   let recordMetaSectionData
-
   if (category === CATEGORIES.archives && data) {
     recordMetaSectionData = mapArchivesDataToSections(
       data as ArchivesRecordZoomLevel3Type,
@@ -118,6 +123,21 @@ export const RecordMeta = ({
                   </p>
                 )
               })}
+              {(section.asteriskSuggestions?.length ?? 0) > 0 && (
+                <AsteriskSourceBlockGroup>
+                  {section.asteriskSuggestions?.map((v, index) => {
+                    return (
+                      <AsteriskTooltip
+                        key={index}
+                        place="left"
+                        title={t('asteriskMeta', { date: v.date, author: v.name })}
+                      >
+                        <AsteriskSourceBlock key={v.date}>{v.subject}</AsteriskSourceBlock>
+                      </AsteriskTooltip>
+                    )
+                  })}
+                </AsteriskSourceBlockGroup>
+              )}
             </>
           </MetaField>
         )
