@@ -41,10 +41,13 @@ export const StoryWithinThemeCarousel = () => {
 
   return (
     <>
-      <div className="hidden lg:block">
+      <div className="hidden carouselDesktop:block">
         <StoryWithinThemeCarouselContent cols={4} stories={stories} />
       </div>
-      <div className="block lg:hidden">
+      <div className="hidden md:block carouselDesktop:hidden">
+        <StoryWithinThemeCarouselContent cols={3} stories={stories} />
+      </div>
+      <div className="block md:hidden">
         <StoryWithinThemeCarouselContent cols={1} stories={stories} />
       </div>
     </>

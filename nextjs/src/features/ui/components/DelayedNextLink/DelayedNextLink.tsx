@@ -44,4 +44,27 @@ export const DelayedNextLink = React.forwardRef<HTMLAnchorElement, DelayedNextLi
     )
   }
 )
+
+export const useDelayedNextRoutePush = (delay: number) => {
+  const router = useRouter()
+  const { stop, start } = useContext(PulseContext)
+  const uniqueIdRef = React.useRef<string>(uniqueId())
+  const timeout = useRef<NodeJS.Timeout>()
+  useEffect(() => {
+    const ref = uniqueIdRef.current
+    return () => {
+      stop(ref)
+      timeout.current && clearTimeout(timeout.current)
+    }
+  }, [stop])
+
+  return (url: string) => {
+    setTimeout(() => {
+      router.push(url)
+      timeout.current = setTimeout(() => {
+        start(uniqueIdRef.current)
+      }, delay + 200)
+    }, delay)
+  }
+}
 DelayedNextLink.displayName = 'DelayedNextLink'

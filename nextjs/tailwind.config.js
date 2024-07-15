@@ -7,6 +7,9 @@ module.exports = {
 
   theme: {
     extend: {
+      screens: {
+        carouselDesktop: '1500px',
+      },
       keyframes: {
         toBlurAndHide: {
           from: { opacity: 1, filter: 'blur(0px)' },

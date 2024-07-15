@@ -53,10 +53,13 @@ export const RecordStoriesCarousel = () => {
 
   return (
     <>
-      <div className="block lg:hidden">
+      <div className="block md:hidden">
         <RecordStoriesCarouselContent stories={stories ?? []} cols={1} />
       </div>
-      <div className="hidden lg:block">
+      <div className="hidden md:block carouselDesktop:hidden">
+        <RecordStoriesCarouselContent stories={stories ?? []} cols={3} />
+      </div>
+      <div className="hidden carouselDesktop:block">
         <RecordStoriesCarouselContent stories={stories ?? []} cols={4} />
       </div>
     </>

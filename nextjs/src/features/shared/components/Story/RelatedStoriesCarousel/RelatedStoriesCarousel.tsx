@@ -63,10 +63,13 @@ export const RelatedStoriesCarousel = () => {
 
   return (
     <>
-      <div className="hidden lg:block">
+      <div className="hidden carouselDesktop:block">
         <RelatedStoriesCarouselContent cols={4} stories={stories} />
       </div>
-      <div className="block lg:hidden">
+      <div className="hidden md:block carouselDesktop:hidden">
+        <RelatedStoriesCarouselContent cols={3} stories={stories} />
+      </div>
+      <div className="block md:hidden">
         <RelatedStoriesCarouselContent cols={1} stories={stories} />
       </div>
     </>
