@@ -81,6 +81,7 @@ export const ImageCarousel = ({ children }: ImageCarouselProps) => {
           </div>
           <div className={cn('absolute flex justify-between w-full', !loaded && 'hidden')}>
             <button
+              aria-label="Previous"
               onClick={prevPage}
               className={cn(
                 !canScrollPrev ? 'opacity-0' : 'opacity-100',
@@ -89,14 +90,15 @@ export const ImageCarousel = ({ children }: ImageCarouselProps) => {
             >
               <Previous />
             </button>
-            <button>
-              <Next
-                onClick={nextPage}
-                className={cn(
-                  !canScrollNext ? 'opacity-0' : 'opacity-100',
-                  'transition-opacity hover:invert'
-                )}
-              />
+            <button
+              onClick={nextPage}
+              aria-label="Next"
+              className={cn(
+                !canScrollNext ? 'opacity-0' : 'opacity-100',
+                'transition-opacity hover:invert'
+              )}
+            >
+              <Next />
             </button>
           </div>
         </div>

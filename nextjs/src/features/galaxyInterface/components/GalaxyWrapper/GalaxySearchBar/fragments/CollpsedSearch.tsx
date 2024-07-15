@@ -11,6 +11,7 @@ export const CollpsedSearch = ({ toggleSearchBar, className }: Props) => {
   return (
     <div className={cn(className, 'flex justify-end items-center w-full h-full')}>
       <IconButton
+        aria-label="search"
         intent={'ghost'}
         size={'small'}
         icon={<SearchIconCollapsed />}

@@ -90,7 +90,7 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
               />
 
               <div className="flex h-full w-[116.32px] items-center justify-center gap-2">
-                <button onClick={prevPage} disabled={!canScrollPrev}>
+                <button onClick={prevPage} disabled={!canScrollPrev} aria-label="Previous">
                   <NavArrowLeft
                     className={cn(
                       !canScrollPrev && 'opacity-20',
@@ -98,7 +98,7 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
                     )}
                   />
                 </button>
-                <button onClick={nextPage} disabled={!canScrollNext}>
+                <button onClick={nextPage} disabled={!canScrollNext} aria-label="Next">
                   <NavArrowRight
                     className={cn(
                       !canScrollNext && 'opacity-20',

@@ -22,7 +22,10 @@ export const Footer = () => {
       <div className="container m-auto max-w-[1392px] p-6 min-[1428px]:px-0">
         <div className="grid gap-1 md:grid-cols-2 lg:grid-cols-3">
           <div>
-            <Link href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}>
+            <Link
+              href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}
+              aria-label="Nieuwe instituut logo"
+            >
               <LogoSvg width={logoSize?.width} height={logoSize?.height} />
             </Link>
             <div className="pt-6">
