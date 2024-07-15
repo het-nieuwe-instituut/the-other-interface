@@ -46,7 +46,6 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
   isNoActiveSearch = true
   const filterInputRef = useRef<HTMLInputElement>(null)
   const searchBarRef = useRef<HTMLDivElement>(null)
-  const router = useRouter()
   const delayedPush = useDelayedNextRoutePush(600)
   const [isUserTyping, setIsUserTyping] = useState(false)
   const { closeSearchMode, clearAllSearch, openSearch, focus } = useSearchBarActions({

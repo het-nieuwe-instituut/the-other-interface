@@ -1,6 +1,6 @@
-import { CSSProperties, useState } from 'react'
-import { SEARCH_MODE_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
 import { cn } from '@/features/ui/utils/cn'
+import { CSSProperties } from 'react'
+import { SEARCH_MODE_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
 
 const BlurOverlay = ({ hide = false }: { hide: boolean }) => {
   return (
