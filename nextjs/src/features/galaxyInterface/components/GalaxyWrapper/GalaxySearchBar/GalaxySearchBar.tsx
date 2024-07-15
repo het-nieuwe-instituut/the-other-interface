@@ -34,6 +34,7 @@ import { SearchButton } from './fragments/SearchButton'
 import SearchResults from './fragments/SearchResults'
 import { TotalResults } from './fragments/TotalResults'
 import { useSearchBarPosition } from './useSearchBarPosition'
+import { useDelayedNextRoutePush } from '@/features/ui/components/DelayedNextLink/DelayedNextLink'
 
 type Props = {
   total?: number
@@ -46,6 +47,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
   const filterInputRef = useRef<HTMLInputElement>(null)
   const searchBarRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
+  const delayedPush = useDelayedNextRoutePush(600)
   const [isUserTyping, setIsUserTyping] = useState(false)
   const { closeSearchMode, clearAllSearch, openSearch, focus } = useSearchBarActions({
     filterInputRef,
@@ -72,9 +74,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
 
   useEnterKey(() => {
     setAnimationState('forward')
-    setTimeout(() => {
-      router.push(searchUrl)
-    }, 600)
+    delayedPush(searchUrl)
 
     handleGoClick()
   })

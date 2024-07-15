@@ -29,12 +29,9 @@ export const GalaxyPagination: React.FC<Props> = ({
   isResultError,
 }) => {
   const { t } = useTypeSafeTranslation('navigation')
-
   const renderPaginationContent = () => {
     if (isResultError) {
-      return (
-        <ErrorBox className={cn(TypographyVariants({ socialLarge: 'sm' }), 'self-center ml-2')} />
-      )
+      return <ErrorBox size="small" className={'self-center ml-2'} />
     }
 
     if (isResultAmountLoading) {
@@ -101,7 +98,8 @@ export const GalaxyPagination: React.FC<Props> = ({
       style={{ '--z-index': FOOTER_Z_INDEX } as CSSProperties}
       className={cn(
         'relative z-[var(--z-index)] grid h-[60px] gap-[5px] border border-solid border-blue p-1 text-blue-100',
-        isResultAmountLoading || isResultError ? 'grid-cols-[1fr]' : 'grid-cols-[36px,1fr,36px]'
+        'grid-cols-[36px,1fr,36px]',
+        isResultError && 'grid-cols-[1fr]'
       )}
     >
       {renderPaginationContent()}
