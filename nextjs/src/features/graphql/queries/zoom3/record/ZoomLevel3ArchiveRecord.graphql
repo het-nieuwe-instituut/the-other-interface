@@ -1,6 +1,7 @@
 query ZoomLevel3ArchiveRecord($id: String!, $locale: Locale!) {
   archivesRecordZoomLevel3(id: $id, locale: $locale) {
     __typename
+    id
     referenceCode
     titleType
     descriptionLevel
@@ -35,7 +36,6 @@ query ZoomLevel3ArchiveRecord($id: String!, $locale: Locale!) {
       id
       externalSourceType
       externalSourceUrl
-      __typename
       referenceCode
       titleType
       descriptionLevel

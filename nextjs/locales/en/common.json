@@ -33,7 +33,14 @@
   "learnAboutExternalSources": "Learn about external sources",
   "showAsterisk": "Show asterisk* annotations ({{count}})",
   "hideAsterisk": "Hide asterisk* annotations ({{count}})",
+  "showExternalSources": "Show external sources ({{count}})",
+  "hideExternalSources": "Hide external sources ({{count}})",
   "asteriskMeta": "Added by {{author}} on {{date}}",
+  "pulledFrom": "Pulled from",
+  "pulledFromGetty": "Getty ULAN",
+  "pulledFromRKD": "RKD",
+  "pulledFromWikiData": "WikiData",
+  "learnAboutExternalDataSources": "Learn about external sources",
   "loadingResults": "Loading results for",
   "loadingSuggestions": "Loading suggestions"
 }

@@ -11,19 +11,18 @@ import {
   AsteriskSourceBlock,
   AsteriskSourceBlockGroup,
 } from '@/features/ui/components/Sources/AsteriskSource'
+import {
+  ExternalSourceBlock,
+  ExternalSourceBlockGroup,
+  ExternalSourceLink,
+} from '@/features/ui/components/Sources/ExternalSource'
 import { AsteriskTooltip } from '@/features/ui/components/tooltip/AsteriskTooltip'
+import { ExternalSourceTooltip } from '@/features/ui/components/tooltip/ExternalSourceTooltip'
 import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
-import Asterisk from '@/features/ui/icons/asterisk-thin.svg'
 import ExternalLink from '@/features/ui/icons/external-link.svg'
-import { Fragment } from 'react'
-import {
-  ArchivesRecordZoomLevel3Type,
-  ObjectRecordZoomLevel3Type,
-  PeopleRecordZoomLevel3Type,
-  PublicationRecordZoomLevel3Type,
-} from 'src/generated/graphql'
-import { useRecordMeta } from '../../hooks/useRecordMeta'
+import { Fragment, useMemo } from 'react'
+import { useRecordMetaQuery } from '../../hooks/useRecordMetaQuery'
 import {
   mapArchivesDataToSections,
   mapObjectDataToSections,
@@ -31,14 +30,15 @@ import {
   mapPublicationDataToSections,
 } from '../../mappers/recordMetaDataMapper'
 import { recordRightsFieldMapper } from '../../mappers/recordRightsMapper'
+import { getExternalSourceTranslation } from '../../utils/enrichedSources'
 
 export const RecordMeta = ({
   data,
   isLoading,
   category,
 }: {
-  data: ReturnType<typeof useRecordMeta>['data']
-  isLoading: ReturnType<typeof useRecordMeta>['isLoading']
+  data: ReturnType<typeof useRecordMetaQuery>['data']
+  isLoading: ReturnType<typeof useRecordMetaQuery>['isLoading']
   category: Category
 }) => {
   const { t: recordMetaPublicationT } = useTypeSafeTranslation('recordMetaPublication')
@@ -47,34 +47,36 @@ export const RecordMeta = ({
   const { t: recordMetaPersonT } = useTypeSafeTranslation('recordMetaPerson')
   const { t } = useLooseTypeSafeTranslation('common')
 
-  let recordMetaSectionData
-  if (category === CATEGORIES.archives && data) {
-    recordMetaSectionData = mapArchivesDataToSections(
-      data as ArchivesRecordZoomLevel3Type,
-      recordMetaArchiveT
-    )
-  }
+  const recordMetaSectionData = useMemo(() => {
+    let recordMetaSectionData
+    if (category === CATEGORIES.archives && data?.__typename === 'ArchivesRecordZoomLevel3Type') {
+      recordMetaSectionData = mapArchivesDataToSections(data, recordMetaArchiveT)
+    }
 
-  if (category === CATEGORIES.publications) {
-    recordMetaSectionData = mapPublicationDataToSections(
-      data as PublicationRecordZoomLevel3Type,
-      recordMetaPublicationT
-    )
-  }
+    if (
+      category === CATEGORIES.publications &&
+      data?.__typename === 'PublicationRecordZoomLevel3Type'
+    ) {
+      recordMetaSectionData = mapPublicationDataToSections(data, recordMetaPublicationT)
+    }
 
-  if (category === CATEGORIES.objects) {
-    recordMetaSectionData = mapObjectDataToSections(
-      data as ObjectRecordZoomLevel3Type,
-      recordMetaObjectT
-    )
-  }
+    if (category === CATEGORIES.objects && data?.__typename === 'ObjectRecordZoomLevel3Type') {
+      recordMetaSectionData = mapObjectDataToSections(data, recordMetaObjectT)
+    }
 
-  if (category === CATEGORIES.people) {
-    recordMetaSectionData = mapPersonDataToSections(
-      data as PeopleRecordZoomLevel3Type,
-      recordMetaPersonT
-    )
-  }
+    if (category === CATEGORIES.people && data?.__typename === 'PeopleRecordZoomLevel3Type') {
+      recordMetaSectionData = mapPersonDataToSections(data, recordMetaPersonT)
+    }
+
+    return recordMetaSectionData
+  }, [
+    category,
+    data,
+    recordMetaArchiveT,
+    recordMetaObjectT,
+    recordMetaPersonT,
+    recordMetaPublicationT,
+  ])
 
   if (isLoading) {
     return <MetaSkeleton />
@@ -123,25 +125,77 @@ export const RecordMeta = ({
                   </p>
                 )
               })}
-              {(section.asteriskSuggestions?.length ?? 0) > 0 && (
-                <AsteriskSourceBlockGroup>
-                  {section.asteriskSuggestions?.map((v, index) => {
+              {'asteriskSuggestions' in section &&
+                section.asteriskSuggestions &&
+                (section.asteriskSuggestions.length ?? 0) > 0 && (
+                  <AsteriskSourceBlockGroup>
+                    {section.asteriskSuggestions?.map((v, index) => {
+                      return (
+                        <AsteriskTooltip
+                          key={index}
+                          place="left"
+                          title={t('asteriskMeta', { date: v.date, author: v.name })}
+                        >
+                          <AsteriskSourceBlock key={v.date}>{v.subject}</AsteriskSourceBlock>
+                        </AsteriskTooltip>
+                      )
+                    })}
+                  </AsteriskSourceBlockGroup>
+                )}
+              {(section.enrichedSources?.length ?? 0) > 0 && (
+                <ExternalSourceBlockGroup className="mt-1">
+                  {section.enrichedSources?.map((v, i, array) => {
+                    const externalSourceType = v.externalSourceType
+                    const externalSourceUrl = v.externalSourceUrl
+
+                    if (!externalSourceType) {
+                      return null
+                    }
                     return (
-                      <AsteriskTooltip
-                        key={index}
-                        place="left"
-                        title={t('asteriskMeta', { date: v.date, author: v.name })}
+                      <ExternalSourceTooltip
+                        place="right-start"
+                        key={`${i}-${array.length}`}
+                        title={
+                          externalSourceUrl ? (
+                            <div className=" inline-block">
+                              {t('pulledFrom')}
+                              <div className="inline-block">
+                                <ExternalSourceLink
+                                  externalSourceType={externalSourceType}
+                                  externalSourceUrl={externalSourceUrl}
+                                />
+                              </div>
+                            </div>
+                          ) : (
+                            getExternalSourceTranslation(externalSourceType)
+                          )
+                        }
                       >
-                        <AsteriskSourceBlock key={v.date}>{v.subject}</AsteriskSourceBlock>
-                      </AsteriskTooltip>
+                        <ExternalSourceBlock>{v.value ?? ''}</ExternalSourceBlock>
+                      </ExternalSourceTooltip>
                     )
                   })}
-                </AsteriskSourceBlockGroup>
+                </ExternalSourceBlockGroup>
               )}
             </>
           </MetaField>
         )
       })}
+      {(data?.enrichedSources?.length ?? 0) > 0 && (
+        <ExternalSourceBlockGroup className="mb-4">
+          {data?.enrichedSources?.map(v => {
+            return (
+              <ExternalSourceBlock href={v.externalSourceUrl} key={v.id}>
+                {getExternalSourceTranslation(v.externalSourceType) ?? ''}
+              </ExternalSourceBlock>
+            )
+          })}
+
+          <ExternalSourceBlock href="/external-sources">
+            {t('learnAboutExternalDataSources') ?? ''}
+          </ExternalSourceBlock>
+        </ExternalSourceBlockGroup>
+      )}
       <SuggestionSection />
     </div>
   )
@@ -194,33 +248,15 @@ function SuggestionSection() {
   return (
     <>
       <MetaField name={t('suggestionTitle')}>
-        <div className="flex flex-col gap-1">
-          <SuggestionLink external url={contributeLink} text={t('suggestionContributeLink')} />
-          <SuggestionLink url={learnMoreLink} text={t('suggestionLearnMoreLink')} />
-        </div>
+        <AsteriskSourceBlockGroup>
+          <AsteriskSourceBlock href={contributeLink} target={'_blank'}>
+            {t('suggestionContributeLink') ?? ''}
+          </AsteriskSourceBlock>
+          <AsteriskSourceBlock href={learnMoreLink} target={'_blank'}>
+            {t('suggestionLearnMoreLink') ?? ''}
+          </AsteriskSourceBlock>
+        </AsteriskSourceBlockGroup>
       </MetaField>
     </>
   )
-
-  interface SuggestionLinkProps {
-    external?: boolean
-    url: string
-    text?: string
-  }
-
-  function SuggestionLink({ external, url, text }: SuggestionLinkProps) {
-    return (
-      <NavLinkButton
-        variant="metaDataText"
-        className="bg-[#DEE5EC] font-semibold text-[#6F7A9C] after:border-none"
-        href={url}
-        title={text}
-        target={external ? '_blank' : undefined}
-      >
-        <Asterisk />
-        {text}
-        {external && <ExternalLink className="size-[14px]" />}
-      </NavLinkButton>
-    )
-  }
 }
