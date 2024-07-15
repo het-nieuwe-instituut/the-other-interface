@@ -15,7 +15,7 @@ export const ExternalSourceTooltip = (props: ExternalSourceTooltipProps) => {
       learnMoreClassName={cn('underline leading-[16px] block')}
       titleClassName="leading-[110%] text-[16px] font-[500] -mt-1 block"
       readMoreHref={'/externalSources'}
-      readMoreText={t('learnAboutExternalSources')}
+      readMoreText={t('learnAboutExternalDataSources')}
       Icon={<Lod />}
       {...props}
     />

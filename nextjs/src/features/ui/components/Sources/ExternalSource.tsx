@@ -1,7 +1,10 @@
-import { cn } from '../../utils/cn'
-import Lod from '../../icons/lod.svg'
-import { SourceBlock, SourceBlockGroup, SourceBlockProps } from './SourceBlock'
+import { getExternalSourceTranslation } from '@/features/record/utils/enrichedSources'
+import ExternalLink from '@/features/ui/icons/external-link.svg'
 import NextLink from 'next/link'
+import { ExternalSource } from 'src/generated/graphql'
+import Lod from '../../icons/lod.svg'
+import { cn } from '../../utils/cn'
+import { SourceBlock, SourceBlockGroup, SourceBlockProps } from './SourceBlock'
 
 interface ExternalSourceBlockProps extends Pick<SourceBlockProps, 'children' | 'className'> {
   href?: string
@@ -26,6 +29,33 @@ export const ExternalSourceBlock = ({ children, className, href }: ExternalSourc
     <SourceBlock Icon={<Lod />} className={classNames}>
       {children}
     </SourceBlock>
+  )
+}
+
+export const ExternalSourceLink = ({
+  externalSourceType,
+  externalSourceUrl,
+  className,
+}: {
+  externalSourceUrl: string
+  externalSourceType: ExternalSource
+  className?: string
+}) => {
+  return (
+    <div className="inline-block ">
+      <NextLink
+        href={externalSourceUrl}
+        className={cn(
+          className,
+          'flex items-center relative',
+          'after:absolute after:bottom-[1px] after:w-full after:border-b after:border-solid after:content-[""] after:border-surface-lod-dark gap-2'
+        )}
+      >
+        {getExternalSourceTranslation(externalSourceType)}
+
+        <ExternalLink className={'relative mt-[-2px] size-[14px]'} />
+      </NextLink>
+    </div>
   )
 }
 
