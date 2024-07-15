@@ -4,6 +4,7 @@ import {
   CarouselGrid,
   CarouselGridCard,
   CarouselGridCardWrapper,
+  CarouselGridDescription,
   CarouselGridFooter,
   CarouselGridLink,
   CarouselGridPagination,
@@ -74,6 +75,9 @@ const Grid = ({
   return (
     <CarouselGrid className={cn('w-full', className)}>
       {carousel.title ? <CarouselGridTitle>{carousel.title}</CarouselGridTitle> : undefined}
+      {carousel.description ? (
+        <CarouselGridDescription>{carousel.description ?? ''}</CarouselGridDescription>
+      ) : undefined}
       {nodes && (
         <CarouselGridCardWrapper cols={cols}>
           {nodes.map(item => {
