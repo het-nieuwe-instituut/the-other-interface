@@ -49,11 +49,11 @@ export const getNextItemsAnimationClassNames = (
   hasItems: boolean
 ) => {
   return cn(
-    !animationState && 'blur-[10px]',
-    animationState === 'forward' && 'animate-[toUnblur_500ms_ease-in-out_forwards]',
-    animationState === 'backwards' && 'animate-[fromBlurredToHide_500ms_ease-in-out_forwards]',
     conditions === 'previousAnimationWasForward' &&
       hasItems &&
-      'animate-[fromHideToShow_500ms_ease-in-out_forwards]'
+      'animate-[fromHideToShow_500ms_ease-in-out_forwards]',
+    !animationState && 'blur-[10px]',
+    animationState === 'forward' && 'animate-[toUnblur_500ms_ease-in-out_forwards]',
+    animationState === 'backwards' && 'animate-[fromBlurredToHide_500ms_ease-in-out_forwards]'
   )
 }
