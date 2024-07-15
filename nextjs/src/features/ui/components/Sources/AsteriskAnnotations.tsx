@@ -22,7 +22,7 @@ export const AsteriskAnnotationGroup = ({ children, count }: AsteriskAnnotationG
         }`}</AsteriskSourceBlock>
       </button>
 
-      {value && children}
+      <div>{value && children}</div>
     </div>
   )
 }
@@ -34,8 +34,8 @@ export interface AsteriskAnnotationItemProps {
 
 export const AsteriskAnnotationItem = ({ children, title }: AsteriskAnnotationItemProps) => {
   return (
-    <div className=" relative flex gap-[15px] pb-4">
-      <div className=" flex h-full items-center justify-center pt-4">
+    <div className="relative flex gap-[15px] pb-4 first:pt-4">
+      <div className=" flex h-full items-center justify-center">
         <div className="absolute top-0 h-full w-[3px] bg-surface-asterisk"></div>
         <div className="z-10 flex size-[30px] items-center justify-center rounded-full bg-surface-asterisk text-surface-asterisk-dark">
           <Asterisk />

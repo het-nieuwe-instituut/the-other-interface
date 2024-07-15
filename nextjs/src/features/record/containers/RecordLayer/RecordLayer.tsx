@@ -9,6 +9,10 @@ import {
   AsteriskAnnotationItem,
 } from '@/features/ui/components/Sources/AsteriskAnnotations'
 import {
+  ExternalSourceGroup,
+  ExternalSourceItem,
+} from '@/features/ui/components/Sources/ExternalSourceAnnotations'
+import {
   ThumbnailCarousel,
   ThumbnailCarouselItem,
 } from '@/features/ui/components/thumbnail-carousel/ThumbnailCarousel'
@@ -21,10 +25,12 @@ import { LayerWrapper } from '../../../shared/components/Layers/LayerWrapper'
 import { RecordMeta } from '../../components/RecordMeta/RecordMeta'
 import { OmitEnrichedData } from '../../configs/recordMetaFieldOrderConfig'
 import { useRecordDetailQuery } from '../../hooks/useRecordDetailQuery'
-import { useRecordMeta } from '../../hooks/useRecordMeta'
+import { useRecordMetaQuery } from '../../hooks/useRecordMetaQuery'
 import { RecordBottomContent } from '../RecordBottomContent/RecordBottomContent'
 import { VideoPlayer } from '@/features/ui/components/video/VideoPlayer'
 import { AudioPlayer } from '@/features/ui/components/audio/AudioPlayer'
+import ErrorBox from '@/features/shared/components/Error/ErrorBox'
+import { isError } from 'lodash'
 
 export const RecordLayer = () => {
   const { t } = useTypeSafeTranslation('common')
@@ -33,115 +39,209 @@ export const RecordLayer = () => {
   const locale = useLocale()
 
   const id = params?.id as string
-  const { data: meta, isLoading } = useRecordMeta(category, id)
-  const { data: record } = useRecordDetailQuery({
+  const { data: meta, isLoading, isError: isMetaError } = useRecordMetaQuery(category, id)
+  const { data: record, isError: isRecordError } = useRecordDetailQuery({
     type: category,
     id,
-    options: { refetchOnWindowFocus: false, suspense: true },
+    options: { refetchOnWindowFocus: false, suspense: false },
     locale,
   })
 
   return (
     <LayerWrapper
       LeftContent={
-        <>
-          <div className="flex flex-col gap-4">
-            <PageHeader
-              title={record?.title ?? undefined}
-              preface={record?.description ?? undefined}
-              constrainPreface={true}
-              splitByHtmlBreaks
-            ></PageHeader>
+        isRecordError ? (
+          <ErrorBox />
+        ) : (
+          <>
+            <div className="flex flex-col gap-4">
+              <PageHeader
+                title={record?.title ?? undefined}
+                preface={record?.description ?? undefined}
+                constrainPreface={true}
+                splitByHtmlBreaks
+              ></PageHeader>
 
-            {record?.__typename === 'ArchiveZoomLevel3DetailType' &&
-            (record?.asteriskSuggestions?.length ?? 0) > 0 ? (
-              <AsteriskAnnotationGroup count={record.asteriskSuggestions?.length ?? 0}>
-                {record.asteriskSuggestions?.map((suggestion, index) => {
-                  const name = suggestion.asterisk_name_title ?? suggestion.asterisk_name_title
-                  const date =
-                    suggestion.asterisk_date_title ?? suggestion.asterisk_date_description
-                  const subject =
-                    suggestion.asterisk_subject_title ?? suggestion.asterisk_subject_description
+              {record?.__typename === 'ArchiveZoomLevel3DetailType' &&
+              (record?.asteriskSuggestions?.length ?? 0) > 0 ? (
+                <AsteriskAnnotationGroup count={record.asteriskSuggestions?.length ?? 0}>
+                  {record.asteriskSuggestions?.map((suggestion, index) => {
+                    const name = suggestion.asterisk_name_title ?? suggestion.asterisk_name_title
+                    const date =
+                      suggestion.asterisk_date_title ?? suggestion.asterisk_date_description
+                    const subject =
+                      suggestion.asterisk_subject_title ?? suggestion.asterisk_subject_description
 
-                  return (
-                    <AsteriskAnnotationItem
+                    return (
+                      <AsteriskAnnotationItem
+                        key={index}
+                        title={t('asteriskMeta', { author: name, date: date })}
+                      >
+                        {subject ?? ''}
+                      </AsteriskAnnotationItem>
+                    )
+                  })}
+                </AsteriskAnnotationGroup>
+              ) : null}
+              {record?.__typename === 'ArchiveZoomLevel3DetailType' &&
+              (record?.enrichedSources?.length ?? 0) > 0 ? (
+                <ExternalSourceGroup count={record.enrichedSources?.length ?? 0}>
+                  {record.enrichedSources?.map((source, index) => {
+                    const href = source.externalSourceUrl
+                    if (!href) {
+                      return null
+                    }
+                    return (
+                      <ExternalSourceItem
+                        href={href}
+                        key={index}
+                        externalSource={source.externalSourceType}
+                      >
+                        {source.description ?? ''}
+                      </ExternalSourceItem>
+                    )
+                  })}
+                </ExternalSourceGroup>
+              ) : null}
+
+              {record?.__typename === 'ObjectsZoomLevel3DetailType' &&
+              (record?.asteriskSuggestions?.length ?? 0) > 0 ? (
+                <AsteriskAnnotationGroup count={record.asteriskSuggestions?.length ?? 0}>
+                  {record.asteriskSuggestions?.map((suggestion, index) => {
+                    const date = suggestion.asterisk_date_title ?? ''
+                    const name = suggestion.asterisk_name_title ?? ''
+                    const subject = suggestion.asterisk_subject_title ?? ''
+
+                    return (
+                      <AsteriskAnnotationItem
+                        title={t('asteriskMeta', { author: name, date })}
+                        key={index}
+                      >
+                        {subject ?? ''}
+                      </AsteriskAnnotationItem>
+                    )
+                  })}
+                </AsteriskAnnotationGroup>
+              ) : null}
+              {record?.__typename === 'ObjectsZoomLevel3DetailType' &&
+              (record?.enrichedSources?.length ?? 0) > 0 ? (
+                <ExternalSourceGroup count={record.enrichedSources?.length ?? 0}>
+                  {record.enrichedSources?.map((source, index) => {
+                    const href = source.externalSourceUrl
+                    if (!href) {
+                      return null
+                    }
+                    return (
+                      <ExternalSourceItem
+                        href={href}
+                        key={index}
+                        externalSource={source.externalSourceType}
+                      >
+                        {source.description ?? ''}
+                      </ExternalSourceItem>
+                    )
+                  })}
+                </ExternalSourceGroup>
+              ) : null}
+
+              {record?.__typename === 'PeopleZoomLevel3DetailType' &&
+              (record?.asteriskSuggestions?.length ?? 0) > 0 ? (
+                <AsteriskAnnotationGroup count={record.asteriskSuggestions?.length ?? 0}>
+                  {record.asteriskSuggestions?.map((suggestion, index) => {
+                    const date = suggestion.asterisk_date_description ?? ''
+                    const name = suggestion.asterisk_name_description ?? ''
+                    const subject = suggestion.asterisk_subject_description ?? ''
+
+                    return (
+                      <AsteriskAnnotationItem
+                        title={t('asteriskMeta', { author: name, date })}
+                        key={index}
+                      >
+                        {subject ?? ''}
+                      </AsteriskAnnotationItem>
+                    )
+                  })}
+                </AsteriskAnnotationGroup>
+              ) : null}
+              {record?.__typename === 'PeopleZoomLevel3DetailType' &&
+              (record?.enrichedSources?.length ?? 0) > 0 ? (
+                <ExternalSourceGroup count={record.enrichedSources?.length ?? 0}>
+                  {record.enrichedSources?.map((source, index) => {
+                    const href = source.externalSourceUrl
+                    if (!href) {
+                      return null
+                    }
+                    return (
+                      <ExternalSourceItem
+                        href={href}
+                        key={index}
+                        externalSource={source.externalSourceType}
+                      >
+                        {source.description ?? ''}
+                      </ExternalSourceItem>
+                    )
+                  })}
+                </ExternalSourceGroup>
+              ) : null}
+
+              {record?.__typename === 'PublicationZoomLevel3DetailType' &&
+              (record?.enrichedSources?.length ?? 0) > 0 ? (
+                <ExternalSourceGroup count={record.enrichedSources?.length ?? 0}>
+                  {record.enrichedSources?.map((source, index) => {
+                    const href = source.externalSourceUrl
+                    if (!href) {
+                      return null
+                    }
+                    return (
+                      <ExternalSourceItem
+                        href={href}
+                        key={index}
+                        externalSource={source.externalSourceType}
+                      >
+                        {source.description ?? ''}
+                      </ExternalSourceItem>
+                    )
+                  })}
+                </ExternalSourceGroup>
+              ) : null}
+
+              {record && 'mediaReference' in record && 'mediaType' in record && (
+                <MediaPlayer
+                  mediaReference={record?.mediaReference}
+                  mediaType={record?.mediaType}
+                />
+              )}
+
+              {record?.thumbnail && (
+                <ThumbnailCarousel>
+                  {record?.thumbnail.map((item, index) => (
+                    <ThumbnailCarouselItem
                       key={index}
-                      title={t('asteriskMeta', { author: name, date: date })}
-                    >
-                      {subject ?? ''}
-                    </AsteriskAnnotationItem>
-                  )
-                })}
-              </AsteriskAnnotationGroup>
-            ) : null}
+                      index={index}
+                      src={item}
+                      alt={`${record.title} image #${index + 1}` ?? ''}
+                    />
+                  ))}
+                </ThumbnailCarousel>
+              )}
 
-            {record?.__typename === 'ObjectsZoomLevel3DetailType' &&
-            (record?.asteriskSuggestions?.length ?? 0) > 0 ? (
-              <AsteriskAnnotationGroup count={record.asteriskSuggestions?.length ?? 0}>
-                {record.asteriskSuggestions?.map((suggestion, index) => {
-                  const date = suggestion.asterisk_date_title ?? ''
-                  const name = suggestion.asterisk_name_title ?? ''
-                  const subject = suggestion.asterisk_subject_title ?? ''
-
-                  return (
-                    <AsteriskAnnotationItem
-                      title={t('asteriskMeta', { author: name, date })}
-                      key={index}
-                    >
-                      {subject ?? ''}
-                    </AsteriskAnnotationItem>
-                  )
-                })}
-              </AsteriskAnnotationGroup>
-            ) : null}
-
-            {record?.__typename === 'PeopleZoomLevel3DetailType' &&
-            (record?.asteriskSuggestions?.length ?? 0) > 0 ? (
-              <AsteriskAnnotationGroup count={record.asteriskSuggestions?.length ?? 0}>
-                {record.asteriskSuggestions?.map((suggestion, index) => {
-                  const date = suggestion.asterisk_date_description ?? ''
-                  const name = suggestion.asterisk_name_description ?? ''
-                  const subject = suggestion.asterisk_subject_description ?? ''
-
-                  return (
-                    <AsteriskAnnotationItem
-                      title={t('asteriskMeta', { author: name, date })}
-                      key={index}
-                    >
-                      {subject ?? ''}
-                    </AsteriskAnnotationItem>
-                  )
-                })}
-              </AsteriskAnnotationGroup>
-            ) : null}
-
-            {record && 'mediaReference' in record && 'mediaType' in record && (
-              <MediaPlayer mediaReference={record?.mediaReference} mediaType={record?.mediaType} />
-            )}
-
-            {record?.thumbnail && (
-              <ThumbnailCarousel>
-                {record?.thumbnail.map((item, index) => (
-                  <ThumbnailCarouselItem
-                    key={index}
-                    index={index}
-                    src={item}
-                    alt={`${record.title} image #${index + 1}` ?? ''}
-                  />
-                ))}
-              </ThumbnailCarousel>
-            )}
-
-            {meta?.__typename === 'ArchivesRecordZoomLevel3Type' ? (
-              <ArchivesDescriptions meta={meta} />
-            ) : null}
-            {record?.__typename === 'PublicationZoomLevel3DetailType' ? (
-              <PublicationsDescriptions data={record} />
-            ) : null}
-          </div>
-        </>
+              {meta?.__typename === 'ArchivesRecordZoomLevel3Type' ? (
+                <ArchivesDescriptions meta={meta} />
+              ) : null}
+              {record?.__typename === 'PublicationZoomLevel3DetailType' ? (
+                <PublicationsDescriptions data={record} />
+              ) : null}
+            </div>
+          </>
+        )
       }
-      RightContent={<RecordMeta data={meta} isLoading={isLoading} category={category} />}
+      RightContent={
+        isMetaError ? (
+          <ErrorBox />
+        ) : (
+          <RecordMeta data={meta} isLoading={isLoading} category={category} />
+        )
+      }
       BottomContent={<RecordBottomContent />}
     />
   )

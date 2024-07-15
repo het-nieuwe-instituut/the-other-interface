@@ -2428,7 +2428,7 @@ export type ZoomLevel3ArchiveRecordQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3ArchiveRecordQuery = { __typename?: 'Query', archivesRecordZoomLevel3?: { __typename: 'ArchivesRecordZoomLevel3Type', referenceCode?: string | null, titleType?: string | null, descriptionLevel?: string | null, size?: string | null, period?: string | null, access?: string | null, photographCreator?: string | null, rights?: string | null, permanentLink?: string | null, externalURI?: string | null, description?: string | null, custodialHistory?: string | null, systemOfArrangement?: string | null, sources?: string | null, existence?: string | null, existenceLocation?: string | null, location?: string | null, subject?: string | null, creators?: string | null, asteriskSuggestions?: Array<{ __typename?: 'BaseArchiveRecordZoomLevel3AsteriskType', asterisk_date_subject?: string | null, asterisk_name_subject?: string | null, asterisk_subject_subject?: string | null, asterisk_date_location?: string | null, asterisk_name_location?: string | null, asterisk_subject_location?: string | null, asterisk_date_content?: string | null, asterisk_name_content?: string | null, asterisk_subject_content?: string | null }> | null, enrichedSources?: Array<{ __typename: 'EnrichedBaseArchivesRecordZoomLevel3Type', id: string, externalSourceType: ExternalSource, externalSourceUrl: string, referenceCode?: string | null, titleType?: string | null, descriptionLevel?: string | null, size?: string | null, period?: string | null, access?: string | null, photographCreator?: string | null, rights?: string | null, permanentLink?: string | null, externalURI?: string | null, description?: string | null, custodialHistory?: string | null, systemOfArrangement?: string | null, sources?: string | null, location?: string | null, existence?: string | null, subject?: string | null, existenceLocation?: string | null, creators?: string | null }> | null } | null };
+export type ZoomLevel3ArchiveRecordQuery = { __typename?: 'Query', archivesRecordZoomLevel3?: { __typename: 'ArchivesRecordZoomLevel3Type', id: string, referenceCode?: string | null, titleType?: string | null, descriptionLevel?: string | null, size?: string | null, period?: string | null, access?: string | null, photographCreator?: string | null, rights?: string | null, permanentLink?: string | null, externalURI?: string | null, description?: string | null, custodialHistory?: string | null, systemOfArrangement?: string | null, sources?: string | null, existence?: string | null, existenceLocation?: string | null, location?: string | null, subject?: string | null, creators?: string | null, asteriskSuggestions?: Array<{ __typename?: 'BaseArchiveRecordZoomLevel3AsteriskType', asterisk_date_subject?: string | null, asterisk_name_subject?: string | null, asterisk_subject_subject?: string | null, asterisk_date_location?: string | null, asterisk_name_location?: string | null, asterisk_subject_location?: string | null, asterisk_date_content?: string | null, asterisk_name_content?: string | null, asterisk_subject_content?: string | null }> | null, enrichedSources?: Array<{ __typename?: 'EnrichedBaseArchivesRecordZoomLevel3Type', id: string, externalSourceType: ExternalSource, externalSourceUrl: string, referenceCode?: string | null, titleType?: string | null, descriptionLevel?: string | null, size?: string | null, period?: string | null, access?: string | null, photographCreator?: string | null, rights?: string | null, permanentLink?: string | null, externalURI?: string | null, description?: string | null, custodialHistory?: string | null, systemOfArrangement?: string | null, sources?: string | null, location?: string | null, existence?: string | null, subject?: string | null, existenceLocation?: string | null, creators?: string | null }> | null } | null };
 
 export type ZoomLevel3ObjectRecordQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -2436,7 +2436,7 @@ export type ZoomLevel3ObjectRecordQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3ObjectRecordQuery = { __typename?: 'Query', objectsRecordZoomLevel3?: { __typename: 'ObjectRecordZoomLevel3Type', id: string, title?: string | null, objectNumber?: string | null, objectType?: string | null, objectName?: string | null, archiveCode?: string | null, date?: string | null, relatedKeywords?: string | null, maker?: string | null, materials?: string | null, techniques?: string | null, hasParts?: string | null, dimension?: string | null, scale?: string | null, creditLine?: string | null, rights?: string | null, geoKeywords?: string | null, permanentLink?: string | null, externalSource?: string | null, asteriskSuggestions?: Array<{ __typename?: 'BaseObjectRecordZoomLevel3AsteriskType', asterisk_date_relatedKeyword?: string | null, asterisk_name_relatedKeyword?: string | null, asterisk_subject_relatedKeyword?: string | null, asterisk_date_geoKeywords?: string | null, asterisk_name_geoKeywords?: string | null, asterisk_subject_geoKeywords?: string | null }> | null, enrichedSources?: Array<{ __typename?: 'EnrichedBaseObjectRecordZoomLevel3Type', id: string, title?: string | null, objectNumber?: string | null, objectType?: string | null, objectName?: string | null, archiveCode?: string | null, date?: string | null, relatedKeywords?: string | null, maker?: string | null, materials?: string | null, techniques?: string | null, hasParts?: string | null, dimension?: string | null, scale?: string | null, creditLine?: string | null, rights?: string | null, geoKeywords?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null } | null };
+export type ZoomLevel3ObjectRecordQuery = { __typename?: 'Query', objectsRecordZoomLevel3?: { __typename: 'ObjectRecordZoomLevel3Type', id: string, title?: string | null, objectNumber?: string | null, objectType?: string | null, objectName?: string | null, archiveCode?: string | null, date?: string | null, relatedKeywords?: string | null, maker?: string | null, materials?: string | null, techniques?: string | null, hasParts?: string | null, dimension?: string | null, scale?: string | null, creditLine?: string | null, rights?: string | null, geoKeywords?: string | null, permanentLink?: string | null, externalSource?: string | null, asteriskSuggestions?: Array<{ __typename?: 'BaseObjectRecordZoomLevel3AsteriskType', asterisk_date_relatedKeyword?: string | null, asterisk_name_relatedKeyword?: string | null, asterisk_subject_relatedKeyword?: string | null, asterisk_date_geoKeywords?: string | null, asterisk_name_geoKeywords?: string | null, asterisk_subject_geoKeywords?: string | null }> | null, enrichedSources?: Array<{ __typename?: 'EnrichedBaseObjectRecordZoomLevel3Type', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, objectNumber?: string | null, objectType?: string | null, objectName?: string | null, archiveCode?: string | null, date?: string | null, relatedKeywords?: string | null, maker?: string | null, materials?: string | null, techniques?: string | null, hasParts?: string | null, dimension?: string | null, scale?: string | null, creditLine?: string | null, rights?: string | null, geoKeywords?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null } | null };
 
 export type ZoomLevel3PeopleRecordQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -2444,7 +2444,7 @@ export type ZoomLevel3PeopleRecordQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3PeopleRecordQuery = { __typename?: 'Query', peopleRecordZoomLevel3?: { __typename: 'PeopleRecordZoomLevel3Type', type?: string | null, profession?: string | null, nameVariations?: string | null, birthDate?: string | null, birthPlace?: string | null, deathDate?: string | null, deathPlace?: string | null, nationality?: string | null, gender?: string | null, period?: string | null, association?: string | null, permanentLink?: string | null, externalSource?: string | null, enrichedSources?: Array<{ __typename?: 'EnrichedBasePeopleRecordZoomLevel3Type', id: string, externalSourceType: ExternalSource, externalSourceUrl: string, type?: string | null, profession?: string | null, nameVariations?: string | null, birthDate?: string | null, birthPlace?: string | null, deathDate?: string | null, deathPlace?: string | null, nationality?: string | null, gender?: string | null, period?: string | null, association?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null } | null };
+export type ZoomLevel3PeopleRecordQuery = { __typename?: 'Query', peopleRecordZoomLevel3?: { __typename: 'PeopleRecordZoomLevel3Type', id: string, type?: string | null, profession?: string | null, nameVariations?: string | null, birthDate?: string | null, birthPlace?: string | null, deathDate?: string | null, deathPlace?: string | null, nationality?: string | null, gender?: string | null, period?: string | null, association?: string | null, permanentLink?: string | null, externalSource?: string | null, enrichedSources?: Array<{ __typename?: 'EnrichedBasePeopleRecordZoomLevel3Type', id: string, externalSourceType: ExternalSource, externalSourceUrl: string, type?: string | null, profession?: string | null, nameVariations?: string | null, birthDate?: string | null, birthPlace?: string | null, deathDate?: string | null, deathPlace?: string | null, nationality?: string | null, gender?: string | null, period?: string | null, association?: string | null, permanentLink?: string | null, externalSource?: string | null }> | null } | null };
 
 export type ZoomLevel3PublicationRecordQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -2452,7 +2452,7 @@ export type ZoomLevel3PublicationRecordQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3PublicationRecordQuery = { __typename?: 'Query', publicationsRecordZoomLevel3?: { __typename: 'PublicationRecordZoomLevel3Type', objectNumber?: string | null, subType?: string | null, authors?: string | null, authorRole?: string | null, publisher?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, isbn?: string | null, codeOfArchive?: string | null, edition?: string | null, illustration?: string | null, pages?: string | null, language?: string | null, series?: string | null, number?: string | null, category?: string | null, relatedKeyword?: string | null, geoKeyword?: string | null, availability?: string | null, permanentLink?: string | null, externalSource?: string | null, continuedFrom?: string | null, continuedAs?: string | null, geographicalKeywords?: string | null, pysicalCarrier?: string | null, volume?: string | null, issue?: string | null, year?: string | null, enrichedSources?: Array<{ __typename?: 'EnrichedBasePublicationRecordZoomLevel3Type', id: string, externalSourceType: ExternalSource, externalSourceUrl: string, objectNumber?: string | null, subType?: string | null, authors?: string | null, authorRole?: string | null, publisher?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, isbn?: string | null, codeOfArchive?: string | null, edition?: string | null, illustration?: string | null, pages?: string | null, language?: string | null, series?: string | null, number?: string | null, category?: string | null, relatedKeyword?: string | null, geoKeyword?: string | null, availability?: string | null, permanentLink?: string | null, externalSource?: string | null, continuedFrom?: string | null, continuedAs?: string | null, geographicalKeywords?: string | null, pysicalCarrier?: string | null, volume?: string | null, issue?: string | null, year?: string | null }> | null } | null };
+export type ZoomLevel3PublicationRecordQuery = { __typename?: 'Query', publicationsRecordZoomLevel3?: { __typename: 'PublicationRecordZoomLevel3Type', id: string, objectNumber?: string | null, subType?: string | null, authors?: string | null, authorRole?: string | null, publisher?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, isbn?: string | null, codeOfArchive?: string | null, edition?: string | null, illustration?: string | null, pages?: string | null, language?: string | null, series?: string | null, number?: string | null, category?: string | null, relatedKeyword?: string | null, geoKeyword?: string | null, availability?: string | null, permanentLink?: string | null, externalSource?: string | null, continuedFrom?: string | null, continuedAs?: string | null, geographicalKeywords?: string | null, pysicalCarrier?: string | null, volume?: string | null, issue?: string | null, year?: string | null, enrichedSources?: Array<{ __typename?: 'EnrichedBasePublicationRecordZoomLevel3Type', id: string, externalSourceType: ExternalSource, externalSourceUrl: string, objectNumber?: string | null, subType?: string | null, authors?: string | null, authorRole?: string | null, publisher?: string | null, yearOfPublication?: string | null, placeOfPublication?: string | null, isbn?: string | null, codeOfArchive?: string | null, edition?: string | null, illustration?: string | null, pages?: string | null, language?: string | null, series?: string | null, number?: string | null, category?: string | null, relatedKeyword?: string | null, geoKeyword?: string | null, availability?: string | null, permanentLink?: string | null, externalSource?: string | null, continuedFrom?: string | null, continuedAs?: string | null, geographicalKeywords?: string | null, pysicalCarrier?: string | null, volume?: string | null, issue?: string | null, year?: string | null }> | null } | null };
 
 export type StoryHoverRecordRelationsQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -4010,6 +4010,7 @@ export const ZoomLevel3ArchiveRecordDocument = gql`
     query ZoomLevel3ArchiveRecord($id: String!, $locale: Locale!) {
   archivesRecordZoomLevel3(id: $id, locale: $locale) {
     __typename
+    id
     referenceCode
     titleType
     descriptionLevel
@@ -4044,7 +4045,6 @@ export const ZoomLevel3ArchiveRecordDocument = gql`
       id
       externalSourceType
       externalSourceUrl
-      __typename
       referenceCode
       titleType
       descriptionLevel
@@ -4100,6 +4100,8 @@ export const ZoomLevel3ObjectRecordDocument = gql`
       asterisk_subject_geoKeywords
     }
     enrichedSources(locale: $locale) {
+      externalSourceType
+      externalSourceUrl
       id
       title
       objectNumber
@@ -4127,6 +4129,7 @@ export const ZoomLevel3PeopleRecordDocument = gql`
     query ZoomLevel3PeopleRecord($id: String!, $locale: Locale!) {
   peopleRecordZoomLevel3(id: $id, locale: $locale) {
     __typename
+    id
     type
     profession
     nameVariations
@@ -4165,6 +4168,7 @@ export const ZoomLevel3PublicationRecordDocument = gql`
     query ZoomLevel3PublicationRecord($id: String!, $locale: Locale!) {
   publicationsRecordZoomLevel3(id: $id, locale: $locale) {
     __typename
+    id
     objectNumber
     subType
     authors
