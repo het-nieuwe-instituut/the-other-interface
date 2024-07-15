@@ -37,9 +37,10 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
         >
           {title && (
             <p
+              lang="en"
               className={TypographyVariants({
                 socialLarge: 'xl',
-                className: cn('group-hover:text-white pb-1 z-10 break-all inline-flex'),
+                className: cn('group-hover:text-white pb-1 z-10 inline-flex hyphens-auto'),
               })}
             >
               {title}
@@ -47,10 +48,11 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
           )}
           {description && (
             <p
+              lang="en"
               className={TypographyVariants({
                 socialLarge: 'md',
                 className: cn(
-                  'line-clamp-12 group-hover:text-white pb-1 z-10 break-all inline-flex'
+                  'line-clamp-12 group-hover:text-white pb-1 z-10 inline-flex hyphens-auto'
                 ),
               })}
             >
@@ -73,7 +75,7 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
                 className={TypographyVariants({
                   socialLarge: 'xl',
                   className: cn(
-                    'group-hover:text-white pb-1 inline-flex relative z-10 break-all',
+                    'group-hover:text-white pb-1 inline-flex relative z-10 hyphens-auto',
                     'after:absolute after:z-[-1]',
                     'group-hover:after:bottom-0  group-hover:after:left-0 group-hover:after:bg-black-100 group-hover:after:content-[""]',
                     'group-hover:after:ml-[-4px] group-hover:after:w-[calc(100%+8px)] group-hover:after:mb-[-4px] group-hover:after:h-[calc(100%+8px)]'
@@ -87,7 +89,7 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
           {description && (
             <div
               className={cn(
-                'group-hover:text-white pb-1 inline-flex relative z-10 break-all',
+                'group-hover:text-white pb-1 inline-flex relative z-10 hyphens-auto',
                 'after:absolute after:z-[-1]',
                 'group-hover:after:bottom-0  group-hover:after:left-0 group-hover:after:bg-black-100 group-hover:after:content-[""]',
                 'group-hover:after:ml-[-4px] group-hover:after:w-[calc(100%+8px)] group-hover:after:mb-[-4px] group-hover:after:h-[calc(100%+8px)]'
