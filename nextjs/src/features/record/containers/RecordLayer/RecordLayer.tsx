@@ -1,9 +1,11 @@
 'use client'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { RecordDescription } from '@/features/editorial/components/RecordDescription/RecordDescription'
+import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { Category } from '@/features/shared/utils/categories'
+import { AudioPlayer } from '@/features/ui/components/audio/AudioPlayer'
 import {
   AsteriskAnnotationGroup,
   AsteriskAnnotationItem,
@@ -16,6 +18,7 @@ import {
   ThumbnailCarousel,
   ThumbnailCarouselItem,
 } from '@/features/ui/components/thumbnail-carousel/ThumbnailCarousel'
+import { VideoPlayer } from '@/features/ui/components/video/VideoPlayer'
 import { useParams } from 'next/navigation'
 import {
   ArchivesRecordZoomLevel3Type,
@@ -27,10 +30,6 @@ import { OmitEnrichedData } from '../../configs/recordMetaFieldOrderConfig'
 import { useRecordDetailQuery } from '../../hooks/useRecordDetailQuery'
 import { useRecordMetaQuery } from '../../hooks/useRecordMetaQuery'
 import { RecordBottomContent } from '../RecordBottomContent/RecordBottomContent'
-import { VideoPlayer } from '@/features/ui/components/video/VideoPlayer'
-import { AudioPlayer } from '@/features/ui/components/audio/AudioPlayer'
-import ErrorBox from '@/features/shared/components/Error/ErrorBox'
-import { isError } from 'lodash'
 
 export const RecordLayer = () => {
   const { t } = useTypeSafeTranslation('common')
