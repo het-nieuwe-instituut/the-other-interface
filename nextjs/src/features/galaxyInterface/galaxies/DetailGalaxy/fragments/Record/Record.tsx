@@ -33,11 +33,7 @@ export const Record = React.memo(
     const { t } = useTypeSafeTranslation('category')
     const lang = useLocale()
     const { id, category, position, grid } = record
-    const {
-      data: recordDetails,
-      isLoading,
-      isError,
-    } = useRecordDetailQuery({
+    const { data: recordDetails, isLoading } = useRecordDetailQuery({
       type: category,
       id,
       locale: lang,
@@ -63,9 +59,9 @@ export const Record = React.memo(
       <div className={cn(className)} style={{ ...grid, ...style }}>
         <div
           className={cn(
-            'peer relative size-full',
-            !clicked && 'transition-opacity opacity-0',
-            !clicked && !isLoading && !isError && 'opacity-100',
+            'peer relative size-full opacity-0 transition-opacity',
+            clicked === true && 'opacity-100',
+            clicked === false && isLoading === false && 'opacity-100',
             animationCssVariables
           )}
           ref={ref}

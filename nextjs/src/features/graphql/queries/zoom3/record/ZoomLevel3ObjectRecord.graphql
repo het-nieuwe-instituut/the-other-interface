@@ -29,6 +29,8 @@ query ZoomLevel3ObjectRecord($id: String!, $locale: Locale!) {
       asterisk_subject_geoKeywords
     }
     enrichedSources(locale: $locale) {
+      externalSourceType
+      externalSourceUrl
       id
       title
       objectNumber

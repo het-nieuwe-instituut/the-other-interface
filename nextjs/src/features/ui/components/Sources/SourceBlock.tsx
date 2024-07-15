@@ -13,7 +13,7 @@ export const SourceBlock = ({ isLink, children, Icon, className }: SourceBlockPr
     <div className={cn('relative flex-row gap-1 px-2 py-1 items-center flex', className)}>
       <span>{Icon}</span>
       <div className="line-clamp-1 h-[22px] overflow-hidden text-ellipsis">{children}</div>
-      {isLink && <ExternalSource />}
+      {isLink && <ExternalSource className="size-[18px]" />}
     </div>
   )
 }
