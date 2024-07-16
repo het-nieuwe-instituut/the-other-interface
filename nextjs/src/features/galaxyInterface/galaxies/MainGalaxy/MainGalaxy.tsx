@@ -152,18 +152,12 @@ const MainGalaxyContent = React.memo(() => {
 
   function handleLeftClick() {
     galaxyPaginationAnimationState.setAnimationState('backwards')
-    //hacky, we should actually listen for event when the animation ends
-    setTimeout(() => {
-      decreasePageNumber()
-    }, 500)
+    decreasePageNumber()
   }
 
   function handleRightClick() {
     galaxyPaginationAnimationState.setAnimationState('forward')
-    setTimeout(() => {
-      //hacky, we should actually listen for event when the animation ends
-      increasePageNumber()
-    }, 500)
+    increasePageNumber()
   }
 })
 MainGalaxyContent.displayName = 'MainGalaxyContent'

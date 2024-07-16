@@ -2,6 +2,7 @@ import { cn } from '@/features/ui/utils/cn'
 import React from 'react'
 import SuspenseLoader from '../SuspenseLoader/SuspenseLoader'
 import { EditorialSkeleton } from '@/features/ui/components/Skeletons/EditorialSkeleton'
+import { BelowTheFoldWrapper } from '@/features/editorial/components/BelowTheFoldWrapper'
 
 interface Props {
   LeftContent: React.ReactNode
@@ -11,7 +12,7 @@ interface Props {
 
 export const LayerWrapper: React.FC<Props> = ({ LeftContent, RightContent, BottomContent }) => {
   return (
-    <div className="relative min-h-[600px] w-full bg-ivory-90 px-0 xl:px-6">
+    <BelowTheFoldWrapper className="relative min-h-[600px] w-full px-0 xl:px-6">
       <div className="mx-auto max-w-[90em] pt-9">
         <div
           className={cn(
@@ -28,6 +29,6 @@ export const LayerWrapper: React.FC<Props> = ({ LeftContent, RightContent, Botto
           {RightContent && <div className="px-6 grid-in-right">{RightContent}</div>}
         </div>
       </div>
-    </div>
+    </BelowTheFoldWrapper>
   )
 }

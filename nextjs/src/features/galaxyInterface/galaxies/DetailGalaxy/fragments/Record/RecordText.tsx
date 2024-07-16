@@ -1,5 +1,3 @@
-import { Flex, Text, BoxProps } from '@chakra-ui/react'
-
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
@@ -8,41 +6,28 @@ import { cn } from '@/features/ui/utils/cn'
 type Props = {
   categoryType: Category
   title?: string | null
-  css?: BoxProps['css']
   className?: string
 }
 
-export const RecordText: React.FC<Props> = ({ title = '', categoryType, css, className }) => {
+export const RecordText: React.FC<Props> = ({ title = '', categoryType, className }) => {
   const { t } = useLooseTypeSafeTranslation('category')
 
   return (
-    <Flex
-      className={cn(className)}
-      w="100%"
-      color="blueAlpha.100"
-      css={css}
-      direction="column"
-      flex="1"
-      mt={2}
-    >
-      <Text
-        align="center"
-        isTruncated
-        textStyle="headingTimesLarge.sm"
-        fontSize={'12px'}
-        lineHeight={'12px'}
+    <div className={cn('flex w-full text-blue-100 flex-col flex-1 mt-2', className)}>
+      <p
+        className={
+          'mt-2 line-clamp-2 hyphens-auto text-center font-times-dot text-[12px] leading-[12px]'
+        }
       >
         {title}
-      </Text>
-      <Text
-        align="center"
-        textStyle="headingTimesLarge.sm"
-        fontSize={'9px'}
-        lineHeight={'9px'}
-        mt={1}
+      </p>
+      <p
+        className={
+          'mt-1 line-clamp-1 hyphens-auto text-center font-times-dot text-[9px] leading-[9px]'
+        }
       >
         {t(toSingularCategory(categoryType))}
-      </Text>
-    </Flex>
+      </p>
+    </div>
   )
 }

@@ -189,18 +189,14 @@ export const CategoryGalaxyContent = React.memo(() => {
 
   function handleLeftClick() {
     setAnimationState('backwards')
-    //hacky, we should actually listen for event when the animation ends
-    setTimeout(() => {
-      decreasePageNumber()
-    }, 500)
+
+    decreasePageNumber()
   }
 
   function handleRightClick() {
     setAnimationState('forward')
-    setTimeout(() => {
-      //hacky, we should actually listen for event when the animation ends
-      increasePageNumber()
-    }, 500)
+
+    increasePageNumber()
   }
 })
 CategoryGalaxyContent.displayName = 'CategoryGalaxyContent'

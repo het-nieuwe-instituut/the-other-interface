@@ -4,12 +4,12 @@ import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translation
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
-import { Text } from '@chakra-ui/react'
 import { useParams } from 'next/navigation'
-import { useStoryOrRecordImageQuery } from '../../MainGalaxy/hooks/useStoryOrRecordImageQuery'
 import { useContext } from 'react'
 import { GalaxyZoomAnimationStateContext } from '../../hooks/GalaxyZoomAnimationStateProvider'
+import { useStoryOrRecordImageQuery } from '../../MainGalaxy/hooks/useStoryOrRecordImageQuery'
 
 interface Props {
   className?: string
@@ -68,24 +68,23 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
             isLoading && 'opacity-0'
           )}
         >
-          <Text
-            align="center"
-            isTruncated
-            textStyle="headingTimesLarge.md"
-            fontSize={{ base: '12px', lg: '20px' }}
-            lineHeight={{ base: '12px', lg: '21px' }}
+          <p
+            className={TypographyVariants({
+              responsive: 'detailedStoryOrRecordTitle',
+              className: 'text-center line-clamp-1 leading-normal w-full hyphens-auto',
+            })}
           >
             {record?.title}
-          </Text>
-          <Text
-            align="center"
-            textStyle="headingTimesLarge.sm"
-            fontSize={{ base: '9px', lg: '12px' }}
-            lineHeight={'normal'}
-            mt={1}
+          </p>
+
+          <p
+            className={TypographyVariants({
+              responsive: 'detailedStoryOrRecordSubTitle',
+              className: 'text-center mt-1',
+            })}
           >
             {t(toSingularCategory(category))}
-          </Text>
+          </p>
         </div>
       </>
     )

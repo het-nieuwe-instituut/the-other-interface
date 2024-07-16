@@ -114,7 +114,8 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
                     'animate-[toBlurAndHide_300ms_ease-in-out_forwards]',
                   TypographyVariants({
                     responsive: 'storyOrRecordTitle',
-                    className: 'line-clamp-1 overflow-hidden items-center text-blue-100 w-full',
+                    className:
+                      'line-clamp-2 text-center hyphens-auto overflow-hidden items-center text-blue-100 w-full',
                   })
                 )}
               >
