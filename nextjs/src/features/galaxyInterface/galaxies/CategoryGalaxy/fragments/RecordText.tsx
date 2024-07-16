@@ -1,48 +1,39 @@
-import { Flex, Text, BoxProps } from '@chakra-ui/react'
-
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { cn } from '@/features/ui/utils/cn'
 import { EntityNames } from 'src/generated/graphql'
 
 type Props = {
   categoryType: EntityNames
   title?: string | null
-  css?: BoxProps['css']
   className: string
 }
 
-export const RecordText: React.FC<Props> = ({ title = '', categoryType, css, className }) => {
+export const RecordText: React.FC<Props> = ({ title = '', categoryType, className }) => {
   const { t } = useLooseTypeSafeTranslation('category')
 
   return (
-    <Flex
-      className={className}
-      w="100%"
-      color="blueAlpha.100"
-      overflow={'hidden'}
-      css={css}
-      direction="column"
-      maxW={'210px'}
-      mt={2}
-    >
-      <Text
-        align="center"
-        isTruncated
-        textStyle="headingTimesLarge.md"
-        fontSize={{ base: '12px', lg: '20px' }}
-        lineHeight={{ base: '12px', lg: '21px' }}
+    <>
+      <div
+        className={cn(
+          'w-full text-blue-100 overflow-hidden flex-col max-w-[210px] mt-2',
+          className
+        )}
       >
-        {title}
-      </Text>
-
-      <Text
-        align="center"
-        textStyle="headingTimesLarge.sm"
-        fontSize={{ base: '9px', lg: '12px' }}
-        lineHeight={{ base: '9px', lg: '12px' }}
-        mt={1}
-      >
-        {t(categoryType?.toLowerCase())}
-      </Text>
-    </Flex>
+        <p
+          className={
+            'line-clamp-2 break-all text-center font-times-dot text-[12px] leading-[12px] lg:text-[20px] lg:leading-[21px]'
+          }
+        >
+          {title}
+        </p>
+        <p
+          className={
+            'mt-1 line-clamp-1 break-all text-center font-times-dot text-[9px] leading-[9px] lg:text-[12px] lg:leading-[12px] '
+          }
+        >
+          {t(categoryType?.toLowerCase())}
+        </p>
+      </div>
+    </>
   )
 }

@@ -4,6 +4,7 @@ import { LayerWrapper } from '../Layers/LayerWrapper'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { Paragraph } from '@/features/ui/components/Paragraph/Paragraph'
 import { cn } from '@/features/ui/utils/cn'
+import { Subtitle } from '@/features/ui/components/subtitle/Subtitle'
 
 interface ParagraphProps {
   children: React.ReactNode
@@ -18,9 +19,7 @@ interface SectionTitleProps {
 }
 
 export const StaticPageSectionTitle = ({ children }: SectionTitleProps) => (
-  <p className={TypographyVariants({ socialLarge: 'lg', className: 'font-bold mt-2' })}>
-    {children}
-  </p>
+  <Subtitle>{children as string}</Subtitle>
 )
 
 interface StaticPageListProps {
