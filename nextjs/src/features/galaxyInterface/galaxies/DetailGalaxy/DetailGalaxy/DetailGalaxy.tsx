@@ -98,7 +98,7 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
 
   return (
     <div className={'w-screen bg-pink-100'}>
-      <div className="relative mx-auto h-screen w-screen max-w-[1440px] overflow-hidden">
+      <div className="relative mx-auto h-screen w-screen max-w-[1440px] ">
         <BlurOverlay hide={!isSearchModeActive} />
         {renderMainContent()}
 
