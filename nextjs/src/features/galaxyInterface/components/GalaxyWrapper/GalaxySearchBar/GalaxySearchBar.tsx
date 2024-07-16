@@ -160,6 +160,7 @@ export const InputBar = React.forwardRef<
     <div ref={ref} className="flex flex-wrap gap-0 p-0 transition-all">
       <div className="mr-2 pt-1">
         <CategoryFilter
+          ariaLabel="Open category suggestions"
           onClick={() =>
             dispatch(
               sharedActions.categorySuggestionsOpen({
@@ -178,6 +179,7 @@ export const InputBar = React.forwardRef<
             subCategory={filter.value}
             id={filter.id}
             actionButton={<CloseIconSmall />}
+            actionButtonAriaLabel={`Remove filter ${filter.value}}`}
             actionButtonClick={removeFilter}
           />
         </div>

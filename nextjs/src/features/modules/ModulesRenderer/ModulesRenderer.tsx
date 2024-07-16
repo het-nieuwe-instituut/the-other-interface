@@ -1,4 +1,7 @@
+import { getTriplyOrStoryHref } from '@/features/editorial/components/getTriplyOrStoryHref'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 import { ImageParagraph } from '@/features/ui/components/ImageParagraph/ImageParagraph'
 import {
   ImageCarousel,
@@ -11,14 +14,11 @@ import { cn } from '@/features/ui/utils/cn'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
 import { StoryByIdQuery } from 'src/generated/graphql'
 import { Paragraph } from '../../ui/components/Paragraph/Paragraph'
-import { ButtonGroup, LinkButtonGroupItem } from '../../ui/components/button-group/component'
+import { ButtonGroup, JumboLinkButtonGroupItem } from '../../ui/components/button-group/component'
 import { Subtitle } from '../../ui/components/subtitle/Subtitle'
 import { ImageModuleWrapper } from '../components/ImageModuleWrapper'
 import { Pullquote } from '../components/Pullquote/Pullquote'
-import { getTriplyOrStoryHref } from '@/features/editorial/components/getTriplyOrStoryHref'
 import { imageBasePath } from '../modulesConstants'
-import { useLocale } from '@/features/shared/hooks/useLocale'
-import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 
 interface Props {
   components: DynamicComponents
@@ -154,21 +154,16 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
             return (
               <ButtonGroup
                 key={keyExtractor(component.id, index, array)}
-                className={isStoryPage ? 'flex-wrap' : 'flex gap-4'}
+                className={isStoryPage ? 'flex-wrap' : 'flex gap-4 bg-red-100 pb-4'}
               >
                 {component.buttons.map(button => {
                   if (!button.text || !button.url) {
                     return null
                   }
                   return (
-                    <LinkButtonGroupItem
-                      key={button.id}
-                      href={button.url}
-                      variant="jumbo"
-                      color={'jumboText'}
-                    >
+                    <JumboLinkButtonGroupItem key={button.id} href={button.url}>
                       {button.text}
-                    </LinkButtonGroupItem>
+                    </JumboLinkButtonGroupItem>
                   )
                 })}
               </ButtonGroup>
