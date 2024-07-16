@@ -1,5 +1,6 @@
 'use client'
 
+import { BelowTheFoldWrapper } from '@/features/editorial/components/BelowTheFoldWrapper'
 import { GenericCardGrid } from '@/features/editorial/components/GenericCardGrid'
 import { GenericCarouselGridWithClientPagination } from '@/features/editorial/components/GenericCarouselGridWithClientPagination'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
@@ -8,10 +9,8 @@ import { MainGalaxy } from '@/features/galaxyInterface/galaxies/MainGalaxy/MainG
 import MobileOverlayProvider from '@/features/shared/components/MobileOverlayProvider/MobileOverlayProvider'
 import SuspenseLoader from '@/features/shared/components/SuspenseLoader/SuspenseLoader'
 import { EditorialSkeleton } from '@/features/ui/components/Skeletons/EditorialSkeleton'
-import { cn } from '@/features/ui/utils/cn'
 import { HomepageQuery, ThemesQuery } from 'src/generated/graphql'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
-import { BelowTheFoldWrapper } from '@/features/editorial/components/BelowTheFoldWrapper'
 
 export type Props = {
   homepage?: HomepageQuery
