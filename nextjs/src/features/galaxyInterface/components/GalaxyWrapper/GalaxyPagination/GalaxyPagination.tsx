@@ -38,6 +38,7 @@ export const GalaxyPagination: React.FC<Props> = ({
       return (
         <>
           <IconButton
+            aria-label="Previous page"
             intent={'ghost'}
             disabled={true}
             size={'small'}
@@ -53,6 +54,7 @@ export const GalaxyPagination: React.FC<Props> = ({
           </div>
 
           <IconButton
+            aria-label="Next page"
             intent={'ghost'}
             disabled={true}
             size={'small'}
@@ -67,6 +69,7 @@ export const GalaxyPagination: React.FC<Props> = ({
     return (
       <>
         <IconButton
+          aria-label="Previous page"
           intent={'ghost'}
           disabled={currentPageNumber === 1}
           size={'small'}
@@ -82,6 +85,7 @@ export const GalaxyPagination: React.FC<Props> = ({
         </div>
 
         <IconButton
+          aria-label="Next page"
           intent={'ghost'}
           disabled={currentPageNumber === pageAmount || pageAmount < 1}
           size={'small'}
