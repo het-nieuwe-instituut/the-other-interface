@@ -8,15 +8,19 @@ interface Props {
   label?: string
   children?: React.ReactNode
   offset?: number
+  className?: string
+  labelClassName?: string
 }
 
 const SUGGESTION_BAR_PADDING = 0
 
 export const SuggestionBar: React.FC<Props> = ({
   isOpen = false,
+  labelClassName,
   children,
   label = '',
   offset,
+  className,
 }) => {
   return (
     <Grid
@@ -34,9 +38,9 @@ export const SuggestionBar: React.FC<Props> = ({
       opacity={isOpen ? 1 : 0}
       visibility={isOpen ? 'visible' : 'hidden'}
       templateColumns={'160px 1fr'}
-      className={'gap-4 px-4 py-2'}
+      className={cn('gap-4 px-4 py-2', className)}
     >
-      <Flex width="146px" py={4}>
+      <Flex width="146px" py={4} className={labelClassName}>
         <p className={cn('text-pink.100', TypographyVariants({ socialLarge: 'textfield' }))}>
           {label}
         </p>

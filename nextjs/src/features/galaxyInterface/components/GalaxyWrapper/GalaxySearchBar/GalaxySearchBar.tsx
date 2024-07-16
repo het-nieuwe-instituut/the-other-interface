@@ -14,9 +14,9 @@ import { useEnterKey } from '@/features/shared/hooks/ui/useEnterKey'
 import { useOutsideClick } from '@/features/shared/hooks/ui/useOutsideClick'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { sharedActions } from '@/features/shared/stores/shared.store'
+import { useDelayedNextRoutePush } from '@/features/ui/components/DelayedNextLink/DelayedNextLink'
 import { cn } from '@/features/ui/utils/cn'
 import CloseIconSmall from '@/icons/close-icon-small.svg'
-import { useRouter } from 'next/navigation'
 import React, { CSSProperties, useCallback, useContext, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
@@ -34,7 +34,6 @@ import { SearchButton } from './fragments/SearchButton'
 import SearchResults from './fragments/SearchResults'
 import { TotalResults } from './fragments/TotalResults'
 import { useSearchBarPosition } from './useSearchBarPosition'
-import { useDelayedNextRoutePush } from '@/features/ui/components/DelayedNextLink/DelayedNextLink'
 
 type Props = {
   total?: number
@@ -240,16 +239,13 @@ export const SearchSuggestionsBar = ({
       </SuggestionBar>
 
       {!isCollectionHighlightsSelected && searchCategoryToTriplyEnum && (
-        <SuggestionBar
-          isOpen={isUserInteracting && !isCategorySuggestionsOpen}
-          label={t('suggestions')}
-          offset={searchBarHeight}
-        >
-          <SuggestionsContainer
-            type={searchCategoryToTriplyEnum}
-            handleSelectFilter={selectFilter}
-          />
-        </SuggestionBar>
+        <SuggestionsContainer
+          type={searchCategoryToTriplyEnum}
+          handleSelectFilter={selectFilter}
+          isUserInteracting={isUserInteracting}
+          isCategorySuggestionsOpen={isCategorySuggestionsOpen}
+          searchBarHeight={searchBarHeight}
+        />
       )}
     </>
   )
