@@ -1,4 +1,3 @@
-import ActionButton from '@/features/shared/components/SearchFilterBox/buttons/ActionButton/ActionButton'
 import { ChangeButton } from '@/features/shared/components/SearchFilterBox/buttons/ChangeButton/ChangeButton'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
@@ -8,9 +7,10 @@ interface Props {
   selectedOption?: string
   onClick: () => void
   isOpen: boolean
+  ariaLabel: string
 }
 
-export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOption }) => {
+export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOption, ariaLabel }) => {
   const { t } = useTypeSafeTranslation('category')
 
   return (
@@ -21,13 +21,14 @@ export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOptio
         'w-fit max-w-full h-[52px]',
         'px-2'
       )}
+      aria-label={ariaLabel}
       onClick={onClick}
     >
       <div className="relative flex max-w-full items-center justify-between pb-2 pt-1">
         <p className={cn('truncate mr-1', TypographyVariants({ socialLarge: 'label' }))}>
           {t('category')}
         </p>
-        <ActionButton className="mt-px">{<ChangeButton isOpen={isOpen} />}</ActionButton>
+        <div className="mt-px">{<ChangeButton isOpen={isOpen} />}</div>
       </div>
       <p className={cn('truncate', TypographyVariants({ socialLarge: 'textfield' }))}>
         {selectedOption}

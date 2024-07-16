@@ -18,6 +18,7 @@ import {
   LandingPagePublicationQuery,
 } from 'src/generated/graphql'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
+import { BelowTheFoldWrapper } from '@/features/editorial/components/BelowTheFoldWrapper'
 
 export interface LandingPageProps {
   editorialData?:
@@ -40,7 +41,7 @@ export const LandingpageContainer: React.FC<LandingPageProps> = ({ editorialData
         </GalaxyInterface>
       </GalaxyZoomAnimationStateProvider>
 
-      <div className="relative w-full bg-ivory-90 px-6 min-[1428px]:px-0">
+      <BelowTheFoldWrapper className="relative w-full px-6 min-[1428px]:px-0">
         <div className="mx-auto max-w-[1392px] pt-6">
           <div className="grid grid-cols-6 gap-3 lg:grid-cols-12">
             <SuspenseLoader LoadingComponent={<EditorialSkeleton />}>
@@ -66,7 +67,7 @@ export const LandingpageContainer: React.FC<LandingPageProps> = ({ editorialData
             </SuspenseLoader>
           </div>
         </div>
-      </div>
+      </BelowTheFoldWrapper>
     </div>
   )
 }

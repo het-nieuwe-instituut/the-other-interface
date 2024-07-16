@@ -108,23 +108,30 @@ export const StoryMeta: React.FC = () => {
           <div>
             {themes.map((theme, index, array) => {
               return (
-                <NextLink
-                  key={keyExtractor(theme, index, array)}
-                  href={addLocaleToUrl(
-                    `/landingpage?category=stories&filters=${encodeFilters([
-                      {
-                        key: 'theme',
-                        value: theme.name ?? '',
-                        id: theme.id ?? '',
-                      },
-                    ])}&searchResult=true`,
-                    lang
-                  )}
-                >
-                  <p className={TypographyVariants({ socialLarge: 'md', className: 'underline' })}>
-                    {theme.name}
-                  </p>
-                </NextLink>
+                // margin is needed for lighthouse score reasons
+                <div className="mb-2 last:mb-0" key={keyExtractor(theme, index, array)}>
+                  <NextLink
+                    href={addLocaleToUrl(
+                      `/landingpage?category=stories&filters=${encodeFilters([
+                        {
+                          key: 'theme',
+                          value: theme.name ?? '',
+                          id: theme.id ?? '',
+                        },
+                      ])}&searchResult=true`,
+                      lang
+                    )}
+                  >
+                    <p
+                      className={TypographyVariants({
+                        socialLarge: 'md',
+                        className: 'underline',
+                      })}
+                    >
+                      {theme.name}
+                    </p>
+                  </NextLink>
+                </div>
               )
             })}
           </div>

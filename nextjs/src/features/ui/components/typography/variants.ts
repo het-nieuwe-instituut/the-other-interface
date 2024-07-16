@@ -74,13 +74,18 @@ export const TypographyVariants = cva('', {
         'md:font-social-large md:text-[21px] md:tracking-[0.21px]',
       ],
       title: [
-        'break-all font-impact-large text-[54px] leading-[100%_] tracking-[-0.8px]',
+        'hyphens-auto font-impact-large text-[54px] leading-[100%_] tracking-[-0.8px]',
         'lg:text-[80px]',
       ],
       storyOrRecordTitle: [
-        'break-all font-times-large text-[12px] leading-[100%_] tracking-[0.04em]',
+        'hyphens-auto font-times-large text-[12px] leading-[100%_] tracking-[0.04em]',
         'lg:font-times-large lg:text-[20px] lg:leading-[105%_] lg:tracking-[0.01em]',
       ],
+      detailedStoryOrRecordTitle: [
+        'hyphens-auto font-times-dot text-[12px] leading-[12px]',
+        'lg:text-[20px] lg:leading-[21px]',
+      ],
+      detailedStoryOrRecordSubTitle: ['hyphens-auto font-times-dot text-[9px]', 'lg:text-[12px]'],
     },
   },
 })

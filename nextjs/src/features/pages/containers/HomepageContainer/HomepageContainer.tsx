@@ -1,5 +1,6 @@
 'use client'
 
+import { BelowTheFoldWrapper } from '@/features/editorial/components/BelowTheFoldWrapper'
 import { GenericCardGrid } from '@/features/editorial/components/GenericCardGrid'
 import { GenericCarouselGridWithClientPagination } from '@/features/editorial/components/GenericCarouselGridWithClientPagination'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
@@ -30,7 +31,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }
         </MobileOverlayProvider>
       </GalaxyInterface>
 
-      <div className="relative w-full bg-ivory-90 px-6 min-[1428px]:px-0">
+      <BelowTheFoldWrapper className="relative w-full px-6 min-[1428px]:px-0">
         <div className="mx-auto max-w-[1392px] pt-6">
           <div className="grid grid-cols-6 gap-3 lg:grid-cols-12">
             <SuspenseLoader LoadingComponent={<EditorialSkeleton />}>
@@ -59,7 +60,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }
             </SuspenseLoader>
           </div>
         </div>
-      </div>
+      </BelowTheFoldWrapper>
     </>
   )
 }

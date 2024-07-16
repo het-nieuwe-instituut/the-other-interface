@@ -104,6 +104,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
           }
         >
           <DelayedNextLinkWithZoomAnimationsContext
+            aria-label={t(category)}
             delay={600}
             style={
               {
