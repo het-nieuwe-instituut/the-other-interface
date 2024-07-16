@@ -1,5 +1,5 @@
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
-import { notFound, usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { notFound, usePathname, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
 import { useDelayedNextRoutePush } from '../components/DelayedNextLink/DelayedNextLink'
 

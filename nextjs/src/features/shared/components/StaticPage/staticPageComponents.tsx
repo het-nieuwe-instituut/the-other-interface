@@ -1,10 +1,10 @@
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
-import { StaticHeader } from '../StaticHeader/StaticHeader'
-import { LayerWrapper } from '../Layers/LayerWrapper'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { Paragraph } from '@/features/ui/components/Paragraph/Paragraph'
-import { cn } from '@/features/ui/utils/cn'
 import { Subtitle } from '@/features/ui/components/subtitle/Subtitle'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { cn } from '@/features/ui/utils/cn'
+import { LayerWrapper } from '../Layers/LayerWrapper'
+import { StaticPageHeader } from '../StaticHeader/StaticHeader'
 
 interface ParagraphProps {
   children: React.ReactNode
@@ -40,7 +40,7 @@ interface StaticPageContainerProps {
 export const StaticPageContainer = ({ children, title }: StaticPageContainerProps) => (
   <div className="h-full bg-ivory-100">
     <div className="bg-ivory-100 pb-[42px]">
-      <StaticHeader />
+      <StaticPageHeader />
     </div>
     <LayerWrapper
       LeftContent={<PageHeader title={title} />}

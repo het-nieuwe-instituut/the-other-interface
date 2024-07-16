@@ -1,17 +1,23 @@
 'use client'
-import { StaticHeader } from '../StaticHeader/StaticHeader'
-import { Fonts, useNavSettings } from './useNavSettings'
-import useTranslation from 'next-translate/useTranslation'
-import { cn } from '@/features/ui/utils/cn'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { NavLinkButton } from '@/features/ui/components/nav-link-button/component'
-import Link from 'next/link'
-import { useDispatch } from 'react-redux'
-import { sharedActions } from '../../stores/shared.store'
-import useDisableScroll from '../../hooks/ui/useDisableScroll'
-import { MAX_Z_INDEX, NAVIGATION_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
-import { CSSProperties } from 'react'
 import { MenuTypogrpahyVariants } from '@/features/ui/components/typography/menuVariants'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { cn } from '@/features/ui/utils/cn'
+import useTranslation from 'next-translate/useTranslation'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { CSSProperties, useEffect, useMemo, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { State } from '../../configs/store'
+import {
+  MAX_Z_INDEX,
+  NAVIGATION_OVERLAY_Z_INDEX,
+  USER_LOOKS_ON,
+} from '../../constants/mainConstants'
+import useDisableScroll from '../../hooks/ui/useDisableScroll'
+import { useLocale } from '../../hooks/useLocale'
+import { sharedActions } from '../../stores/shared.store'
+import { StaticHeader } from '../StaticHeader/StaticHeader'
 
 const categories = [
   { name: 'archives', translationKey: 'archives' },
@@ -20,9 +26,46 @@ const categories = [
   { name: 'publications', translationKey: 'publications' },
 ]
 
+export enum Fonts {
+  Times = 'times',
+  Impact = 'impact',
+}
+
+const galaxyPathNames = ['/', '/landingpage', '/detail/[category]/[id]', '/detail/[category]']
+
 export const Navigation = () => {
-  const { isMenuOpen, ref, navTextStyle, lang } = useNavSettings()
+  const ref = useRef<HTMLDivElement | null>(null)
+  const isMenuOpen = useSelector((state: State) => state?.shared?.isMenuOpen)
+  const userLooksOn = useSelector((state: State) => state.shared.userLooksOn)
   const { t: tNavigation } = useTranslation('navigation')
+  const lang = useLocale()
+  const pathname = usePathname()
+  const userIsNotOnGalaxyPage = pathname ? !galaxyPathNames.includes(pathname) : false
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'visible'
+    }
+
+    return () => {
+      document.body.style.overflow = 'visible'
+    }
+  }, [isMenuOpen])
+
+  const navTextStyle = useMemo(() => {
+    if (userIsNotOnGalaxyPage) {
+      return Fonts.Impact
+    }
+    if (userLooksOn === USER_LOOKS_ON.EDITORIAL) {
+      return Fonts.Impact
+    }
+    if (userLooksOn === USER_LOOKS_ON.GALAXY) {
+      return Fonts.Times
+    }
+  }, [userIsNotOnGalaxyPage, userLooksOn])
+
   const dispatch = useDispatch()
 
   useDisableScroll(isMenuOpen)
@@ -44,7 +87,8 @@ export const Navigation = () => {
       ref={ref}
     >
       <div className="absolute left-0 top-0 h-screen w-full">
-        <StaticHeader />
+        {pathname && galaxyPathNames.includes(pathname) && <StaticHeader />}
+
         <div
           style={{ '--z-index': `${MAX_Z_INDEX}` } as CSSProperties}
           className="relative z-[var(--z-index)] mx-auto flex max-w-[90em] flex-col justify-between px-6 pt-24 md:flex-row"
