@@ -119,19 +119,13 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
   )
 
   function handleLeftClick() {
-    setAnimationState('backwards')
-    //hacky, we should actually listen for event when the animation ends
-    setTimeout(() => {
-      decreasePageNumber()
-    }, 500)
+    setAnimationState('forward')
+    decreasePageNumber()
   }
 
   function handleRightClick() {
     setAnimationState('forward')
-    setTimeout(() => {
-      //hacky, we should actually listen for event when the animation ends
-      increasePageNumber()
-    }, 500)
+    increasePageNumber()
   }
 })
 DetailGalaxyContent.displayName = 'DetailGalaxyContent'

@@ -1,10 +1,11 @@
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { notFound, usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
+import { useDelayedNextRoutePush } from '../components/DelayedNextLink/DelayedNextLink'
 
 export const useSearchParamPagination = (pageAmount: number, isResultAmountLoading = false) => {
+  const delayedPush = useDelayedNextRoutePush(500)
   const pathname = usePathname()
-  const router = useRouter()
   const searchParams = useSearchParams()
   const { pageNumber: page } = usePageNumber()
 
@@ -22,9 +23,9 @@ export const useSearchParamPagination = (pageAmount: number, isResultAmountLoadi
 
       const url = pathname + `?${updatedSearchParams.toString()}`
 
-      router.push(url)
+      delayedPush(url)
     },
-    [pathname, router, searchParams]
+    [delayedPush, pathname, searchParams]
   )
 
   const increasePageNumber = useCallback(() => {
