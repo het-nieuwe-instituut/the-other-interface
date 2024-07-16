@@ -71,7 +71,7 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
           <p
             className={TypographyVariants({
               responsive: 'detailedStoryOrRecordTitle',
-              className: 'text-center line-clamp-1 leading-normal w-full break-all',
+              className: 'text-center line-clamp-1 leading-normal w-full hyphens-auto',
             })}
           >
             {record?.title}

@@ -115,7 +115,7 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
                   TypographyVariants({
                     responsive: 'storyOrRecordTitle',
                     className:
-                      'line-clamp-2 break-all overflow-hidden items-center text-blue-100 w-full',
+                      'line-clamp-2 text-center hyphens-auto overflow-hidden items-center text-blue-100 w-full',
                   })
                 )}
               >

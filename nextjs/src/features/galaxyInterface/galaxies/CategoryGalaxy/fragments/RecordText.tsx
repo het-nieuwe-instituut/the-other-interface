@@ -21,14 +21,14 @@ export const RecordText: React.FC<Props> = ({ title = '', categoryType, classNam
       >
         <p
           className={
-            'line-clamp-2 break-all text-center font-times-dot text-[12px] leading-[12px] lg:text-[20px] lg:leading-[21px]'
+            'line-clamp-2 hyphens-auto text-center font-times-dot text-[12px] leading-[12px] lg:text-[20px] lg:leading-[21px]'
           }
         >
           {title}
         </p>
         <p
           className={
-            'mt-1 line-clamp-1 break-all text-center font-times-dot text-[9px] leading-[9px] lg:text-[12px] lg:leading-[12px] '
+            'mt-1 line-clamp-1 hyphens-auto text-center font-times-dot text-[9px] leading-[9px] lg:text-[12px] lg:leading-[12px] '
           }
         >
           {t(categoryType?.toLowerCase())}
