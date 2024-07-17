@@ -241,16 +241,13 @@ export const SearchSuggestionsBar = ({
       </SuggestionBar>
 
       {!isCollectionHighlightsSelected && searchCategoryToTriplyEnum && (
-        <SuggestionBar
-          isOpen={isUserInteracting && !isCategorySuggestionsOpen}
-          label={t('suggestions')}
-          offset={searchBarHeight}
-        >
-          <SuggestionsContainer
-            type={searchCategoryToTriplyEnum}
-            handleSelectFilter={selectFilter}
-          />
-        </SuggestionBar>
+        <SuggestionsContainer
+          type={searchCategoryToTriplyEnum}
+          handleSelectFilter={selectFilter}
+          isUserInteracting={isUserInteracting}
+          isCategorySuggestionsOpen={isCategorySuggestionsOpen}
+          searchBarHeight={searchBarHeight}
+        />
       )}
     </>
   )

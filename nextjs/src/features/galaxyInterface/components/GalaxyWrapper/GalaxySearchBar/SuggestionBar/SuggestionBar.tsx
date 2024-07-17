@@ -6,15 +6,19 @@ interface Props {
   label?: string
   children?: React.ReactNode
   offset?: number
+  className?: string
+  labelClassName?: string
 }
 
 const SUGGESTION_BAR_PADDING = 0
 
 export const SuggestionBar: React.FC<Props> = ({
   isOpen = false,
+  labelClassName,
   children,
   label = '',
   offset,
+  className,
 }) => {
   return (
     <div
@@ -26,10 +30,11 @@ export const SuggestionBar: React.FC<Props> = ({
       }}
       className={cn(
         'grid absolute bg-blue-80 z-[9998] grid-cols-[160px,1fr] gap-4 px-4 py-2 w-full',
-        isOpen ? 'translate-y-[0] opacity-100 visible' : 'translate-y-[90%] opacity-0 invisible'
+        isOpen ? 'translate-y-[0] opacity-100 visible' : 'translate-y-[90%] opacity-0 invisible',
+        className
       )}
     >
-      <div className="flex w-[146px] py-4">
+      <div className={cn('flex w-[146px] py-4', labelClassName)}>
         <p className={cn('text-pink.100', TypographyVariants({ socialLarge: 'textfield' }))}>
           {label}
         </p>
