@@ -50,7 +50,7 @@ export const SearchFilterBox: React.FC<Props> = ({
         <ActionButton
           id={id}
           onClick={actionButtonClick}
-          className="absolute right-0 top-0 z-[9999] mt-px hover:bg-initial hover:text-black-100 text-blue-100 size-10 -m-2 flex items-center justify-center"
+          className="absolute right-0 top-0 z-[9999] mt-px hover:bg-initial hover:text-white text-blue-100 size-10 -m-2 flex items-center justify-center"
           aria-label={actionButtonAriaLabel}
         >
           {actionButton}
