@@ -42,5 +42,9 @@
   "pulledFromWikiData": "WikiData",
   "learnAboutExternalDataSources": "Learn about external sources",
   "loadingResults": "Loading results for",
-  "loadingSuggestions": "Loading suggestions"
+  "loadingSuggestions": "Loading suggestions",
+
+  "errorLoadingDetail": "Something went wrong while loading. Please try again later.",
+  "errorLoadingItems": "Something went wrong while loading the items.",
+  "errorTryAgain": "Please try again later"
 }

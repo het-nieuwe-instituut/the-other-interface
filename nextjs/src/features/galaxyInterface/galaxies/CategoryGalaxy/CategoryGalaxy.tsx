@@ -117,13 +117,31 @@ export const CategoryGalaxyContent = React.memo(() => {
   })
 
   const { t } = useTypeSafeTranslation('category')
+  const { t: tCommon } = useTypeSafeTranslation('common')
   const isResultEmpty = searchResultAmount === 0 && !isMainLoading && !isError
 
   const renderMainContent = () => {
     if (isError) {
       return (
         <div className="flex h-full items-center justify-center">
-          <p className={TypographyVariants({ times: 'md' })}>{t('errorLoadingCategoryItems')}</p>
+          <div className="flex flex-col gap-2">
+            <p
+              className={TypographyVariants({
+                times: '2xl',
+                className: 'text-blue-100',
+              })}
+            >
+              {tCommon('errorLoadingItems')}
+            </p>
+            <p
+              className={TypographyVariants({
+                socialLarge: 'lg',
+                className: 'text-blue-100',
+              })}
+            >
+              {tCommon('errorTryAgain')}
+            </p>
+          </div>
         </div>
       )
     }

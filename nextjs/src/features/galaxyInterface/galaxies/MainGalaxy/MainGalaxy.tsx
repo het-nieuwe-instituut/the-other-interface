@@ -67,6 +67,7 @@ export const MainGalaxy = () => {
 
 const MainGalaxyContent = React.memo(() => {
   const { t } = useTypeSafeTranslation('navigation')
+  const { t: commonT } = useTypeSafeTranslation('common')
   const galaxyPaginationAnimationState = useContext(GalaxyPaginationAnimationStateContext)
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
   const searchParams = useSearchParams()
@@ -92,11 +93,29 @@ const MainGalaxyContent = React.memo(() => {
     onRight: handleRightClick,
     disabled: isSearchModeActive,
   })
+
   const renderMainContent = () => {
     if (isError) {
       return (
         <div className="flex h-full items-center justify-center">
-          <p className={TypographyVariants({ times: 'md' })}>{t('errorLoadingThemes')}</p>
+          <div className="flex flex-col gap-2">
+            <p
+              className={TypographyVariants({
+                times: '2xl',
+                className: 'text-blue-100',
+              })}
+            >
+              {commonT('errorLoadingItems')}
+            </p>
+            <p
+              className={TypographyVariants({
+                socialLarge: 'lg',
+                className: 'text-blue-100',
+              })}
+            >
+              {commonT('errorTryAgain')}
+            </p>
+          </div>
         </div>
       )
     }
@@ -127,9 +146,7 @@ const MainGalaxyContent = React.memo(() => {
     <div className={'w-screen bg-pink-100'}>
       <BlurOverlay hide={!isSearchModeActive} />
       <div className="relative mx-auto h-screen w-screen max-w-[1440px]">
-        {categoryClouds.map(cloud => (
-          <Cloud key={cloud.title} cloud={cloud} />
-        ))}
+        {!isError && categoryClouds.map(cloud => <Cloud key={cloud.title} cloud={cloud} />)}
 
         {renderMainContent()}
 
