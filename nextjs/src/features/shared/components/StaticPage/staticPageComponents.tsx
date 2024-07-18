@@ -33,16 +33,24 @@ export const StaticPageList = ({ items }: StaticPageListProps) => {
 }
 
 interface StaticPageContainerProps {
+  className?: string
   title: string
   children: React.ReactNode
+  disableBelowTheFold: boolean
 }
 
-export const StaticPageContainer = ({ children, title }: StaticPageContainerProps) => (
-  <div className="h-full bg-ivory-100">
-    <div className="bg-ivory-100 pb-[42px]">
+export const StaticPageContainer = ({
+  children,
+  title,
+  className,
+  disableBelowTheFold,
+}: StaticPageContainerProps) => (
+  <div className={cn('h-full bg-ivory-100', disableBelowTheFold && 'bg-pink-100', className)}>
+    <div className="pb-[42px]">
       <StaticPageHeader />
     </div>
     <LayerWrapper
+      disableBelowTheFold={disableBelowTheFold}
       LeftContent={<PageHeader title={title} />}
       BottomContent={
         <div className={'mx-auto mb-10 flex max-w-[90em] flex-col gap-[10px] px-6 pt-6'}>

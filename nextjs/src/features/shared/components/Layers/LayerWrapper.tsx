@@ -8,11 +8,31 @@ interface Props {
   LeftContent: React.ReactNode
   RightContent?: React.ReactNode
   BottomContent?: React.ReactNode
+  disableBelowTheFold?: boolean
 }
 
-export const LayerWrapper: React.FC<Props> = ({ LeftContent, RightContent, BottomContent }) => {
+export const LayerWrapper: React.FC<Props> = ({
+  LeftContent,
+  RightContent,
+  BottomContent,
+  disableBelowTheFold,
+}) => {
+  if (disableBelowTheFold) {
+    return (
+      <div className="relative mx-auto block min-h-[600px] w-full px-0 xl:px-6">
+        {renderContent()}
+      </div>
+    )
+  }
+
   return (
     <BelowTheFoldWrapper className="relative min-h-[600px] w-full px-0 xl:px-6">
+      {renderContent()}
+    </BelowTheFoldWrapper>
+  )
+
+  function renderContent() {
+    return (
       <div className="mx-auto max-w-[90em] pt-9">
         <div
           className={cn(
@@ -29,6 +49,6 @@ export const LayerWrapper: React.FC<Props> = ({ LeftContent, RightContent, Botto
           {RightContent && <div className="px-6 grid-in-right">{RightContent}</div>}
         </div>
       </div>
-    </BelowTheFoldWrapper>
-  )
+    )
+  }
 }
