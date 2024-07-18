@@ -1,3 +1,4 @@
+'use client'
 import { StaticPageContainer } from '@/features/shared/components/StaticPage/staticPageComponents'
 import { createTypeSafeTranslation } from '@/features/shared/utils/translations'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'

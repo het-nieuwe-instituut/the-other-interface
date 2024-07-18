@@ -4,6 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { keyExtractor } from '@/features/shared/utils/lists'
+import { Subtitle } from '@/features/ui/components/subtitle/Subtitle'
 
 interface Props {
   component?: TableModuleType
@@ -39,9 +40,9 @@ export const TableModule: React.FC<Props> = props => {
   return (
     <div className="flex flex-col gap-4 bg-inherit">
       <div className="relative flex">
-        <h2 className={cn(TypographyVariants({ responsive: 'title' }), 'mb-4')}>
-          {component.name}
-        </h2>
+        <div>
+          <Subtitle>{component.name ?? ''}</Subtitle>
+        </div>
         <span
           className={cn(TypographyVariants({ socialLarge: 'xl' }), 'relative top-0 -right-2 bold')}
         >
