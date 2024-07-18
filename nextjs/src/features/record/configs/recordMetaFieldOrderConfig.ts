@@ -28,7 +28,6 @@ type BasePublicationRecordZoomLevel3Type = OmitAsteriskSuggestions<
 
 const objectFieldOrder: Array<keyof BaseObjectRecordZoomLevel3Type> = [
   'objectNumber',
-  'title',
   'objectName',
   'objectType',
   'archiveCode',

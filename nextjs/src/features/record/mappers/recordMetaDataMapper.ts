@@ -228,6 +228,12 @@ export function mapArchivesDataToSections(
       return { title, value: values, isLink, key, enrichedSources: filterEnrichedSources }
     })
     .filter(section => section.value !== null)
+    .sort((a, b) => {
+      // make sure permanentLInk is always at the bottom
+      if (a.key === 'permanentLink') return 1
+      if (b.key === 'permanentLink') return -1
+      return 0
+    })
 }
 
 export function mapPublicationDataToSections(
@@ -262,6 +268,12 @@ export function mapPublicationDataToSections(
       return { title, value: values, isLink, key, enrichedSources: filterEnrichedSources }
     })
     .filter(section => section.value !== null)
+    .sort((a, b) => {
+      // make sure permanentLInk is always at the bottom
+      if (a.key === 'permanentLink') return 1
+      if (b.key === 'permanentLink') return -1
+      return 0
+    })
 }
 
 export function mapObjectDataToSections(
@@ -343,6 +355,12 @@ export function mapObjectDataToSections(
       return { title, value: values, isLink, key }
     })
     .filter(section => section.value !== null)
+    .sort((a, b) => {
+      // make sure permanentLInk is always at the bottom
+      if (a.key === 'permanentLink') return 1
+      if (b.key === 'permanentLink') return -1
+      return 0
+    })
 }
 
 export function mapPersonDataToSections(
@@ -376,4 +394,10 @@ export function mapPersonDataToSections(
       return { title, value: values, isLink, key, enrichedSources: filterEnrichedSources }
     })
     .filter(section => section.value !== null)
+    .sort((a, b) => {
+      // make sure permanentLInk is always at the bottom
+      if (a.key === 'permanentLink') return 1
+      if (b.key === 'permanentLink') return -1
+      return 0
+    })
 }
