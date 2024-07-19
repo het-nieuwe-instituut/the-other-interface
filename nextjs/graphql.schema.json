@@ -5004,6 +5004,18 @@
             "deprecationReason": null
           },
           {
+            "name": "place",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profession",
             "description": null,
             "args": [],
@@ -9279,6 +9291,18 @@
           },
           {
             "name": "permanentLink",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "place",
             "description": null,
             "args": [],
             "type": {

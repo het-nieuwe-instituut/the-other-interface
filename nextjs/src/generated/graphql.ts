@@ -560,6 +560,7 @@ export type EnrichedBasePeopleRecordZoomLevel3Type = {
   nationality?: Maybe<Scalars['String']['output']>;
   period?: Maybe<Scalars['String']['output']>;
   permanentLink?: Maybe<Scalars['String']['output']>;
+  place?: Maybe<Scalars['String']['output']>;
   profession?: Maybe<Scalars['String']['output']>;
   type?: Maybe<Scalars['String']['output']>;
 };
@@ -1059,6 +1060,7 @@ export type PeopleRecordZoomLevel3Type = {
   nationality?: Maybe<Scalars['String']['output']>;
   period?: Maybe<Scalars['String']['output']>;
   permanentLink?: Maybe<Scalars['String']['output']>;
+  place?: Maybe<Scalars['String']['output']>;
   profession?: Maybe<Scalars['String']['output']>;
   type?: Maybe<Scalars['String']['output']>;
 };
