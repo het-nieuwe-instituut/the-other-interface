@@ -1,4 +1,3 @@
-import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
 import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useLocale } from '@/features/shared/hooks/useLocale'
@@ -10,6 +9,7 @@ import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 import { GalaxyZoomAnimationStateContext } from '../../hooks/GalaxyZoomAnimationStateProvider'
 import { useStoryOrRecordImageQuery } from '../../MainGalaxy/hooks/useStoryOrRecordImageQuery'
+import { useZoomLevel3Query } from '@/features/record/hooks/useZoomLevel3Query'
 
 interface Props {
   className?: string
@@ -23,7 +23,7 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
   const locale = useLocale()
   const { animationState } = useContext(GalaxyZoomAnimationStateContext)
 
-  const { data: record, isLoading } = useRecordDetailQuery({
+  const { data: record, isLoading } = useZoomLevel3Query({
     type: category,
     id,
     options: { refetchOnWindowFocus: false },
