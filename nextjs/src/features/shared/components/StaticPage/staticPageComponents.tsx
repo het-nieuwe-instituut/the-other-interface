@@ -36,7 +36,7 @@ interface StaticPageContainerProps {
   className?: string
   title: string
   children: React.ReactNode
-  disableBelowTheFold: boolean
+  disableBelowTheFold?: boolean
 }
 
 export const StaticPageContainer = ({
