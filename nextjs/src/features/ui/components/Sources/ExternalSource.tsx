@@ -18,7 +18,7 @@ export const ExternalSourceBlock = ({ children, className, href }: ExternalSourc
   if (href) {
     return (
       <NextLink href={href}>
-        <SourceBlock Icon={<Lod />} isLink className={classNames}>
+        <SourceBlock Icon={<Lod />} isExternalLink className={classNames}>
           {children}
         </SourceBlock>
       </NextLink>
