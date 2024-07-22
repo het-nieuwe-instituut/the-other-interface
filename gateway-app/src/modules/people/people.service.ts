@@ -204,8 +204,17 @@ export class PeopleService {
     return TriplyUtils.combineObjectArray(results.data)
   }
 
-  public getEnrichedSources(id: string, locale: Locale): Promise<EnrichedRecordBaseType[]> {
-    return this.triplyService.getEnrichedSourceData(this.EnrichedSourceEndpoints, id, locale)
+  public getEnrichedSources(
+    id: string,
+    locale: Locale,
+    externalURI?: string | `${string};${string}` | `${string};${string};${string}`
+  ): Promise<EnrichedRecordBaseType[]> {
+    return this.triplyService.getEnrichedSourceData(
+      this.EnrichedSourceEndpoints,
+      id,
+      locale,
+      externalURI
+    )
   }
 
   private formatAsteriskSuggestions(data: PeopleDetailZoomLevel3Data[]) {

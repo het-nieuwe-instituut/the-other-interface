@@ -56,7 +56,7 @@ export class PeopleZoomLevel3DetailResolver {
     @Parent() record: PeopleZoomLevel3DetailType,
     @Args() { locale }: LocaleArgs
   ) {
-    return this.peopleService.getEnrichedSources(record.id, locale)
+    return this.peopleService.getEnrichedSources(record.id, locale, record?.externalURI)
   }
 }
 
@@ -77,6 +77,6 @@ export class PeopleRecordZoomLevel3Resolver {
     @Parent() record: PeopleRecordZoomLevel3Type,
     @Args() { locale }: LocaleArgs
   ) {
-    return this.peopleService.getEnrichedSources(record.id, locale)
+    return this.peopleService.getEnrichedSources(record.id, locale, record?.externalSource)
   }
 }

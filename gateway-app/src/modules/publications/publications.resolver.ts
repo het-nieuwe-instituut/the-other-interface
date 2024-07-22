@@ -63,7 +63,7 @@ export class PublicationZoomLevel3DetailResolver {
     @Parent() record: PublicationZoomLevel3DetailType,
     @Args() { locale }: LocaleArgs
   ) {
-    return this.publicationsService.getEnrichedSources(record.id, locale)
+    return this.publicationsService.getEnrichedSources(record.id, locale, record?.externalURI)
   }
 }
 
@@ -84,6 +84,6 @@ export class PublicationRecordZoomLevel3Resolver {
     @Parent() record: PublicationRecordZoomLevel3Type,
     @Args() { locale }: LocaleArgs
   ) {
-    return this.publicationsService.getEnrichedSources(record.id, locale)
+    return this.publicationsService.getEnrichedSources(record.id, locale, record?.externalSource)
   }
 }

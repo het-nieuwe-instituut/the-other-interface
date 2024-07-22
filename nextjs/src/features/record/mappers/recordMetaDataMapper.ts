@@ -137,9 +137,7 @@ function getValidEnrichedSource<S extends EnrichedSource, K extends keyof S>(
   if (!value) {
     return
   }
-  if (!enrichedSource.externalSourceUrl || enrichedSource.externalSourceUrl === '') {
-    return
-  }
+
   return {
     externalSourceType: enrichedSource.externalSourceType,
     externalSourceUrl: enrichedSource.externalSourceUrl,
@@ -177,6 +175,12 @@ export function mapArchivesDataToSections(
     //   return { title, value: values, isLink, key, asteriskSuggestions }
     // }
 
+    const filteredEnrichedSources = filterEnrichedSources(
+      data.enrichedSources ?? [],
+      key,
+      mapArchivesEnrichedSources
+    )
+
     if (key === 'location') {
       const asteriskSuggestions = data.asteriskSuggestions
         ?.map(suggestion => {
@@ -190,7 +194,14 @@ export function mapArchivesDataToSections(
           return v.date || v.name || v.subject
         })
 
-      return { title, value: values, isLink, key, asteriskSuggestions }
+      return {
+        title,
+        value: values,
+        isLink,
+        key,
+        asteriskSuggestions,
+        enrichedSources: filteredEnrichedSources,
+      }
     }
 
     if (key === 'subject') {
@@ -206,25 +217,17 @@ export function mapArchivesDataToSections(
           return v.date || v.name || v.subject
         })
 
-      return { title, value: values, isLink, key, asteriskSuggestions }
+      return {
+        title,
+        value: values,
+        isLink,
+        key,
+        asteriskSuggestions,
+        enrichedSources: filteredEnrichedSources,
+      }
     }
 
-    const filterEnrichedSources = data.enrichedSources?.reduce<
-      {
-        externalSourceType: ExternalSource | undefined
-        externalSourceUrl: Maybe<string> | undefined
-        value: string | null
-      }[]
-    >((acc, enrichedSource) => {
-      const mappedSource = mapArchivesEnrichedSources(key, enrichedSource)
-
-      if (mappedSource) {
-        return [...acc, mappedSource]
-      }
-      return acc
-    }, [])
-
-    return { title, value: values, isLink, key, enrichedSources: filterEnrichedSources }
+    return { title, value: values, isLink, key, enrichedSources: filteredEnrichedSources }
   })
 
   const filteredValues = filterMappedValues(mappedValues)
@@ -245,22 +248,13 @@ export function mapPublicationDataToSections(
     const values = rawValue ? rawValue.split(';').filter(v => v.trim().length > 0) : null
     const isLink = key === 'permanentLink'
 
-    const filterEnrichedSources = data.enrichedSources?.reduce<
-      {
-        externalSourceType: ExternalSource | undefined
-        externalSourceUrl: Maybe<string> | undefined
-        value: string | null
-      }[]
-    >((acc, enrichedSource) => {
-      const mappedSource = mapPublicationEnrichedSources(key, enrichedSource)
+    const filteredEnrichedSources = filterEnrichedSources(
+      data.enrichedSources ?? [],
+      key,
+      mapPublicationEnrichedSources
+    )
 
-      if (mappedSource) {
-        return [...acc, mappedSource]
-      }
-      return acc
-    }, [])
-
-    return { title, value: values, isLink, key, enrichedSources: filterEnrichedSources }
+    return { title, value: values, isLink, key, enrichedSources: filteredEnrichedSources }
   })
 
   const filteredValues = filterMappedValues(mappedValues)
@@ -279,20 +273,11 @@ export function mapObjectDataToSections(
     const values = rawValue ? rawValue.split(';').filter(v => v.trim().length > 0) : null
     const isLink = key === 'permanentLink'
 
-    const filterEnrichedSources = data.enrichedSources?.reduce<
-      {
-        externalSourceType: ExternalSource | undefined
-        externalSourceUrl: Maybe<string> | undefined
-        value: string | null
-      }[]
-    >((acc, enrichedSource) => {
-      const mappedSource = mapObjectEnrichedSources(key, enrichedSource)
-
-      if (mappedSource) {
-        return [...acc, mappedSource]
-      }
-      return acc
-    }, [])
+    const filteredEnrichedSources = filterEnrichedSources(
+      data.enrichedSources ?? [],
+      key,
+      mapObjectEnrichedSources
+    )
 
     if (key === 'relatedKeywords') {
       const asteriskSuggestions = data.asteriskSuggestions
@@ -313,12 +298,9 @@ export function mapObjectDataToSections(
         isLink,
         key,
         asteriskSuggestions,
-        externalSources: data.enrichedSources,
+        externalSources: filteredEnrichedSources,
       }
     }
-
-    //   return { title, value: values, isLink, key, asteriskSuggestions }
-    // }
 
     if (key === 'geoKeywords') {
       const asteriskSuggestions = data.asteriskSuggestions
@@ -339,7 +321,7 @@ export function mapObjectDataToSections(
         isLink,
         key,
         asteriskSuggestions,
-        enrichedSources: filterEnrichedSources,
+        enrichedSources: filteredEnrichedSources,
       }
     }
     return { title, value: values, isLink, key }
@@ -361,34 +343,69 @@ export function mapPersonDataToSections(
     const title = t(key)?.trim()
     const values = rawValue ? rawValue.split(';').filter(v => v.trim().length > 0) : null
     const isLink = key === 'permanentLink'
-    const filterEnrichedSources = data.enrichedSources?.reduce<
-      {
-        externalSourceType: ExternalSource | undefined
-        externalSourceUrl: Maybe<string> | undefined
-        value: string | null
-      }[]
-    >((acc, enrichedSource) => {
-      const mappedSource = mapPeopleEnrichedSources(key, enrichedSource)
+    const filteredEnrichedSources = filterEnrichedSources(
+      data.enrichedSources ?? [],
+      key,
+      mapPeopleEnrichedSources
+    )
 
-      if (mappedSource) {
-        return [...acc, mappedSource]
-      }
-      return acc
-    }, [])
-
-    return { title, value: values, isLink, key, enrichedSources: filterEnrichedSources }
+    return { title, value: values, isLink, key, enrichedSources: filteredEnrichedSources }
   })
   const filteredValues = filterMappedValues(mappedValues)
-
   return filteredValues
 }
 
+type MappedEnrichedSource = {
+  externalSourceType: ExternalSource | undefined
+  externalSourceUrl: Maybe<string> | undefined
+  value: string | null
+}
+function filterEnrichedSources<
+  T extends
+    | EnrichedBasePeopleRecordZoomLevel3Type[]
+    | EnrichedBaseObjectRecordZoomLevel3Type[]
+    | EnrichedBasePublicationRecordZoomLevel3Type[]
+    | EnrichedBaseArchivesRecordZoomLevel3Type[]
+>(
+  data: T,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  key: any,
+  mapper: (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    key: any,
+    enrichedSource: T[number]
+  ) => MappedEnrichedSource | undefined
+) {
+  return data.reduce<
+    {
+      externalSourceType: ExternalSource | undefined
+      externalSourceUrl: Maybe<string> | undefined
+      value: string | null
+    }[]
+  >((acc, enrichedSource) => {
+    const mappedSource = mapper(key, enrichedSource)
+
+    if (mappedSource) {
+      return [...acc, mappedSource]
+    }
+    return acc
+  }, [])
+}
+
 function filterMappedValues<
-  T extends Array<{ asteriskSuggestions?: Array<Record<string, string>>; value: string[] | null }>
+  T extends Array<{
+    asteriskSuggestions?: Array<Record<string, string>>
+    enrichedSources?: Array<Record<string, unknown>>
+    value: string[] | null
+    key: string
+  }>
 >(data: T): { [K in keyof T]: T[K] } {
   return data.filter(section => {
     const hasAsterisk =
       'asteriskSuggestions' in section && (section.asteriskSuggestions?.length ?? 0) > 0
-    return section.value !== null || hasAsterisk
+    const hasEnrichedSources =
+      'enrichedSources' in section && (section.enrichedSources?.length ?? 0) > 0
+    if (section.key === 'externalSource') return false
+    return section.value !== null || hasAsterisk || hasEnrichedSources
   }) as { [K in keyof T]: T[K] }
 }

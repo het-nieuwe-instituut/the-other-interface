@@ -96,6 +96,9 @@ class BaseArchiveZoomLevel3DetailType {
 
   @Field({ nullable: true })
   public mediaReference?: string
+
+  @Field(() => String, { nullable: true })
+  public externalURI?: string | `${string};${string}` | `${string};${string};${string}`
 }
 
 @ObjectType()

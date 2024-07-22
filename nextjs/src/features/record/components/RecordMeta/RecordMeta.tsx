@@ -77,6 +77,15 @@ export const RecordMeta = ({
     recordMetaPersonT,
     recordMetaPublicationT,
   ])
+  const recordData = useMemo(() => {
+    const filteredenrichedSources = data?.enrichedSources?.filter(
+      v => v.externalSourceType && v.externalSourceUrl
+    )
+    return {
+      ...data,
+      enrichedSources: filteredenrichedSources,
+    }
+  }, [data])
 
   if (isLoading) {
     return <MetaSkeleton />
@@ -154,7 +163,7 @@ export const RecordMeta = ({
                         title={
                           externalSourceUrl ? (
                             <div className=" inline-block">
-                              {t('pulledFrom')}
+                              {t('pulledFrom')}{' '}
                               <div className="inline-block">
                                 <ExternalSourceLink
                                   externalSourceType={externalSourceType}
@@ -177,7 +186,7 @@ export const RecordMeta = ({
           </MetaField>
         )
       })}
-      {(data?.enrichedSources?.length ?? 0) > 0 && (
+      {(recordData?.enrichedSources?.length ?? 0) > 0 && (
         <ExternalSourceBlockGroup className="mb-4">
           {data?.enrichedSources?.map(v => {
             return (
@@ -187,7 +196,7 @@ export const RecordMeta = ({
             )
           })}
 
-          <ExternalSourceBlock href="/external-sources">
+          <ExternalSourceBlock href="/externalSources">
             {t('learnAboutExternalDataSources') ?? ''}
           </ExternalSourceBlock>
         </ExternalSourceBlockGroup>

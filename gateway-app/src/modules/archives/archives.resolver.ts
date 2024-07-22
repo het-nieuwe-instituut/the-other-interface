@@ -55,7 +55,7 @@ export class ArchivesZoomLevel3DetailResolver {
     @Parent() record: ArchiveZoomLevel3DetailType,
     @Args() { locale }: LocaleArgs
   ) {
-    return this.archivesService.getEnrichedSources(record.id, locale)
+    return this.archivesService.getEnrichedSources(record.id, locale, record?.externalURI)
   }
 }
 
@@ -76,6 +76,6 @@ export class ArchivesRecordZoomLevel3Resolver {
     @Parent() record: ArchivesRecordZoomLevel3Type,
     @Args() { locale }: LocaleArgs
   ) {
-    return this.archivesService.getEnrichedSources(record.id, locale)
+    return this.archivesService.getEnrichedSources(record.id, locale, record.externalURI)
   }
 }

@@ -48,7 +48,8 @@ export const ExternalSourceLink = ({
         className={cn(
           className,
           'flex items-center relative',
-          'after:absolute after:bottom-[1px] after:w-full after:border-b after:border-solid after:content-[""] after:border-surface-lod-dark gap-2'
+          'after:absolute after:bottom-[1px] after:w-full after:border-b after:border-solid after:content-[""] after:border-surface-lod-dark gap-2 ',
+          'hover:bg-black-100 hover:text-white hover:after:border-white'
         )}
       >
         {getExternalSourceTranslation(externalSourceType)}

@@ -30,6 +30,9 @@ class BasePeopleZoomLevel3DetailType {
   @Field()
   public id: string
 
+  @Field()
+  public externalURI?: string | `${string};${string}` | `${string};${string};${string}`
+
   @Field(() => String, { nullable: true })
   public title: string
 
@@ -37,7 +40,7 @@ class BasePeopleZoomLevel3DetailType {
   public type: EntityNames
 
   @Field(() => [String], { nullable: true })
-  public thumbnail: string
+  public thumbnail: string[]
 
   @Field(() => String, { nullable: true })
   public description?: string | null
