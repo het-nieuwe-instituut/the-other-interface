@@ -1,6 +1,9 @@
-import ActionButton from './buttons/ActionButton/ActionButton'
-import { cn } from '@/features/ui/utils/cn'
+import { useSuggestionsTranslations } from '@/features/galaxyInterface/services/suggestions'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { cn } from '@/features/ui/utils/cn'
+import { useSelector } from 'react-redux'
+import { State } from '../../configs/store'
+import ActionButton from './buttons/ActionButton/ActionButton'
 
 interface Props {
   category?: string
@@ -22,6 +25,10 @@ export const SearchFilterBox: React.FC<Props> = ({
   actionButtonAriaLabel,
   id,
 }) => {
+  const { searchCategory } = useSelector((state: State) => state.shared)
+  const getTranslation = useSuggestionsTranslations()
+  const translation = getTranslation(category ?? '', searchCategory ?? 'all')
+
   return (
     <div className="relative">
       <div style={{ zIndex: zIndex || 'inherit' }} className="relative">
@@ -39,7 +46,7 @@ export const SearchFilterBox: React.FC<Props> = ({
                 TypographyVariants({ socialLarge: 'label' })
               )}
             >
-              {category ?? 'unknown'}
+              {translation ?? category}
             </p>
           </div>
 
@@ -50,7 +57,21 @@ export const SearchFilterBox: React.FC<Props> = ({
         <ActionButton
           id={id}
           onClick={actionButtonClick}
-          className="absolute right-0 top-0 z-[9999] mt-px hover:bg-initial hover:text-black-100 text-blue-100 size-10 -m-2 flex items-center justify-center"
+          className={cn(
+            'absolute',
+            'right-0',
+            'top-0',
+            'z-[9999]',
+            'mt-px',
+            'hover:bg-initial',
+            'hover:text-black-100',
+            'text-blue-100',
+            'size-10',
+            '-m-2',
+            'flex',
+            'items-center',
+            'justify-center'
+          )}
           aria-label={actionButtonAriaLabel}
         >
           {actionButton}
