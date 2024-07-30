@@ -115,9 +115,12 @@ export const Suggestions = ({
 }) => {
   return (
     <>
-      {suggestionsData.map(item => {
+      {suggestionsData.map((item, index, array) => {
         return (
-          <div className="max-w-full" key={item.value}>
+          <div
+            className="max-w-full"
+            key={`${item.key}-${item.id}-${item.value}-${index}-${array.length}`}
+          >
             <SearchFilterBox
               category={item.key}
               subCategory={item.value}

@@ -127,6 +127,11 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
       </div>
 
       <SearchSuggestionsBar
+        onSelectFilter={() => {
+          if (filterInputRef.current) {
+            filterInputRef.current.value = ''
+          }
+        }}
         onFocus={focus}
         isUserTyping={isUserTyping}
         searchBarHeight={searchBarHeight}
@@ -186,7 +191,7 @@ export const InputBar = React.forwardRef<
       ))}
       <div className={'h-[60px] min-w-[70px] grow py-1 pl-2'}>
         <FilterInput
-          inputRef={filterInputRef}
+          ref={filterInputRef}
           onFocus={openSearch}
           defaultValue={searchValue}
           onChange={e => {
@@ -205,10 +210,12 @@ export const SearchSuggestionsBar = ({
   isUserTyping,
   searchBarHeight,
   onFocus,
+  onSelectFilter,
 }: {
   isUserTyping: boolean
   searchBarHeight: number
   onFocus: () => void
+  onSelectFilter: () => void
 }) => {
   const { isCategorySuggestionsOpen, searchCategory, searchValue, isSearchModeActive } =
     useSelector((state: State) => state.shared)
@@ -243,7 +250,10 @@ export const SearchSuggestionsBar = ({
       {!isCollectionHighlightsSelected && searchCategoryToTriplyEnum && (
         <SuggestionsContainer
           type={searchCategoryToTriplyEnum}
-          handleSelectFilter={selectFilter}
+          handleSelectFilter={filters => {
+            onSelectFilter()
+            selectFilter(filters)
+          }}
           isUserInteracting={isUserInteracting}
           isCategorySuggestionsOpen={isCategorySuggestionsOpen}
           searchBarHeight={searchBarHeight}
