@@ -284,13 +284,11 @@ export class ArchivesService {
     return data.reduce<ArchiveAsteriskType[]>((acc, cur) => {
       const hasValue = this.asteriskKeys.some(key => cur[key] !== undefined)
       if (hasValue) {
-        const filteredObj = { ...cur }
-        const notAsteriskKeys = Object.keys(cur).filter(
-          key => !this.asteriskKeys.includes(key as keyof typeof filteredObj)
-        ) as (keyof typeof filteredObj)[]
-        notAsteriskKeys.forEach(key => delete filteredObj[key])
-        return [...acc, filteredObj]
+        acc.push(cur)
       }
+
+      this.asteriskKeys.forEach(key => delete cur[key])
+
       return acc
     }, [])
   }

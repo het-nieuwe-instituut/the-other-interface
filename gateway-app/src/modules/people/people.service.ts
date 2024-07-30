@@ -218,17 +218,13 @@ export class PeopleService {
   }
 
   private formatAsteriskSuggestions(data: PeopleDetailZoomLevel3Data[]) {
-    return data.reduce<PeopleDetailZoomLevel3Data[]>((acc, cur) => {
+    return data.reduce<PeopleZoomLevel3DetailAsteriskType[]>((acc, cur) => {
       const hasValue = this.asteriskKeys.some(key => cur[key] !== undefined)
       if (hasValue) {
-        const filteredObj = { ...cur }
-        const notAsteriskKeys = Object.keys(cur).filter(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          key => !this.asteriskKeys.includes(key as any)
-        ) as (keyof typeof filteredObj)[]
-        notAsteriskKeys.forEach(key => delete filteredObj[key])
-        return [...acc, filteredObj]
+        acc.push({ ...cur })
       }
+
+      this.asteriskKeys.forEach(key => delete cur[key])
       return acc
     }, [])
   }
