@@ -26,3 +26,12 @@ query ZoomLevel3Archive($id: String!, $locale: Locale!) {
     }
   }
 }
+
+query ZoomLevel3ArchiveSmall($id: String!, $locale: Locale!) {
+  zoomLevel3Archive(id: $id, locale: $locale) {
+    __typename
+    id
+    title
+    thumbnail
+  }
+}

@@ -2422,6 +2422,14 @@ export type ZoomLevel3ArchiveQueryVariables = Exact<{
 
 export type ZoomLevel3ArchiveQuery = { __typename?: 'Query', zoomLevel3Archive?: { __typename: 'ArchiveZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null, mediaType?: string | null, mediaReference?: string | null, asteriskSuggestions?: Array<{ __typename?: 'EnrichedBaseOArchiveZoomLevel3AsteriskDetailType', asterisk_date_title?: string | null, asterisk_name_title?: string | null, asterisk_subject_title?: string | null, asterisk_date_description?: string | null, asterisk_name_description?: string | null, asterisk_subject_description?: string | null }> | null, enrichedSources?: Array<{ __typename: 'EnrichedBaseArchiveZoomLevel3DetailType', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null }> | null } | null };
 
+export type ZoomLevel3ArchiveSmallQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+  locale: Locale;
+}>;
+
+
+export type ZoomLevel3ArchiveSmallQuery = { __typename?: 'Query', zoomLevel3Archive?: { __typename: 'ArchiveZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null };
+
 export type ZoomLevel3ArchiveRecordQueryVariables = Exact<{
   id: Scalars['String']['input'];
   locale: Locale;
@@ -2608,6 +2616,14 @@ export type ZoomLevel3ObjectQueryVariables = Exact<{
 
 export type ZoomLevel3ObjectQuery = { __typename?: 'Query', zoomLevel3Object?: { __typename: 'ObjectsZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null, mediaType?: string | null, mediaReference?: string | null, asteriskSuggestions?: Array<{ __typename?: 'EnrichedBaseObjectsZoomLevel3AsteriskDetailType', asterisk_date_title?: string | null, asterisk_name_title?: string | null, asterisk_subject_title?: string | null }> | null, enrichedSources?: Array<{ __typename: 'EnrichedBaseObjectsZoomLevel3DetailType', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null }> | null } | null };
 
+export type ZoomLevel3ObjectSmallQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+  locale: Locale;
+}>;
+
+
+export type ZoomLevel3ObjectSmallQuery = { __typename?: 'Query', zoomLevel3Object?: { __typename: 'ObjectsZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null };
+
 export type ZoomLevel3PublicationQueryVariables = Exact<{
   id: Scalars['String']['input'];
   locale: Locale;
@@ -2616,6 +2632,14 @@ export type ZoomLevel3PublicationQueryVariables = Exact<{
 
 export type ZoomLevel3PublicationQuery = { __typename?: 'Query', zoomLevel3Publication?: { __typename: 'PublicationZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null, mediaType?: string | null, mediaReference?: string | null, holding?: string | null, historyNotes?: string | null, annotation?: string | null, enrichedSources?: Array<{ __typename: 'EnrichedBasePublicationZoomLevel3DetailType', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null }> | null } | null };
 
+export type ZoomLevel3PublicationSmallQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+  locale: Locale;
+}>;
+
+
+export type ZoomLevel3PublicationSmallQuery = { __typename?: 'Query', zoomLevel3Publication?: { __typename: 'PublicationZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null };
+
 export type ZoomLevel3PeopleQueryVariables = Exact<{
   id: Scalars['String']['input'];
   locale: Locale;
@@ -2623,6 +2647,14 @@ export type ZoomLevel3PeopleQueryVariables = Exact<{
 
 
 export type ZoomLevel3PeopleQuery = { __typename?: 'Query', zoomLevel3People?: { __typename: 'PeopleZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null, asteriskSuggestions?: Array<{ __typename?: 'PeopleZoomLevel3DetailAsteriskType', asterisk_subject_description?: string | null, asterisk_date_description?: string | null, asterisk_name_description?: string | null }> | null, enrichedSources?: Array<{ __typename: 'EnrichedBasePeopleZoomLevel3DetailType', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null }> | null } | null };
+
+export type ZoomLevel3PeopleSmallQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+  locale: Locale;
+}>;
+
+
+export type ZoomLevel3PeopleSmallQuery = { __typename?: 'Query', zoomLevel3People?: { __typename: 'PeopleZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null };
 
 export const TextModuleFragmentFragmentDoc = gql`
     fragment textModuleFragment on ComponentModulesTextModule {
@@ -4006,6 +4038,16 @@ export const ZoomLevel3ArchiveDocument = gql`
   }
 }
     `;
+export const ZoomLevel3ArchiveSmallDocument = gql`
+    query ZoomLevel3ArchiveSmall($id: String!, $locale: Locale!) {
+  zoomLevel3Archive(id: $id, locale: $locale) {
+    __typename
+    id
+    title
+    thumbnail
+  }
+}
+    `;
 export const ZoomLevel3ArchiveRecordDocument = gql`
     query ZoomLevel3ArchiveRecord($id: String!, $locale: Locale!) {
   archivesRecordZoomLevel3(id: $id, locale: $locale) {
@@ -4458,6 +4500,16 @@ export const ZoomLevel3ObjectDocument = gql`
   }
 }
     `;
+export const ZoomLevel3ObjectSmallDocument = gql`
+    query ZoomLevel3ObjectSmall($id: String!, $locale: Locale!) {
+  zoomLevel3Object(id: $id, locale: $locale) {
+    id
+    __typename
+    title
+    thumbnail
+  }
+}
+    `;
 export const ZoomLevel3PublicationDocument = gql`
     query ZoomLevel3Publication($id: String!, $locale: Locale!) {
   zoomLevel3Publication(id: $id, locale: $locale) {
@@ -4483,6 +4535,16 @@ export const ZoomLevel3PublicationDocument = gql`
   }
 }
     `;
+export const ZoomLevel3PublicationSmallDocument = gql`
+    query ZoomLevel3PublicationSmall($id: String!, $locale: Locale!) {
+  zoomLevel3Publication(id: $id, locale: $locale) {
+    id
+    __typename
+    title
+    thumbnail
+  }
+}
+    `;
 export const ZoomLevel3PeopleDocument = gql`
     query ZoomLevel3People($id: String!, $locale: Locale!) {
   zoomLevel3People(id: $id, locale: $locale) {
@@ -4505,6 +4567,16 @@ export const ZoomLevel3PeopleDocument = gql`
       thumbnail
       description
     }
+  }
+}
+    `;
+export const ZoomLevel3PeopleSmallDocument = gql`
+    query ZoomLevel3PeopleSmall($id: String!, $locale: Locale!) {
+  zoomLevel3People(id: $id, locale: $locale) {
+    __typename
+    id
+    title
+    thumbnail
   }
 }
     `;
@@ -4615,6 +4687,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     ZoomLevel3Archive(variables: ZoomLevel3ArchiveQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3ArchiveQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3ArchiveQuery>(ZoomLevel3ArchiveDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3Archive', 'query');
     },
+    ZoomLevel3ArchiveSmall(variables: ZoomLevel3ArchiveSmallQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3ArchiveSmallQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3ArchiveSmallQuery>(ZoomLevel3ArchiveSmallDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3ArchiveSmall', 'query');
+    },
     ZoomLevel3ArchiveRecord(variables: ZoomLevel3ArchiveRecordQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3ArchiveRecordQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3ArchiveRecordQuery>(ZoomLevel3ArchiveRecordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3ArchiveRecord', 'query');
     },
@@ -4678,11 +4753,20 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     ZoomLevel3Object(variables: ZoomLevel3ObjectQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3ObjectQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3ObjectQuery>(ZoomLevel3ObjectDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3Object', 'query');
     },
+    ZoomLevel3ObjectSmall(variables: ZoomLevel3ObjectSmallQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3ObjectSmallQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3ObjectSmallQuery>(ZoomLevel3ObjectSmallDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3ObjectSmall', 'query');
+    },
     ZoomLevel3Publication(variables: ZoomLevel3PublicationQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3PublicationQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3PublicationQuery>(ZoomLevel3PublicationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3Publication', 'query');
     },
+    ZoomLevel3PublicationSmall(variables: ZoomLevel3PublicationSmallQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3PublicationSmallQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3PublicationSmallQuery>(ZoomLevel3PublicationSmallDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3PublicationSmall', 'query');
+    },
     ZoomLevel3People(variables: ZoomLevel3PeopleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3PeopleQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3PeopleQuery>(ZoomLevel3PeopleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3People', 'query');
+    },
+    ZoomLevel3PeopleSmall(variables: ZoomLevel3PeopleSmallQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ZoomLevel3PeopleSmallQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ZoomLevel3PeopleSmallQuery>(ZoomLevel3PeopleSmallDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ZoomLevel3PeopleSmall', 'query');
     }
   };
 }
