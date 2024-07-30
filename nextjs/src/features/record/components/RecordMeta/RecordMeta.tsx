@@ -252,7 +252,7 @@ function SuggestionSection() {
           <AsteriskSourceBlock href={contributeLink} target={'_blank'}>
             {t('suggestionContributeLink') ?? ''}
           </AsteriskSourceBlock>
-          <AsteriskSourceBlock href={learnMoreLink} target={'_blank'}>
+          <AsteriskSourceBlock href={learnMoreLink}>
             {t('suggestionLearnMoreLink') ?? ''}
           </AsteriskSourceBlock>
         </AsteriskSourceBlockGroup>

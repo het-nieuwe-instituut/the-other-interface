@@ -60,5 +60,36 @@ export async function getZoom3RecordTask(
 
   if (!item?.id) return null
 
+  if (item.__typename === 'ArchiveZoomLevel3DetailType') {
+    const filteredAsteriskSuggesitons = item?.asteriskSuggestions?.filter(suggestion => {
+      const keys = Object.keys(suggestion) as (keyof typeof suggestion)[]
+      return keys.some(key => suggestion[key] !== null)
+    })
+    return {
+      ...item,
+      asteriskSuggestions: filteredAsteriskSuggesitons,
+    }
+  }
+
+  if (item.__typename === 'ObjectsZoomLevel3DetailType') {
+    const filteredAsteriskSuggesitons = item?.asteriskSuggestions?.filter(suggestion => {
+      const keys = Object.keys(suggestion) as (keyof typeof suggestion)[]
+      return keys.some(key => suggestion[key] !== null)
+    })
+    return {
+      ...item,
+      asteriskSuggestions: filteredAsteriskSuggesitons,
+    }
+  }
+  if (item.__typename === 'PeopleZoomLevel3DetailType') {
+    const filteredAsteriskSuggesitons = item?.asteriskSuggestions?.filter(suggestion => {
+      const keys = Object.keys(suggestion) as (keyof typeof suggestion)[]
+      return keys.some(key => suggestion[key] !== null)
+    })
+    return {
+      ...item,
+      asteriskSuggestions: filteredAsteriskSuggesitons,
+    }
+  }
   return item
 }

@@ -34,7 +34,6 @@
   "of": "van",
   "theme": "Thema",
 
-  "errorLoadingThemes": "Er is iets misgegaan bij het laden van thema's. Probeer het later opnieuw.",
   "error500Title": "Deze pagina werkt niet",
   "error500Description": "De server heeft een fout aangetroffen en kon uw verzoek niet voltooien.",
   "error404Title": "Pagina niet gevonden",

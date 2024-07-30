@@ -5,9 +5,11 @@ import { USER_LOOKS_ON } from '@/features/shared/constants/mainConstants'
 import useScroll from '@/features/shared/hooks/ui/useScroll'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { useEffect, useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useResizeObserver } from 'usehooks-ts'
 import { PulseProvider, PulseVisual } from '../components/Pulse/Pulse'
+import { State } from '@/features/shared/configs/store'
+import { cn } from '@/features/ui/utils/cn'
 interface Props {
   children: React.ReactNode
 }
@@ -18,6 +20,7 @@ export const GalaxyInterface: React.FC<Props> = ({ children }) => {
   const { scrollPosition } = useScroll()
   const dispatch = useDispatch()
   const HEADER_HEIGHT = 68
+  const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
 
   useEffect(() => {
     if (sizes?.height && scrollPosition >= sizes?.height - HEADER_HEIGHT) {
@@ -30,7 +33,12 @@ export const GalaxyInterface: React.FC<Props> = ({ children }) => {
   return (
     <PulseProvider>
       <div className="relative block">
-        <div className="fixed inset-x-0 top-0 z-[9999] mx-auto flex max-w-[90em] justify-between">
+        <div
+          className={cn(
+            'fixed inset-x-0 top-0 z-[9999] mx-auto flex max-w-[90em] justify-between',
+            isMenuOpen && 'hidden'
+          )}
+        >
           <StaticHeader />
         </div>
 

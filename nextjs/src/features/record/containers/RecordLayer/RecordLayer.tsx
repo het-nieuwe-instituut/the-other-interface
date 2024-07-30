@@ -45,6 +45,12 @@ export const RecordLayer = () => {
     options: { refetchOnWindowFocus: false, suspense: false },
     locale,
   })
+  console.log(
+    record?.__typename === 'ArchiveZoomLevel3DetailType' &&
+      (record?.asteriskSuggestions?.length ?? 0) > 0
+      ? record?.asteriskSuggestions
+      : null
+  )
 
   return (
     <LayerWrapper

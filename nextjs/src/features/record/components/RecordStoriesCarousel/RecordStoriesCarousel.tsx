@@ -82,7 +82,7 @@ const RecordStoriesCarouselContent = ({
 
   const { t: tRecord } = useTypeSafeTranslation('record')
 
-  const title = `${tRecord('relatedStoriesCarousel')} (${stories?.length})`
+  const title = `${tRecord('relatedStoriesCarousel')}`
 
   return (
     <div>

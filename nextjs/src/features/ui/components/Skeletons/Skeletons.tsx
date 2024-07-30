@@ -26,21 +26,21 @@ export const SkeletonParagraph = ({ className, lines }: { className?: string; li
 }
 
 export const SkeletonTitle = ({ className }: { className?: string }) => {
-  return <div className={cn('h-[54px] lg:h-[80px] w-full bg-black-40 mb-4', className)} />
+  return <div className={cn('h-[54px] lg:h-[80px] w-full bg-black-20 mb-4', className)} />
 }
 
 export const SkeletonSubtitle = ({ className }: { className?: string }) => {
-  return <div className={cn('h-[54px] w-full bg-black-40 mb-4', className)} />
+  return <div className={cn('h-[54px] w-full bg-black-20 mb-4', className)} />
 }
 
 export const SkeletonLine = ({ className }: { className?: string }) => {
-  return <div className={cn('h-[42px] lg:h-[27px] w-full bg-black-40 mb-1', className)} />
+  return <div className={cn('h-[42px] lg:h-[27px] w-full bg-black-20 mb-1', className)} />
 }
 
 export const SkeletonMetaLabel = ({ className }: { className?: string }) => {
-  return <div className={cn('h-[18px] w-full bg-black-40', className)} />
+  return <div className={cn('h-[18px] w-full bg-black-20', className)} />
 }
 
 export const SkeletonMetaValue = ({ className }: { className?: string }) => {
-  return <div className={cn('h-[14px] w-full bg-black-40', className)} />
+  return <div className={cn('h-[14px] w-full bg-black-20', className)} />
 }
