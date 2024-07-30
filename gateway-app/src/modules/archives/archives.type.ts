@@ -76,11 +76,17 @@ class BaseArchiveZoomLevel3DetailType {
   @Field()
   public id: string
 
+  @Field(() => EntityNames, { nullable: true })
+  public type: EntityNames
+
   @Field(() => String, { nullable: true })
   public title: string
 
   @Field(() => [String], { nullable: true })
   public thumbnail: string
+
+  @Field(() => String, { nullable: true })
+  public objectNumber?: string
 
   @Field({ nullable: true })
   public mediaType?: string
@@ -221,27 +227,6 @@ class BaseArchivesRecordZoomLevel3Type {
   @Field(() => String, { nullable: true })
   public permanentLink?: string
 
-  @Field({ nullable: true })
-  public location?: string
-
-  @Field({ nullable: true })
-  public subject?: string
-
-  @Field({ nullable: true })
-  public creators?: string
-}
-
-@ObjectType()
-class EnrichedBaseArchivesRecordZoomLevel3Type extends BaseArchivesRecordZoomLevel3Type {
-  @Field()
-  public id: string
-
-  @Field(() => ExternalSource)
-  public externalSourceType: ExternalSource
-
-  @Field()
-  public externalSourceUrl: string
-
   @Field(() => String, { nullable: true })
   public externalURI?: string
 
@@ -262,6 +247,27 @@ class EnrichedBaseArchivesRecordZoomLevel3Type extends BaseArchivesRecordZoomLev
 
   @Field(() => String, { nullable: true })
   public existenceLocation?: string
+
+  @Field({ nullable: true })
+  public location?: string
+
+  @Field({ nullable: true })
+  public subject?: string
+
+  @Field({ nullable: true })
+  public creators?: string
+}
+
+@ObjectType()
+class EnrichedBaseArchivesRecordZoomLevel3Type extends BaseArchivesRecordZoomLevel3Type {
+  @Field()
+  public id: string
+
+  @Field(() => ExternalSource)
+  public externalSourceType: ExternalSource
+
+  @Field()
+  public externalSourceUrl: string
 }
 
 @ObjectType()
