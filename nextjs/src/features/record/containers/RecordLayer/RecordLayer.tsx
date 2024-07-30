@@ -27,8 +27,8 @@ import {
 import { LayerWrapper } from '../../../shared/components/Layers/LayerWrapper'
 import { RecordMeta } from '../../components/RecordMeta/RecordMeta'
 import { OmitEnrichedData } from '../../configs/recordMetaFieldOrderConfig'
-import { useRecordDetailQuery } from '../../hooks/useRecordDetailQuery'
-import { useRecordMetaQuery } from '../../hooks/useRecordMetaQuery'
+import { useZoomLevel3Query } from '../../hooks/useZoomLevel3Query'
+import { useZoomLevel3RecordQuery } from '../../hooks/useZoomLevel3RecordQuery'
 import { RecordBottomContent } from '../RecordBottomContent/RecordBottomContent'
 
 export const RecordLayer = () => {
@@ -38,19 +38,17 @@ export const RecordLayer = () => {
   const locale = useLocale()
 
   const id = params?.id as string
-  const { data: meta, isLoading, isError: isMetaError } = useRecordMetaQuery(category, id)
-  const { data: record, isError: isRecordError } = useRecordDetailQuery({
+  const {
+    data: zoomLevel3Record,
+    isLoading,
+    isError: isMetaError,
+  } = useZoomLevel3RecordQuery(category, id)
+  const { data: zoomLevel3, isError: isRecordError } = useZoomLevel3Query({
     type: category,
     id,
     options: { refetchOnWindowFocus: false, suspense: false },
     locale,
   })
-  console.log(
-    record?.__typename === 'ArchiveZoomLevel3DetailType' &&
-      (record?.asteriskSuggestions?.length ?? 0) > 0
-      ? record?.asteriskSuggestions
-      : null
-  )
 
   return (
     <LayerWrapper
@@ -61,16 +59,16 @@ export const RecordLayer = () => {
           <>
             <div className="flex flex-col gap-4">
               <PageHeader
-                title={record?.title ?? undefined}
-                preface={record?.description ?? undefined}
+                title={zoomLevel3?.title ?? undefined}
+                preface={zoomLevel3?.description ?? undefined}
                 constrainPreface={true}
                 splitByHtmlBreaks
               ></PageHeader>
 
-              {record?.__typename === 'ArchiveZoomLevel3DetailType' &&
-              (record?.asteriskSuggestions?.length ?? 0) > 0 ? (
-                <AsteriskAnnotationGroup count={record.asteriskSuggestions?.length ?? 0}>
-                  {record.asteriskSuggestions?.map((suggestion, index) => {
+              {zoomLevel3?.__typename === 'ArchiveZoomLevel3DetailType' &&
+              (zoomLevel3?.asteriskSuggestions?.length ?? 0) > 0 ? (
+                <AsteriskAnnotationGroup count={zoomLevel3.asteriskSuggestions?.length ?? 0}>
+                  {zoomLevel3.asteriskSuggestions?.map((suggestion, index) => {
                     const name = suggestion.asterisk_name_title ?? suggestion.asterisk_name_title
                     const date =
                       suggestion.asterisk_date_title ?? suggestion.asterisk_date_description
@@ -88,10 +86,10 @@ export const RecordLayer = () => {
                   })}
                 </AsteriskAnnotationGroup>
               ) : null}
-              {record?.__typename === 'ArchiveZoomLevel3DetailType' &&
-              (record?.enrichedSources?.length ?? 0) > 0 ? (
-                <ExternalSourceGroup count={record.enrichedSources?.length ?? 0}>
-                  {record.enrichedSources?.map((source, index) => {
+              {zoomLevel3?.__typename === 'ArchiveZoomLevel3DetailType' &&
+              (zoomLevel3?.enrichedSources?.length ?? 0) > 0 ? (
+                <ExternalSourceGroup count={zoomLevel3.enrichedSources?.length ?? 0}>
+                  {zoomLevel3.enrichedSources?.map((source, index) => {
                     const href = source.externalSourceUrl
                     if (!href) {
                       return null
@@ -109,10 +107,10 @@ export const RecordLayer = () => {
                 </ExternalSourceGroup>
               ) : null}
 
-              {record?.__typename === 'ObjectsZoomLevel3DetailType' &&
-              (record?.asteriskSuggestions?.length ?? 0) > 0 ? (
-                <AsteriskAnnotationGroup count={record.asteriskSuggestions?.length ?? 0}>
-                  {record.asteriskSuggestions?.map((suggestion, index) => {
+              {zoomLevel3?.__typename === 'ObjectsZoomLevel3DetailType' &&
+              (zoomLevel3?.asteriskSuggestions?.length ?? 0) > 0 ? (
+                <AsteriskAnnotationGroup count={zoomLevel3.asteriskSuggestions?.length ?? 0}>
+                  {zoomLevel3.asteriskSuggestions?.map((suggestion, index) => {
                     const date = suggestion.asterisk_date_title ?? ''
                     const name = suggestion.asterisk_name_title ?? ''
                     const subject = suggestion.asterisk_subject_title ?? ''
@@ -128,10 +126,10 @@ export const RecordLayer = () => {
                   })}
                 </AsteriskAnnotationGroup>
               ) : null}
-              {record?.__typename === 'ObjectsZoomLevel3DetailType' &&
-              (record?.enrichedSources?.length ?? 0) > 0 ? (
-                <ExternalSourceGroup count={record.enrichedSources?.length ?? 0}>
-                  {record.enrichedSources?.map((source, index) => {
+              {zoomLevel3?.__typename === 'ObjectsZoomLevel3DetailType' &&
+              (zoomLevel3?.enrichedSources?.length ?? 0) > 0 ? (
+                <ExternalSourceGroup count={zoomLevel3.enrichedSources?.length ?? 0}>
+                  {zoomLevel3.enrichedSources?.map((source, index) => {
                     const href = source.externalSourceUrl
                     if (!href) {
                       return null
@@ -149,10 +147,10 @@ export const RecordLayer = () => {
                 </ExternalSourceGroup>
               ) : null}
 
-              {record?.__typename === 'PeopleZoomLevel3DetailType' &&
-              (record?.asteriskSuggestions?.length ?? 0) > 0 ? (
-                <AsteriskAnnotationGroup count={record.asteriskSuggestions?.length ?? 0}>
-                  {record.asteriskSuggestions?.map((suggestion, index) => {
+              {zoomLevel3?.__typename === 'PeopleZoomLevel3DetailType' &&
+              (zoomLevel3?.asteriskSuggestions?.length ?? 0) > 0 ? (
+                <AsteriskAnnotationGroup count={zoomLevel3.asteriskSuggestions?.length ?? 0}>
+                  {zoomLevel3.asteriskSuggestions?.map((suggestion, index) => {
                     const date = suggestion.asterisk_date_description ?? ''
                     const name = suggestion.asterisk_name_description ?? ''
                     const subject = suggestion.asterisk_subject_description ?? ''
@@ -168,10 +166,10 @@ export const RecordLayer = () => {
                   })}
                 </AsteriskAnnotationGroup>
               ) : null}
-              {record?.__typename === 'PeopleZoomLevel3DetailType' &&
-              (record?.enrichedSources?.length ?? 0) > 0 ? (
-                <ExternalSourceGroup count={record.enrichedSources?.length ?? 0}>
-                  {record.enrichedSources?.map((source, index) => {
+              {zoomLevel3?.__typename === 'PeopleZoomLevel3DetailType' &&
+              (zoomLevel3?.enrichedSources?.length ?? 0) > 0 ? (
+                <ExternalSourceGroup count={zoomLevel3.enrichedSources?.length ?? 0}>
+                  {zoomLevel3.enrichedSources?.map((source, index) => {
                     const href = source.externalSourceUrl
                     if (!href) {
                       return null
@@ -189,10 +187,10 @@ export const RecordLayer = () => {
                 </ExternalSourceGroup>
               ) : null}
 
-              {record?.__typename === 'PublicationZoomLevel3DetailType' &&
-              (record?.enrichedSources?.length ?? 0) > 0 ? (
-                <ExternalSourceGroup count={record.enrichedSources?.length ?? 0}>
-                  {record.enrichedSources?.map((source, index) => {
+              {zoomLevel3?.__typename === 'PublicationZoomLevel3DetailType' &&
+              (zoomLevel3?.enrichedSources?.length ?? 0) > 0 ? (
+                <ExternalSourceGroup count={zoomLevel3.enrichedSources?.length ?? 0}>
+                  {zoomLevel3.enrichedSources?.map((source, index) => {
                     const href = source.externalSourceUrl
                     if (!href) {
                       return null
@@ -210,31 +208,31 @@ export const RecordLayer = () => {
                 </ExternalSourceGroup>
               ) : null}
 
-              {record && 'mediaReference' in record && 'mediaType' in record && (
+              {zoomLevel3 && 'mediaReference' in zoomLevel3 && 'mediaType' in zoomLevel3 && (
                 <MediaPlayer
-                  mediaReference={record?.mediaReference}
-                  mediaType={record?.mediaType}
+                  mediaReference={zoomLevel3?.mediaReference}
+                  mediaType={zoomLevel3?.mediaType}
                 />
               )}
 
-              {record?.thumbnail && (
+              {zoomLevel3?.thumbnail && (
                 <ThumbnailCarousel>
-                  {record?.thumbnail.map((item, index) => (
+                  {zoomLevel3?.thumbnail.map((item, index) => (
                     <ThumbnailCarouselItem
                       key={index}
                       index={index}
                       src={item}
-                      alt={`${record.title} image #${index + 1}` ?? ''}
+                      alt={`${zoomLevel3.title} image #${index + 1}` ?? ''}
                     />
                   ))}
                 </ThumbnailCarousel>
               )}
 
-              {meta?.__typename === 'ArchivesRecordZoomLevel3Type' ? (
-                <ArchivesDescriptions meta={meta} />
+              {zoomLevel3Record?.__typename === 'ArchivesRecordZoomLevel3Type' ? (
+                <ArchivesDescriptions meta={zoomLevel3Record} />
               ) : null}
-              {record?.__typename === 'PublicationZoomLevel3DetailType' ? (
-                <PublicationsDescriptions data={record} />
+              {zoomLevel3?.__typename === 'PublicationZoomLevel3DetailType' ? (
+                <PublicationsDescriptions data={zoomLevel3} />
               ) : null}
             </div>
           </>
@@ -244,7 +242,7 @@ export const RecordLayer = () => {
         isMetaError ? (
           <ErrorBox />
         ) : (
-          <RecordMeta data={meta} isLoading={isLoading} category={category} />
+          <RecordMeta data={zoomLevel3Record} isLoading={isLoading} category={category} />
         )
       }
       BottomContent={<RecordBottomContent />}

@@ -98,8 +98,6 @@ const publicationFieldOrder: Array<keyof BasePublicationRecordZoomLevel3Type> = 
   'relatedKeyword',
   'geoKeyword',
   'availability',
-  'permanentLink',
-  'externalSource',
   'continuedFrom',
   'continuedAs',
   'volume',
@@ -107,6 +105,8 @@ const publicationFieldOrder: Array<keyof BasePublicationRecordZoomLevel3Type> = 
   'year',
   'geographicalKeywords',
   'pysicalCarrier',
+  'permanentLink',
+  'externalSource',
 ]
 
 type CategoryFieldsMapping = {

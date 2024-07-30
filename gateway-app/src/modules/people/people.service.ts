@@ -112,6 +112,12 @@ export class PeopleService {
     [ExternalSource.rkd]: 'people-enrichment-rkd/run',
   }
 
+  private asteriskKeys: (keyof typeof PeopleZoomLevel3DetailAsteriskType.prototype)[] = [
+    'asterisk_date_description',
+    'asterisk_name_description',
+    'asterisk_subject_description',
+  ]
+
   public constructor(private triplyService: TriplyService) {}
 
   public async getZoomLevel3Data(id: string, locale: Locale) {
@@ -204,21 +210,12 @@ export class PeopleService {
 
   private formatAsteriskSuggestions(data: PeopleDetailZoomLevel3Data[]) {
     return data.reduce<PeopleZoomLevel3DetailAsteriskType[]>((acc, cur) => {
-      const { asterisk_subject_description, asterisk_date_description, asterisk_name_description } =
-        cur
-
-      if (asterisk_subject_description || asterisk_date_description || asterisk_name_description) {
-        acc.push({
-          asterisk_subject_description,
-          asterisk_date_description,
-          asterisk_name_description,
-        })
+      const hasValue = this.asteriskKeys.some(key => cur[key] !== undefined)
+      if (hasValue) {
+        acc.push({ ...cur })
       }
 
-      delete cur.asterisk_subject_description
-      delete cur.asterisk_date_description
-      delete cur.asterisk_name_description
-
+      this.asteriskKeys.forEach(key => delete cur[key])
       return acc
     }, [])
   }

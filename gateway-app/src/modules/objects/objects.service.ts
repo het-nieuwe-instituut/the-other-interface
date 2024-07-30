@@ -250,11 +250,10 @@ export class ObjectsService {
     return data.reduce<ObjectAsteriskType[]>((acc, cur) => {
       const hasValue = this.asteriskKeys.some(key => cur[key] !== undefined)
       if (hasValue) {
-        acc.push(cur)
+        acc.push({ ...cur })
       }
 
       this.asteriskKeys.forEach(key => delete cur[key])
-
       return acc
     }, [])
   }
