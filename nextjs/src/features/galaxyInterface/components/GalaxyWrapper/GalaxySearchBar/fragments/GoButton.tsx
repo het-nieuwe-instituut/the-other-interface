@@ -1,30 +1,31 @@
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/components/DelayedNextLink/DelayedNextLinkWithZoomAnimationsContext'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 type Props = {
   href: string
   hide?: boolean
-  onClick?: () => void
+  disabled?: boolean
 }
 
-export const GoButton: React.FC<Props> = ({ hide = false, href, onClick }) => {
+export const GoButton: React.FC<Props> = ({ hide = false, disabled }) => {
   const { t } = useTypeSafeTranslation('common')
 
   return (
-    <DelayedNextLinkWithZoomAnimationsContext
-      delay={600}
-      animation="forward"
-      href={href}
-      onClick={onClick}
+    <button
+      form="search-form"
+      type="submit"
+      value={'Submit'}
+      disabled={disabled}
       className={cn(
-        'rounded-[3px] px-[7px] py-[6px] text-pink-100 transition-colors duration-200 hover:bg-pink-100 hover:text-blue-100',
+        'inline-block rounded-[3px] px-[7px] py-[6px] text-pink-100 transition-colors duration-200 ',
+        !disabled && 'hover:bg-pink-100 hover:text-blue-100',
+        'disabled:cursor-not-allowed disabled:opacity-60',
         hide ? 'hidden' : 'visible'
       )}
     >
       <span className={cn('text-pink.100', TypographyVariants({ socialLarge: 'md' }))}>
         {t('go')}
       </span>
-    </DelayedNextLinkWithZoomAnimationsContext>
+    </button>
   )
 }

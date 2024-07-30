@@ -10,7 +10,6 @@ import {
   useSelectedFilters,
 } from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useEnterKey } from '@/features/shared/hooks/ui/useEnterKey'
 import { useOutsideClick } from '@/features/shared/hooks/ui/useOutsideClick'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { sharedActions } from '@/features/shared/stores/shared.store'
@@ -34,6 +33,7 @@ import { SearchButton } from './fragments/SearchButton'
 import SearchResults from './fragments/SearchResults'
 import { TotalResults } from './fragments/TotalResults'
 import { useSearchBarPosition } from './useSearchBarPosition'
+import { useParams, usePathname, useSearchParams } from 'next/navigation'
 
 type Props = {
   total?: number
@@ -41,16 +41,60 @@ type Props = {
   isNoActiveSearch?: boolean
 }
 
+function useGetRawPath() {
+  const params = useParams()
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const splittedRoute = pathname?.split('/') ?? []
+  const lang = useLocale()
+
+  function constructParams() {
+    if (typeof params === 'object' && params !== null) {
+      let reconstructedPath = ''
+
+      for (let i = 1; i < splittedRoute.length; i++) {
+        const segment = splittedRoute[i]
+
+        // Check if the segment matches any value in the params object
+        const matchingKey = Object.keys(params).find(key => params[key] === segment)
+
+        if (matchingKey) {
+          // Replace the segment with the dynamic segment
+          reconstructedPath += `/[${matchingKey}]`
+        } else {
+          // Keep the original segment
+          reconstructedPath += `/${segment}`
+        }
+      }
+
+      return reconstructedPath
+    } else {
+      // Params object is not present
+      return pathname
+    }
+  }
+
+  function constructUrl() {
+    const path = constructParams()
+    const search = searchParams?.toString()
+
+    return addLocaleToUrl(`${path}${search ? `?${search}` : ''}`, lang)
+  }
+
+  return constructUrl()
+}
+
 export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }) => {
   isNoActiveSearch = true
   const filterInputRef = useRef<HTMLInputElement>(null)
-  const searchBarRef = useRef<HTMLDivElement>(null)
+  const searchBarRef = useRef<HTMLFormElement>(null)
   const delayedPush = useDelayedNextRoutePush(600)
   const [isUserTyping, setIsUserTyping] = useState(false)
   const { closeSearchMode, clearAllSearch, openSearch, focus } = useSearchBarActions({
     filterInputRef,
     isNoActiveSearch,
   })
+  const rawPath = useGetRawPath()
   const lang = useLocale()
   const { encodedFilters } = useEncodedSearchFilters()
   const selectedFilters = useSelectedFilters()
@@ -60,8 +104,15 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
   )
   const searchParam = searchValue ? `&search=${searchValue}` : ''
   const filtersParam = encodedFilters ? `&filters=${encodedFilters}` : ''
+
   let searchUrl = `/landingpage?category=${searchCategory}${searchParam}${filtersParam}&searchResult=true`
   searchUrl = addLocaleToUrl(searchUrl, lang)
+
+  const searchUrlChanged = useMemo(() => {
+    return searchUrl !== rawPath
+  }, [rawPath, searchUrl])
+
+  console.log({ rawPath, searchUrl })
 
   const { setAnimationState } = useContext(GalaxyZoomAnimationStateContext)
 
@@ -70,12 +121,6 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
     closeSearchMode(false)
   }, [closeSearchMode])
 
-  useEnterKey(() => {
-    setAnimationState('forward')
-    delayedPush(searchUrl)
-
-    handleGoClick()
-  })
   useOutsideClick(searchBarRef, () => {
     closeSearchMode(true)
   })
@@ -83,7 +128,15 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
 
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-    <div
+    <form
+      id="search-form"
+      onSubmit={e => {
+        e.preventDefault()
+        setAnimationState('forward')
+        delayedPush(searchUrl)
+
+        handleGoClick()
+      }}
       style={{ '--z-index': FOOTER_Z_INDEX, '--offset': `${offset}px` } as CSSProperties}
       className={cn(
         `grid pl-4 relative h-auto grid-cols-[160px,minmax(20px,1fr),minmax(95px,auto)] gap-4 bg-blue-100 z-[var(--z-index)] text-pink-100 bottom-[var(--offset)]
@@ -110,7 +163,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
       <div className="flex h-[60px] items-center gap-[12px] self-end pt-1">
         {isSearchModeActive ? (
           <>
-            <GoButton href={searchUrl} onClick={handleGoClick} />
+            <GoButton href={searchUrl} disabled={!searchUrlChanged} />
             <CloseButton onClick={clearAllSearch} />
           </>
         ) : isNoActiveSearch ? (
@@ -136,7 +189,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
         isUserTyping={isUserTyping}
         searchBarHeight={searchBarHeight}
       />
-    </div>
+    </form>
   )
 }
 
