@@ -64,7 +64,7 @@ export const SearchFilterBox: React.FC<Props> = ({
             'z-[9999]',
             'mt-px',
             'hover:bg-initial',
-            'hover:text-black-100',
+            'hover:text-white',
             'text-blue-100',
             'size-10',
             '-m-2',

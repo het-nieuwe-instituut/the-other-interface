@@ -9,7 +9,7 @@ import initApiClientService from '../../shared/utils/initApiClientService'
 import { getPublicationState } from '../../shared/utils/publication-state'
 
 export const getRecordDetailQueryKey = (id: string, lang: string) => ['record-detail', id, lang]
-export function useRecordDetailQuery({
+export function useZoomLevel3Query({
   type,
   id,
   options,
@@ -40,6 +40,7 @@ export function useRecordDetailQuery({
     },
     staleTime: Infinity,
     suspense: options?.suspense ?? false,
+    refetchOnWindowFocus: false,
     retry: 0,
   })
 }

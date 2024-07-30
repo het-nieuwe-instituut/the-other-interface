@@ -1,5 +1,5 @@
 import React, { CSSProperties, useContext, useState } from 'react'
-import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
+
 import { StoryOrRecordResponsiveImage } from '@/features/shared/components/ResponsiveImage/StoryOrRecordResponsiveImage'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
@@ -18,6 +18,7 @@ import {
 import { PositionedRecord } from '../types'
 import { RecordText } from './RecordText'
 import { useCalculateLine } from './useCalculateLine'
+import { useZoomLevel3Query } from '@/features/record/hooks/useZoomLevel3Query'
 
 type Props = {
   record: PositionedRecord
@@ -33,7 +34,7 @@ export const Record = React.memo(
     const { t } = useTypeSafeTranslation('category')
     const lang = useLocale()
     const { id, category, position, grid } = record
-    const { data: recordDetails, isLoading } = useRecordDetailQuery({
+    const { data: recordDetails, isLoading } = useZoomLevel3Query({
       type: category,
       id,
       locale: lang,

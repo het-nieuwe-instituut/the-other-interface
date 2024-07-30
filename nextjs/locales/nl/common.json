@@ -43,5 +43,9 @@
   "showAsterisk": "Toon asterisk* annotaties ({{count}})",
   "hideAsterisk": "Verberg asterisk* annotaties ({{count}})",
   "loadingResults": "Resultaten laden voor",
-  "loadingSuggestions": "Suggesties laden..."
+  "loadingSuggestions": "Suggesties laden",
+
+  "errorLoadingDetail": "Er is iets misgegaan bij het laden. Probeer het later opnieuw.",
+  "errorLoadingItems": "Er is iets misgegaan bij het laden van de items.",
+  "errorTryAgain": "Probeer het later nog eens"
 }

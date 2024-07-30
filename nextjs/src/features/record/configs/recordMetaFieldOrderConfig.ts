@@ -28,7 +28,6 @@ type BasePublicationRecordZoomLevel3Type = OmitAsteriskSuggestions<
 
 const objectFieldOrder: Array<keyof BaseObjectRecordZoomLevel3Type> = [
   'objectNumber',
-  'title',
   'objectName',
   'objectType',
   'archiveCode',
@@ -99,8 +98,6 @@ const publicationFieldOrder: Array<keyof BasePublicationRecordZoomLevel3Type> = 
   'relatedKeyword',
   'geoKeyword',
   'availability',
-  'permanentLink',
-  'externalSource',
   'continuedFrom',
   'continuedAs',
   'volume',
@@ -108,6 +105,8 @@ const publicationFieldOrder: Array<keyof BasePublicationRecordZoomLevel3Type> = 
   'year',
   'geographicalKeywords',
   'pysicalCarrier',
+  'permanentLink',
+  'externalSource',
 ]
 
 type CategoryFieldsMapping = {

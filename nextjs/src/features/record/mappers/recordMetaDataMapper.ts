@@ -154,80 +154,82 @@ export function mapArchivesDataToSections(
   if (!data) return []
   const fields = categoryFieldsMapping[CLOUD_CATEGORIES.archives]
 
-  return fields
-    .map(key => {
-      const rawValue = data[key]
-      const title = t(key)?.trim()
-      const values = rawValue ? rawValue.split(';').filter(v => v.trim().length > 0) : null
-      const isLink = key === 'permanentLink'
+  const mappedValues = fields.map(key => {
+    const rawValue = data[key]
+    const title = t(key)?.trim()
+    const values = rawValue ? rawValue.split(';').filter(v => v.trim().length > 0) : null
+    const isLink = key === 'permanentLink'
 
-      // TODO: commented out till we support content, location and subject
-      // if (key === 'content') {
-      //   const asteriskSuggestions = data.asteriskSuggestions
-      //     ?.map(suggestion => {
-      //       return {
-      //         date: suggestion.asterisk_date_content ?? '',
-      //         name: suggestion.asterisk_name_content ?? '',
-      //         subject: suggestion.asterisk_subject_content ?? '',
-      //       }
-      //     })
-      //     .filter(v => {
-      //         return v.date || v.name || v.subject
-      //     })
+    // TODO: commented out till we support content, location and subject
+    // if (key === 'content') {
+    //   const asteriskSuggestions = data.asteriskSuggestions
+    //     ?.map(suggestion => {
+    //       return {
+    //         date: suggestion.asterisk_date_content ?? '',
+    //         name: suggestion.asterisk_name_content ?? '',
+    //         subject: suggestion.asterisk_subject_content ?? '',
+    //       }
+    //     })
+    //     .filter(v => {
+    //         return v.date || v.name || v.subject
+    //     })
 
-      //   return { title, value: values, isLink, key, asteriskSuggestions }
-      // }
+    //   return { title, value: values, isLink, key, asteriskSuggestions }
+    // }
 
-      if (key === 'location') {
-        const asteriskSuggestions = data.asteriskSuggestions
-          ?.map(suggestion => {
-            return {
-              date: suggestion.asterisk_date_location ?? '',
-              name: suggestion.asterisk_name_location ?? '',
-              subject: suggestion.asterisk_subject_location ?? '',
-            }
-          })
-          .filter(v => {
-            return v.date || v.name || v.subject
-          })
+    if (key === 'location') {
+      const asteriskSuggestions = data.asteriskSuggestions
+        ?.map(suggestion => {
+          return {
+            date: suggestion.asterisk_date_location ?? '',
+            name: suggestion.asterisk_name_location ?? '',
+            subject: suggestion.asterisk_subject_location ?? '',
+          }
+        })
+        .filter(v => {
+          return v.date || v.name || v.subject
+        })
 
-        return { title, value: values, isLink, key, asteriskSuggestions }
+      return { title, value: values, isLink, key, asteriskSuggestions }
+    }
+
+    if (key === 'subject') {
+      const asteriskSuggestions = data.asteriskSuggestions
+        ?.map(suggestion => {
+          return {
+            date: suggestion.asterisk_date_subject ?? '',
+            name: suggestion.asterisk_name_subject ?? '',
+            subject: suggestion.asterisk_subject_subject ?? '',
+          }
+        })
+        .filter(v => {
+          return v.date || v.name || v.subject
+        })
+
+      return { title, value: values, isLink, key, asteriskSuggestions }
+    }
+
+    const filterEnrichedSources = data.enrichedSources?.reduce<
+      {
+        externalSourceType: ExternalSource | undefined
+        externalSourceUrl: Maybe<string> | undefined
+        value: string | null
+      }[]
+    >((acc, enrichedSource) => {
+      const mappedSource = mapArchivesEnrichedSources(key, enrichedSource)
+
+      if (mappedSource) {
+        return [...acc, mappedSource]
       }
+      return acc
+    }, [])
 
-      if (key === 'subject') {
-        const asteriskSuggestions = data.asteriskSuggestions
-          ?.map(suggestion => {
-            return {
-              date: suggestion.asterisk_date_subject ?? '',
-              name: suggestion.asterisk_name_subject ?? '',
-              subject: suggestion.asterisk_subject_subject ?? '',
-            }
-          })
-          .filter(v => {
-            return v.date || v.name || v.subject
-          })
+    return { title, value: values, isLink, key, enrichedSources: filterEnrichedSources }
+  })
 
-        return { title, value: values, isLink, key, asteriskSuggestions }
-      }
+  const filteredValues = filterMappedValues(mappedValues)
 
-      const filterEnrichedSources = data.enrichedSources?.reduce<
-        {
-          externalSourceType: ExternalSource | undefined
-          externalSourceUrl: Maybe<string> | undefined
-          value: string | null
-        }[]
-      >((acc, enrichedSource) => {
-        const mappedSource = mapArchivesEnrichedSources(key, enrichedSource)
-
-        if (mappedSource) {
-          return [...acc, mappedSource]
-        }
-        return acc
-      }, [])
-
-      return { title, value: values, isLink, key, enrichedSources: filterEnrichedSources }
-    })
-    .filter(section => section.value !== null)
+  return filteredValues
 }
 
 export function mapPublicationDataToSections(
@@ -237,31 +239,32 @@ export function mapPublicationDataToSections(
   if (!data) return []
   const fields = categoryFieldsMapping[CLOUD_CATEGORIES.publications]
 
-  return fields
-    .map(key => {
-      const rawValue = data[key]
-      const title = t(key)?.trim()
-      const values = rawValue ? rawValue.split(';').filter(v => v.trim().length > 0) : null
-      const isLink = key === 'permanentLink'
+  const mappedValues = fields.map(key => {
+    const rawValue = data[key]
+    const title = t(key)?.trim()
+    const values = rawValue ? rawValue.split(';').filter(v => v.trim().length > 0) : null
+    const isLink = key === 'permanentLink'
 
-      const filterEnrichedSources = data.enrichedSources?.reduce<
-        {
-          externalSourceType: ExternalSource | undefined
-          externalSourceUrl: Maybe<string> | undefined
-          value: string | null
-        }[]
-      >((acc, enrichedSource) => {
-        const mappedSource = mapPublicationEnrichedSources(key, enrichedSource)
+    const filterEnrichedSources = data.enrichedSources?.reduce<
+      {
+        externalSourceType: ExternalSource | undefined
+        externalSourceUrl: Maybe<string> | undefined
+        value: string | null
+      }[]
+    >((acc, enrichedSource) => {
+      const mappedSource = mapPublicationEnrichedSources(key, enrichedSource)
 
-        if (mappedSource) {
-          return [...acc, mappedSource]
-        }
-        return acc
-      }, [])
+      if (mappedSource) {
+        return [...acc, mappedSource]
+      }
+      return acc
+    }, [])
 
-      return { title, value: values, isLink, key, enrichedSources: filterEnrichedSources }
-    })
-    .filter(section => section.value !== null)
+    return { title, value: values, isLink, key, enrichedSources: filterEnrichedSources }
+  })
+
+  const filteredValues = filterMappedValues(mappedValues)
+  return filteredValues
 }
 
 export function mapObjectDataToSections(
@@ -270,79 +273,80 @@ export function mapObjectDataToSections(
 ) {
   if (!data) return []
   const fields = categoryFieldsMapping[CLOUD_CATEGORIES.objects]
-  return fields
-    .map(key => {
-      const rawValue = data[key]
-      const title = t(key)?.trim()
-      const values = rawValue ? rawValue.split(';').filter(v => v.trim().length > 0) : null
-      const isLink = key === 'permanentLink'
+  const mappedValues = fields.map(key => {
+    const rawValue = data[key]
+    const title = t(key)?.trim()
+    const values = rawValue ? rawValue.split(';').filter(v => v.trim().length > 0) : null
+    const isLink = key === 'permanentLink'
 
-      const filterEnrichedSources = data.enrichedSources?.reduce<
-        {
-          externalSourceType: ExternalSource | undefined
-          externalSourceUrl: Maybe<string> | undefined
-          value: string | null
-        }[]
-      >((acc, enrichedSource) => {
-        const mappedSource = mapObjectEnrichedSources(key, enrichedSource)
+    const filterEnrichedSources = data.enrichedSources?.reduce<
+      {
+        externalSourceType: ExternalSource | undefined
+        externalSourceUrl: Maybe<string> | undefined
+        value: string | null
+      }[]
+    >((acc, enrichedSource) => {
+      const mappedSource = mapObjectEnrichedSources(key, enrichedSource)
 
-        if (mappedSource) {
-          return [...acc, mappedSource]
-        }
-        return acc
-      }, [])
-
-      if (key === 'relatedKeywords') {
-        const asteriskSuggestions = data.asteriskSuggestions
-          ?.map(suggestion => {
-            return {
-              date: suggestion.asterisk_date_relatedKeyword ?? '',
-              name: suggestion.asterisk_name_relatedKeyword ?? '',
-              subject: suggestion.asterisk_subject_relatedKeyword ?? '',
-            }
-          })
-          .filter(v => {
-            return v.date || v.name || v.subject
-          })
-
-        return {
-          title,
-          value: values,
-          isLink,
-          key,
-          asteriskSuggestions,
-          externalSources: data.enrichedSources,
-        }
+      if (mappedSource) {
+        return [...acc, mappedSource]
       }
+      return acc
+    }, [])
 
-      //   return { title, value: values, isLink, key, asteriskSuggestions }
-      // }
+    if (key === 'relatedKeywords') {
+      const asteriskSuggestions = data.asteriskSuggestions
+        ?.map(suggestion => {
+          return {
+            date: suggestion.asterisk_date_relatedKeyword ?? '',
+            name: suggestion.asterisk_name_relatedKeyword ?? '',
+            subject: suggestion.asterisk_subject_relatedKeyword ?? '',
+          }
+        })
+        .filter(v => {
+          return v.date || v.name || v.subject
+        })
 
-      if (key === 'geoKeywords') {
-        const asteriskSuggestions = data.asteriskSuggestions
-          ?.map(suggestion => {
-            return {
-              date: suggestion.asterisk_date_geoKeywords ?? '',
-              name: suggestion.asterisk_name_geoKeywords ?? '',
-              subject: suggestion.asterisk_subject_geoKeywords ?? '',
-            }
-          })
-          .filter(v => {
-            return v.date || v.name || v.subject
-          })
-
-        return {
-          title,
-          value: values,
-          isLink,
-          key,
-          asteriskSuggestions,
-          enrichedSources: filterEnrichedSources,
-        }
+      return {
+        title,
+        value: values,
+        isLink,
+        key,
+        asteriskSuggestions,
+        externalSources: data.enrichedSources,
       }
-      return { title, value: values, isLink, key }
-    })
-    .filter(section => section.value !== null)
+    }
+
+    //   return { title, value: values, isLink, key, asteriskSuggestions }
+    // }
+
+    if (key === 'geoKeywords') {
+      const asteriskSuggestions = data.asteriskSuggestions
+        ?.map(suggestion => {
+          return {
+            date: suggestion.asterisk_date_geoKeywords ?? '',
+            name: suggestion.asterisk_name_geoKeywords ?? '',
+            subject: suggestion.asterisk_subject_geoKeywords ?? '',
+          }
+        })
+        .filter(v => {
+          return v.date || v.name || v.subject
+        })
+
+      return {
+        title,
+        value: values,
+        isLink,
+        key,
+        asteriskSuggestions,
+        enrichedSources: filterEnrichedSources,
+      }
+    }
+    return { title, value: values, isLink, key }
+  })
+  const filteredValues = filterMappedValues(mappedValues)
+
+  return filteredValues
 }
 
 export function mapPersonDataToSections(
@@ -352,28 +356,39 @@ export function mapPersonDataToSections(
   if (!data) return []
   const fields = categoryFieldsMapping[CLOUD_CATEGORIES.people]
 
-  return fields
-    .map(key => {
-      const rawValue = data[key]
-      const title = t(key)?.trim()
-      const values = rawValue ? rawValue.split(';').filter(v => v.trim().length > 0) : null
-      const isLink = key === 'permanentLink'
-      const filterEnrichedSources = data.enrichedSources?.reduce<
-        {
-          externalSourceType: ExternalSource | undefined
-          externalSourceUrl: Maybe<string> | undefined
-          value: string | null
-        }[]
-      >((acc, enrichedSource) => {
-        const mappedSource = mapPeopleEnrichedSources(key, enrichedSource)
+  const mappedValues = fields.map(key => {
+    const rawValue = data[key]
+    const title = t(key)?.trim()
+    const values = rawValue ? rawValue.split(';').filter(v => v.trim().length > 0) : null
+    const isLink = key === 'permanentLink'
+    const filterEnrichedSources = data.enrichedSources?.reduce<
+      {
+        externalSourceType: ExternalSource | undefined
+        externalSourceUrl: Maybe<string> | undefined
+        value: string | null
+      }[]
+    >((acc, enrichedSource) => {
+      const mappedSource = mapPeopleEnrichedSources(key, enrichedSource)
 
-        if (mappedSource) {
-          return [...acc, mappedSource]
-        }
-        return acc
-      }, [])
+      if (mappedSource) {
+        return [...acc, mappedSource]
+      }
+      return acc
+    }, [])
 
-      return { title, value: values, isLink, key, enrichedSources: filterEnrichedSources }
-    })
-    .filter(section => section.value !== null)
+    return { title, value: values, isLink, key, enrichedSources: filterEnrichedSources }
+  })
+  const filteredValues = filterMappedValues(mappedValues)
+
+  return filteredValues
+}
+
+function filterMappedValues<
+  T extends Array<{ asteriskSuggestions?: Array<Record<string, string>>; value: string[] | null }>
+>(data: T): { [K in keyof T]: T[K] } {
+  return data.filter(section => {
+    const hasAsterisk =
+      'asteriskSuggestions' in section && (section.asteriskSuggestions?.length ?? 0) > 0
+    return section.value !== null || hasAsterisk
+  }) as { [K in keyof T]: T[K] }
 }

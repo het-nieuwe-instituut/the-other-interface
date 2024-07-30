@@ -22,7 +22,7 @@ import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreToolti
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import ExternalLink from '@/features/ui/icons/external-link.svg'
 import { Fragment, useMemo } from 'react'
-import { useRecordMetaQuery } from '../../hooks/useRecordMetaQuery'
+import { useZoomLevel3RecordQuery } from '../../hooks/useZoomLevel3RecordQuery'
 import {
   mapArchivesDataToSections,
   mapObjectDataToSections,
@@ -37,8 +37,8 @@ export const RecordMeta = ({
   isLoading,
   category,
 }: {
-  data: ReturnType<typeof useRecordMetaQuery>['data']
-  isLoading: ReturnType<typeof useRecordMetaQuery>['isLoading']
+  data: ReturnType<typeof useZoomLevel3RecordQuery>['data']
+  isLoading: ReturnType<typeof useZoomLevel3RecordQuery>['isLoading']
   category: Category
 }) => {
   const { t: recordMetaPublicationT } = useTypeSafeTranslation('recordMetaPublication')
@@ -87,10 +87,6 @@ export const RecordMeta = ({
   return (
     <div className="flex flex-row flex-wrap">
       {recordMetaSectionData.map(section => {
-        if (!section.value) {
-          return null
-        }
-
         if (section.key === 'rights') {
           return (
             <Fragment key={section.key}>
@@ -196,7 +192,7 @@ export const RecordMeta = ({
           </ExternalSourceBlock>
         </ExternalSourceBlockGroup>
       )}
-      <SuggestionSection />
+      {data && data.__typename !== 'PublicationRecordZoomLevel3Type' && <SuggestionSection />}
     </div>
   )
 }
@@ -252,7 +248,7 @@ function SuggestionSection() {
           <AsteriskSourceBlock href={contributeLink} target={'_blank'}>
             {t('suggestionContributeLink') ?? ''}
           </AsteriskSourceBlock>
-          <AsteriskSourceBlock href={learnMoreLink} target={'_blank'}>
+          <AsteriskSourceBlock href={learnMoreLink}>
             {t('suggestionLearnMoreLink') ?? ''}
           </AsteriskSourceBlock>
         </AsteriskSourceBlockGroup>

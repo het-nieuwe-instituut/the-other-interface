@@ -75,9 +75,7 @@ export const StoryWithinThemeCarouselContent = ({
       {stories && stories.length > 0 && (
         <>
           <CarouselGrid>
-            <CarouselGridTitle>{`${tStories('moreOnTheme')} (${
-              stories.length
-            })`}</CarouselGridTitle>
+            <CarouselGridTitle>{`${tStories('moreOnTheme')}`}</CarouselGridTitle>
             <CarouselGridCardWrapper cols={cols}>
               {nodes.map(item => {
                 const url = addLocaleToUrl(`/detail/stories/${item.id}`, lang)
