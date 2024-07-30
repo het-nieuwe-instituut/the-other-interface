@@ -76,26 +76,35 @@ class BaseArchiveZoomLevel3DetailType {
   @Field()
   public id: string
 
-  @Field(() => EntityNames, { nullable: true })
-  public type: EntityNames
-
   @Field(() => String, { nullable: true })
   public title: string
 
   @Field(() => [String], { nullable: true })
   public thumbnail: string
 
-  @Field(() => String, { nullable: true })
-  public objectNumber?: string
-
-  @Field(() => String, { nullable: true })
-  public description?: string | null
-
   @Field({ nullable: true })
   public mediaType?: string
 
   @Field({ nullable: true })
   public mediaReference?: string
+
+  @Field(() => String, { nullable: true })
+  public description?: string | null
+
+  @Field({ nullable: true })
+  public custodialHistory?: string
+
+  @Field({ nullable: true })
+  public systemOfArrangement?: string
+
+  @Field(() => String, { nullable: true })
+  public existence?: string | null
+
+  @Field(() => String, { nullable: true })
+  public existenceLocation?: string | null
+
+  @Field(() => String, { nullable: true })
+  public sources?: string | null
 }
 
 @ObjectType()
@@ -212,27 +221,6 @@ class BaseArchivesRecordZoomLevel3Type {
   @Field(() => String, { nullable: true })
   public permanentLink?: string
 
-  @Field(() => String, { nullable: true })
-  public externalURI?: string
-
-  @Field(() => String, { nullable: true })
-  public description?: string
-
-  @Field(() => String, { nullable: true })
-  public custodialHistory?: string
-
-  @Field(() => String, { nullable: true })
-  public systemOfArrangement?: string
-
-  @Field(() => String, { nullable: true })
-  public sources?: string
-
-  @Field(() => String, { nullable: true })
-  public existence?: string
-
-  @Field(() => String, { nullable: true })
-  public existenceLocation?: string
-
   @Field({ nullable: true })
   public location?: string
 
@@ -253,6 +241,27 @@ class EnrichedBaseArchivesRecordZoomLevel3Type extends BaseArchivesRecordZoomLev
 
   @Field()
   public externalSourceUrl: string
+
+  @Field(() => String, { nullable: true })
+  public externalURI?: string
+
+  @Field(() => String, { nullable: true })
+  public description?: string
+
+  @Field(() => String, { nullable: true })
+  public custodialHistory?: string
+
+  @Field(() => String, { nullable: true })
+  public systemOfArrangement?: string
+
+  @Field(() => String, { nullable: true })
+  public sources?: string
+
+  @Field(() => String, { nullable: true })
+  public existence?: string
+
+  @Field(() => String, { nullable: true })
+  public existenceLocation?: string
 }
 
 @ObjectType()

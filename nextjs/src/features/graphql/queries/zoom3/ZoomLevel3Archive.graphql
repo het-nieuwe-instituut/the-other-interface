@@ -7,6 +7,11 @@ query ZoomLevel3Archive($id: String!, $locale: Locale!) {
     description
     mediaType
     mediaReference
+    custodialHistory
+    systemOfArrangement
+    sources
+    existence
+    existenceLocation
     asteriskSuggestions {
       asterisk_date_title
       asterisk_name_title
