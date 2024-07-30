@@ -69,7 +69,7 @@ export const LightBoxNextImageByIcon = (props: LightBoxNextImageByIconProps) => 
 
   return (
     <div className="group relative size-full">
-      <NextImage {...props} />
+      <NextImage {...props} onContextMenu={e => e.preventDefault()} />
       <Button
         title={commonT('seeFullImage')}
         intent={'tertiary'}
