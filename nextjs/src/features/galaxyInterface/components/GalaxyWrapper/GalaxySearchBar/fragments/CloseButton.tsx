@@ -6,7 +6,7 @@ type Props = {
 
 export const CloseButton: React.FC<Props> = ({ onClick }) => {
   return (
-    <button onClick={onClick}>
+    <button onClick={onClick} aria-label="close">
       <CrossIcon />
     </button>
   )
