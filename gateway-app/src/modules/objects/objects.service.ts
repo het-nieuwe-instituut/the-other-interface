@@ -242,17 +242,8 @@ export class ObjectsService {
     return TriplyUtils.combineObjectArray(results.data)
   }
 
-  public getEnrichedSources(
-    id: string,
-    locale: Locale,
-    externalURI?: string | `${string};${string}` | `${string};${string};${string}`
-  ): Promise<EnrichedRecordBaseType[]> {
-    return this.triplyService.getEnrichedSourceData(
-      this.EnrichedSourceEndpoints,
-      id,
-      locale,
-      externalURI
-    )
+  public getEnrichedSources(id: string, locale: Locale): Promise<EnrichedRecordBaseType[]> {
+    return this.triplyService.getEnrichedSourceData(this.EnrichedSourceEndpoints, id, locale)
   }
 
   private formatAsteriskSuggestions(data: ObjectAsteriskType[]) {

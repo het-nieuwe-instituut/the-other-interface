@@ -55,7 +55,7 @@ export class ObjectsZoomLevel3DetailResolver {
     @Parent() record: ObjectsZoomLevel3DetailType,
     @Args() { locale }: LocaleArgs
   ) {
-    return this.objectsService.getEnrichedSources(record.id, locale, record?.externalURI)
+    return this.objectsService.getEnrichedSources(record.id, locale)
   }
 }
 
@@ -76,6 +76,6 @@ export class ObjectsRecordZoomLevel3Resolver {
     @Parent() record: ObjectRecordZoomLevel3Type,
     @Args() { locale }: LocaleArgs
   ) {
-    return this.objectsService.getEnrichedSources(record.id, locale, record.externalSource)
+    return this.objectsService.getEnrichedSources(record.id, locale)
   }
 }

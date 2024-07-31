@@ -30,9 +30,6 @@ class BasePeopleZoomLevel3DetailType {
   @Field()
   public id: string
 
-  @Field()
-  public externalURI?: string | `${string};${string}` | `${string};${string};${string}`
-
   @Field(() => String, { nullable: true })
   public title: string
 

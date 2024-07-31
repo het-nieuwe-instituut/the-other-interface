@@ -42,9 +42,6 @@ class BasePublicationZoomLevel3DetailType {
 
   @Field({ nullable: true })
   public mediaReference?: string
-
-  @Field({ nullable: true })
-  public externalURI?: string | `${string};${string}` | `${string};${string};${string}`
 }
 
 @ObjectType()
