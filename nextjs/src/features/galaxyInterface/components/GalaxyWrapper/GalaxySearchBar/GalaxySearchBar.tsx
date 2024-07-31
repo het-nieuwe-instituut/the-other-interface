@@ -1,22 +1,17 @@
 import { searchCategoryToTriplyCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
-import { GalaxyZoomAnimationStateContext } from '@/features/galaxyInterface/galaxies/hooks/GalaxyZoomAnimationStateProvider'
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { State } from '@/features/shared/configs/store'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
-import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import {
-  useEncodedSearchFilters,
+  useDecodedSearchFilters,
   useFilterActions,
-  useSelectedFilters,
 } from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useOutsideClick } from '@/features/shared/hooks/ui/useOutsideClick'
-import { useLocale } from '@/features/shared/hooks/useLocale'
 import { sharedActions } from '@/features/shared/stores/shared.store'
-import { useDelayedNextRoutePush } from '@/features/ui/components/DelayedNextLink/DelayedNextLink'
 import { cn } from '@/features/ui/utils/cn'
 import CloseIconSmall from '@/icons/close-icon-small.svg'
-import React, { CSSProperties, useCallback, useContext, useMemo, useRef, useState } from 'react'
+import React, { CSSProperties, useCallback, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { COLLECTION_HILIGHT_ID, SuggestionsContainer } from '../Suggestions/Suggestions'
@@ -33,7 +28,6 @@ import { SearchButton } from './fragments/SearchButton'
 import SearchResults from './fragments/SearchResults'
 import { TotalResults } from './fragments/TotalResults'
 import { useSearchBarPosition } from './useSearchBarPosition'
-import { useParams, usePathname, useSearchParams } from 'next/navigation'
 
 type Props = {
   total?: number
@@ -41,80 +35,18 @@ type Props = {
   isNoActiveSearch?: boolean
 }
 
-function useGetRawPath() {
-  const params = useParams()
-  const searchParams = useSearchParams()
-  const pathname = usePathname()
-  const splittedRoute = pathname?.split('/') ?? []
-  const lang = useLocale()
-
-  function constructParams() {
-    if (typeof params === 'object' && params !== null) {
-      let reconstructedPath = ''
-
-      for (let i = 1; i < splittedRoute.length; i++) {
-        const segment = splittedRoute[i]
-
-        // Check if the segment matches any value in the params object
-        const matchingKey = Object.keys(params).find(key => params[key] === segment)
-
-        if (matchingKey) {
-          // Replace the segment with the dynamic segment
-          reconstructedPath += `/[${matchingKey}]`
-        } else {
-          // Keep the original segment
-          reconstructedPath += `/${segment}`
-        }
-      }
-
-      return reconstructedPath
-    } else {
-      // Params object is not present
-      return pathname
-    }
-  }
-
-  function constructUrl() {
-    const path = constructParams()
-    const search = searchParams?.toString()
-
-    return addLocaleToUrl(`${path}${search ? `?${search}` : ''}`, lang)
-  }
-
-  return constructUrl()
-}
-
 export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }) => {
   isNoActiveSearch = true
   const filterInputRef = useRef<HTMLInputElement>(null)
   const searchBarRef = useRef<HTMLFormElement>(null)
-  const delayedPush = useDelayedNextRoutePush(600)
   const [isUserTyping, setIsUserTyping] = useState(false)
   const { closeSearchMode, clearAllSearch, openSearch, focus } = useSearchBarActions({
     filterInputRef,
     isNoActiveSearch,
   })
-  const rawPath = useGetRawPath()
-  const lang = useLocale()
-  const { encodedFilters } = useEncodedSearchFilters()
-  const selectedFilters = useSelectedFilters()
-  const { offset, searchBarHeight, wrapRef } = useSearchBarPosition(selectedFilters)
-  const { isSearchModeActive, searchCategory, searchValue } = useSelector(
-    (state: State) => state.shared
-  )
-  const searchParam = searchValue ? `&search=${searchValue}` : ''
-  const filtersParam = encodedFilters ? `&filters=${encodedFilters}` : ''
-
-  let searchUrl = `/landingpage?category=${searchCategory}${searchParam}${filtersParam}&searchResult=true`
-  searchUrl = addLocaleToUrl(searchUrl, lang)
-
-  const searchUrlChanged = useMemo(() => {
-    return searchUrl !== rawPath
-  }, [rawPath, searchUrl])
-
-  console.log({ rawPath, searchUrl })
-
-  const { setAnimationState } = useContext(GalaxyZoomAnimationStateContext)
+  const { decodedFilters } = useDecodedSearchFilters()
+  const { offset, searchBarHeight, wrapRef } = useSearchBarPosition(decodedFilters)
+  const { isSearchModeActive, searchValue } = useSelector((state: State) => state.shared)
 
   const handleGoClick = useCallback(() => {
     setIsUserTyping(false)
@@ -132,10 +64,6 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
       id="search-form"
       onSubmit={e => {
         e.preventDefault()
-        setAnimationState('forward')
-        delayedPush(searchUrl)
-
-        handleGoClick()
       }}
       style={{ '--z-index': FOOTER_Z_INDEX, '--offset': `${offset}px` } as CSSProperties}
       className={cn(
@@ -163,7 +91,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
       <div className="flex h-[60px] items-center gap-[12px] self-end pt-1">
         {isSearchModeActive ? (
           <>
-            <GoButton href={searchUrl} disabled={!searchUrlChanged} />
+            <GoButton onGoClick={handleGoClick} />
             <CloseButton onClick={clearAllSearch} />
           </>
         ) : isNoActiveSearch ? (
@@ -203,7 +131,7 @@ export const InputBar = React.forwardRef<
   }
 >(({ onTyping, openSearch, onFocus, filterInputRef }, ref) => {
   const { t } = useTypeSafeTranslation('category')
-  const selectedFilters = useSelectedFilters()
+  const { decodedFilters } = useDecodedSearchFilters()
   const { searchCategory, isCategorySuggestionsOpen, searchValue } = useSelector(
     (state: State) => state.shared
   )
@@ -230,7 +158,7 @@ export const InputBar = React.forwardRef<
           selectedOption={searchCategory ? t(searchCategory) : ''}
         />
       </div>
-      {selectedFilters.map(filter => (
+      {decodedFilters.map(filter => (
         <div key={filter.id} className="mr-2 h-[60px] max-w-full pt-1">
           <SearchFilterBox
             category={filter.key}
@@ -277,8 +205,8 @@ export const SearchSuggestionsBar = ({
     onSelectFilter: onFocus,
     onRemoveFilter: onFocus,
   })
-  const selectedFilters = useSelectedFilters()
-  const isCollectionHighlightsSelected: boolean = selectedFilters.some(
+  const { decodedFilters } = useDecodedSearchFilters()
+  const isCollectionHighlightsSelected: boolean = decodedFilters.some(
     filter => filter.id === COLLECTION_HILIGHT_ID
   )
 

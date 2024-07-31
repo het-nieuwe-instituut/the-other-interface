@@ -5,7 +5,6 @@ const Page: NextPage = () => {
   const spacingObj = tailwind.theme?.extend?.spacing
   if (!spacingObj) return null
   const spacingKeys = Object.keys(spacingObj)
-  console.log(spacingKeys)
   return (
     <div className="flex flex-col gap-4">
       <p>Spacings</p>
