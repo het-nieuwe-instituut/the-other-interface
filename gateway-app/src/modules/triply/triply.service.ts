@@ -99,35 +99,36 @@ export class TriplyService {
   public async getEnrichedSourceData(
     enrichedSourceEndpoints: Record<ExternalSource, string>,
     id: string,
-    locale: Locale,
-    externalURI?: string | `${string};${string}` | `${string};${string};${string}`
+    locale: Locale
   ): Promise<EnrichedRecordBaseType[]> {
-    const externalURIArray = externalURI?.split(';') ?? []
     const sources = Object.entries(enrichedSourceEndpoints)
-    const keys = Object.keys(enrichedSourceEndpoints)
     const params = { id, language: locale }
+
     const enrichedSources = await Promise.all(
-      sources.map(async ([source, endpoint], index) => {
+      sources.map(async ([source, endpoint]) => {
         const result = await this.queryTriplyData(endpoint, {}, undefined, params)
-        const externalSourceEnum = keys[index] as ExternalSource
 
         const enrichedSource = TriplyUtils.combineObjectArray(result.data as object[])
         if (!enrichedSource) {
           return
         }
 
+        const externalSourceUrl = TriplyUtils.getExternalSourceUrlFromData(
+          enrichedSource,
+          source as ExternalSource
+        )
+
         return {
           ...enrichedSource,
           id,
           externalSourceType: source as ExternalSource,
-          externalSourceUrl:
-            externalURIArray.find(uri => uri.toLowerCase().includes(externalSourceEnum)) ?? '',
+          externalSourceUrl,
         }
       })
     )
 
     return enrichedSources.reduce<EnrichedRecordBaseType[]>(
-      (acc, curr) => (curr?.externalSourceUrl && curr.externalSourceType ? [...acc, curr] : acc),
+      (acc, curr) => (curr ? [...acc, curr] : acc),
       []
     )
   }
