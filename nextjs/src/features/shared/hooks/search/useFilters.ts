@@ -23,7 +23,7 @@ export const useFilterActions = ({ onSelectFilter, onRemoveFilter }: UseFiltersP
 
   const selectFilter = useCallback(
     (filter: Filter) => {
-      if (selectedFilters.some(f => f.value === filter.value)) {
+      if (selectedFilters.some(f => f.value === filter.value && f.key === filter.key)) {
         return
       }
 

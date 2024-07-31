@@ -16,10 +16,7 @@ import {
 } from '@/features/ui/components/thumbnail-carousel/ThumbnailCarousel'
 import { VideoPlayer } from '@/features/ui/components/video/VideoPlayer'
 import { useParams } from 'next/navigation'
-import {
-  ArchivesRecordZoomLevel3Type,
-  PublicationZoomLevel3DetailType,
-} from 'src/generated/graphql'
+import { ArchiveZoomLevel3DetailType, PublicationZoomLevel3DetailType } from 'src/generated/graphql'
 import { LayerWrapper } from '../../../shared/components/Layers/LayerWrapper'
 import { RecordMeta } from '../../components/RecordMeta/RecordMeta'
 import { OmitEnrichedData } from '../../configs/recordMetaFieldOrderConfig'
@@ -164,10 +161,10 @@ export const RecordLayer = () => {
                 </ThumbnailCarousel>
               )}
 
-              {zoomLevel3Record?.__typename === 'ArchivesRecordZoomLevel3Type' ? (
-                <ArchivesDescriptions meta={zoomLevel3Record} />
+              {zoomLevel3 && zoomLevel3.__typename === 'ArchiveZoomLevel3DetailType' ? (
+                <ArchivesDescriptions data={zoomLevel3} />
               ) : null}
-              {zoomLevel3?.__typename === 'PublicationZoomLevel3DetailType' ? (
+              {zoomLevel3 && zoomLevel3.__typename === 'PublicationZoomLevel3DetailType' ? (
                 <PublicationsDescriptions data={zoomLevel3} />
               ) : null}
             </div>
@@ -206,10 +203,10 @@ const MediaPlayer = ({ mediaReference, mediaType }: MediaPlayerProps) => {
 }
 
 interface ArchiveMetaDescriptionProps {
-  meta: OmitEnrichedData<ArchivesRecordZoomLevel3Type>
+  data: OmitEnrichedData<ArchiveZoomLevel3DetailType>
 }
 
-const ArchivesDescriptions = ({ meta }: ArchiveMetaDescriptionProps) => {
+const ArchivesDescriptions = ({ data }: ArchiveMetaDescriptionProps) => {
   const { t: recordMetaT } = useTypeSafeTranslation('recordMeta')
   const keys = [
     'custodialHistory',
@@ -223,7 +220,7 @@ const ArchivesDescriptions = ({ meta }: ArchiveMetaDescriptionProps) => {
     <div className="mt-10 flex flex-col gap-10 empty:mt-0">
       {keys.map((k, i) => {
         const title = recordMetaT(k)
-        const preface = meta[k] ?? undefined
+        const preface = data[k] ?? undefined
 
         if (!title || !preface) {
           return null

@@ -8,12 +8,18 @@ import { Category } from '../../shared/utils/categories'
 import initApiClientService from '../../shared/utils/initApiClientService'
 import { getPublicationState } from '../../shared/utils/publication-state'
 
-export const getRecordDetailQueryKey = (id: string, lang: string) => ['record-detail', id, lang]
+export const getRecordDetailQueryKey = (id: string, lang: string, small?: boolean) => [
+  'record-detail',
+  id,
+  lang,
+  small,
+]
 export function useZoomLevel3Query({
   type,
   id,
   options,
   locale,
+  small,
 }: {
   type: Category
   id: string
@@ -22,19 +28,21 @@ export function useZoomLevel3Query({
     'suspense' | 'refetchOnWindowFocus'
   >
   locale: Locale
+  small?: boolean
 }) {
   const { isDraftMode } = useSelector((state: State) => state.shared)
   const api = initApiClientService()
 
   return useQuery({
-    queryKey: getRecordDetailQueryKey(id, locale),
+    queryKey: getRecordDetailQueryKey(id, locale, small),
     queryFn: async () => {
-      const res = await getZoom3RecordTask(
+      const res = await getZoom3RecordTask({
         type,
-        { id, locale, publicationState: getPublicationState(isDraftMode) },
+        payload: { id, locale, publicationState: getPublicationState(isDraftMode) },
         api,
-        options?.suspense
-      )
+        throwOnError: options?.suspense,
+        small,
+      })
 
       return res
     },

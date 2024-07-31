@@ -23,3 +23,12 @@ query ZoomLevel3Object($id: String!, $locale: Locale!) {
     }
   }
 }
+
+query ZoomLevel3ObjectSmall($id: String!, $locale: Locale!) {
+  zoomLevel3Object(id: $id, locale: $locale) {
+    id
+    __typename
+    title
+    thumbnail
+  }
+}
