@@ -31,6 +31,7 @@ import {
 } from '../../mappers/recordMetaDataMapper'
 import { recordRightsFieldMapper } from '../../mappers/recordRightsMapper'
 import { getExternalSourceTranslation } from '../../utils/enrichedSources'
+import { ExternalSource } from 'src/generated/graphql'
 
 export const RecordMeta = ({
   data,
@@ -77,13 +78,27 @@ export const RecordMeta = ({
     recordMetaPersonT,
     recordMetaPublicationT,
   ])
-  const recordData = useMemo(() => {
-    const filteredenrichedSources = data?.enrichedSources?.filter(
-      v => v.externalSourceType && v.externalSourceUrl
-    )
-    return {
-      ...data,
-      enrichedSources: filteredenrichedSources,
+  const externalSources = useMemo(() => {
+    if (data && 'externalSource' in data) {
+      return data.externalSource
+        ?.split(';')
+        .map(v => {
+          let detectedType: ExternalSource | undefined = undefined
+
+          if (v.includes('rkd.nl')) {
+            detectedType = ExternalSource.Rkd
+          } else if (v.includes('getty.edu')) {
+            detectedType = ExternalSource.Getty
+          } else if (v.includes('wikidata.org')) {
+            detectedType = ExternalSource.Wikidata
+          }
+
+          return {
+            externalSourceUrl: v,
+            externalSourceType: (detectedType ?? '') as ExternalSource,
+          }
+        })
+        .filter(v => v.externalSourceType && v.externalSourceUrl)
     }
   }, [data])
 
@@ -186,12 +201,16 @@ export const RecordMeta = ({
           </MetaField>
         )
       })}
-      {(recordData?.enrichedSources?.length ?? 0) > 0 && (
+      {externalSources && (externalSources.length ?? 0) > 0 && (
         <ExternalSourceBlockGroup className="mb-4">
-          {data?.enrichedSources?.map(v => {
+          {externalSources.map((v, index, array) => {
+            const exSource = v.externalSourceType
+            if (!exSource) {
+              return null
+            }
             return (
-              <ExternalSourceBlock href={v.externalSourceUrl} key={v.id}>
-                {getExternalSourceTranslation(v.externalSourceType) ?? ''}
+              <ExternalSourceBlock href={v.externalSourceUrl} key={`${index}-${array.length}`}>
+                {getExternalSourceTranslation(exSource) ?? ''}
               </ExternalSourceBlock>
             )
           })}
