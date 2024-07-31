@@ -16,7 +16,14 @@ import {
 } from '@/features/ui/components/thumbnail-carousel/ThumbnailCarousel'
 import { VideoPlayer } from '@/features/ui/components/video/VideoPlayer'
 import { useParams } from 'next/navigation'
-import { ArchiveZoomLevel3DetailType, PublicationZoomLevel3DetailType } from 'src/generated/graphql'
+import {
+  ArchiveZoomLevel3DetailType,
+  EnrichedBaseArchiveZoomLevel3DetailType,
+  EnrichedBaseObjectsZoomLevel3DetailType,
+  EnrichedBasePeopleZoomLevel3DetailType,
+  EnrichedBasePublicationZoomLevel3DetailType,
+  PublicationZoomLevel3DetailType,
+} from 'src/generated/graphql'
 import { LayerWrapper } from '../../../shared/components/Layers/LayerWrapper'
 import { RecordMeta } from '../../components/RecordMeta/RecordMeta'
 import { OmitEnrichedData } from '../../configs/recordMetaFieldOrderConfig'
@@ -24,17 +31,24 @@ import { useZoomLevel3Query } from '../../hooks/useZoomLevel3Query'
 import { useZoomLevel3RecordQuery } from '../../hooks/useZoomLevel3RecordQuery'
 import { RecordBottomContent } from '../RecordBottomContent/RecordBottomContent'
 
-function getEnrichedSources(data: ReturnType<typeof useZoomLevel3Query>['data']) {
-  if (!data) return []
+function getEnrichedSources(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any
+): (
+  | NonNullable<EnrichedBaseArchiveZoomLevel3DetailType>
+  | NonNullable<EnrichedBasePeopleZoomLevel3DetailType>
+  | NonNullable<EnrichedBaseObjectsZoomLevel3DetailType>
+  | NonNullable<EnrichedBasePublicationZoomLevel3DetailType>
+)[] {
   if (
-    (data?.__typename === 'ArchiveZoomLevel3DetailType' ||
-      data?.__typename === 'ObjectsZoomLevel3DetailType' ||
-      data?.__typename === 'PeopleZoomLevel3DetailType' ||
-      data?.__typename === 'PublicationZoomLevel3DetailType') &&
-    (data?.enrichedSources?.length ?? 0) > 0
-  )
-    return data.enrichedSources
-
+    data?.__typename === 'PublicationZoomLevel3DetailType' ||
+    data?.__typename === 'PeopleZoomLevel3DetailType' ||
+    data?.__typename === 'ObjectsZoomLevel3DetailType' ||
+    data?.__typename === 'ArchiveZoomLevel3DetailType'
+  ) {
+    const enrichedSources = data?.enrichedSources || []
+    return (data?.enrichedSources?.length ?? 0) > 0 ? enrichedSources : []
+  }
   return []
 }
 
@@ -56,8 +70,8 @@ export const RecordLayer = () => {
     options: { refetchOnWindowFocus: false, suspense: false },
     locale,
   })
-  const enrichedSources = getEnrichedSources(zoomLevel3)
-  const enrichedTitles = enrichedSources?.filter(v => !!v.title)
+  const enrichedSources = getEnrichedSources(zoomLevel3) ?? []
+  const enrichedTitles = enrichedSources?.filter(v => 'title' in v && !!v.title)
   const enrichedDescriptions = enrichedSources?.filter(v => !!v.description)
   const enrichedThumbnails = enrichedSources?.filter(v => !!v.thumbnail)
 

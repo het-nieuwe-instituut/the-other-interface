@@ -365,11 +365,12 @@ type MappedEnrichedSource = {
   value: string | null
 }
 function filterEnrichedSources<
-  T extends
-    | EnrichedBasePeopleRecordZoomLevel3Type[]
-    | EnrichedBaseObjectRecordZoomLevel3Type[]
-    | EnrichedBasePublicationRecordZoomLevel3Type[]
-    | EnrichedBaseArchivesRecordZoomLevel3Type[]
+  T extends (
+    | EnrichedBasePeopleRecordZoomLevel3Type
+    | EnrichedBaseObjectRecordZoomLevel3Type
+    | EnrichedBasePublicationRecordZoomLevel3Type
+    | EnrichedBaseArchivesRecordZoomLevel3Type
+  )[]
 >(
   data: T,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -379,7 +380,7 @@ function filterEnrichedSources<
     key: any,
     enrichedSource: T[number]
   ) => MappedEnrichedSource | undefined
-) {
+): MappedEnrichedSource[] {
   return data.reduce<
     {
       externalSourceType: ExternalSource | undefined
