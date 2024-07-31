@@ -68,12 +68,10 @@ export const RecordLayer = () => {
     locale,
   })
   const enrichedSources = getEnrichedSources(zoomLevel3)
-
   const enrichedTitles = enrichedSources?.filter(v => !!v.title)
   const enrichedDescriptions = enrichedSources?.filter(v => !!v.description)
   const enrichedThumbnails = enrichedSources?.filter(v => !!v.thumbnail)
 
-  console.log(enrichedThumbnails, zoomLevel3)
   return (
     <LayerWrapper
       LeftContent={
