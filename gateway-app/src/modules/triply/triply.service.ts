@@ -114,7 +114,7 @@ export class TriplyService {
         }
 
         const externalSourceUrl = TriplyUtils.getExternalSourceUrlFromData(
-          result.data,
+          enrichedSource,
           source as ExternalSource
         )
 

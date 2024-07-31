@@ -1,12 +1,21 @@
 'use client'
 import { imageBasePath } from '@/features/modules/modulesConstants'
+import { getExternalSourceTranslation } from '@/features/record/utils/enrichedSources'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
+import { createTypeSafeTranslation } from '@/features/shared/utils/translations'
 import { ImageProps } from 'next/image'
 import React, { CSSProperties, Children, useContext, useState } from 'react'
+import { ExternalSource } from 'src/generated/graphql'
 import { useHorizontalSnappingList } from '../../hooks/useHorizontallScrollSnapping'
 import { cn } from '../../utils/cn'
 import { LightBoxNextImage, LightBoxNextImageByIcon } from '../lightbox/LightBoxNextImage'
 import { LightboxProvider } from '../lightbox/LightboxProvider'
+import {
+  ExternalSourceBlock,
+  ExternalSourceBlockGroup,
+  ExternalSourceLink,
+} from '../Sources/ExternalSource'
+import { ExternalSourceTooltip } from '../tooltip/ExternalSourceTooltip'
 import NavArrowLeft from './nav-arrow-left.svg'
 import NavArrowRight from './nav-arrow-right.svg'
 
@@ -42,8 +51,9 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
     return <ErrorBox />
   }
 
-  const { src, alt } = focusedItemProps
+  const { src, alt, enrichedSource } = focusedItemProps
   const imageSrc = src ? imageBasePath(src.toString()) : ''
+  const { t } = createTypeSafeTranslation('common')
 
   return (
     <LightboxProvider>
@@ -51,6 +61,38 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
         value={{ setIndex: (index: number) => setIndex(index), index }}
       >
         <div className={cn(className, 'flex flex-col gap-4 relative')}>
+          <div className="absolute left-2 top-2 z-[9999]">
+            {enrichedSource && enrichedSource.thumbnail && (
+              <ExternalSourceBlockGroup className="mt-1">
+                {enrichedSource.thumbnail.map(v => {
+                  return (
+                    <ExternalSourceTooltip
+                      key={v}
+                      place="right-start"
+                      title={
+                        enrichedSource.externalSourceUrl ? (
+                          <div className=" inline-block">
+                            {t('pulledFrom')}{' '}
+                            <div className="inline-block">
+                              <ExternalSourceLink
+                                externalSourceType={enrichedSource.externalSourceType}
+                                externalSourceUrl={enrichedSource.externalSourceUrl}
+                              />
+                            </div>
+                          </div>
+                        ) : (
+                          getExternalSourceTranslation(enrichedSource.externalSourceType)
+                        )
+                      }
+                    >
+                      <ExternalSourceBlock>{v}</ExternalSourceBlock>
+                    </ExternalSourceTooltip>
+                  )
+                })}
+              </ExternalSourceBlockGroup>
+            )}
+          </div>
+
           <div className="relative flex h-[621.41px] w-full items-center justify-center">
             <LightBoxNextImageByIcon
               src={imageSrc ?? ''}
@@ -117,6 +159,11 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
 
 interface ThumbnailCarouselItemProps extends ImageProps {
   index: number
+  enrichedSource?: {
+    externalSourceType: ExternalSource
+    externalSourceUrl: string
+    thumbnail?: string[] | null
+  } | null
 }
 export const ThumbnailCarouselItem = ({ src, alt, index }: ThumbnailCarouselItemProps) => {
   const context = useContext(ThumbnailCarouselContext)
