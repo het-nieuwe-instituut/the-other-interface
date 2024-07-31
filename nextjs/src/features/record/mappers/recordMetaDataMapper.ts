@@ -138,6 +138,10 @@ function getValidEnrichedSource<S extends EnrichedSource, K extends keyof S>(
     return
   }
 
+  if (!enrichedSource.externalSourceType || !enrichedSource.externalSourceUrl) {
+    return
+  }
+
   return {
     externalSourceType: enrichedSource.externalSourceType,
     externalSourceUrl: enrichedSource.externalSourceUrl,
