@@ -8,25 +8,15 @@ import {
   SearchCategory,
 } from '@/features/shared/utils/categories'
 import { useQuery } from '@tanstack/react-query'
-import {
-  InputMaybe,
-  Locale,
-  SelectedFilterSuggestion,
-  StringFilterInput,
-  TriplyRecordFiltersInput,
-} from 'src/generated/graphql'
+import { Locale, StringFilterInput, TriplyRecordFiltersInput } from 'src/generated/graphql'
 import { STORIES_PER_PAGE, ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
 import { storyToRecordMapper } from '../../helpers/extractStoryData'
 import { mapCategoryToTriplyEnum } from '../../helpers/mapCategoryToTriplyEnum'
-import initApiClientService from '../../utils/initApiClientService'
-import {
-  Filter,
-  FilterArray,
-  useDecodedSearchFilters,
-  useSelectedFilters,
-} from '../search/useFilters'
-import { useLocale } from '../useLocale'
 import mapSelectedHighlightToSearch from '../../mappers/mapSelectedHighlightToSearch'
+import initApiClientService from '../../utils/initApiClientService'
+import { Filter, FilterArray, useFilterActions } from '../search/useFilters'
+import { useLocale } from '../useLocale'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 type SearchArgs = {
   category: SearchCategory
@@ -35,7 +25,7 @@ type SearchArgs = {
   enabled?: boolean
   filters?: Filter[]
   fallback?: boolean
-  selectedFilters: InputMaybe<Array<SelectedFilterSuggestion> | SelectedFilterSuggestion>
+  selectedFilters: FilterArray
 }
 
 export function useSearchByCategoryQuery({
@@ -44,59 +34,19 @@ export function useSearchByCategoryQuery({
   page = 1,
   enabled = true,
   fallback = false,
+  selectedFilters,
 }: SearchArgs) {
   const api = initApiClientService()
   const locale = useLocale()
-  const { decodedFilters } = useDecodedSearchFilters()
-  const selectedFilters = useSelectedFilters()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
 
-  const queryKey =
-    category === SEARCH_CATEGORIES.stories
-      ? ['searchByStories', category, text, page, locale, decodedFilters]
-      : ['search', category, text, page, decodedFilters]
-
-  const queryFnArgs = {
-    api,
-    selectedFilters,
-    decodedFilters,
-    category,
-    locale,
-    page,
-    fallback,
-    text,
-  }
-
-  return useQuery(queryKey, queryFn(queryFnArgs), {
-    enabled,
-    refetchOnWindowFocus: false,
-    staleTime: Infinity,
-  })
-}
-
-interface QueryFnArgs {
-  api: ReturnType<typeof initApiClientService>
-  selectedFilters: FilterArray
-  decodedFilters: FilterArray
-  category: SearchCategory
-  locale: Locale
-  page?: number
-  fallback?: boolean
-  text?: string
-}
-
-function queryFn(args: QueryFnArgs) {
-  return async () => {
-    const { api, selectedFilters, decodedFilters, category, locale, page, fallback, text } = args
-
-    const selectedFiltersToInput = selectedFilters.map(f => ({ key: f.key, value: f.value }))
-
-    const collectionHighlightsActive =
-      decodedFilters.some(f => f.id === COLLECTION_HILIGHT_ID) ||
-      selectedFilters.some(f => f.id === COLLECTION_HILIGHT_ID)
+  async function queryFn() {
+    const collectionHighlightsActive = selectedFilters.some(f => f.id === COLLECTION_HILIGHT_ID)
 
     if (collectionHighlightsActive) {
       const type = searchCategoryToTriplyCategory(category)
-
       const labelFilter: StringFilterInput = { containsi: text || undefined }
 
       const queryFilters: TriplyRecordFiltersInput = {
@@ -109,7 +59,6 @@ function queryFn(args: QueryFnArgs) {
       }
 
       const { isArchive, isObject, isPerson, isPublication } = getQueryOptions(category)
-
       const response = await api.searchBySelectedHighlights({
         filters: queryFilters,
         page,
@@ -127,7 +76,12 @@ function queryFn(args: QueryFnArgs) {
           filter => filter.id !== COLLECTION_HILIGHT_ID
         )
 
-        return searchByCategory(api, locale, decodedFilters, {
+        // doing this sideeffect here because other places would be too complicated
+        const current = new URLSearchParams(Array.from(searchParams?.entries() ?? []))
+        current.delete('filters')
+        router.replace(`${pathname}?${current.toString()}`)
+
+        return searchByCategory(api, locale, selectedFilters, {
           category,
           text,
           page,
@@ -142,13 +96,23 @@ function queryFn(args: QueryFnArgs) {
       }
     }
 
-    return searchByCategory(api, locale, decodedFilters, {
+    return searchByCategory(api, locale, selectedFilters, {
       category,
       text,
       page,
-      selectedFilters: selectedFiltersToInput,
+      selectedFilters: selectedFilters,
     })
   }
+
+  const queryKey =
+    category === SEARCH_CATEGORIES.stories
+      ? ['searchByStories', category, text, page, locale, selectedFilters]
+      : ['search', category, text, page, selectedFilters]
+
+  return useQuery(queryKey, queryFn, {
+    enabled,
+    refetchOnWindowFocus: false,
+  })
 }
 
 function getQueryOptions(category: SearchCategory) {
