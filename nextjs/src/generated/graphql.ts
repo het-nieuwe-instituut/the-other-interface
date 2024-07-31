@@ -45,10 +45,12 @@ export type ArchiveZoomLevel3DetailType = {
   id: Scalars['String']['output'];
   mediaReference?: Maybe<Scalars['String']['output']>;
   mediaType?: Maybe<Scalars['String']['output']>;
+  objectNumber?: Maybe<Scalars['String']['output']>;
   sources?: Maybe<Scalars['String']['output']>;
   systemOfArrangement?: Maybe<Scalars['String']['output']>;
   thumbnail?: Maybe<Array<Scalars['String']['output']>>;
   title?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<EntityNames>;
 };
 
 
@@ -61,8 +63,13 @@ export type ArchivesRecordZoomLevel3Type = {
   access?: Maybe<Scalars['String']['output']>;
   asteriskSuggestions?: Maybe<Array<BaseArchiveRecordZoomLevel3AsteriskType>>;
   creators?: Maybe<Scalars['String']['output']>;
+  custodialHistory?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
   descriptionLevel?: Maybe<Scalars['String']['output']>;
   enrichedSources?: Maybe<Array<EnrichedBaseArchivesRecordZoomLevel3Type>>;
+  existence?: Maybe<Scalars['String']['output']>;
+  existenceLocation?: Maybe<Scalars['String']['output']>;
+  externalURI?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   location?: Maybe<Scalars['String']['output']>;
   period?: Maybe<Scalars['String']['output']>;
@@ -71,7 +78,9 @@ export type ArchivesRecordZoomLevel3Type = {
   referenceCode?: Maybe<Scalars['String']['output']>;
   rights?: Maybe<Scalars['String']['output']>;
   size?: Maybe<Scalars['String']['output']>;
+  sources?: Maybe<Scalars['String']['output']>;
   subject?: Maybe<Scalars['String']['output']>;
+  systemOfArrangement?: Maybe<Scalars['String']['output']>;
   titleType?: Maybe<Scalars['String']['output']>;
 };
 
@@ -447,10 +456,12 @@ export type EnrichedBaseArchiveZoomLevel3DetailType = {
   id: Scalars['String']['output'];
   mediaReference?: Maybe<Scalars['String']['output']>;
   mediaType?: Maybe<Scalars['String']['output']>;
+  objectNumber?: Maybe<Scalars['String']['output']>;
   sources?: Maybe<Scalars['String']['output']>;
   systemOfArrangement?: Maybe<Scalars['String']['output']>;
   thumbnail?: Maybe<Array<Scalars['String']['output']>>;
   title?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<EntityNames>;
 };
 
 export type EnrichedBaseArchivesRecordZoomLevel3Type = {
