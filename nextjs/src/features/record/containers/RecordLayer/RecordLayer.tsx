@@ -30,22 +30,14 @@ import { RecordBottomContent } from '../RecordBottomContent/RecordBottomContent'
 function getEnrichedSources(data: ReturnType<typeof useZoomLevel3Query>['data']) {
   if (!data) return []
   if (
-    data?.__typename === 'ArchiveZoomLevel3DetailType' &&
+    (data?.__typename === 'ArchiveZoomLevel3DetailType' ||
+      data?.__typename === 'ObjectsZoomLevel3DetailType' ||
+      data?.__typename === 'PeopleZoomLevel3DetailType' ||
+      data?.__typename === 'PublicationZoomLevel3DetailType') &&
     (data?.enrichedSources?.length ?? 0) > 0
   )
     return data.enrichedSources
-  if (
-    data?.__typename === 'ObjectsZoomLevel3DetailType' &&
-    (data?.enrichedSources?.length ?? 0) > 0
-  )
-    return data.enrichedSources
-  if (data?.__typename === 'PeopleZoomLevel3DetailType' && (data?.enrichedSources?.length ?? 0) > 0)
-    return data.enrichedSources
-  if (
-    data?.__typename === 'PublicationZoomLevel3DetailType' &&
-    (data?.enrichedSources?.length ?? 0) > 0
-  )
-    return data.enrichedSources
+
   return []
 }
 
