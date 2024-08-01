@@ -82,7 +82,7 @@ export const CarouselGridPagination = ({
 }: CarouselGridPaginationProps) => {
   return (
     <div className={cn('flex h-full items-center justify-center gap-2 -mr-3 ml-auto', className)}>
-      <button onClick={onPrevious} disabled={hidePrevious}>
+      <button onClick={onPrevious} disabled={hidePrevious} aria-label="previous">
         <NavArrowLeft
           className={cn(
             hidePrevious && 'opacity-20',
@@ -90,7 +90,7 @@ export const CarouselGridPagination = ({
           )}
         />
       </button>
-      <button onClick={onNext} disabled={hideNext}>
+      <button onClick={onNext} disabled={hideNext} aria-label="next">
         <NavArrowRight
           className={cn(
             hideNext && 'opacity-20',

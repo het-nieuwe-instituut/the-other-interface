@@ -21,3 +21,12 @@ query ZoomLevel3People($id: String!, $locale: Locale!) {
     }
   }
 }
+
+query ZoomLevel3PeopleSmall($id: String!, $locale: Locale!) {
+  zoomLevel3People(id: $id, locale: $locale) {
+    __typename
+    id
+    title
+    thumbnail
+  }
+}

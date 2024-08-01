@@ -39,6 +39,7 @@ export const Record = React.memo(
       id,
       locale: lang,
       options: { refetchOnWindowFocus: false },
+      small: true,
     })
     const {
       data,

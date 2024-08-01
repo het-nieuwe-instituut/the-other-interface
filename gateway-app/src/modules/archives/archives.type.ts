@@ -88,14 +88,29 @@ class BaseArchiveZoomLevel3DetailType {
   @Field(() => String, { nullable: true })
   public objectNumber?: string
 
-  @Field(() => String, { nullable: true })
-  public description?: string | null
-
   @Field({ nullable: true })
   public mediaType?: string
 
   @Field({ nullable: true })
   public mediaReference?: string
+
+  @Field(() => String, { nullable: true })
+  public description?: string | null
+
+  @Field({ nullable: true })
+  public custodialHistory?: string
+
+  @Field({ nullable: true })
+  public systemOfArrangement?: string
+
+  @Field(() => String, { nullable: true })
+  public existence?: string | null
+
+  @Field(() => String, { nullable: true })
+  public existenceLocation?: string | null
+
+  @Field(() => String, { nullable: true })
+  public sources?: string | null
 }
 
 @ObjectType()

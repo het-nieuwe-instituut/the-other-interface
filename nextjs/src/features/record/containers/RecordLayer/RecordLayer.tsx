@@ -11,17 +11,17 @@ import {
   AsteriskAnnotationItem,
 } from '@/features/ui/components/Sources/AsteriskAnnotations'
 import {
-  ExternalSourceGroup,
-  ExternalSourceItem,
-} from '@/features/ui/components/Sources/ExternalSourceAnnotations'
-import {
   ThumbnailCarousel,
   ThumbnailCarouselItem,
 } from '@/features/ui/components/thumbnail-carousel/ThumbnailCarousel'
 import { VideoPlayer } from '@/features/ui/components/video/VideoPlayer'
 import { useParams } from 'next/navigation'
 import {
-  ArchivesRecordZoomLevel3Type,
+  ArchiveZoomLevel3DetailType,
+  EnrichedBaseArchiveZoomLevel3DetailType,
+  EnrichedBaseObjectsZoomLevel3DetailType,
+  EnrichedBasePeopleZoomLevel3DetailType,
+  EnrichedBasePublicationZoomLevel3DetailType,
   PublicationZoomLevel3DetailType,
 } from 'src/generated/graphql'
 import { LayerWrapper } from '../../../shared/components/Layers/LayerWrapper'
@@ -30,6 +30,27 @@ import { OmitEnrichedData } from '../../configs/recordMetaFieldOrderConfig'
 import { useZoomLevel3Query } from '../../hooks/useZoomLevel3Query'
 import { useZoomLevel3RecordQuery } from '../../hooks/useZoomLevel3RecordQuery'
 import { RecordBottomContent } from '../RecordBottomContent/RecordBottomContent'
+
+function getEnrichedSources(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any
+): (
+  | NonNullable<EnrichedBaseArchiveZoomLevel3DetailType>
+  | NonNullable<EnrichedBasePeopleZoomLevel3DetailType>
+  | NonNullable<EnrichedBaseObjectsZoomLevel3DetailType>
+  | NonNullable<EnrichedBasePublicationZoomLevel3DetailType>
+)[] {
+  if (
+    data?.__typename === 'PublicationZoomLevel3DetailType' ||
+    data?.__typename === 'PeopleZoomLevel3DetailType' ||
+    data?.__typename === 'ObjectsZoomLevel3DetailType' ||
+    data?.__typename === 'ArchiveZoomLevel3DetailType'
+  ) {
+    const enrichedSources = data?.enrichedSources || []
+    return (data?.enrichedSources?.length ?? 0) > 0 ? enrichedSources : []
+  }
+  return []
+}
 
 export const RecordLayer = () => {
   const { t } = useTypeSafeTranslation('common')
@@ -49,6 +70,10 @@ export const RecordLayer = () => {
     options: { refetchOnWindowFocus: false, suspense: false },
     locale,
   })
+  const enrichedSources = getEnrichedSources(zoomLevel3) ?? []
+  const enrichedTitles = enrichedSources?.filter(v => 'title' in v && !!v.title)
+  const enrichedDescriptions = enrichedSources?.filter(v => !!v.description)
+  const enrichedThumbnails = enrichedSources?.filter(v => !!v.thumbnail)
 
   return (
     <LayerWrapper
@@ -63,6 +88,8 @@ export const RecordLayer = () => {
                 preface={zoomLevel3?.description ?? undefined}
                 constrainPreface={true}
                 splitByHtmlBreaks
+                enrichedTitles={enrichedTitles}
+                enrichedDescriptions={enrichedDescriptions}
               ></PageHeader>
 
               {zoomLevel3?.__typename === 'ArchiveZoomLevel3DetailType' &&
@@ -86,26 +113,6 @@ export const RecordLayer = () => {
                   })}
                 </AsteriskAnnotationGroup>
               ) : null}
-              {zoomLevel3?.__typename === 'ArchiveZoomLevel3DetailType' &&
-              (zoomLevel3?.enrichedSources?.length ?? 0) > 0 ? (
-                <ExternalSourceGroup count={zoomLevel3.enrichedSources?.length ?? 0}>
-                  {zoomLevel3.enrichedSources?.map((source, index) => {
-                    const href = source.externalSourceUrl
-                    if (!href) {
-                      return null
-                    }
-                    return (
-                      <ExternalSourceItem
-                        href={href}
-                        key={index}
-                        externalSource={source.externalSourceType}
-                      >
-                        {source.description ?? ''}
-                      </ExternalSourceItem>
-                    )
-                  })}
-                </ExternalSourceGroup>
-              ) : null}
 
               {zoomLevel3?.__typename === 'ObjectsZoomLevel3DetailType' &&
               (zoomLevel3?.asteriskSuggestions?.length ?? 0) > 0 ? (
@@ -125,26 +132,6 @@ export const RecordLayer = () => {
                     )
                   })}
                 </AsteriskAnnotationGroup>
-              ) : null}
-              {zoomLevel3?.__typename === 'ObjectsZoomLevel3DetailType' &&
-              (zoomLevel3?.enrichedSources?.length ?? 0) > 0 ? (
-                <ExternalSourceGroup count={zoomLevel3.enrichedSources?.length ?? 0}>
-                  {zoomLevel3.enrichedSources?.map((source, index) => {
-                    const href = source.externalSourceUrl
-                    if (!href) {
-                      return null
-                    }
-                    return (
-                      <ExternalSourceItem
-                        href={href}
-                        key={index}
-                        externalSource={source.externalSourceType}
-                      >
-                        {source.description ?? ''}
-                      </ExternalSourceItem>
-                    )
-                  })}
-                </ExternalSourceGroup>
               ) : null}
 
               {zoomLevel3?.__typename === 'PeopleZoomLevel3DetailType' &&
@@ -166,47 +153,6 @@ export const RecordLayer = () => {
                   })}
                 </AsteriskAnnotationGroup>
               ) : null}
-              {zoomLevel3?.__typename === 'PeopleZoomLevel3DetailType' &&
-              (zoomLevel3?.enrichedSources?.length ?? 0) > 0 ? (
-                <ExternalSourceGroup count={zoomLevel3.enrichedSources?.length ?? 0}>
-                  {zoomLevel3.enrichedSources?.map((source, index) => {
-                    const href = source.externalSourceUrl
-                    if (!href) {
-                      return null
-                    }
-                    return (
-                      <ExternalSourceItem
-                        href={href}
-                        key={index}
-                        externalSource={source.externalSourceType}
-                      >
-                        {source.description ?? ''}
-                      </ExternalSourceItem>
-                    )
-                  })}
-                </ExternalSourceGroup>
-              ) : null}
-
-              {zoomLevel3?.__typename === 'PublicationZoomLevel3DetailType' &&
-              (zoomLevel3?.enrichedSources?.length ?? 0) > 0 ? (
-                <ExternalSourceGroup count={zoomLevel3.enrichedSources?.length ?? 0}>
-                  {zoomLevel3.enrichedSources?.map((source, index) => {
-                    const href = source.externalSourceUrl
-                    if (!href) {
-                      return null
-                    }
-                    return (
-                      <ExternalSourceItem
-                        href={href}
-                        key={index}
-                        externalSource={source.externalSourceType}
-                      >
-                        {source.description ?? ''}
-                      </ExternalSourceItem>
-                    )
-                  })}
-                </ExternalSourceGroup>
-              ) : null}
 
               {zoomLevel3 && 'mediaReference' in zoomLevel3 && 'mediaType' in zoomLevel3 && (
                 <MediaPlayer
@@ -223,15 +169,16 @@ export const RecordLayer = () => {
                       index={index}
                       src={item}
                       alt={`${zoomLevel3.title} image #${index + 1}` ?? ''}
+                      enrichedSource={enrichedThumbnails?.at(index)}
                     />
                   ))}
                 </ThumbnailCarousel>
               )}
 
-              {zoomLevel3Record?.__typename === 'ArchivesRecordZoomLevel3Type' ? (
-                <ArchivesDescriptions meta={zoomLevel3Record} />
+              {zoomLevel3 && zoomLevel3.__typename === 'ArchiveZoomLevel3DetailType' ? (
+                <ArchivesDescriptions data={zoomLevel3} />
               ) : null}
-              {zoomLevel3?.__typename === 'PublicationZoomLevel3DetailType' ? (
+              {zoomLevel3 && zoomLevel3.__typename === 'PublicationZoomLevel3DetailType' ? (
                 <PublicationsDescriptions data={zoomLevel3} />
               ) : null}
             </div>
@@ -270,10 +217,10 @@ const MediaPlayer = ({ mediaReference, mediaType }: MediaPlayerProps) => {
 }
 
 interface ArchiveMetaDescriptionProps {
-  meta: OmitEnrichedData<ArchivesRecordZoomLevel3Type>
+  data: OmitEnrichedData<ArchiveZoomLevel3DetailType>
 }
 
-const ArchivesDescriptions = ({ meta }: ArchiveMetaDescriptionProps) => {
+const ArchivesDescriptions = ({ data }: ArchiveMetaDescriptionProps) => {
   const { t: recordMetaT } = useTypeSafeTranslation('recordMeta')
   const keys = [
     'custodialHistory',
@@ -287,7 +234,7 @@ const ArchivesDescriptions = ({ meta }: ArchiveMetaDescriptionProps) => {
     <div className="mt-10 flex flex-col gap-10 empty:mt-0">
       {keys.map((k, i) => {
         const title = recordMetaT(k)
-        const preface = meta[k] ?? undefined
+        const preface = data[k] ?? undefined
 
         if (!title || !preface) {
           return null

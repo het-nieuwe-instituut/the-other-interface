@@ -11,13 +11,6 @@ query ZoomLevel3ArchiveRecord($id: String!, $locale: Locale!) {
     photographCreator
     rights
     permanentLink
-    externalURI
-    description
-    custodialHistory
-    systemOfArrangement
-    sources
-    existence
-    existenceLocation
     location
     subject
     creators

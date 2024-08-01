@@ -44,7 +44,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           'absolute top-0 left-0 object-center object-contain opacity-100',
           !showFallback && isLoaded && 'opacity-0'
         )}
-        onContextMenu={() => false}
+        onContextMenu={e => e.preventDefault()}
         fill={true}
       />
 
