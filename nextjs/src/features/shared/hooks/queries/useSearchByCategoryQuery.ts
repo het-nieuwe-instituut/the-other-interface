@@ -8,15 +8,23 @@ import {
   SearchCategory,
 } from '@/features/shared/utils/categories'
 import { useQuery } from '@tanstack/react-query'
-import { Locale, StringFilterInput, TriplyRecordFiltersInput } from 'src/generated/graphql'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useDispatch } from 'react-redux'
+import {
+  InputMaybe,
+  Locale,
+  SelectedFilterSuggestion,
+  StringFilterInput,
+  TriplyRecordFiltersInput,
+} from 'src/generated/graphql'
 import { STORIES_PER_PAGE, ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
 import { storyToRecordMapper } from '../../helpers/extractStoryData'
 import { mapCategoryToTriplyEnum } from '../../helpers/mapCategoryToTriplyEnum'
 import mapSelectedHighlightToSearch from '../../mappers/mapSelectedHighlightToSearch'
+import { sharedActions } from '../../stores/shared.store'
 import initApiClientService from '../../utils/initApiClientService'
-import { Filter, FilterArray, useFilterActions } from '../search/useFilters'
+import { Filter, useDecodedSearchFilters, useSelectedFilters } from '../search/useFilters'
 import { useLocale } from '../useLocale'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 type SearchArgs = {
   category: SearchCategory
@@ -25,7 +33,7 @@ type SearchArgs = {
   enabled?: boolean
   filters?: Filter[]
   fallback?: boolean
-  selectedFilters: FilterArray
+  selectedFilters: InputMaybe<Array<SelectedFilterSuggestion> | SelectedFilterSuggestion>
 }
 
 export function useSearchByCategoryQuery({
@@ -34,17 +42,21 @@ export function useSearchByCategoryQuery({
   page = 1,
   enabled = true,
   fallback = false,
-  selectedFilters,
 }: SearchArgs) {
   const api = initApiClientService()
   const locale = useLocale()
   const router = useRouter()
   const searchParams = useSearchParams()
   const pathname = usePathname()
+  const dispatch = useDispatch()
+  const { decodedFilters } = useDecodedSearchFilters()
+  const selectedFilters = useSelectedFilters()
 
   async function queryFn() {
-    const collectionHighlightsActive = selectedFilters.some(f => f.id === COLLECTION_HILIGHT_ID)
-
+    const selectedFiltersToInput = selectedFilters.map(f => ({ key: f.key, value: f.value }))
+    const collectionHighlightsActive =
+      decodedFilters.some(f => f.id === COLLECTION_HILIGHT_ID) ||
+      selectedFilters.some(f => f.id === COLLECTION_HILIGHT_ID)
     if (collectionHighlightsActive) {
       const type = searchCategoryToTriplyCategory(category)
       const labelFilter: StringFilterInput = { containsi: text || undefined }
@@ -77,11 +89,12 @@ export function useSearchByCategoryQuery({
         )
 
         // doing this sideeffect here because other places would be too complicated
+        dispatch(sharedActions.setFilters({ selectedFilters: sanitizedFilters }))
         const current = new URLSearchParams(Array.from(searchParams?.entries() ?? []))
         current.delete('filters')
         router.replace(`${pathname}?${current.toString()}`)
 
-        return searchByCategory(api, locale, selectedFilters, {
+        return searchByCategory(api, locale, decodedFilters, {
           category,
           text,
           page,
@@ -96,18 +109,18 @@ export function useSearchByCategoryQuery({
       }
     }
 
-    return searchByCategory(api, locale, selectedFilters, {
+    return searchByCategory(api, locale, decodedFilters, {
       category,
       text,
       page,
-      selectedFilters: selectedFilters,
+      selectedFilters: selectedFiltersToInput,
     })
   }
 
   const queryKey =
     category === SEARCH_CATEGORIES.stories
-      ? ['searchByStories', category, text, page, locale, selectedFilters]
-      : ['search', category, text, page, selectedFilters]
+      ? ['searchByStories', category, text, page, locale, decodedFilters]
+      : ['search', category, text, page, decodedFilters]
 
   return useQuery(queryKey, queryFn, {
     enabled,

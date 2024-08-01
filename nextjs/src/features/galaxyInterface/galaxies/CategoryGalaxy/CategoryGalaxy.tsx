@@ -17,7 +17,6 @@ import { isSearchCategory } from '@/features/shared/utils/categories'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { useArrowNavigation } from '@/features/ui/hooks/useArrowNavigation'
 import { useSearchParamPagination } from '@/features/ui/hooks/useSearchParamPagination'
-import { useSearchParams } from 'next/navigation'
 import React, { useContext } from 'react'
 import { useSelector } from 'react-redux'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
@@ -48,7 +47,6 @@ export const CategoryGalaxy = () => {
     pageNumber
   )
 
-  const search = useSearchParamSearchValue()
   const category = useSearchParamCategory()
 
   if (!isSearchCategory(category)) {
@@ -63,7 +61,7 @@ export const CategoryGalaxy = () => {
           currentTemplate,
         }}
       >
-        <CategoryGalaxyContent key={`${pageNumber ?? '1'}-${category}-${search}`} />
+        <CategoryGalaxyContent key={`${pageNumber ?? '1'}`} />
       </CategoryGalaxyTemplateContext.Provider>
     </GalaxyPaginationAnimationStateProvider>
   )

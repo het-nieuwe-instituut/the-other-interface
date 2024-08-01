@@ -1,7 +1,7 @@
 import { Record } from '../Record/Record'
 
 import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
-import { useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
+import { useDecodedSearchFilters } from '@/features/shared/hooks/search/useFilters'
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { cn } from '@/features/ui/utils/cn'
@@ -60,7 +60,7 @@ export const Records: React.FC<Props> = ({ pageAmount, records }) => {
   } = useContext(GalaxyPaginationAnimationStateContext)
   const { animationState: galaxyZoomAnimationState } = useContext(GalaxyZoomAnimationStateContext)
   const { pageNumber } = usePageNumber()
-  const selectedFilters = useSelectedFilters()
+  const { decodedFilters } = useDecodedSearchFilters()
 
   const isLastPage = pageNumber === pageAmount
   const nextPage = pageNumber + 1
@@ -70,7 +70,7 @@ export const Records: React.FC<Props> = ({ pageAmount, records }) => {
     text: search,
     page: nextPage,
     enabled: !isLastPage,
-    selectedFilters,
+    selectedFilters: decodedFilters,
   })
 
   const nextRecords = useMemo(() => nextResults?.items || [], [nextResults?.items])

@@ -8,6 +8,7 @@ import MobileOverlayProvider from '@/features/shared/components/MobileOverlayPro
 import SuspenseLoader from '@/features/shared/components/SuspenseLoader/SuspenseLoader'
 import {
   useSearchParamCategory,
+  useSearchParamFilters,
   useSearchParamSearchValue,
 } from '@/features/shared/hooks/useZoom2Params'
 import { EditorialSkeleton } from '@/features/ui/components/Skeletons/EditorialSkeleton'
@@ -19,6 +20,11 @@ import {
 } from 'src/generated/graphql'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
 import { BelowTheFoldWrapper } from '@/features/editorial/components/BelowTheFoldWrapper'
+import {
+  useDecodedSearchFilters,
+  useEncodedSearchFilters,
+} from '@/features/shared/hooks/search/useFilters'
+import { useGetRawPath } from '@/features/ui/utils/route'
 
 export interface LandingPageProps {
   editorialData?:
@@ -30,10 +36,10 @@ export interface LandingPageProps {
 export const LandingpageContainer: React.FC<LandingPageProps> = ({ editorialData }) => {
   const category = useSearchParamCategory()
   const searchValue = useSearchParamSearchValue()
-
+  const encodedFilters = useSearchParamFilters()
   return (
     <div>
-      <GalaxyZoomAnimationStateProvider key={`${searchValue}-${category}`}>
+      <GalaxyZoomAnimationStateProvider key={`${category}-${searchValue}-${encodedFilters ?? ''}`}>
         <GalaxyInterface>
           <MobileOverlayProvider>
             <CategoryGalaxy />

@@ -2,10 +2,7 @@ import { searchCategoryToTriplyCategory } from '@/features/galaxyInterface/galax
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { State } from '@/features/shared/configs/store'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
-import {
-  useDecodedSearchFilters,
-  useFilterActions,
-} from '@/features/shared/hooks/search/useFilters'
+import { useFilterActions, useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useOutsideClick } from '@/features/shared/hooks/ui/useOutsideClick'
 import { sharedActions } from '@/features/shared/stores/shared.store'
@@ -44,8 +41,8 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
     filterInputRef,
     isNoActiveSearch,
   })
-  const { decodedFilters } = useDecodedSearchFilters()
-  const { offset, searchBarHeight, wrapRef } = useSearchBarPosition(decodedFilters)
+  const selectedFilters = useSelectedFilters()
+  const { offset, searchBarHeight, wrapRef } = useSearchBarPosition(selectedFilters)
   const { isSearchModeActive, searchValue } = useSelector((state: State) => state.shared)
 
   const handleGoClick = useCallback(() => {
@@ -131,7 +128,7 @@ export const InputBar = React.forwardRef<
   }
 >(({ onTyping, openSearch, onFocus, filterInputRef }, ref) => {
   const { t } = useTypeSafeTranslation('category')
-  const { decodedFilters } = useDecodedSearchFilters()
+  const selectedFilters = useSelectedFilters()
   const { searchCategory, isCategorySuggestionsOpen, searchValue } = useSelector(
     (state: State) => state.shared
   )
@@ -158,7 +155,7 @@ export const InputBar = React.forwardRef<
           selectedOption={searchCategory ? t(searchCategory) : ''}
         />
       </div>
-      {decodedFilters.map(filter => (
+      {selectedFilters.map(filter => (
         <div key={filter.id} className="mr-2 h-[60px] max-w-full pt-1">
           <SearchFilterBox
             category={filter.key}
@@ -205,8 +202,8 @@ export const SearchSuggestionsBar = ({
     onSelectFilter: onFocus,
     onRemoveFilter: onFocus,
   })
-  const { decodedFilters } = useDecodedSearchFilters()
-  const isCollectionHighlightsSelected: boolean = decodedFilters.some(
+  const selectedFilters = useSelectedFilters()
+  const isCollectionHighlightsSelected: boolean = selectedFilters.some(
     filter => filter.id === COLLECTION_HILIGHT_ID
   )
 

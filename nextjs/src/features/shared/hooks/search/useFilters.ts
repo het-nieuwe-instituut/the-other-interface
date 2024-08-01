@@ -28,6 +28,7 @@ export const useFilterActions = ({ onSelectFilter, onRemoveFilter }: UseFiltersP
       }
 
       dispatch(sharedActions.setFilters({ selectedFilters: [...selectedFilters, filter] }))
+      dispatch(sharedActions.setSearch({ searchValue: '' }))
       dispatch(sharedActions.categorySuggestionsOpen({ categorySuggestionsOpen: false }))
 
       if (onSelectFilter) {

@@ -64,3 +64,13 @@ export function useSearchParamSearchResult() {
 
   return !!val
 }
+
+export function useSearchParamFilters() {
+  const searchParams = useSearchParams()
+
+  const val = useMemo(() => {
+    return searchParams?.get('filters')
+  }, [searchParams])
+
+  return val
+}
