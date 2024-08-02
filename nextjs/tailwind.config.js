@@ -20,6 +20,11 @@ module.exports = {
           from: { opacity: 0, filter: 'blur(10px)' },
           to: { opacity: 1, filter: 'blur(0px)' },
         },
+        fromHideToBlur: {
+          initial: { opacity: 0 },
+          from: { opacity: 0, filter: 'blur(10px)' },
+          to: { opacity: 1, filter: 'blur(10px)' },
+        },
         fromBlurredToHide: {
           from: { opacity: 1, filter: 'blur(10px)' },
           to: { opacity: 0, filter: 'blur(10px)' },

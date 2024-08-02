@@ -52,7 +52,10 @@ export const getNextItemsAnimationClassNames = (
     conditions === 'previousAnimationWasForward' &&
       hasItems &&
       'animate-[fromHideToShow_500ms_ease-in-out_forwards]',
-    !animationState && 'blur-[10px]',
+    !animationState &&
+      conditions === 'firstRender' &&
+      'animate-[fromHideToBlur_500ms_ease-in-out_forwards]',
+    !animationState && conditions !== 'firstRender' && 'blur-[10px]',
     animationState === 'forward' && 'animate-[toUnblur_500ms_ease-in-out_forwards]',
     animationState === 'backwards' && 'animate-[fromBlurredToHide_500ms_ease-in-out_forwards]'
   )
