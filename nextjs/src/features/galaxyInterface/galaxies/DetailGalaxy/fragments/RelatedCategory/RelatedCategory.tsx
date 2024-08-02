@@ -80,6 +80,7 @@ export const RelatedCategory: React.FC<Props> = React.memo(props => {
     </>
   )
 })
+RelatedCategory.displayName = 'RelatedCategory'
 
 const PositionedRecords = ({
   id,
