@@ -1,5 +1,6 @@
 'use client'
 
+import { BelowTheFoldWrapper } from '@/features/editorial/components/BelowTheFoldWrapper'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { GalaxyZoomAnimationStateProvider } from '@/features/galaxyInterface/galaxies/hooks/GalaxyZoomAnimationStateProvider'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
@@ -19,12 +20,6 @@ import {
   LandingPagePublicationQuery,
 } from 'src/generated/graphql'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
-import { BelowTheFoldWrapper } from '@/features/editorial/components/BelowTheFoldWrapper'
-import {
-  useDecodedSearchFilters,
-  useEncodedSearchFilters,
-} from '@/features/shared/hooks/search/useFilters'
-import { useGetRawPath } from '@/features/ui/utils/route'
 
 export interface LandingPageProps {
   editorialData?:
