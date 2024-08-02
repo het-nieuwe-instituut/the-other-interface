@@ -49,6 +49,7 @@ export const getNextItemsAnimationClassNames = (
   hasItems: boolean
 ) => {
   return cn(
+    conditions === 'firstRender' && 'animate-[fromHideToShow_500ms_ease-in-out_forwards]',
     conditions === 'previousAnimationWasForward' &&
       hasItems &&
       'animate-[fromHideToShow_500ms_ease-in-out_forwards]',
