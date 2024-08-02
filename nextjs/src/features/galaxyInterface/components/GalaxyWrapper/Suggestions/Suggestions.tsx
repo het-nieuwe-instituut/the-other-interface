@@ -96,7 +96,9 @@ export const SuggestionsContainer: React.FC<Props> = ({
       className={cn((isLoading || isError || isEmpty) && 'grid-cols-1 grid')}
       labelClassName={cn((isLoading || isError || isEmpty) && 'w-full')}
     >
-      <Suggestions suggestionsData={items} handleSelectFilter={handleSelectFilter} />
+      {!isLoading && !isError && !isEmpty ? (
+        <Suggestions suggestionsData={items} handleSelectFilter={handleSelectFilter} />
+      ) : null}
     </SuggestionBar>
   )
 }

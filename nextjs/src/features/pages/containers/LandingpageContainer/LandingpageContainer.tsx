@@ -1,5 +1,6 @@
 'use client'
 
+import { BelowTheFoldWrapper } from '@/features/editorial/components/BelowTheFoldWrapper'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { GalaxyZoomAnimationStateProvider } from '@/features/galaxyInterface/galaxies/hooks/GalaxyZoomAnimationStateProvider'
 import { GalaxyInterface } from '@/features/galaxyInterface/GalaxyInterface/GalaxyInterface'
@@ -8,6 +9,7 @@ import MobileOverlayProvider from '@/features/shared/components/MobileOverlayPro
 import SuspenseLoader from '@/features/shared/components/SuspenseLoader/SuspenseLoader'
 import {
   useSearchParamCategory,
+  useSearchParamFilters,
   useSearchParamSearchValue,
 } from '@/features/shared/hooks/useZoom2Params'
 import { EditorialSkeleton } from '@/features/ui/components/Skeletons/EditorialSkeleton'
@@ -18,7 +20,6 @@ import {
   LandingPagePublicationQuery,
 } from 'src/generated/graphql'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
-import { BelowTheFoldWrapper } from '@/features/editorial/components/BelowTheFoldWrapper'
 
 export interface LandingPageProps {
   editorialData?:
@@ -30,10 +31,10 @@ export interface LandingPageProps {
 export const LandingpageContainer: React.FC<LandingPageProps> = ({ editorialData }) => {
   const category = useSearchParamCategory()
   const searchValue = useSearchParamSearchValue()
-
+  const encodedFilters = useSearchParamFilters()
   return (
     <div>
-      <GalaxyZoomAnimationStateProvider key={`${searchValue}-${category}`}>
+      <GalaxyZoomAnimationStateProvider key={`${category}-${searchValue}-${encodedFilters ?? ''}`}>
         <GalaxyInterface>
           <MobileOverlayProvider>
             <CategoryGalaxy />

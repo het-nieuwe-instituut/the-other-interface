@@ -3,6 +3,9 @@ import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 import { useLocale } from './useLocale'
 
+/**
+ * @deprecated DO NOT USE ON NEW FEATURES
+ */
 export const useZoom2Params = () => {
   const searchParams = useSearchParams()
   const lang = useLocale()
@@ -39,5 +42,35 @@ export function useSearchParamSearchValue() {
     return searchParams?.get('search')
   }, [searchParams])
 
-  return search
+  return search || undefined
+}
+
+export function useSearchParamFallback() {
+  const searchParams = useSearchParams()
+
+  const val = useMemo(() => {
+    return searchParams?.get('fallback')
+  }, [searchParams])
+
+  return !!val
+}
+
+export function useSearchParamSearchResult() {
+  const searchParams = useSearchParams()
+
+  const val = useMemo(() => {
+    return searchParams?.get('searchResult')
+  }, [searchParams])
+
+  return !!val
+}
+
+export function useSearchParamFilters() {
+  const searchParams = useSearchParams()
+
+  const val = useMemo(() => {
+    return searchParams?.get('filters')
+  }, [searchParams])
+
+  return val
 }

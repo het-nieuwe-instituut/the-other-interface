@@ -1,23 +1,14 @@
 import { searchCategoryToTriplyCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
-import { GalaxyZoomAnimationStateContext } from '@/features/galaxyInterface/galaxies/hooks/GalaxyZoomAnimationStateProvider'
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { State } from '@/features/shared/configs/store'
 import { FOOTER_Z_INDEX } from '@/features/shared/constants/mainConstants'
-import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import {
-  useEncodedSearchFilters,
-  useFilterActions,
-  useSelectedFilters,
-} from '@/features/shared/hooks/search/useFilters'
+import { useFilterActions, useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useEnterKey } from '@/features/shared/hooks/ui/useEnterKey'
 import { useOutsideClick } from '@/features/shared/hooks/ui/useOutsideClick'
-import { useLocale } from '@/features/shared/hooks/useLocale'
 import { sharedActions } from '@/features/shared/stores/shared.store'
-import { useDelayedNextRoutePush } from '@/features/ui/components/DelayedNextLink/DelayedNextLink'
 import { cn } from '@/features/ui/utils/cn'
 import CloseIconSmall from '@/icons/close-icon-small.svg'
-import React, { CSSProperties, useCallback, useContext, useMemo, useRef, useState } from 'react'
+import React, { CSSProperties, useCallback, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
 import { COLLECTION_HILIGHT_ID, SuggestionsContainer } from '../Suggestions/Suggestions'
@@ -44,38 +35,21 @@ type Props = {
 export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }) => {
   isNoActiveSearch = true
   const filterInputRef = useRef<HTMLInputElement>(null)
-  const searchBarRef = useRef<HTMLDivElement>(null)
-  const delayedPush = useDelayedNextRoutePush(600)
+  const searchBarRef = useRef<HTMLFormElement>(null)
   const [isUserTyping, setIsUserTyping] = useState(false)
   const { closeSearchMode, clearAllSearch, openSearch, focus } = useSearchBarActions({
     filterInputRef,
     isNoActiveSearch,
   })
-  const lang = useLocale()
-  const { encodedFilters } = useEncodedSearchFilters()
   const selectedFilters = useSelectedFilters()
   const { offset, searchBarHeight, wrapRef } = useSearchBarPosition(selectedFilters)
-  const { isSearchModeActive, searchCategory, searchValue } = useSelector(
-    (state: State) => state.shared
-  )
-  const searchParam = searchValue ? `&search=${searchValue}` : ''
-  const filtersParam = encodedFilters ? `&filters=${encodedFilters}` : ''
-  let searchUrl = `/landingpage?category=${searchCategory}${searchParam}${filtersParam}&searchResult=true`
-  searchUrl = addLocaleToUrl(searchUrl, lang)
-
-  const { setAnimationState } = useContext(GalaxyZoomAnimationStateContext)
+  const { isSearchModeActive, searchValue } = useSelector((state: State) => state.shared)
 
   const handleGoClick = useCallback(() => {
     setIsUserTyping(false)
     closeSearchMode(false)
   }, [closeSearchMode])
 
-  useEnterKey(() => {
-    setAnimationState('forward')
-    delayedPush(searchUrl)
-
-    handleGoClick()
-  })
   useOutsideClick(searchBarRef, () => {
     closeSearchMode(true)
   })
@@ -83,7 +57,11 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
 
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-    <div
+    <form
+      id="search-form"
+      onSubmit={e => {
+        e.preventDefault()
+      }}
       style={{ '--z-index': FOOTER_Z_INDEX, '--offset': `${offset}px` } as CSSProperties}
       className={cn(
         `grid pl-4 relative h-auto grid-cols-[160px,minmax(20px,1fr),minmax(95px,auto)] gap-4 bg-blue-100 z-[var(--z-index)] text-pink-100 bottom-[var(--offset)]
@@ -110,7 +88,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
       <div className="flex h-[60px] items-center gap-[12px] self-end pt-1">
         {isSearchModeActive ? (
           <>
-            <GoButton href={searchUrl} onClick={handleGoClick} />
+            <GoButton onGoClick={handleGoClick} />
             <CloseButton onClick={clearAllSearch} />
           </>
         ) : isNoActiveSearch ? (
@@ -136,7 +114,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
         isUserTyping={isUserTyping}
         searchBarHeight={searchBarHeight}
       />
-    </div>
+    </form>
   )
 }
 

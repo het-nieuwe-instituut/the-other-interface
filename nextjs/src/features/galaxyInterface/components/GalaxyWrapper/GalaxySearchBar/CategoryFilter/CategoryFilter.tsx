@@ -23,6 +23,7 @@ export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOptio
       )}
       aria-label={ariaLabel}
       onClick={onClick}
+      type="button"
     >
       <div className="relative flex max-w-full items-center justify-between pb-2 pt-1">
         <p className={cn('truncate mr-1', TypographyVariants({ socialLarge: 'label' }))}>
