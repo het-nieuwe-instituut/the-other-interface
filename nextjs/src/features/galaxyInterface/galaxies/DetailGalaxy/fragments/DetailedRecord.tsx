@@ -10,6 +10,7 @@ import { useContext } from 'react'
 import { GalaxyZoomAnimationStateContext } from '../../hooks/GalaxyZoomAnimationStateProvider'
 import { useStoryOrRecordImageQuery } from '../../MainGalaxy/hooks/useStoryOrRecordImageQuery'
 import { useZoomLevel3Query } from '@/features/record/hooks/useZoomLevel3Query'
+import { GalaxyPaginationAnimationStateContext } from '../../hooks/GalaxyPaginationAnimationStateProvider'
 
 interface Props {
   className?: string
@@ -22,6 +23,7 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
   const id = params?.id as string
   const locale = useLocale()
   const { animationState } = useContext(GalaxyZoomAnimationStateContext)
+  const { conditions } = useContext(GalaxyPaginationAnimationStateContext)
 
   const { data: record, isLoading } = useZoomLevel3Query({
     type: category,
@@ -64,6 +66,7 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
             'mt-2 flex w-full flex-1 flex-col text-blue-100',
             !(animationState === 'forward' || animationState === 'backwards') &&
               !isLoading &&
+              conditions === 'firstRender' &&
               'animate-[fromHideToShow_1000ms_ease-in-out_forwards]',
             isLoading && 'opacity-0'
           )}

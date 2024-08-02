@@ -10,7 +10,7 @@ import { useSearchParamPagination } from '@/features/ui/hooks/useSearchParamPagi
 import { cn } from '@/features/ui/utils/cn'
 import { useIsFetching } from '@tanstack/react-query'
 import { useParams, useSearchParams } from 'next/navigation'
-import React, { useContext } from 'react'
+import React, { useCallback, useContext } from 'react'
 import { useSelector } from 'react-redux'
 import { GalaxyFooter } from '../../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyPagination } from '../../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
@@ -52,11 +52,17 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
     countData?.totalPages ?? 0,
     false
   )
-  const isFetching = useIsFetching({
+  const isFetchingGalaxyItems = useIsFetching({
     predicate: query => {
       const key = query.queryKey.at(0) as string
       return key
-        ? ['record-relations', 'record-relations-count', 'record-detail'].includes(key)
+        ? [
+            'record-relations',
+            'record-relations-count',
+            'record-detail',
+            'record-relations-positons',
+            'related-stories',
+          ].includes(key)
         : false
     },
   })
@@ -67,10 +73,22 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
     disabled: isSearchModeActive,
   })
 
-  const renderMainContent = () => {
-    return (
-      <>
-        <Pulse hide={!isFetching} />
+  const handleLeftClick = useCallback(() => {
+    setAnimationState('backwards')
+    decreasePageNumber()
+  }, [setAnimationState, decreasePageNumber])
+
+  const handleRightClick = useCallback(() => {
+    setAnimationState('forward')
+    increasePageNumber()
+  }, [setAnimationState, increasePageNumber])
+
+  return (
+    <div className={'w-screen bg-pink-100'}>
+      <div className="relative mx-auto h-screen w-screen max-w-[1440px] ">
+        <BlurOverlay hide={!isSearchModeActive} />
+
+        <Pulse hide={!isFetchingGalaxyItems} />
 
         <div
           id="detail-galaxy-grid"
@@ -92,15 +110,6 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
 
           <RelatedStories allRelationTotals={countData?.allRelationTotals} />
         </div>
-      </>
-    )
-  }
-
-  return (
-    <div className={'w-screen bg-pink-100'}>
-      <div className="relative mx-auto h-screen w-screen max-w-[1440px] ">
-        <BlurOverlay hide={!isSearchModeActive} />
-        {renderMainContent()}
 
         <GalaxyFooter
           galaxyPagination={
@@ -117,15 +126,5 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
       </div>
     </div>
   )
-
-  function handleLeftClick() {
-    setAnimationState('forward')
-    decreasePageNumber()
-  }
-
-  function handleRightClick() {
-    setAnimationState('forward')
-    increasePageNumber()
-  }
 })
 DetailGalaxyContent.displayName = 'DetailGalaxyContent'

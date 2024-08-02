@@ -1,5 +1,6 @@
 import React, { CSSProperties, useContext, useState } from 'react'
 
+import { getZoom3RecordTask } from '@/features/pages/tasks/getZoom3Record'
 import { StoryOrRecordResponsiveImage } from '@/features/shared/components/ResponsiveImage/StoryOrRecordResponsiveImage'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
@@ -18,7 +19,6 @@ import {
 import { PositionedRecord } from '../types'
 import { RecordText } from './RecordText'
 import { useCalculateLine } from './useCalculateLine'
-import { useZoomLevel3Query } from '@/features/record/hooks/useZoomLevel3Query'
 
 type Props = {
   record: PositionedRecord
@@ -27,26 +27,20 @@ type Props = {
   tooltipPlace?: ReadMoreTooltipProps['place']
   isIdLoading?: boolean
   className?: string
+  recordDetails: Awaited<ReturnType<typeof getZoom3RecordTask>>
 }
 
 export const Record = React.memo(
-  ({ record, style, tabIndex = 0, tooltipPlace = 'bottom', className }: Props) => {
+  ({ record, style, tabIndex = 0, tooltipPlace = 'bottom', className, recordDetails }: Props) => {
     const { t } = useTypeSafeTranslation('category')
     const lang = useLocale()
     const { id, category, position, grid } = record
-    const { data: recordDetails, isLoading } = useZoomLevel3Query({
-      type: category,
-      id,
-      locale: lang,
-      options: { refetchOnWindowFocus: false },
-      small: true,
-    })
     const {
       data,
       isError: isLoadingHoverError,
       isLoading: isLoadingHover,
     } = useZoomHoverRecordResultQuery({ id, category })
-    const { coordinates, ref } = useCalculateLine({ trigger: !isLoading })
+    const { coordinates, ref } = useCalculateLine({ trigger: true })
     const [animationCssVariables, positionRef] = useMoveElementToCenterValues({
       scale: 1.65,
       offsetTop: -80,
@@ -63,7 +57,7 @@ export const Record = React.memo(
           className={cn(
             'group relative size-full opacity-0 transition-opacity',
             clicked === true && 'opacity-100',
-            clicked === false && isLoading === false && 'opacity-100',
+            clicked === false && 'opacity-100',
             animationCssVariables
           )}
         >
@@ -137,7 +131,6 @@ export const Record = React.memo(
                   />
                   <RecordText
                     className={cn(
-                      'animate-[fromHideToShow_1000ms_ease-in-out_forwards]',
                       animationState === 'forward' &&
                         'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
                     )}

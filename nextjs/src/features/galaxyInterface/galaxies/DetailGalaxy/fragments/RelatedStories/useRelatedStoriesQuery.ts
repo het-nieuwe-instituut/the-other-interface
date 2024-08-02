@@ -5,8 +5,8 @@ import { getZoom3RelationsTask } from '@/features/pages/tasks/getZoom3Relations'
 import initApiClientService from '@/features/shared/utils/initApiClientService'
 import { useQuery } from '@tanstack/react-query'
 import { Locale, ZoomLevel3RelationsType } from 'src/generated/graphql'
-import { PositionedRecord } from '../types'
 import { GALAXY_QUERIES_STALE_TIME } from '../../../galaxies.constants'
+import { PositionedRecord } from '../types'
 
 const positioningTemplate: PositioningTemplate[][] = [
   [
@@ -55,6 +55,18 @@ const positioningTemplate: PositioningTemplate[][] = [
   ],
 ]
 
+export const getRelatedStoryKey = ({
+  id,
+  category,
+  page,
+  locale,
+}: {
+  id: string
+  category: CloudCategory
+  page: number
+  locale: Locale
+}) => ['related-stories', id, category, page, locale]
+
 export const useRelatedStoriesQuery = ({
   maxPages,
   page,
@@ -86,7 +98,7 @@ export const useRelatedStoriesQuery = ({
   }
 
   return useQuery({
-    queryKey: ['related-stories', id, category, page, locale],
+    queryKey: getRelatedStoryKey({ id, category, page, locale }),
     queryFn,
     staleTime: GALAXY_QUERIES_STALE_TIME,
     refetchOnWindowFocus: false,

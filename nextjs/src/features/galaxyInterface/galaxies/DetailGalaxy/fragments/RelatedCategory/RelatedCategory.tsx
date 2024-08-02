@@ -1,19 +1,24 @@
 'use client'
 
+import {
+  useIsFetchingRecordDetails,
+  useZoomLevel3Queries,
+} from '@/features/record/hooks/useZoomLevel3Query'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 import { GridParams } from '@/features/shared/types/position'
 import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { keyExtractor } from '@/features/shared/utils/lists'
-import { useContext } from 'react'
+import { useParams, useSearchParams } from 'next/navigation'
+import React, { useContext, useEffect, useState } from 'react'
+import { Locale } from 'src/generated/graphql'
 import {
   GalaxyPaginationAnimationStateContext,
   getItemsAnimationClassNames,
   getNextItemsAnimationClassNames,
 } from '../../../hooks/GalaxyPaginationAnimationStateProvider'
 import { Record } from '../Record/Record'
-import { usePositionedRecordsQuery } from './usePositionedRecordsQuery'
 import { useSwapCurrentNext } from '../RelatedStories'
-import { useLocale } from '@/features/shared/hooks/useLocale'
-import { useParams, useSearchParams } from 'next/navigation'
+import { usePositionedRecordsQuery } from './usePositionedRecordsQuery'
 
 export interface AllRelationTotalsType {
   [CLOUD_CATEGORIES.archives]: number
@@ -28,21 +33,74 @@ interface Props extends GridParams {
   allRelationTotals?: AllRelationTotalsType
 }
 
-export const RelatedCategory: React.FC<Props> = ({
-  category,
-  allRelationTotals,
-  gridRow,
-  gridColumn,
-}) => {
+export const RelatedCategory: React.FC<Props> = React.memo(props => {
+  const { allRelationTotals, category, gridColumn, gridRow } = props
+  const searchParams = useSearchParams()
+  const page = parseInt(searchParams?.get('page') || '1')
+  const maxPages = Math.ceil((allRelationTotals?.[category] || 2) / 2)
+  const { current, next } = useSwapCurrentNext(page, maxPages)
   const params = useParams()
   const locale = useLocale()
   const recordCategory = params?.category as CloudCategory
-  const searchParams = useSearchParams()
-  const page = parseInt(searchParams?.get('page') || '1')
   const id = params?.id as string
+  const [complete, setComplete] = useState(false)
 
-  const maxPages = Math.ceil((allRelationTotals?.[category] || 2) / 2)
-  const { current, next } = useSwapCurrentNext(page, maxPages)
+  return (
+    <>
+      {complete && (
+        <div className=" text-white" style={{ gridRow, gridColumn }}>
+          <div className="grid h-full grid-cols-2 grid-rows-2">
+            <NextPositionedRecords
+              next={next}
+              id={id}
+              locale={locale}
+              page={page}
+              maxPages={maxPages}
+              category={category}
+              recordCategory={recordCategory}
+            />
+          </div>
+        </div>
+      )}
+
+      <div className="text-white" color={'white'} style={{ gridRow, gridColumn }}>
+        <div className="grid h-full grid-cols-2 grid-rows-2">
+          <PositionedRecords
+            onComplete={() => setComplete(true)}
+            current={current}
+            id={id}
+            locale={locale}
+            page={page}
+            maxPages={maxPages}
+            category={category}
+            recordCategory={recordCategory}
+          />
+        </div>
+      </div>
+    </>
+  )
+})
+
+const PositionedRecords = ({
+  id,
+  maxPages,
+  locale,
+  category,
+  page,
+  recordCategory,
+  current,
+  onComplete,
+}: {
+  current?: number
+  locale: Locale
+  page: number
+  id: string
+  category: CloudCategory
+  maxPages: number
+  recordCategory: CloudCategory
+  onComplete: () => void
+}) => {
+  const lang = useLocale()
   const { conditions, animationState } = useContext(GalaxyPaginationAnimationStateContext)
   const { data, isLoading: isPositionsedRecordLoading } = usePositionedRecordsQuery({
     locale,
@@ -53,6 +111,82 @@ export const RelatedCategory: React.FC<Props> = ({
     category: category,
     recordCategory: recordCategory,
   })
+  const positionedRecords = data || []
+  const isFetchingingRecords = useIsFetchingRecordDetails()
+  const results = useZoomLevel3Queries({
+    data:
+      positionedRecords?.map(({ category, id }) => {
+        return {
+          type: category,
+          id,
+          locale: lang,
+          options: { refetchOnWindowFocus: false },
+          small: true,
+        }
+      }) ?? [],
+  })
+
+  const allFinished = results.every(query => !query.isLoading)
+
+  useEffect(() => {
+    if (allFinished && !isPositionsedRecordLoading && !isFetchingingRecords) {
+      // all the queries have executed successfully
+      onComplete()
+    }
+  }, [allFinished, isFetchingingRecords])
+
+  return (
+    <>
+      {!isPositionsedRecordLoading &&
+        results.map((result, index) => {
+          const { isLoading, isError, data } = result
+          if (isLoading) {
+            return null
+          }
+
+          if (isError) {
+            return null
+          }
+
+          const positionedRecord = positionedRecords.find(v => v.id === data?.id)
+
+          if (!positionedRecord) {
+            return null
+          }
+
+          return (
+            <Record
+              className={getItemsAnimationClassNames(animationState, conditions)}
+              key={keyExtractor(positionedRecord.id, index, positionedRecords)}
+              record={positionedRecord}
+              recordDetails={data}
+            />
+          )
+        })}
+    </>
+  )
+}
+
+const NextPositionedRecords = ({
+  id,
+  maxPages,
+  locale,
+  page,
+  recordCategory,
+  category,
+  next,
+}: {
+  next?: number
+  locale: Locale
+  page: number
+  category: CloudCategory
+  id: string
+  maxPages: number
+  recordCategory: CloudCategory
+}) => {
+  const lang = useLocale()
+  const { conditions, animationState } = useContext(GalaxyPaginationAnimationStateContext)
+
   const { data: nextData, isLoading: isNextPositionedRecordLoading } = usePositionedRecordsQuery({
     locale,
     page: page + 1,
@@ -62,40 +196,54 @@ export const RelatedCategory: React.FC<Props> = ({
     recordCategory: recordCategory,
     category: category,
   })
-  const positionedRecords = data || []
   const nextPositionedRecords = nextData || []
+
+  const results = useZoomLevel3Queries({
+    data:
+      nextPositionedRecords?.map(({ category, id }) => {
+        return {
+          type: category,
+          id,
+          locale: lang,
+          options: { refetchOnWindowFocus: false },
+          small: true,
+        }
+      }) ?? [],
+  })
 
   return (
     <>
-      <div className=" text-white" style={{ gridRow, gridColumn }}>
-        <div className="grid h-full grid-cols-2 grid-rows-2">
-          {!isNextPositionedRecordLoading &&
-            nextPositionedRecords.map((record, index) => (
-              <Record
-                className={getNextItemsAnimationClassNames(
-                  animationState,
-                  conditions,
-                  nextPositionedRecords.length > 0
-                )}
-                key={keyExtractor(record.id, index, positionedRecords)}
-                record={record}
-                tabIndex={-1}
-              />
-            ))}
-        </div>
-      </div>
-      <div className="text-white" color={'white'} style={{ gridRow, gridColumn }}>
-        <div className="grid h-full grid-cols-2 grid-rows-2">
-          {!isPositionsedRecordLoading &&
-            positionedRecords.map((record, index) => (
-              <Record
-                className={getItemsAnimationClassNames(animationState, conditions)}
-                key={keyExtractor(record.id, index, positionedRecords)}
-                record={record}
-              />
-            ))}
-        </div>
-      </div>
+      {!isNextPositionedRecordLoading &&
+        results.map((result, index) => {
+          const { isLoading, isError, data } = result
+          if (isLoading) {
+            return null
+          }
+
+          if (isError) {
+            return null
+          }
+
+          const positionedRecord = nextPositionedRecords.find(v => v.id === data?.id)
+
+          if (!positionedRecord) {
+            return null
+          }
+
+          return (
+            <Record
+              className={getNextItemsAnimationClassNames(
+                animationState,
+                conditions,
+                nextPositionedRecords.length > 0
+              )}
+              key={keyExtractor(positionedRecord.id, index, nextPositionedRecords)}
+              record={positionedRecord}
+              recordDetails={data}
+              tabIndex={-1}
+            />
+          )
+        })}
     </>
   )
 }
