@@ -32,7 +32,7 @@ export function useThemesQuery({ page }: { page: number; fromCacheOnly?: boolean
 
   const queryFn = async () => {
     const res = await fetchHighlightedThemes(page)
-    console.log({ res })
+
     const data =
       res?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
 
@@ -40,8 +40,6 @@ export function useThemesQuery({ page }: { page: number; fromCacheOnly?: boolean
     const highlightedStories = data?.highlightedStories?.data
     const stories = highlightedStories?.length ? highlightedStories : data?.stories?.data
     const pagination = res?.highlightedHomepageThemes.meta?.pagination
-
-    console.log({ data, themeTitle, stories, pagination })
 
     return {
       themeTitle,
