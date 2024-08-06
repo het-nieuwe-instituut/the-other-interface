@@ -87,7 +87,7 @@ export const Navigation = () => {
       ref={ref}
     >
       <div className="absolute left-0 top-0 h-screen w-full">
-        {pathname && galaxyPathNames.includes(pathname) && <StaticHeader />}
+        <StaticHeader />
 
         <div
           style={{ '--z-index': `${MAX_Z_INDEX}` } as CSSProperties}
