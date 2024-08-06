@@ -72,6 +72,7 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
           )}
         >
           <p
+            lang="nl"
             className={TypographyVariants({
               responsive: 'detailedStoryOrRecordTitle',
               className: 'text-center line-clamp-1 leading-normal w-full hyphens-auto',
@@ -81,6 +82,7 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
           </p>
 
           <p
+            lang="nl"
             className={TypographyVariants({
               responsive: 'detailedStoryOrRecordSubTitle',
               className: 'text-center mt-1',

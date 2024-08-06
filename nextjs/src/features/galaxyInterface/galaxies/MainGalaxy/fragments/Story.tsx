@@ -109,6 +109,7 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
             />
             <div className="mt-1 w-full flex-1">
               <p
+                lang="nl"
                 className={cn(
                   animationState === 'forward' &&
                     'animate-[toBlurAndHide_300ms_ease-in-out_forwards]',
