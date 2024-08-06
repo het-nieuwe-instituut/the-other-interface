@@ -5,7 +5,7 @@ import { TypographyVariants } from '@/features/ui/components/typography/variants
 import { cn } from '@/features/ui/utils/cn'
 import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useParams, usePathname } from 'next/navigation'
 import { CSSProperties, useEffect, useMemo, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { State } from '../../configs/store'
@@ -31,8 +31,6 @@ export enum Fonts {
   Impact = 'impact',
 }
 
-const galaxyPathNames = ['/', '/landingpage', '/detail/[category]/[id]', '/detail/[category]']
-
 export const Navigation = () => {
   const ref = useRef<HTMLDivElement | null>(null)
   const isMenuOpen = useSelector((state: State) => state?.shared?.isMenuOpen)
@@ -40,6 +38,16 @@ export const Navigation = () => {
   const { t: tNavigation } = useTranslation('navigation')
   const lang = useLocale()
   const pathname = usePathname()
+  const params = useParams()
+  const galaxyPathNames =
+    params && params.category && params.id
+      ? [
+          '/',
+          '/landingpage',
+          `/detail/${params.category}/${params.id}`,
+          `/detail/${params.category}`,
+        ]
+      : ['/', '/landingpage']
   const userIsNotOnGalaxyPage = pathname ? !galaxyPathNames.includes(pathname) : false
 
   useEffect(() => {
@@ -65,7 +73,7 @@ export const Navigation = () => {
       return Fonts.Times
     }
   }, [userIsNotOnGalaxyPage, userLooksOn])
-
+  console.log(pathname, galaxyPathNames)
   const dispatch = useDispatch()
 
   useDisableScroll(isMenuOpen)
@@ -87,7 +95,7 @@ export const Navigation = () => {
       ref={ref}
     >
       <div className="absolute left-0 top-0 h-screen w-full">
-        <StaticHeader />
+        {pathname && galaxyPathNames.includes(pathname) && <StaticHeader />}
 
         <div
           style={{ '--z-index': `${MAX_Z_INDEX}` } as CSSProperties}
