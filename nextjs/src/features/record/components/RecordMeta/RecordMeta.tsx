@@ -32,6 +32,7 @@ import {
 import { recordRightsFieldMapper } from '../../mappers/recordRightsMapper'
 import { getExternalSourceTranslation } from '../../utils/enrichedSources'
 import { ExternalSource } from 'src/generated/graphql'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 
 export const RecordMeta = ({
   data,
@@ -47,6 +48,7 @@ export const RecordMeta = ({
   const { t: recordMetaObjectT } = useTypeSafeTranslation('recordMetaObject')
   const { t: recordMetaPersonT } = useTypeSafeTranslation('recordMetaPerson')
   const { t } = useLooseTypeSafeTranslation('common')
+  const locale = useLocale()
 
   const recordMetaSectionData = useMemo(() => {
     let recordMetaSectionData
@@ -215,7 +217,7 @@ export const RecordMeta = ({
             )
           })}
 
-          <ExternalSourceBlock href="/externalSources">
+          <ExternalSourceBlock href={`/externalSources?lang=${locale}`} isExternalLink={false}>
             {t('learnAboutExternalDataSources') ?? ''}
           </ExternalSourceBlock>
         </ExternalSourceBlockGroup>
