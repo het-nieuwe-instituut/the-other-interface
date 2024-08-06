@@ -26,11 +26,25 @@ fragment ThemeFragmentWithHighlightedStories on ThemeEntity {
     stories {
       data {
         ...StoryWithoutRelationsFragment
+        attributes {
+          components {
+            ... on ComponentModulesImage {
+              ...imageModuleFragment
+            }
+          }
+        }
       }
     }
     highlightedStories {
       data {
         ...StoryWithoutRelationsFragment
+        attributes {
+          components {
+            ... on ComponentModulesImage {
+              ...imageModuleFragment
+            }
+          }
+        }
       }
     }
   }
