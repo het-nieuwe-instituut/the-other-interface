@@ -73,7 +73,7 @@ export const Navigation = () => {
       return Fonts.Times
     }
   }, [userIsNotOnGalaxyPage, userLooksOn])
-  console.log(pathname, galaxyPathNames)
+
   const dispatch = useDispatch()
 
   useDisableScroll(isMenuOpen)
