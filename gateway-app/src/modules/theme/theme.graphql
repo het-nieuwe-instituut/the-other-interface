@@ -29,6 +29,29 @@ query themes(
   }
 }
 
+query themeIds(
+  $filters: ThemeFiltersInput
+  $pagination: PaginationArg
+  $sort: [String]
+  $publicationState: PublicationState
+  $locale: I18NLocaleCode
+) {
+  themes(
+    filters: $filters
+    pagination: $pagination
+    sort: $sort
+    publicationState: $publicationState
+    locale: $locale
+  ) {
+    data {
+      id
+    }
+    meta {
+      ...ResponseCollectionMetaFragment
+    }
+  }
+}
+
 query storiesRelatedToTheme(
   $storyId: ID!
   $lang: I18NLocaleCode

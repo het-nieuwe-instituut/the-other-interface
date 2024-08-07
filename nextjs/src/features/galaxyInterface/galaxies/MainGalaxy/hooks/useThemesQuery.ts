@@ -5,10 +5,16 @@ import { PublicationState } from '@/features/shared/types/enums'
 import initApiClientService from '@/features/shared/utils/initApiClientService'
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
-import { ThemesQuery } from 'src/generated/graphql'
+import { HighlightedHomepageThemesQuery } from 'src/generated/graphql'
 import { GALAXY_QUERIES_STALE_TIME } from '../../galaxies.constants'
 
-export type ThemeData = NonNullable<ThemesQuery['themes']['data']>[0]
+type ThemeData = NonNullable<
+  NonNullable<
+    NonNullable<
+      HighlightedHomepageThemesQuery['highlightedHomepageThemes']['data']['attributes']
+    >['highlightedThemes']
+  >['data']
+>[0]
 export type StoriesData = NonNullable<
   NonNullable<NonNullable<ThemeData['attributes']>['stories']>
 >['data']
@@ -17,13 +23,6 @@ export type StoryComponentsDynamicZone = NonNullable<
   NonNullable<StoryData['attributes']>['components']
 >
 
-export function getThemesQueryKey(
-  page: number,
-  lang: string,
-  isDraftMode: boolean
-): ['paginated-themes', number, string, boolean] {
-  return ['paginated-themes', page, lang, isDraftMode]
-}
 export function useThemesQuery({ page }: { page: number; fromCacheOnly?: boolean }) {
   const api = initApiClientService()
   const lang = useLocale()
@@ -39,21 +38,18 @@ export function useThemesQuery({ page }: { page: number; fromCacheOnly?: boolean
 
   const queryFn = async () => {
     const res = await fetchHighlightedThemes(page)
-    const storyTitle =
-      res.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
-        ?.name
-    const stories =
-      res.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
-        ?.stories?.data || []
-    const highlightedStories =
-      res.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
-        ?.highlightedStories?.data
 
+    const data =
+      res?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes
+
+    const themeTitle = data?.name
+    const highlightedStories = data?.highlightedStories?.data
+    const stories = highlightedStories?.length ? highlightedStories : data?.stories?.data
     const pagination = res?.highlightedHomepageThemes.meta?.pagination
 
     return {
-      storyTitle,
-      stories: highlightedStories && highlightedStories?.length > 0 ? highlightedStories : stories,
+      themeTitle,
+      stories,
       pagination,
     }
   }
@@ -69,4 +65,12 @@ export function useThemesQuery({ page }: { page: number; fromCacheOnly?: boolean
     ...query,
     page,
   }
+}
+
+function getThemesQueryKey(
+  page: number,
+  lang: string,
+  isDraftMode: boolean
+): ['paginated-themes', number, string, boolean] {
+  return ['paginated-themes', page, lang, isDraftMode]
 }

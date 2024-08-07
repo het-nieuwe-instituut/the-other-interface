@@ -240,6 +240,26 @@ query storiesTotal {
   }
 }
 
+query storyParentAndChildren($id: ID!) {
+  story(id: $id) {
+    data {
+      id
+      attributes {
+        parent_story {
+          data {
+            id
+          }
+        }
+        child_stories {
+          data {
+            id
+          }
+        }
+      }
+    }
+  }
+}
+
 fragment StoryWithoutRelationsFragment on StoryEntity {
   id
   attributes {
