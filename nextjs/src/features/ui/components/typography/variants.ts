@@ -23,7 +23,7 @@ export const TypographyVariants = cva('', {
       xl: [
         'font-impact-large text-[55px] leading-[120%] tracking-[-0.8px] md:text-[80px] md:leading-[100%_]',
       ],
-      lg: ['font-impact-large text-[54px] leading-[120%_] tracking-[-0.54px]'],
+      lg: ['hyphens-auto font-impact-large text-[54px] leading-[120%_] tracking-[-0.54px]'],
       md: ['font-impact-large text-[32px] leading-[120%_] tracking-[-0.32px]'],
       sm: ['font-impact-large text-[25px] leading-[120%_] tracking-[-0.25px]'],
     },
@@ -77,6 +77,7 @@ export const TypographyVariants = cva('', {
         'hyphens-auto font-impact-large text-[54px] leading-[100%_] tracking-[-0.8px]',
         'lg:text-[80px]',
       ],
+      subTitle: ['hyphens-auto font-impact-large text-[54px] leading-[100%_] tracking-[-0.8px]'],
       storyOrRecordTitle: [
         'hyphens-auto font-times-large text-[12px] leading-[100%_] tracking-[0.04em]',
         'lg:font-times-large lg:text-[20px] lg:leading-[105%_] lg:tracking-[0.01em]',
