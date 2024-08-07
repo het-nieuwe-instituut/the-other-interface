@@ -25,22 +25,27 @@ fragment ThemeFragmentWithHighlightedStories on ThemeEntity {
     name
     stories {
       data {
-        ...StoryFragment
+        ...StoryWithoutRelationsFragment
+        attributes {
+          components {
+            ... on ComponentModulesImage {
+              ...imageModuleFragment
+            }
+          }
+        }
       }
     }
     highlightedStories {
       data {
-        ...StoryFragment
+        ...StoryWithoutRelationsFragment
+        attributes {
+          components {
+            ... on ComponentModulesImage {
+              ...imageModuleFragment
+            }
+          }
+        }
       }
     }
-    createdAt
-    updatedAt
-    publishedAt
-    localizations {
-      data {
-        id
-      }
-    }
-    locale
   }
 }

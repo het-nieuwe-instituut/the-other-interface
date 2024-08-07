@@ -79,11 +79,10 @@ const MainGalaxyContent = React.memo(() => {
     isError,
   } = useThemesQuery({ page: currentPage })
   const { data: nextData } = useThemesQuery({ page: currentPage + 1 })
-  const { data: prevData } = useThemesQuery({ page: currentPage - 1 })
 
   const pagination = mainData?.pagination
   const totalPages = pagination?.pageCount || 0
-  const storyTitle = mainData?.storyTitle
+  const storyTitle = mainData?.themeTitle
   const stories = mainData?.stories ?? []
   const nextStories = nextData?.stories ?? []
 
@@ -120,17 +119,7 @@ const MainGalaxyContent = React.memo(() => {
       )
     }
 
-    if (isMainLoading && prevData) {
-      return (
-        <>
-          <Pulse />
-          <Stories stories={prevData?.stories} nextStories={[]} />
-          <ThemeTitle title={storyTitle} />
-        </>
-      )
-    }
-
-    if (isMainLoading && !mainData) {
+    if (isMainLoading) {
       return <Pulse />
     }
 

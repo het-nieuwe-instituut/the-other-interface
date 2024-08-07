@@ -10586,6 +10586,32 @@ export type StoriesTotalQuery = {
   } | null
 }
 
+export type StoryParentAndChildrenQueryVariables = Exact<{
+  id: Scalars['ID']
+}>
+
+export type StoryParentAndChildrenQuery = {
+  __typename?: 'Query'
+  story?: {
+    __typename?: 'StoryEntityResponse'
+    data?: {
+      __typename?: 'StoryEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'Story'
+        parent_story?: {
+          __typename?: 'StoryEntityResponse'
+          data?: { __typename?: 'StoryEntity'; id?: string | null } | null
+        } | null
+        child_stories?: {
+          __typename?: 'StoryRelationResponseCollection'
+          data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
+        } | null
+      } | null
+    } | null
+  } | null
+}
+
 export type StoryWithoutRelationsFragmentFragment = {
   __typename?: 'StoryEntity'
   id?: string | null
@@ -15600,6 +15626,32 @@ export type ThemesQuery = {
   } | null
 }
 
+export type ThemeIdsQueryVariables = Exact<{
+  filters?: InputMaybe<ThemeFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>
+  publicationState?: InputMaybe<PublicationState>
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>
+}>
+
+export type ThemeIdsQuery = {
+  __typename?: 'Query'
+  themes?: {
+    __typename?: 'ThemeEntityResponseCollection'
+    data: Array<{ __typename?: 'ThemeEntity'; id?: string | null }>
+    meta: {
+      __typename?: 'ResponseCollectionMeta'
+      pagination: {
+        __typename?: 'Pagination'
+        page: number
+        pageCount: number
+        pageSize: number
+        total: number
+      }
+    }
+  } | null
+}
+
 export type StoriesRelatedToThemeQueryVariables = Exact<{
   storyId: Scalars['ID']
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
@@ -19354,6 +19406,31 @@ export type TriplyRecordsQuery = {
   } | null
 }
 
+export type TriplyRecordIdsQueryVariables = Exact<{
+  filters?: InputMaybe<TriplyRecordFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>
+  publicationState?: InputMaybe<PublicationState>
+}>
+
+export type TriplyRecordIdsQuery = {
+  __typename?: 'Query'
+  triplyRecords?: {
+    __typename?: 'TriplyRecordEntityResponseCollection'
+    data: Array<{ __typename?: 'TriplyRecordEntity'; id?: string | null }>
+    meta: {
+      __typename?: 'ResponseCollectionMeta'
+      pagination: {
+        __typename?: 'Pagination'
+        page: number
+        pageCount: number
+        pageSize: number
+        total: number
+      }
+    }
+  } | null
+}
+
 export type TriplyRecordFragmentFragment = {
   __typename?: 'TriplyRecordEntity'
   id?: string | null
@@ -21788,6 +21865,27 @@ export const StoriesTotalDocument = gql`
     }
   }
 `
+export const StoryParentAndChildrenDocument = gql`
+  query storyParentAndChildren($id: ID!) {
+    story(id: $id) {
+      data {
+        id
+        attributes {
+          parent_story {
+            data {
+              id
+            }
+          }
+          child_stories {
+            data {
+              id
+            }
+          }
+        }
+      }
+    }
+  }
+`
 export const ThemeDocument = gql`
   query theme($id: ID, $locale: I18NLocaleCode) {
     theme(id: $id, locale: $locale) {
@@ -21822,6 +21920,31 @@ export const ThemesDocument = gql`
     }
   }
   ${ThemeFragmentFragmentDoc}
+  ${ResponseCollectionMetaFragmentFragmentDoc}
+`
+export const ThemeIdsDocument = gql`
+  query themeIds(
+    $filters: ThemeFiltersInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState
+    $locale: I18NLocaleCode
+  ) {
+    themes(
+      filters: $filters
+      pagination: $pagination
+      sort: $sort
+      publicationState: $publicationState
+      locale: $locale
+    ) {
+      data {
+        id
+      }
+      meta {
+        ...ResponseCollectionMetaFragment
+      }
+    }
+  }
   ${ResponseCollectionMetaFragmentFragmentDoc}
 `
 export const StoriesRelatedToThemeDocument = gql`
@@ -21876,6 +21999,29 @@ export const TriplyRecordsDocument = gql`
     }
   }
   ${TriplyRecordFragmentFragmentDoc}
+  ${ResponseCollectionMetaFragmentFragmentDoc}
+`
+export const TriplyRecordIdsDocument = gql`
+  query triplyRecordIds(
+    $filters: TriplyRecordFiltersInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $publicationState: PublicationState
+  ) {
+    triplyRecords(
+      filters: $filters
+      pagination: $pagination
+      sort: $sort
+      publicationState: $publicationState
+    ) {
+      data {
+        id
+      }
+      meta {
+        ...ResponseCollectionMetaFragment
+      }
+    }
+  }
   ${ResponseCollectionMetaFragmentFragmentDoc}
 `
 export const UsersPermissionsUserDocument = gql`
@@ -22268,6 +22414,20 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
         'query'
       )
     },
+    storyParentAndChildren(
+      variables: StoryParentAndChildrenQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<StoryParentAndChildrenQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<StoryParentAndChildrenQuery>(StoryParentAndChildrenDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'storyParentAndChildren',
+        'query'
+      )
+    },
     theme(
       variables?: ThemeQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']
@@ -22293,6 +22453,20 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'themes',
+        'query'
+      )
+    },
+    themeIds(
+      variables?: ThemeIdsQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<ThemeIdsQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<ThemeIdsQuery>(ThemeIdsDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'themeIds',
         'query'
       )
     },
@@ -22335,6 +22509,20 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'triplyRecords',
+        'query'
+      )
+    },
+    triplyRecordIds(
+      variables?: TriplyRecordIdsQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<TriplyRecordIdsQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<TriplyRecordIdsQuery>(TriplyRecordIdsDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'triplyRecordIds',
         'query'
       )
     },
