@@ -63,11 +63,7 @@ export const PageHeader: React.FC<Props> = props => {
           'text-left flex flex-col gap-4  max-w-[calc(100vw-40px)]'
         )}
       >
-        {title && (
-          <h1 lang="nl" className={TypographyVariants({ responsive: 'title' })}>
-            {title}
-          </h1>
-        )}
+        {title && <h1 className={TypographyVariants({ responsive: 'title' })}>{title}</h1>}
       </button>
       {enrichedTitles && enrichedTitles.length > 0 && (
         <ExternalSourceBlockGroup className="mt-1">
