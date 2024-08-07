@@ -8,17 +8,23 @@ import { SourceBlock, SourceBlockGroup, SourceBlockProps } from './SourceBlock'
 
 interface ExternalSourceBlockProps extends Pick<SourceBlockProps, 'children' | 'className'> {
   href?: string
+  isExternalLink?: boolean
 }
-export const ExternalSourceBlock = ({ children, className, href }: ExternalSourceBlockProps) => {
+export const ExternalSourceBlock = ({
+  children,
+  className,
+  href,
+  isExternalLink = true,
+}: ExternalSourceBlockProps) => {
   const classNames = cn(
-    'bg-surface-lod text-surface-lod-dark font-arial-reboot-lines leading-[110%] text-[16px] font-[500] ',
+    'bg-surface-lod text-surface-lod-dark font-arial-reboot-lines leading-[110%] text-[16px] font-[500] hover:bg-black-100 hover:text-white',
     className
   )
 
   if (href) {
     return (
-      <NextLink href={href}>
-        <SourceBlock Icon={<Lod />} isExternalLink className={classNames}>
+      <NextLink href={href} target={isExternalLink ? '_blank' : ''}>
+        <SourceBlock Icon={<Lod />} isExternalLink={isExternalLink} className={classNames}>
           {children}
         </SourceBlock>
       </NextLink>
