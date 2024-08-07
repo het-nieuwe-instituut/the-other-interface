@@ -5,10 +5,16 @@ import { PublicationState } from '@/features/shared/types/enums'
 import initApiClientService from '@/features/shared/utils/initApiClientService'
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
-import { ThemesQuery } from 'src/generated/graphql'
+import { HighlightedHomepageThemesQuery } from 'src/generated/graphql'
 import { GALAXY_QUERIES_STALE_TIME } from '../../galaxies.constants'
 
-type ThemeData = NonNullable<ThemesQuery['themes']['data']>[0]
+type ThemeData = NonNullable<
+  NonNullable<
+    NonNullable<
+      HighlightedHomepageThemesQuery['highlightedHomepageThemes']['data']['attributes']
+    >['highlightedThemes']
+  >['data']
+>[0]
 export type StoriesData = NonNullable<
   NonNullable<NonNullable<ThemeData['attributes']>['stories']>
 >['data']
