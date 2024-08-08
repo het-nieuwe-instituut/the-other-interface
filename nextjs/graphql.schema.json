@@ -10,7 +10,6 @@
         "kind": "OBJECT",
         "name": "ArchiveRelationsType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "asterisk_date_person",
@@ -106,7 +105,6 @@
         "kind": "OBJECT",
         "name": "ArchiveZoomLevel3DetailType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "asteriskSuggestions",
@@ -343,7 +341,6 @@
         "kind": "OBJECT",
         "name": "ArchivesRecordZoomLevel3Type",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "access",
@@ -656,7 +653,6 @@
         "kind": "OBJECT",
         "name": "ArchivesRelationsCountType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "total",
@@ -680,7 +676,6 @@
         "kind": "OBJECT",
         "name": "ArchivesZoomLevelHoverType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "creators",
@@ -728,7 +723,6 @@
         "kind": "OBJECT",
         "name": "Author",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "createdAt",
@@ -820,7 +814,6 @@
         "kind": "OBJECT",
         "name": "AuthorEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -856,7 +849,6 @@
         "kind": "OBJECT",
         "name": "AuthorEntityResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -880,7 +872,6 @@
         "kind": "OBJECT",
         "name": "AuthorEntityResponseCollection",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -932,7 +923,6 @@
         "kind": "INPUT_OBJECT",
         "name": "AuthorFiltersInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -1080,7 +1070,6 @@
         "kind": "OBJECT",
         "name": "BaseArchiveRecordZoomLevel3AsteriskType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "asterisk_date_content",
@@ -1200,7 +1189,6 @@
         "kind": "OBJECT",
         "name": "BaseObjectRecordZoomLevel3AsteriskType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "asterisk_date_geoKeywords",
@@ -1284,7 +1272,6 @@
         "kind": "SCALAR",
         "name": "Boolean",
         "description": "The `Boolean` scalar type represents `true` or `false`.",
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -1295,7 +1282,6 @@
         "kind": "INPUT_OBJECT",
         "name": "BooleanFilterInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -1599,7 +1585,6 @@
         "kind": "OBJECT",
         "name": "ComponentCoreButton",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "id",
@@ -1651,7 +1636,6 @@
         "kind": "INPUT_OBJECT",
         "name": "ComponentCoreButtonFiltersInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -1739,7 +1723,6 @@
         "kind": "OBJECT",
         "name": "ComponentCoreCarouselImage",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "alt_text",
@@ -1839,7 +1822,6 @@
         "kind": "OBJECT",
         "name": "ComponentCoreGridFeaturedFields",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "id",
@@ -1935,7 +1917,6 @@
         "kind": "OBJECT",
         "name": "ComponentCoreImageCarouselItem",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "alt_text",
@@ -2031,7 +2012,6 @@
         "kind": "OBJECT",
         "name": "ComponentCoreMuxAudio",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "caption",
@@ -2083,7 +2063,6 @@
         "kind": "OBJECT",
         "name": "ComponentCoreMuxVideo",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "caption",
@@ -2135,7 +2114,6 @@
         "kind": "OBJECT",
         "name": "ComponentCorePublicationDate",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "date",
@@ -2183,7 +2161,6 @@
         "kind": "INPUT_OBJECT",
         "name": "ComponentCorePublicationDateFiltersInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -2271,7 +2248,6 @@
         "kind": "OBJECT",
         "name": "ComponentCoreStandAloneLink",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attachment",
@@ -2339,7 +2315,6 @@
         "kind": "OBJECT",
         "name": "ComponentCoreTimeframe",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "id",
@@ -2391,7 +2366,6 @@
         "kind": "INPUT_OBJECT",
         "name": "ComponentCoreTimeframeFiltersInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -2479,7 +2453,6 @@
         "kind": "OBJECT",
         "name": "ComponentModulesButtonsModule",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "buttons",
@@ -2527,7 +2500,6 @@
         "kind": "INPUT_OBJECT",
         "name": "ComponentModulesButtonsModuleFiltersInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -2603,7 +2575,6 @@
         "kind": "OBJECT",
         "name": "ComponentModulesCarousel",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "description",
@@ -2703,7 +2674,6 @@
         "kind": "OBJECT",
         "name": "ComponentModulesGridModule",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "cards",
@@ -2775,7 +2745,6 @@
         "kind": "OBJECT",
         "name": "ComponentModulesHighlight",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "buttons",
@@ -2883,7 +2852,6 @@
         "kind": "OBJECT",
         "name": "ComponentModulesImage",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "alt_text",
@@ -2975,7 +2943,6 @@
         "kind": "OBJECT",
         "name": "ComponentModulesImageCarousel",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "description",
@@ -3039,7 +3006,6 @@
         "kind": "OBJECT",
         "name": "ComponentModulesPullquote",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "id",
@@ -3079,7 +3045,6 @@
         "kind": "OBJECT",
         "name": "ComponentModulesSideImageWithText",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "id",
@@ -3155,7 +3120,6 @@
         "kind": "OBJECT",
         "name": "ComponentModulesStandaloneLinks",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "id",
@@ -3203,7 +3167,6 @@
         "kind": "OBJECT",
         "name": "ComponentModulesSubtitle",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "id",
@@ -3243,7 +3206,6 @@
         "kind": "OBJECT",
         "name": "ComponentModulesTextModule",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "Richtext",
@@ -3283,7 +3245,6 @@
         "kind": "OBJECT",
         "name": "ComponentModulesTitleModule",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "Title",
@@ -3323,7 +3284,6 @@
         "kind": "SCALAR",
         "name": "Date",
         "description": "Date scalar",
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -3334,7 +3294,6 @@
         "kind": "INPUT_OBJECT",
         "name": "DateFilterInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -3638,7 +3597,6 @@
         "kind": "INPUT_OBJECT",
         "name": "DateTimeFilterInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -3942,7 +3900,6 @@
         "kind": "OBJECT",
         "name": "EnrichedBaseArchiveZoomLevel3DetailType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "custodialHistory",
@@ -4154,7 +4111,6 @@
         "kind": "OBJECT",
         "name": "EnrichedBaseArchivesRecordZoomLevel3Type",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "access",
@@ -4442,7 +4398,6 @@
         "kind": "OBJECT",
         "name": "EnrichedBaseOArchiveZoomLevel3AsteriskDetailType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "asterisk_date_description",
@@ -4526,7 +4481,6 @@
         "kind": "OBJECT",
         "name": "EnrichedBaseObjectRecordZoomLevel3Type",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "archiveCode",
@@ -4802,8 +4756,19 @@
         "kind": "OBJECT",
         "name": "EnrichedBaseObjectsZoomLevel3AsteriskDetailType",
         "description": null,
-        "isOneOf": null,
         "fields": [
+          {
+            "name": "asterisk_date_description",
+            "description": "asterisk value for the description field",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "asterisk_date_title",
             "description": "asterisk value for the title field",
@@ -4817,8 +4782,32 @@
             "deprecationReason": null
           },
           {
+            "name": "asterisk_name_description",
+            "description": "asterisk value for the description field",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "asterisk_name_title",
             "description": "asterisk value for the title field",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "asterisk_subject_description",
+            "description": "asterisk value for the description field",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -4850,7 +4839,6 @@
         "kind": "OBJECT",
         "name": "EnrichedBaseObjectsZoomLevel3DetailType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "description",
@@ -4990,7 +4978,6 @@
         "kind": "OBJECT",
         "name": "EnrichedBasePeopleRecordZoomLevel3Type",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "association",
@@ -5206,7 +5193,6 @@
         "kind": "OBJECT",
         "name": "EnrichedBasePeopleZoomLevel3DetailType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "description",
@@ -5322,7 +5308,6 @@
         "kind": "OBJECT",
         "name": "EnrichedBasePublicationRecordZoomLevel3Type",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "authorRole",
@@ -5718,7 +5703,6 @@
         "kind": "OBJECT",
         "name": "EnrichedBasePublicationZoomLevel3DetailType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "annotation",
@@ -5918,7 +5902,6 @@
         "kind": "ENUM",
         "name": "EntityNames",
         "description": null,
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -5990,7 +5973,6 @@
         "kind": "ENUM",
         "name": "Enum_Componentcorepublicationdate_Displaytype",
         "description": null,
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -6014,7 +5996,6 @@
         "kind": "ENUM",
         "name": "Enum_Componentmodulescarousel_Variant",
         "description": null,
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -6044,7 +6025,6 @@
         "kind": "ENUM",
         "name": "Enum_Triplyrecord_Type",
         "description": null,
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -6086,7 +6066,6 @@
         "kind": "OBJECT",
         "name": "Error",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "code",
@@ -6126,7 +6105,6 @@
         "kind": "ENUM",
         "name": "ExternalSource",
         "description": null,
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -6156,7 +6134,6 @@
         "kind": "OBJECT",
         "name": "FilterSuggestionType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "key",
@@ -6200,7 +6177,6 @@
         "kind": "SCALAR",
         "name": "Float",
         "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -6211,7 +6187,6 @@
         "kind": "OBJECT",
         "name": "HighlightedHomepageThemeEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -6247,7 +6222,6 @@
         "kind": "OBJECT",
         "name": "HighlightedHomepageThemeEntityResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -6328,7 +6302,6 @@
         "kind": "OBJECT",
         "name": "HighlightedHomepageThemes",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "highlightedThemes",
@@ -6352,7 +6325,6 @@
         "kind": "OBJECT",
         "name": "Homepage",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "Title",
@@ -6456,7 +6428,6 @@
         "kind": "OBJECT",
         "name": "HomepageEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -6492,7 +6463,6 @@
         "kind": "OBJECT",
         "name": "HomepageEntityResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -6520,7 +6490,6 @@
         "kind": "SCALAR",
         "name": "ID",
         "description": "The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID.",
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -6531,7 +6500,6 @@
         "kind": "INPUT_OBJECT",
         "name": "IdFilterInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -6835,7 +6803,6 @@
         "kind": "SCALAR",
         "name": "Int",
         "description": "The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.",
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -6846,7 +6813,6 @@
         "kind": "OBJECT",
         "name": "LandingPageArchive",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "carousel",
@@ -6934,7 +6900,6 @@
         "kind": "OBJECT",
         "name": "LandingPageArchiveEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -6970,7 +6935,6 @@
         "kind": "OBJECT",
         "name": "LandingPageArchiveEntityResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -6994,7 +6958,6 @@
         "kind": "OBJECT",
         "name": "LandingPageObject",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "carousel",
@@ -7082,7 +7045,6 @@
         "kind": "OBJECT",
         "name": "LandingPageObjectEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -7118,7 +7080,6 @@
         "kind": "OBJECT",
         "name": "LandingPageObjectEntityResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -7142,7 +7103,6 @@
         "kind": "OBJECT",
         "name": "LandingPagePeople",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "carousel",
@@ -7230,7 +7190,6 @@
         "kind": "OBJECT",
         "name": "LandingPagePeopleEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -7266,7 +7225,6 @@
         "kind": "OBJECT",
         "name": "LandingPagePeopleEntityResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -7290,7 +7248,6 @@
         "kind": "OBJECT",
         "name": "LandingPagePublication",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "carousel",
@@ -7378,7 +7335,6 @@
         "kind": "OBJECT",
         "name": "LandingPagePublicationEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -7414,7 +7370,6 @@
         "kind": "OBJECT",
         "name": "LandingPagePublicationEntityResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -7438,7 +7393,6 @@
         "kind": "ENUM",
         "name": "Locale",
         "description": null,
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -7462,7 +7416,6 @@
         "kind": "OBJECT",
         "name": "Location",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "city",
@@ -7558,7 +7511,6 @@
         "kind": "OBJECT",
         "name": "LocationEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -7594,7 +7546,6 @@
         "kind": "OBJECT",
         "name": "LocationEntityResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -7618,7 +7569,6 @@
         "kind": "INPUT_OBJECT",
         "name": "LocationFiltersInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -7766,7 +7716,6 @@
         "kind": "OBJECT",
         "name": "LocationRelationResponseCollection",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -7814,7 +7763,6 @@
         "kind": "INPUT_OBJECT",
         "name": "LongFilterInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -8118,7 +8066,6 @@
         "kind": "OBJECT",
         "name": "MuxAudio",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "aspect_ratio",
@@ -8270,7 +8217,6 @@
         "kind": "OBJECT",
         "name": "MuxAudioEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -8306,7 +8252,6 @@
         "kind": "OBJECT",
         "name": "MuxAudioResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -8330,7 +8275,6 @@
         "kind": "OBJECT",
         "name": "MuxVideo",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "aspect_ratio",
@@ -8482,7 +8426,6 @@
         "kind": "OBJECT",
         "name": "MuxVideoEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -8518,7 +8461,6 @@
         "kind": "OBJECT",
         "name": "MuxVideoResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -8542,7 +8484,6 @@
         "kind": "OBJECT",
         "name": "ObjectRecordZoomLevel3Type",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "archiveCode",
@@ -8843,7 +8784,6 @@
         "kind": "OBJECT",
         "name": "ObjectRelationsCountType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "total",
@@ -8867,7 +8807,6 @@
         "kind": "OBJECT",
         "name": "ObjectRelationsType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "asterisk_date_person",
@@ -8975,7 +8914,6 @@
         "kind": "OBJECT",
         "name": "ObjectsZoomLevel3DetailType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "asteriskSuggestions",
@@ -9140,7 +9078,6 @@
         "kind": "OBJECT",
         "name": "ObjectsZoomLevelHoverType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "description",
@@ -9188,7 +9125,6 @@
         "kind": "OBJECT",
         "name": "Pagination",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "page",
@@ -9264,7 +9200,6 @@
         "kind": "INPUT_OBJECT",
         "name": "PaginationArg",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -9324,7 +9259,6 @@
         "kind": "OBJECT",
         "name": "PeopleRecordZoomLevel3Type",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "association",
@@ -9545,7 +9479,6 @@
         "kind": "OBJECT",
         "name": "PeopleRelationsCountType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "total",
@@ -9569,7 +9502,6 @@
         "kind": "OBJECT",
         "name": "PeopleRelationsType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "externalSource",
@@ -9653,7 +9585,6 @@
         "kind": "OBJECT",
         "name": "PeopleZoomLevel3DetailAsteriskType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "asterisk_date_description",
@@ -9701,7 +9632,6 @@
         "kind": "OBJECT",
         "name": "PeopleZoomLevel3DetailType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "asteriskSuggestions",
@@ -9842,7 +9772,6 @@
         "kind": "OBJECT",
         "name": "PeopleZoomLevelHoverType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "description",
@@ -9890,7 +9819,6 @@
         "kind": "OBJECT",
         "name": "PublicationRecordZoomLevel3Type",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "authorRole",
@@ -10291,7 +10219,6 @@
         "kind": "OBJECT",
         "name": "PublicationRelationsType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "externalSource",
@@ -10363,7 +10290,6 @@
         "kind": "OBJECT",
         "name": "PublicationZoomLevel3DetailType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "annotation",
@@ -10568,7 +10494,6 @@
         "kind": "OBJECT",
         "name": "PublicationsRelationsCountType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "total",
@@ -10592,7 +10517,6 @@
         "kind": "OBJECT",
         "name": "PublicationsZoomLevelHoverType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "authors",
@@ -10640,7 +10564,6 @@
         "kind": "OBJECT",
         "name": "Query",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "archivesRecordRelations",
@@ -13598,7 +13521,6 @@
         "kind": "OBJECT",
         "name": "ResponseCollectionMeta",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "pagination",
@@ -13626,7 +13548,6 @@
         "kind": "OBJECT",
         "name": "SearchResultItemType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "id",
@@ -13694,7 +13615,6 @@
         "kind": "OBJECT",
         "name": "SearchResultType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "nodes",
@@ -13758,7 +13678,6 @@
         "kind": "INPUT_OBJECT",
         "name": "SelectedFilterSuggestion",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -13802,7 +13721,6 @@
         "kind": "OBJECT",
         "name": "StoriesRelatedToThemeResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "stories",
@@ -13858,7 +13776,6 @@
         "kind": "OBJECT",
         "name": "Story",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "author",
@@ -14130,7 +14047,6 @@
         "kind": "UNION",
         "name": "StoryComponentsDynamicZone",
         "description": null,
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -14207,7 +14123,6 @@
         "kind": "OBJECT",
         "name": "StoryCountType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "archives",
@@ -14267,7 +14182,6 @@
         "kind": "OBJECT",
         "name": "StoryEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -14307,7 +14221,6 @@
         "kind": "OBJECT",
         "name": "StoryEntityResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -14331,7 +14244,6 @@
         "kind": "OBJECT",
         "name": "StoryEntityResponseCollection",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -14375,7 +14287,6 @@
         "kind": "INPUT_OBJECT",
         "name": "StoryFiltersInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -14715,7 +14626,6 @@
         "kind": "OBJECT",
         "name": "StoryMetaEntityResponseCollection",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -14739,7 +14649,6 @@
         "kind": "OBJECT",
         "name": "StoryRelationResponseCollection",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -14771,7 +14680,6 @@
         "kind": "OBJECT",
         "name": "StoryWithoutRelations",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "author",
@@ -14895,7 +14803,6 @@
         "kind": "OBJECT",
         "name": "StoryWithoutRelationsEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -14931,7 +14838,6 @@
         "kind": "OBJECT",
         "name": "StoryWithoutRelationsEntityResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -14955,7 +14861,6 @@
         "kind": "OBJECT",
         "name": "StoryWithoutRelationsEntityResponseCollection",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -14999,7 +14904,6 @@
         "kind": "SCALAR",
         "name": "String",
         "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -15010,7 +14914,6 @@
         "kind": "INPUT_OBJECT",
         "name": "StringFilterInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -15314,7 +15217,6 @@
         "kind": "OBJECT",
         "name": "Theme",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "createdAt",
@@ -15426,7 +15328,6 @@
         "kind": "OBJECT",
         "name": "ThemeEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -15462,7 +15363,6 @@
         "kind": "OBJECT",
         "name": "ThemeEntityResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -15486,7 +15386,6 @@
         "kind": "INPUT_OBJECT",
         "name": "ThemeFiltersInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -15610,7 +15509,6 @@
         "kind": "OBJECT",
         "name": "ThemeRelationResponseCollection",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -15654,7 +15552,6 @@
         "kind": "OBJECT",
         "name": "TriplyRecord",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "archive",
@@ -15902,7 +15799,6 @@
         "kind": "OBJECT",
         "name": "TriplyRecordEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -15942,7 +15838,6 @@
         "kind": "OBJECT",
         "name": "TriplyRecordEntityResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -15966,7 +15861,6 @@
         "kind": "INPUT_OBJECT",
         "name": "TriplyRecordFiltersInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -16138,7 +16032,6 @@
         "kind": "OBJECT",
         "name": "TriplyRecordRelationResponseCollection",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -16186,7 +16079,6 @@
         "kind": "OBJECT",
         "name": "UploadFile",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "alternativeText",
@@ -16414,7 +16306,6 @@
         "kind": "OBJECT",
         "name": "UploadFileEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -16450,7 +16341,6 @@
         "kind": "OBJECT",
         "name": "UploadFileEntityResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -16474,7 +16364,6 @@
         "kind": "OBJECT",
         "name": "UsersPermissionsPermission",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "action",
@@ -16538,7 +16427,6 @@
         "kind": "OBJECT",
         "name": "UsersPermissionsPermissionEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -16574,7 +16462,6 @@
         "kind": "INPUT_OBJECT",
         "name": "UsersPermissionsPermissionFiltersInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -16698,7 +16585,6 @@
         "kind": "OBJECT",
         "name": "UsersPermissionsPermissionRelationResponseCollection",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -16734,7 +16620,6 @@
         "kind": "OBJECT",
         "name": "UsersPermissionsRole",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "createdAt",
@@ -16834,7 +16719,6 @@
         "kind": "OBJECT",
         "name": "UsersPermissionsRoleEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -16870,7 +16754,6 @@
         "kind": "OBJECT",
         "name": "UsersPermissionsRoleEntityResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -16894,7 +16777,6 @@
         "kind": "INPUT_OBJECT",
         "name": "UsersPermissionsRoleFiltersInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -17054,7 +16936,6 @@
         "kind": "OBJECT",
         "name": "UsersPermissionsUser",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "blocked",
@@ -17170,7 +17051,6 @@
         "kind": "OBJECT",
         "name": "UsersPermissionsUserEntity",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "attributes",
@@ -17206,7 +17086,6 @@
         "kind": "OBJECT",
         "name": "UsersPermissionsUserEntityResponse",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -17230,7 +17109,6 @@
         "kind": "OBJECT",
         "name": "UsersPermissionsUserEntityResponseCollection",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -17282,7 +17160,6 @@
         "kind": "INPUT_OBJECT",
         "name": "UsersPermissionsUserFiltersInput",
         "description": null,
-        "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
@@ -17490,7 +17367,6 @@
         "kind": "OBJECT",
         "name": "UsersPermissionsUserRelationResponseCollection",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "data",
@@ -17526,7 +17402,6 @@
         "kind": "OBJECT",
         "name": "ZoomLevel2AmountParentType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "total",
@@ -17554,7 +17429,6 @@
         "kind": "OBJECT",
         "name": "ZoomLevel2ParentType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "nodes",
@@ -17602,7 +17476,6 @@
         "kind": "OBJECT",
         "name": "ZoomLevel2Type",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "id",
@@ -17654,7 +17527,6 @@
         "kind": "OBJECT",
         "name": "ZoomLevel3RelationsType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "paginatedRelations",
@@ -17714,7 +17586,6 @@
         "kind": "OBJECT",
         "name": "ZoomLevel3StoriesRelatedToRecordType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "stories",
@@ -17770,7 +17641,6 @@
         "kind": "OBJECT",
         "name": "ZoomLevel3StoryRelationsCountType",
         "description": null,
-        "isOneOf": null,
         "fields": [
           {
             "name": "linkedStoryCount",
@@ -17806,7 +17676,6 @@
         "kind": "OBJECT",
         "name": "__Directive",
         "description": "A Directive provides a way to describe alternate runtime execution and type validation behavior in a GraphQL document.\n\nIn some cases, you need to provide options to alter GraphQL's execution behavior in ways field arguments will not suffice, such as conditionally including or skipping a field. Directives provide this by describing additional information to the executor.",
-        "isOneOf": null,
         "fields": [
           {
             "name": "name",
@@ -17923,7 +17792,6 @@
         "kind": "ENUM",
         "name": "__DirectiveLocation",
         "description": "A Directive can be adjacent to many parts of the GraphQL language, a __DirectiveLocation describes one such possible adjacencies.",
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -18049,7 +17917,6 @@
         "kind": "OBJECT",
         "name": "__EnumValue",
         "description": "One possible value for a given Enum. Enum values are unique values, not a placeholder for a string or numeric value. However an Enum value is returned in a JSON response as a string.",
-        "isOneOf": null,
         "fields": [
           {
             "name": "name",
@@ -18117,7 +17984,6 @@
         "kind": "OBJECT",
         "name": "__Field",
         "description": "Object and Interface types are described by a list of Fields, each of which has a name, potentially a list of arguments, and a return type.",
-        "isOneOf": null,
         "fields": [
           {
             "name": "name",
@@ -18238,7 +18104,6 @@
         "kind": "OBJECT",
         "name": "__InputValue",
         "description": "Arguments provided to Fields or Directives and the input fields of an InputObject are represented as Input Values which describe their type and optionally a default value.",
-        "isOneOf": null,
         "fields": [
           {
             "name": "name",
@@ -18334,7 +18199,6 @@
         "kind": "OBJECT",
         "name": "__Schema",
         "description": "A GraphQL Schema defines the capabilities of a GraphQL server. It exposes all available types and directives on the server, as well as the entry points for query, mutation, and subscription operations.",
-        "isOneOf": null,
         "fields": [
           {
             "name": "description",
@@ -18446,7 +18310,6 @@
         "kind": "OBJECT",
         "name": "__Type",
         "description": "The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.\n\nDepending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name, description and optional `specifiedByURL`, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.",
-        "isOneOf": null,
         "fields": [
           {
             "name": "kind",
@@ -18650,18 +18513,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "isOneOf",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -18673,7 +18524,6 @@
         "kind": "ENUM",
         "name": "__TypeKind",
         "description": "An enum describing what kind of type a given `__Type` is.",
-        "isOneOf": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,

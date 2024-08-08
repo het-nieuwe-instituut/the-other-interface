@@ -15,11 +15,7 @@ export const AsteriskTooltip = (props: AsteriskTooltipProps) => {
       titleClassName="leading-[100%] text-[17px] font-[600] -mt-1 block"
       learnMoreClassName={cn('underline leading-[17px] font-[600]  block')}
       readMoreHref={'/asterisk'}
-      readMoreText={
-        <div className="gap-1 flex items-center">
-          {t('learnAboutAsterisk')} <Asterisk />
-        </div>
-      }
+      readMoreText={<div className="flex items-center gap-1">{t('learnAboutAsterisk')}</div>}
       Icon={<Asterisk />}
       {...props}
     />

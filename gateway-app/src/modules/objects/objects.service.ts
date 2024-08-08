@@ -16,6 +16,9 @@ export interface ObjectsDetailZoomLevel3Data {
   asterisk_date_title?: string
   asterisk_name_title?: string
   asterisk_subject_title?: string
+  asterisk_date_description?: string
+  asterisk_name_description?: string
+  asterisk_subject_description?: string
   mediaType?: string
   mediaReference?: string
 }
@@ -28,6 +31,9 @@ const objectsDetailZoomLevel3DataKeys: KeysToVerify<ObjectsDetailZoomLevel3Data>
   asterisk_date_title: true,
   asterisk_name_title: true,
   asterisk_subject_title: true,
+  asterisk_date_description: true,
+  asterisk_name_description: true,
+  asterisk_subject_description: true,
   mediaReference: true,
   mediaType: true,
 }
