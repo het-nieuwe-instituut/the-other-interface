@@ -6,7 +6,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { WELCOME_PAGE_Z_INDEX } from '../../constants/mainConstants'
 import { useLooseTypeSafeTranslation } from '../../hooks/translations'
 import StorageService from '../../services/storageService'
-import BlurOverlay from '../BlurOverlay/BlurOverlay'
+import WelcomeBlurOverlay from '../BlurOverlay/WelcomeBlurOverlay'
 import { Button } from '@/features/ui/components/button/component'
 import { useLocale } from '../../hooks/useLocale'
 
@@ -55,7 +55,7 @@ const WelcomeOverlay = ({ className }: { className?: string }) => {
         className
       )}
     >
-      <BlurOverlay hide={false} />
+      <WelcomeBlurOverlay hide={false} />
       <div
         className="relative mx-auto h-screen w-screen max-w-[1440px] overflow-hidden"
         style={{ zIndex: WELCOME_PAGE_Z_INDEX }}
