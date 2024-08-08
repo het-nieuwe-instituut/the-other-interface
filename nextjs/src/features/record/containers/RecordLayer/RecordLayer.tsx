@@ -118,9 +118,11 @@ export const RecordLayer = () => {
               (zoomLevel3?.asteriskSuggestions?.length ?? 0) > 0 ? (
                 <AsteriskAnnotationGroup count={zoomLevel3.asteriskSuggestions?.length ?? 0}>
                   {zoomLevel3.asteriskSuggestions?.map((suggestion, index) => {
-                    const date = suggestion.asterisk_date_title ?? ''
-                    const name = suggestion.asterisk_name_title ?? ''
-                    const subject = suggestion.asterisk_subject_title ?? ''
+                    const date =
+                      suggestion.asterisk_date_title ?? suggestion.asterisk_date_description ?? ''
+                    const name =
+                      suggestion.asterisk_name_title ?? suggestion.asterisk_name_description ?? ''
+                    const subject = suggestion.asterisk_subject_description ?? ''
 
                     return (
                       <AsteriskAnnotationItem

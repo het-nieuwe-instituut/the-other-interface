@@ -42,6 +42,15 @@ export class ObjectAsteriskType {
   @Field({ nullable: true, description: 'asterisk value for the relatedKeyword field' })
   public asterisk_subject_relatedKeyword?: string
 
+  @Field({ nullable: true, description: 'asterisk value for the description field' })
+  public asterisk_date_description?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the description field' })
+  public asterisk_name_description?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the description field' })
+  public asterisk_subject_description?: string
+
   @Field({ nullable: true, description: 'asterisk value for the title field' })
   public asterisk_date_title?: string
 
@@ -93,6 +102,9 @@ export class EnrichedBaseObjectsZoomLevel3AsteriskDetailType extends PickType(Ob
   'asterisk_date_title',
   'asterisk_name_title',
   'asterisk_subject_title',
+  'asterisk_date_description',
+  'asterisk_name_description',
+  'asterisk_subject_description',
 ]) {}
 
 @ObjectType()
