@@ -8,7 +8,10 @@ export interface SubtitleProps {
 
 export const Subtitle: React.FC<SubtitleProps> = ({ className, children }) => {
   return (
-    <h2 className={cn('w-full bg-inherit', TypographyVariants({ impact: 'lg', className }))}>
+    <h2
+      lang="nl"
+      className={cn('w-full bg-inherit', TypographyVariants({ impact: 'lg', className }))}
+    >
       {children}
     </h2>
   )
