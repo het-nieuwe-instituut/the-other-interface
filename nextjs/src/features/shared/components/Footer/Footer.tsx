@@ -8,6 +8,7 @@ import { Locale } from 'src/generated/graphql'
 import { FOOTER_Z_INDEX } from '../../constants/mainConstants'
 import { CSSProperties } from 'react'
 import { BelowTheFoldWrapper } from '@/features/editorial/components/BelowTheFoldWrapper'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 
 export const Footer = () => {
   const lang = useLocale()
@@ -33,18 +34,34 @@ export const Footer = () => {
             </Link>
             <div className="pt-6">
               <Link href="https://goo.gl/maps/m5EvkSa3z321G68z6" className="hover:text-blue-50">
-                <p className="font-social-large text-[21px] tracking-[0.21px]">Nieuwe Instituut</p>
-                <p className="font-social-large text-[21px] tracking-[0.21px]">Museumpark 25</p>
-                <p className="font-social-large text-[21px] tracking-[0.21px]">3015CB Rotterdam</p>
+                <p className={TypographyVariants({ socialLarge: 'lg', className: 'mb-[2px]' })}>
+                  Nieuwe Instituut
+                </p>
+                <p className={TypographyVariants({ socialLarge: 'lg', className: 'mb-[2px]' })}>
+                  Museumpark 25
+                </p>
+                <p className={TypographyVariants({ socialLarge: 'lg', className: 'mb-[2px]' })}>
+                  3015CB Rotterdam
+                </p>
               </Link>
               <div className="pt-6">
                 <Link href="tel:+31(0)10-4401200">
-                  <p className="font-social-large text-[21px] tracking-[0.21px] hover:text-blue-50">
+                  <p
+                    className={TypographyVariants({
+                      socialLarge: 'lg',
+                      className: 'hover:text-blue-50 mb-[2px]',
+                    })}
+                  >
                     +31(0)10-4401200
                   </p>
                 </Link>
                 <Link href={`mailto:info@nieuweinstituut.nl`}>
-                  <p className="font-social-large text-[21px] tracking-[0.21px] hover:text-blue-50">
+                  <p
+                    className={TypographyVariants({
+                      socialLarge: 'lg',
+                      className: 'hover:text-blue-50',
+                    })}
+                  >
                     info@nieuweinstituut.nl
                   </p>
                 </Link>
@@ -61,7 +78,7 @@ export const Footer = () => {
                         ? 'https://nieuweinstituut.nl/en/pages/nieuwsbrief'
                         : 'https://nieuweinstituut.nl/pages/nieuwsbrief'
                     }
-                    className="mb-2"
+                    className={TypographyVariants({ socialLarge: 'lg', className: 'mb-2 ' })}
                     variant={'footerPrimary'}
                   >
                     {t('newsletter')} <Icon className="size-5" />
@@ -72,7 +89,7 @@ export const Footer = () => {
                         ? 'https://nieuweinstituut.nl/en/pages/now-on-display'
                         : 'https://nieuweinstituut.nl/pages/now-on-display'
                     }
-                    className="mb-2"
+                    className={TypographyVariants({ socialLarge: 'lg', className: 'mb-2 ' })}
                     variant={'footerPrimary'}
                   >
                     {t('onDisplay')} <Icon className="size-5" />
@@ -83,7 +100,7 @@ export const Footer = () => {
                         ? 'https://nieuweinstituut.nl/en/events'
                         : 'https://nieuweinstituut.nl/events'
                     }
-                    className="mb-2"
+                    className={TypographyVariants({ socialLarge: 'lg', className: 'mb-2 ' })}
                     variant={'footerPrimary'}
                   >
                     {t('exhibitions')} <Icon className="size-5" />
@@ -96,21 +113,31 @@ export const Footer = () => {
                         ? 'https://nieuweinstituut.nl/en/pages/privacy'
                         : 'https://nieuweinstituut.nl/pages/privacy'
                     }
-                    className="mb-2"
+                    className={TypographyVariants({ socialLarge: 'lg', className: 'mb-2 ' })}
                     variant={'footerPrimary'}
                   >
                     {t('privacyPolicy')} <Icon className="size-5" />
                   </NavLinkButton>
-                  <NavLinkButton href={'/disclaimer'} className="mb-2" variant={'footerPrimary'}>
+                  <NavLinkButton
+                    href={'/disclaimer'}
+                    className={TypographyVariants({ socialLarge: 'lg', className: 'mb-2 ' })}
+                    variant={'footerPrimary'}
+                  >
                     {t('disclaimer')}
                   </NavLinkButton>
-                  <NavLinkButton href={'/developers'} variant={'footerPrimary'}>
+                  <NavLinkButton
+                    href={'/developers'}
+                    variant={'footerPrimary'}
+                    className={TypographyVariants({ socialLarge: 'lg' })}
+                  >
                     {t('forDevs')}
                   </NavLinkButton>
                 </div>
               </div>
               <div>
-                <p className="font-social-large text-[14px]">{t('languageDisclaimer')}</p>
+                <p className={TypographyVariants({ socialLarge: 'md' })}>
+                  {t('languageDisclaimer')}
+                </p>
               </div>
             </div>
           </div>
