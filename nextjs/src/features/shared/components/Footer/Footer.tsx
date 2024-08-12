@@ -26,23 +26,25 @@ export const Footer = () => {
             <Link
               href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}
               aria-label="Nieuwe instituut logo"
+              target="_blank"
+              className="hover:text-blue-50"
             >
               <LogoSvg width={logoSize?.width} height={logoSize?.height} />
             </Link>
             <div className="pt-6">
-              <Link href="https://goo.gl/maps/m5EvkSa3z321G68z6">
+              <Link href="https://goo.gl/maps/m5EvkSa3z321G68z6" className="hover:text-blue-50">
                 <p className="font-social-large text-[21px] tracking-[0.21px]">Nieuwe Instituut</p>
                 <p className="font-social-large text-[21px] tracking-[0.21px]">Museumpark 25</p>
                 <p className="font-social-large text-[21px] tracking-[0.21px]">3015CB Rotterdam</p>
               </Link>
               <div className="pt-6">
                 <Link href="tel:+31(0)10-4401200">
-                  <p className="font-social-large text-[21px] tracking-[0.21px]">
+                  <p className="font-social-large text-[21px] tracking-[0.21px] hover:text-blue-50">
                     +31(0)10-4401200
                   </p>
                 </Link>
                 <Link href={`mailto:info@nieuweinstituut.nl`}>
-                  <p className="font-social-large text-[21px] tracking-[0.21px]">
+                  <p className="font-social-large text-[21px] tracking-[0.21px] hover:text-blue-50">
                     info@nieuweinstituut.nl
                   </p>
                 </Link>
