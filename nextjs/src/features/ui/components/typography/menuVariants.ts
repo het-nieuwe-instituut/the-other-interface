@@ -54,14 +54,14 @@ export const MenuTypogrpahyVariants = cva('', {
     },
     menuItem: {
       primary: [
-        TypographyVariants({ times: '2xl' }),
+        'font-times-large text-[70px] leading-[120%] tracking-[-1.92px] md:text-[84px] lg:text-[96px] md:leading-[100%_]',
         'text-pink-100 ',
         'hover:text-pink-50',
         'focus:bg-pink-100 focus:text-blue-100 focus:outline-blue-100',
         'disabled:text-[rgba(0,0,0.2)]',
       ],
       secondary: [
-        TypographyVariants({ impact: 'xl' }),
+        'font-impact-large text-[55px] leading-[120%] tracking-[-0.8px] md:text-[62px] lg:text-[80px] md:leading-[100%_]',
         'text-pink-100',
         'hover:text-pink-50',
         'focus:bg-blue-100 focus:text-pink-100 focus:outline-pink-100',
