@@ -66,6 +66,7 @@ export const GalaxyZoomNavigation = () => {
           delay={300}
           href="/"
           className="flex w-[48px] cursor-pointer flex-col flex-nowrap items-center  justify-center gap-2 whitespace-nowrap"
+          startAnimation={currentZoomNumber !== 1}
         >
           <label
             htmlFor="zoom-0"
@@ -95,6 +96,7 @@ export const GalaxyZoomNavigation = () => {
             'flex w-[45px] flex-col flex-nowrap items-center justify-center gap-2 whitespace-nowrap',
             !zoom2Link && currentZoomNumber === 2 && 'cursor-not-allowed pointer-events-none'
           )}
+          startAnimation={currentZoomNumber !== 1 && currentZoomNumber !== 2}
         >
           <label
             htmlFor="zoom-1"

@@ -6,10 +6,11 @@ import { useRouter } from 'next/navigation'
 import React, { useContext, useEffect, useRef } from 'react'
 
 export type DelayedNextLinkProps = LinkProps &
-  React.AnchorHTMLAttributes<HTMLAnchorElement> & { delay: number }
+  React.AnchorHTMLAttributes<HTMLAnchorElement> & { delay: number; startAnimation?: boolean }
+
 export const DelayedNextLink = React.forwardRef<HTMLAnchorElement, DelayedNextLinkProps>(
   (props: DelayedNextLinkProps, ref) => {
-    const { delay, onClick, ...restProps } = props
+    const { delay, onClick, startAnimation = true, ...restProps } = props
     const router = useRouter()
     const { stop, start } = useContext(PulseContext)
     const uniqueIdRef = React.useRef<string>(uniqueId())
@@ -28,16 +29,18 @@ export const DelayedNextLink = React.forwardRef<HTMLAnchorElement, DelayedNextLi
         ref={ref}
         onClick={e => {
           e.preventDefault()
-          onClick?.(e)
-          const url = e.currentTarget.getAttribute('href')
+          if (startAnimation) {
+            onClick?.(e)
+            const url = e.currentTarget.getAttribute('href')
 
-          if (url) {
-            setTimeout(() => {
-              router.push(url)
-              timeout.current = setTimeout(() => {
-                start(uniqueIdRef.current)
-              }, delay + 200)
-            }, delay)
+            if (url) {
+              setTimeout(() => {
+                router.push(url)
+                timeout.current = setTimeout(() => {
+                  start(uniqueIdRef.current)
+                }, delay + 200)
+              }, delay)
+            }
           }
         }}
       />
