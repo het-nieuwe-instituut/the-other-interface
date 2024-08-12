@@ -26,6 +26,7 @@ export const Footer = () => {
             <Link
               href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}
               aria-label="Nieuwe instituut logo"
+              target="_blank"
             >
               <LogoSvg width={logoSize?.width} height={logoSize?.height} />
             </Link>
