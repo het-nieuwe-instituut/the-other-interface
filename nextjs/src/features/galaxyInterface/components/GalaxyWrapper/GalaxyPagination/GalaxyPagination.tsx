@@ -43,7 +43,7 @@ export const GalaxyPagination: React.FC<Props> = ({
             disabled={true}
             size={'small'}
             icon={<ArrowIcon rotation="rotate(180deg)" />}
-            className={'w-9 border-none px-2 py-1'}
+            className={'w-9 border-none px-2 py-1 disabled:text-blue-50'}
             onClick={handleLeftClick}
           />
 
@@ -59,7 +59,7 @@ export const GalaxyPagination: React.FC<Props> = ({
             disabled={true}
             size={'small'}
             icon={<ArrowIcon />}
-            className={'w-9 border-none px-2 py-1'}
+            className={'w-9 border-none px-2 py-1 disabled:text-blue-50'}
             onClick={handleRightClick}
           />
         </>
@@ -74,7 +74,7 @@ export const GalaxyPagination: React.FC<Props> = ({
           disabled={currentPageNumber === 1}
           size={'small'}
           icon={<ArrowIcon rotation="rotate(180deg)" />}
-          className={'w-9 border-none px-2 py-1'}
+          className={'w-9 border-none px-2 py-1 disabled:text-blue-50'}
           onClick={handleLeftClick}
         />
 
@@ -90,7 +90,7 @@ export const GalaxyPagination: React.FC<Props> = ({
           disabled={currentPageNumber === pageAmount || pageAmount < 1}
           size={'small'}
           icon={<ArrowIcon />}
-          className={'w-9 border-none px-2 py-1'}
+          className={'w-9 border-none px-2 py-1 disabled:text-blue-50'}
           onClick={handleRightClick}
         />
       </>
