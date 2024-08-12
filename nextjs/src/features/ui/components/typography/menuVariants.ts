@@ -19,7 +19,8 @@ export const MenuTypogrpahyVariants = cva('', {
         'disabled:text-[rgba(0,0,0.2)]',
       ],
       small: [
-        TypographyVariants({ socialLarge: 'lg' }),
+        'self-stretch not-italic leading-[130%_]',
+        'font-social-large sm:text-[21px] tracking-[0.21px] text-[16px]',
         'text-blue-100',
         'hover:text-blue-50',
         'focus:outline-blue-100',
@@ -44,7 +45,8 @@ export const MenuTypogrpahyVariants = cva('', {
         'disabled:text-[rgba(0,0,0.2)]',
       ],
       small: [
-        TypographyVariants({ socialLarge: 'lg' }),
+        'self-stretch not-italic leading-[130%_]',
+        'font-social-large sm:text-[21px] tracking-[0.21px] text-[16px]',
         'text-pink-100',
         'hover:text-blue-50',
         'focus:bg-pink-100 focus:text-blue-100 focus:outline-pink-100 active:bg-pink-100 active:text-blue-100',

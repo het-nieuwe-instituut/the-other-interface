@@ -49,7 +49,7 @@ export const StaticHeader = ({ isNotGalaxyPage }: { isNotGalaxyPage?: boolean })
                 'cursor-pointer overflow-hidden h-full flex m-0 '
               )}
             >
-              <p className="mr-2 max-md:text-[20px] max-md:font-normal max-md:leading-[21px] max-sm:overflow-visible max-sm:whitespace-normal">
+              <p className="mr-2 max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px] max-sm:overflow-visible max-sm:whitespace-normal">
                 {tNavigation('headerTitle')}
               </p>
             </DelayedNextLinkWithZoomAnimationsContext>
@@ -90,7 +90,7 @@ export const StaticPageHeader = () => {
                 'cursor-pointer overflow-hidden h-full flex m-0 '
               )}
             >
-              <p className="mr-2 max-md:text-[20px] max-md:font-normal max-md:leading-[21px] max-sm:overflow-visible max-sm:whitespace-normal">
+              <p className="mr-2 max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px] max-sm:overflow-visible max-sm:whitespace-normal">
                 {tNavigation('headerTitle')}
               </p>
             </DelayedNextLinkWithZoomAnimationsContext>
