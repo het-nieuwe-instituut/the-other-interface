@@ -1,9 +1,11 @@
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { Category } from '@/features/shared/utils/categories'
+import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
 import { cn } from '@/features/ui/utils/cn'
 import { EntityNames } from 'src/generated/graphql'
 
 type Props = {
-  categoryType: EntityNames
+  categoryType: Category
   title?: string | null
   className: string
 }
@@ -31,7 +33,7 @@ export const RecordText: React.FC<Props> = ({ title = '', categoryType, classNam
             'mt-1 line-clamp-1 hyphens-auto text-center font-times-dot text-[9px] leading-[9px] lg:text-[12px] lg:leading-[12px] '
           }
         >
-          {t(categoryType?.toLowerCase())}
+          {t(toSingularCategory(categoryType))}
         </p>
       </div>
     </>

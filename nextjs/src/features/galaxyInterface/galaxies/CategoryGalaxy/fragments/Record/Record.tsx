@@ -16,6 +16,7 @@ import {
   useMoveElementToCenterValues,
 } from '../../../hooks/GalaxyZoomAnimationStateProvider'
 import { RecordText } from '../RecordText'
+import { Category } from '@/features/shared/utils/categories'
 
 export type RecordComponentProps = {
   className?: string
@@ -137,7 +138,7 @@ const RecordData = ({
           animationState === 'forward' && 'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
         )}
         title={title}
-        categoryType={category}
+        categoryType={category.toLocaleLowerCase() as Category}
       />
     </DelayedNextLinkWithZoomAnimationsContext>
   )
