@@ -2,7 +2,6 @@ import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translation
 import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
 import { cn } from '@/features/ui/utils/cn'
-import { EntityNames } from 'src/generated/graphql'
 
 type Props = {
   categoryType: Category
