@@ -19,7 +19,7 @@ const JumboButton = React.forwardRef<HTMLButtonElement, JumboButtonProps>(
             'transition-colors',
             'py-10 bg-black-100 px-4 relative border border-black rounded-[4px]',
             'hover:bg-ivory-90 hover:text-black-100',
-            'text-center text-white text-[32px] font-bold font-social-large leading-9',
+            'text-center text-ivory-90 text-[32px] font-bold font-social-large leading-9',
             state === 'loading' && 'text-blue-100',
             className
           )}
@@ -47,7 +47,7 @@ const JumboLinkButton = React.forwardRef<HTMLAnchorElement, JumboLinkButtonProps
             'transition-colors',
             'py-10 bg-black-100 px-4 relative border border-black rounded-[4px]',
             'hover:bg-ivory-90 hover:text-black-100',
-            'text-center text-white text-[32px] font-bold font-social-large leading-9',
+            'text-center text-ivory-90 text-[32px] font-bold font-social-large leading-9',
             state === 'loading' && 'text-blue-100',
             className
           )}
