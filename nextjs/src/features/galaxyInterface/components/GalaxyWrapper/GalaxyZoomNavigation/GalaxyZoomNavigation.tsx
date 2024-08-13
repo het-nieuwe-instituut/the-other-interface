@@ -66,7 +66,7 @@ export const GalaxyZoomNavigation = () => {
           delay={300}
           href="/"
           className="flex w-[48px] cursor-pointer flex-col flex-nowrap items-center  justify-center gap-2 whitespace-nowrap"
-          startAnimation={currentZoomNumber !== 1}
+          disabled={currentZoomNumber === 1}
         >
           <label
             htmlFor="zoom-0"
@@ -90,13 +90,12 @@ export const GalaxyZoomNavigation = () => {
         <DelayedNextLinkWithZoomAnimationsContext
           animation={'backwards'}
           delay={300}
-          aria-disabled={!zoom2Link && currentZoomNumber === 2}
           href={addLocaleToUrl(zoom2Link ?? '', locale)}
           className={cn(
             'flex w-[45px] flex-col flex-nowrap items-center justify-center gap-2 whitespace-nowrap',
             !zoom2Link && currentZoomNumber === 2 && 'cursor-not-allowed pointer-events-none'
           )}
-          startAnimation={currentZoomNumber !== 1 && currentZoomNumber !== 2}
+          disabled={currentZoomNumber === 1 || currentZoomNumber === 2}
         >
           <label
             htmlFor="zoom-1"

@@ -13,14 +13,14 @@ export const DelayedNextLinkWithZoomAnimationsContext = React.forwardRef<
   HTMLAnchorElement,
   DelayedNextLinkWithZoomAnimationsProps
 >((props: DelayedNextLinkWithZoomAnimationsProps, ref) => {
-  const { onClick, animation, startAnimation, ...restProps } = props
+  const { onClick, animation, disabled, ...restProps } = props
   const { setAnimationState } = useContext(GalaxyZoomAnimationStateContext)
 
   return (
     <DelayedNextLink
       {...restProps}
       ref={ref}
-      startAnimation={startAnimation}
+      disabled={disabled}
       onClick={e => {
         setAnimationState(animation)
         onClick?.(e)
