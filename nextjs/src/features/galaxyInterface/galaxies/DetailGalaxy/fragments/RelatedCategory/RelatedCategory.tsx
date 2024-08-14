@@ -48,7 +48,7 @@ export const RelatedCategory: React.FC<Props> = React.memo(props => {
   return (
     <>
       {complete && (
-        <div className=" text-white" style={{ gridRow, gridColumn }}>
+        <div className="text-ivory-100" style={{ gridRow, gridColumn }}>
           <div className="grid h-full grid-cols-2 grid-rows-2">
             <NextPositionedRecords
               next={next}
@@ -63,7 +63,7 @@ export const RelatedCategory: React.FC<Props> = React.memo(props => {
         </div>
       )}
 
-      <div className="text-white" color={'white'} style={{ gridRow, gridColumn }}>
+      <div className="text-ivory-100" color={'white'} style={{ gridRow, gridColumn }}>
         <div className="grid h-full grid-cols-2 grid-rows-2">
           <PositionedRecords
             onComplete={() => setComplete(true)}
