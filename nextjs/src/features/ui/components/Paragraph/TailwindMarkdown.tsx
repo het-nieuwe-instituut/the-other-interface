@@ -47,4 +47,5 @@ const components = {
   ol: ({ children }: { children: ReactNode }) => (
     <ol className={styles['md-ol-list']}>{children}</ol>
   ),
+  u: ({ children }: { children: ReactNode }) => <u className={styles['md-u']}>{children}</u>,
 }
