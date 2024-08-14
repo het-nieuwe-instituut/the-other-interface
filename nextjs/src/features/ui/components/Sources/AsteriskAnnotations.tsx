@@ -17,7 +17,7 @@ export const AsteriskAnnotationGroup = ({ children, count }: AsteriskAnnotationG
   return (
     <div className="flex-col">
       <button onClick={() => toggle()}>
-        <AsteriskSourceBlock className="hover:bg-black-100 hover:text-white">{`${
+        <AsteriskSourceBlock className="hover:bg-black-100 hover:text-ivory-100">{`${
           value ? t('hideAsterisk', { count }) : t('showAsterisk', { count })
         }`}</AsteriskSourceBlock>
       </button>

@@ -17,7 +17,7 @@ export const ExternalSourceBlock = ({
   isExternalLink = true,
 }: ExternalSourceBlockProps) => {
   const classNames = cn(
-    'bg-surface-lod text-surface-lod-dark font-arial-reboot-lines leading-[110%] text-[16px] font-[500] hover:bg-black-100 hover:text-white',
+    'bg-surface-lod text-surface-lod-dark font-arial-reboot-lines leading-[110%] text-[16px] font-[500] hover:bg-black-100 hover:text-ivory-100',
     className
   )
 
@@ -55,7 +55,7 @@ export const ExternalSourceLink = ({
           className,
           'flex items-center relative',
           'after:absolute after:bottom-[1px] after:w-full after:border-b after:border-solid after:content-[""] after:border-surface-lod-dark gap-2 ',
-          'hover:bg-black-100 hover:text-white hover:after:border-white'
+          'hover:bg-black-100 hover:text-ivory-100 hover:after:border-ivory-100'
         )}
       >
         {getExternalSourceTranslation(externalSourceType)}

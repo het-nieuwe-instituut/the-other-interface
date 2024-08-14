@@ -26,7 +26,7 @@ export const AsteriskSourceBlock = ({
         <SourceBlock
           Icon={<Asterisk />}
           isExternalLink={isExternalLink || target === '_blank'}
-          className={cn(classNames, 'hover:bg-black-100 hover:text-white')}
+          className={cn(classNames, 'hover:bg-black-100 hover:text-ivory-100')}
         >
           {children}
         </SourceBlock>

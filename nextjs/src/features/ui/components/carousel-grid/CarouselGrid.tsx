@@ -86,7 +86,7 @@ export const CarouselGridPagination = ({
         <NavArrowLeft
           className={cn(
             hidePrevious && 'opacity-20',
-            !hidePrevious && 'hover:bg-black-100 hover:text-white'
+            !hidePrevious && 'hover:bg-black-100 hover:text-ivory-100'
           )}
         />
       </button>
@@ -94,7 +94,7 @@ export const CarouselGridPagination = ({
         <NavArrowRight
           className={cn(
             hideNext && 'opacity-20',
-            !hideNext && 'hover:bg-black-100 hover:text-white'
+            !hideNext && 'hover:bg-black-100 hover:text-ivory-100'
           )}
         />
       </button>

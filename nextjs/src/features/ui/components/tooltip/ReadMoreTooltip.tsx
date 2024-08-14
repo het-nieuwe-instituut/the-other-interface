@@ -150,7 +150,12 @@ const ReadMoreTooltipContent = ({
           <h2
             className={TypographyVariants({
               socialLarge: 'sm',
-              className: cn('text-pink-100 font-bold line-clamp-[4]', description && 'pb-2'),
+              className: cn(
+                color === 'black' && 'text-ivory-100',
+                color === 'blue' && 'text-pink-100',
+                'font-bold line-clamp-[4]',
+                description && 'pb-2'
+              ),
             })}
           >
             {title}
@@ -161,7 +166,12 @@ const ReadMoreTooltipContent = ({
           <p
             className={TypographyVariants({
               socialLarge: 'sm',
-              className: cn('text-pink-100 line-clamp-[7]', readMoreHref && 'pb-2'),
+              className: cn(
+                color === 'black' && 'text-ivory-100',
+                color === 'blue' && 'text-pink-100',
+                'line-clamp-[7]',
+                readMoreHref && 'pb-2'
+              ),
             })}
           >
             {description}
@@ -171,7 +181,7 @@ const ReadMoreTooltipContent = ({
         {readMoreHref && (
           <NextLink href={readMoreHref}>
             <NavButton
-              color={color === 'black' ? 'invertedPinkHover' : 'inverted'}
+              color={color === 'black' ? 'invertedIvoryHover' : 'inverted'}
               variant={'textSecondary'}
             >
               {readMoreText}

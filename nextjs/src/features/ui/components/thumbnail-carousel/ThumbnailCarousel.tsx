@@ -136,7 +136,7 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
                   <NavArrowLeft
                     className={cn(
                       !canScrollPrev && 'opacity-20',
-                      canScrollPrev && 'hover:bg-black-100 hover:text-white'
+                      canScrollPrev && 'hover:bg-black-100 hover:text-ivory-100'
                     )}
                   />
                 </button>
@@ -144,7 +144,7 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
                   <NavArrowRight
                     className={cn(
                       !canScrollNext && 'opacity-20',
-                      canScrollNext && 'hover:bg-black-100 hover:text-white'
+                      canScrollNext && 'hover:bg-black-100 hover:text-ivory-100'
                     )}
                   />
                 </button>
