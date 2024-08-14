@@ -84,7 +84,10 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
           </thead>
           <tbody>
             {component.tableBody?.map((item, rowIndex) => (
-              <tr key={rowIndex} className="tr-border-gradient">
+              <tr
+                key={rowIndex}
+                className="tr-border-gradient hover:bg-black-100 hover:text-ivory-100 active:bg-black-100 active:text-ivory-100"
+              >
                 {item.TableBodyItem?.map((bodyItem, cellIndex) => (
                   <td
                     key={bodyItem.id}
