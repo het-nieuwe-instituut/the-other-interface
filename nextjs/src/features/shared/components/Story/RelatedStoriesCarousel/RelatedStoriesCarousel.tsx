@@ -93,7 +93,9 @@ export const RelatedStoriesCarouselContent = ({
 
   return stories && stories.length > 0 ? (
     <CarouselGrid>
-      <CarouselGridTitle>{`${tStories('relatedStories')}`}</CarouselGridTitle>
+      <CarouselGridTitle superscript={stories.length}>{`${tStories(
+        'relatedStories'
+      )}`}</CarouselGridTitle>
       <CarouselGridCardWrapper cols={cols}>
         {nodes.map(item => {
           const url = addLocaleToUrl(`/detail/${CATEGORIES.stories}/${item.id}`, lang)
