@@ -88,7 +88,7 @@ const RecordStoriesCarouselContent = ({
     <div>
       {stories && stories.length > 0 && (
         <CarouselGrid>
-          <CarouselGridTitle>{title}</CarouselGridTitle>
+          <CarouselGridTitle superscript={stories.length}>{title}</CarouselGridTitle>
           <CarouselGridCardWrapper cols={cols}>
             {nodes.map(item => {
               const url = addLocaleToUrl(`/detail/${CATEGORIES.stories}/${item.id}`, lang)

@@ -109,9 +109,23 @@ export const CarouselGridLink = (props: CarouselGridLinkProps) => {
   return <NavLinkButton variant={'textPrimary'} {...props} />
 }
 
-export interface CarouselGridTitleProps extends SubtitleProps {}
+export interface CarouselGridTitleProps extends SubtitleProps {
+  superscript?: number
+}
+
 export const CarouselGridTitle = (props: CarouselGridTitleProps) => {
-  return <Subtitle {...props} />
+  return (
+    <div className="flex">
+      <div>
+        <Subtitle {...props} />
+      </div>
+      <span
+        className={cn(TypographyVariants({ socialLarge: 'xl' }), 'relative top-0 -right-2 bold')}
+      >
+        {props.superscript ? `${props.superscript}` : ''}
+      </span>
+    </div>
+  )
 }
 
 export interface CarouselGridDescriptionProps extends SubtitleProps {}
