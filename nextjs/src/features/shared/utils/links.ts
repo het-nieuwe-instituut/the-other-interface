@@ -3,7 +3,7 @@ import { EntityNames } from 'src/generated/graphql'
 export const isExternalURL = (url: string, origin: string) => {
   try {
     const urlOrigin = new URL(url).origin
-    return urlOrigin !== `https://${origin}` && urlOrigin !== `http://${origin}`
+    return urlOrigin !== origin
   } catch {
     return false
   }

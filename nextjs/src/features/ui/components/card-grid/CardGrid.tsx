@@ -31,7 +31,7 @@ export interface CardGridWrapperProps {
 }
 
 export const CardGridCardWrapper = ({ className, children }: CardGridWrapperProps) => {
-  return <div className={cn(className, 'grid gap-4 grid-cols-1 lg:grid-cols-3')}>{children}</div>
+  return <div className={cn(className, 'grid gap-12 grid-cols-1 lg:grid-cols-3')}>{children}</div>
 }
 
 export const CardGridCard = Card
@@ -52,7 +52,7 @@ export const CardGridLink = (props: CardGridLinkProps) => {
 
 export interface CardGridTitleProps extends SubtitleProps {}
 export const CardGridTitle = (props: CardGridTitleProps) => {
-  return <Subtitle {...props} />
+  return <Subtitle {...props} className="leading-[100%]" />
 }
 
 export interface CardGridDescriptionProps extends SubtitleProps {}
