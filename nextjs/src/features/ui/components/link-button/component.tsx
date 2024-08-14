@@ -17,7 +17,7 @@ const LinkButton = React.forwardRef<HTMLAnchorElement, LinkButtonProps>(
 
     return (
       <NextLink
-        className={cn(ButtonVariants({ className, intent, state, size }))}
+        className={cn(ButtonVariants({ className, intent, state, size }), 'h-8')}
         ref={ref}
         {...props}
         target={isExternal ? '_blank' : ''}
