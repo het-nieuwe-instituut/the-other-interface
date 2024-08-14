@@ -33,20 +33,20 @@ export const TypographyVariants = cva('', {
         'font-social-large text-[32px] tracking-[-0.32px]',
       ],
       lg: [
-        'self-stretch not-italic leading-[130%_]',
+        'self-stretch not-italic leading-[120%_]',
         'font-social-large text-[21px] tracking-[0.21px]',
       ],
       md: [
-        'self-stretch not-italic leading-[130%_]',
+        'self-stretch not-italic leading-[120%_]',
         'font-social-large text-[14px] tracking-[-0.25px]',
       ],
-      sm: ['self-stretch not-italic leading-[130%_]', 'font-social-large text-[12px]'],
+      sm: ['self-stretch not-italic leading-[120%_]', 'font-social-large text-[12px]'],
       placeholder:
-        ' self-stretch font-social-large text-[21px] italic  leading-[130%_] tracking-[0.21px]',
+        ' self-stretch font-social-large text-[21px] italic  leading-[120%_] tracking-[0.21px]',
       label:
         ' self-stretch font-social-large text-[11px] not-italic leading-[11px_] tracking-[0.11px]',
       textfield: 'self-stretch font-social-large text-[18px] leading-[18px_] tracking-[0.18px]',
-      sidebarTitle: 'font-social-large text-[16px] font-bold leading-[130%]',
+      sidebarTitle: 'font-social-large text-[16px] font-bold leading-[120%]',
     },
     socialMedium: {
       xl: [
