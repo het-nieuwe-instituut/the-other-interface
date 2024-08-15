@@ -45,7 +45,7 @@ export function LandingPageComponentRenderer({ grid, highlight, imageCarousel, c
               }) ?? '',
               lang
             )
-            const url = item?.url ? imageBasePath(item.url.toString()) : undefined
+            const url = attributes?.url ? imageBasePath(attributes?.url.toString()) : undefined
             if (!attributes || !attributes.height || !attributes.width || !attributes.url || !url) {
               return null
             }
