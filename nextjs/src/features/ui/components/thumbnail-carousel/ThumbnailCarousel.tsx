@@ -45,7 +45,7 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
     index
   ] as React.ReactElement<ThumbnailCarouselItemProps>
   const itemsFitInContainer = Math.floor(width / ITEM_WIDTH)
-
+  const isSingle = Children.toArray(children).length === 1
   const focusedItemProps = focusedItem.props
   if (!focusedItem) {
     return <ErrorBox />
@@ -103,54 +103,56 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
             />
           </div>
 
-          <div className="relative flex">
-            <div className="overflow-x-scroll scrollbar-hide" ref={scrollContainerRef}>
-              <div
-                className="flex flex-nowrap gap-4"
-                style={{
-                  width: pages * itemsFitInContainer * (ITEM_WIDTH + 16),
-                }}
-              >
-                {children}
+          {!isSingle && (
+            <div className="relative flex empty:hidden">
+              <div className="overflow-x-scroll scrollbar-hide" ref={scrollContainerRef}>
+                <div
+                  className="flex flex-nowrap gap-4"
+                  style={{
+                    width: pages * itemsFitInContainer * (ITEM_WIDTH + 16),
+                  }}
+                >
+                  {children}
+                </div>
               </div>
-            </div>
 
-            <div
-              className={cn(
-                'truncate-gradient-left absolute bg-ivory-90 w-[81.81px] h-[106px] top-[-1px] bottom-0',
-                'pointer-events-none absolute  transition-opacity opacity-100 ',
-                !canScrollPrev && 'opacity-0'
-              )}
-            />
-            <div className="relative flex">
               <div
                 className={cn(
-                  'truncate-gradient-right bg-ivory-90 w-[81.81px] h-[106px] top-[-1px]',
-                  'pointer-events-none absolute left-[-81px] transition-opacity opacity-100 ',
-                  !canScrollNext && 'opacity-0'
+                  'truncate-gradient-left absolute bg-ivory-90 w-[81.81px] h-[106px] top-[-1px] bottom-0',
+                  'pointer-events-none absolute  transition-opacity opacity-100 ',
+                  !canScrollPrev && 'opacity-0'
                 )}
               />
+              <div className="relative flex">
+                <div
+                  className={cn(
+                    'truncate-gradient-right bg-ivory-90 w-[81.81px] h-[106px] top-[-1px]',
+                    'pointer-events-none absolute left-[-81px] transition-opacity opacity-100 ',
+                    !canScrollNext && 'opacity-0'
+                  )}
+                />
 
-              <div className="flex h-full w-[116.32px] items-center justify-center gap-2">
-                <button onClick={prevPage} disabled={!canScrollPrev} aria-label="Previous">
-                  <NavArrowLeft
-                    className={cn(
-                      !canScrollPrev && 'opacity-20',
-                      canScrollPrev && 'hover:bg-black-100 hover:text-ivory-100'
-                    )}
-                  />
-                </button>
-                <button onClick={nextPage} disabled={!canScrollNext} aria-label="Next">
-                  <NavArrowRight
-                    className={cn(
-                      !canScrollNext && 'opacity-20',
-                      canScrollNext && 'hover:bg-black-100 hover:text-ivory-100'
-                    )}
-                  />
-                </button>
+                <div className="flex h-full w-[116.32px] items-center justify-center gap-2">
+                  <button onClick={prevPage} disabled={!canScrollPrev} aria-label="Previous">
+                    <NavArrowLeft
+                      className={cn(
+                        !canScrollPrev && 'opacity-20',
+                        canScrollPrev && 'hover:bg-black-100 hover:text-ivory-100'
+                      )}
+                    />
+                  </button>
+                  <button onClick={nextPage} disabled={!canScrollNext} aria-label="Next">
+                    <NavArrowRight
+                      className={cn(
+                        !canScrollNext && 'opacity-20',
+                        canScrollNext && 'hover:bg-black-100 hover:text-ivory-100'
+                      )}
+                    />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </ThumbnailCarouselContext.Provider>
     </LightboxProvider>
