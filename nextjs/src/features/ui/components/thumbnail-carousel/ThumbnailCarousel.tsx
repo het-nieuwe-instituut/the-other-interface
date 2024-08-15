@@ -22,7 +22,6 @@ import NavArrowRight from './nav-arrow-right.svg'
 export interface ThumbnailCarouselProps {
   className?: string
   children: React.ReactElement<ThumbnailCarouselItemProps>[]
-  isSingle?: boolean
 }
 
 const ThumbnailCarouselContext = React.createContext<{
@@ -34,11 +33,7 @@ const ThumbnailCarouselContext = React.createContext<{
 })
 const ITEM_WIDTH = 154.783
 
-export const ThumbnailCarousel = ({
-  className,
-  children,
-  isSingle = false,
-}: ThumbnailCarouselProps) => {
+export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProps) => {
   const { pages, width, nextPage, prevPage, scrollContainerRef, canScrollNext, canScrollPrev } =
     useHorizontalSnappingList({
       numberOfItems: children.length,
@@ -50,7 +45,7 @@ export const ThumbnailCarousel = ({
     index
   ] as React.ReactElement<ThumbnailCarouselItemProps>
   const itemsFitInContainer = Math.floor(width / ITEM_WIDTH)
-
+  const isSingle = Children.toArray(children).length === 1
   const focusedItemProps = focusedItem.props
   if (!focusedItem) {
     return <ErrorBox />
@@ -109,7 +104,7 @@ export const ThumbnailCarousel = ({
           </div>
 
           {!isSingle && (
-            <div className="relative flex">
+            <div className="relative flex empty:hidden">
               <div className="overflow-x-scroll scrollbar-hide" ref={scrollContainerRef}>
                 <div
                   className="flex flex-nowrap gap-4"

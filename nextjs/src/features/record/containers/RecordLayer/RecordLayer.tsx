@@ -164,7 +164,7 @@ export const RecordLayer = () => {
               )}
 
               {zoomLevel3?.thumbnail && (
-                <ThumbnailCarousel isSingle={zoomLevel3?.thumbnail.length === 1}>
+                <ThumbnailCarousel>
                   {zoomLevel3?.thumbnail.map((item, index) => (
                     <ThumbnailCarouselItem
                       key={index}
