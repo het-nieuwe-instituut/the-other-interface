@@ -142,7 +142,7 @@ export const Navigation = () => {
               <p
                 className={TypographyVariants({
                   socialLarge: 'md',
-                  className: 'text-pink-100 mb-3 ',
+                  className: 'text-pink-100 mb-3 tracking-normal',
                 })}
               >
                 {tNavigation('aboutDescription')}

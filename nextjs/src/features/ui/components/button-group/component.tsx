@@ -23,6 +23,7 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, className })
 interface LinkButtonGroupItemProps extends VariantProps<typeof NavButtonVariants> {
   href: string
   children: string
+  className?: string
 }
 
 export const LinkButtonGroupItem: React.FC<LinkButtonGroupItemProps> = ({
@@ -33,7 +34,13 @@ export const LinkButtonGroupItem: React.FC<LinkButtonGroupItemProps> = ({
 }: LinkButtonGroupItemProps) => {
   const isExternal = isExternalURL(href, process.env.parsed.NEXT_PUBLIC_URL ?? '')
   return (
-    <NavLinkButton href={href} variant={variant} color={color} className="relative w-full">
+    <NavLinkButton
+      href={href}
+      variant={variant}
+      color={color}
+      className="relative w-full"
+      target={isExternal ? '_blank' : ''}
+    >
       {children}
       <i>{isExternal && <ExternalLink className="size-6" />}</i>
     </NavLinkButton>
@@ -43,14 +50,17 @@ export const LinkButtonGroupItem: React.FC<LinkButtonGroupItemProps> = ({
 interface JumboLinkButtonGroupItemProps {
   href: string
   children: string
+  className?: string
 }
+
 export const JumboLinkButtonGroupItem: React.FC<JumboLinkButtonGroupItemProps> = ({
   href,
   children,
+  className,
 }: LinkButtonGroupItemProps) => {
   const isExternal = isExternalURL(href, process.env.parsed.NEXT_PUBLIC_URL ?? '')
   return (
-    <JumboLinkButton href={href}>
+    <JumboLinkButton className={cn(className)} href={href} target={isExternal ? '_blank' : ''}>
       {children}
       <i>{isExternal && <ExternalLink className="ml-2 inline-flex size-6" />}</i>
     </JumboLinkButton>

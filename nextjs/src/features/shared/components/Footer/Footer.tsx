@@ -24,42 +24,48 @@ export const Footer = () => {
       <div className="container m-auto max-w-[1392px] p-6 min-[1428px]:px-0">
         <div className="grid gap-1 md:grid-cols-2 lg:grid-cols-3">
           <div>
-            <Link
-              href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}
-              aria-label="Nieuwe instituut logo"
-              target="_blank"
-              className="hover:text-blue-50"
-            >
-              <LogoSvg width={logoSize?.width} height={logoSize?.height} />
-            </Link>
-            <div className="pt-6">
-              <Link href="https://goo.gl/maps/m5EvkSa3z321G68z6" className="hover:text-blue-50">
-                <p className={TypographyVariants({ socialLarge: 'lg', className: 'mb-[2px]' })}>
-                  Nieuwe Instituut
-                </p>
-                <p className={TypographyVariants({ socialLarge: 'lg', className: 'mb-[2px]' })}>
-                  Museumpark 25
-                </p>
-                <p className={TypographyVariants({ socialLarge: 'lg', className: 'mb-[2px]' })}>
-                  3015CB Rotterdam
-                </p>
+            <div className="hover:bg-black-100 inline-block">
+              <Link
+                href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}
+                aria-label="Nieuwe instituut logo"
+                target="_blank"
+                className="hover:text-ivory-100"
+              >
+                <LogoSvg width={logoSize?.width} height={logoSize?.height} />
               </Link>
+            </div>
+            <div className="pt-6">
+              <div className="hover:bg-black-100 inline-block whitespace-nowrap">
+                <Link href="https://goo.gl/maps/m5EvkSa3z321G68z6" className="hover:text-ivory-100">
+                  <p className={TypographyVariants({ socialLarge: 'lg', className: 'mb-[2px]' })}>
+                    Nieuwe Instituut
+                  </p>
+                  <p className={TypographyVariants({ socialLarge: 'lg', className: 'mb-[2px]' })}>
+                    Museumpark 25
+                  </p>
+                  <p className={TypographyVariants({ socialLarge: 'lg', className: 'mb-[2px]' })}>
+                    3015CB Rotterdam
+                  </p>
+                </Link>
+              </div>
               <div className="pt-6">
                 <Link href="tel:+31(0)10-4401200">
                   <p
                     className={TypographyVariants({
                       socialLarge: 'lg',
-                      className: 'hover:text-blue-50 mb-[2px]',
+                      className:
+                        'hover:text-ivory-100 hover:bg-black-100 mb-[2px] inline-block whitespace-nowrap',
                     })}
                   >
                     +31(0)10-4401200
                   </p>
                 </Link>
+                <br />
                 <Link href={`mailto:info@nieuweinstituut.nl`}>
                   <p
                     className={TypographyVariants({
                       socialLarge: 'lg',
-                      className: 'hover:text-blue-50',
+                      className: 'hover:text-ivory-100 hover:bg-black-100 inline-block',
                     })}
                   >
                     info@nieuweinstituut.nl

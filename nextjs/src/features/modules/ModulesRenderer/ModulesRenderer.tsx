@@ -161,7 +161,11 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
                     return null
                   }
                   return (
-                    <JumboLinkButtonGroupItem key={button.id} href={button.url}>
+                    <JumboLinkButtonGroupItem
+                      key={button.id}
+                      href={button.url}
+                      className={cn((component?.buttons || []).length > 1 ? 'mb-4' : '')}
+                    >
                       {button.text}
                     </JumboLinkButtonGroupItem>
                   )
