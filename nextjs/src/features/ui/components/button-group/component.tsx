@@ -38,7 +38,7 @@ export const LinkButtonGroupItem: React.FC<LinkButtonGroupItemProps> = ({
       href={href}
       variant={variant}
       color={color}
-      className="relative w-full"
+      className="relative w-fit"
       target={isExternal ? '_blank' : ''}
     >
       {children}
