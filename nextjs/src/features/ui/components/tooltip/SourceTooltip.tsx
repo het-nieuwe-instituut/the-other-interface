@@ -111,7 +111,7 @@ const SourceTooltipContent = ({
   if (error) {
     return (
       <div role="tooltip" className={cn('w-[243.76px] justify-start p-4 text-start bg-error-100 ')}>
-        <p className={TypographyVariants({ socialLarge: 'sm', className: 'text-white' })}>
+        <p className={TypographyVariants({ socialLarge: 'sm', className: 'text-ivory-100' })}>
           {error}
         </p>
       </div>

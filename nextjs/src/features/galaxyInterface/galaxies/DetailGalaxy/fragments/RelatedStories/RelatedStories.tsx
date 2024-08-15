@@ -61,7 +61,7 @@ export const RelatedStories: React.FC<Props> = ({
 
   return (
     <>
-      <div className="pointer-events-none col-start-2 col-end-2 row-start-1 row-end-3 text-white">
+      <div className="pointer-events-none col-start-2 col-end-2 row-start-1 row-end-3 text-ivory-100">
         <div className="grid h-full grid-cols-2 grid-rows-4">
           {!isFetchingEditorial && complete && (
             <NextPositionedRecords
@@ -75,7 +75,7 @@ export const RelatedStories: React.FC<Props> = ({
           )}
         </div>
       </div>
-      <div className="col-start-2 col-end-2 row-start-1 row-end-3 text-white">
+      <div className="col-start-2 col-end-2 row-start-1 row-end-3 text-ivory-100">
         <div className="grid h-full grid-cols-2 grid-rows-4">
           {!isFetchingEditorial && (
             <PositionedRecords
