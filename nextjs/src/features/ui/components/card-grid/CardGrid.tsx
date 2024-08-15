@@ -31,7 +31,11 @@ export interface CardGridWrapperProps {
 }
 
 export const CardGridCardWrapper = ({ className, children }: CardGridWrapperProps) => {
-  return <div className={cn(className, 'grid gap-12 grid-cols-1 lg:grid-cols-3')}>{children}</div>
+  return (
+    <div className={cn(className, 'grid gap-4 gap-y-12 grid-cols-1 lg:grid-cols-3')}>
+      {children}
+    </div>
+  )
 }
 
 export const CardGridCard = Card
