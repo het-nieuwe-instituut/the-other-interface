@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { keyExtractor } from '@/features/shared/utils/lists'
 import { Subtitle } from '@/features/ui/components/subtitle/Subtitle'
+import { useRouter } from 'next/navigation'
 
 interface Props {
   component?: TableModuleType
@@ -61,6 +62,7 @@ export const TableModule: React.FC<Props> = props => {
 
 const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
   const lang = useLocale()
+  const router = useRouter()
   if (!component) return null
 
   return (
@@ -85,6 +87,9 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
           <tbody>
             {component.tableBody?.map((item, rowIndex) => (
               <tr
+                onClick={() => {
+                  router.push(`/detail/${component.type}/${item.id}?lang=${lang}`)
+                }}
                 key={rowIndex}
                 className="tr-border-gradient hover:bg-black-100 hover:text-ivory-100 active:bg-black-100 active:text-ivory-100"
               >
@@ -96,9 +101,7 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
                       'text-left, py-6 pr-2 cursor-pointer'
                     )}
                   >
-                    <Link href={`/detail/${component.type}/${item.id}?lang=${lang}`}>
-                      {Boolean(bodyItem.value) ? bodyItem.value : 'n/a'}
-                    </Link>
+                    {Boolean(bodyItem.value) ? bodyItem.value : 'n/a'}
                   </td>
                 ))}
               </tr>
