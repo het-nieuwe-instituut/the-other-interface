@@ -47,9 +47,9 @@ export const getNextItemsAnimationClassNames = (
   animationState: Animations,
   conditions: Conditions,
   hasItems: boolean,
-  isZoom1: boolean = false
+  blurVariant: '50px' | '10px' = '10px'
 ) => {
-  if (isZoom1) {
+  if (blurVariant === '50px') {
     return cn(
       conditions === 'previousAnimationWasForward' &&
         hasItems &&

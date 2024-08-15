@@ -74,7 +74,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
             paginationAnimationState,
             paginationAnimationConditions,
             !!positionedStories?.length,
-            true
+            '50px'
           )
         )}
       >
