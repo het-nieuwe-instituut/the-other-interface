@@ -46,8 +46,24 @@ export const getItemsAnimationClassNames = (animationState: Animations, conditio
 export const getNextItemsAnimationClassNames = (
   animationState: Animations,
   conditions: Conditions,
-  hasItems: boolean
+  hasItems: boolean,
+  isZoom1: boolean = false
 ) => {
+  if (isZoom1) {
+    return cn(
+      conditions === 'previousAnimationWasForward' &&
+        hasItems &&
+        'animate-[fromHideToShowExtraBlurZoom1_500ms_ease-in-out_forwards]',
+      !animationState &&
+        conditions === 'firstRender' &&
+        'animate-[fromHideToBlurZoom1_500ms_ease-in-out_forwards]',
+      !animationState && conditions !== 'firstRender' && 'blur-[50px]',
+      animationState === 'forward' && 'animate-[toUnblurZoom1_500ms_ease-in-out_forwards]',
+      animationState === 'backwards' &&
+        'animate-[fromBlurredToHideZoom1_500ms_ease-in-out_forwards]'
+    )
+  }
+
   return cn(
     conditions === 'previousAnimationWasForward' &&
       hasItems &&
@@ -55,7 +71,7 @@ export const getNextItemsAnimationClassNames = (
     !animationState &&
       conditions === 'firstRender' &&
       'animate-[fromHideToBlur_500ms_ease-in-out_forwards]',
-    !animationState && conditions !== 'firstRender' && 'blur-[60px]',
+    !animationState && conditions !== 'firstRender' && 'blur-[10px]',
     animationState === 'forward' && 'animate-[toUnblur_500ms_ease-in-out_forwards]',
     animationState === 'backwards' && 'animate-[fromBlurredToHide_500ms_ease-in-out_forwards]'
   )

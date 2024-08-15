@@ -22,24 +22,42 @@ module.exports = {
         },
         fromHideToShowExtraBlur: {
           initial: { opacity: 0 },
-          from: { opacity: 0, filter: 'blur(60px)' },
+          from: { opacity: 0, filter: 'blur(10px)' },
+          to: { opacity: 1, filter: 'blur(0px)' },
+        },
+        fromHideToShowExtraBlurZoom1: {
+          initial: { opacity: 0 },
+          from: { opacity: 0, filter: 'blur(50px)' },
           to: { opacity: 1, filter: 'blur(0px)' },
         },
         fromHideToBlur: {
           initial: { opacity: 0 },
-          from: { opacity: 0, filter: 'blur(60px)' },
-          to: { opacity: 1, filter: 'blur(60px)' },
+          from: { opacity: 0, filter: 'blur(10px)' },
+          to: { opacity: 1, filter: 'blur(10px)' },
+        },
+        fromHideToBlurZoom1: {
+          initial: { opacity: 0 },
+          from: { opacity: 0, filter: 'blur(50px)' },
+          to: { opacity: 1, filter: 'blur(50px)' },
         },
         fromBlurredToHide: {
-          from: { opacity: 1, filter: 'blur(60px)' },
-          to: { opacity: 0, filter: 'blur(60px)' },
+          from: { opacity: 1, filter: 'blur(10px)' },
+          to: { opacity: 0, filter: 'blur(10px)' },
+        },
+        fromBlurredToHideZoom1: {
+          from: { opacity: 1, filter: 'blur(50px)' },
+          to: { opacity: 0, filter: 'blur(50px)' },
         },
         toBlur: {
           '0%': { filter: 'blur(0px)' },
           '100%': { filter: 'blur(10px)' },
         },
         toUnblur: {
-          '0%': { filter: 'blur(60px)' },
+          '0%': { filter: 'blur(10px)' },
+          '100%': { filter: 'blur(0px)' },
+        },
+        toUnblurZoom1: {
+          '0%': { filter: 'blur(50px)' },
           '100%': { filter: 'blur(0px)' },
         },
         toFadeIn: {
