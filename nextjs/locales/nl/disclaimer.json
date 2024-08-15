@@ -5,7 +5,7 @@
   "dataPartner": "Data partner: ",
   "visualIdentity": "Visuele identiteit team: Jacob Hoving, Cengiz Mengüç, Maureen Mooren, Vera van der Seyp, Maud Vervenne",
   "editorial": "Redactie: ",
-  "disclaierTitle": "Disclaimer",
+  "disclaimerTitle": "Disclaimer",
   "disclaimerP1": "Nieuwe Instituut heeft ernaar gestreefd auteursrechten volgens de wettelijke bepalingen te regelen. Zij die menen nog zekere rechten te kunnen doen gelden, kunnen zich wenden tot het Nieuwe Instituut. De auteursrechten en andere intellectuele eigendomsrechten op de teksten, illustraties en ander beschermd materiaal op deze website berusten bij het Nieuwe Instituut respectievelijk de rechthebbenden van dat materiaal.",
   "disclaimerP2": "Hoewel de website met de grootste zorgvuldigheid is gemaakt, zullen er ongetwijfeld foutjes, verbeterpunten en omissies in zitten. De website wordt in de komende periode verder ontwikkeld. Reacties ontvangen wij graag op ",
   "disclaimerP3": "Voor eventuele overname van informatie of herpublicatie kan contact opgenomen worden met ",
@@ -15,5 +15,10 @@
   "privacyTitle": "Privacy & Cookies",
   "privacyP1": "Nieuwe Instituut verwerkt uw persoonsgegevens alleen wanneer dat voor de uitvoering van onze activiteiten, diensten of werkzaamheden nodig is. Hier vindt u een overzicht van persoonsgegevens die wij meer in het algemeen verwerken, waarbij nadere informatie wordt verstrekt over de doeleinden en grondslagen van de verwerkingen. Welke persoonsgegevens er van u worden verzameld, hangt af van onze relatie tot u.",
   "privacyP2": "Nieuwe Instituut gebruikt cookies om informatie te verzamelen over het gebruik van haar diensten en deze te verbeteren en aan te passen aan de wensen van de bezoekers. Tevens worden cookies gebruikt voor eigen marketingdoeleinden, waaronder online advertenties. De cookies die op de website van het Nieuwe Instituut worden gebruikt kunnen zowel afkomstig zijn van het Nieuwe Instituut als van door het Nieuwe Instituut betrokken derden.",
-  "privacyP3": ""
+  "privacyP3": "",
+  "aiTitle": "Kunstmatige Intelligentie",
+  "paragraphAI": "De auteurs behouden nadrukkelijk het recht voor om de Werken die toegankelijk zijn via deze webpagina te verveelvoudigen of anderszins te gebruiken voor doeleinden die te maken hebben met het trainen van kunstmatige intelligentie, waaronder maar niet beperkt tot (commerciële) tekst- en datamining in de zin van artikel 4 van de DSM-richtlijn en artikel 15o Auteurswet.",
+  "mediaTitle": "Metadata en media",
+  "mediaParagraph1": "Nieuwe Instituut heeft de beschrijvende informatie samengesteld die op het Collectieplatform gebruikt wordt, en stelt deze beschrijvende informatie beschikbaar onder licentie ",
+  "mediaParagraph2": " Daarmee is de dataset voor het publiek toegankelijk en beschikbaar. Voor het gebruik van media op het Collectieplatform verwijzen wij naar het veld “Rechten” dat op elke detailpagina getoond wordt."
 }

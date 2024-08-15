@@ -32,6 +32,9 @@ export default async function Page() {
       <StaticPageParagraph>{t('introP1')}</StaticPageParagraph>
       <StaticPageParagraph>{t('introP2')}</StaticPageParagraph>
 
+      <StaticPageSectionTitle>{t('whyTitle')}</StaticPageSectionTitle>
+      <StaticPageList items={[t('why1') || '', t('why2') || '', t('why3') || '']} />
+
       <StaticPageSectionTitle>{t('howToTitle')}</StaticPageSectionTitle>
       <StaticPageList items={[t('howTo1') || '', t('howTo2') || '', t('howTo3') || '']} />
 
@@ -45,11 +48,12 @@ export default async function Page() {
         ]}
       />
 
-      <StaticPageSectionTitle>{t('whyTitle')}</StaticPageSectionTitle>
-      <StaticPageList items={[t('why1') || '', t('why2') || '', t('why3') || '']} />
       <StaticPageParagraph>
         {t('whySection1')}
-        <StaticPageLink href="mailto:info@nieuweinstituut.nl" label="info@nieuweinstituut.nl" />
+        <StaticPageLink
+          href="mailto:collectieplatform@nieuweinstituut.nl"
+          label="collectieplatform@nieuweinstituut.nl"
+        />
         {t('whySection2')}
       </StaticPageParagraph>
 

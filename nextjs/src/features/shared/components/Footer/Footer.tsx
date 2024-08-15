@@ -103,8 +103,8 @@ export const Footer = () => {
                   <NavLinkButton
                     href={
                       lang === Locale.En
-                        ? 'https://nieuweinstituut.nl/en/events'
-                        : 'https://nieuweinstituut.nl/events'
+                        ? 'https://nieuweinstituut.nl/en/projects/huis-sonneveld'
+                        : 'https://nieuweinstituut.nl/projects/huis-sonneveld'
                     }
                     className={TypographyVariants({ socialLarge: 'lg', className: 'mb-2 ' })}
                     variant={'footerPrimary'}
