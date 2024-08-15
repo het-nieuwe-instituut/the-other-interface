@@ -24,7 +24,7 @@ export default async function Page() {
   const { t } = createTypeSafeTranslation('asterisk')
   const introParagraphs = [t('introP1'), t('introP2')]
   const missionParagraphs = [t('missionP1'), t('missionP2')]
-  const [c1, c2] = [t('contributeP1'), t('contributeP2')]
+  const [contribute1, contribute2] = [t('contributeP1'), t('contributeP2')]
 
   return (
     <StaticPageContainer title={title || ''}>
@@ -38,13 +38,13 @@ export default async function Page() {
       ))}
       <StaticPageSectionTitle>{t('contributeTitle')}</StaticPageSectionTitle>
       <StaticPageParagraph>
-        {c1}
+        {contribute1}
         <StaticPageLink
           external
-          label={'link'}
+          label={t('asteriskFormLink') || ''}
           href="https://forms.office.com/pages/responsepage.aspx?id=-nOvvAYyuU2cuMU4_1TahnU7jGT5k41AuJISCxkAcUdUNDdZRFQ5UjA4VDlUOVpISk1USzhHU0hMSi4u"
         ></StaticPageLink>{' '}
-        {c2}
+        {contribute2}
       </StaticPageParagraph>
     </StaticPageContainer>
   )
