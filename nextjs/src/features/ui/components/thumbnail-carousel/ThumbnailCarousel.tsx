@@ -123,7 +123,7 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
                   !canScrollPrev && 'opacity-0'
                 )}
               />
-              <div className="relative flex">
+              <div className="absolute right-0 flex h-[106px] w-[116.32px] bg-ivory-100">
                 <div
                   className={cn(
                     'truncate-gradient-right bg-ivory-90 w-[81.81px] h-[106px] top-[-1px]',
@@ -132,7 +132,7 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
                   )}
                 />
 
-                <div className="flex h-full w-[116.32px] items-center justify-center gap-2">
+                <div className="flex h-full w-[116.32px] items-center justify-center gap-2 ">
                   <button onClick={prevPage} disabled={!canScrollPrev} aria-label="Previous">
                     <NavArrowLeft
                       className={cn(
