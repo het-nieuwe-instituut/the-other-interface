@@ -16,7 +16,7 @@ export const RecordText: React.FC<Props> = ({ title = '', categoryType, classNam
     <>
       <div
         className={cn(
-          'w-full text-blue-100 overflow-hidden flex-col max-w-[210px] mt-2',
+          'w-full text-blue-100 overflow-visible flex-col max-w-[210px] mt-2',
           className
         )}
       >
