@@ -60,7 +60,7 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
                   ),
                 })}
               >
-                {description}
+                <p className={cn('line-clamp-12')}>{description}</p>
               </p>
             </div>
           )}
@@ -108,7 +108,7 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
                   ),
                 })}
               >
-                {description}
+                <p className={cn('line-clamp-2')}>{description}</p>
               </p>
             </div>
           )}
