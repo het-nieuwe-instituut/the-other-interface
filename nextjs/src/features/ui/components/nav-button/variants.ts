@@ -44,6 +44,10 @@ export const NavButtonVariants = cva(
           'text-center font-social-large text-[14px] font-normal leading-4',
         ],
         primary: ['h-[48px]', 'px-[20px] text-[16px]'],
+        highlight: [
+          'border border-black text-black-100 before:border-black after:border-b-0 after:border-black hover:border-black hover:bg-black-100 hover:text-ivory-100',
+          'h-[48px] w-fit p-[20px] text-[16px]',
+        ],
       },
       color: {
         black: 'text-black-100 after:border-black after:text-black-100',

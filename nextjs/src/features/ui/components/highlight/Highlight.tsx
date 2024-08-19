@@ -55,8 +55,8 @@ export const Highlight = ({
                 <LinkButtonGroupItem
                   key={button.id}
                   href={button.url}
-                  color={'blue'}
-                  variant={'primary'}
+                  color={'black'}
+                  variant={'highlight'}
                 >
                   {button.text}
                 </LinkButtonGroupItem>
