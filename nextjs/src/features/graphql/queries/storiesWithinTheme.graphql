@@ -1,0 +1,35 @@
+query storiesWithinTheme(
+  $locale: Locale!
+  $filters: StoryFiltersInput
+  $pagination: PaginationArg
+) {
+  storiesWithMinimalRelations(locale: $locale, filters: $filters, pagination: $pagination) {
+    data {
+      id
+      __typename
+      attributes {
+        title
+        components {
+          ...imageModuleFragment
+        }
+        author {
+          data {
+            attributes {
+              firstName
+              lastName
+              insertion
+            }
+          }
+        }
+      }
+    }
+    meta {
+      pagination {
+        page
+        pageSize
+        pageCount
+        total
+      }
+    }
+  }
+}

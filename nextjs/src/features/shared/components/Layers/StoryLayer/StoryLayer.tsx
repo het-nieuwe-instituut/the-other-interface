@@ -25,6 +25,9 @@ export const StoryLayer = () => {
     return <EditorialSkeleton />
   }
 
+  const themeIds: string[] =
+    (story?.attributes?.themes?.data?.map(t => t.id).filter(Boolean) as string[]) ?? []
+
   return (
     <LayerWrapper
       LeftContent={
@@ -56,7 +59,7 @@ export const StoryLayer = () => {
           <StoryMeta />
         </ErrorBoundaryWrapper>
       }
-      BottomContent={<StoryBottomContent />}
+      BottomContent={<StoryBottomContent themeIds={themeIds} id={id} />}
     />
   )
 }

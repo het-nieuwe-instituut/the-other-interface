@@ -47,6 +47,11 @@ query storyById($locale: Locale!, $id: ID, $publicationState: String = "LIVE") {
             }
           }
         }
+        themes {
+          data {
+            id
+          }
+        }
         components {
           ... on ComponentModulesTextModule {
             ...textModuleFragment
