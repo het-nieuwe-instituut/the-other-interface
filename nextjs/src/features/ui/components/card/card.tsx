@@ -47,12 +47,11 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
           )}
           {description && (
             <div>
-              <p
-                lang="nl"
+              <div
                 className={TypographyVariants({
                   socialLarge: 'md',
                   className: cn(
-                    'hyphens-auto inline-block relative z-10 inline-flex',
+                    'inline-block relative z-10 inline-flex',
                     'after:absolute after:z-[-1]',
                     'group-hover:text-ivory-100 group-hover:after:bg-black-100 group-hover:after:content-[""]',
                     'group-hover:after:w-[calc(100%+8px)] group-hover:after:h-[calc(100%+8px)]',
@@ -60,8 +59,10 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
                   ),
                 })}
               >
-                <p className={cn('line-clamp-12')}>{description}</p>
-              </p>
+                <p lang="nl" className={cn('line-clamp-12 hyphens-auto')}>
+                  {description}
+                </p>
+              </div>
             </div>
           )}
         </div>
@@ -95,12 +96,11 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
           )}
           {description && (
             <div>
-              <p
-                lang="nl"
+              <div
                 className={TypographyVariants({
                   socialLarge: 'md',
                   className: cn(
-                    'hyphens-auto inline-block relative z-10 inline-flex',
+                    'inline-block relative z-10 inline-flex',
                     'after:absolute after:z-[-1]',
                     'group-hover:text-ivory-100 group-hover:after:bg-black-100 group-hover:after:content-[""]',
                     'group-hover:after:w-[calc(100%+8px)] group-hover:after:h-[calc(100%+8px)]',
@@ -108,8 +108,10 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
                   ),
                 })}
               >
-                <p className={cn('line-clamp-2')}>{description}</p>
-              </p>
+                <p lang="nl" className={cn('line-clamp-2 hyphens-auto')}>
+                  {description}
+                </p>
+              </div>
             </div>
           )}
         </div>
