@@ -1,47 +1,81 @@
 import { Inject } from '@nestjs/common'
-import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { PublicationState, Sdk, StoryEntity } from '../../generated/strapi-sdk'
+import { Args, Context, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
+import { PublicationState, Sdk } from '../../generated/strapi-sdk'
 import { PaginationArg } from '../strapi/shared-types'
 import {
-  Story,
+  StoryEntity,
   StoryEntityResponseCollection,
   StoryFiltersInput,
-  StoryWithoutRelationsEntityResponse,
-  StoryWithoutRelationsEntityResponseCollection,
   StoryMetaEntityResponseCollection,
-  StoryWithMinimalRelationsEntityResponseCollection,
 } from './story.type'
 import { StoryEntityResponse } from './story.types.circular'
 import { StoryService } from './story.service'
 import { LocaleArgs } from '../util/localeArgs.type'
+import { GraphqlContext } from 'src/app.module'
 
-@Resolver(Story)
+@Resolver(StoryEntity)
 export class StoryFieldResolver {
-  public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
-
   @ResolveField()
-  public async locations(@Parent() story: Story) {
-    if (story.locations?.data && story.locations.data.length) {
-      const res = await this.strapiGqlSdk.locations({
-        filters: {
-          or: story.locations.data.map(ent => {
-            return { id: { eq: ent.id } }
-          }),
-        },
-        locale: story?.locale,
-      })
-
-      return res.locations
-    }
+  public async locations(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
+    return loaders.storyLocations.load(story.id)
   }
 
   @ResolveField()
-  public async author(@Parent() story: Story) {
-    if (story.author?.data?.id) {
-      const res = await this.strapiGqlSdk.author({ id: story.author?.data.id })
-      return res.author
-    }
-    return null
+  public async author(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
+    return loaders.storyAuthor.load(story.id)
+  }
+
+  @ResolveField()
+  public async themes(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
+    return loaders.storyThemes.load(story.id)
+  }
+
+  @ResolveField()
+  public async parent_story(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
+    return loaders.storyParentStory.load(story.id)
+  }
+
+  @ResolveField()
+  public async child_stories(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
+    return loaders.storyChildStories.load(story.id)
+  }
+
+  @ResolveField()
+  public async siblings(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
+    return loaders.storySiblings.load(story.id)
+  }
+
+  @ResolveField()
+  public async components(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
+    return loaders.storyComponents.load(story.id)
+  }
+
+  @ResolveField()
+  public async localizations(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
+    return loaders.storyLocalizations.load(story.id)
+  }
+
+  @ResolveField()
+  public async triplyRecords(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
+    return loaders.storyTriplyRecords.load(story.id)
+  }
+
+  @ResolveField()
+  public async storyLinks(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
+    return loaders.storyStoryLinks.load(story.id)
+  }
+
+  @ResolveField()
+  public async timeframe(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
+    return loaders.storyTimeframe.load(story.id)
+  }
+
+  @ResolveField()
+  public async publicationDate(
+    @Parent() story: StoryEntity,
+    @Context() { loaders }: GraphqlContext
+  ) {
+    return loaders.storyPublicationDate.load(story.id)
   }
 }
 
@@ -151,52 +185,6 @@ export class StoryResolver {
       id,
       locale,
     })
-
-    return res.story
-  }
-
-  @Query(() => StoryWithoutRelationsEntityResponseCollection)
-  public async storiesWithoutRelations(
-    @Args() { locale }: LocaleArgs,
-    @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
-    @Args('pagination', { nullable: true }) pagination?: PaginationArg,
-    @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
-    @Args('publicationState', { nullable: true }) publicationState?: PublicationState
-  ) {
-    const res = await this.strapiGqlSdk.storiesWithoutRelations({
-      filters: filters || undefined,
-      pagination: pagination || {},
-      sort: sort || [],
-      publicationState: publicationState || undefined,
-      locale: locale || undefined,
-    })
-
-    return res.stories
-  }
-
-  @Query(() => StoryWithMinimalRelationsEntityResponseCollection)
-  public async storiesWithMinimalRelations(
-    @Args() { locale }: LocaleArgs,
-    @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
-    @Args('pagination', { nullable: true }) pagination?: PaginationArg,
-    @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
-    @Args('publicationState', { nullable: true }) publicationState?: PublicationState
-  ) {
-    const res = await this.strapiGqlSdk.storiesWithoutRelations({
-      filters: filters || undefined,
-      pagination: pagination || {},
-      sort: sort || [],
-      publicationState: publicationState || undefined,
-      locale: locale || undefined,
-      minimal: true,
-    })
-
-    return res.stories
-  }
-
-  @Query(() => StoryWithoutRelationsEntityResponse)
-  public async storyWithoutRelations(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
-    const res = await this.strapiGqlSdk.storyWithoutRelations({ id, locale })
 
     return res.story
   }

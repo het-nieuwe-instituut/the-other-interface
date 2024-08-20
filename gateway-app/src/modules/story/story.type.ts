@@ -1,4 +1,4 @@
-import { ObjectType, Field, createUnionType, ID, InputType, PickType } from '@nestjs/graphql'
+import { ObjectType, Field, createUnionType, ID, InputType } from '@nestjs/graphql'
 import { AuthorEntityResponse, AuthorFiltersInput } from '../author/author.type'
 import { LocationFiltersInput, LocationRelationResponseCollection } from '../location/location.type'
 import {
@@ -46,19 +46,7 @@ export class StoryRelationResponseCollection {
 }
 
 @ObjectType()
-export class StoryWithoutRelationsRelationResponseCollection {
-  @Field(() => [StoryWithoutRelationsEntity], { nullable: true })
-  public data?: StoryWithoutRelationsEntity[]
-}
-
-@ObjectType()
 export class Story {
-  @Field(() => AuthorEntityResponse, { nullable: true })
-  public author?: AuthorEntityResponse
-
-  @Field(() => [StoryComponentsDynamicZone], { nullable: true })
-  public components?: typeof StoryComponentsDynamicZone[]
-
   @Field({ nullable: true })
   public createdAt: Date
 
@@ -67,15 +55,6 @@ export class Story {
 
   @Field({ nullable: true })
   public locale?: string
-
-  @Field(() => StoryRelationResponseCollection, { nullable: true })
-  public localizations?: StoryRelationResponseCollection
-
-  @Field(() => LocationRelationResponseCollection, { nullable: true })
-  public locations?: LocationRelationResponseCollection
-
-  @Field(() => ComponentCorePublicationDate, { nullable: true })
-  public publicationDate?: ComponentCorePublicationDate
 
   @Field({ nullable: true })
   public publishedAt: Date
@@ -86,64 +65,11 @@ export class Story {
   @Field({ nullable: true })
   public slug?: string
 
-  @Field(() => ComponentModulesButtonsModule, { nullable: true })
-  public storyLinks?: ComponentModulesButtonsModule
-
-  @Field({ nullable: true })
-  public timeframe?: ComponentCoreTimeframe
-
   @Field({ nullable: false })
   public title: string
 
-  @Field(() => TriplyRecordRelationResponseCollection, { nullable: true })
-  public triplyRecords?: TriplyRecordRelationResponseCollection
-
   @Field({ nullable: true })
   public updatedAt: Date
-
-  @Field(() => ThemeRelationResponseCollection, { nullable: true })
-  public themes?: ThemeRelationResponseCollection
-
-  @Field({ nullable: true })
-  public parent_story?: StoryEntityResponse
-
-  @Field({ nullable: true })
-  public child_stories?: StoryRelationResponseCollection
-
-  @Field(() => [StoryEntity], { nullable: true })
-  public siblings?: StoryEntity[]
-}
-
-@ObjectType()
-export class StoryWithoutRelations extends PickType(Story, [
-  'createdAt',
-  'description',
-  'locale',
-  'publishedAt',
-  'shortDescription',
-  'slug',
-  'title',
-  'updatedAt',
-  'author',
-] as const) {}
-
-@ObjectType()
-export class StoryWithMinimalRelations extends PickType(Story, [
-  'createdAt',
-  'description',
-  'locale',
-  'publishedAt',
-  'shortDescription',
-  'slug',
-  'title',
-  'updatedAt',
-  'author',
-] as const) {
-  @Field(() => [StoryComponentsDynamicZone], {
-    nullable: true,
-    description: 'only includes image module component relation',
-  })
-  public components?: typeof StoryComponentsDynamicZone[]
 }
 
 export const StoryComponentsDynamicZone = createUnionType({
@@ -176,30 +102,45 @@ export class StoryEntity {
 
   @Field(() => ID)
   public id: string
-}
 
-@ObjectType()
-export class StoryWithoutRelationsEntity {
+  //////////////////// relations ////////////////////
+
+  @Field(() => AuthorEntityResponse, { nullable: true })
+  public author?: AuthorEntityResponse
+
+  @Field(() => LocationRelationResponseCollection, { nullable: true })
+  public locations?: LocationRelationResponseCollection
+
+  @Field(() => ThemeRelationResponseCollection, { nullable: true })
+  public themes?: ThemeRelationResponseCollection
+
   @Field({ nullable: true })
-  public attributes?: StoryWithoutRelations
+  public parent_story?: StoryEntityResponse
 
-  @Field(() => ID, { nullable: true })
-  public id?: string
-}
-
-@ObjectType()
-export class StoryWithMinimalRelationsEntity {
-  @Field({ nullable: true, description: 'only includes image module component relation' })
-  public attributes?: StoryWithMinimalRelations
-
-  @Field(() => ID, { nullable: true })
-  public id?: string
-}
-
-@ObjectType()
-export class StoryWithoutRelationsEntityResponse {
   @Field({ nullable: true })
-  public data?: StoryWithoutRelationsEntity
+  public child_stories?: StoryRelationResponseCollection
+
+  @Field(() => [StoryEntity], { nullable: true })
+  public siblings?: StoryEntity[]
+
+  @Field(() => [StoryComponentsDynamicZone], { nullable: true })
+  // eslint-disable-next-line prettier/prettier
+  public components?: (typeof StoryComponentsDynamicZone)[]
+
+  @Field(() => StoryRelationResponseCollection, { nullable: true })
+  public localizations?: StoryRelationResponseCollection
+
+  @Field(() => TriplyRecordRelationResponseCollection, { nullable: true })
+  public triplyRecords?: TriplyRecordRelationResponseCollection
+
+  @Field(() => ComponentModulesButtonsModule, { nullable: true })
+  public storyLinks?: ComponentModulesButtonsModule
+
+  @Field(() => ComponentCoreTimeframe, { nullable: true })
+  public timeframe?: ComponentCoreTimeframe
+
+  @Field(() => ComponentCorePublicationDate, { nullable: true })
+  public publicationDate?: ComponentCorePublicationDate
 }
 
 @ObjectType()
@@ -215,27 +156,6 @@ export class StoryEntityResponseCollection {
 export class StoryMetaEntityResponseCollection {
   @Field(() => StoryEntity, { nullable: true })
   public data?: StoryEntity
-}
-
-@ObjectType()
-export class StoryWithoutRelationsEntityResponseCollection {
-  @Field(() => [StoryWithoutRelationsEntity], { nullable: true })
-  public data?: StoryWithoutRelationsEntity[]
-
-  @Field(() => ResponseCollectionMeta, { nullable: true })
-  public meta: ResponseCollectionMeta
-}
-
-@ObjectType()
-export class StoryWithMinimalRelationsEntityResponseCollection {
-  @Field(() => [StoryWithMinimalRelationsEntity], {
-    nullable: true,
-    description: 'only includes image module component relation',
-  })
-  public data?: StoryWithMinimalRelationsEntity[]
-
-  @Field(() => ResponseCollectionMeta, { nullable: true })
-  public meta: ResponseCollectionMeta
 }
 
 @InputType()
