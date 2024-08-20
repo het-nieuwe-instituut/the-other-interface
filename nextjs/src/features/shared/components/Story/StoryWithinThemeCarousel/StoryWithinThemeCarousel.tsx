@@ -13,18 +13,20 @@ import {
   CarouselGridPagination,
   CarouselGridTitle,
 } from '@/features/ui/components/carousel-grid/CarouselGrid'
-import { useParams } from 'next/navigation'
 import { useMemo } from 'react'
 import ErrorBox from '../../Error/ErrorBox'
 import { ThemedSpinner } from '../../Loading/ThemedSpinner/ThemedSpinner'
 
-export const StoryWithinThemeCarousel = () => {
-  const params = useParams()
-  const id = params?.id as string
-  const { data, isLoading, isError } = useStoriesRelatedByThemeQuery(id)
+interface StoryWithinThemeCarouselProps {
+  themeIds: string[]
+  id: string
+}
+
+export const StoryWithinThemeCarousel = ({ themeIds, id }: StoryWithinThemeCarouselProps) => {
+  const { data, isLoading, isError } = useStoriesRelatedByThemeQuery(id, themeIds)
   const stories = useMemo(
-    () => storiesToCarouselDataMapper(data?.storiesRealtedWithinTheme?.stories) ?? [],
-    [data?.storiesRealtedWithinTheme?.stories]
+    () => storiesToCarouselDataMapper(data?.storiesWithMinimalRelations.data) ?? [],
+    [data?.storiesWithMinimalRelations.data]
   )
 
   if (isError) {

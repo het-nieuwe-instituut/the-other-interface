@@ -2,6 +2,8 @@ import {
   ComponentModulesImage,
   Maybe,
   StoriesRelationForRecordQuery,
+  StoriesWithinThemeQuery,
+  StoryComponentsDynamicZone,
   StoryMetaByIdQuery,
 } from 'src/generated/graphql'
 import { joinNullableStrings } from '../utils/text'
@@ -16,6 +18,7 @@ export type StoryImageInfo = {
 }
 
 type StoryMeta = NonNullable<StoryMetaByIdQuery['storyMetaByLocale']['data']>['attributes']
+type MinimalStoryMeta = NonNullable<StoriesWithinThemeQuery['storiesWithMinimalRelations']['data']>
 
 export const storiesToCarouselDataMapper = (
   relatedStories:
@@ -23,45 +26,36 @@ export const storiesToCarouselDataMapper = (
     | NonNullable<NonNullable<StoryMeta>['child_stories']>['data']
     | NonNullable<NonNullable<StoryMeta>['siblings']>
     | NonNullable<NonNullable<NonNullable<NonNullable<StoryMeta>['parent_story']>>['data']>[]
+    | MinimalStoryMeta
 ): StoryImageInfo[] | undefined => {
-  const mappedStories = relatedStories
-    ?.flatMap(story => {
-      const { firstName, lastName } = story?.attributes?.author?.data?.attributes ?? {}
-      const authorName = joinNullableStrings(' ', firstName, lastName)
+  const images: StoryImageInfo[] = []
 
-      const images = story?.attributes?.components
-        ?.filter(
-          (component): component is ComponentModulesImage =>
-            component.__typename === 'ComponentModulesImage' && !!component.image
-        )
-        .map(component => ({
-          url: component.image.data?.attributes?.url,
-          height: component.image.data?.attributes?.height,
-          width: component.image.data?.attributes?.width,
-        }))
+  relatedStories?.forEach(story => {
+    const { firstName, lastName } = story?.attributes?.author?.data?.attributes ?? {}
+    const authorName = joinNullableStrings(' ', firstName, lastName)
 
-      if (!images || images.length === 0) {
-        return []
-      }
+    if (!story?.attributes?.components) {
+      return
+    }
 
-      const image = images[0]
+    const imageModule: ComponentModulesImage = (
+      story?.attributes?.components as StoryComponentsDynamicZone[]
+    ).find(c => c.__typename === 'ComponentModulesImage') as ComponentModulesImage
 
-      if (image.url === undefined) {
-        return []
-      }
+    const { url, height, width } = imageModule?.image.data?.attributes || {}
+    if (!url) {
+      return
+    }
 
-      return [
-        {
-          url: image.url,
-          id: story?.id,
-          height: image.height,
-          width: image.width,
-          title: story?.attributes?.title,
-          description: authorName,
-        },
-      ]
+    return images.push({
+      url,
+      id: story?.id,
+      height,
+      width,
+      title: story?.attributes?.title,
+      description: authorName,
     })
-    .filter(Boolean)
+  })
 
-  return mappedStories && mappedStories.length > 0 ? mappedStories : undefined
+  return images
 }

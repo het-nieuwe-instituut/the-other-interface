@@ -3,13 +3,11 @@ import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { PublicationState, Sdk } from '../../generated/strapi-sdk'
 import { PaginationArg } from '../strapi/shared-types'
 import {
-  StoriesRelatedToThemeResponse,
   ThemeEntityResponse,
   ThemeFiltersInput,
   ThemeRelationResponseCollection,
 } from './theme.type'
 import { Theme } from './theme-dependency.type'
-import { EntityNames } from '../util/entityNames.type'
 import { LocaleArgs } from '../util/localeArgs.type'
 
 @Resolver()
@@ -41,32 +39,6 @@ export class ThemeResolver {
 
     return res.themes
   }
-
-  @Query(() => StoriesRelatedToThemeResponse)
-  public async storiesRealtedWithinTheme(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
-    const res = await this.strapiGqlSdk.storiesRelatedToTheme({
-      storyId: id,
-      lang: locale,
-    })
-
-    const currentStoryId = id
-
-    const filteredStories =
-      res.themes?.data?.[0]?.attributes?.stories?.data?.filter(story => {
-        const isCurrentStory = story?.id === currentStoryId
-        const isInLocalizations = story.attributes?.localizations?.data?.some(
-          localization => localization.id === currentStoryId
-        )
-
-        return !isCurrentStory && !isInLocalizations
-      }) || []
-
-    return {
-      type: EntityNames.Stories,
-      total: filteredStories?.length || 0,
-      stories: filteredStories || [],
-    }
-  }
 }
 
 @Resolver(Theme)
@@ -74,9 +46,13 @@ export class ThemeFieldResolver {
   public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
   @ResolveField()
-  public async stories(@Parent() theme: Theme) {
+  public async stories(
+    @Parent() theme: Theme,
+    @Args('paginationArgs', { nullable: true }) paginationArgs?: PaginationArg
+  ) {
     if (theme.stories?.data && theme.stories?.data.length) {
-      const res = await this.strapiGqlSdk.stories({
+      const res = await this.strapiGqlSdk.storiesWithoutRelations({
+        pagination: paginationArgs,
         locale: theme.locale,
         sort: ['createdAt:asc'],
         filters: {

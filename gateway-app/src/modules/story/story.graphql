@@ -110,6 +110,7 @@ query storiesWithoutRelations(
   $sort: [String]
   $publicationState: PublicationState = LIVE
   $locale: I18NLocaleCode
+  $minimal: Boolean = false
 ) {
   stories(
     filters: $filters
@@ -120,6 +121,15 @@ query storiesWithoutRelations(
   ) {
     data {
       ...StoryWithoutRelationsFragment
+      attributes {
+        # include image component if minimal is true
+        components @include(if: $minimal) {
+          __typename
+          ... on ComponentModulesImage {
+            ...ComponentModulesImageFragment
+          }
+        }
+      }
     }
     meta {
       ...ResponseCollectionMetaFragment

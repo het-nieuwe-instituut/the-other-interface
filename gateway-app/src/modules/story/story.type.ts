@@ -127,6 +127,25 @@ export class StoryWithoutRelations extends PickType(Story, [
   'author',
 ] as const) {}
 
+@ObjectType()
+export class StoryWithMinimalRelations extends PickType(Story, [
+  'createdAt',
+  'description',
+  'locale',
+  'publishedAt',
+  'shortDescription',
+  'slug',
+  'title',
+  'updatedAt',
+  'author',
+] as const) {
+  @Field(() => [StoryComponentsDynamicZone], {
+    nullable: true,
+    description: 'only includes image module component relation',
+  })
+  public components?: typeof StoryComponentsDynamicZone[]
+}
+
 export const StoryComponentsDynamicZone = createUnionType({
   name: 'StoryComponentsDynamicZone',
   types: () =>
@@ -169,6 +188,15 @@ export class StoryWithoutRelationsEntity {
 }
 
 @ObjectType()
+export class StoryWithMinimalRelationsEntity {
+  @Field({ nullable: true, description: 'only includes image module component relation' })
+  public attributes?: StoryWithMinimalRelations
+
+  @Field(() => ID, { nullable: true })
+  public id?: string
+}
+
+@ObjectType()
 export class StoryWithoutRelationsEntityResponse {
   @Field({ nullable: true })
   public data?: StoryWithoutRelationsEntity
@@ -193,6 +221,18 @@ export class StoryMetaEntityResponseCollection {
 export class StoryWithoutRelationsEntityResponseCollection {
   @Field(() => [StoryWithoutRelationsEntity], { nullable: true })
   public data?: StoryWithoutRelationsEntity[]
+
+  @Field(() => ResponseCollectionMeta, { nullable: true })
+  public meta: ResponseCollectionMeta
+}
+
+@ObjectType()
+export class StoryWithMinimalRelationsEntityResponseCollection {
+  @Field(() => [StoryWithMinimalRelationsEntity], {
+    nullable: true,
+    description: 'only includes image module component relation',
+  })
+  public data?: StoryWithMinimalRelationsEntity[]
 
   @Field(() => ResponseCollectionMeta, { nullable: true })
   public meta: ResponseCollectionMeta

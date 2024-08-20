@@ -52,24 +52,6 @@ query themeIds(
   }
 }
 
-query storiesRelatedToTheme(
-  $storyId: ID!
-  $lang: I18NLocaleCode
-  $publicationState: PublicationState = LIVE
-) {
-  themes(
-    filters: {
-      stories: { or: [{ id: { eq: $storyId } }, { localizations: { id: { eq: $storyId } } }] }
-    }
-    locale: $lang
-    publicationState: $publicationState
-  ) {
-    data {
-      ...ThemeFragment
-    }
-  }
-}
-
 fragment ThemeFragment on ThemeEntity {
   id
   attributes {
@@ -97,12 +79,28 @@ fragment ThemeFragmentWithHighlightedStories on ThemeEntity {
     name
     stories {
       data {
-        ...StoryFragment
+        ...StoryWithoutRelationsFragment
+        attributes {
+          components {
+            __typename
+            ... on ComponentModulesImage {
+              ...ComponentModulesImageFragment
+            }
+          }
+        }
       }
     }
     highlightedStories {
       data {
-        ...StoryFragment
+        ...StoryWithoutRelationsFragment
+        attributes {
+          components {
+            __typename
+            ... on ComponentModulesImage {
+              ...ComponentModulesImageFragment
+            }
+          }
+        }
       }
     }
     createdAt

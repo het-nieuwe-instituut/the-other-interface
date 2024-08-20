@@ -3,7 +3,12 @@ import { StoryWithinThemeCarousel } from '../StoryWithinThemeCarousel/StoryWithi
 import { RelatedStoriesCarousel } from '../RelatedStoriesCarousel/RelatedStoriesCarousel'
 import ErrorBoundaryWrapper from '../../Error/ErrorBoundary/ErrorBoundary'
 
-export const StoryBottomContent = () => {
+interface StoryBottomContentProps {
+  themeIds: string[]
+  id: string
+}
+
+export const StoryBottomContent = ({ themeIds, id }: StoryBottomContentProps) => {
   return (
     <>
       <div className="flex flex-col gap-4 px-6 pb-10">
@@ -12,7 +17,7 @@ export const StoryBottomContent = () => {
         </ErrorBoundaryWrapper>
 
         <ErrorBoundaryWrapper>
-          <StoryWithinThemeCarousel />
+          <StoryWithinThemeCarousel themeIds={themeIds} id={id} />
         </ErrorBoundaryWrapper>
       </div>
     </>

@@ -2,15 +2,20 @@
 import initApiClientService from '../../utils/initApiClientService'
 import { useQuery } from '@tanstack/react-query'
 import { useLocale } from '../useLocale'
+import { StoriesWithinThemeQueryVariables } from 'src/generated/graphql'
 
-export const useStoriesRelatedByThemeQuery = (id: string) => {
+export const useStoriesRelatedByThemeQuery = (id: string, themeIds: string[]) => {
   const api = initApiClientService()
-  const lang = useLocale()
-  const queryFn = () => api.storiesRealtedWithinTheme({ id, locale: lang ?? 'nl' })
+  const locale = useLocale()
+
+  const filters: StoriesWithinThemeQueryVariables['filters'] = {
+    ...(themeIds.length ? { themes: { id: { in: themeIds } } } : {}),
+    id: { ne: id },
+  }
 
   return useQuery({
-    queryKey: ['stories-related-within-theme', id, lang],
-    queryFn,
+    queryKey: ['stories-within-theme', id, locale],
+    queryFn: () => api.storiesWithinTheme({ locale, filters }),
     suspense: true,
     refetchOnWindowFocus: false,
   })

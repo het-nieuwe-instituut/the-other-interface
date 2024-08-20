@@ -9,6 +9,7 @@ import {
   StoryWithoutRelationsEntityResponse,
   StoryWithoutRelationsEntityResponseCollection,
   StoryMetaEntityResponseCollection,
+  StoryWithMinimalRelationsEntityResponseCollection,
 } from './story.type'
 import { StoryEntityResponse } from './story.types.circular'
 import { StoryService } from './story.service'
@@ -168,6 +169,26 @@ export class StoryResolver {
       sort: sort || [],
       publicationState: publicationState || undefined,
       locale: locale || undefined,
+    })
+
+    return res.stories
+  }
+
+  @Query(() => StoryWithMinimalRelationsEntityResponseCollection)
+  public async storiesWithMinimalRelations(
+    @Args() { locale }: LocaleArgs,
+    @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
+    @Args('pagination', { nullable: true }) pagination?: PaginationArg,
+    @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState
+  ) {
+    const res = await this.strapiGqlSdk.storiesWithoutRelations({
+      filters: filters || undefined,
+      pagination: pagination || {},
+      sort: sort || [],
+      publicationState: publicationState || undefined,
+      locale: locale || undefined,
+      minimal: true,
     })
 
     return res.stories
