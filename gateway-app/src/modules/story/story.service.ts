@@ -30,16 +30,6 @@ export class StoryService {
     return story.story
   }
 
-  //   TODO: implement this for the sibling stories
-  //   public async getStorySiblings(parentId: string, currentStoryId: string, locale: Locale) {
-  //     const parentRes = await this.strapiGqlSdk.story({ id: parentId, locale })
-
-  //     const parentStory = parentRes?.story?.data
-  //     const siblingsStories = parentStory?.attributes?.child_stories?.data
-  //     const siblings = siblingsStories?.filter(s => s.id !== currentStoryId)
-  //     return siblings
-  //   }
-
   public getAuthors = async (ids: readonly string[]): Promise<(AuthorEntityResponse | null)[]> => {
     if (!ids.length) {
       return []
@@ -127,17 +117,44 @@ export class StoryService {
       return []
     }
 
-    // TODO
-    return Promise.resolve([])
+    const res = await this.strapiGqlSdk.storiesWithChildStories({ ids: [...ids] })
+
+    return ids.map(id => {
+      const childStories = res.stories?.data.find(d => d.id === id)?.attributes?.child_stories
+      if (!childStories) {
+        return []
+      }
+
+      return childStories.data as StoryEntity[]
+    })
   }
+
+  //   TODO: implement this for the sibling stories
+  //   public async getStorySiblings(parentId: string, currentStoryId: string, locale: Locale) {
+  //     const parentRes = await this.strapiGqlSdk.story({ id: parentId, locale })
+
+  //     const parentStory = parentRes?.story?.data
+  //     const siblingsStories = parentStory?.attributes?.child_stories?.data
+  //     const siblings = siblingsStories?.filter(s => s.id !== currentStoryId)
+  //     return siblings
+  //   }
 
   public getSiblings = async (ids: readonly string[]): Promise<StoryEntity[][]> => {
     if (!ids.length) {
       return []
     }
 
-    // TODO
-    return Promise.resolve([])
+    const res = await this.strapiGqlSdk.storiesWithSiblings({ ids: [...ids] })
+
+    return ids.map(id => {
+      const sbilings = res.stories?.data.find(d => d.id === id)?.attributes?.parent_story?.data
+        ?.attributes?.child_stories
+      if (!sbilings) {
+        return []
+      }
+
+      return sbilings.data as StoryEntity[]
+    })
   }
 
   public getComponents = async (
@@ -148,8 +165,17 @@ export class StoryService {
       return []
     }
 
-    // TODO
-    return Promise.resolve([])
+    const res = await this.strapiGqlSdk.storiesWithComponents({ ids: [...ids] })
+
+    return ids.map(id => {
+      const componenets = res.stories?.data.find(d => d.id === id)?.attributes?.components
+      if (!componenets) {
+        return []
+      }
+
+      // eslint-disable-next-line prettier/prettier
+      return componenets as (typeof StoryComponentsDynamicZone)[]
+    })
   }
 
   public getLocalizations = async (ids: readonly string[]): Promise<StoryEntity[][]> => {
@@ -157,8 +183,16 @@ export class StoryService {
       return []
     }
 
-    // TODO
-    return Promise.resolve([])
+    const res = await this.strapiGqlSdk.storiesWithLocalizations({ ids: [...ids] })
+
+    return ids.map(id => {
+      const localizations = res.stories?.data.find(d => d.id === id)?.attributes?.localizations
+      if (!localizations) {
+        return []
+      }
+
+      return localizations.data as StoryEntity[]
+    })
   }
 
   public getTriplyRecords = async (ids: readonly string[]): Promise<TriplyRecordEntity[][]> => {
@@ -166,38 +200,72 @@ export class StoryService {
       return []
     }
 
-    // TODO
-    return Promise.resolve([])
+    const res = await this.strapiGqlSdk.storiesWithTriplyRecords({ ids: [...ids] })
+
+    return ids.map(id => {
+      const triplyRecords = res.stories?.data.find(d => d.id === id)?.attributes?.triplyRecords
+      if (!triplyRecords) {
+        return []
+      }
+
+      return triplyRecords.data as TriplyRecordEntity[]
+    })
   }
 
   public getStoryLinks = async (
     ids: readonly string[]
-  ): Promise<ComponentModulesButtonsModule[]> => {
+  ): Promise<(ComponentModulesButtonsModule | null)[]> => {
     if (!ids.length) {
       return []
     }
 
-    // TODO
-    return Promise.resolve([])
+    const res = await this.strapiGqlSdk.storiesWithStoryLinks({ ids: [...ids] })
+
+    return ids.map(id => {
+      const links = res.stories?.data.find(d => d.id === id)?.attributes?.storyLinks
+      if (!links) {
+        return null
+      }
+
+      return links as ComponentModulesButtonsModule
+    })
   }
 
-  public getTimeframe = async (ids: readonly string[]): Promise<ComponentCoreTimeframe[]> => {
+  public getTimeframe = async (
+    ids: readonly string[]
+  ): Promise<(ComponentCoreTimeframe | null)[]> => {
     if (!ids.length) {
       return []
     }
 
-    // TODO
-    return Promise.resolve([])
+    const res = await this.strapiGqlSdk.storiesWithTimeframe({ ids: [...ids] })
+
+    return ids.map(id => {
+      const timeframe = res.stories?.data.find(d => d.id === id)?.attributes?.timeframe
+      if (!timeframe) {
+        return null
+      }
+
+      return timeframe
+    })
   }
 
   public getPublicationDate = async (
     ids: readonly string[]
-  ): Promise<ComponentCorePublicationDate[]> => {
+  ): Promise<(ComponentCorePublicationDate | null)[]> => {
     if (!ids.length) {
       return []
     }
 
-    // TODO
-    return Promise.resolve([])
+    const res = await this.strapiGqlSdk.storiesWithPublicationDate({ ids: [...ids] })
+
+    return ids.map(id => {
+      const pubDate = res.stories?.data.find(d => d.id === id)?.attributes?.publicationDate
+      if (!pubDate) {
+        return null
+      }
+
+      return pubDate as ComponentCorePublicationDate
+    })
   }
 }

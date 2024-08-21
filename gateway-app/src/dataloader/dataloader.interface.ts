@@ -20,7 +20,7 @@ export interface IDataloaders {
   storyComponents: DataLoader<string, (typeof StoryComponentsDynamicZone)[]>
   storyLocalizations: DataLoader<string, StoryEntity[]>
   storyTriplyRecords: DataLoader<string, TriplyRecordEntity[]>
-  storyStoryLinks: DataLoader<string, ComponentModulesButtonsModule>
-  storyTimeframe: DataLoader<string, ComponentCoreTimeframe>
-  storyPublicationDate: DataLoader<string, ComponentCorePublicationDate>
+  storyStoryLinks: DataLoader<string, ComponentModulesButtonsModule | null>
+  storyTimeframe: DataLoader<string, ComponentCoreTimeframe | null>
+  storyPublicationDate: DataLoader<string, ComponentCorePublicationDate | null>
 }
