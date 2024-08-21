@@ -55,7 +55,7 @@ query story($id: ID, $locale: I18NLocaleCode) {
 query storyByLocale($id: ID) {
   story(id: $id) {
     data {
-      ...LocalizedStoryFragment
+      ...StoryFragment
     }
   }
 }
@@ -76,7 +76,7 @@ query storiesByLocale(
     locale: $locale
   ) {
     data {
-      ...LocalizedStoryFragment
+      ...StoryFragment
     }
     meta {
       ...ResponseCollectionMetaFragment
@@ -99,7 +99,7 @@ query storiesMetaByLocale(
     locale: $locale
   ) {
     data {
-      ...LocalizedStoryMetaFragment
+      ...StoryFragment
     }
   }
 }
@@ -120,7 +120,7 @@ query storiesWithoutRelations(
     locale: $locale
   ) {
     data {
-      ...StoryWithoutRelationsFragment
+      ...StoryFragment
       attributes {
         # include image component if minimal is true
         components @include(if: $minimal) {
@@ -140,7 +140,7 @@ query storiesWithoutRelations(
 query storyWithoutRelations($id: ID, $locale: I18NLocaleCode) {
   story(id: $id, locale: $locale) {
     data {
-      ...StoryWithoutRelationsFragment
+      ...StoryFragment
     }
   }
 }
@@ -214,7 +214,7 @@ query storiesByIds($storiesIds: [ID]!) {
         }
         localizations {
           data {
-            ...StoryWithoutRelationsFragment
+            ...StoryFragment
           }
         }
       }
@@ -270,98 +270,230 @@ query storyParentAndChildren($id: ID!) {
   }
 }
 
-fragment NestedStoryFragment on StoryEntity {
-  id
-  attributes {
-    title
-    slug
-    description
-    locale
-    author {
-      data {
-        id
-        attributes {
-          firstName
-          lastName
-          insertion
+query storiesWithAuthor($ids: [ID]!) {
+  stories(filters: { id: { in: $ids } }) {
+    data {
+      id
+      attributes {
+        author {
+          data {
+            id
+            attributes {
+              firstName
+              lastName
+              insertion
+            }
+          }
         }
       }
-    }
-    parent_story {
-      data {
-        id
-        attributes {
-          title
-          slug
-          locale
-        }
-      }
-    }
-    child_stories {
-      data {
-        id
-        attributes {
-          title
-          slug
-          locale
-        }
-      }
-    }
-    components {
-      ...StoryComponentsFragment
-    }
-    storyLinks {
-      ...ComponentModulesButtonsModuleFragment
     }
   }
 }
 
-fragment LocalizedStoryFragment on StoryEntity {
-  id
-  attributes {
-    title
-    slug
-    description
-    locale
-    author {
-      data {
-        id
-        attributes {
-          firstName
-          lastName
-          insertion
+query storiesWithLocations($ids: [ID]!) {
+  stories(filters: { id: { in: $ids } }) {
+    data {
+      id
+      attributes {
+        locations {
+          data {
+            id
+            attributes {
+              city
+            }
+          }
         }
       }
     }
-    parent_story {
-      data {
-        id
-        attributes {
-          title
-          slug
-          locale
+  }
+}
+
+query storiesWithThemes($ids: [ID]!) {
+  stories(filters: { id: { in: $ids } }) {
+    data {
+      id
+      attributes {
+        themes {
+          data {
+            id
+            attributes {
+              name
+            }
+          }
         }
       }
     }
-    child_stories {
-      data {
-        id
-        attributes {
-          title
-          slug
-          locale
+  }
+}
+
+query storiesWithParentStory($ids: [ID]!) {
+  stories(filters: { id: { in: $ids } }) {
+    data {
+      id
+      attributes {
+        parent_story {
+          data {
+            ...StoryFragment
+          }
         }
       }
     }
-    components {
-      ...StoryComponentsFragment
+  }
+}
+
+query storiesWithChildStories($ids: [ID]!) {
+  stories(filters: { id: { in: $ids } }) {
+    data {
+      id
+      attributes {
+        child_stories {
+          data {
+            ...StoryFragment
+          }
+        }
+      }
     }
-    storyLinks {
-      ...ComponentModulesButtonsModuleFragment
+  }
+}
+
+query storiesWithSiblings($ids: [ID]!) {
+  stories(filters: { id: { in: $ids } }) {
+    data {
+      id
+      attributes {
+        parent_story {
+          data {
+            id
+            attributes {
+              child_stories {
+                data {
+                  ...StoryFragment
+                }
+              }
+            }
+          }
+        }
+      }
     }
-    localizations {
-      data {
-        ...NestedStoryFragment
+  }
+}
+
+query storiesWithComponents($ids: [ID]!) {
+  stories(filters: { id: { in: $ids } }) {
+    data {
+      id
+      attributes {
+        components {
+          __typename
+          ... on ComponentModulesPullquote {
+            ...ComponentModulesPullquoteFragment
+          }
+          ... on ComponentModulesTextModule {
+            ...ComponentModulesTextModuleFragment
+          }
+          ... on ComponentModulesSubtitle {
+            ...ComponentModulesSubtitleFragment
+          }
+          ... on ComponentModulesTitleModule {
+            ...ComponentModulesTitleModuleFragment
+          }
+          ... on ComponentModulesImageCarousel {
+            ...ComponentModulesImageCarouselFragment
+          }
+          ... on ComponentModulesImage {
+            ...ComponentModulesImageFragment
+          }
+          ... on ComponentCoreStandAloneLink {
+            ...ComponentCoreStandAloneLinkFragment
+          }
+          ... on ComponentCoreMuxAudio {
+            ...ComponentCoreMuxAudioFragment
+          }
+          ... on ComponentCoreMuxVideo {
+            ...ComponentCoreMuxVideoFragment
+          }
+          ... on ComponentModulesSideImageWithText {
+            ...ComponentModulesSideImageWithTextFragment
+          }
+          ... on ComponentModulesButtonsModule {
+            ...ComponentModulesButtonsModuleFragment
+          }
+          ... on ComponentModulesStandaloneLinks {
+            ...ComponentModulesStandaloneLinksFragment
+          }
+          ... on Error {
+            ...ErrorFragment
+          }
+        }
+      }
+    }
+  }
+}
+
+query storiesWithLocalizations($ids: [ID]!) {
+  stories(filters: { id: { in: $ids } }) {
+    data {
+      id
+      attributes {
+        localizations {
+          data {
+            ...StoryFragment
+          }
+        }
+      }
+    }
+  }
+}
+
+query storiesWithTriplyRecords($ids: [ID]!) {
+  stories(filters: { id: { in: $ids } }) {
+    data {
+      id
+      attributes {
+        triplyRecords {
+          data {
+            ...BaseTriplyRecordFragment
+          }
+        }
+      }
+    }
+  }
+}
+
+query storiesWithStoryLinks($ids: [ID]!) {
+  stories(filters: { id: { in: $ids } }) {
+    data {
+      id
+      attributes {
+        storyLinks {
+          ...ComponentModulesButtonsModuleFragment
+        }
+      }
+    }
+  }
+}
+
+query storiesWithTimeframe($ids: [ID]!) {
+  stories(filters: { id: { in: $ids } }) {
+    data {
+      id
+      attributes {
+        timeframe {
+          ...ComponentCoreTimeframeFragment
+        }
+      }
+    }
+  }
+}
+
+query storiesWithPublicationDate($ids: [ID]!) {
+  stories(filters: { id: { in: $ids } }) {
+    data {
+      id
+      attributes {
+        publicationDate {
+          ...ComponentCorePublicationDateFragment
+        }
       }
     }
   }

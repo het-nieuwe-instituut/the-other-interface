@@ -3,18 +3,14 @@ import { Sdk } from '../../generated/strapi-sdk'
 import { EntityNames } from '../util/entityNames.type'
 import { Locale } from '../util/locale.type'
 import { AuthorEntityResponse } from 'src/modules/author/author.type'
-import { LocationRelationResponseCollection } from 'src/modules/location/location.type'
-import {
-  StoryComponentsDynamicZone,
-  StoryEntity,
-  StoryRelationResponseCollection,
-} from 'src/modules/story/story.type'
+import { LocationEntity } from 'src/modules/location/location.type'
+import { StoryComponentsDynamicZone, StoryEntity } from 'src/modules/story/story.type'
 import { StoryEntityResponse } from 'src/modules/story/story.types.circular'
 import { ComponentCorePublicationDate } from 'src/modules/strapi/components/core/publicationDate'
 import { ComponentCoreTimeframe } from 'src/modules/strapi/components/core/timeframe'
 import { ComponentModulesButtonsModule } from 'src/modules/strapi/components/modules/buttonsModule'
-import { ThemeRelationResponseCollection } from 'src/modules/theme/theme.type'
-import { TriplyRecordRelationResponseCollection } from 'src/modules/triplyRecord/triplyRecord.type'
+import { ThemeEntity } from 'src/modules/theme/theme.type'
+import { TriplyRecordEntity } from 'src/modules/triplyRecord/triplyRecord.type'
 
 @Injectable()
 export class StoryService {
@@ -34,56 +30,99 @@ export class StoryService {
     return story.story
   }
 
-  public async getStorySiblings(parentId: string, currentStoryId: string, locale: Locale) {
-    const parentRes = await this.strapiGqlSdk.story({ id: parentId, locale })
+  //   TODO: implement this for the sibling stories
+  //   public async getStorySiblings(parentId: string, currentStoryId: string, locale: Locale) {
+  //     const parentRes = await this.strapiGqlSdk.story({ id: parentId, locale })
 
-    const parentStory = parentRes?.story?.data
-    const siblingsStories = parentStory?.attributes?.child_stories?.data
-    const siblings = siblingsStories?.filter(s => s.id !== currentStoryId)
-    return siblings
-  }
+  //     const parentStory = parentRes?.story?.data
+  //     const siblingsStories = parentStory?.attributes?.child_stories?.data
+  //     const siblings = siblingsStories?.filter(s => s.id !== currentStoryId)
+  //     return siblings
+  //   }
 
-  public getAuthors = async (ids: readonly string[]): Promise<AuthorEntityResponse[]> => {
+  public getAuthors = async (ids: readonly string[]): Promise<(AuthorEntityResponse | null)[]> => {
     if (!ids.length) {
       return []
     }
 
-    // TODO
-    return Promise.resolve([])
+    const res = await this.strapiGqlSdk.storiesWithAuthor({ ids: [...ids] })
+    if (!res.stories) {
+      return []
+    }
+
+    return ids.map(id => {
+      const author = res.stories?.data.find(s => s.id === id)?.attributes?.author
+      if (!author) {
+        return null
+      }
+
+      return author as AuthorEntityResponse
+    })
   }
 
-  public getLocations = async (
+  public getLocations = async (ids: readonly string[]): Promise<LocationEntity[][]> => {
+    if (!ids.length) {
+      return []
+    }
+
+    const res = await this.strapiGqlSdk.storiesWithLocations({ ids: [...ids] })
+    if (!res.stories) {
+      return []
+    }
+
+    return ids.map(id => {
+      const locations = res.stories?.data.find(s => s.id === id)?.attributes?.locations
+      if (!locations) {
+        return []
+      }
+
+      return locations.data as LocationEntity[]
+    })
+  }
+
+  public getThemes = async (ids: readonly string[]): Promise<ThemeEntity[][]> => {
+    if (!ids.length) {
+      return []
+    }
+
+    const res = await this.strapiGqlSdk.storiesWithThemes({ ids: [...ids] })
+    if (!res.stories) {
+      return []
+    }
+
+    return ids.map(id => {
+      const themes = res.stories?.data.find(s => s.id === id)?.attributes?.themes
+      if (!themes) {
+        return []
+      }
+
+      return themes.data as ThemeEntity[]
+    })
+  }
+
+  public getParentStory = async (
     ids: readonly string[]
-  ): Promise<LocationRelationResponseCollection[]> => {
+  ): Promise<(StoryEntityResponse | null)[]> => {
     if (!ids.length) {
       return []
     }
 
-    // TODO
-    return Promise.resolve([])
-  }
-
-  public getThemes = async (ids: readonly string[]): Promise<ThemeRelationResponseCollection[]> => {
-    if (!ids.length) {
+    const res = await this.strapiGqlSdk.storiesWithParentStory({ ids: [...ids] })
+    if (!res.stories) {
       return []
     }
 
-    // TODO
-    return Promise.resolve([])
+    return ids.map(id => {
+      const parentStory = res.stories?.data.find(s => s.id === id)?.attributes?.parent_story
+      if (!parentStory) {
+        return null
+      }
+
+      return parentStory as StoryEntityResponse
+    })
   }
 
-  public getParentStory = async (ids: readonly string[]): Promise<StoryEntityResponse[]> => {
-    if (!ids.length) {
-      return []
-    }
-
-    // TODO
-    return Promise.resolve([])
-  }
-
-  public getChildStories = async (
-    ids: readonly string[]
-  ): Promise<StoryRelationResponseCollection[]> => {
+  public getChildStories = async (ids: readonly string[]): Promise<StoryEntity[][]> => {
     if (!ids.length) {
       return []
     }
@@ -113,9 +152,7 @@ export class StoryService {
     return Promise.resolve([])
   }
 
-  public getLocalizations = async (
-    ids: readonly string[]
-  ): Promise<StoryRelationResponseCollection[]> => {
+  public getLocalizations = async (ids: readonly string[]): Promise<StoryEntity[][]> => {
     if (!ids.length) {
       return []
     }
@@ -124,9 +161,7 @@ export class StoryService {
     return Promise.resolve([])
   }
 
-  public getTriplyRecords = async (
-    ids: readonly string[]
-  ): Promise<TriplyRecordRelationResponseCollection[]> => {
+  public getTriplyRecords = async (ids: readonly string[]): Promise<TriplyRecordEntity[][]> => {
     if (!ids.length) {
       return []
     }

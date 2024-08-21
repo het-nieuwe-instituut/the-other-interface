@@ -2,14 +2,8 @@ import { Inject } from '@nestjs/common'
 import { Args, Context, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { PublicationState, Sdk } from '../../generated/strapi-sdk'
 import { PaginationArg } from '../strapi/shared-types'
-import {
-  StoryEntity,
-  StoryEntityResponseCollection,
-  StoryFiltersInput,
-  StoryMetaEntityResponseCollection,
-} from './story.type'
+import { StoryEntity, StoryEntityResponseCollection, StoryFiltersInput } from './story.type'
 import { StoryEntityResponse } from './story.types.circular'
-import { StoryService } from './story.service'
 import { LocaleArgs } from '../util/localeArgs.type'
 import { GraphqlContext } from 'src/app.module'
 
@@ -17,57 +11,57 @@ import { GraphqlContext } from 'src/app.module'
 export class StoryFieldResolver {
   @ResolveField()
   public async locations(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return loaders.storyLocations.load(story.id)
+    return story.id ? loaders.storyLocations.load(story.id) : null
   }
 
   @ResolveField()
   public async author(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return loaders.storyAuthor.load(story.id)
+    return story.id ? loaders.storyAuthor.load(story.id) : null
   }
 
   @ResolveField()
   public async themes(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return loaders.storyThemes.load(story.id)
+    return story.id ? loaders.storyThemes.load(story.id) : null
   }
 
   @ResolveField()
   public async parent_story(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return loaders.storyParentStory.load(story.id)
+    return story.id ? loaders.storyParentStory.load(story.id) : null
   }
 
   @ResolveField()
   public async child_stories(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return loaders.storyChildStories.load(story.id)
+    return story.id ? loaders.storyChildStories.load(story.id) : null
   }
 
   @ResolveField()
   public async siblings(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return loaders.storySiblings.load(story.id)
+    return story.id ? loaders.storySiblings.load(story.id) : null
   }
 
   @ResolveField()
   public async components(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return loaders.storyComponents.load(story.id)
+    return story.id ? loaders.storyComponents.load(story.id) : null
   }
 
   @ResolveField()
   public async localizations(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return loaders.storyLocalizations.load(story.id)
+    return story.id ? loaders.storyLocalizations.load(story.id) : null
   }
 
   @ResolveField()
   public async triplyRecords(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return loaders.storyTriplyRecords.load(story.id)
+    return story.id ? loaders.storyTriplyRecords.load(story.id) : null
   }
 
   @ResolveField()
   public async storyLinks(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return loaders.storyStoryLinks.load(story.id)
+    return story.id ? loaders.storyStoryLinks.load(story.id) : null
   }
 
   @ResolveField()
   public async timeframe(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return loaders.storyTimeframe.load(story.id)
+    return story.id ? loaders.storyTimeframe.load(story.id) : null
   }
 
   @ResolveField()
@@ -75,89 +69,32 @@ export class StoryFieldResolver {
     @Parent() story: StoryEntity,
     @Context() { loaders }: GraphqlContext
   ) {
-    return loaders.storyPublicationDate.load(story.id)
+    return story.id ? loaders.storyPublicationDate.load(story.id) : null
   }
 }
 
 @Resolver()
 export class StoryResolver {
-  public constructor(
-    @Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk,
-    private readonly storyService: StoryService
-  ) {}
+  public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
   @Query(() => StoryEntityResponse)
-  public async storyByLocale(
-    @Args() { locale }: LocaleArgs,
-    @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
-    @Args('publicationState', { nullable: true }) publicationState?: PublicationState
-  ) {
-    const res = await this.strapiGqlSdk.storiesByLocale({
-      id: filters?.id,
-      publicationState,
-      locale: ['nl', 'en'], // we only care about story id, which should be searched across all locales
-    })
+  public async storyByLocale(@Args() { locale }: LocaleArgs, @Args('id') id: string) {
+    const res = await this.strapiGqlSdk.storiesWithLocalizations({ ids: [id] })
 
-    const story = res?.stories?.data[0]
-
-    if (story?.attributes?.locale === locale || !locale) {
-      return { data: story }
-    }
-
-    const localizedStory =
-      story?.attributes?.localizations?.data?.find(l => l.attributes?.locale === locale) || null
-
-    return { data: localizedStory }
-  }
-
-  @Query(() => StoryMetaEntityResponseCollection)
-  public async storyMetaByLocale(
-    @Args() { locale }: LocaleArgs,
-    @Args('filters', { nullable: true }) filters?: StoryFiltersInput,
-    @Args('publicationState', { nullable: true }) publicationState?: PublicationState
-  ) {
-    const res = await this.strapiGqlSdk.storiesMetaByLocale({
-      id: filters?.id,
-      publicationState,
-      locale: ['nl', 'en'], // we only care about story id, which should be searched across all locales
-    })
-
-    let story = res?.stories?.data[0]
-
-    if (locale && story?.attributes?.locale !== locale) {
-      const localizedStory = story?.attributes?.localizations?.data.find(
-        l => l?.attributes?.locale === locale
-      )
-      if (localizedStory) {
-        story = localizedStory
-      }
-    }
-
+    const story = res.stories?.data[0]
     if (!story) {
       return { data: null }
     }
 
-    const storyId = story.id
-    const parentId = story.attributes?.parent_story?.data?.id
+    const localization = story.attributes?.localizations?.data.find(
+      l => l.attributes?.locale === locale
+    )
 
-    let siblings: StoryEntity[] | undefined | null = []
-    if (parentId && storyId && locale && story.attributes) {
-      siblings = (await this.storyService.getStorySiblings(
-        parentId,
-        storyId,
-        locale
-      )) as StoryEntity[]
+    if (!localization) {
+      return { data: null }
     }
 
-    return {
-      data: {
-        ...story,
-        attributes: {
-          ...story.attributes,
-          ...(siblings.length ? { siblings } : {}),
-        },
-      },
-    }
+    return { data: localization }
   }
 
   @Query(() => StoryEntityResponseCollection)

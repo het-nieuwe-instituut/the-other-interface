@@ -52,7 +52,7 @@ fragment ComponentModulesImageFragment on ComponentModulesImage {
   }
   story {
     data {
-      ...StoryWithoutRelationsFragment
+      ...StoryFragment
     }
   }
 }

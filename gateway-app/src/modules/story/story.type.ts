@@ -1,6 +1,6 @@
 import { ObjectType, Field, createUnionType, ID, InputType } from '@nestjs/graphql'
 import { AuthorEntityResponse, AuthorFiltersInput } from '../author/author.type'
-import { LocationFiltersInput, LocationRelationResponseCollection } from '../location/location.type'
+import { LocationFiltersInput, LocationEntity } from '../location/location.type'
 import {
   ComponentCorePublicationDate,
   ComponentCorePublicationDateFiltersInput,
@@ -27,11 +27,8 @@ import {
   ResponseCollectionMeta,
   StringFilterInput,
 } from '../strapi/shared-types'
-import {
-  TriplyRecordFiltersInput,
-  TriplyRecordRelationResponseCollection,
-} from '../triplyRecord/triplyRecord.type'
-import { ThemeFiltersInput, ThemeRelationResponseCollection } from '../theme/theme.type'
+import { TriplyRecordFiltersInput, TriplyRecordEntity } from '../triplyRecord/triplyRecord.type'
+import { ThemeFiltersInput, ThemeEntity } from '../theme/theme.type'
 import { StoryEntityResponse } from './story.types.circular'
 import { ComponentCoreStandAloneLink } from '../strapi/components/core/standAloneLink'
 import { ComponentCoreMuxAudio } from '../strapi/components/core/muxAudio'
@@ -65,7 +62,7 @@ export class Story {
   @Field({ nullable: true })
   public slug?: string
 
-  @Field({ nullable: false })
+  @Field()
   public title: string
 
   @Field({ nullable: true })
@@ -100,25 +97,25 @@ export class StoryEntity {
   @Field({ nullable: true })
   public attributes?: Story
 
-  @Field(() => ID)
-  public id: string
+  @Field(() => ID, { nullable: true })
+  public id?: string
 
   //////////////////// relations ////////////////////
 
   @Field(() => AuthorEntityResponse, { nullable: true })
   public author?: AuthorEntityResponse
 
-  @Field(() => LocationRelationResponseCollection, { nullable: true })
-  public locations?: LocationRelationResponseCollection
+  @Field(() => [LocationEntity], { nullable: true })
+  public locations?: LocationEntity[]
 
-  @Field(() => ThemeRelationResponseCollection, { nullable: true })
-  public themes?: ThemeRelationResponseCollection
+  @Field(() => [ThemeEntity], { nullable: true })
+  public themes?: ThemeEntity[]
 
   @Field({ nullable: true })
   public parent_story?: StoryEntityResponse
 
-  @Field({ nullable: true })
-  public child_stories?: StoryRelationResponseCollection
+  @Field(() => [StoryEntity], { nullable: true })
+  public child_stories?: StoryEntity[]
 
   @Field(() => [StoryEntity], { nullable: true })
   public siblings?: StoryEntity[]
@@ -127,11 +124,11 @@ export class StoryEntity {
   // eslint-disable-next-line prettier/prettier
   public components?: (typeof StoryComponentsDynamicZone)[]
 
-  @Field(() => StoryRelationResponseCollection, { nullable: true })
-  public localizations?: StoryRelationResponseCollection
+  @Field(() => [StoryEntity], { nullable: true })
+  public localizations?: StoryEntity[]
 
-  @Field(() => TriplyRecordRelationResponseCollection, { nullable: true })
-  public triplyRecords?: TriplyRecordRelationResponseCollection
+  @Field(() => [TriplyRecordEntity], { nullable: true })
+  public triplyRecords?: TriplyRecordEntity[]
 
   @Field(() => ComponentModulesButtonsModule, { nullable: true })
   public storyLinks?: ComponentModulesButtonsModule

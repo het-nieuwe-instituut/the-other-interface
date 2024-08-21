@@ -79,7 +79,7 @@ fragment ThemeFragmentWithHighlightedStories on ThemeEntity {
     name
     stories {
       data {
-        ...StoryWithoutRelationsFragment
+        ...StoryFragment
         attributes {
           components {
             __typename
@@ -92,7 +92,7 @@ fragment ThemeFragmentWithHighlightedStories on ThemeEntity {
     }
     highlightedStories {
       data {
-        ...StoryWithoutRelationsFragment
+        ...StoryFragment
         attributes {
           components {
             __typename
