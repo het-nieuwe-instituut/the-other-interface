@@ -3,22 +3,22 @@ query storiesWithinTheme(
   $filters: StoryFiltersInput
   $pagination: PaginationArg
 ) {
-  storiesWithMinimalRelations(locale: $locale, filters: $filters, pagination: $pagination) {
+  stories(locale: $locale, filters: $filters, pagination: $pagination) {
     data {
       id
       __typename
       attributes {
         title
-        components {
-          ...imageModuleFragment
-        }
-        author {
-          data {
-            attributes {
-              firstName
-              lastName
-              insertion
-            }
+      }
+      components {
+        ...imageModuleFragment
+      }
+      author {
+        data {
+          attributes {
+            firstName
+            lastName
+            insertion
           }
         }
       }

@@ -25,8 +25,7 @@ export const StoryLayer = () => {
     return <EditorialSkeleton />
   }
 
-  const themeIds: string[] =
-    (story?.attributes?.themes?.data?.map(t => t.id).filter(Boolean) as string[]) ?? []
+  const themeIds: string[] = (story?.themes?.map(t => t.id).filter(Boolean) as string[]) ?? []
 
   return (
     <LayerWrapper
@@ -38,10 +37,10 @@ export const StoryLayer = () => {
             constrainPreface={true}
             showReadMore={false}
           />
-          <DynamicComponentRenderer components={story?.attributes?.components} isStoryPage={true} />
-          {story?.attributes?.storyLinks?.buttons && (
+          <DynamicComponentRenderer components={story?.components} isStoryPage={true} />
+          {story?.storyLinks?.buttons && (
             <ButtonGroup className="flex gap-4 pt-10">
-              {story?.attributes?.storyLinks?.buttons.map(link => {
+              {story?.storyLinks?.buttons.map(link => {
                 if (!link.url || !link.text) return null
 
                 return (

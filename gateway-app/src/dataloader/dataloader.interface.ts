@@ -1,4 +1,4 @@
-import DataLoader from 'dataloader'
+import * as DataLoader from 'dataloader'
 import { AuthorEntityResponse } from 'src/modules/author/author.type'
 import { LocationEntity } from 'src/modules/location/location.type'
 import { StoryComponentsDynamicZone, StoryEntity } from 'src/modules/story/story.type'

@@ -56,10 +56,10 @@ query searchByStories(
       id
       attributes {
         title
-        components {
-          ... on ComponentModulesImage {
-            ...imageModuleFragment
-          }
+      }
+      components {
+        ... on ComponentModulesImage {
+          ...imageModuleFragment
         }
       }
     }

@@ -19,9 +19,7 @@ export type StoriesData = NonNullable<
   NonNullable<NonNullable<ThemeData['attributes']>['stories']>
 >['data']
 export type StoryData = NonNullable<StoriesData>[0]
-export type StoryComponentsDynamicZone = NonNullable<
-  NonNullable<StoryData['attributes']>['components']
->
+export type StoryComponentsDynamicZone = NonNullable<NonNullable<StoryData>['components']>
 
 export function useThemesQuery({ page }: { page: number; fromCacheOnly?: boolean }) {
   const api = initApiClientService()

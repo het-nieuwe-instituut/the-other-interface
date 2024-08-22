@@ -10,7 +10,7 @@ type SelectionHighlightCategoryItem =
 const mapSelectedHighlightToSearch = (item: SelectedHighlightItem) => {
   const { entityName } = item?.attributes
 
-  let currentItem: SelectionHighlightCategoryItem | undefined
+  let currentItem: SelectionHighlightCategoryItem
 
   switch (entityName) {
     case EntityNames.Archives:
@@ -25,19 +25,17 @@ const mapSelectedHighlightToSearch = (item: SelectedHighlightItem) => {
     case EntityNames.Publications:
       currentItem = item.attributes?.publication
       break
-  }
-
-  if (!currentItem) {
-    return {
-      id: item.attributes?.recordId,
-      title: item.attributes?.label ?? '',
-      thumbnail: '',
-      type: entityName,
-    }
+    default:
+      return {
+        id: item.attributes?.recordId,
+        title: item.attributes?.label ?? '',
+        thumbnail: '',
+        type: entityName,
+      }
   }
 
   const thumbnail = Array.isArray(currentItem?.thumbnail)
-    ? currentItem.thumbnail[0]
+    ? currentItem?.thumbnail[0]
     : currentItem?.thumbnail
 
   return {

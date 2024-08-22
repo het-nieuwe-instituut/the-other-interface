@@ -1,5 +1,5 @@
 query storiesWithoutRelations($pagination: PaginationArg, $locale: Locale!) {
-  storiesWithoutRelations(pagination: $pagination, locale: $locale) {
+  stories(pagination: $pagination, locale: $locale) {
     data {
       id
       attributes {

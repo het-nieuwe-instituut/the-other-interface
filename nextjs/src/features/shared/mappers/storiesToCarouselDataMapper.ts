@@ -17,13 +17,13 @@ export type StoryImageInfo = {
   id?: Maybe<string> | undefined
 }
 
-type StoryMeta = NonNullable<StoryMetaByIdQuery['storyMetaByLocale']['data']>['attributes']
-type MinimalStoryMeta = NonNullable<StoriesWithinThemeQuery['storiesWithMinimalRelations']['data']>
+type StoryMeta = NonNullable<StoryMetaByIdQuery['storyByLocale']['data']>
+type MinimalStoryMeta = NonNullable<StoriesWithinThemeQuery['stories']['data']>
 
 export const storiesToCarouselDataMapper = (
   relatedStories:
     | NonNullable<StoriesRelationForRecordQuery['zoomLevel3StoriesRelationsForRecord']>['stories']
-    | NonNullable<NonNullable<StoryMeta>['child_stories']>['data']
+    | NonNullable<NonNullable<StoryMeta>['child_stories']>
     | NonNullable<NonNullable<StoryMeta>['siblings']>
     | NonNullable<NonNullable<NonNullable<NonNullable<StoryMeta>['parent_story']>>['data']>[]
     | MinimalStoryMeta
@@ -31,15 +31,15 @@ export const storiesToCarouselDataMapper = (
   const images: StoryImageInfo[] = []
 
   relatedStories?.forEach(story => {
-    const { firstName, lastName } = story?.attributes?.author?.data?.attributes ?? {}
+    const { firstName, lastName } = story?.author?.data?.attributes ?? {}
     const authorName = joinNullableStrings(' ', firstName, lastName)
 
-    if (!story?.attributes?.components) {
+    if (!story?.components) {
       return
     }
 
     const imageModule: ComponentModulesImage = (
-      story?.attributes?.components as StoryComponentsDynamicZone[]
+      story.components as StoryComponentsDynamicZone[]
     ).find(c => c.__typename === 'ComponentModulesImage') as ComponentModulesImage
 
     const { url, height, width } = imageModule?.image.data?.attributes || {}

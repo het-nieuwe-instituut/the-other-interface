@@ -430,8 +430,8 @@ query storiesWithComponents($ids: [ID]!) {
   }
 }
 
-query storiesWithLocalizations($ids: [ID]!) {
-  stories(filters: { id: { in: $ids } }) {
+query storiesWithLocalizations($ids: [ID]!, $publicationState: PublicationState = LIVE) {
+  stories(filters: { id: { in: $ids } }, publicationState: $publicationState) {
     data {
       id
       attributes {

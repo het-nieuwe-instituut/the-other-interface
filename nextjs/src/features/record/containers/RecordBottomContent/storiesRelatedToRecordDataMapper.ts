@@ -12,10 +12,10 @@ export const mapRecordRelatedStories = (
   relatedStories: StoriesRelationForRecordQuery | undefined
 ): StoryImageInfo[] | undefined => {
   return relatedStories?.zoomLevel3StoriesRelationsForRecord?.stories?.map(story => {
-    const firstName = story?.attributes?.author?.data?.attributes?.firstName ?? ''
-    const lastName = story?.attributes?.author?.data?.attributes?.lastName ?? ''
+    const firstName = story?.author?.data?.attributes?.firstName ?? ''
+    const lastName = story?.author?.data?.attributes?.lastName ?? ''
     const authorName = [firstName, lastName].filter(name => name).join(' ')
-    const images = story?.attributes?.components
+    const images = story?.components
       ?.filter(
         (component): component is ComponentModulesImage =>
           component.__typename === 'ComponentModulesImage' && !!component.image

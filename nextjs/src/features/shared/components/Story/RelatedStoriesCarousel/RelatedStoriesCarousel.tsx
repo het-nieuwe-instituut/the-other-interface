@@ -28,24 +28,20 @@ export const RelatedStoriesCarousel = () => {
     options: { fetchOnWindowFocus: false },
   })
 
-  const story = data?.storyMetaByLocale?.data
+  const story = data?.storyByLocale?.data
 
   const relatedStories = useMemo(
     () => [
       // childs if story has childs
-      ...(story?.attributes?.child_stories?.data ?? []),
+      ...(story?.child_stories ?? []),
 
       // parent if story has parent
-      ...(story?.attributes?.parent_story?.data ? [story.attributes.parent_story.data] : []),
+      ...(story?.parent_story?.data ? [story.parent_story.data] : []),
 
       // siblings if story has siblings
-      ...(story?.attributes?.siblings ?? []),
+      ...(story?.siblings ?? []),
     ],
-    [
-      story?.attributes?.child_stories?.data,
-      story?.attributes?.parent_story?.data,
-      story?.attributes?.siblings,
-    ]
+    [story?.child_stories, story?.parent_story?.data, story?.siblings]
   )
   const stories = useMemo(() => storiesToCarouselDataMapper(relatedStories) ?? [], [relatedStories])
 

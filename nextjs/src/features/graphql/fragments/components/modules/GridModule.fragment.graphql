@@ -25,14 +25,14 @@ fragment gridModuleFragment on ComponentModulesGridModule {
         id
         attributes {
           slug
-          author {
-            data {
-              attributes {
-                firstName
-              }
+          updatedAt
+        }
+        author {
+          data {
+            attributes {
+              firstName
             }
           }
-          updatedAt
         }
       }
     }

@@ -6350,6 +6350,7 @@ export type StoriesWithComponentsQuery = {
 
 export type StoriesWithLocalizationsQueryVariables = Exact<{
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
+  publicationState?: InputMaybe<PublicationState>
 }>
 
 export type StoriesWithLocalizationsQuery = {
@@ -9365,8 +9366,8 @@ export const StoriesWithComponentsDocument = gql`
   ${ErrorFragmentFragmentDoc}
 `
 export const StoriesWithLocalizationsDocument = gql`
-  query storiesWithLocalizations($ids: [ID]!) {
-    stories(filters: { id: { in: $ids } }) {
+  query storiesWithLocalizations($ids: [ID]!, $publicationState: PublicationState = LIVE) {
+    stories(filters: { id: { in: $ids } }, publicationState: $publicationState) {
       data {
         id
         attributes {

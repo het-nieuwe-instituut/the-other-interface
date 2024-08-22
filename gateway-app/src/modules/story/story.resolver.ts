@@ -10,66 +10,99 @@ import { GraphqlContext } from 'src/app.module'
 @Resolver(StoryEntity)
 export class StoryFieldResolver {
   @ResolveField()
-  public async locations(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return story.id ? loaders.storyLocations.load(story.id) : null
+  public async locations(
+    @Parent() story: StoryEntity,
+    @Context() { loaders }: GraphqlContext
+  ): Promise<StoryEntity['locations'] | null> {
+    return loaders.storyLocations.load(story.id)
   }
 
   @ResolveField()
-  public async author(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return story.id ? loaders.storyAuthor.load(story.id) : null
+  public async author(
+    @Parent() story: StoryEntity,
+    @Context() { loaders }: GraphqlContext
+  ): Promise<StoryEntity['author'] | null> {
+    return loaders.storyAuthor.load(story.id)
   }
 
   @ResolveField()
-  public async themes(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return story.id ? loaders.storyThemes.load(story.id) : null
+  public async themes(
+    @Parent() story: StoryEntity,
+    @Context() { loaders }: GraphqlContext
+  ): Promise<StoryEntity['themes'] | null> {
+    return loaders.storyThemes.load(story.id)
   }
 
   @ResolveField()
-  public async parent_story(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return story.id ? loaders.storyParentStory.load(story.id) : null
+  public async parent_story(
+    @Parent() story: StoryEntity,
+    @Context() { loaders }: GraphqlContext
+  ): Promise<StoryEntity['parent_story'] | null> {
+    return loaders.storyParentStory.load(story.id)
   }
 
   @ResolveField()
-  public async child_stories(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return story.id ? loaders.storyChildStories.load(story.id) : null
+  public async child_stories(
+    @Parent() story: StoryEntity,
+    @Context() { loaders }: GraphqlContext
+  ): Promise<StoryEntity['child_stories'] | null> {
+    return loaders.storyChildStories.load(story.id)
   }
 
   @ResolveField()
-  public async siblings(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return story.id ? loaders.storySiblings.load(story.id) : null
+  public async siblings(
+    @Parent() story: StoryEntity,
+    @Context() { loaders }: GraphqlContext
+  ): Promise<StoryEntity['siblings'] | null> {
+    return loaders.storySiblings.load(story.id)
   }
 
   @ResolveField()
-  public async components(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return story.id ? loaders.storyComponents.load(story.id) : null
+  public async components(
+    @Parent() story: StoryEntity,
+    @Context() { loaders }: GraphqlContext
+  ): Promise<StoryEntity['components'] | null> {
+    return loaders.storyComponents.load(story.id)
   }
 
   @ResolveField()
-  public async localizations(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return story.id ? loaders.storyLocalizations.load(story.id) : null
+  public async localizations(
+    @Parent() story: StoryEntity,
+    @Context() { loaders }: GraphqlContext
+  ): Promise<StoryEntity['localizations'] | null> {
+    return loaders.storyLocalizations.load(story.id)
   }
 
   @ResolveField()
-  public async triplyRecords(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return story.id ? loaders.storyTriplyRecords.load(story.id) : null
+  public async triplyRecords(
+    @Parent() story: StoryEntity,
+    @Context() { loaders }: GraphqlContext
+  ): Promise<StoryEntity['triplyRecords'] | null> {
+    return loaders.storyTriplyRecords.load(story.id)
   }
 
   @ResolveField()
-  public async storyLinks(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return story.id ? loaders.storyStoryLinks.load(story.id) : null
+  public async storyLinks(
+    @Parent() story: StoryEntity,
+    @Context() { loaders }: GraphqlContext
+  ): Promise<StoryEntity['storyLinks'] | null> {
+    return loaders.storyStoryLinks.load(story.id)
   }
 
   @ResolveField()
-  public async timeframe(@Parent() story: StoryEntity, @Context() { loaders }: GraphqlContext) {
-    return story.id ? loaders.storyTimeframe.load(story.id) : null
+  public async timeframe(
+    @Parent() story: StoryEntity,
+    @Context() { loaders }: GraphqlContext
+  ): Promise<StoryEntity['timeframe'] | null> {
+    return loaders.storyTimeframe.load(story.id)
   }
 
   @ResolveField()
   public async publicationDate(
     @Parent() story: StoryEntity,
     @Context() { loaders }: GraphqlContext
-  ) {
-    return story.id ? loaders.storyPublicationDate.load(story.id) : null
+  ): Promise<StoryEntity['publicationDate'] | null> {
+    return loaders.storyPublicationDate.load(story.id)
   }
 }
 
@@ -78,12 +111,19 @@ export class StoryResolver {
   public constructor(@Inject('StrapiGqlSDK') private readonly strapiGqlSdk: Sdk) {}
 
   @Query(() => StoryEntityResponse)
-  public async storyByLocale(@Args() { locale }: LocaleArgs, @Args('id') id: string) {
-    const res = await this.strapiGqlSdk.storiesWithLocalizations({ ids: [id] })
+  public async storyByLocale(
+    @Args() { locale }: LocaleArgs,
+    @Args('id') id: string,
+    @Args('publicationState', { nullable: true }) publicationState?: PublicationState
+  ): Promise<StoryEntityResponse> {
+    const res = await this.strapiGqlSdk.storiesWithLocalizations({
+      ids: [id],
+      publicationState: publicationState || undefined,
+    })
 
     const story = res.stories?.data[0]
     if (!story) {
-      return { data: null }
+      return { data: undefined }
     }
 
     const localization = story.attributes?.localizations?.data.find(
@@ -91,10 +131,10 @@ export class StoryResolver {
     )
 
     if (!localization) {
-      return { data: null }
+      return { data: undefined }
     }
 
-    return { data: localization }
+    return { data: localization } as StoryEntityResponse
   }
 
   @Query(() => StoryEntityResponseCollection)
@@ -104,7 +144,7 @@ export class StoryResolver {
     @Args('pagination', { nullable: true }) pagination?: PaginationArg,
     @Args('sort', { nullable: true, type: () => [String] }) sort?: string[],
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState
-  ) {
+  ): Promise<StoryEntityResponseCollection> {
     const res = await this.strapiGqlSdk.stories({
       filters: filters || undefined,
       pagination: pagination || {},
@@ -113,16 +153,19 @@ export class StoryResolver {
       locale: locale || undefined,
     })
 
-    return res.stories
+    return res.stories as StoryEntityResponseCollection
   }
 
   @Query(() => StoryEntityResponse)
-  public async story(@Args('id') id: string, @Args() { locale }: LocaleArgs) {
+  public async story(
+    @Args('id') id: string,
+    @Args() { locale }: LocaleArgs
+  ): Promise<StoryEntityResponse> {
     const res = await this.strapiGqlSdk.story({
       id,
       locale,
     })
 
-    return res.story
+    return res.story as StoryEntityResponse
   }
 }

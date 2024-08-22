@@ -97,8 +97,8 @@ export class StoryEntity {
   @Field({ nullable: true })
   public attributes?: Story
 
-  @Field(() => ID, { nullable: true })
-  public id?: string
+  @Field(() => ID)
+  public id: string
 
   //////////////////// relations ////////////////////
 

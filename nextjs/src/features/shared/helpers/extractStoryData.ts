@@ -5,9 +5,7 @@ import { DeepPartial } from '../types/helpers'
 type StoryById = NonNullable<StoryByIdQuery['storyByLocale']['data']>
 type SearchStory = NonNullable<SearchByStoriesQuery['stories']['data']>[0]
 
-const findImageUrl = (
-  components: DeepPartial<NonNullable<StoryById['attributes']>['components']>
-): string => {
+const findImageUrl = (components: DeepPartial<NonNullable<StoryById>['components']>): string => {
   const imageComponent = components?.find(
     component => component?.__typename === 'ComponentModulesImage'
   )
@@ -32,7 +30,7 @@ export const extractStoryData = (story: StoryById) => {
     ...story,
     // TODO property 'description' and 'locale' are not present in all types, so we need to add them to mutch the type Zoom3Record
     title: story?.attributes?.title ?? '',
-    thumbnail: [findImageUrl(story?.attributes?.components ?? [])] ?? [],
+    thumbnail: [findImageUrl(story?.components ?? [])] ?? [],
     locale: storyLocale || 'nl',
     id: storyId || `${Math.floor(Math.random() * (99999 + 1))}`,
     description: story?.attributes?.description ?? '',
@@ -42,7 +40,7 @@ export const extractStoryData = (story: StoryById) => {
 export const storyToRecordMapper = (story: SearchStory) => {
   return {
     title: story?.attributes?.title ?? '',
-    thumbnail: findImageUrl(story?.attributes?.components ?? []) ?? '',
+    thumbnail: findImageUrl(story?.components ?? []) ?? '',
     id: story.id,
     type: EntityNames.Stories,
   }

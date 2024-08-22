@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import DataLoader from 'dataloader'
+import * as DataLoader from 'dataloader'
 import { StoryService } from 'src/modules/story/story.service'
 
 import { IDataloaders } from './dataloader.interface'
