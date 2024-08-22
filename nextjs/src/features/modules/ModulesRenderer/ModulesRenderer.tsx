@@ -26,7 +26,7 @@ interface Props {
 }
 
 export type DynamicComponents = NonNullable<
-  NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']
+  NonNullable<StoryByIdQuery['storyByLocale']['data']>
 >['components']
 
 export function DynamicComponentRenderer({ components, isStoryPage = false }: Props) {

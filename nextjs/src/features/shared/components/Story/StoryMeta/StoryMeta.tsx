@@ -27,31 +27,34 @@ export const StoryMeta: React.FC = () => {
     id,
     options: { refetchOnWindowFocus: false, suspense: true },
   })
-  const story = data?.storyMetaByLocale?.data?.attributes
+
+  if (isLoading) {
+    return <MetaSkeleton />
+  }
+
+  if (!data?.storyByLocale.data) return null
+
+  const { publicationDate, author, themes, locations, timeframe } = data.storyByLocale.data
+  const { parent_story, child_stories, triplyRecords } = data.storyByLocale.data
+  const { shortDescription } = data.storyByLocale.data.attributes || {}
 
   const publicationDateFormatted = formatPublicationDate(
     lang,
-    story?.publicationDate?.displayType,
-    story?.publicationDate?.date
+    publicationDate?.displayType,
+    publicationDate?.date
   )
-  const authorFormatted = story?.author
+  const authorFormatted = author
     ? {
-        name: formatAuthor(story?.author?.data?.attributes),
-        id: story.author.data?.id,
+        name: formatAuthor(author?.data?.attributes),
+        id: author.data?.id,
       }
     : ''
-  const themes = story?.themes?.data?.map(theme => ({ name: theme.attributes?.name, id: theme.id }))
-  const locations = story?.locations?.data?.map(location => ({
-    name: location.attributes?.city,
-    id: location.id,
-  }))
-  const timeframe = formatTimeframe(story?.timeframe)
-  const parentRelation = story?.parent_story
-  const childrenRelation = story?.child_stories
+
+  const formattedTimeframe = formatTimeframe(timeframe)
 
   const linkedPeopleRecords = getUniqueById(
-    story?.triplyRecords?.data
-      .filter((record): record is { attributes: TriplyRecord } => Boolean(record.attributes))
+    triplyRecords
+      ?.filter((record): record is { attributes: TriplyRecord } => Boolean(record.attributes))
       .filter(record => record.attributes?.type === EnumTriplyrecordType.People)
       .map(record => ({
         id: record.attributes.recordId,
@@ -60,35 +63,29 @@ export const StoryMeta: React.FC = () => {
       })) || []
   )
 
-  if (isLoading) {
-    return <MetaSkeleton />
-  }
-
-  if (!story) return null
-
   return (
     <div className="flex flex-row flex-wrap">
       {dateAndAuthor()}
       <div className="flex w-1/2 flex-col pb-4 pr-4 md:w-1/3 lg:w-full">
-        {story.shortDescription && (
-          <p className={TypographyVariants({ socialLarge: 'md' })}>{story.shortDescription}</p>
+        {shortDescription && (
+          <p className={TypographyVariants({ socialLarge: 'md' })}>{shortDescription}</p>
         )}
       </div>
-      {parentRelation && parentRelation?.data?.id && (
+      {parent_story && parent_story?.data?.id && (
         <MetaField name={storiesT.t('parentStory')}>
           <NavLinkButton
-            title={parentRelation?.data?.attributes?.title ?? ''}
+            title={parent_story?.data?.attributes?.title ?? ''}
             variant={'metaData'}
-            href={`/detail/${CATEGORIES.stories}/${parentRelation?.data?.id}?lang=${lang}`}
+            href={`/detail/${CATEGORIES.stories}/${parent_story?.data?.id}?lang=${lang}`}
           >
-            {parentRelation?.data?.attributes?.title}
+            {parent_story?.data?.attributes?.title}
           </NavLinkButton>
         </MetaField>
       )}
-      {childrenRelation && childrenRelation?.data && childrenRelation.data.length > 0 && (
+      {child_stories && child_stories.length > 0 && (
         <MetaField name={storiesT.t('subStories')}>
           <div>
-            {childrenRelation?.data?.map(child => {
+            {child_stories.map(child => {
               return (
                 <NavLinkButton
                   title={child.attributes?.title}
@@ -115,7 +112,7 @@ export const StoryMeta: React.FC = () => {
                       `/landingpage?category=stories&filters=${encodeFilters([
                         {
                           key: 'theme',
-                          value: theme.name ?? '',
+                          value: theme.attributes?.name ?? '',
                           id: theme.id ?? '',
                         },
                       ])}&searchResult=true`,
@@ -128,7 +125,7 @@ export const StoryMeta: React.FC = () => {
                         className: 'underline',
                       })}
                     >
-                      {theme.name}
+                      {theme.attributes?.name}
                     </p>
                   </NextLink>
                 </div>
@@ -168,7 +165,7 @@ export const StoryMeta: React.FC = () => {
                     `/landingpage?category=stories&filters=${encodeFilters([
                       {
                         key: 'location',
-                        value: location.name ?? '',
+                        value: location.attributes?.city ?? '',
                         id: location.id ?? '',
                       },
                     ])}&searchResult=true`,
@@ -176,7 +173,7 @@ export const StoryMeta: React.FC = () => {
                   )}
                 >
                   <p className={TypographyVariants({ socialLarge: 'md', className: 'underline' })}>
-                    {location.name}
+                    {location.attributes?.city}
                   </p>
                 </NextLink>
               )
@@ -184,9 +181,9 @@ export const StoryMeta: React.FC = () => {
           </div>
         </MetaField>
       )}
-      {timeframe && (
+      {formattedTimeframe && (
         <MetaField name={storiesT.t('time')}>
-          <p className={TypographyVariants({ socialLarge: 'md' })}>{timeframe}</p>
+          <p className={TypographyVariants({ socialLarge: 'md' })}>{formattedTimeframe}</p>
         </MetaField>
       )}
     </div>

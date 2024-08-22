@@ -38,6 +38,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "@slack/web-api": "^6.8.0",
     "apollo-server-express": "^3.10.0",
+    "dataloader": "^2.2.2",
     "graphql": "^16.5.0",
     "lodash": "^4.17.21",
     "reflect-metadata": "^0.1.13",

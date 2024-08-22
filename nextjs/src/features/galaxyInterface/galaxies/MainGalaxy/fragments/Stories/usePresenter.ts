@@ -19,10 +19,10 @@ const findImageUrl = (components: StoryComponentsDynamicZone): string => {
 const mapStory = (story: StoryData) => {
   const storyId = story?.id
   const storyLocale = story?.attributes?.locale
-  const imageUrl = findImageUrl(story?.attributes?.components ?? [])
+  const imageUrl = findImageUrl(story?.components ?? [])
   return {
     title: story?.attributes?.title ?? '',
-    image: findImageUrl(story?.attributes?.components ?? []),
+    image: findImageUrl(story?.components ?? []),
     locale: storyLocale || 'nl',
     id: storyId || `${Math.floor(Math.random() * (99999 + 1))}`,
     hasImage: !!imageUrl,

@@ -10,9 +10,7 @@ import { StoryByIdQuery } from 'src/generated/graphql'
 export interface DetailpageEditorialLayer {
   title?: string | null
   description?: string | null
-  components:
-    | NonNullable<NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']>['components']
-    | null
+  components: NonNullable<NonNullable<StoryByIdQuery['storyByLocale']['data']>>['components'] | null
 }
 interface Props {
   category: string

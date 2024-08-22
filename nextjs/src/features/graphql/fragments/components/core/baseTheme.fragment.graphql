@@ -26,11 +26,9 @@ fragment ThemeFragmentWithHighlightedStories on ThemeEntity {
     stories {
       data {
         ...StoryWithoutRelationsFragment
-        attributes {
-          components {
-            ... on ComponentModulesImage {
-              ...imageModuleFragment
-            }
+        components {
+          ... on ComponentModulesImage {
+            ...imageModuleFragment
           }
         }
       }
@@ -38,11 +36,9 @@ fragment ThemeFragmentWithHighlightedStories on ThemeEntity {
     highlightedStories {
       data {
         ...StoryWithoutRelationsFragment
-        attributes {
-          components {
-            ... on ComponentModulesImage {
-              ...imageModuleFragment
-            }
+        components {
+          ... on ComponentModulesImage {
+            ...imageModuleFragment
           }
         }
       }

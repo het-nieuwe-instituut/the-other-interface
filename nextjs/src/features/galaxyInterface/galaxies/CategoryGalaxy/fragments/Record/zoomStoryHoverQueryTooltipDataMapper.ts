@@ -4,8 +4,8 @@ import { StoryHoverRecordRelationsQuery } from 'src/generated/graphql'
 export const zoomStoryHoverQueryTooltipDataMapper = (
   initialData: StoryHoverRecordRelationsQuery
 ) => {
-  const { title, shortDescription, author } =
-    initialData.storyWithoutRelations.data?.attributes || {}
+  const { title, shortDescription } = initialData.story.data?.attributes || {}
+  const { author } = initialData.story.data || {}
   const { firstName, lastName } = author?.data?.attributes || {}
 
   const authorName = joinNullableStrings(' ', firstName, lastName)

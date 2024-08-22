@@ -24,10 +24,6 @@ interface StoryWithinThemeCarouselProps {
 
 export const StoryWithinThemeCarousel = ({ themeIds, id }: StoryWithinThemeCarouselProps) => {
   const { data, isLoading, isError } = useStoriesRelatedByThemeQuery(id, themeIds)
-  const stories = useMemo(
-    () => storiesToCarouselDataMapper(data?.storiesWithMinimalRelations.data) ?? [],
-    [data?.storiesWithMinimalRelations.data]
-  )
 
   if (isError) {
     return <ErrorBox />
@@ -40,6 +36,18 @@ export const StoryWithinThemeCarousel = ({ themeIds, id }: StoryWithinThemeCarou
       </div>
     )
   }
+
+  if (!data.stories.data || !data.stories.data?.length) {
+    return null
+  }
+
+  // we don't need to memoize before loading the data, so no need to call this before the early returns
+  // if we are keen on sticking to hook rules, we can move the below part to a separate component
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const stories = useMemo(
+    () => storiesToCarouselDataMapper(data?.stories.data) ?? [],
+    [data?.stories.data]
+  )
 
   return (
     <>
