@@ -6362,6 +6362,14 @@ export type StoriesWithLocalizationsQuery = {
       id?: string | null
       attributes?: {
         __typename?: 'Story'
+        title: string
+        slug: string
+        description?: string | null
+        shortDescription: string
+        createdAt?: any | null
+        updatedAt?: any | null
+        publishedAt?: any | null
+        locale?: string | null
         localizations?: {
           __typename?: 'StoryRelationResponseCollection'
           data: Array<{
@@ -9370,6 +9378,7 @@ export const StoriesWithLocalizationsDocument = gql`
     stories(filters: { id: { in: $ids } }, publicationState: $publicationState) {
       data {
         id
+        ...StoryFragment
         attributes {
           localizations {
             data {

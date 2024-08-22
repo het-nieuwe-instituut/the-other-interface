@@ -126,6 +126,10 @@ export class StoryResolver {
       return { data: undefined }
     }
 
+    if (story.attributes?.locale === locale) {
+      return { data: story } as StoryEntityResponse
+    }
+
     const localization = story.attributes?.localizations?.data.find(
       l => l.attributes?.locale === locale
     )

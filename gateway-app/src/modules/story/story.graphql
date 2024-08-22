@@ -434,6 +434,7 @@ query storiesWithLocalizations($ids: [ID]!, $publicationState: PublicationState 
   stories(filters: { id: { in: $ids } }, publicationState: $publicationState) {
     data {
       id
+      ...StoryFragment
       attributes {
         localizations {
           data {
