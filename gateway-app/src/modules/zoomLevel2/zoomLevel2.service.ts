@@ -118,7 +118,8 @@ export class ZoomLevel2Service {
     text?: string | null,
     selectedFilterSuggestions?: SelectedFilterSuggestion[] | null
   ) {
-    const uri = this.getUriForLevel2Data(type, text, { forCount: false })
+    const hasParams = !!selectedFilterSuggestions?.length
+    const uri = this.getUriForLevel2Data(type, text, { forCount: false, hasParams })
     const searchParams = this.getZoomLevel2SearchParams(selectedFilterSuggestions, text)
 
     const result = await this.triplyService.queryTriplyData<ResultData>(
@@ -147,7 +148,8 @@ export class ZoomLevel2Service {
     text?: string | null,
     selectedFilterSuggestions?: SelectedFilterSuggestion[] | null
   ) {
-    const uri = this.getUriForLevel2Data(type, text, { forCount: true })
+    const hasParams = !!selectedFilterSuggestions?.length
+    const uri = this.getUriForLevel2Data(type, text, { forCount: true, hasParams })
     const searchParams = this.getZoomLevel2SearchParams(selectedFilterSuggestions, text)
 
     const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
@@ -167,9 +169,9 @@ export class ZoomLevel2Service {
   private getUriForLevel2Data(
     type: EntityNames,
     text: string | null = '',
-    { forCount }: { forCount: boolean }
+    { forCount, hasParams }: { forCount: boolean; hasParams: boolean }
   ) {
-    if (text) {
+    if (text || hasParams) {
       return this.getUriForLevel2TextSearch(type, { forCount })
     }
 
