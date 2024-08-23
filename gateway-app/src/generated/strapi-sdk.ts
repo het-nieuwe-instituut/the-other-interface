@@ -5842,6 +5842,7 @@ export type StoryParentAndChildrenQuery = {
 
 export type StoriesWithAuthorQueryVariables = Exact<{
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
+  lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
 
 export type StoriesWithAuthorQuery = {
@@ -5873,6 +5874,7 @@ export type StoriesWithAuthorQuery = {
 
 export type StoriesWithLocationsQueryVariables = Exact<{
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
+  lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
 
 export type StoriesWithLocationsQuery = {
@@ -5899,6 +5901,7 @@ export type StoriesWithLocationsQuery = {
 
 export type StoriesWithThemesQueryVariables = Exact<{
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
+  lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
 
 export type StoriesWithThemesQuery = {
@@ -5925,6 +5928,7 @@ export type StoriesWithThemesQuery = {
 
 export type StoriesWithParentStoryQueryVariables = Exact<{
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
+  lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
 
 export type StoriesWithParentStoryQuery = {
@@ -5961,6 +5965,7 @@ export type StoriesWithParentStoryQuery = {
 
 export type StoriesWithChildStoriesQueryVariables = Exact<{
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
+  lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
 
 export type StoriesWithChildStoriesQuery = {
@@ -5997,6 +6002,7 @@ export type StoriesWithChildStoriesQuery = {
 
 export type StoriesWithSiblingsQueryVariables = Exact<{
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
+  lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
 
 export type StoriesWithSiblingsQuery = {
@@ -6043,6 +6049,7 @@ export type StoriesWithSiblingsQuery = {
 
 export type StoriesWithComponentsQueryVariables = Exact<{
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
+  lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
 
 export type StoriesWithComponentsQuery = {
@@ -6351,6 +6358,7 @@ export type StoriesWithComponentsQuery = {
 export type StoriesWithLocalizationsQueryVariables = Exact<{
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   publicationState?: InputMaybe<PublicationState>
+  lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
 
 export type StoriesWithLocalizationsQuery = {
@@ -6395,6 +6403,7 @@ export type StoriesWithLocalizationsQuery = {
 
 export type StoriesWithTriplyRecordsQueryVariables = Exact<{
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
+  lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
 
 export type StoriesWithTriplyRecordsQuery = {
@@ -6425,6 +6434,7 @@ export type StoriesWithTriplyRecordsQuery = {
 
 export type StoriesWithStoryLinksQueryVariables = Exact<{
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
+  lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
 
 export type StoriesWithStoryLinksQuery = {
@@ -6453,6 +6463,7 @@ export type StoriesWithStoryLinksQuery = {
 
 export type StoriesWithTimeframeQueryVariables = Exact<{
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
+  lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
 
 export type StoriesWithTimeframeQuery = {
@@ -6477,6 +6488,7 @@ export type StoriesWithTimeframeQuery = {
 
 export type StoriesWithPublicationDateQueryVariables = Exact<{
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
+  lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
 
 export type StoriesWithPublicationDateQuery = {
@@ -9191,8 +9203,8 @@ export const StoryParentAndChildrenDocument = gql`
   }
 `
 export const StoriesWithAuthorDocument = gql`
-  query storiesWithAuthor($ids: [ID]!) {
-    stories(filters: { id: { in: $ids } }) {
+  query storiesWithAuthor($ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -9212,8 +9224,8 @@ export const StoriesWithAuthorDocument = gql`
   }
 `
 export const StoriesWithLocationsDocument = gql`
-  query storiesWithLocations($ids: [ID]!) {
-    stories(filters: { id: { in: $ids } }) {
+  query storiesWithLocations($ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -9231,8 +9243,8 @@ export const StoriesWithLocationsDocument = gql`
   }
 `
 export const StoriesWithThemesDocument = gql`
-  query storiesWithThemes($ids: [ID]!) {
-    stories(filters: { id: { in: $ids } }) {
+  query storiesWithThemes($ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -9250,8 +9262,8 @@ export const StoriesWithThemesDocument = gql`
   }
 `
 export const StoriesWithParentStoryDocument = gql`
-  query storiesWithParentStory($ids: [ID]!) {
-    stories(filters: { id: { in: $ids } }) {
+  query storiesWithParentStory($ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -9267,8 +9279,8 @@ export const StoriesWithParentStoryDocument = gql`
   ${StoryFragmentFragmentDoc}
 `
 export const StoriesWithChildStoriesDocument = gql`
-  query storiesWithChildStories($ids: [ID]!) {
-    stories(filters: { id: { in: $ids } }) {
+  query storiesWithChildStories($ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -9284,8 +9296,8 @@ export const StoriesWithChildStoriesDocument = gql`
   ${StoryFragmentFragmentDoc}
 `
 export const StoriesWithSiblingsDocument = gql`
-  query storiesWithSiblings($ids: [ID]!) {
-    stories(filters: { id: { in: $ids } }) {
+  query storiesWithSiblings($ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -9308,8 +9320,8 @@ export const StoriesWithSiblingsDocument = gql`
   ${StoryFragmentFragmentDoc}
 `
 export const StoriesWithComponentsDocument = gql`
-  query storiesWithComponents($ids: [ID]!) {
-    stories(filters: { id: { in: $ids } }) {
+  query storiesWithComponents($ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -9374,8 +9386,12 @@ export const StoriesWithComponentsDocument = gql`
   ${ErrorFragmentFragmentDoc}
 `
 export const StoriesWithLocalizationsDocument = gql`
-  query storiesWithLocalizations($ids: [ID]!, $publicationState: PublicationState = LIVE) {
-    stories(filters: { id: { in: $ids } }, publicationState: $publicationState) {
+  query storiesWithLocalizations(
+    $ids: [ID]!
+    $publicationState: PublicationState = LIVE
+    $lang: I18NLocaleCode = "all"
+  ) {
+    stories(filters: { id: { in: $ids } }, publicationState: $publicationState, locale: $lang) {
       data {
         id
         ...StoryFragment
@@ -9392,8 +9408,8 @@ export const StoriesWithLocalizationsDocument = gql`
   ${StoryFragmentFragmentDoc}
 `
 export const StoriesWithTriplyRecordsDocument = gql`
-  query storiesWithTriplyRecords($ids: [ID]!) {
-    stories(filters: { id: { in: $ids } }) {
+  query storiesWithTriplyRecords($ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -9409,8 +9425,8 @@ export const StoriesWithTriplyRecordsDocument = gql`
   ${BaseTriplyRecordFragmentFragmentDoc}
 `
 export const StoriesWithStoryLinksDocument = gql`
-  query storiesWithStoryLinks($ids: [ID]!) {
-    stories(filters: { id: { in: $ids } }) {
+  query storiesWithStoryLinks($ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -9424,8 +9440,8 @@ export const StoriesWithStoryLinksDocument = gql`
   ${ComponentModulesButtonsModuleFragmentFragmentDoc}
 `
 export const StoriesWithTimeframeDocument = gql`
-  query storiesWithTimeframe($ids: [ID]!) {
-    stories(filters: { id: { in: $ids } }) {
+  query storiesWithTimeframe($ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -9439,8 +9455,8 @@ export const StoriesWithTimeframeDocument = gql`
   ${ComponentCoreTimeframeFragmentFragmentDoc}
 `
 export const StoriesWithPublicationDateDocument = gql`
-  query storiesWithPublicationDate($ids: [ID]!) {
-    stories(filters: { id: { in: $ids } }) {
+  query storiesWithPublicationDate($ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {

@@ -6,7 +6,11 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { getUniqueById } from '../util/helpers'
 import { Locale } from '../util/locale.type'
 import { Enum_Triplyrecord_Type } from 'src/generated/strapi-sdk'
-import { FilterSuggestionType, SelectedFilterSuggestion } from './zoomLevel2.type'
+import {
+  FilterSuggestionType,
+  SelectedFilterSuggestion,
+  ZoomLevel2ParentType,
+} from './zoomLevel2.type'
 
 interface ResultData {
   thumbnail: string
@@ -37,7 +41,7 @@ export class ZoomLevel2Service {
     paginationArgs: PaginationArgs,
     text?: string | null,
     selectedFilterSuggestions?: SelectedFilterSuggestion[] | null
-  ) {
+  ): Promise<ZoomLevel2ParentType> {
     switch (entity) {
       case EntityNames.Archives:
       case EntityNames.Objects:
@@ -124,11 +128,13 @@ export class ZoomLevel2Service {
       { ...searchParams, language: locale }
     )
 
-    const uniqueNodes = getUniqueById(result?.data).map(res => ({
-      thumbnail: res.thumbnail,
-      title: res.title,
-      id: res.id,
-    }))
+    const uniqueNodes = getUniqueById(result?.data)
+      .map(res => ({
+        thumbnail: res.thumbnail,
+        title: res.title,
+        id: res.id,
+      }))
+      .filter(r => !!r.id)
 
     return {
       page: paginationArgs.page ?? 1,

@@ -12,14 +12,15 @@ import { StoryMeta } from '../../Story/StoryMeta/StoryMeta'
 import { ButtonGroup } from '@/features/ui/components/button-group/component'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
 import { EditorialSkeleton } from '@/features/ui/components/Skeletons/EditorialSkeleton'
+import { useRedirectToLocale } from '@/features/shared/hooks/useRedirectToLocale'
 
 export const StoryLayer = () => {
-  const params = useParams()
-  const id = params?.id as string
-  const { data, isLoading, error } = useStoryByIdQuery(id)
-  const story = data
+  const id = useParams()?.id as string
+
+  const { data: story, isLoading, error } = useStoryByIdQuery(id)
 
   useRedirectToErrorOnError(error)
+  useRedirectToLocale(story?.locale, story?.id)
 
   if (isLoading) {
     return <EditorialSkeleton />
