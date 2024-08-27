@@ -1,5 +1,4 @@
 'use client'
-import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { DeepPartial } from '@/features/shared/types/helpers'
 
 import { imageBasePath } from '@/features/modules/modulesConstants'
@@ -21,7 +20,7 @@ export const GenericCardGrid = ({ grid, className }: { grid: CardGrid; className
   const items = grid.cards ?? []
 
   if (!items || items.length === 0) {
-    return <ErrorBox />
+    return null
   }
 
   return (

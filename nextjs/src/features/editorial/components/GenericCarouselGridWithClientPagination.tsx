@@ -1,4 +1,3 @@
-import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { DeepPartial } from '@/features/shared/types/helpers'
 import {
   CarouselGrid,
@@ -72,7 +71,7 @@ const Grid = ({
   })
 
   if (!items || items.length === 0) {
-    return <ErrorBox />
+    return null
   }
 
   return (
