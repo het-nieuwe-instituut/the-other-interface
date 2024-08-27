@@ -77,40 +77,15 @@ fragment ThemeFragmentWithHighlightedStories on ThemeEntity {
   id
   attributes {
     name
-    stories {
+    stories(pagination: $highlightedStoriesPaginationArgs) {
       data {
         ...StoryFragment
-        attributes {
-          components {
-            __typename
-            ... on ComponentModulesImage {
-              ...ComponentModulesImageFragment
-            }
-          }
-        }
       }
     }
-    highlightedStories {
+    highlightedStories(pagination: $highlightedStoriesPaginationArgs) {
       data {
         ...StoryFragment
-        attributes {
-          components {
-            __typename
-            ... on ComponentModulesImage {
-              ...ComponentModulesImageFragment
-            }
-          }
-        }
       }
     }
-    createdAt
-    updatedAt
-    publishedAt
-    localizations {
-      data {
-        id
-      }
-    }
-    locale
   }
 }

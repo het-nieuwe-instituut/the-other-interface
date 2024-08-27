@@ -30,6 +30,7 @@ export function useThemesQuery({ page }: { page: number; fromCacheOnly?: boolean
     return await api?.highlightedHomepageThemes({
       locale: lang,
       pagination: { page, pageSize: 1 },
+      storiesPagination: { page: 1, pageSize: 5 },
       publicationState: isDraftMode ? PublicationState.Preview : PublicationState.Live,
     })
   }

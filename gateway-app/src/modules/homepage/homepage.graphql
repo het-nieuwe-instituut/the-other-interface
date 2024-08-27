@@ -37,6 +37,7 @@ query highlightedHomepageThemes(
   $locale: I18NLocaleCode!
   $localeStr: String!
   $highlightedThemesPaginationArgs: PaginationArg
+  $highlightedStoriesPaginationArgs: PaginationArg
 ) {
   homepage(publicationState: $publicationState, locale: $locale) {
     data {

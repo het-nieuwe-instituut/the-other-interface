@@ -1314,6 +1314,7 @@ export type QueryHighlightedHomepageThemesArgs = {
   locale: Scalars['String']['input'];
   paginationArgs?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']['input']>;
+  storiesPaginationArgs?: InputMaybe<PaginationArg>;
 };
 
 
@@ -2064,6 +2065,7 @@ export type FilterSuggestionsQuery = { __typename?: 'Query', filterSuggestions?:
 
 export type HighlightedHomepageThemesQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
+  storiesPagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<Scalars['String']['input']>;
   locale: Scalars['String']['input'];
 }>;
@@ -3185,9 +3187,10 @@ export const FilterSuggestionsDocument = gql`
 }
     `;
 export const HighlightedHomepageThemesDocument = gql`
-    query highlightedHomepageThemes($pagination: PaginationArg, $publicationState: String, $locale: String!) {
+    query highlightedHomepageThemes($pagination: PaginationArg, $storiesPagination: PaginationArg, $publicationState: String, $locale: String!) {
   highlightedHomepageThemes(
     paginationArgs: $pagination
+    storiesPaginationArgs: $storiesPagination
     publicationState: $publicationState
     locale: $locale
   ) {

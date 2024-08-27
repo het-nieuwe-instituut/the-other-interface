@@ -32,13 +32,15 @@ export class HighlightedHomepageThemeEntityResolver {
   public async highlightedHomepageThemes(
     @Args('locale') locale: Locale,
     @Args('publicationState', { nullable: true }) publicationState?: PublicationState,
-    @Args('paginationArgs', { nullable: true }) paginationArgs?: PaginationArg
+    @Args('paginationArgs', { nullable: true }) paginationArgs?: PaginationArg,
+    @Args('storiesPaginationArgs', { nullable: true }) storiesPaginationArgs?: PaginationArg
   ) {
     const res = await this.strapiGqlSdk.highlightedHomepageThemes({
       publicationState,
       locale,
       localeStr: locale,
       highlightedThemesPaginationArgs: paginationArgs,
+      highlightedStoriesPaginationArgs: storiesPaginationArgs,
     })
 
     return res.homepage

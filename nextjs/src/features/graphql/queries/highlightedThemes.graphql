@@ -1,10 +1,12 @@
 query highlightedHomepageThemes(
   $pagination: PaginationArg
+  $storiesPagination: PaginationArg
   $publicationState: String
   $locale: String!
 ) {
   highlightedHomepageThemes(
     paginationArgs: $pagination
+    storiesPaginationArgs: $storiesPagination
     publicationState: $publicationState
     locale: $locale
   ) {
