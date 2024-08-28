@@ -50,6 +50,7 @@ export const StaticPageContainer = ({
       <StaticPageHeader />
     </div>
     <LayerWrapper
+      suspense={true}
       disableBelowTheFold={disableBelowTheFold}
       LeftContent={<PageHeader title={title} />}
       BottomContent={

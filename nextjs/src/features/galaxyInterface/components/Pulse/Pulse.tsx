@@ -14,6 +14,7 @@ export const PulseContext = React.createContext<{
   start: () => undefined,
   stop: () => undefined,
 })
+
 export const PulseProvider = ({ children }: { children: React.ReactNode }) => {
   const [activePulses, setActivePulses] = React.useState<string[]>([])
 
@@ -31,6 +32,7 @@ export const PulseProvider = ({ children }: { children: React.ReactNode }) => {
     </PulseContext.Provider>
   )
 }
+
 export const PulseVisual = ({ className }: { className?: string }) => {
   const pulseContext = React.useContext(PulseContext)
   return (
@@ -46,6 +48,7 @@ export const PulseVisual = ({ className }: { className?: string }) => {
     </div>
   )
 }
+
 export const Pulse = ({
   delay = 0,
   trigger = true,
@@ -55,23 +58,22 @@ export const Pulse = ({
   trigger?: boolean
   delay?: number
 }) => {
-  const { start, stop, activePulses } = React.useContext(PulseContext)
+  const { start, stop } = React.useContext(PulseContext)
   const timeout = useRef<NodeJS.Timeout>()
   const uniqueIdRef = useRef(uniqueId())
+
   useEffect(() => {
     const uniqueId = uniqueIdRef.current
-    if (trigger && !activePulses.includes(uniqueId) && !hide) {
+    if (trigger && !hide) {
       timeout.current = setTimeout(() => {
         start(uniqueId)
       }, delay)
     }
     return () => {
       clearTimeout(timeout.current)
-      if (activePulses.includes(uniqueId)) {
-        stop(uniqueId)
-      }
+      stop(uniqueId)
     }
-  }, [trigger, delay, start, stop, activePulses, hide])
+  }, [trigger, delay, start, stop, hide])
 
   useEffect(() => {
     if (hide) {

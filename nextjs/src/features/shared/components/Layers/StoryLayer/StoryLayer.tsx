@@ -1,18 +1,17 @@
 'use client'
 
-import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
-import { LayerWrapper } from '../LayerWrapper'
-import { StoryBottomContent } from '../../Story/StoryBottomContent/StoryBottomContent'
-import { useStoryByIdQuery } from '@/features/shared/hooks/queries/useStoryByIdQuery'
-import { useParams } from 'next/navigation'
-import { useRedirectToErrorOnError } from '@/features/shared/hooks/useRedirectToErrorOnError'
-import ErrorBoundaryWrapper from '../../Error/ErrorBoundary/ErrorBoundary'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
-import { StoryMeta } from '../../Story/StoryMeta/StoryMeta'
-import { ButtonGroup } from '@/features/ui/components/button-group/component'
-import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
-import { EditorialSkeleton } from '@/features/ui/components/Skeletons/EditorialSkeleton'
+import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
+import { useStoryByIdQuery } from '@/features/shared/hooks/queries/useStoryByIdQuery'
+import { useRedirectToErrorOnError } from '@/features/shared/hooks/useRedirectToErrorOnError'
 import { useRedirectToLocale } from '@/features/shared/hooks/useRedirectToLocale'
+import { ButtonGroup } from '@/features/ui/components/button-group/component'
+import { useParams } from 'next/navigation'
+import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
+import ErrorBoundaryWrapper from '../../Error/ErrorBoundary/ErrorBoundary'
+import { StoryBottomContent } from '../../Story/StoryBottomContent/StoryBottomContent'
+import { StoryMeta } from '../../Story/StoryMeta/StoryMeta'
+import { LayerWrapper } from '../LayerWrapper'
 
 export const StoryLayer = () => {
   const id = useParams()?.id as string
@@ -22,14 +21,11 @@ export const StoryLayer = () => {
   useRedirectToErrorOnError(error)
   useRedirectToLocale(story?.locale, story?.id)
 
-  if (isLoading) {
-    return <EditorialSkeleton />
-  }
-
   const themeIds: string[] = (story?.themes?.map(t => t.id).filter(Boolean) as string[]) ?? []
 
   return (
     <LayerWrapper
+      isLoading={isLoading}
       LeftContent={
         <>
           <PageHeader

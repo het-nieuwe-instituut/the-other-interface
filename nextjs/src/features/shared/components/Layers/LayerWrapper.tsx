@@ -1,14 +1,15 @@
-import { cn } from '@/features/ui/utils/cn'
-import React from 'react'
-import SuspenseLoader from '../SuspenseLoader/SuspenseLoader'
-import { EditorialSkeleton } from '@/features/ui/components/Skeletons/EditorialSkeleton'
 import { BelowTheFoldWrapper } from '@/features/editorial/components/BelowTheFoldWrapper'
+import { EditorialSkeleton } from '@/features/ui/components/Skeletons/EditorialSkeleton'
+import { cn } from '@/features/ui/utils/cn'
+import React, { Suspense } from 'react'
 
 interface Props {
   LeftContent: React.ReactNode
   RightContent?: React.ReactNode
   BottomContent?: React.ReactNode
   disableBelowTheFold?: boolean
+  isLoading?: boolean
+  suspense?: boolean
 }
 
 export const LayerWrapper: React.FC<Props> = ({
@@ -16,6 +17,8 @@ export const LayerWrapper: React.FC<Props> = ({
   RightContent,
   BottomContent,
   disableBelowTheFold,
+  isLoading,
+  suspense,
 }) => {
   if (disableBelowTheFold) {
     return (
@@ -42,10 +45,24 @@ export const LayerWrapper: React.FC<Props> = ({
             RightContent ? 'gap-[3.75rem]' : 'gap-0'
           )}
         >
-          <SuspenseLoader LoadingComponent={<EditorialSkeleton />}>
-            <div className="px-6 grid-in-left">{LeftContent}</div>
-            <div className="grid-in-bottom">{BottomContent}</div>
-          </SuspenseLoader>
+          {suspense ? (
+            <Suspense fallback={<EditorialSkeleton />}>
+              <div className="px-6 grid-in-left">{LeftContent}</div>
+              <div className="grid-in-bottom">{BottomContent}</div>
+            </Suspense>
+          ) : (
+            <>
+              {isLoading ? (
+                <EditorialSkeleton />
+              ) : (
+                <>
+                  <div className="px-6 grid-in-left">{LeftContent}</div>
+                  <div className="grid-in-bottom">{BottomContent}</div>
+                </>
+              )}
+            </>
+          )}
+
           {RightContent && <div className="px-6 grid-in-right">{RightContent}</div>}
         </div>
       </div>

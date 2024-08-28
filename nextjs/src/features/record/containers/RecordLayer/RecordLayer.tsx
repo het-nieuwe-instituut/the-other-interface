@@ -77,6 +77,7 @@ export const RecordLayer = () => {
 
   return (
     <LayerWrapper
+      suspense={true}
       LeftContent={
         isRecordError ? (
           <ErrorBox />

@@ -31,7 +31,7 @@ export const GalaxyPagination: React.FC<Props> = ({
   const { t } = useTypeSafeTranslation('navigation')
   const renderPaginationContent = () => {
     if (isResultError) {
-      return <ErrorBox size="small" className={'self-center ml-2'} />
+      return <ErrorBox size="small" className={'ml-2 self-center'} />
     }
 
     if (isResultAmountLoading) {
@@ -78,7 +78,7 @@ export const GalaxyPagination: React.FC<Props> = ({
           onClick={handleLeftClick}
         />
 
-        <div className={'flex flex-col items-center justify-center'}>
+        <div className={'flex flex-col items-center justify-center text-nowrap'}>
           <span className={cn(TypographyVariants({ socialLarge: 'sm' }), 'text-center')}>
             {text ? text : t('page')} {currentPageNumber} {t('of')} {pageAmount || 1}
           </span>
@@ -101,9 +101,7 @@ export const GalaxyPagination: React.FC<Props> = ({
     <div
       style={{ '--z-index': FOOTER_Z_INDEX } as CSSProperties}
       className={cn(
-        'relative z-[var(--z-index)] grid h-[60px] gap-[5px] border border-solid border-blue p-1 text-blue-100',
-        'grid-cols-[36px,1fr,36px]',
-        isResultError && 'grid-cols-[1fr]'
+        'relative z-[var(--z-index)] h-[60px] gap-[5px] border border-solid border-blue p-1 text-blue-100 flex'
       )}
     >
       {renderPaginationContent()}
