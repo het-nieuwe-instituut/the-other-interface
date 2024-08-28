@@ -2,11 +2,11 @@
 import { State } from '@/features/shared/configs/store'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { PublicationState } from '@/features/shared/types/enums'
-import initApiClientService from '@/features/shared/utils/initApiClientService'
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import { HighlightedHomepageThemesQuery } from 'src/generated/graphql'
 import { GALAXY_QUERIES_STALE_TIME } from '../../galaxies.constants'
+import { fetchHighlightedThemes } from '../helpers/fetchHighlightedThemes'
 
 type ThemeData = NonNullable<
   NonNullable<
@@ -22,21 +22,14 @@ export type StoryData = NonNullable<StoriesData>[0]
 export type StoryComponentsDynamicZone = NonNullable<NonNullable<StoryData>['components']>
 
 export function useThemesQuery({ page }: { page: number; fromCacheOnly?: boolean }) {
-  const api = initApiClientService()
   const lang = useLocale()
   const { isDraftMode } = useSelector((state: State) => state.shared)
 
-  const fetchHighlightedThemes = async (page: number) => {
-    return await api?.highlightedHomepageThemes({
-      locale: lang,
-      pagination: { page, pageSize: 1 },
-      storiesPagination: { page: 1, pageSize: 5 },
-      publicationState: isDraftMode ? PublicationState.Preview : PublicationState.Live,
-    })
-  }
+  const publicationState = isDraftMode ? PublicationState.Preview : PublicationState.Live
+  const fetchFn = fetchHighlightedThemes(lang, page, publicationState)
 
   const queryFn = async () => {
-    const res = await fetchHighlightedThemes(page)
+    const res = await fetchFn
 
     const data =
       res?.highlightedHomepageThemes?.data?.attributes?.highlightedThemes?.data?.[0]?.attributes

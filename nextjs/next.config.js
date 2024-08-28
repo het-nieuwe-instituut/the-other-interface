@@ -57,6 +57,9 @@ const nextConfig = {
   env: {
     parsed,
   },
+  experimental: {
+    serverActions: true,
+  },
 }
 
 module.exports = nextTranslate(nextConfig)
