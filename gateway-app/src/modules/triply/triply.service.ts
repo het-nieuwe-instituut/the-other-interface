@@ -147,7 +147,7 @@ export class TriplyService {
   }
 
   private fetch<ReturnDataType>(endpoint: URL) {
-    const headers = { Authorization: `Bearer ${this.apiKey}` }
+    const headers = { Authorization: `Bearer ${this.apiKey}`, 'Accept-Encoding': '*' }
     const res = this.httpService.get<ReturnDataType[]>(endpoint.toString(), { headers })
 
     return lastValueFrom(
