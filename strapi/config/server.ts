@@ -10,4 +10,9 @@ export default ({ env }) => ({
     enabled: true,
     tasks: cronTasks,
   },
+  webhooks: {
+    defaultHeaders: {
+      'x-api-key': env('GATEWAY_API_TOKEN'),
+    },
+  },
 })

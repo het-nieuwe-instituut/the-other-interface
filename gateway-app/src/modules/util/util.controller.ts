@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common'
+import { Body, Controller, Post, Res, UseGuards } from '@nestjs/common'
 import { Response } from 'express'
 import { StrapiAuthGuard } from '../auth/strapi-auth.guard'
 import { CacheService } from './cache.service'
@@ -26,9 +26,11 @@ export class UtilController {
     res.sendStatus(200)
   }
 
-  @Get('/invalidateCache')
+  @Post('/invalidateCache')
   @UseGuards(StrapiAuthGuard)
   public async invalidateCache(@Res() res: Response) {
+    // if needed, this controller can be extended to invalidate collection specific cache. To do so,
+    // get the collection name from the request body and invalidate the cache for that collection
     await this.cacheService.invalidate()
     res.sendStatus(200)
   }
