@@ -2,16 +2,16 @@
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 
-import { useState, useEffect, useCallback } from 'react'
+import { Button } from '@/features/ui/components/button/component'
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { WELCOME_PAGE_Z_INDEX } from '../../constants/mainConstants'
 import { useLooseTypeSafeTranslation } from '../../hooks/translations'
-import StorageService from '../../services/storageService'
-import WelcomeBlurOverlay from '../BlurOverlay/WelcomeBlurOverlay'
-import { Button } from '@/features/ui/components/button/component'
 import { useLocale } from '../../hooks/useLocale'
+import StorageService from '../../services/storageService'
 
-const WelcomeOverlay = ({ className }: { className?: string }) => {
+const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
   const { t: tCommon, lang } = useLooseTypeSafeTranslation('common')
+  const hasOpened = useRef(false)
   const [showOverlay, setShowOverlay] = useState(false)
   const locale = useLocale()
   const [, forceUpdate] = useState(0)
@@ -19,6 +19,7 @@ const WelcomeOverlay = ({ className }: { className?: string }) => {
   useEffect(() => {
     const hasSeenOverlay = StorageService.getItem('hasSeenWelcomeOverlay')
     if (hasSeenOverlay === null || hasSeenOverlay === 'false') {
+      document.body.style.overflow = 'hidden'
       setShowOverlay(true)
     }
   }, [])
@@ -32,8 +33,9 @@ const WelcomeOverlay = ({ className }: { className?: string }) => {
   // disable scroll when overlay is open
   useEffect(() => {
     if (showOverlay) {
+      hasOpened.current = true
       document.body.style.overflow = 'hidden'
-    } else {
+    } else if (hasOpened.current) {
       document.body.style.overflow = 'auto'
     }
   }, [showOverlay])
@@ -47,18 +49,20 @@ const WelcomeOverlay = ({ className }: { className?: string }) => {
 
   return (
     <div
+      style={{ '--z-index': `${WELCOME_PAGE_Z_INDEX}` } as CSSProperties}
       className={cn(
-        'fixed inset-0 z-20 h-screen w-screen px-0',
-
-        'transition-opacity delay-1000 opacity-0',
+        'fixed inset-0 z-[var(--z-index)]  h-screen w-screen px-0 backdrop-blur-[30px] bg-pink-50',
+        'transition-all duration-1000 opacity-0',
         showOverlay ? 'opacity-100' : 'pointer-events-none',
         className
       )}
     >
-      <WelcomeBlurOverlay hide={false} />
       <div
-        className="relative mx-auto h-screen w-screen max-w-[1440px] overflow-hidden"
-        style={{ zIndex: WELCOME_PAGE_Z_INDEX }}
+        className="relative mx-auto h-screen w-screen max-w-[1440px] overflow-hidden delay-100"
+        style={{
+          willChange: 'backdrop-filter',
+          transform: 'translateZ(0)', // Ensure GPU acceleration
+        }}
       >
         <div
           key={`${locale}-${lang}`} // needed to force re-render the component when locale changes
@@ -99,6 +103,7 @@ const WelcomeOverlay = ({ className }: { className?: string }) => {
       </div>
     </div>
   )
-}
+})
+WelcomeOverlay.displayName = 'WelcomeOverlay'
 
 export default WelcomeOverlay
