@@ -49,7 +49,7 @@ export const RelatedCategory: React.FC<Props> = React.memo(props => {
     <>
       {complete && (
         <div className="text-ivory-100" style={{ gridRow, gridColumn }}>
-          <div className="grid h-full grid-cols-2 grid-rows-2">
+          <div className="pointer-events-none grid h-full grid-cols-2 grid-rows-2 ">
             <NextPositionedRecords
               next={next}
               id={id}
