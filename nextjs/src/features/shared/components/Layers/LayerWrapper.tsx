@@ -22,14 +22,14 @@ export const LayerWrapper: React.FC<Props> = ({
 }) => {
   if (disableBelowTheFold) {
     return (
-      <div className="relative mx-auto block min-h-[600px] w-full px-0 xl:px-6">
+      <div className="relative mx-auto block min-h-[600px] w-full px-0 xl:px-5">
         {renderContent()}
       </div>
     )
   }
 
   return (
-    <BelowTheFoldWrapper className="relative min-h-[600px] w-full px-0 xl:px-6">
+    <BelowTheFoldWrapper className="relative min-h-[600px] w-full px-0 xl:px-5">
       {renderContent()}
     </BelowTheFoldWrapper>
   )
@@ -47,7 +47,7 @@ export const LayerWrapper: React.FC<Props> = ({
         >
           {suspense ? (
             <Suspense fallback={<EditorialSkeleton />}>
-              <div className="px-6 grid-in-left">{LeftContent}</div>
+              <div className="px-5 grid-in-left">{LeftContent}</div>
               <div className="grid-in-bottom">{BottomContent}</div>
             </Suspense>
           ) : (
@@ -56,14 +56,14 @@ export const LayerWrapper: React.FC<Props> = ({
                 <EditorialSkeleton />
               ) : (
                 <>
-                  <div className="px-6 grid-in-left">{LeftContent}</div>
+                  <div className="px-5 grid-in-left">{LeftContent}</div>
                   <div className="grid-in-bottom">{BottomContent}</div>
                 </>
               )}
             </>
           )}
 
-          {RightContent && <div className="px-6 grid-in-right">{RightContent}</div>}
+          {RightContent && <div className="px-5 grid-in-right">{RightContent}</div>}
         </div>
       </div>
     )

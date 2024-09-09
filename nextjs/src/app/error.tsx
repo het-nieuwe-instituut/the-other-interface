@@ -9,7 +9,7 @@ export default function Error() {
 
   return (
     <StaticPageContainer disableBelowTheFold title="">
-      <div className="mb-40 min-h-[40vh] content-end px-6 text-blue-100">
+      <div className="mb-40 min-h-[40vh] content-end px-5 text-blue-100">
         <h1 className={cn(TypographyVariants({ timesDot: '2xl' }), 'mb-2')}>
           {t('error500Title')}
         </h1>

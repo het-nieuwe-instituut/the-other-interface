@@ -34,7 +34,7 @@ const MobileOverlay = () => {
           backdropFilter: 'blur(60px)',
         } as CSSProperties
       }
-      className="fixed right-0 top-0 z-[var(--z-index)] flex h-screen w-full overflow-hidden bg-pink-60 px-0 xl:px-6"
+      className="fixed right-0 top-0 z-[var(--z-index)] flex h-screen w-full overflow-hidden bg-pink-60 px-0 xl:px-5"
     >
       <div
         style={{ '--z-index': `${MOBILE_OVERLAY_Z_INDEX + 1}` } as CSSProperties}
