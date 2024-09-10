@@ -3,7 +3,7 @@ import { TypographyVariants } from '@/features/ui/components/typography/variants
 import { cn } from '@/features/ui/utils/cn'
 
 import { Button } from '@/features/ui/components/button/component'
-import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { CSSProperties, useCallback, useEffect, useRef, useState } from 'react'
 import { WELCOME_PAGE_Z_INDEX } from '../../constants/mainConstants'
 import { useLooseTypeSafeTranslation } from '../../hooks/translations'
 import { useLocale } from '../../hooks/useLocale'
