@@ -49,7 +49,7 @@ export const GoButton: React.FC<Props> = ({ hide = false, onGoClick }) => {
       className={cn(
         'inline-block rounded-[3px] px-[7px] py-[6px] text-pink-100 transition-colors duration-200 ',
         searchUrlChanged && 'hover:bg-pink-100 hover:text-blue-100',
-        'disabled:cursor-not-allowed disabled:opacity-60',
+        'disabled:cursor-not-allowed disabled:opacity-60 rounded-none',
         hide ? 'hidden' : 'visible'
       )}
     >
