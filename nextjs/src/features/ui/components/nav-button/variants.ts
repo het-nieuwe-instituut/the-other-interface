@@ -21,11 +21,11 @@ export const NavButtonVariants = cva(
         ],
         menuPrimary: [
           'h-[27px]',
-          'text-center font-social-large text-[14px] font-normal leading-7 tracking-tight',
+          'text-center font-social-large text-[14px] font-normal leading-7 tracking-normal',
         ],
         menuSecondary: [
           'h-[27px]',
-          'text-center font-social-large text-[21px] font-normal leading-7 tracking-tight',
+          'text-center font-social-large text-[21px] font-normal leading-7 tracking-normal',
         ],
         footerPrimary: [
           'h-[27px]',
