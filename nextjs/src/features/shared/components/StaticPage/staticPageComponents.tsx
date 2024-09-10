@@ -54,7 +54,7 @@ export const StaticPageContainer = ({
       disableBelowTheFold={disableBelowTheFold}
       LeftContent={<PageHeader title={title} />}
       BottomContent={
-        <div className={'mx-auto mb-10 flex max-w-[90em] flex-col gap-[10px] px-6 pt-6'}>
+        <div className={'mx-auto mb-10 flex max-w-[90em] flex-col gap-[10px] px-5 pt-6 md:px-6'}>
           {children}
         </div>
       }
