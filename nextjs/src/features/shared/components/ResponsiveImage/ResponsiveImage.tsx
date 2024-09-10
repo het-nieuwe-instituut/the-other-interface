@@ -11,7 +11,7 @@ export type ResponsiveImageProps = {
   size?: string
   style?: CSSProperties
   onClick?: () => void
-  onLoad?: () => void
+  onLoad?: (ref: HTMLImageElement | null) => void
 }
 
 export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
@@ -26,6 +26,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   const [showFallback, setShowFallback] = useState(!src)
   const [isLoaded, setIsLoaded] = useState(!src)
   const fallbackImageRef = useRef<string>(`/images/fallbacks/1.svg`)
+  const imageRef = useRef<HTMLImageElement>(null)
   const processedSrc = limitCopyrightedImageResolution(src)
 
   useLayoutEffect(() => {
@@ -51,6 +52,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
       {/* Actual Image */}
       {processedSrc && (
         <Image
+          ref={imageRef}
           className={cn(
             'absolute top-0 left-0 object-center object-contain',
             showFallback && 'opacity-0'
@@ -63,7 +65,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           fill={true}
           onContextMenu={e => e.preventDefault()}
           onLoadingComplete={() => {
-            onLoad?.()
+            onLoad?.(imageRef.current)
             setIsLoaded(true)
             setShowFallback(false)
           }}
