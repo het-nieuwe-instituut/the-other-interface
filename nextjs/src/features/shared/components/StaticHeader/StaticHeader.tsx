@@ -10,7 +10,13 @@ import { STATIC_HEADER_Z_INDEX, USER_LOOKS_ON } from '../../constants/mainConsta
 import { useLooseTypeSafeTranslation } from '../../hooks/translations'
 import { useLocale } from '../../hooks/useLocale'
 
-export const StaticHeader = ({ isNotGalaxyPage }: { isNotGalaxyPage?: boolean }) => {
+export const StaticHeader = ({
+  isNotGalaxyPage,
+  className,
+}: {
+  isNotGalaxyPage?: boolean
+  className?: string
+}) => {
   const { t: tNavigation } = useLooseTypeSafeTranslation('navigation')
   const lang = useLocale()
 
@@ -28,7 +34,8 @@ export const StaticHeader = ({ isNotGalaxyPage }: { isNotGalaxyPage?: boolean })
         style={{ '--z-index': `${STATIC_HEADER_Z_INDEX}` } as CSSProperties}
         className={cn(
           isMenuOpen || userLooksOnGalaxy ? 'transparent' : 'bg-pink-100',
-          'ease-in duration-200 fixed top-0 right-0 z-[var(--z-index)] h-auto overflow-hidden py-4 w-full pointer-events-auto'
+          'ease-in duration-200 fixed top-0 right-0 z-[var(--z-index)] h-auto overflow-hidden py-4 w-full pointer-events-auto',
+          className
         )}
       >
         <div className="container mx-auto flex size-full max-w-[90em] items-center justify-between px-6">
