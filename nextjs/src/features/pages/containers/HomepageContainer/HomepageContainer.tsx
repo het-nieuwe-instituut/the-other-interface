@@ -31,7 +31,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }
         </MobileOverlayProvider>
       </GalaxyInterface>
 
-      <BelowTheFoldWrapper className="relative w-full px-5 xl:px-6 min-[1428px]:px-0">
+      <BelowTheFoldWrapper className="relative w-full px-5 md:px-6 min-[1428px]:px-0">
         <div className="mx-auto max-w-[1392px] pt-6">
           <div className="grid grid-cols-6 gap-3 lg:grid-cols-12">
             <SuspenseLoader LoadingComponent={<EditorialSkeleton />}>

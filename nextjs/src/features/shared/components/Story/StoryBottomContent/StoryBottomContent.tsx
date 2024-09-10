@@ -11,7 +11,7 @@ interface StoryBottomContentProps {
 export const StoryBottomContent = ({ themeIds, id }: StoryBottomContentProps) => {
   return (
     <>
-      <div className="flex flex-col gap-4 px-5 pb-10 xl:px-6">
+      <div className="flex flex-col gap-4 px-5 pb-10 md:px-6">
         <ErrorBoundaryWrapper>
           <RelatedStoriesCarousel />
         </ErrorBoundaryWrapper>
