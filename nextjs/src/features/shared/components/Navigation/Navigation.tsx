@@ -111,22 +111,23 @@ export const Navigation = () => {
               {tNavigation('explore_collection')}
             </p>
             {categories.map(category => (
-              <Link
-                onClick={() => closeMenu()}
-                className={cn(
-                  navTextStyle === Fonts.Times
-                    ? MenuTypogrpahyVariants({
-                        menuItem: 'primary',
-                      })
-                    : MenuTypogrpahyVariants({
-                        menuItem: 'secondary',
-                      })
-                )}
-                key={category.name}
-                href={`/landingpage?category=${category.name}&lang=${lang}`}
-              >
-                {tNavigation(category.translationKey)}
-              </Link>
+              <div key={category.name}>
+                <Link
+                  onClick={() => closeMenu()}
+                  className={cn(
+                    navTextStyle === Fonts.Times
+                      ? MenuTypogrpahyVariants({
+                          menuItem: 'primary',
+                        })
+                      : MenuTypogrpahyVariants({
+                          menuItem: 'secondary',
+                        })
+                  )}
+                  href={`/landingpage?category=${category.name}&lang=${lang}`}
+                >
+                  {tNavigation(category.translationKey)}
+                </Link>
+              </div>
             ))}
           </div>
           <div className="flex min-w-[200px] max-w-[398px] flex-col sm:pb-[50px] md:min-w-[388px]">
