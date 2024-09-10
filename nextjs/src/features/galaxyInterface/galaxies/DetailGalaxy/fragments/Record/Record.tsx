@@ -14,7 +14,6 @@ import {
 import { cn } from '@/features/ui/utils/cn'
 import {
   GalaxyZoomAnimationStateContext,
-  useGetMoveElementToCenterScaleAndOffset,
   useMoveElementToCenterValues,
 } from '../../../hooks/GalaxyZoomAnimationStateProvider'
 import { PositionedRecord } from '../types'
@@ -42,10 +41,9 @@ export const Record = React.memo(
       isLoading: isLoadingHover,
     } = useZoomHoverRecordResultQuery({ id, category })
     const { coordinates, ref } = useCalculateLine({ trigger: true })
-    const { calculate, animationValues } = useGetMoveElementToCenterScaleAndOffset()
     const [animationCssVariables, positionRef] = useMoveElementToCenterValues({
-      scale: animationValues?.scale,
-      offsetTop: animationValues?.offsetTop,
+      scale: 1.65,
+      offsetTop: -80,
     })
     const { animationState } = useContext(GalaxyZoomAnimationStateContext)
     const [clicked, setClicked] = useState(false)
@@ -120,12 +118,7 @@ export const Record = React.memo(
                     />
                   </svg>
                 </div>
-                <div
-                  className={cn(
-                    'flex size-full flex-col gap-[12px]  transition-all duration-300 ease-in-out',
-                    !clicked && 'hover:scale-105'
-                  )}
-                >
+                <div className="flex size-full flex-col gap-[12px]  transition-all duration-300 ease-in-out hover:scale-105">
                   <StoryOrRecordResponsiveImage
                     recordOrStoryId={id}
                     src={recordDetails?.thumbnail?.[0]}
@@ -135,7 +128,6 @@ export const Record = React.memo(
                     style={{
                       flex: '1 1 calc(100% - 2vw - 5px)',
                     }}
-                    onLoad={calculate}
                   />
                   <RecordText
                     className={cn(

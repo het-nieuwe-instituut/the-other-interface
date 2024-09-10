@@ -13,7 +13,6 @@ import { PlacesType } from 'react-tooltip'
 import { EntityNames, Locale, SearchResultItemType } from 'src/generated/graphql'
 import {
   GalaxyZoomAnimationStateContext,
-  useGetMoveElementToCenterScaleAndOffset,
   useMoveElementToCenterValues,
 } from '../../../hooks/GalaxyZoomAnimationStateProvider'
 import { RecordText } from '../RecordText'
@@ -45,10 +44,9 @@ export const Record: React.FC<RecordComponentProps> = ({
   const { animationState } = useContext(GalaxyZoomAnimationStateContext)
 
   const [clicked, setClicked] = useState(false)
-  const { calculate, animationValues } = useGetMoveElementToCenterScaleAndOffset()
   const [animationCssVariables, positionRef] = useMoveElementToCenterValues({
-    scale: animationValues?.scale,
-    offsetTop: animationValues?.offsetTop,
+    scale: 1.65,
+    offsetTop: -80,
   })
 
   useEffect(() => {
@@ -85,12 +83,8 @@ export const Record: React.FC<RecordComponentProps> = ({
           <RecordData
             onClick={() => setClicked(true)}
             record={record}
-            clicked={clicked}
             lang={lang}
-            onLoad={ref => {
-              calculate(ref)
-              setImageLoaded(true)
-            }}
+            onLoad={() => setImageLoaded(true)}
           />
         </ReadMoreTooltip>
       </div>
@@ -101,14 +95,12 @@ export const Record: React.FC<RecordComponentProps> = ({
 const RecordData = ({
   record,
   lang,
-  clicked,
   onLoad,
   onClick,
 }: {
   record: RecordProps
   lang?: Locale | null
-  clicked: boolean
-  onLoad: (ref: HTMLImageElement | null) => void
+  onLoad: () => void
   onClick: () => void
 }) => {
   const { id, thumbnail, category, title } = record
@@ -124,9 +116,9 @@ const RecordData = ({
       href={url}
       className={cn(
         'flex size-full cursor-pointer flex-col items-center justify-center gap-[5px]',
-        !(animationState === 'forward' || animationState === 'backwards') &&
-          !clicked &&
-          'group-hover-blur-item transition-all duration-300 ease-in-out hover:scale-105'
+        animationState === 'forward' ||
+          (animationState === 'backwards' &&
+            'group-hover-blur-item transition-all duration-300 ease-in-out hover:scale-105')
       )}
       onClick={onClick}
     >

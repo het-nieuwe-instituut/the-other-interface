@@ -11,7 +11,6 @@ import { cn } from '@/features/ui/utils/cn'
 import { useCallback, useContext, useState } from 'react'
 import {
   GalaxyZoomAnimationStateContext,
-  useGetMoveElementToCenterScaleAndOffset,
   useMoveElementToCenterValues,
 } from '../../hooks/GalaxyZoomAnimationStateProvider'
 import { PositionedStory } from './types'
@@ -43,22 +42,16 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
   const { animationState } = useContext(GalaxyZoomAnimationStateContext)
 
   const [clicked, setClicked] = useState(false)
-  const { calculate, animationValues } = useGetMoveElementToCenterScaleAndOffset()
   const [animationCssVariables, positionRef] = useMoveElementToCenterValues({
-    scale: animationValues?.scale,
-    offsetTop: animationValues?.offsetTop,
+    scale: 2.39,
+    offsetTop: -62,
   })
 
-  const handleImageLoad = useCallback(
-    (ref: HTMLImageElement | null) => {
-      if (calculate) calculate(ref)
-
-      if (onLoad) {
-        onLoad(story.id)
-      }
-    },
-    [onLoad, story.id, calculate]
-  )
+  const handleImageLoad = useCallback(() => {
+    if (onLoad) {
+      onLoad(story.id)
+    }
+  }, [onLoad, story.id])
 
   return (
     <div className={cn('relative', className)} style={{ ...grid }}>
@@ -101,12 +94,7 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
             className="size-full"
             color="blue"
           >
-            <div
-              className={cn(
-                ' flex size-full flex-col gap-[12px] transition-transform duration-[.4] ease-in-out ',
-                !clicked && 'group-hover:scale-105'
-              )}
-            >
+            <div className=" flex size-full flex-col gap-[12px] transition-transform duration-[.4] ease-in-out group-hover:scale-105">
               <StoryOrRecordResponsiveImage
                 recordOrStoryId={story.id}
                 src={image}
