@@ -5,7 +5,7 @@ import ErrorBoundaryWrapper from '@/features/shared/components/Error/ErrorBounda
 
 export const RecordBottomContent = () => {
   return (
-    <div className="px-5">
+    <div className="px-5 xl:px-6">
       <ErrorBoundaryWrapper>
         <RecordTable />
       </ErrorBoundaryWrapper>

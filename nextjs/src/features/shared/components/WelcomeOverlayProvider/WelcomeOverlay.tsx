@@ -62,7 +62,7 @@ const WelcomeOverlay = ({ className }: { className?: string }) => {
       >
         <div
           key={`${locale}-${lang}`} // needed to force re-render the component when locale changes
-          className="relative inset-x-0 flex h-screen max-w-screen-xl flex-col justify-center px-5"
+          className="relative inset-x-0 flex h-screen max-w-screen-xl flex-col justify-center px-5 xl:px-6"
         >
           <p
             className={
