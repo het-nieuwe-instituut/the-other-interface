@@ -118,7 +118,7 @@ export const Record = React.memo(
                     />
                   </svg>
                 </div>
-                <div className="flex size-full flex-col  transition-all duration-300 ease-in-out hover:scale-105">
+                <div className="flex size-full flex-col gap-[12px]  transition-all duration-300 ease-in-out hover:scale-105">
                   <StoryOrRecordResponsiveImage
                     recordOrStoryId={id}
                     src={recordDetails?.thumbnail?.[0]}
