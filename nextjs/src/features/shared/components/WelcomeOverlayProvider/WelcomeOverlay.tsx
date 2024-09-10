@@ -66,7 +66,7 @@ const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
       >
         <div
           key={`${locale}-${lang}`} // needed to force re-render the component when locale changes
-          className="relative inset-x-0 flex h-screen max-w-screen-xl flex-col justify-center px-6"
+          className="relative inset-x-0 flex h-screen max-w-screen-xl flex-col justify-center px-5 md:px-6"
         >
           <p
             className={
