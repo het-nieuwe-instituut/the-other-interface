@@ -29,8 +29,8 @@ export const TypographyVariants = cva('', {
     },
     socialLarge: {
       xl: [
-        'self-stretch font-bold not-italic leading-[110%_]',
-        'font-social-large text-[32px] tracking-[-0.32px]',
+        'self-stretch font-bold not-italic',
+        'font-social-large text-[32px] leading-[120%] tracking-[-0.32px]',
       ],
       lg: [
         'self-stretch not-italic leading-[120%_]',
