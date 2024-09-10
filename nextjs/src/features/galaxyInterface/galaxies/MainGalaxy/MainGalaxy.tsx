@@ -142,7 +142,7 @@ const MainGalaxyContent = React.memo(() => {
         <GalaxyFooter
           galaxyPagination={
             <GalaxyPagination
-              currentPageNumber={pagination?.page || 0}
+              currentPageNumber={currentPage || 0}
               pageAmount={pagination?.pageCount || 0}
               isResultAmountLoading={isMainLoading}
               handleLeftClick={handleLeftClick}
