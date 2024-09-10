@@ -15,6 +15,7 @@ import { Bootstrap } from './_bootstrap/Bootstrap'
 import { LightboxProvider } from '@/features/ui/components/lightbox/LightboxProvider'
 import WelcomeOverlayProvider from '@/features/shared/components/WelcomeOverlayProvider/WelcomeOverlayProvider'
 import { GoogleTagManager } from '@next/third-parties/google'
+import { ScrollbarSpacing } from '@/features/ui/components/ScrollbarSpacing/ScrollbarSpacing'
 
 function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
@@ -39,6 +40,7 @@ function MyApp({ children }: { children: React.ReactNode }) {
                     {children}
                     <ReactTooltipInitializer />
                     <BaseElementWrapper />
+                    <ScrollbarSpacing />
                   </div>
                 </WelcomeOverlayProvider>
               </ThemeProvider>
