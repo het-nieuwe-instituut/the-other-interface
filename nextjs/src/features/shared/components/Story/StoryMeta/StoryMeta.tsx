@@ -102,7 +102,7 @@ export const StoryMeta: React.FC = () => {
       )}
       {themes && (
         <MetaField name={storiesT.t('themes')}>
-          <div>
+          <div className="pt-2">
             {themes.map((theme, index, array) => {
               return (
                 // margin is needed for lighthouse score reasons
@@ -118,6 +118,7 @@ export const StoryMeta: React.FC = () => {
                       ])}&searchResult=true`,
                       lang
                     )}
+                    className="hover:opacity-50"
                   >
                     <p
                       className={TypographyVariants({
@@ -136,27 +137,30 @@ export const StoryMeta: React.FC = () => {
       )}
       {!!linkedPeopleRecords.length && (
         <MetaField name={storiesT.t('people')}>
-          <div className="flex flex-row flex-wrap gap-x-2 gap-y-1">
-            {linkedPeopleRecords
-              .filter(p => p.title)
-              .map(person => {
-                return (
-                  <NavLinkButton
-                    title={person.title ?? ''}
-                    key={person.id}
-                    variant={'metaData'}
-                    href={person.url}
-                  >
-                    {person.title}
-                  </NavLinkButton>
-                )
-              })}
+          <div className="pt-2">
+            {linkedPeopleRecords.map(person => {
+              return (
+                // margin is needed for lighthouse score reasons
+                <div className="mb-2 last:mb-0" key={person.id}>
+                  <NextLink href={person.url} className="hover:opacity-50">
+                    <p
+                      className={TypographyVariants({
+                        socialLarge: 'md',
+                        className: 'underline',
+                      })}
+                    >
+                      {person.title}
+                    </p>
+                  </NextLink>
+                </div>
+              )
+            })}
           </div>
         </MetaField>
       )}
       {locations && (
         <MetaField name={storiesT.t('locations')}>
-          <div>
+          <div className="pt-2">
             {locations.map((location, index, array) => {
               return (
                 <NextLink
@@ -171,8 +175,14 @@ export const StoryMeta: React.FC = () => {
                     ])}&searchResult=true`,
                     lang
                   )}
+                  className="hover:opacity-50"
                 >
-                  <p className={TypographyVariants({ socialLarge: 'md', className: 'underline' })}>
+                  <p
+                    className={TypographyVariants({
+                      socialLarge: 'md',
+                      className: 'underline',
+                    })}
+                  >
                     {location.attributes?.city}
                   </p>
                 </NextLink>
@@ -216,6 +226,7 @@ export const StoryMeta: React.FC = () => {
                 ])}&searchResult=true`,
                 lang
               )}
+              className="hover:opacity-50"
             >
               <p
                 className={TypographyVariants({
@@ -253,6 +264,7 @@ export const StoryMeta: React.FC = () => {
                 ])}&searchResult=true`,
                 lang
               )}
+              className="hover:opacity-50"
             >
               <p
                 className={TypographyVariants({

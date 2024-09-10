@@ -94,7 +94,7 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
             className="size-full"
             color="blue"
           >
-            <div className=" size-full transition-transform duration-[.4] ease-in-out group-hover:scale-105 ">
+            <div className=" flex size-full flex-col gap-[12px] transition-transform duration-[.4] ease-in-out group-hover:scale-105">
               <StoryOrRecordResponsiveImage
                 recordOrStoryId={story.id}
                 src={image}
@@ -106,7 +106,7 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
                 }}
                 onLoad={handleImageLoad}
               />
-              <div className="mt-1 w-full flex-1">
+              <div className="w-full flex-1">
                 <p
                   lang="nl"
                   className={cn(
