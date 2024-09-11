@@ -94,9 +94,9 @@ const MainGalaxyContent = React.memo(() => {
   })
 
   const renderMainContent = () => {
-    if (isError) {
+    if (!isError) {
       return (
-        <div className="flex h-full items-center justify-center">
+        <div className="flex h-full items-center justify-center backdrop-blur-[2px] bg-pink-50">
           <div className="flex flex-col gap-2">
             <p
               className={TypographyVariants({

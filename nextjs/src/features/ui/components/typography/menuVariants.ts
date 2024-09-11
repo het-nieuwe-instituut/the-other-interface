@@ -5,7 +5,7 @@ export const MenuTypogrpahyVariants = cva('', {
   variants: {
     default: {
       primary: [
-        TypographyVariants({ times: 'lg' }),
+        TypographyVariants({ timesDot: 'lg' }),
         'text-blue-100 ',
         'hover:text-blue-50',
         'focus:bg-blue-100 focus:text-pink-100 focus:outline-blue-100 active:bg-blue-100 active:text-pink-100',
@@ -56,7 +56,7 @@ export const MenuTypogrpahyVariants = cva('', {
     },
     menuItem: {
       primary: [
-        'font-times-large text-[70px] leading-[120%] tracking-[-1.92px] md:text-[84px] lg:text-[96px] md:leading-[100%_]',
+        'font-times-dot text-[70px] leading-[120%] tracking-[-1.92px] md:text-[84px] lg:text-[96px] md:leading-[100%_]',
         'text-pink-100 ',
         'hover:text-pink-50',
         'focus:bg-pink-100 focus:text-blue-100 focus:outline-blue-100',
