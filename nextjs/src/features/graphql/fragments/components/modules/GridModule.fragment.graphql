@@ -39,6 +39,7 @@ fragment gridModuleFragment on ComponentModulesGridModule {
     triplyRecord {
       data {
         attributes {
+          type
           recordId
         }
       }

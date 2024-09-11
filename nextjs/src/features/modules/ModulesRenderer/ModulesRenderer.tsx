@@ -35,11 +35,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
 
   return (
     <div
-      className={cn(
-        'pt-0 flex flex-col gap-[40px]',
-        isStoryPage && 'px-0',
-        hasComponents && 'pt-10'
-      )}
+      className={cn('pt-0 flex flex-col gap-20', isStoryPage && 'px-0', hasComponents && 'pt-10')}
     >
       {[...(components || [])].map((component, index, array) => {
         const typeName = component?.__typename
@@ -79,13 +75,11 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               <ImageCarousel key={keyExtractor(component.id, index, array)}>
                 {component.items?.map(item => {
                   const attributes = item.image.data?.attributes
-                  const href = addLocaleToUrl(
-                    getTriplyOrStoryHref({
-                      story: item.story ?? undefined,
-                      triply_record: item.triply_record ?? undefined,
-                    }) ?? '',
-                    lang
-                  )
+                  const href = getTriplyOrStoryHref({
+                    story: item?.story,
+                    triply_record: item?.triply_record,
+                  })
+                  const hrefWithLang = href ? addLocaleToUrl(href, lang) : undefined
                   const url = attributes?.url
                     ? imageBasePath(attributes?.url.toString())
                     : undefined
@@ -95,7 +89,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
                   }
                   return (
                     <ImageCarouselItem
-                      href={href}
+                      href={hrefWithLang}
                       key={item.id}
                       src={url}
                       // TODO: add alt text instead of caption

@@ -4,7 +4,7 @@ import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
 import { State } from '@/features/shared/configs/store'
 import { useRecordRelationsCountQuery } from '@/features/shared/hooks/queries/useRecordRelationsCountQuery'
 import { GridParams } from '@/features/shared/types/position'
-import { CLOUD_CATEGORIES, Category, CloudCategory } from '@/features/shared/utils/categories'
+import { Category, CloudCategory, CLOUD_CATEGORIES } from '@/features/shared/utils/categories'
 import { useArrowNavigation } from '@/features/ui/hooks/useArrowNavigation'
 import { useSearchParamPagination } from '@/features/ui/hooks/useSearchParamPagination'
 import { cn } from '@/features/ui/utils/cn'
@@ -37,6 +37,13 @@ export const DetailGalaxy = () => {
       <DetailGalaxyContent key={currentPage} />
     </GalaxyPaginationAnimationStateProvider>
   )
+}
+
+const transformOriginSetup = {
+  [CLOUD_CATEGORIES.people]: cn('origin-bottom-right'),
+  [CLOUD_CATEGORIES.objects]: cn('origin-bottom-left'),
+  [CLOUD_CATEGORIES.publications]: cn('origin-top-left'),
+  [CLOUD_CATEGORIES.archives]: cn('origin-top-right'),
 }
 
 const DetailGalaxyContent: React.FC = React.memo(() => {
@@ -100,6 +107,7 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
         >
           {relatedCategories.map(({ category: cloudCategory, grid }) => (
             <RelatedCategory
+              className={transformOriginSetup[cloudCategory]}
               key={cloudCategory}
               category={cloudCategory}
               gridRow={grid.gridRow}

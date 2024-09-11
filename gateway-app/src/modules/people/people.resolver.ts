@@ -13,6 +13,7 @@ import {
 } from './people.type'
 import { PeopleService } from './people.service'
 import { LocaleArgs } from '../util/localeArgs.type'
+import { isArray } from 'lodash'
 
 @Resolver(PeopleRelationsType)
 export class PeopleZoomLevel3Resolver {
@@ -52,11 +53,19 @@ export class PeopleZoomLevel3DetailResolver {
   }
 
   @ResolveField()
-  public enrichedSources(
+  public async enrichedSources(
     @Parent() record: PeopleZoomLevel3DetailType,
     @Args() { locale }: LocaleArgs
   ) {
-    return this.peopleService.getEnrichedSources(record.id, locale)
+    const enrichedSources = (await this.peopleService.getEnrichedSources(
+      record.id,
+      locale
+    )) as PeopleZoomLevel3DetailType['enrichedSources']
+
+    return enrichedSources?.map(s => ({
+      ...s,
+      thumbnail: 'thumbnail' in s && isArray(s.thumbnail) ? s.thumbnail : [s.thumbnail],
+    }))
   }
 }
 

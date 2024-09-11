@@ -11,6 +11,45 @@ module.exports = {
         carouselDesktop: '1500px',
       },
       keyframes: {
+        // PAGINATION
+        // current
+        paginationForward: {
+          '0%': { filter: 'blur(0px)', transform: 'scale(1)', opacity: 1 },
+          '100%': { transform: 'scale(var(--scale-max))', opacity: 0 },
+        },
+        paginationBackward: {
+          '0%': { filter: 'blur(1)', transform: 'scale(1)' },
+          '100%': { filter: 'blur(var(--blur))', transform: 'scale(var(--scale-min))' },
+        },
+        paginationHideToShow: {
+          initial: { opacity: 0 },
+          from: { opacity: 0, transform: 'scale(var(--scale-max))' },
+          to: { opacity: 1, filter: 'blur(0px)', transform: 'scale(1)' },
+        },
+
+        // next
+        nextPaginationHideToShow: {
+          from: { opacity: 0, filter: 'blur(var(--blur))', transform: 'scale(var(--scale-hide))' },
+          to: { opacity: 1, filter: 'blur(0px)', transform: 'scale(var(--scale-min))' },
+        },
+        nextPaginationHideToBlur: {
+          from: { opacity: 0, filter: 'blur(var(--blur))', transform: 'scale(var(--scale-hide))' },
+          to: { opacity: 1, filter: 'blur(var(--blur))', transform: 'scale(var(--scale-min))' },
+        },
+        nextPaginationToUnblur: {
+          '0%': { filter: 'blur(var(--blur))', transform: 'scale(var(--scale-min))' },
+          '100%': { filter: 'blur(0px)', transform: 'scale(1)' },
+        },
+        nextPaginationFromBlurredToHide: {
+          from: { opacity: 1, filter: 'blur(var(--blur))', transform: 'scale(var(--scale-min))' },
+          to: {
+            opacity: 0,
+            filter: 'blur(calc(var(--blur)*2))',
+            transform: 'scale(var(--scale-hide))',
+          },
+        },
+
+        // others
         toBlurAndHide: {
           from: { opacity: 1, filter: 'blur(0px)' },
           to: { opacity: 0, filter: 'blur(10px)' },
