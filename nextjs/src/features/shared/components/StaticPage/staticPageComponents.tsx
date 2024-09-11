@@ -46,7 +46,7 @@ export const StaticPageContainer = ({
   disableBelowTheFold,
 }: StaticPageContainerProps) => (
   <div className={cn('h-full bg-ivory-100', disableBelowTheFold && 'bg-pink-100', className)}>
-    <div className="pb-[42px]">
+    <div className="pb-[42px] pt-5">
       <StaticPageHeader />
     </div>
     <LayerWrapper
@@ -54,9 +54,7 @@ export const StaticPageContainer = ({
       disableBelowTheFold={disableBelowTheFold}
       LeftContent={<PageHeader title={title} />}
       BottomContent={
-        <div className={'mx-auto mb-10 flex max-w-[90em] flex-col gap-[10px] px-5 pt-6 md:px-6'}>
-          {children}
-        </div>
+        <div className={'mx-auto mb-10 flex max-w-[90em] flex-col gap-[10px] pt-6'}>{children}</div>
       }
     />
   </div>

@@ -35,11 +35,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
 
   return (
     <div
-      className={cn(
-        'px-5 md:px-6 pt-0 flex flex-col gap-20',
-        isStoryPage && 'px-0',
-        hasComponents && 'pt-10'
-      )}
+      className={cn('pt-0 flex flex-col gap-20', isStoryPage && 'px-0', hasComponents && 'pt-10')}
     >
       {[...(components || [])].map((component, index, array) => {
         const typeName = component?.__typename
