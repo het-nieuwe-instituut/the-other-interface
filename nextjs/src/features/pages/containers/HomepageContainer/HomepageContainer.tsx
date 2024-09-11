@@ -35,7 +35,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }
         <div className="mx-auto max-w-[1392px] pt-6">
           <div className="grid grid-cols-6 gap-3 lg:grid-cols-12">
             <SuspenseLoader LoadingComponent={<EditorialSkeleton />}>
-              <div className=" col-span-12 flex flex-col gap-4">
+              <div className=" col-span-12 flex flex-col gap-20">
                 {editorialData && (
                   <>
                     <PageHeader
@@ -45,7 +45,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }
                       showReadMore={false}
                     />
 
-                    <div className="flex w-full flex-col gap-20 py-20 ">
+                    <div className="flex w-full flex-col gap-20 pb-20">
                       {editorialData?.carousel && (
                         <GenericCarouselGridWithClientPagination
                           carousel={editorialData.carousel}

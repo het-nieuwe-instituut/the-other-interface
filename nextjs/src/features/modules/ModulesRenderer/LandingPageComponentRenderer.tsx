@@ -34,7 +34,7 @@ export function LandingPageComponentRenderer({ grid, highlight, imageCarousel, c
   const lang = useLocale()
 
   return (
-    <div className={cn('pt-10 flex flex-col gap-[40px] w-full')}>
+    <div className={cn('py-20 flex flex-col gap-20 w-full')}>
       {imageCarousel && (
         <ImageCarousel>
           {imageCarousel.items?.map(item => {

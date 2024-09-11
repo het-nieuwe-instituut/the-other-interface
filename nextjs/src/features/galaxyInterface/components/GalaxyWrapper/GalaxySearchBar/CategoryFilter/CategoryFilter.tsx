@@ -29,7 +29,7 @@ export const CategoryFilter: React.FC<Props> = ({ onClick, isOpen, selectedOptio
         <p className={cn('truncate mr-1', TypographyVariants({ socialLarge: 'label' }))}>
           {t('category')}
         </p>
-        <div className="mt-px">{<ChangeButton isOpen={isOpen} />}</div>
+        <div className="mt-[-3px]">{<ChangeButton isOpen={isOpen} />}</div>
       </div>
       <p className={cn('truncate', TypographyVariants({ socialLarge: 'textfield' }))}>
         {selectedOption}
