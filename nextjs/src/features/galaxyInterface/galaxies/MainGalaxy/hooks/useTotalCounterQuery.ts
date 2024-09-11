@@ -110,7 +110,6 @@ function totalCountsQueryFn(
     const suggestions = selectedFilterSuggestions.map(s => ({ key: s.key, value: s.value }))
     const { key: storyFilterKey, id: storyFilterId } = selectedFilterSuggestions?.[0] || {}
     const include = includeFilters(pageCategory)
-    console.log({ include })
 
     const data = await api.totalCounter({
       selectedFilterSuggestions: suggestions,

@@ -2,6 +2,7 @@
 import { cn } from '@/features/ui/utils/cn'
 import Image from 'next/image'
 import React, { CSSProperties, useLayoutEffect, useRef, useState } from 'react'
+import { isUrl } from '../../utils/links'
 import { limitCopyrightedImageResolution } from './limitCopyrightedImageResolution'
 
 export type ResponsiveImageProps = {
@@ -26,7 +27,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   const [showFallback, setShowFallback] = useState(!src)
   const [isLoaded, setIsLoaded] = useState(!src)
   const fallbackImageRef = useRef<string>(`/images/fallbacks/1.svg`)
-  const processedSrc = limitCopyrightedImageResolution(src)
+  const processedSrc = isUrl(src) ? limitCopyrightedImageResolution(src) : null
 
   useLayoutEffect(() => {
     fallbackImageRef.current = `/images/fallbacks/${Math.floor(Math.random() * 9) + 1}.svg`
