@@ -123,7 +123,7 @@ export const CategoryGalaxyContent = React.memo(() => {
           <div className="flex flex-col gap-2">
             <p
               className={TypographyVariants({
-                times: '2xl',
+                timesDot: '2xl',
                 className: 'text-blue-100',
               })}
             >

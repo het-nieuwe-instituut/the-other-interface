@@ -70,7 +70,7 @@ const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
         >
           <p
             className={
-              'mb-4 font-times-large text-[32px] leading-[105%_] text-blue-100 lg:text-[64px] lg:leading-[100%_] lg:tracking-[-1.28px]'
+              'mb-4 font-times-dot text-[32px] leading-[105%_] text-blue-100 lg:text-[64px] lg:leading-[100%_] lg:tracking-[-1.28px]'
             }
           >
             {tCommon('welcomeDescription')}
@@ -93,7 +93,7 @@ const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
           </p>
           <Button
             intent={'invertedSecondary'}
-            className="mt-4 w-[185px]"
+            className="mt-4 w-[185px] font-times-dot"
             onClick={closeOverlay}
             tabIndex={0}
           >
