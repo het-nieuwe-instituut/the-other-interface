@@ -22,14 +22,12 @@ export const LayerWrapper: React.FC<Props> = ({
 }) => {
   if (disableBelowTheFold) {
     return (
-      <div className="relative mx-auto block min-h-[600px] px-5 md:px-6 min-[1428px]:px-0">
-        {renderContent()}
-      </div>
+      <div className="relative mx-auto block min-h-[600px] px-5 md:px-6 ">{renderContent()}</div>
     )
   }
 
   return (
-    <BelowTheFoldWrapper className="relative min-h-[600px] px-5 md:px-6 min-[1428px]:px-0">
+    <BelowTheFoldWrapper className="relative min-h-[600px] px-5 md:px-6 ">
       {renderContent()}
     </BelowTheFoldWrapper>
   )
@@ -47,7 +45,7 @@ export const LayerWrapper: React.FC<Props> = ({
         >
           {suspense ? (
             <Suspense fallback={<EditorialSkeleton />}>
-              <div className=" grid-in-left ">{LeftContent}</div>
+              <div className="grid-in-left">{LeftContent}</div>
               <div className="grid-in-bottom">{BottomContent}</div>
             </Suspense>
           ) : (
