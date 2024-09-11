@@ -45,7 +45,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }
                       showReadMore={false}
                     />
 
-                    <div className="flex w-full flex-col gap-20 py-20 ">
+                    <div className="flex w-full flex-col gap-20 py-20">
                       {editorialData?.carousel && (
                         <GenericCarouselGridWithClientPagination
                           carousel={editorialData.carousel}
