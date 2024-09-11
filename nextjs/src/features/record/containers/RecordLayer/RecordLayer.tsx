@@ -83,7 +83,7 @@ export const RecordLayer = () => {
           <ErrorBox />
         ) : (
           <>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-20">
               <PageHeader
                 title={zoomLevel3?.title ?? undefined}
                 preface={zoomLevel3?.description ?? undefined}
