@@ -5,7 +5,7 @@ import { useDecodedSearchFilters } from '@/features/shared/hooks/search/useFilte
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { cn } from '@/features/ui/utils/cn'
-import { useContext, useMemo } from 'react'
+import { useContext, useMemo, useState } from 'react'
 import { SearchResultItemType } from 'src/generated/graphql'
 import {
   GalaxyPaginationAnimationStateContext,
@@ -17,6 +17,7 @@ import {
 import { GalaxyZoomAnimationStateContext } from '../../../hooks/GalaxyZoomAnimationStateProvider'
 import { CategoryGalaxyTemplateContext } from '../../CategoryGalaxy'
 import { PositioningTemplate, positioningTemplates } from './positioningTemplates'
+import { useIsFetching } from '@tanstack/react-query'
 
 type Props = {
   pageAmount: number
@@ -67,7 +68,7 @@ export const Records: React.FC<Props> = ({ pageAmount, records }) => {
   const isLastPage = pageNumber === pageAmount
   const nextPage = pageNumber + 1
 
-  const { data: nextResults } = useSearchByCategoryQuery({
+  const { data: nextResults, isLoading } = useSearchByCategoryQuery({
     category,
     text: search,
     page: nextPage,
@@ -95,23 +96,25 @@ export const Records: React.FC<Props> = ({ pageAmount, records }) => {
 
   return (
     <div className={'group-hover-blur size-full'}>
-      <div
-        style={getNextItemsCssProperties('50')}
-        className={cn(
-          'absolute inset-x-[2vw] top-[7%] grid h-[calc(80%-1.7rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-4 grid-rows-3',
-          getNextItemsAnimationClassNames(
-            galaxyPaginationAnimationState,
-            galaxyPaginationAnimationConditions,
-            nextRecords?.length > 0
-          ),
-          galaxyZoomAnimationState === 'backwards' &&
-            'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
-        )}
-      >
-        {nextPositionedRecords?.map((r, i) => {
-          return <Record key={r.key} tooltipPlace={i >= 8 ? 'top' : 'bottom'} record={r} />
-        })}
-      </div>
+      {!isLoading && (
+        <div
+          style={getNextItemsCssProperties('50')}
+          className={cn(
+            'absolute inset-x-[2vw] top-[7%] grid h-[calc(80%-1.7rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-4 grid-rows-3',
+            getNextItemsAnimationClassNames(
+              galaxyPaginationAnimationState,
+              galaxyPaginationAnimationConditions,
+              nextRecords?.length > 0
+            ),
+            galaxyZoomAnimationState === 'backwards' &&
+              'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+          )}
+        >
+          {nextPositionedRecords?.map((r, i) => {
+            return <Record key={r.key} tooltipPlace={i >= 8 ? 'top' : 'bottom'} record={r} />
+          })}
+        </div>
+      )}
 
       <div className="absolute inset-x-[2vw] top-[7%] h-[calc(80%-1.7rem-60px)] w-[96vw] max-w-[1382.4px]">
         <div

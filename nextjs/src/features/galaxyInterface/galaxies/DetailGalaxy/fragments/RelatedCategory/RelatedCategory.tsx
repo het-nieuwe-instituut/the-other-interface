@@ -48,6 +48,7 @@ export const RelatedCategory: React.FC<Props> = React.memo(props => {
   const recordCategory = params?.category as CloudCategory
   const id = params?.id as string
   const [complete, setComplete] = useState(false)
+  const [nextComplete, setNextComplete] = useState(false)
   const { conditions, animationState } = useContext(GalaxyPaginationAnimationStateContext)
 
   return (
@@ -55,10 +56,11 @@ export const RelatedCategory: React.FC<Props> = React.memo(props => {
       {complete && (
         <div
           style={{ gridRow, gridColumn, ...getNextItemsCssProperties('50') }}
-          className={cn(
-            getNextItemsAnimationClassNames(animationState, conditions, true),
-            className
-          )}
+          className={
+            nextComplete
+              ? cn(getNextItemsAnimationClassNames(animationState, conditions, true), className)
+              : 'hidden'
+          }
         >
           <div className="pointer-events-none grid h-full grid-cols-2 grid-rows-2 text-ivory-100">
             <NextPositionedRecords
@@ -69,6 +71,7 @@ export const RelatedCategory: React.FC<Props> = React.memo(props => {
               maxPages={maxPages}
               category={category}
               recordCategory={recordCategory}
+              onComplete={() => setNextComplete(true)}
             />
           </div>
         </div>
@@ -77,7 +80,11 @@ export const RelatedCategory: React.FC<Props> = React.memo(props => {
       <div
         color={'white'}
         style={{ gridRow, gridColumn, ...getItemsCssProperties('50') }}
-        className={cn(getItemsAnimationClassNames(animationState, conditions), className)}
+        className={
+          complete
+            ? cn(getItemsAnimationClassNames(animationState, conditions), className)
+            : 'hidden'
+        }
       >
         <div className="grid h-full grid-cols-2 grid-rows-2">
           <PositionedRecords
@@ -189,6 +196,7 @@ const NextPositionedRecords = ({
   recordCategory,
   category,
   next,
+  onComplete,
 }: {
   next?: number
   locale: Locale
@@ -197,6 +205,7 @@ const NextPositionedRecords = ({
   id: string
   maxPages: number
   recordCategory: CloudCategory
+  onComplete: () => void
 }) => {
   const lang = useLocale()
 
@@ -210,7 +219,7 @@ const NextPositionedRecords = ({
     category: category,
   })
   const nextPositionedRecords = nextData || []
-
+  const isFetchingingRecords = useIsFetchingRecordDetails()
   const results = useZoomLevel3Queries({
     data:
       nextPositionedRecords?.map(({ category, id }) => {
@@ -223,6 +232,15 @@ const NextPositionedRecords = ({
         }
       }) ?? [],
   })
+
+  const allFinished = results.every(query => !query.isLoading)
+
+  useEffect(() => {
+    if (allFinished && !isNextPositionedRecordLoading && !isFetchingingRecords) {
+      // all the queries have executed successfully
+      onComplete()
+    }
+  }, [allFinished, isFetchingingRecords])
 
   return (
     <>

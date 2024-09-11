@@ -61,20 +61,26 @@ export const RelatedStories: React.FC<Props> = ({
   const maxPages = Math.ceil((allRelationTotals?.[CATEGORIES.stories] || 2) / 2)
   const { current, next } = useSwapCurrentNext(page, maxPages)
   const [complete, setComplete] = useState(false)
+  const [nextComplete, setNextCOmplete] = useState(false)
   const { conditions, animationState } = useContext(GalaxyPaginationAnimationStateContext)
 
   return (
     <>
       <div
         style={getNextItemsCssProperties('50')}
-        className={cn(
-          getNextItemsAnimationClassNames(animationState, conditions, true),
-          'pointer-events-none col-start-2 col-end-2 row-start-1 row-end-3 text-ivory-100'
-        )}
+        className={
+          nextComplete
+            ? cn(
+                getNextItemsAnimationClassNames(animationState, conditions, true),
+                'pointer-events-none col-start-2 col-end-2 row-start-1 row-end-3 text-ivory-100'
+              )
+            : 'hidden'
+        }
       >
         <div className="grid h-full grid-cols-2 grid-rows-4">
           {!isFetchingEditorial && complete && (
             <NextPositionedRecords
+              onComplete={() => setNextCOmplete(true)}
               next={next}
               id={id}
               locale={locale}
@@ -89,10 +95,14 @@ export const RelatedStories: React.FC<Props> = ({
         <DetailedRecord className="absolute my-auto mx-auto h-full" />
         <div
           style={getItemsCssProperties('50')}
-          className={cn(
-            getItemsAnimationClassNames(animationState, conditions),
-            'grid h-full w-full grid-cols-2 grid-rows-4'
-          )}
+          className={
+            complete
+              ? cn(
+                  getItemsAnimationClassNames(animationState, conditions),
+                  'grid h-full w-full grid-cols-2 grid-rows-4'
+                )
+              : 'hidden'
+          }
         >
           {!isFetchingEditorial && (
             <PositionedRecords
@@ -128,8 +138,6 @@ const PositionedRecords = ({
   recordCategory: CloudCategory
   onComplete: () => void
 }) => {
-  const { conditions, animationState } = useContext(GalaxyPaginationAnimationStateContext)
-
   const lang = useLocale()
   const { data, isLoading: isRelatedStoriesLoading } = useRelatedStoriesQuery({
     maxPages,
@@ -154,15 +162,13 @@ const PositionedRecords = ({
   })
 
   const isFetchingingRecords = useIsFetchingRecordDetails()
-
-  const allFinished = results.every(query => query.isSuccess)
-
+  const allFinished = results.every(query => !query.isLoading)
   useEffect(() => {
-    if (allFinished && !isFetchingingRecords && !isRelatedStoriesLoading) {
-      // all the queries have either succeeded or errored
+    if (allFinished && !isRelatedStoriesLoading && !isFetchingingRecords) {
+      // all the queries have executed successfully
       onComplete()
     }
-  }, [allFinished])
+  }, [allFinished, isFetchingingRecords])
 
   return (
     <>
@@ -202,6 +208,7 @@ const NextPositionedRecords = ({
   page,
   recordCategory,
   next,
+  onComplete,
 }: {
   next?: number
   locale: Locale
@@ -209,6 +216,7 @@ const NextPositionedRecords = ({
   id: string
   maxPages: number
   recordCategory: CloudCategory
+  onComplete: () => void
 }) => {
   const lang = useLocale()
 
@@ -234,6 +242,15 @@ const NextPositionedRecords = ({
         }
       }) ?? [],
   })
+
+  const isFetchingingRecords = useIsFetchingRecordDetails()
+  const allFinished = results.every(query => !query.isLoading)
+  useEffect(() => {
+    if (allFinished && !isNextRelatedStoriesLoading && !isFetchingingRecords) {
+      // all the queries have executed successfully
+      onComplete()
+    }
+  }, [allFinished, isFetchingingRecords])
 
   return (
     <>
