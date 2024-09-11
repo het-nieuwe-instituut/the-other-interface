@@ -8,13 +8,16 @@ import { useLocale } from '@/features/shared/hooks/useLocale'
 import { GridParams } from '@/features/shared/types/position'
 import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { keyExtractor } from '@/features/shared/utils/lists'
+import { cn } from '@/features/ui/utils/cn'
 import { useParams, useSearchParams } from 'next/navigation'
 import React, { useContext, useEffect, useState } from 'react'
 import { Locale } from 'src/generated/graphql'
 import {
   GalaxyPaginationAnimationStateContext,
   getItemsAnimationClassNames,
+  getItemsCssProperties,
   getNextItemsAnimationClassNames,
+  getNextItemsCssProperties,
 } from '../../../hooks/GalaxyPaginationAnimationStateProvider'
 import { Record } from '../Record/Record'
 import { useSwapCurrentNext } from '../RelatedStories'
@@ -31,10 +34,11 @@ export interface AllRelationTotalsType {
 interface Props extends GridParams {
   category: CloudCategory
   allRelationTotals?: AllRelationTotalsType
+  className?: string
 }
 
 export const RelatedCategory: React.FC<Props> = React.memo(props => {
-  const { allRelationTotals, category, gridColumn, gridRow } = props
+  const { allRelationTotals, category, gridColumn, gridRow, className } = props
   const searchParams = useSearchParams()
   const page = parseInt(searchParams?.get('page') || '1')
   const maxPages = Math.ceil((allRelationTotals?.[category] || 2) / 2)
@@ -44,12 +48,19 @@ export const RelatedCategory: React.FC<Props> = React.memo(props => {
   const recordCategory = params?.category as CloudCategory
   const id = params?.id as string
   const [complete, setComplete] = useState(false)
+  const { conditions, animationState } = useContext(GalaxyPaginationAnimationStateContext)
 
   return (
     <>
       {complete && (
-        <div className="text-ivory-100" style={{ gridRow, gridColumn }}>
-          <div className="pointer-events-none grid h-full grid-cols-2 grid-rows-2 ">
+        <div
+          style={{ gridRow, gridColumn, ...getNextItemsCssProperties('50') }}
+          className={cn(
+            getNextItemsAnimationClassNames(animationState, conditions, true),
+            className
+          )}
+        >
+          <div className="pointer-events-none grid h-full grid-cols-2 grid-rows-2 text-ivory-100">
             <NextPositionedRecords
               next={next}
               id={id}
@@ -63,7 +74,11 @@ export const RelatedCategory: React.FC<Props> = React.memo(props => {
         </div>
       )}
 
-      <div className="text-ivory-100" color={'white'} style={{ gridRow, gridColumn }}>
+      <div
+        color={'white'}
+        style={{ gridRow, gridColumn, ...getItemsCssProperties('50') }}
+        className={cn(getItemsAnimationClassNames(animationState, conditions), className)}
+      >
         <div className="grid h-full grid-cols-2 grid-rows-2">
           <PositionedRecords
             onComplete={() => setComplete(true)}
@@ -102,7 +117,6 @@ const PositionedRecords = ({
   onComplete: () => void
 }) => {
   const lang = useLocale()
-  const { conditions, animationState } = useContext(GalaxyPaginationAnimationStateContext)
   const { data, isLoading: isPositionsedRecordLoading } = usePositionedRecordsQuery({
     locale,
     page,
@@ -157,7 +171,6 @@ const PositionedRecords = ({
 
           return (
             <Record
-              className={getItemsAnimationClassNames(animationState, conditions)}
               key={keyExtractor(positionedRecord.id, index, positionedRecords)}
               record={positionedRecord}
               recordDetails={data}
@@ -186,7 +199,6 @@ const NextPositionedRecords = ({
   recordCategory: CloudCategory
 }) => {
   const lang = useLocale()
-  const { conditions, animationState } = useContext(GalaxyPaginationAnimationStateContext)
 
   const { data: nextData, isLoading: isNextPositionedRecordLoading } = usePositionedRecordsQuery({
     locale,
@@ -233,11 +245,6 @@ const NextPositionedRecords = ({
 
           return (
             <Record
-              className={getNextItemsAnimationClassNames(
-                animationState,
-                conditions,
-                nextPositionedRecords.length > 0
-              )}
               key={keyExtractor(positionedRecord.id, index, nextPositionedRecords)}
               record={positionedRecord}
               recordDetails={data}

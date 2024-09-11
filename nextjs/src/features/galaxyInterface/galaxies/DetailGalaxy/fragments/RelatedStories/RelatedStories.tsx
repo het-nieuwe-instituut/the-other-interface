@@ -5,13 +5,16 @@ import {
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { keyExtractor } from '@/features/shared/utils/lists'
+import { cn } from '@/features/ui/utils/cn'
 import { useParams, useSearchParams } from 'next/navigation'
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { Locale } from 'src/generated/graphql'
 import {
   GalaxyPaginationAnimationStateContext,
   getItemsAnimationClassNames,
+  getItemsCssProperties,
   getNextItemsAnimationClassNames,
+  getNextItemsCssProperties,
 } from '../../../hooks/GalaxyPaginationAnimationStateProvider'
 import { DetailedRecord } from '../DetailedRecord'
 import { Record } from '../Record/Record'
@@ -58,10 +61,17 @@ export const RelatedStories: React.FC<Props> = ({
   const maxPages = Math.ceil((allRelationTotals?.[CATEGORIES.stories] || 2) / 2)
   const { current, next } = useSwapCurrentNext(page, maxPages)
   const [complete, setComplete] = useState(false)
+  const { conditions, animationState } = useContext(GalaxyPaginationAnimationStateContext)
 
   return (
     <>
-      <div className="pointer-events-none col-start-2 col-end-2 row-start-1 row-end-3 text-ivory-100">
+      <div
+        style={getNextItemsCssProperties('50')}
+        className={cn(
+          getNextItemsAnimationClassNames(animationState, conditions, true),
+          'pointer-events-none col-start-2 col-end-2 row-start-1 row-end-3 text-ivory-100'
+        )}
+      >
         <div className="grid h-full grid-cols-2 grid-rows-4">
           {!isFetchingEditorial && complete && (
             <NextPositionedRecords
@@ -75,8 +85,15 @@ export const RelatedStories: React.FC<Props> = ({
           )}
         </div>
       </div>
-      <div className="col-start-2 col-end-2 row-start-1 row-end-3 text-ivory-100">
-        <div className="grid h-full grid-cols-2 grid-rows-4">
+      <div className="col-start-2 col-end-2 row-start-1 row-end-3 text-ivory-100 flex items-center justify-center">
+        <DetailedRecord className="absolute my-auto mx-auto h-full" />
+        <div
+          style={getItemsCssProperties('50')}
+          className={cn(
+            getItemsAnimationClassNames(animationState, conditions),
+            'grid h-full w-full grid-cols-2 grid-rows-4'
+          )}
+        >
           {!isFetchingEditorial && (
             <PositionedRecords
               onComplete={() => setComplete(true)}
@@ -88,8 +105,6 @@ export const RelatedStories: React.FC<Props> = ({
               recordCategory={recordCategory}
             />
           )}
-
-          <DetailedRecord />
         </div>
       </div>
     </>
@@ -113,8 +128,9 @@ const PositionedRecords = ({
   recordCategory: CloudCategory
   onComplete: () => void
 }) => {
-  const lang = useLocale()
   const { conditions, animationState } = useContext(GalaxyPaginationAnimationStateContext)
+
+  const lang = useLocale()
   const { data, isLoading: isRelatedStoriesLoading } = useRelatedStoriesQuery({
     maxPages,
     page,
@@ -169,7 +185,6 @@ const PositionedRecords = ({
 
           return (
             <Record
-              className={getItemsAnimationClassNames(animationState, conditions)}
               key={keyExtractor(positionedRecord.id, index, positionedStories)}
               record={positionedRecord}
               recordDetails={data}
@@ -196,7 +211,6 @@ const NextPositionedRecords = ({
   recordCategory: CloudCategory
 }) => {
   const lang = useLocale()
-  const { conditions, animationState } = useContext(GalaxyPaginationAnimationStateContext)
 
   const { data: nextData, isLoading: isNextRelatedStoriesLoading } = useRelatedStoriesQuery({
     maxPages,
@@ -242,11 +256,6 @@ const NextPositionedRecords = ({
 
           return (
             <Record
-              className={getNextItemsAnimationClassNames(
-                animationState,
-                conditions,
-                nextPositionedStories.length > 0
-              )}
               key={keyExtractor(positionedRecord.id, index, nextPositionedStories)}
               record={positionedRecord}
               recordDetails={data}
