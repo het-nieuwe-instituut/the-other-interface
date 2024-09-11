@@ -85,7 +85,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
         filterInputRef={filterInputRef}
       />
 
-      <div className="flex h-[60px] items-center gap-[12px] self-end pt-1">
+      <div className="flex h-[60px] items-center gap-[12px] self-end">
         {isSearchModeActive ? (
           <>
             <GoButton onGoClick={handleGoClick} />
