@@ -9,6 +9,17 @@ export const isExternalURL = (url: string, origin: string) => {
   }
 }
 
+export function isUrl(url: string | null) {
+  if (!url) return false
+
+  try {
+    new URL(url)
+    return true
+  } catch {
+    return false
+  }
+}
+
 export function getTriplyRecordPathForTypeAndId(type: EntityNames, id: string, base?: string) {
   const baseURL = base ? base : 'https://collectiedata.hetnieuweinstituut.nl/id'
 

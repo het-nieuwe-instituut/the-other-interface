@@ -10,14 +10,24 @@ import { Locale } from 'src/generated/graphql'
 import { SearchCategory } from '@/features/shared/utils/categories'
 import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
 import { searchCategoryToTriplyCategory } from '../../CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
+import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
 
 export function useTotalCounterQuery(selectedFilterSuggestions: FilterArray, text: string) {
   const api = initApiClientService()
   const locale = useLocale()
   const { searchCategory } = useSelector((state: State) => state.shared)
+  const { pageCategory } = usePageCategory()
+
   const ids = selectedFilterSuggestions.map(s => s.id)
 
-  const queryFn = getQueryFn(api, locale, selectedFilterSuggestions, searchCategory, text)
+  const queryFn = getQueryFn(
+    api,
+    locale,
+    selectedFilterSuggestions,
+    searchCategory,
+    text,
+    pageCategory
+  )
 
   return useQuery({
     retry: false,
@@ -34,7 +44,8 @@ function getQueryFn(
   locale: Locale,
   selectedFilterSuggestions: FilterArray,
   searchCategory: SearchCategory | null,
-  text: string
+  text: string,
+  pageCategory: SearchCategory
 ) {
   const collectionHighlightsActive = selectedFilterSuggestions.some(
     f => f.id === COLLECTION_HILIGHT_ID
@@ -43,7 +54,14 @@ function getQueryFn(
     return collectionHighlightsCountQueryFn(api, locale, searchCategory, text)
   }
 
-  return totalCountsQueryFn(api, locale, selectedFilterSuggestions, searchCategory, text)
+  return totalCountsQueryFn(
+    api,
+    locale,
+    selectedFilterSuggestions,
+    searchCategory,
+    text,
+    pageCategory
+  )
 }
 
 function collectionHighlightsCountQueryFn(
@@ -85,11 +103,13 @@ function totalCountsQueryFn(
   locale: Locale,
   selectedFilterSuggestions: FilterArray,
   searchCategory: SearchCategory | null,
-  text: string
+  text: string,
+  pageCategory: SearchCategory
 ) {
   return async () => {
     const suggestions = selectedFilterSuggestions.map(s => ({ key: s.key, value: s.value }))
     const { key: storyFilterKey, id: storyFilterId } = selectedFilterSuggestions?.[0] || {}
+    const include = includeFilters(pageCategory)
 
     const data = await api.totalCounter({
       selectedFilterSuggestions: suggestions,
@@ -98,7 +118,18 @@ function totalCountsQueryFn(
       locationsFilterTerm: storyFilterKey === 'location' ? storyFilterId : undefined,
       themesFilterTerm: storyFilterKey === 'theme' ? storyFilterId : undefined,
       authorFilterTerm: storyFilterKey === 'author' ? storyFilterId : undefined,
+      ...include,
     })
     return sumTotalCounts(data, searchCategory)
+  }
+}
+
+function includeFilters(pageCategory: SearchCategory) {
+  return {
+    includeArchives: pageCategory === 'archives' || pageCategory === 'all',
+    includeObjects: pageCategory === 'objects' || pageCategory === 'all',
+    includePeople: pageCategory === 'people' || pageCategory === 'all',
+    includePublications: pageCategory === 'publications' || pageCategory === 'all',
+    includeStories: pageCategory === 'stories' || pageCategory === 'all',
   }
 }

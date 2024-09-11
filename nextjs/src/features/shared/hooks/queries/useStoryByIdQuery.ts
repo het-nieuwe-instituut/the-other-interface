@@ -12,7 +12,6 @@ export function useStoryByIdQuery(id: string) {
   const api = initApiClientService()
   const lang = useLocale()
 
-  console.log(['story-by-id', id, lang, isDraftMode])
   const queryFn = async () => {
     const res = await api.storyById({
       id,
