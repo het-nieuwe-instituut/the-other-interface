@@ -3006,6 +3006,7 @@ export type HighlightedHomepageThemesQuery = {
             attributes?: {
               __typename?: 'Theme'
               name: string
+              locale?: string | null
               stories?: {
                 __typename?: 'StoryRelationResponseCollection'
                 data: Array<{
@@ -7305,6 +7306,7 @@ export type ThemeFragmentWithHighlightedStoriesFragment = {
   attributes?: {
     __typename?: 'Theme'
     name: string
+    locale?: string | null
     stories?: {
       __typename?: 'StoryRelationResponseCollection'
       data: Array<{
@@ -8271,6 +8273,7 @@ export const ThemeFragmentWithHighlightedStoriesFragmentDoc = gql`
     id
     attributes {
       name
+      locale
       stories(pagination: $highlightedStoriesPaginationArgs) {
         data {
           ...StoryFragment

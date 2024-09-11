@@ -43,7 +43,7 @@ function useBodyScrollable() {
   return bodyScrollable
 }
 
-export function ScrollbarSpacing() {
+export default function ScrollbarSpacing() {
   const bodyScrollable = useBodyScrollable()
 
   useLayoutEffect(() => {
