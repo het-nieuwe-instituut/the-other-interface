@@ -9,11 +9,13 @@ export const useDrawLines = ({
   selector,
   template,
   stories,
+  delay = 500,
 }: {
   selector: string
   template: number
   stories: PositionedStory[]
   hideLines?: boolean
+  delay?: number
 }) => {
   const svgRef = useRef<SVGSVGElement>(null)
   useTimeout(() => {
@@ -21,7 +23,7 @@ export const useDrawLines = ({
     if (svg) {
       svg.style.opacity = '100'
     }
-  }, 200)
+  }, delay + 200)
 
   const searchParams = useSearchParams()
 
@@ -79,7 +81,9 @@ export const useDrawLines = ({
       }
     }
 
-    drawAfterLayout()
+    setTimeout(() => {
+      drawAfterLayout()
+    }, delay)
 
     window.addEventListener('resize', drawAfterLayout)
 
