@@ -5,6 +5,11 @@ query totalCounter(
   $themesFilterTerm: ID
   $authorFilterTerm: ID
   $searchTerm: String
+  $includeStories: Boolean = false
+  $includeArchives: Boolean = false
+  $includeObjects: Boolean = false
+  $includePeople: Boolean = false
+  $includePublications: Boolean = false
 ) {
   stories(
     filters: {
@@ -32,7 +37,7 @@ query totalCounter(
     }
     pagination: { page: 1, pageSize: 1 }
     locale: $locale
-  ) {
+  ) @include(if: $includeStories) {
     meta {
       pagination {
         total
@@ -44,7 +49,7 @@ query totalCounter(
     locale: $locale
     selectedFilterSuggestions: $selectedFilterSuggestions
     text: $searchTerm
-  ) {
+  ) @include(if: $includeArchives) {
     total
   }
   objects: zoomLevel2Amount(
@@ -52,7 +57,7 @@ query totalCounter(
     locale: $locale
     selectedFilterSuggestions: $selectedFilterSuggestions
     text: $searchTerm
-  ) {
+  ) @include(if: $includeObjects) {
     total
   }
   people: zoomLevel2Amount(
@@ -60,7 +65,7 @@ query totalCounter(
     locale: $locale
     selectedFilterSuggestions: $selectedFilterSuggestions
     text: $searchTerm
-  ) {
+  ) @include(if: $includePeople) {
     total
   }
   publications: zoomLevel2Amount(
@@ -68,7 +73,7 @@ query totalCounter(
     locale: $locale
     selectedFilterSuggestions: $selectedFilterSuggestions
     text: $searchTerm
-  ) {
+  ) @include(if: $includePublications) {
     total
   }
 }

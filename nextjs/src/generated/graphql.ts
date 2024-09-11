@@ -2209,10 +2209,15 @@ export type TotalCounterQueryVariables = Exact<{
   themesFilterTerm?: InputMaybe<Scalars['ID']['input']>;
   authorFilterTerm?: InputMaybe<Scalars['ID']['input']>;
   searchTerm?: InputMaybe<Scalars['String']['input']>;
+  includeStories?: InputMaybe<Scalars['Boolean']['input']>;
+  includeArchives?: InputMaybe<Scalars['Boolean']['input']>;
+  includeObjects?: InputMaybe<Scalars['Boolean']['input']>;
+  includePeople?: InputMaybe<Scalars['Boolean']['input']>;
+  includePublications?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
-export type TotalCounterQuery = { __typename?: 'Query', stories: { __typename?: 'StoryEntityResponseCollection', meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', total: number } } | null }, archives: { __typename?: 'ZoomLevel2AmountParentType', total: string }, objects: { __typename?: 'ZoomLevel2AmountParentType', total: string }, people: { __typename?: 'ZoomLevel2AmountParentType', total: string }, publications: { __typename?: 'ZoomLevel2AmountParentType', total: string } };
+export type TotalCounterQuery = { __typename?: 'Query', stories?: { __typename?: 'StoryEntityResponseCollection', meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', total: number } } | null }, archives?: { __typename?: 'ZoomLevel2AmountParentType', total: string }, objects?: { __typename?: 'ZoomLevel2AmountParentType', total: string }, people?: { __typename?: 'ZoomLevel2AmountParentType', total: string }, publications?: { __typename?: 'ZoomLevel2AmountParentType', total: string } };
 
 export type ArchivesZoomRecordHoverQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -3661,12 +3666,12 @@ export const ThemesDocument = gql`
 }
     ${ThemeFragmentFragmentDoc}`;
 export const TotalCounterDocument = gql`
-    query totalCounter($locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!], $locationsFilterTerm: ID, $themesFilterTerm: ID, $authorFilterTerm: ID, $searchTerm: String) {
+    query totalCounter($locale: Locale!, $selectedFilterSuggestions: [SelectedFilterSuggestion!], $locationsFilterTerm: ID, $themesFilterTerm: ID, $authorFilterTerm: ID, $searchTerm: String, $includeStories: Boolean = false, $includeArchives: Boolean = false, $includeObjects: Boolean = false, $includePeople: Boolean = false, $includePublications: Boolean = false) {
   stories(
     filters: {and: [{or: [{locations: {id: {eq: $locationsFilterTerm}}}, {themes: {id: {eq: $themesFilterTerm}}}, {author: {id: {eq: $authorFilterTerm}}}]}, {or: [{title: {containsi: $searchTerm}}, {description: {containsi: $searchTerm}}, {shortDescription: {containsi: $searchTerm}}]}], or: [{title: {containsi: $searchTerm}}, {description: {containsi: $searchTerm}}, {shortDescription: {containsi: $searchTerm}}]}
     pagination: {page: 1, pageSize: 1}
     locale: $locale
-  ) {
+  ) @include(if: $includeStories) {
     meta {
       pagination {
         total
@@ -3678,7 +3683,7 @@ export const TotalCounterDocument = gql`
     locale: $locale
     selectedFilterSuggestions: $selectedFilterSuggestions
     text: $searchTerm
-  ) {
+  ) @include(if: $includeArchives) {
     total
   }
   objects: zoomLevel2Amount(
@@ -3686,7 +3691,7 @@ export const TotalCounterDocument = gql`
     locale: $locale
     selectedFilterSuggestions: $selectedFilterSuggestions
     text: $searchTerm
-  ) {
+  ) @include(if: $includeObjects) {
     total
   }
   people: zoomLevel2Amount(
@@ -3694,7 +3699,7 @@ export const TotalCounterDocument = gql`
     locale: $locale
     selectedFilterSuggestions: $selectedFilterSuggestions
     text: $searchTerm
-  ) {
+  ) @include(if: $includePeople) {
     total
   }
   publications: zoomLevel2Amount(
@@ -3702,7 +3707,7 @@ export const TotalCounterDocument = gql`
     locale: $locale
     selectedFilterSuggestions: $selectedFilterSuggestions
     text: $searchTerm
-  ) {
+  ) @include(if: $includePublications) {
     total
   }
 }
