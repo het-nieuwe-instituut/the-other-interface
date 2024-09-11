@@ -5,7 +5,7 @@ import { useDecodedSearchFilters } from '@/features/shared/hooks/search/useFilte
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { cn } from '@/features/ui/utils/cn'
-import { useContext, useMemo, useState } from 'react'
+import { useContext, useMemo } from 'react'
 import { SearchResultItemType } from 'src/generated/graphql'
 import {
   GalaxyPaginationAnimationStateContext,
@@ -17,7 +17,6 @@ import {
 import { GalaxyZoomAnimationStateContext } from '../../../hooks/GalaxyZoomAnimationStateProvider'
 import { CategoryGalaxyTemplateContext } from '../../CategoryGalaxy'
 import { PositioningTemplate, positioningTemplates } from './positioningTemplates'
-import { useIsFetching } from '@tanstack/react-query'
 
 type Props = {
   pageAmount: number
