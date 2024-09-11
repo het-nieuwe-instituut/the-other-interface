@@ -3,7 +3,9 @@ import { useContext } from 'react'
 import {
   GalaxyPaginationAnimationStateContext,
   getItemsAnimationClassNames,
+  getItemsCssProperties,
   getNextItemsAnimationClassNames,
+  getNextItemsCssProperties,
 } from '../../../hooks/GalaxyPaginationAnimationStateProvider'
 import { StoriesData } from '../../hooks/useThemesQuery'
 import { Story } from '../Story'
@@ -37,16 +39,14 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
     <div className={cn('size-full')}>
       <div className="absolute right-[18%] top-[13%] h-[55%] w-[65vw] max-w-[936px]">
         <div
+          style={getItemsCssProperties('50')}
           className={cn(
-            'relative size-full z-20 grid   grid-cols-4 grid-rows-2 gap-[20px] opacity-100  '
+            'relative size-full z-20 grid grid-cols-4 grid-rows-2 gap-[20px]',
+            getItemsAnimationClassNames(paginationAnimationState, paginationAnimationConditions)
           )}
         >
           {positionedStories.map(positionedStory => (
             <Story
-              className={getItemsAnimationClassNames(
-                paginationAnimationState,
-                paginationAnimationConditions
-              )}
               key={`${positionedStory.id}-${positionedStory.locale}-${currentPage}`}
               story={positionedStory}
               isMainGrid
@@ -68,13 +68,13 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
         }}
       />
       <div
+        style={getNextItemsCssProperties('50')}
         className={cn(
           'absolute right-[18%] top-[13%] grid h-[55%] w-[65vw] max-w-[936px] grid-cols-4 grid-rows-2 gap-[20px] z-10',
           getNextItemsAnimationClassNames(
             paginationAnimationState,
             paginationAnimationConditions,
-            !!positionedStories?.length,
-            '50px'
+            !!positionedStories?.length
           )
         )}
       >
