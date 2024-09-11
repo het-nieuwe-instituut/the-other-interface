@@ -54,6 +54,10 @@ function getQueryFn(
     return collectionHighlightsCountQueryFn(api, locale, searchCategory, text)
   }
 
+  if (pageCategory === 'all') {
+    return searchAll(api, locale, text)
+  }
+
   return totalCountsQueryFn(
     api,
     locale,
@@ -95,6 +99,18 @@ function collectionHighlightsCountQueryFn(
     })
 
     return res.triplyRecords.meta?.pagination.total || 0
+  }
+}
+
+function searchAll(api: ReturnType<typeof initApiClientService>, lang: Locale, text: string) {
+  return async () => {
+    const pagination = { page: 1, pageSize: 0 }
+    const [triplyData, storyData] = await Promise.all([
+      api.searchAll({ text, lang, ...pagination }),
+      api.searchByStories({ searchTerm: text || undefined, locale: lang, ...pagination }),
+    ])
+
+    return (triplyData.searchTriply.total || 0) + (storyData.stories.meta?.pagination.total || 0)
   }
 }
 
