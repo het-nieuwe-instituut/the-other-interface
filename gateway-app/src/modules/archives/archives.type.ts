@@ -83,7 +83,7 @@ class BaseArchiveZoomLevel3DetailType {
   public title: string
 
   @Field(() => [String], { nullable: true })
-  public thumbnail: string
+  public thumbnail: string[]
 
   @Field(() => String, { nullable: true })
   public objectNumber?: string
