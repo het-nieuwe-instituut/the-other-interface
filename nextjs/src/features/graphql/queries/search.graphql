@@ -1,6 +1,5 @@
-query searchAll($text: String!, $lang: Locale!, $page: Int!, $pageSize: Int) {
-  searchTriply(page: $page, lang: $lang, pageSize: $pageSize, text: $text) {
-    page
+query searchAll($text: String!, $lang: Locale!, $start: Int!, $limit: Int) {
+  searchTriply(start: $start, lang: $lang, limit: $limit, text: $text) {
     nodes {
       title
       thumbnail

@@ -20,6 +20,8 @@ query searchByStories(
   $searchTerm: String
   $page: Int
   $pageSize: Int
+  $start: Int
+  $limit: Int
   $locationsFilterTerm: ID
   $themesFilterTerm: ID
   $authorFilterTerm: ID
@@ -49,7 +51,7 @@ query searchByStories(
         { shortDescription: { containsi: $searchTerm } }
       ]
     }
-    pagination: { page: $page, pageSize: $pageSize }
+    pagination: { page: $page, pageSize: $pageSize, start: $start, limit: $limit }
     locale: $locale
   ) {
     data {
