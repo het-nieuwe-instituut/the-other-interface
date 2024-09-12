@@ -27,9 +27,9 @@ export const Navigation = () => {
             '--z-index': `${NAVIGATION_OVERLAY_Z_INDEX}`,
           } as CSSProperties
         }
-        className={cn('size-full md:overflow-hidden')}
+        className={cn('md:overflow-hidden relative')}
       >
-        <div className="absolute left-0 top-0 h-screen w-full">
+        <div className="left-0 top-0 h-screen ">
           <NavigationStaticHeader />
           <div
             style={{ '--z-index': `${MAX_Z_INDEX}` } as CSSProperties}

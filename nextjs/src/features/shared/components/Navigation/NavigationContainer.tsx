@@ -24,21 +24,41 @@ export const NavigationContainer = ({ children }: { children: React.ReactNode })
   useDisableScroll(isMenuOpen)
 
   return (
-    <div
-      style={
-        {
-          '--z-index': `${NAVIGATION_OVERLAY_Z_INDEX}`,
-        } as CSSProperties
-      }
-      id="navigation-scrollbar"
-      className={cn(
-        'fixed left-0 top-0 z-[var(--z-index)] h-screen w-full bg-blue-95',
-        isMenuOpen
-          ? 'visible transition-opacity ease-out duration-300 opacity-95'
-          : 'invisible transition-opacity ease-in duration-300 opacity-0'
-      )}
-    >
-      {children}
-    </div>
+    <>
+      <div
+        className={cn(
+          'fixed inset-0 z-[var(--z-index)] h-screen w-screen',
+          'backdrop-blur-[10px]',
+          'transition-opacity duration-300',
+          isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        )}
+        style={{ '--z-index': `${NAVIGATION_OVERLAY_Z_INDEX}` } as CSSProperties}
+      />
+
+      <div
+        className={cn(
+          'fixed inset-0 z-[var(--z-index)] h-screen w-screen',
+          'bg-blue-95',
+          'transition-opacity duration-300',
+          isMenuOpen ? 'opacity-95' : 'opacity-0 pointer-events-none'
+        )}
+        style={{ '--z-index': `${NAVIGATION_OVERLAY_Z_INDEX}` } as CSSProperties}
+      />
+
+      <div
+        style={
+          {
+            '--z-index': `${NAVIGATION_OVERLAY_Z_INDEX}`,
+          } as CSSProperties
+        }
+        className={cn(
+          'fixed left-0 top-0  z-[calc(var(--z-index)+1)] h-screen w-screen duration-300 box-border',
+          isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        )}
+        id="navigation-scrollbar"
+      >
+        {children}
+      </div>
+    </>
   )
 }
