@@ -1,8 +1,5 @@
 'use client'
-import {
-  getUrlLandingPageUrl,
-  useGetUrlLandingPageUrl,
-} from '@/features/galaxyInterface/utils/galaxyRoutes'
+import { useGetUrlLandingPageUrl } from '@/features/galaxyInterface/utils/galaxyRoutes'
 import { NavLinkButton } from '@/features/ui/components/nav-link-button/component'
 import { MenuTypogrpahyVariants } from '@/features/ui/components/typography/menuVariants'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
