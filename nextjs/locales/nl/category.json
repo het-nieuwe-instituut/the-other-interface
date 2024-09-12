@@ -19,6 +19,6 @@
   "searchPlaceholder": "Typ hier je zoekterm",
   "searchCategory": "Categorieën",
 
-  "couldNotFetchHover": "Er is iets misgegaan bij het laden. Probeer het later opnieuw.",
+  "couldNotFetchHover": "Er ging iets fout bij het laden. Probeer het late ropnieuw.",
   "errorLoadingDetail": "Er is iets misgegaan bij het laden. Probeer het later opnieuw."
 }

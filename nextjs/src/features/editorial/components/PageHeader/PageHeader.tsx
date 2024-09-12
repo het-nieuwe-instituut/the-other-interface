@@ -55,7 +55,7 @@ export const PageHeader: React.FC<Props> = props => {
   const [constrainPrefaceState, setConstrainPreface] = useState(constrainPreface)
 
   return (
-    <div className="flex max-w-[calc(100vw-40px)] flex-col  gap-4">
+    <div className="flex max-w-[calc(100vw-40px)] flex-col gap-4">
       <button
         onClick={ScrollToContent}
         className={cn(

@@ -40,7 +40,7 @@ export const LayerWrapper: React.FC<Props> = ({
             'grid lg:grid-areas-editorial-large grid-areas-editorial-small',
             'lg:grid-cols-[minmax(0,1fr),320px] grid-cols-[100%,100%]',
             'lg:grid-rows-[1fr,auto] grid-rows-[auto,minmax(0,1fr),auto]',
-            RightContent ? 'gap-[3.75rem]' : 'gap-0'
+            RightContent ? 'gap-20' : 'gap-0'
           )}
         >
           {suspense ? (
