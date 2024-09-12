@@ -2,28 +2,24 @@ import { PlacementWithLogical, useBreakpoint } from '@chakra-ui/react'
 import { HOMEPAGE_Z_INDEXES } from '../constants'
 import { CategoryCloud } from '../types'
 
-import { CollectionHighlightsFilter } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
+import { useGetUrlLandingPageUrl } from '@/features/galaxyInterface/utils/galaxyRoutes'
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
-import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { encodeFilters } from '@/features/shared/helpers/searchHelpers'
 import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
 import { useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/components/DelayedNextLink/DelayedNextLinkWithZoomAnimationsContext'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 import { CSSProperties, useContext, useState } from 'react'
-import { GalaxyZoomAnimationStateContext } from '../../../hooks/GalaxyZoomAnimationStateProvider'
 import { GalaxyPaginationAnimationStateContext } from '../../../hooks/GalaxyPaginationAnimationStateProvider'
+import { GalaxyZoomAnimationStateContext } from '../../../hooks/GalaxyZoomAnimationStateProvider'
 interface Props {
   cloud: CategoryCloud
 }
 
 export const Cloud: React.FC<Props> = ({ cloud }) => {
   const { t } = useTypeSafeTranslation('homepage')
-  const { lang } = useZoom2Params()
   const { title: category, sizeClassNames, cloudClassNames, titleClassNames } = cloud
   const selectedFilters = useSelectedFilters()
   useSearchByCategoryQuery({
@@ -32,10 +28,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
     selectedFilters,
   })
 
-  let url = `/landingpage?category=${category}&filters=${encodeFilters([
-    CollectionHighlightsFilter,
-  ])}&searchResult=true&fallback=true`
-  url = addLocaleToUrl(url, lang)
+  const url = useGetUrlLandingPageUrl(category)
 
   const breakpoint = useBreakpoint()
   const placement = tooltipPlacement(category, breakpoint)
