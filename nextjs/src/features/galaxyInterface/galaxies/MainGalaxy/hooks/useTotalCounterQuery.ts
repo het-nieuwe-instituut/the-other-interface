@@ -31,7 +31,7 @@ export function useTotalCounterQuery(selectedFilterSuggestions: FilterArray, tex
 
   return useQuery({
     retry: false,
-    queryKey: ['total-counter', locale, searchCategory, ...ids],
+    queryKey: ['total-counter', locale, searchCategory, text, ...ids],
     queryFn,
     cacheTime: 0,
     refetchOnWindowFocus: false,
@@ -52,6 +52,10 @@ function getQueryFn(
   )
   if (collectionHighlightsActive) {
     return collectionHighlightsCountQueryFn(api, locale, searchCategory, text)
+  }
+
+  if (pageCategory === 'all' && text) {
+    return searchAll(api, locale, text)
   }
 
   return totalCountsQueryFn(
@@ -95,6 +99,18 @@ function collectionHighlightsCountQueryFn(
     })
 
     return res.triplyRecords.meta?.pagination.total || 0
+  }
+}
+
+function searchAll(api: ReturnType<typeof initApiClientService>, lang: Locale, text: string) {
+  return async () => {
+    const pagination = { limit: 0, start: 0 }
+    const [triplyData, storyData] = await Promise.all([
+      api.searchAll({ text, lang, ...pagination }),
+      api.searchByStories({ searchTerm: text || undefined, locale: lang, ...pagination }),
+    ])
+
+    return (triplyData.searchTriply.total || 0) + (storyData.stories.meta?.pagination.total || 0)
   }
 }
 

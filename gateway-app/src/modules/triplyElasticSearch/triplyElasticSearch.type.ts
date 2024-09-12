@@ -1,4 +1,4 @@
-import { ArgsType, Field, Int, ObjectType } from '@nestjs/graphql'
+import { ArgsType, Field, Int, ObjectType, PickType } from '@nestjs/graphql'
 import { IsString } from 'class-validator'
 import { EntityNames } from '../util/entityNames.type'
 import { PaginationArgs } from '../util/paginationArgs.type'
@@ -25,14 +25,11 @@ export class SearchResultType {
   public nodes?: (SearchResultItemType | null)[] | null
 
   @Field(() => Int)
-  public page: number
-
-  @Field(() => Int)
   public total: number
 }
 
 @ArgsType()
-export class SearchArgsType extends PaginationArgs {
+export class SearchArgsType extends PickType(PaginationArgs, ['start', 'limit']) {
   @Field(() => String)
   @IsString()
   public text: string
