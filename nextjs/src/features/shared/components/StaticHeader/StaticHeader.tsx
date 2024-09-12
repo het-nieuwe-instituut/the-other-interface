@@ -56,7 +56,7 @@ export const StaticHeader = ({
                 'cursor-pointer overflow-hidden h-full flex m-0 '
               )}
             >
-              <p className="mr-2 max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px] max-sm:overflow-visible max-sm:whitespace-normal">
+              <p className="mr-2 max-sm:overflow-visible max-sm:whitespace-normal max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px]">
                 {tNavigation('headerTitle')}
               </p>
             </DelayedNextLinkWithZoomAnimationsContext>
@@ -97,7 +97,7 @@ export const StaticPageHeader = () => {
                 'cursor-pointer overflow-hidden h-full flex m-0 '
               )}
             >
-              <p className="mr-2 max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px] max-sm:overflow-visible max-sm:whitespace-normal">
+              <p className="mr-2 max-sm:overflow-visible max-sm:whitespace-normal max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px]">
                 {tNavigation('headerTitle')}
               </p>
             </DelayedNextLinkWithZoomAnimationsContext>

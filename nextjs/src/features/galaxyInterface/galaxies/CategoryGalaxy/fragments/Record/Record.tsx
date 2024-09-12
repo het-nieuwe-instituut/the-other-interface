@@ -127,6 +127,7 @@ const RecordData = ({
         src={thumbnail}
         alt={title ?? ''}
         className="max-h-[calc(100%-2.6vw-7px)]" // where 2.6vw are a texts' line heights, 15px are gaps
+        imageClassName="object-bottom"
         size={'16vw'}
         style={{
           flex: `1 1 calc(100% - 2.6vw - 7px)`,
