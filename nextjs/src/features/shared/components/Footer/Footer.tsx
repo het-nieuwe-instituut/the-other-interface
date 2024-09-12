@@ -1,19 +1,20 @@
-'use client'
+import { BelowTheFoldWrapper } from '@/features/editorial/components/BelowTheFoldWrapper'
 import LogoSvg from '@/features/modules/components/LogoSvg/LogoSvg'
-import Link from 'next/link'
-import { useTypeSafeTranslation } from '../../hooks/translations'
-import { useLocale } from '../../hooks/useLocale'
 import { NavLinkButton } from '@/features/ui/components/nav-link-button/component'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import ExternalLink from '@/features/ui/icons/external-link.svg'
+import { headers } from 'next/headers'
+import Link from 'next/link'
+import { CSSProperties } from 'react'
 import { Locale } from 'src/generated/graphql'
 import { FOOTER_Z_INDEX } from '../../constants/mainConstants'
-import { CSSProperties } from 'react'
-import { BelowTheFoldWrapper } from '@/features/editorial/components/BelowTheFoldWrapper'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { useTypeSafeTranslation } from '../../hooks/translations'
 
 export const Footer = () => {
-  const lang = useLocale()
   const logoSize = { width: 280, height: 129 }
+  const headersList = headers()
+  const acceptLanguage = headersList.get('accept-language')
+  const locale = acceptLanguage ? acceptLanguage.split(',')[0] : 'en'
   const { t } = useTypeSafeTranslation('footer')
   const Icon = ExternalLink
 
@@ -27,7 +28,7 @@ export const Footer = () => {
           <div>
             <div className="inline-block hover:bg-black-100">
               <Link
-                href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}
+                href={`https://nieuweinstituut.nl/${locale ?? 'nl'}`}
                 aria-label="Nieuwe instituut logo"
                 target="_blank"
                 className="hover:text-ivory-100"
@@ -81,7 +82,7 @@ export const Footer = () => {
                 <div>
                   <NavLinkButton
                     href={
-                      lang === Locale.En
+                      locale === Locale.En
                         ? 'https://nieuweinstituut.nl/en/pages/nieuwsbrief'
                         : 'https://nieuweinstituut.nl/pages/nieuwsbrief'
                     }
@@ -92,7 +93,7 @@ export const Footer = () => {
                   </NavLinkButton>
                   <NavLinkButton
                     href={
-                      lang === Locale.En
+                      locale === Locale.En
                         ? 'https://nieuweinstituut.nl/en/pages/now-on-display'
                         : 'https://nieuweinstituut.nl/pages/now-on-display'
                     }
@@ -103,7 +104,7 @@ export const Footer = () => {
                   </NavLinkButton>
                   <NavLinkButton
                     href={
-                      lang === Locale.En
+                      locale === Locale.En
                         ? 'https://nieuweinstituut.nl/en/projects/huis-sonneveld'
                         : 'https://nieuweinstituut.nl/projects/huis-sonneveld'
                     }
@@ -116,7 +117,7 @@ export const Footer = () => {
                 <div className="pt-8">
                   <NavLinkButton
                     href={
-                      lang === Locale.En
+                      locale === Locale.En
                         ? 'https://nieuweinstituut.nl/en/pages/privacy'
                         : 'https://nieuweinstituut.nl/pages/privacy'
                     }
