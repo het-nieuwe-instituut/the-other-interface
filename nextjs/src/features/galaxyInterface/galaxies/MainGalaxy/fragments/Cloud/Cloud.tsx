@@ -17,13 +17,13 @@ import { cn } from '@/features/ui/utils/cn'
 import { CSSProperties, useContext, useState } from 'react'
 import { GalaxyZoomAnimationStateContext } from '../../../hooks/GalaxyZoomAnimationStateProvider'
 import { GalaxyPaginationAnimationStateContext } from '../../../hooks/GalaxyPaginationAnimationStateProvider'
+import { useGetUrlLandingPageUrl } from '@/features/galaxyInterface/utils/galaxyRoutes'
 interface Props {
   cloud: CategoryCloud
 }
 
 export const Cloud: React.FC<Props> = ({ cloud }) => {
   const { t } = useTypeSafeTranslation('homepage')
-  const { lang } = useZoom2Params()
   const { title: category, sizeClassNames, cloudClassNames, titleClassNames } = cloud
   const selectedFilters = useSelectedFilters()
   useSearchByCategoryQuery({
@@ -32,10 +32,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
     selectedFilters,
   })
 
-  let url = `/landingpage?category=${category}&filters=${encodeFilters([
-    CollectionHighlightsFilter,
-  ])}&searchResult=true&fallback=true`
-  url = addLocaleToUrl(url, lang)
+  const url = useGetUrlLandingPageUrl(category)
 
   const breakpoint = useBreakpoint()
   const placement = tooltipPlacement(category, breakpoint)
