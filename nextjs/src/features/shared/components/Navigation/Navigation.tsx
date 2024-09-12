@@ -79,136 +79,148 @@ export const Navigation = () => {
   useDisableScroll(isMenuOpen)
 
   return (
-    <div
-      style={
-        {
-          '--z-index': `${NAVIGATION_OVERLAY_Z_INDEX}`,
-        } as CSSProperties
-      }
-      id="navigation-scrollbar"
-      className={cn(
-        'fixed left-0 top-0 z-[var(--z-index)] h-screen w-full bg-blue-95',
-        isMenuOpen
-          ? 'visible transition-opacity ease-out duration-300 opacity-95'
-          : 'invisible transition-opacity ease-in duration-300 opacity-0'
-      )}
-    >
+    <>
+      <div
+        className={cn(
+          'fixed inset-0 z-[var(--z-index)] h-screen w-screen',
+          'backdrop-blur-[10px]',
+          'transition-opacity duration-300',
+          isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        )}
+        style={{ '--z-index': `${NAVIGATION_OVERLAY_Z_INDEX}` } as CSSProperties}
+      />
+
+      <div
+        className={cn(
+          'fixed inset-0 z-[var(--z-index)] h-screen w-screen',
+          'bg-blue-95',
+          'transition-opacity duration-300',
+          isMenuOpen ? 'opacity-95' : 'opacity-0 pointer-events-none'
+        )}
+        style={{ '--z-index': `${NAVIGATION_OVERLAY_Z_INDEX}` } as CSSProperties}
+      />
+
       <div
         style={
           {
-            backdropFilter: 'blur(100px)',
+            '--z-index': `${NAVIGATION_OVERLAY_Z_INDEX}`,
           } as CSSProperties
         }
-        className={cn('size-full md:overflow-hidden')}
-        ref={ref}
+        className={cn(
+          ' fixed left-0 top-0  z-[calc(var(--z-index)+1)] h-screen w-screen duration-300',
+          isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        )}
+        id="navigation-scrollbar"
       >
-        <div className="absolute left-0 top-0 h-screen w-full">
-          {pathname && galaxyPathNames.includes(pathname) && isMenuOpen && (
-            <StaticHeader className="absolute" />
-          )}
+        <div className="relative mx-auto h-screen w-screen max-w-[1440px] overflow-hidden">
+          <div className="absolute screen w-full">
+            {pathname && galaxyPathNames.includes(pathname) && isMenuOpen && (
+              <StaticHeader className="absolute" />
+            )}
 
-          <div
-            style={{ '--z-index': `${MAX_Z_INDEX}` } as CSSProperties}
-            className="relative z-[var(--z-index)] mx-auto flex max-w-[90em] flex-col justify-between px-6 pt-24 md:flex-row"
-          >
-            <div className="flex min-w-[388px] max-w-[711px] flex-col pb-20 pr-[32px]">
-              <p
-                className={TypographyVariants({
-                  socialLarge: 'lg',
-                  className: 'text-pink-100 mb-5',
-                })}
-              >
-                {tNavigation('explore_collection')}
-              </p>
-              {categories.map(category => (
-                <div key={category.name}>
-                  <Link
-                    onClick={() => closeMenu()}
-                    className={cn(
-                      navTextStyle === Fonts.Times
-                        ? MenuTypogrpahyVariants({
-                            menuItem: 'primary',
-                          })
-                        : MenuTypogrpahyVariants({
-                            menuItem: 'secondary',
-                          })
-                    )}
-                    href={`/landingpage?category=${category.name}&lang=${lang}`}
-                  >
-                    {tNavigation(category.translationKey)}
-                  </Link>
-                </div>
-              ))}
-            </div>
-            <div className="flex min-w-[200px] max-w-[398px] flex-col sm:pb-[50px] md:min-w-[388px]">
-              <div className="mb-[63px] flex flex-col">
+            <div
+              style={{ '--z-index': `${MAX_Z_INDEX}` } as CSSProperties}
+              className="relative z-[var(--z-index)] mx-auto flex max-w-[90em] flex-col justify-between px-6 pt-24 md:flex-row"
+            >
+              <div className="flex min-w-[388px] max-w-[711px] flex-col pb-20 pr-[32px]">
                 <p
                   className={TypographyVariants({
                     socialLarge: 'lg',
                     className: 'text-pink-100 mb-5',
                   })}
                 >
-                  {tNavigation('about')}
+                  {tNavigation('explore_collection')}
                 </p>
-                <p
-                  className={TypographyVariants({
-                    socialLarge: 'md',
-                    className: 'text-pink-100 mb-3 tracking-normal',
-                  })}
-                >
-                  {tNavigation('aboutDescription')}
-                </p>
-                <NavLinkButton
-                  href={'/readmore'}
-                  variant={'menuPrimary'}
-                  color={'invertedPaleHover'}
-                  onClick={() => closeMenu()}
-                >
-                  {tNavigation('readMore')}
-                </NavLinkButton>
+                {categories.map(category => (
+                  <div key={category.name}>
+                    <Link
+                      onClick={() => closeMenu()}
+                      className={cn(
+                        navTextStyle === Fonts.Times
+                          ? MenuTypogrpahyVariants({
+                              menuItem: 'primary',
+                            })
+                          : MenuTypogrpahyVariants({
+                              menuItem: 'secondary',
+                            })
+                      )}
+                      href={`/landingpage?category=${category.name}&lang=${lang}`}
+                    >
+                      {tNavigation(category.translationKey)}
+                    </Link>
+                  </div>
+                ))}
               </div>
-              <div className="flex flex-col">
-                <NavLinkButton
-                  href={'/collection'}
-                  variant={'menuSecondary'}
-                  color={'invertedPaleHover'}
-                  className="mb-4"
-                  onClick={() => closeMenu()}
-                >
-                  {tNavigation('theCollection')}
-                </NavLinkButton>
-                <NavLinkButton
-                  href={'/asterisk'}
-                  variant={'menuSecondary'}
-                  color={'invertedPaleHover'}
-                  className="mb-4"
-                  onClick={() => closeMenu()}
-                >
-                  {tNavigation('asterisk')}
-                </NavLinkButton>
-                <NavLinkButton
-                  href={'/externalSources'}
-                  variant={'menuSecondary'}
-                  color={'invertedPaleHover'}
-                  className="mb-4"
-                  onClick={() => closeMenu()}
-                >
-                  {tNavigation('externalSources')}
-                </NavLinkButton>
-                <NavLinkButton
-                  href={'/contribute'}
-                  variant={'menuSecondary'}
-                  color={'invertedPaleHover'}
-                  onClick={() => closeMenu()}
-                >
-                  {tNavigation('contribute')}
-                </NavLinkButton>
+              <div className="flex min-w-[200px] max-w-[398px] flex-col sm:pb-[50px] md:min-w-[388px]">
+                <div className="mb-[63px] flex flex-col">
+                  <p
+                    className={TypographyVariants({
+                      socialLarge: 'lg',
+                      className: 'text-pink-100 mb-5',
+                    })}
+                  >
+                    {tNavigation('about')}
+                  </p>
+                  <p
+                    className={TypographyVariants({
+                      socialLarge: 'md',
+                      className: 'text-pink-100 mb-3 tracking-normal',
+                    })}
+                  >
+                    {tNavigation('aboutDescription')}
+                  </p>
+                  <NavLinkButton
+                    href={'/readmore'}
+                    variant={'menuPrimary'}
+                    color={'invertedPaleHover'}
+                    onClick={() => closeMenu()}
+                  >
+                    {tNavigation('readMore')}
+                  </NavLinkButton>
+                </div>
+                <div className="flex flex-col">
+                  <NavLinkButton
+                    href={'/collection'}
+                    variant={'menuSecondary'}
+                    color={'invertedPaleHover'}
+                    className="mb-4"
+                    onClick={() => closeMenu()}
+                  >
+                    {tNavigation('theCollection')}
+                  </NavLinkButton>
+                  <NavLinkButton
+                    href={'/asterisk'}
+                    variant={'menuSecondary'}
+                    color={'invertedPaleHover'}
+                    className="mb-4"
+                    onClick={() => closeMenu()}
+                  >
+                    {tNavigation('asterisk')}
+                  </NavLinkButton>
+                  <NavLinkButton
+                    href={'/externalSources'}
+                    variant={'menuSecondary'}
+                    color={'invertedPaleHover'}
+                    className="mb-4"
+                    onClick={() => closeMenu()}
+                  >
+                    {tNavigation('externalSources')}
+                  </NavLinkButton>
+                  <NavLinkButton
+                    href={'/contribute'}
+                    variant={'menuSecondary'}
+                    color={'invertedPaleHover'}
+                    onClick={() => closeMenu()}
+                  >
+                    {tNavigation('contribute')}
+                  </NavLinkButton>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 
   function closeMenu() {
