@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation'
 import { headers } from 'next/headers'
 import { CSSProperties } from 'react'
 import { Locale } from 'src/generated/graphql'
-import { MAX_Z_INDEX } from '../../constants/mainConstants'
+import { MAX_Z_INDEX, NAVIGATION_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
 
 import { CategoryLink } from './CategoryLink'
 import { NavigationStaticHeader } from './NaviagtionStaticHeader'
@@ -24,7 +24,7 @@ export const Navigation = () => {
       <div
         style={
           {
-            backdropFilter: 'blur(100px)',
+            '--z-index': `${NAVIGATION_OVERLAY_Z_INDEX}`,
           } as CSSProperties
         }
         className={cn('size-full md:overflow-hidden')}
@@ -62,7 +62,7 @@ export const Navigation = () => {
                     className: 'text-pink-100 mb-5',
                   })}
                 >
-                  {tNavigation('about')}
+                  {tNavigation('explore_collection')}
                 </p>
                 <p
                   className={TypographyVariants({

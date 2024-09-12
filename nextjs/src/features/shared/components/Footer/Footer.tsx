@@ -143,7 +143,12 @@ export const Footer = () => {
                 </div>
               </div>
               <div>
-                <p className={TypographyVariants({ socialLarge: 'md' })}>
+                <p
+                  className={TypographyVariants({
+                    socialLarge: 'md',
+                    className: 'tracking-normal',
+                  })}
+                >
                   {t('languageDisclaimer')}
                 </p>
               </div>

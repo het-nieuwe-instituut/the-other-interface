@@ -91,8 +91,10 @@ export const RelatedStories: React.FC<Props> = ({
           )}
         </div>
       </div>
+      <div className="col-start-2 col-end-3 row-start-1 row-end-3 flex justify-center items-center ">
+        <DetailedRecord className="size-full  flex justify-center items-center" />
+      </div>
       <div className="col-start-2 col-end-2 row-start-1 row-end-3 text-ivory-100 flex items-center justify-center">
-        <DetailedRecord className="absolute my-auto mx-auto h-full" />
         <div
           style={getItemsCssProperties('50')}
           className={
