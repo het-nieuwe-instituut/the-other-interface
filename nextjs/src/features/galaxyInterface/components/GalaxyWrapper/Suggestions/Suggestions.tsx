@@ -14,8 +14,8 @@ import { SuggestionBar } from '../GalaxySearchBar/SuggestionBar/SuggestionBar'
 export const COLLECTION_HILIGHT_ID = 'collection-highlights-id'
 
 export const CollectionHighlightsFilter = {
-  key: 'Subjects',
-  value: 'Collection Highlights',
+  key: 'collectionHighlights',
+  value: 'Collection highlights / Uitgelichte stukken',
   id: COLLECTION_HILIGHT_ID,
 }
 
