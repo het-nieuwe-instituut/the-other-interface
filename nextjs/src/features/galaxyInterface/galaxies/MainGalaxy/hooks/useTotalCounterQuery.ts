@@ -8,9 +8,9 @@ import { sumTotalCounts } from '../helpers/sumTotalCounts'
 import { FilterArray } from '@/features/shared/hooks/search/useFilters'
 import { Locale } from 'src/generated/graphql'
 import { SearchCategory } from '@/features/shared/utils/categories'
-import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
 import { searchCategoryToTriplyCategory } from '../../CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
 import { usePageCategory } from '@/features/shared/hooks/usePageCategory'
+import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/suggestions.constants'
 
 export function useTotalCounterQuery(selectedFilterSuggestions: FilterArray, text: string) {
   const api = initApiClientService()

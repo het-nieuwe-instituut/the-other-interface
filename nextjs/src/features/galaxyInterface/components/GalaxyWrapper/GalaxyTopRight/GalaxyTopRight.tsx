@@ -1,22 +1,21 @@
 'use client'
-import { LOCALES } from '@/features/shared/constants/locales'
-import NextLink from 'next/link'
-import { Fragment, useMemo } from 'react'
-
-import { MenuButton } from '../../../../shared/components/MenuButton/MenuButton'
 
 import { State } from '@/features/shared/configs/store'
+import { LOCALES } from '@/features/shared/constants/locales'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { MenuTypogrpahyVariants } from '@/features/ui/components/typography/menuVariants'
 import { cn } from '@/features/ui/utils/cn'
 import { usePathname, useSearchParams } from 'next/navigation'
+import { Fragment, useMemo } from 'react'
 import { useSelector } from 'react-redux'
+import { MenuButton } from '../../../../shared/components/MenuButton/MenuButton'
 
 export const GalaxyTopRight: React.FC = () => {
   const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const lang = useLocale()
+
   const hrefs = useMemo(() => {
     return LOCALES.map(locale => {
       if (!pathname || !process.env.parsed.NEXT_PUBLIC_URL || !searchParams) {
@@ -33,6 +32,14 @@ export const GalaxyTopRight: React.FC = () => {
     })
   }, [pathname, searchParams])
 
+  const handleLanguageChange = (newLocale: string, href: string) => {
+    // Set the new locale in a cookie or local storage
+    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000`
+
+    // Force a full page reload to trigger server-side rendering
+    window.location.href = href
+  }
+
   return (
     <div className="flex items-center">
       <div className="flex-row items-center justify-center">
@@ -41,7 +48,7 @@ export const GalaxyTopRight: React.FC = () => {
           if (!href) return null
           return (
             <Fragment key={locale}>
-              <NextLink
+              <button
                 className={cn(
                   'truncate mr-[10px] transition-colors',
                   isMenuOpen &&
@@ -57,11 +64,10 @@ export const GalaxyTopRight: React.FC = () => {
                       lang === locale && 'border-b border-solid border-current'
                     )
                 )}
-                href={href}
-                locale={locale}
+                onClick={() => handleLanguageChange(locale, href)}
               >
                 {locale.toUpperCase()}
-              </NextLink>
+              </button>
             </Fragment>
           )
         })}
