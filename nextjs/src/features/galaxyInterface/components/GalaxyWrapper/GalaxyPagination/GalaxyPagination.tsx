@@ -101,7 +101,7 @@ export const GalaxyPagination: React.FC<Props> = ({
     <div
       style={{ '--z-index': FOOTER_Z_INDEX } as CSSProperties}
       className={cn(
-        'relative z-[var(--z-index)] h-[60px] gap-[5px] border border-solid border-blue p-1 text-blue-100 flex'
+        'relative z-[var(--z-index)] h-[61.5px] gap-[5px] border border-solid border-blue p-1 text-blue-100 flex'
       )}
     >
       {renderPaginationContent()}
