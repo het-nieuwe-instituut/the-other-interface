@@ -95,40 +95,47 @@ export const Record = React.memo(
               onClick={() => setClicked(true)}
             >
               <div ref={ref} className="relative size-full ">
-                <div
-                  style={{
-                    position: 'absolute',
-
-                    zIndex: -80,
-                  }}
-                  className={cn(
-                    'hidden group-hover:block size-full max-h-[calc(100%-2vw-5px)]',
-                    (animationState === 'forward' || animationState === 'backwards') &&
-                      'hidden group-hover:hidden'
-                  )}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="size-full overflow-visible">
-                    <line
-                      x1={coordinates.x1}
-                      y1={coordinates.y1}
-                      x2={coordinates.x2}
-                      y2={coordinates.y2}
-                      strokeWidth={1}
-                      stroke={'RGBA(0, 81, 255, .4)'}
-                    />
-                  </svg>
-                </div>
                 <div className="flex size-full flex-col gap-[12px]  transition-all duration-300 ease-in-out hover:scale-105">
-                  <StoryOrRecordResponsiveImage
-                    recordOrStoryId={id}
-                    src={recordDetails?.thumbnail?.[0]}
-                    alt={recordDetails?.title}
-                    className="max-h-[calc(100%-2vw-5px)]" // where 1.6vw are a texts' line heights, 5px are gaps
-                    size={'11vw'}
+                  <div
+                    className="size-full  flex items-center  justify-center "
                     style={{
                       flex: '1 1 calc(100% - 2vw - 5px)',
                     }}
-                  />
+                  >
+                    <div
+                      style={{
+                        position: 'absolute',
+                        zIndex: -80,
+                      }}
+                      className={cn(
+                        'hidden group-hover:block size-full ',
+                        (animationState === 'forward' || animationState === 'backwards') &&
+                          'hidden group-hover:hidden'
+                      )}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="size-full overflow-visible"
+                      >
+                        <line
+                          x1={coordinates.x1}
+                          y1={coordinates.y1}
+                          x2={coordinates.x2}
+                          y2={coordinates.y2}
+                          strokeWidth={1}
+                          stroke={'RGBA(0, 81, 255, .4)'}
+                        />
+                      </svg>
+                    </div>
+                    <StoryOrRecordResponsiveImage
+                      recordOrStoryId={id}
+                      src={recordDetails?.thumbnail?.[0]}
+                      alt={recordDetails?.title}
+                      className="size-full"
+                      imageClassName={cn('object-bottom')}
+                      size={'11vw'}
+                    />
+                  </div>
                   <RecordText
                     className={cn(
                       animationState === 'forward' &&
