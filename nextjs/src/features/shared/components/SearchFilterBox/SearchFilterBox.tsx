@@ -1,8 +1,11 @@
+import { CollectionHighlightsFilter } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
 import { useSuggestionsTranslations } from '@/features/galaxyInterface/services/suggestions'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
+import useTranslation from 'next-translate/useTranslation'
 import { useSelector } from 'react-redux'
 import { State } from '../../configs/store'
+import { useTypeSafeTranslation } from '../../hooks/translations'
 import ActionButton from './buttons/ActionButton/ActionButton'
 
 interface Props {
@@ -26,6 +29,7 @@ export const SearchFilterBox: React.FC<Props> = ({
   id,
 }) => {
   const { searchCategory } = useSelector((state: State) => state.shared)
+  const tSuggesitons = useTypeSafeTranslation('suggestions').t
   const getTranslation = useSuggestionsTranslations()
   const translation = getTranslation(category ?? '', searchCategory ?? 'all')
 
@@ -50,7 +54,11 @@ export const SearchFilterBox: React.FC<Props> = ({
             </p>
           </div>
 
-          <p className={cn('truncate', TypographyVariants({ socialLarge: 'lg' }))}>{subCategory}</p>
+          <p className={cn('truncate', TypographyVariants({ socialLarge: 'lg' }))}>
+            {CollectionHighlightsFilter.value === subCategory
+              ? tSuggesitons('subcategoryCollectionHighlight')
+              : subCategory}
+          </p>
         </button>
       </div>
       {actionButton && actionButtonAriaLabel && (
