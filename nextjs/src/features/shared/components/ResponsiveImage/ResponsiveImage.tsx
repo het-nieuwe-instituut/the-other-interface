@@ -7,6 +7,7 @@ import { limitCopyrightedImageResolution } from './limitCopyrightedImageResoluti
 
 export type ResponsiveImageProps = {
   className: string
+  imageClassName?: string
   src?: string | null
   alt?: string | null
   size?: string
@@ -23,6 +24,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   onClick,
   onLoad,
   className,
+  imageClassName,
 }) => {
   const [showFallback, setShowFallback] = useState(!src)
   const [isLoaded, setIsLoaded] = useState(!src)
@@ -43,7 +45,8 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         className={cn(
           'transition-opacity',
           'absolute top-0 left-0 object-center object-contain opacity-100',
-          !showFallback && isLoaded && 'opacity-0'
+          !showFallback && isLoaded && 'opacity-0',
+          imageClassName
         )}
         onContextMenu={e => e.preventDefault()}
         fill={true}
@@ -54,7 +57,8 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         <Image
           className={cn(
             'absolute top-0 left-0 object-center object-contain',
-            showFallback && 'opacity-0'
+            showFallback && 'opacity-0',
+            imageClassName
           )}
           src={processedSrc}
           alt={alt || 'Actual image'}

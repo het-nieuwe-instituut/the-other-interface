@@ -92,7 +92,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
             <CloseButton onClick={clearAllSearch} />
           </>
         ) : isNoActiveSearch ? (
-          <div className={'ml-14'}>
+          <div className={'ml-14 mt-2'}>
             <SearchButton />
           </div>
         ) : (
