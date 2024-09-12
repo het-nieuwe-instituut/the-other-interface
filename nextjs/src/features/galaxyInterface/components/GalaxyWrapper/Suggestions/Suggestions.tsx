@@ -10,14 +10,7 @@ import { useSelector } from 'react-redux'
 import { EnumTriplyrecordType } from 'src/generated/graphql'
 import { useDebounceValue } from 'usehooks-ts'
 import { SuggestionBar } from '../GalaxySearchBar/SuggestionBar/SuggestionBar'
-
-export const COLLECTION_HILIGHT_ID = 'collection-highlights-id'
-
-export const CollectionHighlightsFilter = {
-  key: 'Subjects',
-  value: 'Collection Highlights',
-  id: COLLECTION_HILIGHT_ID,
-}
+import { CollectionHighlightsFilter, COLLECTION_HILIGHT_ID } from './suggestions.constants'
 
 type Props = {
   handleSelectFilter: (filters: Filter) => void

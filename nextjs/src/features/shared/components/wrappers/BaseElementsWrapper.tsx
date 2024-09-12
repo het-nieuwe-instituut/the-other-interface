@@ -1,4 +1,3 @@
-'use client'
 import { Footer } from '../Footer/Footer'
 import { Navigation } from '../Navigation/Navigation'
 

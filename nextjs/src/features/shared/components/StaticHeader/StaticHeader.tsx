@@ -4,11 +4,12 @@ import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/componen
 import { MenuTypogrpahyVariants } from '@/features/ui/components/typography/menuVariants'
 import { cn } from '@/features/ui/utils/cn'
 import { CSSProperties } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { State } from '../../configs/store'
 import { STATIC_HEADER_Z_INDEX, USER_LOOKS_ON } from '../../constants/mainConstants'
 import { useLooseTypeSafeTranslation } from '../../hooks/translations'
 import { useLocale } from '../../hooks/useLocale'
+import { sharedActions } from '../../stores/shared.store'
 
 export const StaticHeader = ({
   isNotGalaxyPage,
@@ -17,6 +18,7 @@ export const StaticHeader = ({
   isNotGalaxyPage?: boolean
   className?: string
 }) => {
+  const dispatch = useDispatch()
   const { t: tNavigation } = useLooseTypeSafeTranslation('navigation')
   const lang = useLocale()
 
@@ -41,6 +43,7 @@ export const StaticHeader = ({
         <div className="container mx-auto flex size-full max-w-[90em] items-center justify-between px-6">
           <div className="h-full items-center">
             <DelayedNextLinkWithZoomAnimationsContext
+              onClick={() => dispatch(sharedActions.menuOpen({ isMenuOpen: false }))}
               animation={'backwards'}
               delay={300}
               href={lang ? `/?lang=${lang}` : '/?lang=nl'}
@@ -56,7 +59,7 @@ export const StaticHeader = ({
                 'cursor-pointer overflow-hidden h-full flex m-0 '
               )}
             >
-              <p className="mr-2 max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px] max-sm:overflow-visible max-sm:whitespace-normal">
+              <p className="mr-2 max-sm:overflow-visible max-sm:whitespace-normal max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px]">
                 {tNavigation('headerTitle')}
               </p>
             </DelayedNextLinkWithZoomAnimationsContext>
@@ -97,7 +100,7 @@ export const StaticPageHeader = () => {
                 'cursor-pointer overflow-hidden h-full flex m-0 '
               )}
             >
-              <p className="mr-2 max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px] max-sm:overflow-visible max-sm:whitespace-normal">
+              <p className="mr-2 max-sm:overflow-visible max-sm:whitespace-normal max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px]">
                 {tNavigation('headerTitle')}
               </p>
             </DelayedNextLinkWithZoomAnimationsContext>

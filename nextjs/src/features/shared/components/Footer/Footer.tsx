@@ -1,3 +1,4 @@
+'use client'
 import LogoSvg from '@/features/modules/components/LogoSvg/LogoSvg'
 import Link from 'next/link'
 import { useTypeSafeTranslation } from '../../hooks/translations'
@@ -24,7 +25,7 @@ export const Footer = () => {
       <div className="container m-auto max-w-[1392px] p-6 min-[1428px]:px-0">
         <div className="grid gap-1 md:grid-cols-2 lg:grid-cols-3">
           <div>
-            <div className="hover:bg-black-100 inline-block">
+            <div className="inline-block hover:bg-black-100">
               <Link
                 href={`https://nieuweinstituut.nl/${lang ?? 'nl'}`}
                 aria-label="Nieuwe instituut logo"
@@ -35,7 +36,7 @@ export const Footer = () => {
               </Link>
             </div>
             <div className="pt-6">
-              <div className="hover:bg-black-100 inline-block whitespace-nowrap">
+              <div className="inline-block whitespace-nowrap hover:bg-black-100">
                 <Link href="https://goo.gl/maps/m5EvkSa3z321G68z6" className="hover:text-ivory-100">
                   <p className={TypographyVariants({ socialLarge: 'lg', className: 'mb-[2px]' })}>
                     Nieuwe Instituut
