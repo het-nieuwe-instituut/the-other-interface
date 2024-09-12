@@ -7,7 +7,7 @@ import { cn } from '@/features/ui/utils/cn'
 import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
-import { CSSProperties, useEffect, useMemo, useRef } from 'react'
+import { CSSProperties, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { State } from '../../configs/store'
 import {
@@ -16,9 +16,8 @@ import {
   USER_LOOKS_ON,
 } from '../../constants/mainConstants'
 import useDisableScroll from '../../hooks/ui/useDisableScroll'
-import { useLocale } from '../../hooks/useLocale'
 import { sharedActions } from '../../stores/shared.store'
-import { CloudCategory, CLOUD_CATEGORIES } from '../../utils/categories'
+import { CLOUD_CATEGORIES } from '../../utils/categories'
 import { StaticHeader } from '../StaticHeader/StaticHeader'
 
 const categories = [
