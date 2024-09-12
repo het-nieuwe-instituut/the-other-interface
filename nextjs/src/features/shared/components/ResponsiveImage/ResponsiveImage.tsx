@@ -7,7 +7,7 @@ import { limitCopyrightedImageResolution } from './limitCopyrightedImageResoluti
 
 export type ResponsiveImageProps = {
   className: string
-  imageClassName: string
+  imageClassName?: string
   src?: string | null
   alt?: string | null
   size?: string
