@@ -54,18 +54,16 @@ export class TriplyElasticSearchService {
     }
   }
 
-  // TODO: implement locale after ElasticSearch endpoint is updated - HNIT-1903
   public async search(
     search: string,
     locale: Locale,
-    { page = 1, pageSize = 12 }: PaginationArgs
+    { start = 0, limit = 12 }: Pick<PaginationArgs, 'start' | 'limit'>
   ): Promise<SearchResultType> {
     const elasticQuery = {
-      from: pageSize * (page - 1),
-      size: pageSize,
+      from: start,
+      size: limit,
       query: this.getQuery(search),
     }
-
     const res = await this.post<ElasticsearchResult>(
       new URL(this.elasticSearchURL[locale]),
       elasticQuery
@@ -75,7 +73,6 @@ export class TriplyElasticSearchService {
 
     return {
       nodes: formattedResult,
-      page,
       total: res.hits.total.value,
     }
   }

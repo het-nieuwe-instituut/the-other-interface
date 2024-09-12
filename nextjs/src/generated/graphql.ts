@@ -1265,9 +1265,11 @@ export type Query = {
 
 export type QueryArchivesRecordRelationsArgs = {
   id: Scalars['String']['input'];
+  limit?: InputMaybe<Scalars['Int']['input']>;
   locale: Locale;
   page: Scalars['Int']['input'];
   pageSize?: InputMaybe<Scalars['Int']['input']>;
+  start?: InputMaybe<Scalars['Int']['input']>;
   type: EntityNames;
 };
 
@@ -1361,9 +1363,11 @@ export type QueryLocationsArgs = {
 
 export type QueryObjectRecordRelationsArgs = {
   id: Scalars['String']['input'];
+  limit?: InputMaybe<Scalars['Int']['input']>;
   locale: Locale;
   page: Scalars['Int']['input'];
   pageSize?: InputMaybe<Scalars['Int']['input']>;
+  start?: InputMaybe<Scalars['Int']['input']>;
   type: EntityNames;
 };
 
@@ -1388,9 +1392,11 @@ export type QueryObjectsZoomRecordHoverArgs = {
 
 export type QueryPeopleRecordRelationsArgs = {
   id: Scalars['String']['input'];
+  limit?: InputMaybe<Scalars['Int']['input']>;
   locale: Locale;
   page: Scalars['Int']['input'];
   pageSize?: InputMaybe<Scalars['Int']['input']>;
+  start?: InputMaybe<Scalars['Int']['input']>;
   type: EntityNames;
 };
 
@@ -1415,9 +1421,11 @@ export type QueryPeopleZoomLevelHoverArgs = {
 
 export type QueryPublicationRecordRelationsArgs = {
   id: Scalars['String']['input'];
+  limit?: InputMaybe<Scalars['Int']['input']>;
   locale: Locale;
   page: Scalars['Int']['input'];
   pageSize?: InputMaybe<Scalars['Int']['input']>;
+  start?: InputMaybe<Scalars['Int']['input']>;
   type: EntityNames;
 };
 
@@ -1442,17 +1450,19 @@ export type QueryPublicationsZoomRecordHoverArgs = {
 
 export type QueryRelationsArgs = {
   id: Scalars['String']['input'];
+  limit?: InputMaybe<Scalars['Int']['input']>;
   locale: Locale;
   page: Scalars['Int']['input'];
   pageSize?: InputMaybe<Scalars['Int']['input']>;
+  start?: InputMaybe<Scalars['Int']['input']>;
   type: EntityNames;
 };
 
 
 export type QuerySearchTriplyArgs = {
   lang: Locale;
-  page: Scalars['Int']['input'];
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  start?: InputMaybe<Scalars['Int']['input']>;
   text: Scalars['String']['input'];
 };
 
@@ -1527,10 +1537,12 @@ export type QueryUsersPermissionsUsersArgs = {
 
 export type QueryZoomLevel2Args = {
   entityName: EntityNames;
+  limit?: InputMaybe<Scalars['Int']['input']>;
   locale: Locale;
   page: Scalars['Int']['input'];
   pageSize?: InputMaybe<Scalars['Int']['input']>;
   selectedFilterSuggestions?: InputMaybe<Array<SelectedFilterSuggestion>>;
+  start?: InputMaybe<Scalars['Int']['input']>;
   text?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1589,7 +1601,6 @@ export type SearchResultItemType = {
 export type SearchResultType = {
   __typename?: 'SearchResultType';
   nodes?: Maybe<Array<SearchResultItemType>>;
-  page: Scalars['Int']['output'];
   total: Scalars['Int']['output'];
 };
 
@@ -2120,12 +2131,12 @@ export type LandingPagePublicationFragmentFragment = { __typename?: 'LandingPage
 export type SearchAllQueryVariables = Exact<{
   text: Scalars['String']['input'];
   lang: Locale;
-  page: Scalars['Int']['input'];
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  start: Scalars['Int']['input'];
+  limit?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type SearchAllQuery = { __typename?: 'Query', searchTriply: { __typename?: 'SearchResultType', page: number, total: number, nodes?: Array<{ __typename?: 'SearchResultItemType', title?: string | null, thumbnail?: string | null, id: string, type: EntityNames }> | null } };
+export type SearchAllQuery = { __typename?: 'Query', searchTriply: { __typename?: 'SearchResultType', total: number, nodes?: Array<{ __typename?: 'SearchResultItemType', title?: string | null, thumbnail?: string | null, id: string, type: EntityNames }> | null } };
 
 export type StoriesQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
@@ -2139,6 +2150,8 @@ export type SearchByStoriesQueryVariables = Exact<{
   searchTerm?: InputMaybe<Scalars['String']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
+  start?: InputMaybe<Scalars['Int']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
   locationsFilterTerm?: InputMaybe<Scalars['ID']['input']>;
   themesFilterTerm?: InputMaybe<Scalars['ID']['input']>;
   authorFilterTerm?: InputMaybe<Scalars['ID']['input']>;
@@ -3292,9 +3305,8 @@ export const LandingPagePublicationDocument = gql`
 }
     ${LandingPagePublicationFragmentFragmentDoc}`;
 export const SearchAllDocument = gql`
-    query searchAll($text: String!, $lang: Locale!, $page: Int!, $pageSize: Int) {
-  searchTriply(page: $page, lang: $lang, pageSize: $pageSize, text: $text) {
-    page
+    query searchAll($text: String!, $lang: Locale!, $start: Int!, $limit: Int) {
+  searchTriply(start: $start, lang: $lang, limit: $limit, text: $text) {
     nodes {
       title
       thumbnail
@@ -3325,10 +3337,10 @@ export const StoriesDocument = gql`
 }
     `;
 export const SearchByStoriesDocument = gql`
-    query searchByStories($searchTerm: String, $page: Int, $pageSize: Int, $locationsFilterTerm: ID, $themesFilterTerm: ID, $authorFilterTerm: ID, $locale: Locale!) {
+    query searchByStories($searchTerm: String, $page: Int, $pageSize: Int, $start: Int, $limit: Int, $locationsFilterTerm: ID, $themesFilterTerm: ID, $authorFilterTerm: ID, $locale: Locale!) {
   stories(
     filters: {and: [{or: [{locations: {id: {eq: $locationsFilterTerm}}}, {themes: {id: {eq: $themesFilterTerm}}}, {author: {id: {eq: $authorFilterTerm}}}]}, {or: [{title: {containsi: $searchTerm}}, {description: {containsi: $searchTerm}}, {shortDescription: {containsi: $searchTerm}}]}], or: [{title: {containsi: $searchTerm}}, {description: {containsi: $searchTerm}}, {shortDescription: {containsi: $searchTerm}}]}
-    pagination: {page: $page, pageSize: $pageSize}
+    pagination: {page: $page, pageSize: $pageSize, start: $start, limit: $limit}
     locale: $locale
   ) {
     data {

@@ -31,7 +31,7 @@ export function useTotalCounterQuery(selectedFilterSuggestions: FilterArray, tex
 
   return useQuery({
     retry: false,
-    queryKey: ['total-counter', locale, searchCategory, ...ids],
+    queryKey: ['total-counter', locale, searchCategory, text, ...ids],
     queryFn,
     cacheTime: 0,
     refetchOnWindowFocus: false,
@@ -54,7 +54,7 @@ function getQueryFn(
     return collectionHighlightsCountQueryFn(api, locale, searchCategory, text)
   }
 
-  if (pageCategory === 'all') {
+  if (pageCategory === 'all' && text) {
     return searchAll(api, locale, text)
   }
 
@@ -104,7 +104,7 @@ function collectionHighlightsCountQueryFn(
 
 function searchAll(api: ReturnType<typeof initApiClientService>, lang: Locale, text: string) {
   return async () => {
-    const pagination = { page: 1, pageSize: 0 }
+    const pagination = { limit: 0, start: 0 }
     const [triplyData, storyData] = await Promise.all([
       api.searchAll({ text, lang, ...pagination }),
       api.searchByStories({ searchTerm: text || undefined, locale: lang, ...pagination }),

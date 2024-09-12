@@ -10,4 +10,10 @@ export class PaginationArgs {
   @Field(() => Int, { nullable: true })
   @Min(1)
   public pageSize?: number
+
+  @Field(() => Int, { nullable: true })
+  public start?: number
+
+  @Field(() => Int, { nullable: true })
+  public limit?: number
 }
