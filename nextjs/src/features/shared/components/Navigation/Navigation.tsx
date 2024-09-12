@@ -16,7 +16,6 @@ import {
   USER_LOOKS_ON,
 } from '../../constants/mainConstants'
 import useDisableScroll from '../../hooks/ui/useDisableScroll'
-import { useLocale } from '../../hooks/useLocale'
 import { sharedActions } from '../../stores/shared.store'
 import { CLOUD_CATEGORIES } from '../../utils/categories'
 import { StaticHeader } from '../StaticHeader/StaticHeader'
@@ -39,7 +38,6 @@ export const Navigation = () => {
   const { t: tNavigation } = useTranslation('navigation')
   const pathname = usePathname()
   const params = useParams()
-  const locale = useLocale()
   const galaxyPathNames =
     params && params.category && params.id
       ? [
@@ -134,6 +132,7 @@ export const Navigation = () => {
                 </p>
                 {categories.map(category => (
                   <CategoryLink
+                    key={category.name}
                     category={category}
                     navTextStyle={navTextStyle}
                     onClick={closeMenu}
