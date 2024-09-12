@@ -96,11 +96,11 @@ const MainGalaxyContent = React.memo(() => {
   const renderMainContent = () => {
     if (isError) {
       return (
-        <div className="flex h-full items-center justify-center">
+        <div className="flex h-full items-center justify-center bg-pink-50 backdrop-blur-[2px]">
           <div className="flex flex-col gap-2">
             <p
               className={TypographyVariants({
-                times: '2xl',
+                timesDot: '2xl',
                 className: 'text-blue-100',
               })}
             >

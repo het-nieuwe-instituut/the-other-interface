@@ -1,6 +1,6 @@
 import { cn } from '@/features/ui/utils/cn'
 
-import React from 'react'
+import React, { CSSProperties } from 'react'
 
 import { Animations, Conditions, useGalaxyAnimationState } from './useGalaxyAnimationState'
 
@@ -36,42 +36,52 @@ export const GalaxyPaginationAnimationStateProvider = ({
 export const getItemsAnimationClassNames = (animationState: Animations, conditions: Conditions) => {
   return cn(
     conditions === 'previousAnimationWasBackwards' &&
-      'animate-[fromHideToShow_500ms_ease-in-out_forwards]',
-    animationState === 'forward' && 'animate-[toBlurAndHide_500ms_ease-in-out_forwards]',
-    animationState === 'backwards' && 'animate-[toBlur_500ms_ease-in-out_forwards]',
-    conditions === 'firstRender' && 'animate-[fromHideToShow_500ms_ease-in-out_forwards]'
+      'animate-[paginationHideToShow_500ms_ease-in-out_forwards]',
+    animationState === 'forward' && 'animate-[paginationForward_500ms_ease-in-out_forwards]',
+    animationState === 'backwards' && 'animate-[paginationBackward_500ms_ease-in-out_forwards]',
+    conditions === 'firstRender' && 'animate-[paginationHideToShow_500ms_ease-in-out_forwards]'
   )
+}
+
+export function getItemsCssProperties(blur: '10' | '50' = '10') {
+  return {
+    '--blur': `${blur}px`,
+    '--scale-max': '2',
+    '--scale-min': '0.9',
+  } as CSSProperties
 }
 
 export const getNextItemsAnimationClassNames = (
   animationState: Animations,
   conditions: Conditions,
-  hasItems: boolean,
-  blurVariant: '50px' | '10px' = '10px'
+  hasItems: boolean
 ) => {
-  if (blurVariant === '50px') {
-    return cn(
-      conditions === 'previousAnimationWasForward' &&
-        hasItems &&
-        'animate-[fromHideToShowExtraBlur50px_500ms_ease-in-out_forwards]',
-      !animationState &&
-        conditions === 'firstRender' &&
-        'animate-[fromHideToBlur50px_500ms_ease-in-out_forwards]',
-      !animationState && conditions !== 'firstRender' && 'blur-[50px]',
-      animationState === 'forward' && 'animate-[toUnblur50px_500ms_ease-in-out_forwards]',
-      animationState === 'backwards' && 'animate-[fromBlurredToHide50px_500ms_ease-in-out_forwards]'
-    )
-  }
-
   return cn(
     conditions === 'previousAnimationWasForward' &&
       hasItems &&
-      'animate-[fromHideToShow_500ms_ease-in-out_forwards]',
+      'animate-[nextPaginationHideToShow_500ms_ease-in-out_forwards]',
     !animationState &&
       conditions === 'firstRender' &&
-      'animate-[fromHideToBlur_500ms_ease-in-out_forwards]',
-    !animationState && conditions !== 'firstRender' && 'blur-[10px]',
-    animationState === 'forward' && 'animate-[toUnblur_500ms_ease-in-out_forwards]',
-    animationState === 'backwards' && 'animate-[fromBlurredToHide_500ms_ease-in-out_forwards]'
+      'animate-[nextPaginationHideToBlur_500ms_ease-in-out_forwards]  scale-[var(--scale-min)]',
+    !animationState &&
+      conditions !== 'firstRender' &&
+      conditions === 'previousAnimationWasForward' &&
+      'animate-[nextPaginationHideToBlur_500ms_ease-in-out_forwards]',
+    !animationState &&
+      conditions !== 'firstRender' &&
+      conditions === 'previousAnimationWasBackwards' &&
+      'blur-[var(--blur)] scale-[var(--scale-min)]',
+    animationState === 'forward' && 'animate-[nextPaginationToUnblur_500ms_ease-in-out_forwards]',
+    animationState === 'backwards' &&
+      'animate-[nextPaginationFromBlurredToHide_500ms_ease-in-out_forwards]'
   )
+}
+
+export function getNextItemsCssProperties(blur: '10' | '50' = '10') {
+  return {
+    '--blur': `${blur}px`,
+    '--scale-max': '2',
+    '--scale-min': '0.9',
+    '--scale-hide': '0.8',
+  } as CSSProperties
 }

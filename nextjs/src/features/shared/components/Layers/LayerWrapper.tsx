@@ -22,32 +22,30 @@ export const LayerWrapper: React.FC<Props> = ({
 }) => {
   if (disableBelowTheFold) {
     return (
-      <div className="relative mx-auto block min-h-[600px] w-full px-0 xl:px-6">
-        {renderContent()}
-      </div>
+      <div className="relative mx-auto block min-h-[600px] px-5 md:px-6">{renderContent()}</div>
     )
   }
 
   return (
-    <BelowTheFoldWrapper className="relative min-h-[600px] w-full px-0 xl:px-6">
+    <BelowTheFoldWrapper className="relative min-h-[600px] px-5 md:px-6 ">
       {renderContent()}
     </BelowTheFoldWrapper>
   )
 
   function renderContent() {
     return (
-      <div className="mx-auto max-w-[90em] pt-9">
+      <div className="mx-auto max-w-[1392px] pt-9">
         <div
           className={cn(
             'grid lg:grid-areas-editorial-large grid-areas-editorial-small',
             'lg:grid-cols-[minmax(0,1fr),320px] grid-cols-[100%,100%]',
             'lg:grid-rows-[1fr,auto] grid-rows-[auto,minmax(0,1fr),auto]',
-            RightContent ? 'gap-[3.75rem]' : 'gap-0'
+            RightContent ? 'gap-20' : 'gap-0'
           )}
         >
           {suspense ? (
             <Suspense fallback={<EditorialSkeleton />}>
-              <div className="px-5 grid-in-left md:px-6">{LeftContent}</div>
+              <div className="grid-in-left">{LeftContent}</div>
               <div className="grid-in-bottom">{BottomContent}</div>
             </Suspense>
           ) : (
@@ -56,14 +54,14 @@ export const LayerWrapper: React.FC<Props> = ({
                 <EditorialSkeleton />
               ) : (
                 <>
-                  <div className="px-5 grid-in-left md:px-6">{LeftContent}</div>
+                  <div className=" grid-in-left ">{LeftContent}</div>
                   <div className="grid-in-bottom">{BottomContent}</div>
                 </>
               )}
             </>
           )}
 
-          {RightContent && <div className="px-5 grid-in-right md:px-6">{RightContent}</div>}
+          {RightContent && <div className=" grid-in-right ">{RightContent}</div>}
         </div>
       </div>
     )

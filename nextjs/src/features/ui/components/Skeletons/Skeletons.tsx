@@ -9,7 +9,7 @@ export const SkeletonGroup = ({
   className?: string
 }) => {
   return (
-    <div role="status" className={cn('flex w-full flex-col gap-4 lg:ml-6 xl:ml-0', className)}>
+    <div role="status" className={cn('flex w-full flex-col gap-4  xl:ml-0', className)}>
       {children}
     </div>
   )

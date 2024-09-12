@@ -13,10 +13,10 @@ export const RecordText: React.FC<Props> = ({ title = '', categoryType, classNam
   const { t } = useLooseTypeSafeTranslation('category')
 
   return (
-    <div className={cn('flex w-full text-blue-100 flex-col flex-1 mt-2', className)}>
+    <div className={cn('flex w-full text-blue-100 flex-col flex-1', className)}>
       <p
         className={
-          'mt-2 line-clamp-2 hyphens-auto text-center font-times-dot text-[12px] leading-[12px]'
+          'line-clamp-2 hyphens-auto text-center font-times-dot text-[12px] leading-[120%]'
         }
       >
         {title}

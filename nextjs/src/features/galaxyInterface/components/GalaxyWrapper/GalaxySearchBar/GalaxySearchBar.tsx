@@ -85,14 +85,14 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
         filterInputRef={filterInputRef}
       />
 
-      <div className="flex h-[60px] items-center gap-[12px] self-end pt-1">
+      <div className="flex h-[60px] items-center gap-[12px] self-end">
         {isSearchModeActive ? (
           <>
             <GoButton onGoClick={handleGoClick} />
             <CloseButton onClick={clearAllSearch} />
           </>
         ) : isNoActiveSearch ? (
-          <div className={'ml-14'}>
+          <div className={'ml-14 mt-2'}>
             <SearchButton />
           </div>
         ) : (

@@ -83,15 +83,17 @@ export const RecordLayer = () => {
           <ErrorBox />
         ) : (
           <>
-            <div className="flex flex-col gap-4">
-              <PageHeader
-                title={zoomLevel3?.title ?? undefined}
-                preface={zoomLevel3?.description ?? undefined}
-                constrainPreface={true}
-                splitByHtmlBreaks
-                enrichedTitles={enrichedTitles}
-                enrichedDescriptions={enrichedDescriptions}
-              ></PageHeader>
+            <div className="flex flex-col">
+              <div className="pb-20">
+                <PageHeader
+                  title={zoomLevel3?.title ?? undefined}
+                  preface={zoomLevel3?.description ?? undefined}
+                  constrainPreface={true}
+                  splitByHtmlBreaks
+                  enrichedTitles={enrichedTitles}
+                  enrichedDescriptions={enrichedDescriptions}
+                ></PageHeader>
+              </div>
 
               {zoomLevel3?.__typename === 'ArchiveZoomLevel3DetailType' &&
               (zoomLevel3?.asteriskSuggestions?.length ?? 0) > 0 ? (

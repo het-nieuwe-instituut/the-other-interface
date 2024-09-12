@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useWindowSize } from 'usehooks-ts'
+import { useTimeout, useWindowSize } from 'usehooks-ts'
 
 type ElementPosition = {
   left: number | undefined
@@ -23,7 +23,13 @@ export const useElementPosition = () => {
     height: undefined,
   })
 
+  // because of all the scale animation stuff this is needed, else it registers incorrect location
+  useTimeout(() => setPos(), 500)
   useEffect(() => {
+    setPos()
+  }, [width, height])
+
+  function setPos() {
     if (ref.current !== null) {
       const rect = ref.current.getBoundingClientRect()
       setPosition({
@@ -35,7 +41,7 @@ export const useElementPosition = () => {
         height: rect.height,
       })
     }
-  }, [width, height])
+  }
 
   return [position, ref] as const
 }
