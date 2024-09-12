@@ -6,7 +6,7 @@ import { cn } from '@/features/ui/utils/cn'
 import useTranslation from 'next-translate/useTranslation'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
-import { CSSProperties, useEffect, useMemo, useRef } from 'react'
+import { CSSProperties, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { State } from '../../configs/store'
 import {
@@ -32,7 +32,6 @@ export enum Fonts {
 }
 
 export const Navigation = () => {
-  const ref = useRef<HTMLDivElement | null>(null)
   const isMenuOpen = useSelector((state: State) => state?.shared?.isMenuOpen)
   const userLooksOn = useSelector((state: State) => state.shared.userLooksOn)
   const { t: tNavigation } = useTranslation('navigation')
@@ -113,7 +112,7 @@ export const Navigation = () => {
         id="navigation-scrollbar"
       >
         <div className="relative mx-auto h-screen w-screen max-w-[1440px] overflow-hidden">
-          <div className="absolute screen w-full">
+          <div className="screen absolute w-full">
             {pathname && galaxyPathNames.includes(pathname) && isMenuOpen && (
               <StaticHeader className="absolute" />
             )}
