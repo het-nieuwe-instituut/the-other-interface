@@ -8,7 +8,7 @@ interface Props {
   onClick: () => void
   isOpen: boolean
   ariaLabel: string
-  className: string
+  className?: string
 }
 
 export const CategoryFilter: React.FC<Props> = ({

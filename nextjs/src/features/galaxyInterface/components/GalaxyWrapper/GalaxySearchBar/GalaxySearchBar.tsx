@@ -93,7 +93,12 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
       <div className="flex h-[60px] items-center gap-[12px] self-end">
         {isSearchModeActive ? (
           <>
-            <GoButton onGoClick={handleGoClick} />
+            <GoButton
+              onGoClick={handleGoClick}
+              className={
+                'text-blue-100 group-focus-within:text-pink-100 group-focus-within:hover:text-blue-100'
+              }
+            />
             <CloseButton onClick={clearAllSearch} />
           </>
         ) : isNoActiveSearch ? (

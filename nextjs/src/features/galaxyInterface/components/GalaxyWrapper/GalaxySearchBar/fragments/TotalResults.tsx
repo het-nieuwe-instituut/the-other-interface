@@ -7,7 +7,7 @@ import { cn } from '@/features/ui/utils/cn'
 
 interface Props {
   text: string
-  className: string
+  className?: string
 }
 
 export const TotalResults = ({ text, className }: Props) => {
