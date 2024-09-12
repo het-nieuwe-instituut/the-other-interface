@@ -15,7 +15,7 @@ export const FilterInput = React.forwardRef<HTMLInputElement, Props>(
         ref={ref}
         className={cn(
           'h-full w-full border-none bg-transparent p-0 font-social-large text-xl',
-          'focus:shadow-none focus:outline-none'
+          'focus:shadow-none focus:outline-none placeholder-blue-50'
         )}
         type="text"
         placeholder={placeholder}
