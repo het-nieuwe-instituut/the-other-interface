@@ -1,4 +1,8 @@
 'use client'
+import {
+  getUrlLandingPageUrl,
+  useGetUrlLandingPageUrl,
+} from '@/features/galaxyInterface/utils/galaxyRoutes'
 import { NavLinkButton } from '@/features/ui/components/nav-link-button/component'
 import { MenuTypogrpahyVariants } from '@/features/ui/components/typography/menuVariants'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
@@ -17,13 +21,14 @@ import {
 import useDisableScroll from '../../hooks/ui/useDisableScroll'
 import { useLocale } from '../../hooks/useLocale'
 import { sharedActions } from '../../stores/shared.store'
+import { CLOUD_CATEGORIES } from '../../utils/categories'
 import { StaticHeader } from '../StaticHeader/StaticHeader'
 
 const categories = [
-  { name: 'archives', translationKey: 'archives' },
-  { name: 'objects', translationKey: 'objects' },
-  { name: 'people', translationKey: 'people' },
-  { name: 'publications', translationKey: 'publications' },
+  { name: 'archives', translationKey: 'archives', category: CLOUD_CATEGORIES.archives },
+  { name: 'objects', translationKey: 'objects', category: CLOUD_CATEGORIES.objects },
+  { name: 'people', translationKey: 'people', category: CLOUD_CATEGORIES.people },
+  { name: 'publications', translationKey: 'publications', category: CLOUD_CATEGORIES.publications },
 ]
 
 export enum Fonts {
@@ -35,9 +40,9 @@ export const Navigation = () => {
   const isMenuOpen = useSelector((state: State) => state?.shared?.isMenuOpen)
   const userLooksOn = useSelector((state: State) => state.shared.userLooksOn)
   const { t: tNavigation } = useTranslation('navigation')
-  const lang = useLocale()
   const pathname = usePathname()
   const params = useParams()
+  const locale = useLocale()
   const galaxyPathNames =
     params && params.category && params.id
       ? [
@@ -131,23 +136,11 @@ export const Navigation = () => {
                   {tNavigation('explore_collection')}
                 </p>
                 {categories.map(category => (
-                  <div key={category.name}>
-                    <Link
-                      onClick={() => closeMenu()}
-                      className={cn(
-                        navTextStyle === Fonts.Times
-                          ? MenuTypogrpahyVariants({
-                              menuItem: 'primary',
-                            })
-                          : MenuTypogrpahyVariants({
-                              menuItem: 'secondary',
-                            })
-                      )}
-                      href={`/landingpage?category=${category.name}&lang=${lang}`}
-                    >
-                      {tNavigation(category.translationKey)}
-                    </Link>
-                  </div>
+                  <CategoryLink
+                    category={category}
+                    navTextStyle={navTextStyle}
+                    onClick={closeMenu}
+                  />
                 ))}
               </div>
               <div className="flex min-w-[200px] max-w-[398px] flex-col sm:pb-[50px] md:min-w-[388px]">
@@ -225,4 +218,37 @@ export const Navigation = () => {
   function closeMenu() {
     dispatch(sharedActions.menuOpen({ isMenuOpen: false }))
   }
+}
+
+const CategoryLink = ({
+  category,
+  navTextStyle,
+  onClick,
+}: {
+  category: (typeof categories)[number]
+  onClick: () => void
+  navTextStyle?: Fonts
+}) => {
+  const url = useGetUrlLandingPageUrl(category.category)
+  const { t: tNavigation } = useTranslation('navigation')
+
+  return (
+    <div key={category.name}>
+      <Link
+        onClick={onClick}
+        className={cn(
+          navTextStyle === Fonts.Times
+            ? MenuTypogrpahyVariants({
+                menuItem: 'primary',
+              })
+            : MenuTypogrpahyVariants({
+                menuItem: 'secondary',
+              })
+        )}
+        href={url}
+      >
+        {tNavigation(category.translationKey)}
+      </Link>
+    </div>
+  )
 }
