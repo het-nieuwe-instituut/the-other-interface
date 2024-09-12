@@ -15,7 +15,7 @@ export const COLLECTION_HILIGHT_ID = 'collection-highlights-id'
 
 export const CollectionHighlightsFilter = {
   key: 'collectionHighlights',
-  value: 'Collection highlgight / Uitgelichte stukken',
+  value: 'Collection highlights / Uitgelichte stukken',
   id: COLLECTION_HILIGHT_ID,
 }
 
