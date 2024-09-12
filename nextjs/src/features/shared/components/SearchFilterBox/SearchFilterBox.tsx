@@ -2,7 +2,6 @@ import { CollectionHighlightsFilter } from '@/features/galaxyInterface/component
 import { useSuggestionsTranslations } from '@/features/galaxyInterface/services/suggestions'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
-import useTranslation from 'next-translate/useTranslation'
 import { useSelector } from 'react-redux'
 import { State } from '../../configs/store'
 import { useTypeSafeTranslation } from '../../hooks/translations'
