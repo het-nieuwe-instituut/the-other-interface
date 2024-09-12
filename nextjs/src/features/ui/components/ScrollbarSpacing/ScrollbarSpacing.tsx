@@ -50,7 +50,6 @@ export default function ScrollbarSpacing() {
     const scrollbarWidth = getScrollbarWidth()
     const nav = document.getElementById('navigation-scrollbar')
     if (nav) {
-      console.log(nav, scrollbarWidth)
       nav.style.paddingRight = `${scrollbarWidth}px`
     }
   }, [bodyScrollable])
