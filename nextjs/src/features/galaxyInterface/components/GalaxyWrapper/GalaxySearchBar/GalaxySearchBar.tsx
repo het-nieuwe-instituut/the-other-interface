@@ -67,7 +67,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
         `grid pl-4 relative h-auto grid-cols-[160px,minmax(20px,1fr),minmax(95px,auto)] gap-4 z-[var(--z-index)] bottom-[var(--offset)]
         max-[1280px]:gap-2 max-[1280px]:grid-cols-[100px,minmax(20px,1fr),minmax(95px,auto)]
         `,
-        'group/test text-blue-100 border border-blue focus-within:text-pink-100 focus-within:bg-blue-100',
+        'group text-blue-100 border border-blue focus-within:text-pink-100 focus-within:bg-blue-100',
         !isSearchModeActive ? 'cursor-pointer' : 'cursor-default',
         className
       )}
@@ -75,7 +75,11 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
       ref={searchBarRef}
     >
       <div className=" flex h-[60px] flex-col items-start justify-center self-end pt-1">
-        {isNoActiveSearch ? <TotalResults text={searchValue} /> : <SearchResults />}
+        {isNoActiveSearch ? (
+          <TotalResults text={searchValue} className={'group-focus-within:text-pink-100'} />
+        ) : (
+          <SearchResults />
+        )}
       </div>
 
       <InputBar
@@ -154,6 +158,9 @@ export const InputBar = React.forwardRef<
           }
           isOpen={isCategorySuggestionsOpen}
           selectedOption={searchCategory ? t(searchCategory) : ''}
+          className={
+            'border border-blue text-blue-100 group-focus-within:border group-focus-within:border-pink-100 group-focus-within:text-pink-100'
+          }
         />
       </div>
       {selectedFilters.map(filter => (
