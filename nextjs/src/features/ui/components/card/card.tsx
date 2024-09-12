@@ -55,7 +55,8 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
                     'after:absolute after:z-[-1]',
                     'group-hover:text-ivory-100 group-hover:after:bg-black-100 group-hover:after:content-[""]',
                     'group-hover:after:w-[calc(100%+8px)] group-hover:after:h-[calc(100%+8px)]',
-                    'group-hover:after:ml-[-2px] group-hover:after:mb-[-2px] group-hover:after:bottom-0 group-hover:after:left-0'
+                    'group-hover:after:ml-[-2px] group-hover:after:mb-[-2px] group-hover:after:bottom-0 group-hover:after:left-0',
+                    'tracking-normal'
                   ),
                 })}
               >
@@ -104,7 +105,8 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
                     'after:absolute after:z-[-1]',
                     'group-hover:text-ivory-100 group-hover:after:bg-black-100 group-hover:after:content-[""]',
                     'group-hover:after:w-[calc(100%+8px)] group-hover:after:h-[calc(100%+8px)]',
-                    'group-hover:after:ml-[-2px] group-hover:after:mb-[-2px] group-hover:after:bottom-0 group-hover:after:left-0'
+                    'group-hover:after:ml-[-2px] group-hover:after:mb-[-2px] group-hover:after:bottom-0 group-hover:after:left-0',
+                    'tracking-normal'
                   ),
                 })}
               >
