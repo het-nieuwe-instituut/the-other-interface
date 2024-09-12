@@ -102,18 +102,15 @@ module.exports = {
           '0%': { opacity: 1 },
           '100%': { opacity: 0 },
         },
-        toScaleFullPage: {
-          '0%': { transform: 'scale(1.1)', opacity: 1 },
-          '75%': { transform: 'scale(3)', opacity: 0.5 },
-          '100%': { transform: 'scale(4)', opacity: 0 },
-        },
         toCenterOfGalaxy: {
           '0%': {
             transform: 'translate(0, 0)',
+            opacity: 1,
           },
           '100%': {
             transform:
               'translate(var(--animation-translate-x), var(--animation-translate-y)) scale(var(--animation-scale))',
+            opacity: 'var(--animation-opacity)',
           },
         },
       },

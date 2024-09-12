@@ -15,7 +15,10 @@ import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/componen
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 import { CSSProperties, useContext, useState } from 'react'
-import { GalaxyZoomAnimationStateContext } from '../../../hooks/GalaxyZoomAnimationStateProvider'
+import {
+  GalaxyZoomAnimationStateContext,
+  useMoveElementToCenterValues,
+} from '../../../hooks/GalaxyZoomAnimationStateProvider'
 import { GalaxyPaginationAnimationStateContext } from '../../../hooks/GalaxyPaginationAnimationStateProvider'
 interface Props {
   cloud: CategoryCloud
@@ -60,6 +63,11 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
   const { conditions: paginationAnimationConditions } = useContext(
     GalaxyPaginationAnimationStateContext
   )
+  const [animationCssVariables, positionRef] = useMoveElementToCenterValues({
+    scale: 1.2,
+    offsetTop: 0,
+    opacity: 0,
+  })
 
   return (
     <>
@@ -104,11 +112,13 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
           }
         >
           <DelayedNextLinkWithZoomAnimationsContext
+            ref={positionRef}
             aria-label={t(category)}
             delay={600}
             style={
               {
                 zIndex: HOMEPAGE_Z_INDEXES.CLOUD,
+                ...animationCssVariables,
               } as CSSProperties
             }
             className={cn(
@@ -120,7 +130,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
               animationState !== 'forward' && 'transition-transform duration-[400] hover:scale-110',
               animationState === 'forward' &&
                 clicked &&
-                'animate-[toScaleFullPage_600ms_ease-in-out_forwards]',
+                'animate-[toCenterOfGalaxy_500ms_ease-in-out_forwards]',
               animationState === 'forward' &&
                 !clicked &&
                 'animate-[toBlurAndHide_500ms_ease-in-out_forwards]'
