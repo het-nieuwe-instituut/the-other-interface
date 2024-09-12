@@ -22,7 +22,7 @@ export const LayerWrapper: React.FC<Props> = ({
 }) => {
   if (disableBelowTheFold) {
     return (
-      <div className="relative mx-auto block min-h-[600px] px-5 md:px-6 ">{renderContent()}</div>
+      <div className="relative mx-auto block min-h-[600px] px-5 md:px-6">{renderContent()}</div>
     )
   }
 
@@ -34,7 +34,7 @@ export const LayerWrapper: React.FC<Props> = ({
 
   function renderContent() {
     return (
-      <div className="mx-auto max-w-[90em] pt-9">
+      <div className="mx-auto max-w-[1392px] pt-9">
         <div
           className={cn(
             'grid lg:grid-areas-editorial-large grid-areas-editorial-small',
