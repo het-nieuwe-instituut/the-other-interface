@@ -52,8 +52,12 @@ export const getMoveElementToCenterY = ({
   return centerY - elementPositionTop - elementPositionHeight / 2
 }
 
-export const useMoveElementToCenterValues = (opts: { scale?: number; offsetTop?: number }) => {
-  const { scale = 1, offsetTop = 0 } = opts
+export const useMoveElementToCenterValues = (opts: {
+  scale?: number
+  offsetTop?: number
+  opacity?: number
+}) => {
+  const { scale = 1, offsetTop = 0, opacity = 1 } = opts
   const { width, height } = useWindowSize()
   const [elementPosition, ref] = useElementPosition()
   const centerX = (width ?? 0) / 2
@@ -73,6 +77,7 @@ export const useMoveElementToCenterValues = (opts: { scale?: number; offsetTop?:
       }) + offsetTop
     }px`,
     '--animation-scale': scale,
+    '--animation-opacity': opacity,
   }
 
   return [animationCssVariables, ref] as const
