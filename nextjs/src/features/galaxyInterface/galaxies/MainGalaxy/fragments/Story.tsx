@@ -20,9 +20,16 @@ type Props = {
   story: PositionedStory
   isMainGrid?: boolean
   onLoad?: (storyId: string) => void
+  positionClassName?: string
 }
 
-export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className }) => {
+export const Story: React.FC<Props> = ({
+  story,
+  isMainGrid,
+  onLoad,
+  className,
+  positionClassName,
+}) => {
   const { t: hoverT } = useTypeSafeTranslation('category')
   const lang = useLocale()
 
@@ -74,7 +81,8 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
             animationState === 'forward' && !clicked && 'animate-[toBlurAndHide_300ms_forwards]',
             animationState === 'forward' &&
               clicked &&
-              'animate-[toCenterOfGalaxy_500ms_forwards] z-[1000]'
+              'animate-[toCenterOfGalaxy_500ms_forwards] z-[1000]',
+            positionClassName
           )}
           style={{ ...position, ...animationCssVariables }}
           onClick={() => {

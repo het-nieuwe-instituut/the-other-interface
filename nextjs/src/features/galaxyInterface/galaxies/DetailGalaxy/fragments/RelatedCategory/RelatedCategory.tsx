@@ -6,11 +6,11 @@ import {
 } from '@/features/record/hooks/useZoomLevel3Query'
 import { useLocale } from '@/features/shared/hooks/useLocale'
 import { GridParams } from '@/features/shared/types/position'
-import { CLOUD_CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
+import { CloudCategory, CLOUD_CATEGORIES } from '@/features/shared/utils/categories'
 import { keyExtractor } from '@/features/shared/utils/lists'
 import { cn } from '@/features/ui/utils/cn'
 import { useParams, useSearchParams } from 'next/navigation'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { Locale } from 'src/generated/graphql'
 import {
   GalaxyPaginationAnimationStateContext,
@@ -19,6 +19,10 @@ import {
   getNextItemsAnimationClassNames,
   getNextItemsCssProperties,
 } from '../../../hooks/GalaxyPaginationAnimationStateProvider'
+import {
+  GalaxyZoomAnimationStateContext,
+  getScaleAnimationClassName,
+} from '../../../hooks/GalaxyZoomAnimationStateProvider'
 import { Record } from '../Record/Record'
 import { useSwapCurrentNext } from '../RelatedStories'
 import { usePositionedRecordsQuery } from './usePositionedRecordsQuery'
@@ -147,6 +151,24 @@ const PositionedRecords = ({
         }
       }) ?? [],
   })
+  const animations = useMemo(() => {
+    const config = [
+      cn('animate-[zoomFirstRender_300ms_both_100ms]'),
+      cn('animate-[zoomFirstRender_325ms_both_125ms]'),
+      cn('animate-[zoomFirstRender_350ms_both_150ms]'),
+      cn('animate-[zoomFirstRender_375ms_both_175ms]'),
+      cn('animate-[zoomFirstRender_400ms_both_200ms]'),
+      cn('animate-[zoomFirstRender_425ms_both_225ms]'),
+      cn('animate-[zoomFirstRender_450ms_both_250ms]'),
+      cn('animate-[zoomFirstRender_475ms_both_275ms]'),
+      cn('animate-[zoomFirstRender_500ms_both_300ms]'),
+      cn('animate-[zoomFirstRender_525ms_both_325ms]'),
+      cn('animate-[zoomFirstRender_550ms_both_350ms]'),
+      cn('animate-[zoomFirstRender_575ms_both_375ms]'),
+    ]
+    // shuffle the array
+    return config.sort(() => Math.random() - 0.5)
+  }, [])
 
   const allFinished = results.every(query => !query.isLoading)
 
@@ -156,6 +178,13 @@ const PositionedRecords = ({
       onComplete()
     }
   }, [allFinished, isFetchingingRecords])
+
+  const {
+    conditions: galaxyPaginationAnimationConditions,
+    animationState: galaxyPaginationAnimationState,
+  } = useContext(GalaxyPaginationAnimationStateContext)
+  const { conditions: galaxyZoomAnimationConditions, animationState: galaxyZoomAnimationState } =
+    useContext(GalaxyZoomAnimationStateContext)
 
   return (
     <>
@@ -181,6 +210,14 @@ const PositionedRecords = ({
               key={keyExtractor(positionedRecord.id, index, positionedRecords)}
               record={positionedRecord}
               recordDetails={data}
+              positionClassName={getScaleAnimationClassName({
+                allLoaded: allFinished,
+                animation: animations[index],
+                galaxyZoomAnimationConditions: galaxyZoomAnimationConditions,
+                galaxyPaginationAnimationConditions: galaxyPaginationAnimationConditions,
+                galaxyZoomAnimationState: galaxyZoomAnimationState,
+                galaxyPaginationAnimationState: galaxyPaginationAnimationState,
+              })}
             />
           )
         })}

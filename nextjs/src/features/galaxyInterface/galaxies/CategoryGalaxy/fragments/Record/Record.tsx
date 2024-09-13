@@ -23,6 +23,7 @@ export type RecordComponentProps = {
   record: RecordProps
   tooltipPlace: PlacesType
   onFullyLoaded?: () => void
+  positionClassName?: string
 }
 
 type RecordProps = SearchResultItemType & {
@@ -35,6 +36,7 @@ export const Record: React.FC<RecordComponentProps> = ({
   record,
   tooltipPlace,
   onFullyLoaded,
+  positionClassName,
 }) => {
   const { id, category } = record
   const { t } = useTypeSafeTranslation('category')
@@ -65,7 +67,8 @@ export const Record: React.FC<RecordComponentProps> = ({
           animationState === 'forward' && !clicked && 'animate-[toBlurAndHide_300ms_forwards]',
           animationState === 'forward' &&
             clicked &&
-            'animate-[toCenterOfGalaxy_500ms_forwards] z-[1000]'
+            'animate-[toCenterOfGalaxy_500ms_forwards] z-[1000]',
+          positionClassName
         )}
       >
         <ReadMoreTooltip

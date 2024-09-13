@@ -28,10 +28,19 @@ type Props = {
   isIdLoading?: boolean
   className?: string
   recordDetails: Awaited<ReturnType<typeof getZoom3RecordTask>>
+  positionClassName?: string
 }
 
 export const Record = React.memo(
-  ({ record, style, tabIndex = 0, tooltipPlace = 'bottom', className, recordDetails }: Props) => {
+  ({
+    record,
+    style,
+    positionClassName,
+    tabIndex = 0,
+    tooltipPlace = 'bottom',
+    className,
+    recordDetails,
+  }: Props) => {
     const { t } = useTypeSafeTranslation('category')
     const lang = useLocale()
     const { id, category, position, grid } = record
@@ -91,7 +100,8 @@ export const Record = React.memo(
                   'animate-[toBlurAndHide_300ms_forwards]',
                 animationState === 'forward' &&
                   clicked &&
-                  'animate-[toCenterOfGalaxy_500ms_forwards] z-[1000]'
+                  'animate-[toCenterOfGalaxy_500ms_forwards] z-[1000]',
+                positionClassName
               )}
               onClick={() => setClicked(true)}
             >
