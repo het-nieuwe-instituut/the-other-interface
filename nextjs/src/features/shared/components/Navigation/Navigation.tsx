@@ -17,7 +17,8 @@ export const Navigation = () => {
   const { t: tNavigation } = useTranslation('navigation')
   const headersList = headers()
   const acceptLanguage = headersList.get('accept-language')
-  const locale = acceptLanguage ? acceptLanguage.split(',')[0] : 'en'
+  const acceptLanguageLocale = acceptLanguage && acceptLanguage.split('-')[0]
+  const locale = acceptLanguageLocale === 'en' ? 'en' : 'nl'
 
   return (
     <NavigationContainer>
