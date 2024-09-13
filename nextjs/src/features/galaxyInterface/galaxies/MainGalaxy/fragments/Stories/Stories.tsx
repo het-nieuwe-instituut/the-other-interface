@@ -81,8 +81,9 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
         {positionedNextStories.map(positionedStory => (
           <Story
             className={cn(
+              'ease-toi-cubic-bezier',
               paginationAnimationConditions === 'firstRender' &&
-                'animate-[fromHideToShow_1000ms_ease-in-out_forwards]'
+                'animate-[fromHideToShow_1000ms_forwards]'
             )}
             key={`${positionedStory.id}-${positionedStory.locale}`}
             story={positionedStory}

@@ -105,18 +105,15 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
               } as CSSProperties
             }
             className={cn(
+              'ease-toi-cubic-bezier',
               'size-full',
               'absolute',
               'cursor-pointer rounded-[50%] bg-[url(/images/cloud.svg)] bg-cover bg-no-repeat',
               paginationAnimationConditions === 'firstRender' &&
-                'animate-[fromHideToShow_1000ms_ease-in-out_forwards]',
+                'animate-[fromHideToShow_1000ms_forwards]',
               animationState !== 'forward' && 'transition-transform duration-[400] hover:scale-110',
-              animationState === 'forward' &&
-                clicked &&
-                'animate-[toScaleFullPage_600ms_ease-in-out_forwards]',
-              animationState === 'forward' &&
-                !clicked &&
-                'animate-[toBlurAndHide_500ms_ease-in-out_forwards]'
+              animationState === 'forward' && clicked && 'animate-[toScaleFullPage_600ms_forwards]',
+              animationState === 'forward' && !clicked && 'animate-[toBlurAndHide_500ms_forwards]'
             )}
             animation="forward"
             onClick={() => setClicked(true)}
@@ -127,6 +124,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
 
       <p
         className={cn(
+          'ease-toi-cubic-bezier',
           TypographyVariants({
             timesDot: 'lg',
             className: cn(
@@ -134,12 +132,12 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
               'text-blue-100 absolute',
               'blur-[1.5px] pointer-events-none ',
               paginationAnimationConditions === 'firstRender' &&
-                'animate-[fromHideToShow_1000ms_ease-in-out_forwards]'
+                'animate-[fromHideToShow_1000ms_forwards]'
             ),
           }),
           'text-[20px] lg:text-[32px]',
           'leading-[21px] lg:leading-[33.6px] xl:leading-[41.6px]',
-          animationState === 'forward' && 'animate-[toBlurAndHide_500ms_ease-in-out_forwards]'
+          animationState === 'forward' && 'animate-[toBlurAndHide_500ms_forwards]'
         )}
       >
         {t(category)}
