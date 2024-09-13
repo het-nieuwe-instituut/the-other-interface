@@ -63,7 +63,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
   })
 
   return (
-    <>
+    <div className="group">
       <Tooltip
         openDelay={300}
         hidden={!!animationState}
@@ -118,10 +118,11 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
               'ease-toi-cubic-bezier',
               'size-full',
               'absolute',
-              'cursor-pointer rounded-[50%] bg-[url(/images/cloud.svg)] bg-cover bg-no-repeat',
+              'cursor-pointer rounded-[50%] bg-[url(/images/cloud.svg)] bg-cover bg-no-repeat flex items-center justify-center',
               paginationAnimationConditions === 'firstRender' &&
                 'animate-[fromHideToShow_1000ms_forwards]',
-              animationState !== 'forward' && 'transition-transform duration-[400] hover:scale-110',
+              animationState !== 'forward' &&
+                'transition-transform duration-[400] group-hover:scale-110 ',
               animationState === 'forward' &&
                 clicked &&
                 'animate-[toCenterOfGalaxy_600ms_forwards]',
@@ -130,7 +131,9 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
             animation="forward"
             onClick={() => setClicked(true)}
             href={url} // delayed for animation
-          ></DelayedNextLinkWithZoomAnimationsContext>
+          >
+            <div className="left-0 top-0 m-auto size-3/4 bg-[url(/images/cloud.svg)] bg-contain opacity-0 transition-opacity ease-toi-cubic-bezier group-hover:opacity-95"></div>
+          </DelayedNextLinkWithZoomAnimationsContext>
         </div>
       </Tooltip>
 
@@ -140,11 +143,16 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
           TypographyVariants({
             timesDot: 'lg',
             className: cn(
+              'ease-toi-cubic-bezier',
               titleClassNames,
               'text-blue-100 absolute',
-              'blur-[1.5px] pointer-events-none ',
-              paginationAnimationConditions === 'firstRender' &&
-                'animate-[fromHideToShow_1000ms_forwards]'
+              'blur-[1.5px] pointer-events-none',
+              'transition-all duration-200', // Add this line
+              'group-hover:blur-[0px] ',
+              category === 'objects' && 'group-hover:translate-x-2 group-hover:-translate-y-1',
+              category === 'people' && 'group-hover:-translate-x-[2px] group-hover:-translate-y-2',
+              category === 'publications' && 'group-hover:translate-x-1 group-hover:translate-y-2',
+              category === 'archives' && 'group-hover:-translate-x-2 group-hover:translate-y-2'
             ),
           }),
           'text-[20px] lg:text-[32px]',
@@ -154,7 +162,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
       >
         {t(category)}
       </p>
-    </>
+    </div>
   )
 }
 
