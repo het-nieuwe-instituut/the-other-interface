@@ -272,7 +272,10 @@ export class ZoomLevel3Service {
   ): Promise<ZoomLevel3RelationsType> {
     const themeIds = await this.getStoryThemeIds(storyId, locale)
 
-    const storyFilters: StoryFiltersInput = { or: [{ themes: { id: { in: themeIds } } }] }
+    const storyFilters: StoryFiltersInput = {
+      or: [{ themes: { id: { in: themeIds } } }],
+      id: { ne: storyId },
+    }
     if (childrenIds.length) {
       storyFilters.or?.push({ id: { in: childrenIds } })
     }

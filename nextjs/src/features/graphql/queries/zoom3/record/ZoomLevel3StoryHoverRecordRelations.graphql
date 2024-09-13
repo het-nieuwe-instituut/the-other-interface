@@ -12,6 +12,7 @@ query StoryHoverRecordRelations($id: String!, $locale: Locale!) {
           attributes {
             firstName
             lastName
+            insertion
           }
         }
       }

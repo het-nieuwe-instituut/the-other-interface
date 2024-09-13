@@ -2,31 +2,27 @@ import { PlacementWithLogical, useBreakpoint } from '@chakra-ui/react'
 import { HOMEPAGE_Z_INDEXES } from '../constants'
 import { CategoryCloud } from '../types'
 
-import { CollectionHighlightsFilter } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
+import { useGetUrlLandingPageUrl } from '@/features/galaxyInterface/utils/galaxyRoutes'
 import { Tooltip } from '@/features/modules/components/ToolTip/Tooltip'
-import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
-import { encodeFilters } from '@/features/shared/helpers/searchHelpers'
 import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
 import { useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { CATEGORIES, CloudCategory } from '@/features/shared/utils/categories'
 import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/components/DelayedNextLink/DelayedNextLinkWithZoomAnimationsContext'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 import { CSSProperties, useContext, useState } from 'react'
+import { GalaxyPaginationAnimationStateContext } from '../../../hooks/GalaxyPaginationAnimationStateProvider'
 import {
   GalaxyZoomAnimationStateContext,
   useMoveElementToCenterValues,
 } from '../../../hooks/GalaxyZoomAnimationStateProvider'
-import { GalaxyPaginationAnimationStateContext } from '../../../hooks/GalaxyPaginationAnimationStateProvider'
 interface Props {
   cloud: CategoryCloud
 }
 
 export const Cloud: React.FC<Props> = ({ cloud }) => {
   const { t } = useTypeSafeTranslation('homepage')
-  const { lang } = useZoom2Params()
   const { title: category, sizeClassNames, cloudClassNames, titleClassNames } = cloud
   const selectedFilters = useSelectedFilters()
   useSearchByCategoryQuery({
@@ -35,10 +31,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
     selectedFilters,
   })
 
-  let url = `/landingpage?category=${category}&filters=${encodeFilters([
-    CollectionHighlightsFilter,
-  ])}&searchResult=true&fallback=true`
-  url = addLocaleToUrl(url, lang)
+  const url = useGetUrlLandingPageUrl(category)
 
   const breakpoint = useBreakpoint()
   const placement = tooltipPlacement(category, breakpoint)
@@ -122,18 +115,17 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
               } as CSSProperties
             }
             className={cn(
+              'ease-toi-cubic-bezier',
               'size-full',
               'absolute',
               'cursor-pointer rounded-[50%] bg-[url(/images/cloud.svg)] bg-cover bg-no-repeat',
               paginationAnimationConditions === 'firstRender' &&
-                'animate-[fromHideToShow_1000ms_ease-in-out_forwards]',
+                'animate-[fromHideToShow_1000ms_forwards]',
               animationState !== 'forward' && 'transition-transform duration-[400] hover:scale-110',
               animationState === 'forward' &&
                 clicked &&
-                'animate-[toCenterOfGalaxy_500ms_ease-in-out_forwards]',
-              animationState === 'forward' &&
-                !clicked &&
-                'animate-[toBlurAndHide_500ms_ease-in-out_forwards]'
+                'animate-[toCenterOfGalaxy_600ms_forwards]',
+              animationState === 'forward' && !clicked && 'animate-[toBlurAndHide_500ms_forwards]'
             )}
             animation="forward"
             onClick={() => setClicked(true)}
@@ -144,6 +136,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
 
       <p
         className={cn(
+          'ease-toi-cubic-bezier',
           TypographyVariants({
             timesDot: 'lg',
             className: cn(
@@ -151,12 +144,12 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
               'text-blue-100 absolute',
               'blur-[1.5px] pointer-events-none ',
               paginationAnimationConditions === 'firstRender' &&
-                'animate-[fromHideToShow_1000ms_ease-in-out_forwards]'
+                'animate-[fromHideToShow_1000ms_forwards]'
             ),
           }),
           'text-[20px] lg:text-[32px]',
           'leading-[21px] lg:leading-[33.6px] xl:leading-[41.6px]',
-          animationState === 'forward' && 'animate-[toBlurAndHide_500ms_ease-in-out_forwards]'
+          animationState === 'forward' && 'animate-[toBlurAndHide_500ms_forwards]'
         )}
       >
         {t(category)}

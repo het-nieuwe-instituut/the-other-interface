@@ -133,3 +133,8 @@
   font-weight: 600;
   font-display: swap;
 }
+
+body {
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
+}

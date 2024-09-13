@@ -38,9 +38,10 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
   return (
     <div
       className={cn(
-        ' col-start-1 col-end-3 row-start-2 row-end-4 flex items-center justify-center',
+        'ease-toi-cubic-bezier',
+        'w-full ',
         className,
-        animationState === 'forward' && 'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+        animationState === 'forward' && 'animate-[toBlurAndHide_300ms_forwards]'
       )}
     >
       <div className="relative flex size-4/5 flex-col items-center justify-center gap-[2px]">
@@ -55,7 +56,8 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
         <ResponsiveImage
           src={data ?? record?.thumbnail?.[0]}
           alt={record?.title}
-          className="max-h-[calc(100%-3vw-8px)]"
+          className="max-h-[176.48px]"
+          imageClassName="object-bottom"
           size={'25vw'}
           style={{
             flex: `1 1 calc(100% - 3vw - 8px)`,
@@ -63,11 +65,12 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
         />
         <div
           className={cn(
-            'mt-2 flex w-full flex-1 flex-col text-blue-100',
+            'ease-toi-cubic-bezier',
+            'mt-[12px] flex w-full flex-col text-blue-100',
             !(animationState === 'forward' || animationState === 'backwards') &&
               !isLoading &&
               conditions === 'firstRender' &&
-              'animate-[fromHideToShow_1000ms_ease-in-out_forwards]',
+              'animate-[fromHideToShow_1000ms_forwards]',
             isLoading && 'opacity-0'
           )}
         >

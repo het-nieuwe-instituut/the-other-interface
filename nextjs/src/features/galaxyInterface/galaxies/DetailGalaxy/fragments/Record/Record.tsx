@@ -80,59 +80,67 @@ export const Record = React.memo(
               href={url}
               tabIndex={tabIndex}
               className={cn(
+                'ease-toi-cubic-bezier',
                 'fixed',
                 'absolute flex size-4/5 cursor-pointer flex-col items-center justify-center gap-[2px]',
-                !clicked && 'group-hover-blur-item transition-all duration-300 ease-in-out',
+                !clicked && 'group-hover-blur-item transition-all duration-300',
                 !clicked && 'use-calculate-line-element',
                 !clicked && 'group-hover-blur-item',
                 animationState === 'forward' &&
                   !clicked &&
-                  'animate-[toBlurAndHide_300ms_ease-in-out_forwards]',
+                  'animate-[toBlurAndHide_300ms_forwards]',
                 animationState === 'forward' &&
                   clicked &&
-                  'animate-[toCenterOfGalaxy_500ms_ease-in-out_forwards] z-[1000]'
+                  'animate-[toCenterOfGalaxy_500ms_forwards] z-[1000]'
               )}
               onClick={() => setClicked(true)}
             >
               <div ref={ref} className="relative size-full ">
-                <div
-                  style={{
-                    position: 'absolute',
-
-                    zIndex: -80,
-                  }}
-                  className={cn(
-                    'hidden group-hover:block size-full max-h-[calc(100%-2vw-5px)]',
-                    (animationState === 'forward' || animationState === 'backwards') &&
-                      'hidden group-hover:hidden'
-                  )}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="size-full overflow-visible">
-                    <line
-                      x1={coordinates.x1}
-                      y1={coordinates.y1}
-                      x2={coordinates.x2}
-                      y2={coordinates.y2}
-                      strokeWidth={1}
-                      stroke={'RGBA(0, 81, 255, .4)'}
-                    />
-                  </svg>
-                </div>
-                <div className="flex size-full flex-col gap-[12px]  transition-all duration-300 ease-in-out hover:scale-105">
-                  <StoryOrRecordResponsiveImage
-                    recordOrStoryId={id}
-                    src={recordDetails?.thumbnail?.[0]}
-                    alt={recordDetails?.title}
-                    className="max-h-[calc(100%-2vw-5px)]" // where 1.6vw are a texts' line heights, 5px are gaps
-                    size={'11vw'}
+                <div className="flex size-full flex-col gap-[12px] transition-all  duration-300 ease-toi-cubic-bezier hover:scale-105">
+                  <div
+                    className="flex  size-full items-center  justify-center "
                     style={{
                       flex: '1 1 calc(100% - 2vw - 5px)',
                     }}
-                  />
+                  >
+                    <div
+                      style={{
+                        position: 'absolute',
+                        zIndex: -80,
+                      }}
+                      className={cn(
+                        'hidden group-hover:block size-full ',
+                        (animationState === 'forward' || animationState === 'backwards') &&
+                          'hidden group-hover:hidden'
+                      )}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="size-full overflow-visible"
+                      >
+                        <line
+                          x1={coordinates.x1}
+                          y1={coordinates.y1}
+                          x2={coordinates.x2}
+                          y2={coordinates.y2}
+                          strokeWidth={1}
+                          stroke={'RGBA(0, 81, 255, .4)'}
+                        />
+                      </svg>
+                    </div>
+                    <StoryOrRecordResponsiveImage
+                      recordOrStoryId={id}
+                      src={recordDetails?.thumbnail?.[0]}
+                      alt={recordDetails?.title}
+                      className="size-full"
+                      imageClassName={cn('object-bottom')}
+                      size={'11vw'}
+                    />
+                  </div>
                   <RecordText
                     className={cn(
-                      animationState === 'forward' &&
-                        'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+                      'ease-toi-cubic-bezier',
+                      animationState === 'forward' && 'animate-[toBlurAndHide_300ms_forwards]'
                     )}
                     title={recordDetails?.title}
                     categoryType={category}

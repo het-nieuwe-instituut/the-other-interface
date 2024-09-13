@@ -11,7 +11,7 @@ import CloseIconSmall from '@/icons/close-icon-small.svg'
 import React, { CSSProperties, useCallback, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { CategorySuggestions } from '../CategorySuggestions/CategorySuggestions'
-import { COLLECTION_HILIGHT_ID, SuggestionsContainer } from '../Suggestions/Suggestions'
+import { SuggestionsContainer } from '../Suggestions/Suggestions'
 import { CategoryFilter } from './CategoryFilter/CategoryFilter'
 import {
   useCloseSearchOnPathnameChange,
@@ -25,6 +25,7 @@ import { SearchButton } from './fragments/SearchButton'
 import SearchResults from './fragments/SearchResults'
 import { TotalResults } from './fragments/TotalResults'
 import { useSearchBarPosition } from './useSearchBarPosition'
+import { COLLECTION_HILIGHT_ID } from '../Suggestions/suggestions.constants'
 
 type Props = {
   total?: number
@@ -92,7 +93,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
             <CloseButton onClick={clearAllSearch} />
           </>
         ) : isNoActiveSearch ? (
-          <div className={'ml-14'}>
+          <div className={'ml-14 mt-2'}>
             <SearchButton />
           </div>
         ) : (

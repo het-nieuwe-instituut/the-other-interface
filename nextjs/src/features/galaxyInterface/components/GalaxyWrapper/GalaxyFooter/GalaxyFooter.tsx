@@ -55,9 +55,10 @@ export const GalaxyFooter: React.FC<Props> = ({ galaxyPagination }) => {
     <div
       style={{ bottom, zIndex }} // no other easy way to refactor to tailwind from previous code
       className={cn(
+        'ease-toi-cubic-bezier',
         `absolute left-6 grid h-[60px] w-full grid-cols-[auto_1fr_190px] gap-[5px] max-[1280px]:w-[97%] min-[1280px]:grid-cols-[auto_1fr_230px]`,
         (animationState === 'backwards' || animationState === 'forward') &&
-          'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+          'animate-[toBlurAndHide_300ms_forwards]'
       )}
     >
       <div className="">{galaxyPagination}</div>
