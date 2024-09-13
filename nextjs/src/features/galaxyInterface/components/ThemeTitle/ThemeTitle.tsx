@@ -20,9 +20,10 @@ export const ThemeTitle: React.FC<Props> = ({ title }) => {
         zIndex: HOMEPAGE_Z_INDEXES.THEME_TITLE,
       }}
       className={cn(
-        ' bottom-[calc(12vh+88px)] lg:bottom-[calc(12vh+80px)] font-times-dot font-[400] absolute left-6 max-w-[70vw] line-clamp-1 text-blue-100 pointer-events-none overflow-hidden',
+        'ease-toi-cubic-bezier',
+        'bottom-[calc(12vh+88px)] lg:bottom-[calc(12vh+80px)] font-times-dot font-[400] absolute left-6 max-w-[70vw] line-clamp-1 text-blue-100 pointer-events-none overflow-hidden',
         'leading-[33.6px] lg:leading-[64px] text-[32px] lg:text-[52px]',
-        animationState && 'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+        animationState && 'animate-[toBlurAndHide_300ms_forwards]'
       )}
     >
       {t('storiesOver', {
