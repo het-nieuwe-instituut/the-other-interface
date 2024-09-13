@@ -56,8 +56,8 @@ export class Story {
   @Field({ nullable: true })
   public publishedAt: Date
 
-  @Field({ nullable: true })
-  public shortDescription?: string
+  @Field()
+  public shortDescription: string
 
   @Field({ nullable: true })
   public slug?: string
