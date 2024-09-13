@@ -99,14 +99,14 @@ export const Records: React.FC<Props> = ({ pageAmount, records }) => {
         <div
           style={getNextItemsCssProperties('50')}
           className={cn(
+            'ease-toi-cubic-bezier',
             'absolute inset-x-[2vw] top-[7%] grid h-[calc(80%-1.7rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-4 grid-rows-3',
             getNextItemsAnimationClassNames(
               galaxyPaginationAnimationState,
               galaxyPaginationAnimationConditions,
               nextRecords?.length > 0
             ),
-            galaxyZoomAnimationState === 'backwards' &&
-              'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+            galaxyZoomAnimationState === 'backwards' && 'animate-[toBlurAndHide_300ms_forwards]'
           )}
         >
           {nextPositionedRecords?.map((r, i) => {
@@ -119,13 +119,13 @@ export const Records: React.FC<Props> = ({ pageAmount, records }) => {
         <div
           style={getItemsCssProperties('50')}
           className={cn(
+            'ease-toi-cubic-bezier',
             'relative grid size-full grid-cols-4 grid-rows-3',
             getItemsAnimationClassNames(
               galaxyPaginationAnimationState,
               galaxyPaginationAnimationConditions
             ),
-            galaxyZoomAnimationState === 'backwards' &&
-              'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+            galaxyZoomAnimationState === 'backwards' && 'animate-[toBlurAndHide_300ms_forwards]'
           )}
         >
           {currentPositionedRecords?.map((r, i) => {

@@ -35,8 +35,9 @@ export const StaticHeader = ({
       <div
         style={{ '--z-index': `${STATIC_HEADER_Z_INDEX}` } as CSSProperties}
         className={cn(
+          'ease-toi-cubic-bezier',
           isMenuOpen || userLooksOnGalaxy ? 'transparent' : 'bg-pink-100',
-          'ease-in duration-200 fixed top-0 right-0 z-[var(--z-index)] h-auto overflow-hidden py-4 w-full pointer-events-auto',
+          'duration-200 fixed top-0 right-0 z-[var(--z-index)] h-auto overflow-hidden py-4 w-full pointer-events-auto',
           className
         )}
       >
@@ -84,8 +85,9 @@ export const StaticPageHeader = () => {
       <div
         style={{ '--z-index': `${STATIC_HEADER_Z_INDEX}` } as CSSProperties}
         className={cn(
+          'ease-toi-cubic-bezier',
           isMenuOpen ? 'bg-blue-90' : 'bg-pink-100',
-          'ease-in duration-200 fixed top-0 right-0 z-[var(--z-index)] h-auto overflow-hidden py-4 w-full pointer-events-auto'
+          'duration-200 fixed top-0 right-0 z-[var(--z-index)] h-auto overflow-hidden py-4 w-full pointer-events-auto'
         )}
       >
         <div className="container mx-auto flex size-full max-w-[90em] items-center justify-between px-6">
