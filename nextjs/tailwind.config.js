@@ -49,6 +49,12 @@ module.exports = {
           },
         },
 
+        zoomFirstRender: {
+          initial: { opacity: 0, scale: 0 },
+          '0%': { opacity: 0, scale: 0 },
+          '100%': { opacity: 1, scale: 1 },
+        },
+
         // others
         toBlurAndHide: {
           from: { opacity: 1, filter: 'blur(0px)' },

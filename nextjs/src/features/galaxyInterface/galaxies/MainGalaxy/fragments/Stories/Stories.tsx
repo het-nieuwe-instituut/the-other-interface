@@ -1,5 +1,5 @@
 import { cn } from '@/features/ui/utils/cn'
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 import {
   GalaxyPaginationAnimationStateContext,
   getItemsAnimationClassNames,
@@ -11,7 +11,10 @@ import { StoriesData } from '../../hooks/useThemesQuery'
 import { Story } from '../Story'
 import { useDrawLines } from './useDrawLines'
 import { usePresenter } from './usePresenter'
-import { GalaxyZoomAnimationStateContext } from '../../../hooks/GalaxyZoomAnimationStateProvider'
+import {
+  GalaxyZoomAnimationStateContext,
+  getScaleAnimationClassName,
+} from '../../../hooks/GalaxyZoomAnimationStateProvider'
 
 type Props = {
   stories: StoriesData
@@ -27,13 +30,33 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
   } = usePresenter(stories, nextStories)
   const { animationState: paginationAnimationState, conditions: paginationAnimationConditions } =
     useContext(GalaxyPaginationAnimationStateContext)
-  const { animationState: zoomAnimationState } = useContext(GalaxyZoomAnimationStateContext)
+  const { animationState: zoomAnimationState, conditions: galaxyZoomAnimationConditions } =
+    useContext(GalaxyZoomAnimationStateContext)
   const svgRef = useDrawLines({
     hideLines: !!paginationAnimationState,
     selector: '.story-grid-item',
     template: originalTemplateIndex,
     stories: positionedStories,
   })
+
+  const animations = useMemo(() => {
+    const config = [
+      cn('animate-[zoomFirstRender_300ms_both_100ms]'),
+      cn('animate-[zoomFirstRender_325ms_both_125ms]'),
+      cn('animate-[zoomFirstRender_350ms_both_150ms]'),
+      cn('animate-[zoomFirstRender_375ms_both_175ms]'),
+      cn('animate-[zoomFirstRender_400ms_both_200ms]'),
+      cn('animate-[zoomFirstRender_425ms_both_225ms]'),
+      cn('animate-[zoomFirstRender_450ms_both_250ms]'),
+      cn('animate-[zoomFirstRender_475ms_both_275ms]'),
+      cn('animate-[zoomFirstRender_500ms_both_300ms]'),
+      cn('animate-[zoomFirstRender_525ms_both_325ms]'),
+      cn('animate-[zoomFirstRender_550ms_both_350ms]'),
+      cn('animate-[zoomFirstRender_575ms_both_375ms]'),
+    ]
+    // shuffle the array
+    return config.sort(() => Math.random() - 0.5)
+  }, [])
 
   return (
     <div className={cn('size-full')}>
@@ -45,11 +68,19 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
             getItemsAnimationClassNames(paginationAnimationState, paginationAnimationConditions)
           )}
         >
-          {positionedStories.map(positionedStory => (
+          {positionedStories.map((positionedStory, index) => (
             <Story
               key={`${positionedStory.id}-${positionedStory.locale}-${currentPage}`}
               story={positionedStory}
               isMainGrid
+              positionClassName={getScaleAnimationClassName({
+                allLoaded: true,
+                animation: animations[index],
+                galaxyZoomAnimationConditions: galaxyZoomAnimationConditions,
+                galaxyZoomAnimationState: zoomAnimationState,
+                galaxyPaginationAnimationState: paginationAnimationState,
+                galaxyPaginationAnimationConditions: paginationAnimationConditions,
+              })}
             />
           ))}
         </div>

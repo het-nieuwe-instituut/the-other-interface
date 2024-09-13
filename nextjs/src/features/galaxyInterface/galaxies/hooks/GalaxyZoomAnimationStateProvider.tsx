@@ -2,7 +2,7 @@
 import { useElementPosition } from '@/features/ui/hooks/useElementPosition'
 import React from 'react'
 import { useWindowSize } from 'usehooks-ts'
-import { Animations, useGalaxyAnimationState } from './useGalaxyAnimationState'
+import { Animations, Conditions, useGalaxyAnimationState } from './useGalaxyAnimationState'
 
 export const GalaxyZoomAnimationStateContext = React.createContext<{
   animationState?: Animations
@@ -76,4 +76,31 @@ export const useMoveElementToCenterValues = (opts: { scale?: number; offsetTop?:
   }
 
   return [animationCssVariables, ref] as const
+}
+
+export function getScaleAnimationClassName({
+  allLoaded,
+  animation,
+  galaxyZoomAnimationConditions,
+  galaxyPaginationAnimationConditions,
+  galaxyZoomAnimationState,
+  galaxyPaginationAnimationState,
+}: {
+  allLoaded: boolean
+  animation: string
+  galaxyZoomAnimationConditions: Conditions
+  galaxyPaginationAnimationConditions: Conditions
+  galaxyZoomAnimationState: Animations
+  galaxyPaginationAnimationState: Animations
+}) {
+  return allLoaded &&
+    galaxyZoomAnimationConditions === 'firstRender' &&
+    galaxyPaginationAnimationConditions === 'firstRender'
+    ? animation
+    : !galaxyZoomAnimationState &&
+      !galaxyPaginationAnimationState &&
+      galaxyPaginationAnimationConditions !== 'previousAnimationWasBackwards' &&
+      galaxyPaginationAnimationConditions !== 'previousAnimationWasForward'
+    ? 'opacity-0'
+    : undefined
 }

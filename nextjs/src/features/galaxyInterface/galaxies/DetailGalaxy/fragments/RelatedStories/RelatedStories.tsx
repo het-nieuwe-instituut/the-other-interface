@@ -16,6 +16,10 @@ import {
   getNextItemsAnimationClassNames,
   getNextItemsCssProperties,
 } from '../../../hooks/GalaxyPaginationAnimationStateProvider'
+import {
+  GalaxyZoomAnimationStateContext,
+  getScaleAnimationClassName,
+} from '../../../hooks/GalaxyZoomAnimationStateProvider'
 import { DetailedRecord } from '../DetailedRecord'
 import { Record } from '../Record/Record'
 import { AllRelationTotalsType } from '../RelatedCategory'
@@ -91,10 +95,10 @@ export const RelatedStories: React.FC<Props> = ({
           )}
         </div>
       </div>
-      <div className="col-start-2 col-end-3 row-start-1 row-end-3 flex justify-center items-center ">
-        <DetailedRecord className="size-full  flex justify-center items-center" />
+      <div className="col-start-2 col-end-3 row-start-1 row-end-3 flex items-center justify-center ">
+        <DetailedRecord className="flex  size-full items-center justify-center" />
       </div>
-      <div className="col-start-2 col-end-2 row-start-1 row-end-3 text-ivory-100 flex items-center justify-center">
+      <div className="col-start-2 col-end-2 row-start-1 row-end-3 flex items-center justify-center text-ivory-100">
         <div
           style={getItemsCssProperties('50')}
           className={
@@ -141,6 +145,12 @@ const PositionedRecords = ({
   onComplete: () => void
 }) => {
   const lang = useLocale()
+  const {
+    conditions: galaxyPaginationAnimationConditions,
+    animationState: galaxyPaginationAnimationState,
+  } = useContext(GalaxyPaginationAnimationStateContext)
+  const { conditions: galaxyZoomAnimationConditions, animationState: galaxyZoomAnimationState } =
+    useContext(GalaxyZoomAnimationStateContext)
   const { data, isLoading: isRelatedStoriesLoading } = useRelatedStoriesQuery({
     maxPages,
     page,
@@ -172,6 +182,25 @@ const PositionedRecords = ({
     }
   }, [allFinished, isFetchingingRecords])
 
+  const animations = useMemo(() => {
+    const config = [
+      cn('animate-[zoomFirstRender_300ms_both_100ms]'),
+      cn('animate-[zoomFirstRender_325ms_both_125ms]'),
+      cn('animate-[zoomFirstRender_350ms_both_150ms]'),
+      cn('animate-[zoomFirstRender_375ms_both_175ms]'),
+      cn('animate-[zoomFirstRender_400ms_both_200ms]'),
+      cn('animate-[zoomFirstRender_425ms_both_225ms]'),
+      cn('animate-[zoomFirstRender_450ms_both_250ms]'),
+      cn('animate-[zoomFirstRender_475ms_both_275ms]'),
+      cn('animate-[zoomFirstRender_500ms_both_300ms]'),
+      cn('animate-[zoomFirstRender_525ms_both_325ms]'),
+      cn('animate-[zoomFirstRender_550ms_both_350ms]'),
+      cn('animate-[zoomFirstRender_575ms_both_375ms]'),
+    ]
+    //shuffle the array
+    return config.sort(() => Math.random() - 0.5)
+  }, [])
+
   return (
     <>
       {!isRelatedStoriesLoading &&
@@ -196,6 +225,14 @@ const PositionedRecords = ({
               key={keyExtractor(positionedRecord.id, index, positionedStories)}
               record={positionedRecord}
               recordDetails={data}
+              positionClassName={getScaleAnimationClassName({
+                allLoaded: allFinished,
+                animation: animations[index],
+                galaxyZoomAnimationConditions: galaxyZoomAnimationConditions,
+                galaxyPaginationAnimationConditions: galaxyPaginationAnimationConditions,
+                galaxyZoomAnimationState: galaxyZoomAnimationState,
+                galaxyPaginationAnimationState: galaxyPaginationAnimationState,
+              })}
             />
           )
         })}

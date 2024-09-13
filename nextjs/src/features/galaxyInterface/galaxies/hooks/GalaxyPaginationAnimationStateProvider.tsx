@@ -39,8 +39,7 @@ export const getItemsAnimationClassNames = (animationState: Animations, conditio
     conditions === 'previousAnimationWasBackwards' &&
       'animate-[paginationHideToShow_500ms_forwards]',
     animationState === 'forward' && 'animate-[paginationForward_500ms_forwards]',
-    animationState === 'backwards' && 'animate-[paginationBackward_500ms_forwards]',
-    conditions === 'firstRender' && 'animate-[paginationHideToShow_500ms_forwards]'
+    animationState === 'backwards' && 'animate-[paginationBackward_500ms_forwards]'
   )
 }
 
