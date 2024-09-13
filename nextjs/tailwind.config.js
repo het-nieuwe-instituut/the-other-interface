@@ -117,6 +117,9 @@ module.exports = {
           },
         },
       },
+      transitionTimingFunction: {
+        'toi-cubic-bezier': 'cubic-bezier(0.25, 0.1, 0.25, 0.1)',
+      },
       gridTemplateAreas: {
         'editorial-large': ['left right', 'bottom right'],
         'editorial-small': ['right', 'left', 'bottom'],

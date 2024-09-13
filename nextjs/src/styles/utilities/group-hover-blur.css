@@ -6,7 +6,8 @@
 </div>
 */
 .group-hover-blur {
-  transition: opacity 0.5s ease-in-out;
+  @apply ease-toi-cubic-bezier;
+  transition: opacity 0.5s;
 }
 .group-hover-blur:has(.group-hover-blur-item:hover)
   .group-hover-blur-item:not(.group-hover-blur-item:hover) {
