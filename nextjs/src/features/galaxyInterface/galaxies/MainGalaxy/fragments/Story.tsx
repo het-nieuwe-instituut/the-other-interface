@@ -70,7 +70,7 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
           href={url}
           className={cn(
             'absolute w-[154px] h-[198px] flex-col items-center justify-center gap-[5px] z-[20] transition-transform duration-[400ms] ease-in-out ',
-            isMainGrid ? 'story-grid-item' : '',
+
             animationState === 'forward' &&
               !clicked &&
               'animate-[toBlurAndHide_300ms_ease-in-out_forwards]',
@@ -99,7 +99,10 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
                 recordOrStoryId={story.id}
                 src={image}
                 alt={title}
-                className="size-full max-h-[calc(100%-2vw-5px)]" // where 2vw is a title's line height, 5px is gap
+                className={cn(
+                  'size-full max-h-[calc(100%-2vw-5px)]',
+                  isMainGrid ? 'story-grid-item' : ''
+                )} // where 2vw is a title's line height, 5px is gap
                 imageClassName="object-bottom"
                 size={'12vw'}
                 style={{
