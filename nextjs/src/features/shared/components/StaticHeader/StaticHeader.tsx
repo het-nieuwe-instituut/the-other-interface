@@ -33,6 +33,11 @@ export const StaticHeader = ({
   return (
     <>
       <div
+        role="button"
+        aria-label="scroll"
+        tabIndex={0}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        onKeyDown={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         style={{ '--z-index': `${STATIC_HEADER_Z_INDEX}` } as CSSProperties}
         className={cn(
           'ease-toi-cubic-bezier',
