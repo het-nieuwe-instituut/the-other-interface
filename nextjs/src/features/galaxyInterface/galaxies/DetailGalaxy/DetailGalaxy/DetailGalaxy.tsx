@@ -62,15 +62,17 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
   const isFetchingGalaxyItems = useIsFetching({
     predicate: query => {
       const key = query.queryKey.at(0) as string
-      return key
-        ? [
-            'record-relations',
-            'record-relations-count',
-            'record-detail',
-            'record-relations-positons',
-            'related-stories',
-          ].includes(key)
-        : false
+      if (!key) return false
+
+      if (key === 'record-relations-positons' && query.queryKey.at(4) === page) {
+        return true
+      }
+
+      if (key === 'related-stories' && query.queryKey.at(3) === page) {
+        return true
+      }
+
+      return ['record-relations-count', 'record-detail'].includes(key)
     },
   })
 
@@ -100,9 +102,9 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
         <div
           id="detail-galaxy-grid"
           className={cn(
+            'ease-toi-cubic-bezier',
             'group-hover-blur relative inset-x-[2vw] top-[6%] grid h-[calc(80%-1rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-3 grid-rows-2 min-[1440px]:inset-x-[28.8px]',
-            galaxyZoomAnimationState === 'backwards' &&
-              'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+            galaxyZoomAnimationState === 'backwards' && 'animate-[toBlurAndHide_300ms_forwards]'
           )}
         >
           {relatedCategories.map(({ category: cloudCategory, grid }) => (

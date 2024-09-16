@@ -20,9 +20,16 @@ type Props = {
   story: PositionedStory
   isMainGrid?: boolean
   onLoad?: (storyId: string) => void
+  positionClassName?: string
 }
 
-export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className }) => {
+export const Story: React.FC<Props> = ({
+  story,
+  isMainGrid,
+  onLoad,
+  className,
+  positionClassName,
+}) => {
   const { t: hoverT } = useTypeSafeTranslation('category')
   const lang = useLocale()
 
@@ -69,14 +76,13 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
           ref={positionRef}
           href={url}
           className={cn(
-            'absolute w-[154px] h-[198px] flex-col items-center justify-center gap-[5px] z-[20] transition-transform duration-[400ms] ease-in-out ',
-            isMainGrid ? 'story-grid-item' : '',
-            animationState === 'forward' &&
-              !clicked &&
-              'animate-[toBlurAndHide_300ms_ease-in-out_forwards]',
+            'ease-toi-cubic-bezier',
+            'absolute w-[154px] h-[198px] flex-col items-center justify-center gap-[5px] z-[20] transition-transform duration-[400ms] ',
+            animationState === 'forward' && !clicked && 'animate-[toBlurAndHide_300ms_forwards]',
             animationState === 'forward' &&
               clicked &&
-              'animate-[toCenterOfGalaxy_500ms_ease-in-out_forwards] z-[1000]'
+              'animate-[toCenterOfGalaxy_500ms_forwards] z-[1000]',
+            positionClassName
           )}
           style={{ ...position, ...animationCssVariables }}
           onClick={() => {
@@ -94,12 +100,15 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
             className="size-full"
             color="blue"
           >
-            <div className=" flex size-full flex-col gap-[12px] transition-transform duration-[.4] ease-in-out group-hover:scale-105">
+            <div className=" flex size-full flex-col gap-[12px] transition-transform duration-[.4] ease-toi-cubic-bezier group-hover:scale-105">
               <StoryOrRecordResponsiveImage
                 recordOrStoryId={story.id}
                 src={image}
                 alt={title}
-                className="size-full max-h-[calc(100%-2vw-5px)]" // where 2vw is a title's line height, 5px is gap
+                className={cn(
+                  'size-full max-h-[calc(100%-2vw-5px)]',
+                  isMainGrid ? 'story-grid-item' : ''
+                )} // where 2vw is a title's line height, 5px is gap
                 imageClassName="object-bottom"
                 size={'12vw'}
                 style={{
@@ -111,8 +120,8 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
                 <p
                   lang="nl"
                   className={cn(
-                    animationState === 'forward' &&
-                      'animate-[toBlurAndHide_300ms_ease-in-out_forwards]',
+                    'ease-toi-cubic-bezier',
+                    animationState === 'forward' && 'animate-[toBlurAndHide_300ms_forwards]',
                     TypographyVariants({
                       responsive: 'storyOrRecordTitle',
                       className:

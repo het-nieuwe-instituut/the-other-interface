@@ -49,6 +49,12 @@ module.exports = {
           },
         },
 
+        zoomFirstRender: {
+          initial: { opacity: 0, scale: 0 },
+          '0%': { opacity: 0, scale: 0 },
+          '100%': { opacity: 1, scale: 1 },
+        },
+
         // others
         toBlurAndHide: {
           from: { opacity: 1, filter: 'blur(0px)' },
@@ -102,20 +108,20 @@ module.exports = {
           '0%': { opacity: 1 },
           '100%': { opacity: 0 },
         },
-        toScaleFullPage: {
-          '0%': { transform: 'scale(1.1)', opacity: 1 },
-          '75%': { transform: 'scale(3)', opacity: 0.5 },
-          '100%': { transform: 'scale(4)', opacity: 0 },
-        },
         toCenterOfGalaxy: {
           '0%': {
             transform: 'translate(0, 0)',
+            opacity: 1,
           },
           '100%': {
             transform:
               'translate(var(--animation-translate-x), var(--animation-translate-y)) scale(var(--animation-scale))',
+            opacity: 'var(--animation-opacity)',
           },
         },
+      },
+      transitionTimingFunction: {
+        'toi-cubic-bezier': 'cubic-bezier(0.25, 0.1, 0.25, 0.1)',
       },
       gridTemplateAreas: {
         'editorial-large': ['left right', 'bottom right'],

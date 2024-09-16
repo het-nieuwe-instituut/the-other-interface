@@ -35,11 +35,11 @@ export const GalaxyPaginationAnimationStateProvider = ({
 
 export const getItemsAnimationClassNames = (animationState: Animations, conditions: Conditions) => {
   return cn(
+    'ease-toi-cubic-bezier',
     conditions === 'previousAnimationWasBackwards' &&
-      'animate-[paginationHideToShow_500ms_ease-in-out_forwards]',
-    animationState === 'forward' && 'animate-[paginationForward_500ms_ease-in-out_forwards]',
-    animationState === 'backwards' && 'animate-[paginationBackward_500ms_ease-in-out_forwards]',
-    conditions === 'firstRender' && 'animate-[paginationHideToShow_500ms_ease-in-out_forwards]'
+      'animate-[paginationHideToShow_500ms_forwards]',
+    animationState === 'forward' && 'animate-[paginationForward_500ms_forwards]',
+    animationState === 'backwards' && 'animate-[paginationBackward_500ms_forwards]'
   )
 }
 
@@ -57,23 +57,23 @@ export const getNextItemsAnimationClassNames = (
   hasItems: boolean
 ) => {
   return cn(
+    'ease-toi-cubic-bezier',
     conditions === 'previousAnimationWasForward' &&
       hasItems &&
-      'animate-[nextPaginationHideToShow_500ms_ease-in-out_forwards]',
+      'animate-[nextPaginationHideToShow_500ms_forwards]',
     !animationState &&
       conditions === 'firstRender' &&
-      'animate-[nextPaginationHideToBlur_500ms_ease-in-out_forwards]  scale-[var(--scale-min)]',
+      'animate-[nextPaginationHideToBlur_500ms_forwards]  scale-[var(--scale-min)]',
     !animationState &&
       conditions !== 'firstRender' &&
       conditions === 'previousAnimationWasForward' &&
-      'animate-[nextPaginationHideToBlur_500ms_ease-in-out_forwards]',
+      'animate-[nextPaginationHideToBlur_500ms_forwards]',
     !animationState &&
       conditions !== 'firstRender' &&
       conditions === 'previousAnimationWasBackwards' &&
       'blur-[var(--blur)] scale-[var(--scale-min)]',
-    animationState === 'forward' && 'animate-[nextPaginationToUnblur_500ms_ease-in-out_forwards]',
-    animationState === 'backwards' &&
-      'animate-[nextPaginationFromBlurredToHide_500ms_ease-in-out_forwards]'
+    animationState === 'forward' && 'animate-[nextPaginationToUnblur_500ms_forwards]',
+    animationState === 'backwards' && 'animate-[nextPaginationFromBlurredToHide_500ms_forwards]'
   )
 }
 

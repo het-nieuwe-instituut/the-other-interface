@@ -1,10 +1,10 @@
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { encodeFilters } from '@/features/shared/helpers/searchHelpers'
 import { useLocale } from '@/features/shared/hooks/useLocale'
-import { CloudCategory } from '@/features/shared/utils/categories'
+import { type CloudCategory } from '@/features/shared/utils/categories'
 import { useMemo } from 'react'
 import { Locale } from 'src/generated/graphql'
-import { CollectionHighlightsFilter } from '../components/GalaxyWrapper/Suggestions/Suggestions'
+import { CollectionHighlightsFilter } from '../components/GalaxyWrapper/Suggestions/suggestions.constants'
 
 export const getUrlLandingPageUrl = (lang: Locale, category: CloudCategory) => {
   let url = `/landingpage?category=${category}&filters=${encodeFilters([

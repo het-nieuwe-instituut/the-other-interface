@@ -23,6 +23,7 @@ export type RecordComponentProps = {
   record: RecordProps
   tooltipPlace: PlacesType
   onFullyLoaded?: () => void
+  positionClassName?: string
 }
 
 type RecordProps = SearchResultItemType & {
@@ -35,6 +36,7 @@ export const Record: React.FC<RecordComponentProps> = ({
   record,
   tooltipPlace,
   onFullyLoaded,
+  positionClassName,
 }) => {
   const { id, category } = record
   const { t } = useTypeSafeTranslation('category')
@@ -60,13 +62,13 @@ export const Record: React.FC<RecordComponentProps> = ({
         ref={positionRef}
         style={{ ...animationCssVariables, ...record.position } as CSSProperties}
         className={cn(
+          'ease-toi-cubic-bezier',
           'absolute flex h-4/5 w-[70%]',
-          animationState === 'forward' &&
-            !clicked &&
-            'animate-[toBlurAndHide_300ms_ease-in-out_forwards]',
+          animationState === 'forward' && !clicked && 'animate-[toBlurAndHide_300ms_forwards]',
           animationState === 'forward' &&
             clicked &&
-            'animate-[toCenterOfGalaxy_500ms_ease-in-out_forwards] z-[1000]'
+            'animate-[toCenterOfGalaxy_500ms_forwards] z-[1000]',
+          positionClassName
         )}
       >
         <ReadMoreTooltip
@@ -115,10 +117,11 @@ const RecordData = ({
       animation="forward"
       href={url}
       className={cn(
+        'ease-toi-cubic-bezier',
         'flex size-full cursor-pointer flex-col items-center justify-center gap-[5px]',
         animationState === 'forward' ||
           (animationState === 'backwards' &&
-            'group-hover-blur-item transition-all duration-300 ease-in-out hover:scale-105')
+            'group-hover-blur-item transition-all duration-300 hover:scale-105')
       )}
       onClick={onClick}
     >
@@ -136,7 +139,8 @@ const RecordData = ({
 
       <RecordText
         className={cn(
-          animationState === 'forward' && 'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+          'ease-toi-cubic-bezier',
+          animationState === 'forward' && 'animate-[toBlurAndHide_300ms_forwards]'
         )}
         title={title}
         categoryType={category.toLocaleLowerCase() as Category}

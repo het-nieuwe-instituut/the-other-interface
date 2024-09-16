@@ -28,10 +28,19 @@ type Props = {
   isIdLoading?: boolean
   className?: string
   recordDetails: Awaited<ReturnType<typeof getZoom3RecordTask>>
+  positionClassName?: string
 }
 
 export const Record = React.memo(
-  ({ record, style, tabIndex = 0, tooltipPlace = 'bottom', className, recordDetails }: Props) => {
+  ({
+    record,
+    style,
+    positionClassName,
+    tabIndex = 0,
+    tooltipPlace = 'bottom',
+    className,
+    recordDetails,
+  }: Props) => {
     const { t } = useTypeSafeTranslation('category')
     const lang = useLocale()
     const { id, category, position, grid } = record
@@ -80,24 +89,26 @@ export const Record = React.memo(
               href={url}
               tabIndex={tabIndex}
               className={cn(
+                'ease-toi-cubic-bezier',
                 'fixed',
                 'absolute flex size-4/5 cursor-pointer flex-col items-center justify-center gap-[2px]',
-                !clicked && 'group-hover-blur-item transition-all duration-300 ease-in-out',
+                !clicked && 'group-hover-blur-item transition-all duration-300',
                 !clicked && 'use-calculate-line-element',
                 !clicked && 'group-hover-blur-item',
                 animationState === 'forward' &&
                   !clicked &&
-                  'animate-[toBlurAndHide_300ms_ease-in-out_forwards]',
+                  'animate-[toBlurAndHide_300ms_forwards]',
                 animationState === 'forward' &&
                   clicked &&
-                  'animate-[toCenterOfGalaxy_500ms_ease-in-out_forwards] z-[1000]'
+                  'animate-[toCenterOfGalaxy_500ms_forwards] z-[1000]',
+                positionClassName
               )}
               onClick={() => setClicked(true)}
             >
               <div ref={ref} className="relative size-full ">
-                <div className="flex size-full flex-col gap-[12px]  transition-all duration-300 ease-in-out hover:scale-105">
+                <div className="flex size-full flex-col gap-[12px] transition-all  duration-300 ease-toi-cubic-bezier hover:scale-105">
                   <div
-                    className="size-full  flex items-center  justify-center "
+                    className="flex  size-full items-center  justify-center "
                     style={{
                       flex: '1 1 calc(100% - 2vw - 5px)',
                     }}
@@ -138,8 +149,8 @@ export const Record = React.memo(
                   </div>
                   <RecordText
                     className={cn(
-                      animationState === 'forward' &&
-                        'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+                      'ease-toi-cubic-bezier',
+                      animationState === 'forward' && 'animate-[toBlurAndHide_300ms_forwards]'
                     )}
                     title={recordDetails?.title}
                     categoryType={category}

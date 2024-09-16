@@ -1,5 +1,5 @@
 'use client'
-import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/Suggestions'
+import { COLLECTION_HILIGHT_ID } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/suggestions.constants'
 import { searchCategoryToTriplyCategory } from '@/features/galaxyInterface/galaxies/CategoryGalaxy/mappers/searchCategoryToTriplyMapper'
 import {
   CATEGORIES_TO_ENTITY_MAPPER,
@@ -13,11 +13,13 @@ import { useDispatch } from 'react-redux'
 import {
   InputMaybe,
   Locale,
+  SearchAllQuery,
+  SearchByStoriesQuery,
   SelectedFilterSuggestion,
   StringFilterInput,
   TriplyRecordFiltersInput,
 } from 'src/generated/graphql'
-import { STORIES_PER_PAGE, ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
+import { ZOOM2_RECORDS_PER_PAGE } from '../../constants/mainConstants'
 import { storyToRecordMapper } from '../../helpers/extractStoryData'
 import { mapCategoryToTriplyEnum } from '../../helpers/mapCategoryToTriplyEnum'
 import mapSelectedHighlightToSearch from '../../mappers/mapSelectedHighlightToSearch'
@@ -197,36 +199,50 @@ async function searchAll(
   locale: Locale,
   text?: string
 ) {
-  const storiesData = await api.searchByStories({
-    searchTerm: text ?? '',
-    page,
-    pageSize: 1,
-    locale,
-  })
+  const storyParams = { searchTerm: text ?? '', locale }
+  const recordParams = { text: text ?? '', lang: locale }
+  const noItemPagination = { start: 0, limit: 0 }
 
-  const storiesTotal = storiesData?.stories?.meta?.pagination?.total ?? 0
-  const storyPagesAmount = Math.ceil(storiesTotal / STORIES_PER_PAGE)
+  const [storiesTotalRes, recordsTotalRes] = await Promise.all([
+    api.searchByStories({ ...storyParams, ...noItemPagination }),
+    api.searchAll({ ...recordParams, ...noItemPagination }),
+  ])
 
-  const storiesSearchResponse = await api.searchByStories({
-    searchTerm: text ?? '',
-    page: page > storyPagesAmount ? storyPagesAmount : page,
-    pageSize: STORIES_PER_PAGE,
-    locale,
-  })
+  // total of 12 records per page
+  // if there are 6 of each type, split them evenly
+  // otherwise, if a type has less than 6, fill the rest with the other type
+  // make sure to take the previous page into account
+  const storiesTotal = storiesTotalRes.stories.meta?.pagination.total || 0
+  const recordsTotal = recordsTotalRes.searchTriply.total || 0
+  const total = storiesTotal + recordsTotal
 
-  const searchStories =
-    storiesSearchResponse?.stories?.data?.map(story => storyToRecordMapper(story)) ?? []
+  const paginationParams = getSearchAllPaginationParams(storiesTotal, recordsTotal, page)
 
-  const searchAllResult = await api.searchAll({
-    text: text ?? '',
-    page: page,
-    lang: locale,
-    pageSize: ZOOM2_RECORDS_PER_PAGE - STORIES_PER_PAGE,
-  })
+  let storiesResult: SearchByStoriesQuery | undefined = undefined
+  if (paginationParams.stories) {
+    storiesResult = await api.searchByStories({
+      searchTerm: text ?? '',
+      limit: paginationParams.stories.limit,
+      start: paginationParams.stories.start,
+      locale,
+    })
+  }
+
+  const searchStories = storiesResult?.stories?.data?.map(story => storyToRecordMapper(story)) ?? []
+
+  let recordsResult: SearchAllQuery | undefined = undefined
+  if (paginationParams.records) {
+    recordsResult = await api.searchAll({
+      text: text ?? '',
+      lang: locale,
+      limit: paginationParams.records.limit,
+      start: paginationParams.records.start,
+    })
+  }
 
   return {
-    items: [...searchStories, ...(searchAllResult?.searchTriply?.nodes ?? [])],
-    total: storiesTotal + (+searchAllResult.searchTriply?.total || 0),
+    items: [...searchStories, ...(recordsResult?.searchTriply?.nodes ?? [])],
+    total,
   }
 }
 
@@ -261,5 +277,74 @@ async function searchCategory(
         type: mapCategoryToTriplyEnum(category),
       })) ?? [],
     total: totalData.zoomLevel2Amount.total,
+  }
+}
+
+/**
+ * - max 12 items per page,
+ * - 6 items per type when there are sufficient items of each type,
+ * - otherwise, fill the rest with the other type
+ */
+function getSearchAllPaginationParams(storiesTotal: number, recordsTotal: number, page: number) {
+  const halfPerPage = ZOOM2_RECORDS_PER_PAGE / 2
+  const itemsPerPage = 12
+
+  const fullStoryPages = Math.floor(storiesTotal / halfPerPage)
+  const fullRecordPages = Math.floor(recordsTotal / halfPerPage)
+  const remainingStoryItems = storiesTotal % halfPerPage
+  const remainingRecordItems = recordsTotal % halfPerPage
+
+  const lastFullPage = Math.min(fullRecordPages, fullStoryPages)
+
+  if (page <= lastFullPage || fullRecordPages === fullStoryPages) {
+    const start = (page - 1) * halfPerPage
+
+    return {
+      stories: { start, limit: halfPerPage },
+      records: { start, limit: halfPerPage },
+    }
+  }
+
+  if (page === lastFullPage + 1) {
+    const start = (page - 1) * halfPerPage
+
+    if (fullStoryPages > fullRecordPages) {
+      return {
+        stories: { start, limit: itemsPerPage - remainingRecordItems },
+        records: { start, limit: remainingRecordItems },
+      }
+    }
+
+    return {
+      stories: { start, limit: remainingStoryItems },
+      records: { start, limit: itemsPerPage - remainingStoryItems },
+    }
+  }
+
+  const normalPageOffset = lastFullPage * halfPerPage
+  const pageWithSingleTypeOnlyOffset = (page - lastFullPage - 2) * itemsPerPage
+
+  if (fullStoryPages > fullRecordPages) {
+    const partialStoryPageOffset = itemsPerPage - remainingRecordItems
+    const start = partialStoryPageOffset + pageWithSingleTypeOnlyOffset + normalPageOffset
+
+    return {
+      stories: { start, limit: itemsPerPage },
+      records: null,
+    }
+  }
+
+  const partialRecordPageOffset = itemsPerPage - remainingStoryItems
+  const start = partialRecordPageOffset + pageWithSingleTypeOnlyOffset + normalPageOffset
+  console.log({
+    start,
+    limit: itemsPerPage,
+    normalPageOffset,
+    pageWithSingleTypeOnlyOffset,
+    partialRecordPageOffset,
+  })
+  return {
+    stories: null,
+    records: { start, limit: itemsPerPage },
   }
 }

@@ -2,7 +2,7 @@
 import { useElementPosition } from '@/features/ui/hooks/useElementPosition'
 import React from 'react'
 import { useWindowSize } from 'usehooks-ts'
-import { Animations, useGalaxyAnimationState } from './useGalaxyAnimationState'
+import { Animations, Conditions, useGalaxyAnimationState } from './useGalaxyAnimationState'
 
 export const GalaxyZoomAnimationStateContext = React.createContext<{
   animationState?: Animations
@@ -52,8 +52,12 @@ export const getMoveElementToCenterY = ({
   return centerY - elementPositionTop - elementPositionHeight / 2
 }
 
-export const useMoveElementToCenterValues = (opts: { scale?: number; offsetTop?: number }) => {
-  const { scale = 1, offsetTop = 0 } = opts
+export const useMoveElementToCenterValues = (opts: {
+  scale?: number
+  offsetTop?: number
+  opacity?: number
+}) => {
+  const { scale = 1, offsetTop = 0, opacity = 1 } = opts
   const { width, height } = useWindowSize()
   const [elementPosition, ref] = useElementPosition()
   const centerX = (width ?? 0) / 2
@@ -73,7 +77,35 @@ export const useMoveElementToCenterValues = (opts: { scale?: number; offsetTop?:
       }) + offsetTop
     }px`,
     '--animation-scale': scale,
+    '--animation-opacity': opacity,
   }
 
   return [animationCssVariables, ref] as const
+}
+
+export function getScaleAnimationClassName({
+  allLoaded,
+  animation,
+  galaxyZoomAnimationConditions,
+  galaxyPaginationAnimationConditions,
+  galaxyZoomAnimationState,
+  galaxyPaginationAnimationState,
+}: {
+  allLoaded: boolean
+  animation: string
+  galaxyZoomAnimationConditions: Conditions
+  galaxyPaginationAnimationConditions: Conditions
+  galaxyZoomAnimationState: Animations
+  galaxyPaginationAnimationState: Animations
+}) {
+  return allLoaded &&
+    galaxyZoomAnimationConditions === 'firstRender' &&
+    galaxyPaginationAnimationConditions === 'firstRender'
+    ? animation
+    : !galaxyZoomAnimationState &&
+      !galaxyPaginationAnimationState &&
+      galaxyPaginationAnimationConditions !== 'previousAnimationWasBackwards' &&
+      galaxyPaginationAnimationConditions !== 'previousAnimationWasForward'
+    ? 'opacity-0'
+    : undefined
 }

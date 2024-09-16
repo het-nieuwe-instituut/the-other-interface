@@ -160,6 +160,26 @@ const getTranslationConfig = (translate: typeof createTypeSafeTranslation) => [
     type: CLOUD_CATEGORIES.archives,
     value: translate('suggestions').t('archiveAsterisk'),
   },
+  {
+    key: 'collectionHighlights',
+    type: CLOUD_CATEGORIES.archives,
+    value: translate('suggestions').t('collectionHighlights'),
+  },
+  {
+    key: 'collectionHighlights',
+    type: CLOUD_CATEGORIES.objects,
+    value: translate('suggestions').t('collectionHighlights'),
+  },
+  {
+    key: 'collectionHighlights',
+    type: CLOUD_CATEGORIES.people,
+    value: translate('suggestions').t('collectionHighlights'),
+  },
+  {
+    key: 'collectionHighlights',
+    type: CLOUD_CATEGORIES.publications,
+    value: translate('suggestions').t('collectionHighlights'),
+  },
 ]
 
 function initializeGlobalTranslations() {

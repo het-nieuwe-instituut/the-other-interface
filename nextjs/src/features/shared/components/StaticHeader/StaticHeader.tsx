@@ -4,11 +4,12 @@ import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/componen
 import { MenuTypogrpahyVariants } from '@/features/ui/components/typography/menuVariants'
 import { cn } from '@/features/ui/utils/cn'
 import { CSSProperties } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { State } from '../../configs/store'
 import { STATIC_HEADER_Z_INDEX, USER_LOOKS_ON } from '../../constants/mainConstants'
 import { useLooseTypeSafeTranslation } from '../../hooks/translations'
 import { useLocale } from '../../hooks/useLocale'
+import { sharedActions } from '../../stores/shared.store'
 
 export const StaticHeader = ({
   isNotGalaxyPage,
@@ -17,6 +18,7 @@ export const StaticHeader = ({
   isNotGalaxyPage?: boolean
   className?: string
 }) => {
+  const dispatch = useDispatch()
   const { t: tNavigation } = useLooseTypeSafeTranslation('navigation')
   const lang = useLocale()
 
@@ -33,14 +35,16 @@ export const StaticHeader = ({
       <div
         style={{ '--z-index': `${STATIC_HEADER_Z_INDEX}` } as CSSProperties}
         className={cn(
+          'ease-toi-cubic-bezier',
           isMenuOpen || userLooksOnGalaxy ? 'transparent' : 'bg-pink-100',
-          'ease-in duration-200 fixed top-0 right-0 z-[var(--z-index)] h-auto overflow-hidden py-4 w-full pointer-events-auto',
+          'duration-200 fixed top-0 right-0 z-[var(--z-index)] h-auto overflow-hidden py-4 w-full pointer-events-auto',
           className
         )}
       >
         <div className="container mx-auto flex size-full max-w-[90em] items-center justify-between px-6">
           <div className="h-full items-center">
             <DelayedNextLinkWithZoomAnimationsContext
+              onClick={() => dispatch(sharedActions.menuOpen({ isMenuOpen: false }))}
               animation={'backwards'}
               delay={300}
               href={lang ? `/?lang=${lang}` : '/?lang=nl'}
@@ -81,8 +85,9 @@ export const StaticPageHeader = () => {
       <div
         style={{ '--z-index': `${STATIC_HEADER_Z_INDEX}` } as CSSProperties}
         className={cn(
+          'ease-toi-cubic-bezier',
           isMenuOpen ? 'bg-blue-90' : 'bg-pink-100',
-          'ease-in duration-200 fixed top-0 right-0 z-[var(--z-index)] h-auto overflow-hidden py-4 w-full pointer-events-auto'
+          'duration-200 fixed top-0 right-0 z-[var(--z-index)] h-auto overflow-hidden py-4 w-full pointer-events-auto'
         )}
       >
         <div className="container mx-auto flex size-full max-w-[90em] items-center justify-between px-6">

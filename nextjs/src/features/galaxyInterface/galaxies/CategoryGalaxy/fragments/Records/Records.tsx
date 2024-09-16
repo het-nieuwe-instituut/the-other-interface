@@ -60,7 +60,8 @@ export const Records: React.FC<Props> = ({ pageAmount, records }) => {
     conditions: galaxyPaginationAnimationConditions,
     animationState: galaxyPaginationAnimationState,
   } = useContext(GalaxyPaginationAnimationStateContext)
-  const { animationState: galaxyZoomAnimationState } = useContext(GalaxyZoomAnimationStateContext)
+  const { animationState: galaxyZoomAnimationState, conditions: galaxyZoomAnimationConditions } =
+    useContext(GalaxyZoomAnimationStateContext)
   const { pageNumber } = usePageNumber()
   const { decodedFilters } = useDecodedSearchFilters()
 
@@ -93,20 +94,39 @@ export const Records: React.FC<Props> = ({ pageAmount, records }) => {
     })
   }, [nextRecords, nextTemplate, nextPage])
 
+  const animations = useMemo(() => {
+    const config = [
+      cn('animate-[zoomFirstRender_300ms_both_100ms]'),
+      cn('animate-[zoomFirstRender_325ms_both_125ms]'),
+      cn('animate-[zoomFirstRender_350ms_both_150ms]'),
+      cn('animate-[zoomFirstRender_375ms_both_175ms]'),
+      cn('animate-[zoomFirstRender_400ms_both_200ms]'),
+      cn('animate-[zoomFirstRender_425ms_both_225ms]'),
+      cn('animate-[zoomFirstRender_450ms_both_250ms]'),
+      cn('animate-[zoomFirstRender_475ms_both_275ms]'),
+      cn('animate-[zoomFirstRender_500ms_both_300ms]'),
+      cn('animate-[zoomFirstRender_525ms_both_325ms]'),
+      cn('animate-[zoomFirstRender_550ms_both_350ms]'),
+      cn('animate-[zoomFirstRender_575ms_both_375ms]'),
+    ]
+    //shuffle the array
+    return config.sort(() => Math.random() - 0.5)
+  }, [])
+
   return (
     <div className={'group-hover-blur size-full'}>
       {!isLoading && (
         <div
           style={getNextItemsCssProperties('50')}
           className={cn(
+            'ease-toi-cubic-bezier',
             'absolute inset-x-[2vw] top-[7%] grid h-[calc(80%-1.7rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-4 grid-rows-3',
             getNextItemsAnimationClassNames(
               galaxyPaginationAnimationState,
               galaxyPaginationAnimationConditions,
               nextRecords?.length > 0
             ),
-            galaxyZoomAnimationState === 'backwards' &&
-              'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+            galaxyZoomAnimationState === 'backwards' && 'animate-[toBlurAndHide_300ms_forwards]'
           )}
         >
           {nextPositionedRecords?.map((r, i) => {
@@ -119,17 +139,29 @@ export const Records: React.FC<Props> = ({ pageAmount, records }) => {
         <div
           style={getItemsCssProperties('50')}
           className={cn(
+            'ease-toi-cubic-bezier',
             'relative grid size-full grid-cols-4 grid-rows-3',
             getItemsAnimationClassNames(
               galaxyPaginationAnimationState,
               galaxyPaginationAnimationConditions
             ),
-            galaxyZoomAnimationState === 'backwards' &&
-              'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+            galaxyZoomAnimationState === 'backwards' && 'animate-[toBlurAndHide_300ms_forwards]'
           )}
         >
           {currentPositionedRecords?.map((r, i) => {
-            return <Record key={r.key} tooltipPlace={i >= 8 ? 'top' : 'bottom'} record={r} />
+            return (
+              <Record
+                positionClassName={cn(
+                  galaxyZoomAnimationConditions === 'firstRender' &&
+                    galaxyPaginationAnimationConditions === 'firstRender'
+                    ? animations[i]
+                    : undefined
+                )}
+                key={r.key}
+                tooltipPlace={i >= 8 ? 'top' : 'bottom'}
+                record={r}
+              />
+            )
           })}
         </div>
       </div>

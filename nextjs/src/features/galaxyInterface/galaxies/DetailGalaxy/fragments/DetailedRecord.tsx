@@ -38,9 +38,10 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
   return (
     <div
       className={cn(
-        'w-full',
+        'ease-toi-cubic-bezier',
+        'w-full ',
         className,
-        animationState === 'forward' && 'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+        animationState === 'forward' && 'animate-[toBlurAndHide_300ms_forwards]'
       )}
     >
       <div className="relative flex size-4/5 flex-col items-center justify-center gap-[2px]">
@@ -64,11 +65,12 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
         />
         <div
           className={cn(
+            'ease-toi-cubic-bezier',
             'mt-[12px] flex w-full flex-col text-blue-100',
             !(animationState === 'forward' || animationState === 'backwards') &&
               !isLoading &&
               conditions === 'firstRender' &&
-              'animate-[fromHideToShow_1000ms_ease-in-out_forwards]',
+              'animate-[fromHideToShow_1000ms_forwards]',
             isLoading && 'opacity-0'
           )}
         >
