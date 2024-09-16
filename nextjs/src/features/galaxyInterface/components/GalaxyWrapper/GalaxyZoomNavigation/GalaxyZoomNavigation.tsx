@@ -103,8 +103,9 @@ export const GalaxyZoomNavigation = () => {
             className={TypographyVariants({
               socialLarge: 'label',
               className: cn(
-                'text-blue-100 group flex flex-col gap-2',
-                zoom2Link ? 'cursor-pointer' : 'cursor-not-allowed'
+                'group flex flex-col gap-2',
+                zoom2Link ? 'cursor-pointer' : 'cursor-not-allowed',
+                currentZoomNumber === 1 ? 'text-blue-50' : 'text-blue-100'
               ),
             })}
           >
@@ -128,7 +129,10 @@ export const GalaxyZoomNavigation = () => {
               socialLarge: 'label',
               className: cn(
                 'text-blue-100 group flex flex-col gap-2',
-                currentZoomNumber === 3 ? 'cursor-pointer' : 'cursor-not-allowed'
+                currentZoomNumber === 3 ? 'cursor-pointer' : 'cursor-not-allowed',
+                currentZoomNumber === 1 || currentZoomNumber === 2
+                  ? 'text-blue-50'
+                  : 'text-blue-100'
               ),
             })}
           >
