@@ -2,7 +2,11 @@ import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { getCurrentZoomNumber } from '@/features/shared/helpers/getCurrentZoomNumber'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useLocale } from '@/features/shared/hooks/useLocale'
-import { isCloudCategory, isSearchCategory } from '@/features/shared/utils/categories'
+import {
+  CloudCategory,
+  isCloudCategory,
+  isSearchCategory,
+} from '@/features/shared/utils/categories'
 import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/components/DelayedNextLink/DelayedNextLinkWithZoomAnimationsContext'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
@@ -40,13 +44,13 @@ export const galaxyZooms = [
   },
 ] as const
 
-export const GalaxyZoomNavigation = () => {
+export const GalaxyZoomNavigator = () => {
   const pathname = usePathname()
   const params = useParams()
   const searchParams = useSearchParams()
   const locale = useLocale()
 
-  const category = (params?.category as string) ?? searchParams?.get('category')
+  const category = (params?.category as CloudCategory & 'stroies') ?? searchParams?.get('category')
 
   const searchParam = searchParams?.get('search') || ''
 
@@ -65,7 +69,7 @@ export const GalaxyZoomNavigation = () => {
           animation={'backwards'}
           delay={300}
           href="/"
-          className="flex w-[48px] cursor-pointer flex-col flex-nowrap items-center  justify-center gap-2 whitespace-nowrap"
+          className="flex cursor-pointer flex-col flex-nowrap items-center  justify-center gap-2 whitespace-nowrap"
           disabled={currentZoomNumber === 1}
         >
           <label
@@ -92,7 +96,7 @@ export const GalaxyZoomNavigation = () => {
           delay={300}
           href={addLocaleToUrl(zoom2Link ?? '', locale)}
           className={cn(
-            'flex w-[45px] flex-col flex-nowrap items-center justify-center gap-2 whitespace-nowrap',
+            'flex flex-col flex-nowrap items-center justify-center gap-2 whitespace-nowrap',
             !zoom2Link && currentZoomNumber === 2 && 'cursor-not-allowed pointer-events-none'
           )}
           disabled={currentZoomNumber === 1 || currentZoomNumber === 2}
@@ -116,16 +120,17 @@ export const GalaxyZoomNavigation = () => {
               className="self-center"
             />
 
-            {t('category')}
+            {t(category)}
           </label>
         </DelayedNextLinkWithZoomAnimationsContext>
-        <div className="flex w-[28px] flex-col flex-nowrap items-center justify-center gap-2 whitespace-nowrap">
+
+        <div className="flex flex-col flex-nowrap items-center justify-center gap-2 whitespace-nowrap">
           <label
             htmlFor="zoom-2"
             className={TypographyVariants({
               socialLarge: 'label',
               className: cn(
-                'text-blue-100 group flex flex-col gap-2',
+                'text-blue-100 group flex flex-col gap-2 items-end',
                 currentZoomNumber === 3 ? 'cursor-pointer' : 'cursor-not-allowed'
               ),
             })}
@@ -139,14 +144,14 @@ export const GalaxyZoomNavigation = () => {
               disabled={currentZoomNumber === 1 || currentZoomNumber === 2}
             />
 
-            {t('detail')}
+            {category === 'stories' ? t('story') : t('detail')}
           </label>
         </div>
         <div className="absolute top-1 flex w-full">
           <div className="w-2"></div>
           <div className=" pointer-events-none mt-[-0.5px] h-px w-[71px] bg-blue-50 opacity-50"></div>
           <div className="w-2"></div>
-          <div className="pointer-events-none mt-[-0.5px] h-px w-[51px] bg-blue-50 opacity-50"></div>
+          <div className="pointer-events-none mt-[-0.5px] h-px w-[51px] bg-blue-50 opacity-50 "></div>
           <div className="w-2"></div>
         </div>
       </form>
