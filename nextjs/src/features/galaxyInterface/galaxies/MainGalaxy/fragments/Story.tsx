@@ -131,6 +131,15 @@ export const Story: React.FC<Props> = ({
                 >
                   {title}
                 </p>
+                <p
+                  lang="nl"
+                  className={TypographyVariants({
+                    responsive: 'detailedStoryOrRecordSubTitle',
+                    className: 'text-center mt-1 text-blue-100',
+                  })}
+                >
+                  {hoverT('stories')}
+                </p>
               </div>
             </div>
           </ReadMoreTooltip>
