@@ -6,7 +6,7 @@ import { useMemo } from 'react'
 import { Locale } from 'src/generated/graphql'
 import { CollectionHighlightsFilter } from '../components/GalaxyWrapper/Suggestions/suggestions.constants'
 
-export const getUrlLandingPageUrl = (lang: Locale, category: CloudCategory) => {
+export const getUrlLandingPageUrl = (lang: Locale, category: CloudCategory | 'stories') => {
   let url = `/landingpage?category=${category}&filters=${encodeFilters([
     CollectionHighlightsFilter,
   ])}&searchResult=true&fallback=true`
