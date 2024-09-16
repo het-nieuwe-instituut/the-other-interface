@@ -61,6 +61,7 @@ export const GalaxyZoomNavigation = () => {
       </p>
 
       <form className="relative flex items-center justify-center gap-3">
+        {/* ZOOM 1 */}
         <DelayedNextLinkWithZoomAnimationsContext
           animation={'backwards'}
           delay={300}
@@ -86,7 +87,7 @@ export const GalaxyZoomNavigation = () => {
             {t('collection')}
           </label>
         </DelayedNextLinkWithZoomAnimationsContext>
-
+        {/* ZOOM 2 */}
         <DelayedNextLinkWithZoomAnimationsContext
           animation={'backwards'}
           delay={300}
@@ -119,6 +120,7 @@ export const GalaxyZoomNavigation = () => {
             {t('category')}
           </label>
         </DelayedNextLinkWithZoomAnimationsContext>
+        {/* ZOOM 3 */}
         <div className="flex w-[28px] flex-col flex-nowrap items-center justify-center gap-2 whitespace-nowrap">
           <label
             htmlFor="zoom-2"
@@ -144,9 +146,21 @@ export const GalaxyZoomNavigation = () => {
         </div>
         <div className="absolute top-1 flex w-full">
           <div className="w-2"></div>
-          <div className=" pointer-events-none mt-[-0.5px] h-px w-[71px] bg-blue-50 opacity-50"></div>
+          <div
+            className={cn(
+              'pointer-events-none mt-[-0.5px] h-px w-[71px]',
+              'bg-blue-50 opacity-50',
+              currentZoomNumber === 2 || currentZoomNumber === 3 ? 'bg-blue-100 opacity-100' : ''
+            )}
+          ></div>
           <div className="w-2"></div>
-          <div className="pointer-events-none mt-[-0.5px] h-px w-[51px] bg-blue-50 opacity-50"></div>
+          <div
+            className={cn(
+              'pointer-events-none mt-[-0.5px] h-px w-[51px]',
+              'bg-blue-50 opacity-50',
+              currentZoomNumber === 3 ? 'bg-blue-100 opacity-100' : ''
+            )}
+          ></div>
           <div className="w-2"></div>
         </div>
       </form>
