@@ -33,10 +33,8 @@ export const StaticHeader = ({
   }
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      if (event.target === event.currentTarget) {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-      }
+    if ((event.key === 'Enter' || event.key === ' ') && event.target === event.currentTarget) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
 
