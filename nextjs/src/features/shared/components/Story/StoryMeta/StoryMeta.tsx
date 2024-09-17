@@ -104,6 +104,7 @@ export const StoryMeta: React.FC = () => {
                   key={child.id}
                   variant={'metaData'}
                   href={`/detail/${CATEGORIES.stories}/${child.id}?lang=${lang}`}
+                  className="mb-0 [&:not(:last-child)]:mb-1"
                 >
                   {child.attributes?.title}
                 </NavLinkButton>
