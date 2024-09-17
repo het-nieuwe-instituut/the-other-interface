@@ -26,6 +26,18 @@ export const StaticHeader = ({
   const userLooksOnGalaxy =
     useSelector((state: State) => state.shared.userLooksOn) === USER_LOOKS_ON.GALAXY
 
+  const handleHeaderClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (event.target === event.currentTarget) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if ((event.key === 'Enter' || event.key === ' ') && event.target === event.currentTarget) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
   if (isNotGalaxyPage) {
     return <StaticPageHeader />
   }
@@ -41,7 +53,14 @@ export const StaticHeader = ({
           className
         )}
       >
-        <div className="container mx-auto flex size-full max-w-[90em] items-center justify-between px-6">
+        <div
+          className="container mx-auto flex size-full max-w-[90em] items-center justify-between px-6"
+          role="button"
+          aria-label="scroll"
+          tabIndex={0}
+          onClick={handleHeaderClick}
+          onKeyDown={handleKeyDown}
+        >
           <div className="h-full items-center">
             <DelayedNextLinkWithZoomAnimationsContext
               onClick={() => dispatch(sharedActions.menuOpen({ isMenuOpen: false }))}
