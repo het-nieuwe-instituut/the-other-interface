@@ -122,7 +122,7 @@ export interface CorePublicationDate extends Schema.Component {
   }
   attributes: {
     date: Attribute.Date
-    displayType: Attribute.Enumeration<['Year', 'Date']> & Attribute.DefaultTo<'Year'>
+    displayType: Attribute.Enumeration<['Year', 'Date']> & Attribute.DefaultTo<'Date'>
   }
 }
 
