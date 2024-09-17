@@ -1,8 +1,5 @@
 import * as DataLoader from 'dataloader'
-import {
-  // AuthorEntityResponse,
-  AuthorEntityResponseCollection,
-} from 'src/modules/author/author.type'
+import { AuthorEntityResponseCollection } from 'src/modules/author/author.type'
 import { LocationEntity } from 'src/modules/location/location.type'
 import { StoryComponentsDynamicZone, StoryEntity } from 'src/modules/story/story.type'
 import { StoryEntityResponse } from 'src/modules/story/story.types.circular'
