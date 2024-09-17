@@ -10,7 +10,7 @@ import { useCallback, useContext, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { GalaxySearchBar } from '../GalaxySearchBar/GalaxySearchBar'
 import { CollpsedSearch } from '../GalaxySearchBar/fragments/CollpsedSearch'
-import { GalaxyZoomNavigation } from '../GalaxyZoomNavigation/GalaxyZoomNavigation'
+import { GalaxyZoomNavigator } from '../../GalaxyZoomNavigator'
 import { cn } from '@/features/ui/utils/cn'
 import { GalaxyZoomAnimationStateContext } from '@/features/galaxyInterface/galaxies/hooks/GalaxyZoomAnimationStateProvider'
 
@@ -96,7 +96,7 @@ export const GalaxyFooter: React.FC<Props> = ({ galaxyPagination }) => {
       </div>
 
       <div className="flex h-full pl-4 align-top">
-        <GalaxyZoomNavigation />
+        <GalaxyZoomNavigator />
       </div>
     </div>
   )

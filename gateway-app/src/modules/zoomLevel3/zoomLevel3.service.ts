@@ -124,17 +124,10 @@ export class ZoomLevel3Service {
         )
       )
 
-    const themeIds = await this.getStoryThemeIds(storyId, locale)
-
-    const stories = await this.strapiGqlSdk.storiesIds({
-      filters: { themes: { id: { in: themeIds } } },
-      locale,
-      publicationState: PublicationState.Live,
-      pagination: { page: 1, pageSize: 500 },
-    })
+    const stories = await this.getPaginatedStoryRelationsForStory(storyId, locale)
 
     return {
-      linkedStoryCount: stories.stories?.data.length || 0,
+      linkedStoryCount: stories.total || 0,
       linkedTriplyRecords: {
         archives: resTriplyArchives.triplyRecords?.meta.pagination.total,
         people: resTriplyPeople.triplyRecords?.meta.pagination.total,
@@ -149,30 +142,9 @@ export class ZoomLevel3Service {
     locale: Locale,
     page?: number
   ): Promise<ZoomLevel3RelationsType[]> {
-    const res = await this.strapiGqlSdk.storyParentAndChildren({ id })
-    const story = res.story?.data
+    const storyRelation = await this.getPaginatedStoryRelationsForStory(id, locale, page)
+    const triplyRelations = await this.getTriplyRelationsForStory(id, page)
 
-    if (!story?.id) {
-      throw CustomError.internalCritical('Story not found')
-    }
-
-    const storyId = story.id
-    const parentId = story.attributes?.parent_story?.data?.id
-    const childrensIds =
-      (story.attributes?.child_stories?.data?.map(s => s.id).filter(Boolean) as string[]) || []
-
-    const storyRelation = await this.getPaginatedStoryRelationsForStory(
-      storyId,
-      childrensIds,
-      locale,
-      parentId,
-      page
-    )
-
-    const triplyRelations = await this.getTriplyRelationsForStory(storyId, page)
-
-    // related records (archives, objects, people, publications) from triply (based on story theme)
-    // combine it all to return
     return [...triplyRelations, storyRelation]
   }
 
@@ -265,23 +237,18 @@ export class ZoomLevel3Service {
 
   private async getPaginatedStoryRelationsForStory(
     storyId: string,
-    childrenIds: string[],
     locale: Locale,
-    parentId?: string | null,
     page?: number
   ): Promise<ZoomLevel3RelationsType> {
     const themeIds = await this.getStoryThemeIds(storyId, locale)
 
     const storyFilters: StoryFiltersInput = {
-      or: [{ themes: { id: { in: themeIds } } }],
+      or: [
+        { themes: { id: { in: themeIds } } },
+        { child_stories: { id: { eq: storyId } } },
+        { parent_story: { id: { eq: storyId } } },
+      ],
       id: { ne: storyId },
-    }
-    if (childrenIds.length) {
-      storyFilters.or?.push({ id: { in: childrenIds } })
-    }
-
-    if (parentId) {
-      storyFilters.or?.push({ id: { eq: parentId } })
     }
 
     const paginatedRelatedStories = await this.strapiGqlSdk.stories({

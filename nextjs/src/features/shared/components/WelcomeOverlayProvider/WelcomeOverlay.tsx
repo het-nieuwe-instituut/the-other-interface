@@ -93,7 +93,7 @@ const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
           </p>
           <Button
             intent={'invertedSecondary'}
-            className="mt-4 w-[185px] font-times-dot"
+            className="mt-8 w-[185px] font-times-dot"
             onClick={closeOverlay}
             tabIndex={0}
           >
