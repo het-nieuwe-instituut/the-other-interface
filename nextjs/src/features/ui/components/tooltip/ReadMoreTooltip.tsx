@@ -153,8 +153,8 @@ const ReadMoreTooltipContent = ({
               className: cn(
                 color === 'black' && 'text-ivory-100',
                 color === 'blue' && 'text-pink-100',
-                'font-bold line-clamp-[4]',
-                description && 'pb-2'
+                'font-bold line-clamp-4 overflow-hidden',
+                description && 'mb-2'
               ),
             })}
           >
@@ -170,7 +170,7 @@ const ReadMoreTooltipContent = ({
                 color === 'black' && 'text-ivory-100',
                 color === 'blue' && 'text-pink-100',
                 'line-clamp-[7]',
-                readMoreHref && 'pb-2'
+                readMoreHref && 'mb-2'
               ),
             })}
           >
