@@ -1,5 +1,9 @@
 import { ObjectType, Field, createUnionType, ID, InputType } from '@nestjs/graphql'
-import { AuthorEntityResponse, AuthorFiltersInput } from '../author/author.type'
+import {
+  AuthorEntityResponse,
+  AuthorEntityResponseCollection,
+  AuthorFiltersInput,
+} from '../author/author.type'
 import { LocationFiltersInput, LocationEntity } from '../location/location.type'
 import {
   ComponentCorePublicationDate,
@@ -105,8 +109,8 @@ export class StoryEntity {
   @Field(() => AuthorEntityResponse, { nullable: true })
   public author?: AuthorEntityResponse
 
-  @Field(() => [AuthorEntityResponse], { nullable: true })
-  public authors?: AuthorEntityResponse[]
+  @Field(() => AuthorEntityResponseCollection, { nullable: true })
+  public authors?: AuthorEntityResponseCollection
 
   @Field(() => [LocationEntity], { nullable: true })
   public locations?: LocationEntity[]

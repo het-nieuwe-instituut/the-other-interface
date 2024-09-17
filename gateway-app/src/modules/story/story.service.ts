@@ -2,7 +2,10 @@ import { Inject, Injectable } from '@nestjs/common'
 import { Sdk } from '../../generated/strapi-sdk'
 import { EntityNames } from '../util/entityNames.type'
 import { Locale } from '../util/locale.type'
-import { AuthorEntityResponse } from 'src/modules/author/author.type'
+import {
+  AuthorEntityResponse,
+  AuthorEntityResponseCollection,
+} from 'src/modules/author/author.type'
 import { LocationEntity } from 'src/modules/location/location.type'
 import { StoryComponentsDynamicZone, StoryEntity } from 'src/modules/story/story.type'
 import { StoryEntityResponse } from 'src/modules/story/story.types.circular'
@@ -52,7 +55,7 @@ export class StoryService {
 
   public getMultipleAuthors = async (
     ids: readonly string[]
-  ): Promise<(AuthorEntityResponse[] | null)[]> => {
+  ): Promise<(AuthorEntityResponseCollection | null)[]> => {
     if (!ids.length) {
       return []
     }
@@ -62,16 +65,25 @@ export class StoryService {
       return []
     }
 
-    return []
+    return ids.map(id => {
+      const authors = res.stories?.data.find(s => s.id === id)?.attributes?.authors
 
-    // return ids.map(id => {
-    //   const author = res.stories?.data.find(s => s.id === id)?.attributes?.authors
-    //   if (!author) {
-    //     return null
-    //   }
-
-    //   return author as AuthorEntityResponse
-    // })
+      if (!authors) {
+        return null
+      }
+      console.log('TEST', authors)
+      // authors should be
+      // {
+      // data : [{
+      //    id: '5',
+      //    attributes: { firstName: 'Ernst', lastName: 'Bouvrie', insertion: 'des' }
+      //  },
+      //  {
+      //   id: '6',
+      //   attributes: { firstName: 'Ernst', lastName: 'Bouvrie', insertion: 'des' }]
+      // }
+      return authors as AuthorEntityResponseCollection
+    })
   }
 
   public getLocations = async (ids: readonly string[]): Promise<LocationEntity[][]> => {
