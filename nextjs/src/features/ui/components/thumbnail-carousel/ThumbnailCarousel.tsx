@@ -34,12 +34,11 @@ const ThumbnailCarouselContext = React.createContext<{
 const ITEM_WIDTH = 154.783
 
 export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProps) => {
-  const { pages, width, nextPage, prevPage, scrollContainerRef, canScrollNext, canScrollPrev } =
-    useHorizontalSnappingList({
-      numberOfItems: children.length,
-      itemWidth: ITEM_WIDTH,
-      gap: 16,
-    })
+  const { pages, width, scrollContainerRef, scrollToIndex } = useHorizontalSnappingList({
+    numberOfItems: children.length,
+    itemWidth: ITEM_WIDTH,
+    gap: 16,
+  })
   const [index, setIndex] = useState<number>(0)
   const focusedItem = Children.toArray(children)[
     index
@@ -55,11 +54,33 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
   const imageSrc = src ? imageBasePath(src.toString()) : ''
   const { t } = createTypeSafeTranslation('common')
 
+  const handlePrevious = () => {
+    const newIndex = Math.max(0, index - 1)
+    setIndex(newIndex)
+    scrollToIndex(newIndex)
+  }
+
+  const handleNext = () => {
+    const newIndex = Math.min(children.length - 1, index + 1)
+    setIndex(newIndex)
+    scrollToIndex(newIndex)
+  }
+
+  const handleSetNext = (index: number) => {
+    setIndex(index)
+    scrollToIndex(index)
+  }
+
+  const canScrollPrev = index > 0
+  const canScrollNext = index < children.length - 1
+
+  console.log('pages', pages)
+  console.log('itemsFitInContainer', itemsFitInContainer)
+  console.log('children.length', children.length)
+  console.log('index', index)
   return (
     <LightboxProvider>
-      <ThumbnailCarouselContext.Provider
-        value={{ setIndex: (index: number) => setIndex(index), index }}
-      >
+      <ThumbnailCarouselContext.Provider value={{ setIndex: handleSetNext, index }}>
         <div className={cn(className, 'flex flex-col gap-4 relative')}>
           <div className="absolute left-2 top-2 z-[9999]">
             {enrichedSource && enrichedSource.thumbnail && (
@@ -109,7 +130,7 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
                 <div
                   className="flex flex-nowrap gap-4"
                   style={{
-                    width: pages * itemsFitInContainer * (ITEM_WIDTH + 16),
+                    width: (pages + 1) * itemsFitInContainer * (ITEM_WIDTH + 16),
                   }}
                 >
                   {children}
@@ -133,7 +154,7 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
                 />
 
                 <div className="flex h-full w-[116.32px] items-center justify-center gap-2 ">
-                  <button onClick={prevPage} disabled={!canScrollPrev} aria-label="Previous">
+                  <button onClick={handlePrevious} disabled={!canScrollPrev} aria-label="Previous">
                     <NavArrowLeft
                       className={cn(
                         !canScrollPrev && 'opacity-20',
@@ -141,7 +162,7 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
                       )}
                     />
                   </button>
-                  <button onClick={nextPage} disabled={!canScrollNext} aria-label="Next">
+                  <button onClick={handleNext} disabled={!canScrollNext} aria-label="Next">
                     <NavArrowRight
                       className={cn(
                         !canScrollNext && 'opacity-20',
