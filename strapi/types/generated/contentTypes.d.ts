@@ -1244,6 +1244,7 @@ export interface ApiStoryStory extends Schema.CollectionType {
     themes: Attribute.Relation<'api::story.story', 'manyToMany', 'api::theme.theme'>
     child_stories: Attribute.Relation<'api::story.story', 'oneToMany', 'api::story.story'>
     parent_story: Attribute.Relation<'api::story.story', 'manyToOne', 'api::story.story'>
+    authors: Attribute.Relation<'api::story.story', 'oneToMany', 'api::author.author'>
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime
