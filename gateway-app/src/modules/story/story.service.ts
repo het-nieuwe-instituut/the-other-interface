@@ -71,17 +71,7 @@ export class StoryService {
       if (!authors) {
         return null
       }
-      console.log('TEST', authors)
-      // authors should be
-      // {
-      // data : [{
-      //    id: '5',
-      //    attributes: { firstName: 'Ernst', lastName: 'Bouvrie', insertion: 'des' }
-      //  },
-      //  {
-      //   id: '6',
-      //   attributes: { firstName: 'Ernst', lastName: 'Bouvrie', insertion: 'des' }]
-      // }
+
       return authors as AuthorEntityResponseCollection
     })
   }
