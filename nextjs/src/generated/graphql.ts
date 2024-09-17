@@ -2435,7 +2435,7 @@ export type StoryHoverRecordRelationsQueryVariables = Exact<{
 }>;
 
 
-export type StoryHoverRecordRelationsQuery = { __typename?: 'Query', story: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id: string, attributes?: { __typename?: 'Story', title: string, shortDescription: string } | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null, attributes?: { __typename?: 'Author', firstName: string, lastName: string, insertion?: string | null } | null } | null } | null } | null } };
+export type StoryHoverRecordRelationsQuery = { __typename?: 'Query', story: { __typename?: 'StoryEntityResponse', data?: { __typename?: 'StoryEntity', id: string, attributes?: { __typename?: 'Story', title: string, shortDescription: string } | null, author?: { __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null, attributes?: { __typename?: 'Author', firstName: string, lastName: string, insertion?: string | null } | null } | null } | null, authors?: Array<{ __typename?: 'AuthorEntityResponse', data?: { __typename?: 'AuthorEntity', id?: string | null, attributes?: { __typename?: 'Author', firstName: string, lastName: string, insertion?: string | null } | null } | null }> | null } | null } };
 
 export type ArchiveRecordRelationsQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -4272,6 +4272,16 @@ export const StoryHoverRecordRelationsDocument = gql`
         shortDescription
       }
       author {
+        data {
+          id
+          attributes {
+            firstName
+            lastName
+            insertion
+          }
+        }
+      }
+      authors {
         data {
           id
           attributes {

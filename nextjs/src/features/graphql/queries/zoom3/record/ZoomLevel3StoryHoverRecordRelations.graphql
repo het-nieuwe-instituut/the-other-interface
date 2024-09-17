@@ -16,6 +16,16 @@ query StoryHoverRecordRelations($id: String!, $locale: Locale!) {
           }
         }
       }
+      authors {
+        data {
+          id
+          attributes {
+            firstName
+            lastName
+            insertion
+          }
+        }
+      }
     }
   }
 }
