@@ -14,7 +14,7 @@ import { encodeFilters } from '@/features/shared/helpers/searchHelpers'
 import { keyExtractor } from '@/features/shared/utils/lists'
 import { MetaSkeleton } from '@/features/ui/components/Skeletons/MetaSkeleton'
 import NextLink from 'next/link'
-import { formatAuthor, formatPublicationDate, formatTimeframe, getPeopleUrl } from './helpers'
+import { formatAuthors, formatPublicationDate, formatTimeframe, getPeopleUrl } from './helpers'
 
 export const StoryMeta: React.FC = () => {
   const storiesT = useTypeSafeTranslation('stories')
@@ -34,7 +34,7 @@ export const StoryMeta: React.FC = () => {
 
   if (!data?.storyByLocale.data) return null
 
-  const { publicationDate, author, themes, locations, timeframe } = data.storyByLocale.data
+  const { publicationDate, author, themes, locations, timeframe, authors } = data.storyByLocale.data
   const { parent_story, child_stories, triplyRecords } = data.storyByLocale.data
   const { shortDescription } = data.storyByLocale.data.attributes || {}
 
@@ -45,7 +45,7 @@ export const StoryMeta: React.FC = () => {
   )
   const authorFormatted = author
     ? {
-        name: formatAuthor(author?.data?.attributes),
+        name: formatAuthors(authors),
         id: author.data?.id,
       }
     : ''

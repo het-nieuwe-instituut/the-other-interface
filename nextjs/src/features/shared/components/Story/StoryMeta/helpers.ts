@@ -3,6 +3,7 @@ import { DateService } from '@/features/shared/services/dates'
 import { capitalizeFirstLetter, joinNullableStrings } from '@/features/shared/utils/text'
 import {
   AuthorEntity,
+  AuthorEntityResponseCollection,
   ComponentCoreTimeframe,
   EnumComponentcorepublicationdateDisplaytype,
   Locale,
@@ -36,6 +37,28 @@ export function formatAuthor(author?: AuthorEntity['attributes'] | null) {
   const lastName = author.lastName ? ' ' + capitalizeFirstLetter(author.lastName) : ''
 
   return joinNullableStrings(' ', firstName, insertion, lastName)
+}
+
+export function formatAuthors(
+  authors?: Omit<AuthorEntityResponseCollection, 'meta'> | null | undefined
+) {
+  if (!authors || authors.data.length === 0) return undefined
+
+  const formattedAuthors = authors.data
+    .map(author => {
+      const firstName = author.attributes?.firstName
+        ? capitalizeFirstLetter(author.attributes?.firstName)
+        : ''
+      const insertion = author.attributes?.insertion ? ' ' + author.attributes?.insertion : ''
+      const lastName = author.attributes?.lastName
+        ? ' ' + capitalizeFirstLetter(author.attributes?.lastName)
+        : ''
+
+      return joinNullableStrings(' ', firstName, insertion, lastName)
+    })
+    .join(', ')
+
+  return formattedAuthors
 }
 
 export function formatTimeframe(timeframe?: ComponentCoreTimeframe | null) {
