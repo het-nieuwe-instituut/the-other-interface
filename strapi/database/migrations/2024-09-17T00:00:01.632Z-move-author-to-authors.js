@@ -23,18 +23,20 @@ module.exports = {
             table.integer('author_order')
           })
         }
+        const newStoryAuthorLinks = await trx.select('*').from('stories_authors_links')
+        if (newStoryAuthorLinks.length === 0) {
+          // get the stories_author_links table
+          const storyAuthorLinks = await trx.select('*').from('stories_author_links')
 
-        // get the stories_author_links table
-        const storyAuthorLinks = await trx.select('*').from('stories_author_links')
+          // loop over each one and add a default author_order of 1
+          for (let row of storyAuthorLinks) {
+            delete row['id']
+            row['author_order'] = 1
+          }
 
-        // loop over each one and add a default author_order of 1
-        for (let row of storyAuthorLinks) {
-          delete row['id']
-          row['author_order'] = 1
+          // insert all the rows into the new table
+          await knex('stories_authors_links').insert(storyAuthorLinks)
         }
-
-        // insert all the rows into the new table
-        await knex('stories_authors_links').insert(storyAuthorLinks)
       } catch (error) {
         console.log('MIGRATION FAILED')
         console.error(error)
