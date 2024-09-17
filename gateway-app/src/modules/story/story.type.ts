@@ -105,6 +105,9 @@ export class StoryEntity {
   @Field(() => AuthorEntityResponse, { nullable: true })
   public author?: AuthorEntityResponse
 
+  @Field(() => [AuthorEntityResponse], { nullable: true })
+  public authors?: AuthorEntityResponse[]
+
   @Field(() => [LocationEntity], { nullable: true })
   public locations?: LocationEntity[]
 

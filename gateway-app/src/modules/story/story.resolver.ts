@@ -26,6 +26,14 @@ export class StoryFieldResolver {
   }
 
   @ResolveField()
+  public async authors(
+    @Parent() story: StoryEntity,
+    @Context() { loaders }: GraphqlContext
+  ): Promise<StoryEntity['authors'] | null> {
+    return loaders.storyAuthors.load(story.id)
+  }
+
+  @ResolveField()
   public async themes(
     @Parent() story: StoryEntity,
     @Context() { loaders }: GraphqlContext

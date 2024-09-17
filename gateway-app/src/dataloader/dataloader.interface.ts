@@ -11,6 +11,7 @@ import { TriplyRecordEntity } from 'src/modules/triplyRecord/triplyRecord.type'
 
 export interface IDataloaders {
   storyAuthor: DataLoader<string, AuthorEntityResponse | null>
+  storyAuthors: DataLoader<string, AuthorEntityResponse[] | null>
   storyLocations: DataLoader<string, LocationEntity[]>
   storyThemes: DataLoader<string, ThemeEntity[]>
   storyParentStory: DataLoader<string, StoryEntityResponse | null>

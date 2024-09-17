@@ -267,6 +267,26 @@ query storiesWithAuthor($ids: [ID]!, $lang: I18NLocaleCode = "all") {
   }
 }
 
+query storiesWithAuthors($ids: [ID]!, $lang: I18NLocaleCode = "all") {
+  stories(filters: { id: { in: $ids } }, locale: $lang) {
+    data {
+      id
+      attributes {
+        authors {
+          data {
+            id
+            attributes {
+              firstName
+              lastName
+              insertion
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 query storiesWithLocations($ids: [ID]!, $lang: I18NLocaleCode = "all") {
   stories(filters: { id: { in: $ids } }, locale: $lang) {
     data {

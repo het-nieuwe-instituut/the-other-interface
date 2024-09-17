@@ -115,6 +115,16 @@ query storyMetaById($locale: Locale!, $id: String!, $publicationState: String) {
           }
         }
       }
+      authors {
+        data {
+          id
+          attributes {
+            firstName
+            lastName
+            insertion
+          }
+        }
+      }
       publicationDate {
         id
         date
@@ -172,6 +182,16 @@ query storyMetaById($locale: Locale!, $id: String!, $publicationState: String) {
             }
           }
         }
+        authors {
+          data {
+            id
+            attributes {
+              firstName
+              lastName
+              insertion
+            }
+          }
+        }
       }
       parent_story {
         data {
@@ -194,6 +214,16 @@ query storyMetaById($locale: Locale!, $id: String!, $publicationState: String) {
               }
             }
           }
+          authors {
+            data {
+              id
+              attributes {
+                firstName
+                lastName
+                insertion
+              }
+            }
+          }
         }
       }
       siblings {
@@ -207,6 +237,16 @@ query storyMetaById($locale: Locale!, $id: String!, $publicationState: String) {
           }
         }
         author {
+          data {
+            id
+            attributes {
+              firstName
+              lastName
+              insertion
+            }
+          }
+        }
+        authors {
           data {
             id
             attributes {

@@ -50,6 +50,30 @@ export class StoryService {
     })
   }
 
+  public getMultipleAuthors = async (
+    ids: readonly string[]
+  ): Promise<(AuthorEntityResponse[] | null)[]> => {
+    if (!ids.length) {
+      return []
+    }
+
+    const res = await this.strapiGqlSdk.storiesWithAuthors({ ids: [...ids] })
+    if (!res.stories) {
+      return []
+    }
+
+    return []
+
+    // return ids.map(id => {
+    //   const author = res.stories?.data.find(s => s.id === id)?.attributes?.authors
+    //   if (!author) {
+    //     return null
+    //   }
+
+    //   return author as AuthorEntityResponse
+    // })
+  }
+
   public getLocations = async (ids: readonly string[]): Promise<LocationEntity[][]> => {
     if (!ids.length) {
       return []
