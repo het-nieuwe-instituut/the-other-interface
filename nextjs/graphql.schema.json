@@ -14295,7 +14295,7 @@
             "deprecationReason": null
           },
           {
-            "name": "author",
+            "name": "authors",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",

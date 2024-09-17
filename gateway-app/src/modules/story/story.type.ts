@@ -188,7 +188,7 @@ export class StoryFiltersInput {
   public updatedAt?: DateTimeFilterInput
 
   @Field(() => AuthorFiltersInput, { nullable: true })
-  public author?: AuthorFiltersInput
+  public authors?: AuthorFiltersInput
 
   @Field(() => StringFilterInput, { nullable: true })
   public description?: StringFilterInput
