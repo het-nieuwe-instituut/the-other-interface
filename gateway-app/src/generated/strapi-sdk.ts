@@ -5117,32 +5117,6 @@ export type StoriesQuery = {
   } | null
 }
 
-export type StoriesIdsQueryVariables = Exact<{
-  filters?: InputMaybe<StoryFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>
-  publicationState?: InputMaybe<PublicationState>
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>
-}>
-
-export type StoriesIdsQuery = {
-  __typename?: 'Query'
-  stories?: {
-    __typename?: 'StoryEntityResponseCollection'
-    data: Array<{ __typename?: 'StoryEntity'; id?: string | null }>
-    meta: {
-      __typename?: 'ResponseCollectionMeta'
-      pagination: {
-        __typename?: 'Pagination'
-        page: number
-        pageCount: number
-        pageSize: number
-        total: number
-      }
-    }
-  } | null
-}
-
 export type StoryQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
@@ -8579,31 +8553,6 @@ export const StoriesDocument = gql`
   ${StoryFragmentFragmentDoc}
   ${ResponseCollectionMetaFragmentFragmentDoc}
 `
-export const StoriesIdsDocument = gql`
-  query storiesIds(
-    $filters: StoryFiltersInput
-    $pagination: PaginationArg
-    $sort: [String]
-    $publicationState: PublicationState = LIVE
-    $locale: I18NLocaleCode
-  ) {
-    stories(
-      filters: $filters
-      pagination: $pagination
-      sort: $sort
-      publicationState: $publicationState
-      locale: $locale
-    ) {
-      data {
-        id
-      }
-      meta {
-        ...ResponseCollectionMetaFragment
-      }
-    }
-  }
-  ${ResponseCollectionMetaFragmentFragmentDoc}
-`
 export const StoryDocument = gql`
   query story($id: ID, $locale: I18NLocaleCode) {
     story(id: $id, locale: $locale) {
@@ -9445,20 +9394,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'stories',
-        'query'
-      )
-    },
-    storiesIds(
-      variables?: StoriesIdsQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<StoriesIdsQuery> {
-      return withWrapper(
-        wrappedRequestHeaders =>
-          client.request<StoriesIdsQuery>(StoriesIdsDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        'storiesIds',
         'query'
       )
     },

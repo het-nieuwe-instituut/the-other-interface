@@ -65,39 +65,46 @@ export const GalaxyZoomNavigator = () => {
       </p>
 
       <form className="relative flex items-center justify-center gap-3">
+        {/* ZOOM 1 */}
         <DelayedNextLinkWithZoomAnimationsContext
           animation={'backwards'}
           delay={300}
           href="/"
-          className="flex cursor-pointer flex-col flex-nowrap items-center  justify-center gap-2 whitespace-nowrap"
+          className="relative flex flex-1 cursor-pointer flex-col flex-nowrap items-center justify-center gap-2 whitespace-nowrap"
           disabled={currentZoomNumber === 1}
         >
           <label
             htmlFor="zoom-0"
-            className={TypographyVariants({
-              socialLarge: 'label',
-              className: 'text-blue-100 group flex flex-col gap-2 cursor-pointer',
-            })}
+            className={cn(
+              TypographyVariants({
+                socialLarge: 'label',
+                className: 'text-blue-100 group flex flex-col gap-2 cursor-pointer',
+              }),
+              "after:content-[''] after:absolute after:h-px after:ml-2 after:w-full after:top-[3.5px]",
+              currentZoomNumber >= 2 ? 'after:bg-blue-100' : 'after:bg-[#809ef0]'
+            )}
           >
             <Radio
               defaultChecked={currentZoomNumber === 1}
               name="zoom"
               id="zoom-0"
               value="zoom-0"
-              className="self-start"
+              className={'self-start'}
             />
 
             {t('collection')}
           </label>
         </DelayedNextLinkWithZoomAnimationsContext>
 
+        {/* ZOOM 2 */}
         <DelayedNextLinkWithZoomAnimationsContext
           animation={'backwards'}
           delay={300}
           href={addLocaleToUrl(zoom2Link ?? '', locale)}
           className={cn(
-            'flex flex-col flex-nowrap items-center justify-center gap-2 whitespace-nowrap',
-            !zoom2Link && currentZoomNumber === 2 && 'cursor-not-allowed pointer-events-none'
+            'flex flex-col flex-1 flex-nowrap items-center justify-center gap-2 whitespace-nowrap relative',
+            !zoom2Link && currentZoomNumber === 2 && 'cursor-not-allowed pointer-events-none',
+            currentZoomNumber === 1 ? 'text-blue-50' : 'text-blue-100'
           )}
           disabled={currentZoomNumber === 1 || currentZoomNumber === 2}
         >
@@ -106,8 +113,13 @@ export const GalaxyZoomNavigator = () => {
             className={TypographyVariants({
               socialLarge: 'label',
               className: cn(
-                'text-blue-100 group flex flex-col gap-2',
-                zoom2Link ? 'cursor-pointer' : 'cursor-not-allowed'
+                'group flex flex-col gap-2',
+                zoom2Link ? 'cursor-pointer' : 'cursor-not-allowed',
+                currentZoomNumber === 1 ? 'text-blue-50' : 'text-blue-100',
+                "before:content-[''] before:absolute before:h-px before:w-full before:top-[3.5px] before:-left-[calc(50%+4px)]   ",
+                currentZoomNumber >= 2 ? 'before:bg-blue-100' : 'before:bg-[#809ef0]',
+                "after:content-[''] after:absolute after:h-px after:w-full after:top-[3.5px] after:left-[calc(50%+4px)]",
+                currentZoomNumber >= 3 ? 'after:bg-blue-100' : 'after:bg-[#809ef0]'
               ),
             })}
           >
@@ -117,21 +129,28 @@ export const GalaxyZoomNavigator = () => {
               id="zoom-1"
               value="zoom-1"
               disabled={currentZoomNumber === 1}
-              className="self-center"
+              className="self-center "
             />
 
-            {t(category)}
+            {category ? t(category) : t('category')}
           </label>
         </DelayedNextLinkWithZoomAnimationsContext>
 
-        <div className="flex flex-col flex-nowrap items-center justify-center gap-2 whitespace-nowrap">
+        {/* ZOOM 3 */}
+        <div className="relative flex flex-1 flex-col flex-nowrap items-center justify-center gap-2 whitespace-nowrap">
           <label
             htmlFor="zoom-2"
             className={TypographyVariants({
               socialLarge: 'label',
               className: cn(
                 'text-blue-100 group flex flex-col gap-2 items-end',
-                currentZoomNumber === 3 ? 'cursor-pointer' : 'cursor-not-allowed'
+                currentZoomNumber === 3 ? 'cursor-pointer' : 'cursor-not-allowed',
+                currentZoomNumber === 1 || currentZoomNumber === 2
+                  ? 'text-blue-50'
+                  : 'text-blue-100',
+                currentZoomNumber === 1 ? 'text-blue-50' : 'text-blue-100',
+                "before:content-[''] before:absolute before:h-px before:w-full before:top-[3.5px] before:-left-2   ",
+                currentZoomNumber >= 3 ? 'before:bg-blue-100' : 'before:bg-[#809ef0]'
               ),
             })}
           >
@@ -146,13 +165,6 @@ export const GalaxyZoomNavigator = () => {
 
             {category === 'stories' ? t('story') : t('detail')}
           </label>
-        </div>
-        <div className="absolute top-1 flex w-full">
-          <div className="w-2"></div>
-          <div className=" pointer-events-none mt-[-0.5px] h-px w-[71px] bg-blue-50 opacity-50"></div>
-          <div className="w-2"></div>
-          <div className="pointer-events-none mt-[-0.5px] h-px w-[51px] bg-blue-50 opacity-50 "></div>
-          <div className="w-2"></div>
         </div>
       </form>
     </div>
