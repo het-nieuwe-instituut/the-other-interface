@@ -1,6 +1,6 @@
 import * as DataLoader from 'dataloader'
 import {
-  AuthorEntityResponse,
+  // AuthorEntityResponse,
   AuthorEntityResponseCollection,
 } from 'src/modules/author/author.type'
 import { LocationEntity } from 'src/modules/location/location.type'
@@ -13,7 +13,6 @@ import { ThemeEntity } from 'src/modules/theme/theme.type'
 import { TriplyRecordEntity } from 'src/modules/triplyRecord/triplyRecord.type'
 
 export interface IDataloaders {
-  storyAuthor: DataLoader<string, AuthorEntityResponse | null>
   storyAuthors: DataLoader<string, AuthorEntityResponseCollection | null>
   storyLocations: DataLoader<string, LocationEntity[]>
   storyThemes: DataLoader<string, ThemeEntity[]>

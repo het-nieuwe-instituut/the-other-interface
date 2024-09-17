@@ -247,26 +247,6 @@ query storyParentAndChildren($id: ID!) {
   }
 }
 
-query storiesWithAuthor($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-  stories(filters: { id: { in: $ids } }, locale: $lang) {
-    data {
-      id
-      attributes {
-        author {
-          data {
-            id
-            attributes {
-              firstName
-              lastName
-              insertion
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
 query storiesWithAuthors($ids: [ID]!, $lang: I18NLocaleCode = "all") {
   stories(filters: { id: { in: $ids } }, locale: $lang) {
     data {

@@ -10,7 +10,6 @@ export class DataloaderService {
 
   public get loaders(): IDataloaders {
     return {
-      storyAuthor: new DataLoader(this.storyService.getAuthors),
       storyAuthors: new DataLoader(this.storyService.getMultipleAuthors),
       storyLocations: new DataLoader(this.storyService.getLocations),
       storyThemes: new DataLoader(this.storyService.getThemes),

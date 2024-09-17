@@ -27,7 +27,7 @@ fragment gridModuleFragment on ComponentModulesGridModule {
           slug
           updatedAt
         }
-        author {
+        authors {
           data {
             attributes {
               firstName

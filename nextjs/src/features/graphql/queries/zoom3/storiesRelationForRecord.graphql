@@ -13,7 +13,7 @@ query StoriesRelationForRecord($id: String!, $type: EntityNames!, $locale: Local
           ...imageModuleFragment
         }
       }
-      author {
+      authors {
         data {
           attributes {
             firstName

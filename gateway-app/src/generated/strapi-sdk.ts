@@ -5669,38 +5669,6 @@ export type StoryParentAndChildrenQuery = {
   } | null
 }
 
-export type StoriesWithAuthorQueryVariables = Exact<{
-  ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
-  lang?: InputMaybe<Scalars['I18NLocaleCode']>
-}>
-
-export type StoriesWithAuthorQuery = {
-  __typename?: 'Query'
-  stories?: {
-    __typename?: 'StoryEntityResponseCollection'
-    data: Array<{
-      __typename?: 'StoryEntity'
-      id?: string | null
-      attributes?: {
-        __typename?: 'Story'
-        author?: {
-          __typename?: 'AuthorEntityResponse'
-          data?: {
-            __typename?: 'AuthorEntity'
-            id?: string | null
-            attributes?: {
-              __typename?: 'Author'
-              firstName: string
-              lastName: string
-              insertion?: string | null
-            } | null
-          } | null
-        } | null
-      } | null
-    }>
-  } | null
-}
-
 export type StoriesWithAuthorsQueryVariables = Exact<{
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
@@ -8853,27 +8821,6 @@ export const StoryParentAndChildrenDocument = gql`
     }
   }
 `
-export const StoriesWithAuthorDocument = gql`
-  query storiesWithAuthor($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-    stories(filters: { id: { in: $ids } }, locale: $lang) {
-      data {
-        id
-        attributes {
-          author {
-            data {
-              id
-              attributes {
-                firstName
-                lastName
-                insertion
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
 export const StoriesWithAuthorsDocument = gql`
   query storiesWithAuthors($ids: [ID]!, $lang: I18NLocaleCode = "all") {
     stories(filters: { id: { in: $ids } }, locale: $lang) {
@@ -9646,20 +9593,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             ...wrappedRequestHeaders,
           }),
         'storyParentAndChildren',
-        'query'
-      )
-    },
-    storiesWithAuthor(
-      variables: StoriesWithAuthorQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<StoriesWithAuthorQuery> {
-      return withWrapper(
-        wrappedRequestHeaders =>
-          client.request<StoriesWithAuthorQuery>(StoriesWithAuthorDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        'storiesWithAuthor',
         'query'
       )
     },

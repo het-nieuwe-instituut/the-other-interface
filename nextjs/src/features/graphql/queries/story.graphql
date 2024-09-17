@@ -105,16 +105,6 @@ query storyMetaById($locale: Locale!, $id: String!, $publicationState: String) {
         updatedAt
         publishedAt
       }
-      author {
-        data {
-          id
-          attributes {
-            firstName
-            lastName
-            insertion
-          }
-        }
-      }
       authors {
         data {
           id
@@ -172,16 +162,6 @@ query storyMetaById($locale: Locale!, $id: String!, $publicationState: String) {
             ...imageModuleFragment
           }
         }
-        author {
-          data {
-            id
-            attributes {
-              firstName
-              lastName
-              insertion
-            }
-          }
-        }
         authors {
           data {
             id
@@ -204,16 +184,6 @@ query storyMetaById($locale: Locale!, $id: String!, $publicationState: String) {
               ...imageModuleFragment
             }
           }
-          author {
-            data {
-              id
-              attributes {
-                firstName
-                lastName
-                insertion
-              }
-            }
-          }
           authors {
             data {
               id
@@ -234,16 +204,6 @@ query storyMetaById($locale: Locale!, $id: String!, $publicationState: String) {
         components {
           ... on ComponentModulesImage {
             ...imageModuleFragment
-          }
-        }
-        author {
-          data {
-            id
-            attributes {
-              firstName
-              lastName
-              insertion
-            }
           }
         }
         authors {

@@ -6,16 +6,6 @@ query StoryHoverRecordRelations($id: String!, $locale: Locale!) {
         title
         shortDescription
       }
-      author {
-        data {
-          id
-          attributes {
-            firstName
-            lastName
-            insertion
-          }
-        }
-      }
       authors {
         data {
           id
