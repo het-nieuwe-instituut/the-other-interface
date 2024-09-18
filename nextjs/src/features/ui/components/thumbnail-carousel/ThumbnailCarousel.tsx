@@ -74,10 +74,6 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
   const canScrollPrev = index > 0
   const canScrollNext = index < children.length - 1
 
-  console.log('pages', pages)
-  console.log('itemsFitInContainer', itemsFitInContainer)
-  console.log('children.length', children.length)
-  console.log('index', index)
   return (
     <LightboxProvider>
       <ThumbnailCarouselContext.Provider value={{ setIndex: handleSetNext, index }}>
