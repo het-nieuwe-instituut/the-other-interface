@@ -459,106 +459,6 @@ export type ComponentModulesTitleModule = {
   id: Scalars['ID']
 }
 
-export type ContentReleasesRelease = {
-  __typename?: 'ContentReleasesRelease'
-  actions?: Maybe<ContentReleasesReleaseActionRelationResponseCollection>
-  createdAt?: Maybe<Scalars['DateTime']>
-  name: Scalars['String']
-  releasedAt?: Maybe<Scalars['DateTime']>
-  updatedAt?: Maybe<Scalars['DateTime']>
-}
-
-export type ContentReleasesReleaseActionsArgs = {
-  filters?: InputMaybe<ContentReleasesReleaseActionFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type ContentReleasesReleaseAction = {
-  __typename?: 'ContentReleasesReleaseAction'
-  contentType: Scalars['String']
-  createdAt?: Maybe<Scalars['DateTime']>
-  entry?: Maybe<GenericMorph>
-  release?: Maybe<ContentReleasesReleaseEntityResponse>
-  type: Enum_Contentreleasesreleaseaction_Type
-  updatedAt?: Maybe<Scalars['DateTime']>
-}
-
-export type ContentReleasesReleaseActionEntity = {
-  __typename?: 'ContentReleasesReleaseActionEntity'
-  attributes?: Maybe<ContentReleasesReleaseAction>
-  id?: Maybe<Scalars['ID']>
-}
-
-export type ContentReleasesReleaseActionEntityResponse = {
-  __typename?: 'ContentReleasesReleaseActionEntityResponse'
-  data?: Maybe<ContentReleasesReleaseActionEntity>
-}
-
-export type ContentReleasesReleaseActionEntityResponseCollection = {
-  __typename?: 'ContentReleasesReleaseActionEntityResponseCollection'
-  data: Array<ContentReleasesReleaseActionEntity>
-  meta: ResponseCollectionMeta
-}
-
-export type ContentReleasesReleaseActionFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<ContentReleasesReleaseActionFiltersInput>>>
-  contentType?: InputMaybe<StringFilterInput>
-  createdAt?: InputMaybe<DateTimeFilterInput>
-  id?: InputMaybe<IdFilterInput>
-  not?: InputMaybe<ContentReleasesReleaseActionFiltersInput>
-  or?: InputMaybe<Array<InputMaybe<ContentReleasesReleaseActionFiltersInput>>>
-  release?: InputMaybe<ContentReleasesReleaseFiltersInput>
-  type?: InputMaybe<StringFilterInput>
-  updatedAt?: InputMaybe<DateTimeFilterInput>
-}
-
-export type ContentReleasesReleaseActionInput = {
-  contentType?: InputMaybe<Scalars['String']>
-  release?: InputMaybe<Scalars['ID']>
-  type?: InputMaybe<Enum_Contentreleasesreleaseaction_Type>
-}
-
-export type ContentReleasesReleaseActionRelationResponseCollection = {
-  __typename?: 'ContentReleasesReleaseActionRelationResponseCollection'
-  data: Array<ContentReleasesReleaseActionEntity>
-}
-
-export type ContentReleasesReleaseEntity = {
-  __typename?: 'ContentReleasesReleaseEntity'
-  attributes?: Maybe<ContentReleasesRelease>
-  id?: Maybe<Scalars['ID']>
-}
-
-export type ContentReleasesReleaseEntityResponse = {
-  __typename?: 'ContentReleasesReleaseEntityResponse'
-  data?: Maybe<ContentReleasesReleaseEntity>
-}
-
-export type ContentReleasesReleaseEntityResponseCollection = {
-  __typename?: 'ContentReleasesReleaseEntityResponseCollection'
-  data: Array<ContentReleasesReleaseEntity>
-  meta: ResponseCollectionMeta
-}
-
-export type ContentReleasesReleaseFiltersInput = {
-  actions?: InputMaybe<ContentReleasesReleaseActionFiltersInput>
-  and?: InputMaybe<Array<InputMaybe<ContentReleasesReleaseFiltersInput>>>
-  createdAt?: InputMaybe<DateTimeFilterInput>
-  id?: InputMaybe<IdFilterInput>
-  name?: InputMaybe<StringFilterInput>
-  not?: InputMaybe<ContentReleasesReleaseFiltersInput>
-  or?: InputMaybe<Array<InputMaybe<ContentReleasesReleaseFiltersInput>>>
-  releasedAt?: InputMaybe<DateTimeFilterInput>
-  updatedAt?: InputMaybe<DateTimeFilterInput>
-}
-
-export type ContentReleasesReleaseInput = {
-  actions?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
-  name?: InputMaybe<Scalars['String']>
-  releasedAt?: InputMaybe<Scalars['DateTime']>
-}
-
 export type DateFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>
   between?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>
@@ -618,11 +518,6 @@ export enum Enum_Componentmodulescarousel_Variant {
   FourUp = 'four_up',
   ThreeUp = 'three_up',
   TwoUp = 'two_up',
-}
-
-export enum Enum_Contentreleasesreleaseaction_Type {
-  Publish = 'publish',
-  Unpublish = 'unpublish',
 }
 
 export enum Enum_Triplyrecord_Type {
@@ -694,8 +589,6 @@ export type GenericMorph =
   | ComponentModulesSubtitle
   | ComponentModulesTextModule
   | ComponentModulesTitleModule
-  | ContentReleasesRelease
-  | ContentReleasesReleaseAction
   | Homepage
   | I18NLocale
   | LandingPageArchive
@@ -704,6 +597,7 @@ export type GenericMorph =
   | LandingPagePublication
   | Location
   | MuxVideoUploaderMuxAsset
+  | MuxVideoUploaderMuxTextTrack
   | Story
   | Theme
   | TriplyRecord
@@ -1127,8 +1021,6 @@ export type Mutation = {
   /** Change user password. Confirm with the current password. */
   changePassword?: Maybe<UsersPermissionsLoginPayload>
   createAuthor?: Maybe<AuthorEntityResponse>
-  createContentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>
-  createContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>
   createHomepageLocalization?: Maybe<HomepageEntityResponse>
   createLandingPageArchiveLocalization?: Maybe<LandingPageArchiveEntityResponse>
   createLandingPageObjectLocalization?: Maybe<LandingPageObjectEntityResponse>
@@ -1137,6 +1029,7 @@ export type Mutation = {
   createLocation?: Maybe<LocationEntityResponse>
   createLocationLocalization?: Maybe<LocationEntityResponse>
   createMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
+  createMuxVideoUploaderMuxTextTrack?: Maybe<MuxVideoUploaderMuxTextTrackEntityResponse>
   createStory?: Maybe<StoryEntityResponse>
   createStoryLocalization?: Maybe<StoryEntityResponse>
   createTheme?: Maybe<ThemeEntityResponse>
@@ -1149,8 +1042,6 @@ export type Mutation = {
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse
   deleteAuthor?: Maybe<AuthorEntityResponse>
-  deleteContentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>
-  deleteContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>
   deleteHomepage?: Maybe<HomepageEntityResponse>
   deleteLandingPageArchive?: Maybe<LandingPageArchiveEntityResponse>
   deleteLandingPageObject?: Maybe<LandingPageObjectEntityResponse>
@@ -1158,6 +1049,7 @@ export type Mutation = {
   deleteLandingPagePublication?: Maybe<LandingPagePublicationEntityResponse>
   deleteLocation?: Maybe<LocationEntityResponse>
   deleteMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
+  deleteMuxVideoUploaderMuxTextTrack?: Maybe<MuxVideoUploaderMuxTextTrackEntityResponse>
   deleteStory?: Maybe<StoryEntityResponse>
   deleteTheme?: Maybe<ThemeEntityResponse>
   deleteTriplyRecord?: Maybe<TriplyRecordEntityResponse>
@@ -1179,8 +1071,6 @@ export type Mutation = {
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>
   updateAuthor?: Maybe<AuthorEntityResponse>
-  updateContentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>
-  updateContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>
   updateFileInfo: UploadFileEntityResponse
   updateHomepage?: Maybe<HomepageEntityResponse>
   updateLandingPageArchive?: Maybe<LandingPageArchiveEntityResponse>
@@ -1189,6 +1079,7 @@ export type Mutation = {
   updateLandingPagePublication?: Maybe<LandingPagePublicationEntityResponse>
   updateLocation?: Maybe<LocationEntityResponse>
   updateMuxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
+  updateMuxVideoUploaderMuxTextTrack?: Maybe<MuxVideoUploaderMuxTextTrackEntityResponse>
   updateStory?: Maybe<StoryEntityResponse>
   updateTheme?: Maybe<ThemeEntityResponse>
   updateTriplyRecord?: Maybe<TriplyRecordEntityResponse>
@@ -1209,14 +1100,6 @@ export type MutationChangePasswordArgs = {
 
 export type MutationCreateAuthorArgs = {
   data: AuthorInput
-}
-
-export type MutationCreateContentReleasesReleaseArgs = {
-  data: ContentReleasesReleaseInput
-}
-
-export type MutationCreateContentReleasesReleaseActionArgs = {
-  data: ContentReleasesReleaseActionInput
 }
 
 export type MutationCreateHomepageLocalizationArgs = {
@@ -1262,6 +1145,10 @@ export type MutationCreateLocationLocalizationArgs = {
 
 export type MutationCreateMuxVideoUploaderMuxAssetArgs = {
   data: MuxVideoUploaderMuxAssetInput
+}
+
+export type MutationCreateMuxVideoUploaderMuxTextTrackArgs = {
+  data: MuxVideoUploaderMuxTextTrackInput
 }
 
 export type MutationCreateStoryArgs = {
@@ -1310,14 +1197,6 @@ export type MutationDeleteAuthorArgs = {
   id: Scalars['ID']
 }
 
-export type MutationDeleteContentReleasesReleaseArgs = {
-  id: Scalars['ID']
-}
-
-export type MutationDeleteContentReleasesReleaseActionArgs = {
-  id: Scalars['ID']
-}
-
 export type MutationDeleteHomepageArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>
 }
@@ -1344,6 +1223,10 @@ export type MutationDeleteLocationArgs = {
 }
 
 export type MutationDeleteMuxVideoUploaderMuxAssetArgs = {
+  id: Scalars['ID']
+}
+
+export type MutationDeleteMuxVideoUploaderMuxTextTrackArgs = {
   id: Scalars['ID']
 }
 
@@ -1415,16 +1298,6 @@ export type MutationUpdateAuthorArgs = {
   id: Scalars['ID']
 }
 
-export type MutationUpdateContentReleasesReleaseArgs = {
-  data: ContentReleasesReleaseInput
-  id: Scalars['ID']
-}
-
-export type MutationUpdateContentReleasesReleaseActionArgs = {
-  data: ContentReleasesReleaseActionInput
-  id: Scalars['ID']
-}
-
 export type MutationUpdateFileInfoArgs = {
   id: Scalars['ID']
   info?: InputMaybe<FileInfoInput>
@@ -1463,6 +1336,11 @@ export type MutationUpdateLocationArgs = {
 
 export type MutationUpdateMuxVideoUploaderMuxAssetArgs = {
   data: MuxVideoUploaderMuxAssetInput
+  id: Scalars['ID']
+}
+
+export type MutationUpdateMuxVideoUploaderMuxTextTrackArgs = {
+  data: MuxVideoUploaderMuxTextTrackInput
   id: Scalars['ID']
 }
 
@@ -1514,6 +1392,7 @@ export type MutationUploadArgs = {
 export type MuxVideoUploaderMuxAsset = {
   __typename?: 'MuxVideoUploaderMuxAsset'
   aspect_ratio?: Maybe<Scalars['String']>
+  asset_data?: Maybe<Scalars['JSON']>
   asset_id?: Maybe<Scalars['String']>
   createdAt?: Maybe<Scalars['DateTime']>
   duration?: Maybe<Scalars['Float']>
@@ -1546,6 +1425,7 @@ export type MuxVideoUploaderMuxAssetEntityResponseCollection = {
 export type MuxVideoUploaderMuxAssetFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<MuxVideoUploaderMuxAssetFiltersInput>>>
   aspect_ratio?: InputMaybe<StringFilterInput>
+  asset_data?: InputMaybe<JsonFilterInput>
   asset_id?: InputMaybe<StringFilterInput>
   createdAt?: InputMaybe<DateTimeFilterInput>
   duration?: InputMaybe<FloatFilterInput>
@@ -1563,6 +1443,7 @@ export type MuxVideoUploaderMuxAssetFiltersInput = {
 
 export type MuxVideoUploaderMuxAssetInput = {
   aspect_ratio?: InputMaybe<Scalars['String']>
+  asset_data?: InputMaybe<Scalars['JSON']>
   asset_id?: InputMaybe<Scalars['String']>
   duration?: InputMaybe<Scalars['Float']>
   error_message?: InputMaybe<Scalars['String']>
@@ -1571,6 +1452,53 @@ export type MuxVideoUploaderMuxAssetInput = {
   signed?: InputMaybe<Scalars['Boolean']>
   title?: InputMaybe<Scalars['String']>
   upload_id?: InputMaybe<Scalars['String']>
+}
+
+export type MuxVideoUploaderMuxTextTrack = {
+  __typename?: 'MuxVideoUploaderMuxTextTrack'
+  closed_captions: Scalars['Boolean']
+  createdAt?: Maybe<Scalars['DateTime']>
+  file: Scalars['JSON']
+  language_code: Scalars['String']
+  name: Scalars['String']
+  updatedAt?: Maybe<Scalars['DateTime']>
+}
+
+export type MuxVideoUploaderMuxTextTrackEntity = {
+  __typename?: 'MuxVideoUploaderMuxTextTrackEntity'
+  attributes?: Maybe<MuxVideoUploaderMuxTextTrack>
+  id?: Maybe<Scalars['ID']>
+}
+
+export type MuxVideoUploaderMuxTextTrackEntityResponse = {
+  __typename?: 'MuxVideoUploaderMuxTextTrackEntityResponse'
+  data?: Maybe<MuxVideoUploaderMuxTextTrackEntity>
+}
+
+export type MuxVideoUploaderMuxTextTrackEntityResponseCollection = {
+  __typename?: 'MuxVideoUploaderMuxTextTrackEntityResponseCollection'
+  data: Array<MuxVideoUploaderMuxTextTrackEntity>
+  meta: ResponseCollectionMeta
+}
+
+export type MuxVideoUploaderMuxTextTrackFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<MuxVideoUploaderMuxTextTrackFiltersInput>>>
+  closed_captions?: InputMaybe<BooleanFilterInput>
+  createdAt?: InputMaybe<DateTimeFilterInput>
+  file?: InputMaybe<JsonFilterInput>
+  id?: InputMaybe<IdFilterInput>
+  language_code?: InputMaybe<StringFilterInput>
+  name?: InputMaybe<StringFilterInput>
+  not?: InputMaybe<MuxVideoUploaderMuxTextTrackFiltersInput>
+  or?: InputMaybe<Array<InputMaybe<MuxVideoUploaderMuxTextTrackFiltersInput>>>
+  updatedAt?: InputMaybe<DateTimeFilterInput>
+}
+
+export type MuxVideoUploaderMuxTextTrackInput = {
+  closed_captions?: InputMaybe<Scalars['Boolean']>
+  file?: InputMaybe<Scalars['JSON']>
+  language_code?: InputMaybe<Scalars['String']>
+  name?: InputMaybe<Scalars['String']>
 }
 
 export type Pagination = {
@@ -1598,10 +1526,6 @@ export type Query = {
   StoryPostBySlug?: Maybe<StoryEntityResponse>
   author?: Maybe<AuthorEntityResponse>
   authors?: Maybe<AuthorEntityResponseCollection>
-  contentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>
-  contentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>
-  contentReleasesReleaseActions?: Maybe<ContentReleasesReleaseActionEntityResponseCollection>
-  contentReleasesReleases?: Maybe<ContentReleasesReleaseEntityResponseCollection>
   homepage?: Maybe<HomepageEntityResponse>
   i18NLocale?: Maybe<I18NLocaleEntityResponse>
   i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>
@@ -1614,6 +1538,8 @@ export type Query = {
   me?: Maybe<UsersPermissionsMe>
   muxVideoUploaderMuxAsset?: Maybe<MuxVideoUploaderMuxAssetEntityResponse>
   muxVideoUploaderMuxAssets?: Maybe<MuxVideoUploaderMuxAssetEntityResponseCollection>
+  muxVideoUploaderMuxTextTrack?: Maybe<MuxVideoUploaderMuxTextTrackEntityResponse>
+  muxVideoUploaderMuxTextTracks?: Maybe<MuxVideoUploaderMuxTextTrackEntityResponseCollection>
   stories?: Maybe<StoryEntityResponseCollection>
   story?: Maybe<StoryEntityResponse>
   theme?: Maybe<ThemeEntityResponse>
@@ -1643,26 +1569,6 @@ export type QueryAuthorsArgs = {
   filters?: InputMaybe<AuthorFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   publicationState?: InputMaybe<PublicationState>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type QueryContentReleasesReleaseArgs = {
-  id?: InputMaybe<Scalars['ID']>
-}
-
-export type QueryContentReleasesReleaseActionArgs = {
-  id?: InputMaybe<Scalars['ID']>
-}
-
-export type QueryContentReleasesReleaseActionsArgs = {
-  filters?: InputMaybe<ContentReleasesReleaseActionFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
-}
-
-export type QueryContentReleasesReleasesArgs = {
-  filters?: InputMaybe<ContentReleasesReleaseFiltersInput>
-  pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
@@ -1716,6 +1622,16 @@ export type QueryMuxVideoUploaderMuxAssetArgs = {
 
 export type QueryMuxVideoUploaderMuxAssetsArgs = {
   filters?: InputMaybe<MuxVideoUploaderMuxAssetFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
+}
+
+export type QueryMuxVideoUploaderMuxTextTrackArgs = {
+  id?: InputMaybe<Scalars['ID']>
+}
+
+export type QueryMuxVideoUploaderMuxTextTracksArgs = {
+  filters?: InputMaybe<MuxVideoUploaderMuxTextTrackFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
