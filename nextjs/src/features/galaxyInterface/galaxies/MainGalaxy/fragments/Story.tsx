@@ -138,7 +138,7 @@ export const Story: React.FC<Props> = ({
                     className: 'text-center mt-1 text-blue-100',
                   })}
                 >
-                  {hoverT('stories')}
+                  {hoverT('story')}
                 </p>
               </div>
             </div>

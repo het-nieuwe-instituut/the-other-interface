@@ -105,7 +105,7 @@ query storyMetaById($locale: Locale!, $id: String!, $publicationState: String) {
         updatedAt
         publishedAt
       }
-      author {
+      authors {
         data {
           id
           attributes {
@@ -162,7 +162,7 @@ query storyMetaById($locale: Locale!, $id: String!, $publicationState: String) {
             ...imageModuleFragment
           }
         }
-        author {
+        authors {
           data {
             id
             attributes {
@@ -184,7 +184,7 @@ query storyMetaById($locale: Locale!, $id: String!, $publicationState: String) {
               ...imageModuleFragment
             }
           }
-          author {
+          authors {
             data {
               id
               attributes {
@@ -206,7 +206,7 @@ query storyMetaById($locale: Locale!, $id: String!, $publicationState: String) {
             ...imageModuleFragment
           }
         }
-        author {
+        authors {
           data {
             id
             attributes {

@@ -141,6 +141,11 @@
       "relation": "manyToOne",
       "target": "api::story.story",
       "inversedBy": "child_stories"
+    },
+    "authors": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::author.author"
     }
   }
 }

@@ -247,12 +247,12 @@ query storyParentAndChildren($id: ID!) {
   }
 }
 
-query storiesWithAuthor($ids: [ID]!, $lang: I18NLocaleCode = "all") {
+query storiesWithAuthors($ids: [ID]!, $lang: I18NLocaleCode = "all") {
   stories(filters: { id: { in: $ids } }, locale: $lang) {
     data {
       id
       attributes {
-        author {
+        authors {
           data {
             id
             attributes {
