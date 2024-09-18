@@ -52,7 +52,7 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
       type: CATEGORIES.archives,
       name: t('relatedArchive') ?? '',
       tableHead: [
-        { label: t('relatedArchive') },
+        { label: t('archivesFirstColumn') },
         { label: t('objectNumber') },
         { label: t('archivePeriod') },
       ],
@@ -88,7 +88,7 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
       type: CATEGORIES.objects,
       name: t('realtedObjects') ?? '',
       tableHead: [
-        { label: t('realtedObjects') },
+        { label: t('objectsFirstColumn') },
         { label: t('objectNumber') },
         { label: t('creationPeriod') },
       ],
@@ -123,7 +123,7 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
       type: CATEGORIES.publications,
       name: t('relatedPublications') ?? '',
       tableHead: [
-        { label: t('relatedPublications') },
+        { label: t('publicationsFirstColumn') },
         { label: t('type') },
         { label: t('yearPublished') },
       ],
@@ -159,7 +159,7 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
       type: CATEGORIES.people,
       name: t('realtedPeople') ?? '',
       tableHead: [
-        { label: t('realtedPeople') },
+        { label: t('peopleFirstColumn') },
         { label: t('role') },
         { label: t('peoplePeriod') },
       ],
