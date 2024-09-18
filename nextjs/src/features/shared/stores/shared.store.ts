@@ -12,6 +12,7 @@ export type SharedState = {
   searchCategory: SearchCategory | null
   isCategorySuggestionsOpen: boolean
   userLooksOn: (typeof USER_LOOKS_ON)[keyof typeof USER_LOOKS_ON]
+  galaxyHeight: number
 }
 
 export const sharedInitialState: SharedState = {
@@ -23,6 +24,7 @@ export const sharedInitialState: SharedState = {
   selectedFilters: [],
   isCategorySuggestionsOpen: false,
   userLooksOn: USER_LOOKS_ON.GALAXY,
+  galaxyHeight: 0,
 }
 
 export const sharedSlice = createSlice({
@@ -93,6 +95,12 @@ export const sharedSlice = createSlice({
       }
       state.isCategorySuggestionsOpen =
         action.payload?.categorySuggestionsOpen ?? state.isCategorySuggestionsOpen
+    },
+    setGalaxyHeight: (
+      state,
+      action: PayloadAction<{ galaxyHeight: SharedState['galaxyHeight'] }>
+    ) => {
+      state.galaxyHeight = action.payload.galaxyHeight
     },
     userChangeLooksOn: (state, action: PayloadAction<{ lookOn: SharedState['userLooksOn'] }>) => {
       state.userLooksOn = action.payload.lookOn
