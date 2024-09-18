@@ -280,7 +280,7 @@ export const StoryMeta: React.FC = () => {
         </div>
       )
     }
-    if (authorsFormatted?.length === 0 && publicationDateFormatted) {
+    if ((!authorsFormatted || authorsFormatted?.length === 0) && publicationDateFormatted) {
       return (
         <div className="flex w-1/2 flex-col pb-4 pr-4 md:w-1/3 lg:w-full">
           <p className={TypographyVariants({ socialLarge: 'md', className: 'font-bold' })}>
