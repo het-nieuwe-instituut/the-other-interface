@@ -18,7 +18,7 @@ query totalCounter(
           or: [
             { locations: { id: { eq: $locationsFilterTerm } } }
             { themes: { id: { eq: $themesFilterTerm } } }
-            { author: { id: { eq: $authorFilterTerm } } }
+            { authors: { id: { eq: $authorFilterTerm } } }
           ]
         }
         {

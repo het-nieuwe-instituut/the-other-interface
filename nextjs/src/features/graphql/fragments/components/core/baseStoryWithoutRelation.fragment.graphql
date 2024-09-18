@@ -1,6 +1,6 @@
 fragment StoryWithoutRelationsFragment on StoryEntity {
   id
-  author {
+  authors {
     data {
       attributes {
         firstName

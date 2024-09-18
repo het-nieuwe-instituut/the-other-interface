@@ -31,8 +31,16 @@ export const storiesToCarouselDataMapper = (
   const images: StoryImageInfo[] = []
 
   relatedStories?.forEach(story => {
-    const { firstName, lastName } = story?.author?.data?.attributes ?? {}
-    const authorName = joinNullableStrings(' ', firstName, lastName)
+    const authorName = story?.authors?.data
+      .map(author => {
+        return joinNullableStrings(
+          ' ',
+          author?.attributes?.firstName,
+          author.attributes?.insertion,
+          author?.attributes?.lastName
+        )
+      })
+      .join(', ')
 
     if (!story?.components) {
       return
@@ -53,7 +61,7 @@ export const storiesToCarouselDataMapper = (
       height,
       width,
       title: story?.attributes?.title,
-      description: authorName,
+      description: authorName ?? null,
     })
   })
 

@@ -71,6 +71,11 @@ export type AuthorInput = {
   publishedAt?: InputMaybe<Scalars['DateTime']>
 }
 
+export type AuthorRelationResponseCollection = {
+  __typename?: 'AuthorRelationResponseCollection'
+  data: Array<AuthorEntity>
+}
+
 export type BooleanFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>
   between?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>
@@ -1800,6 +1805,7 @@ export type ResponseCollectionMeta = {
 export type Story = {
   __typename?: 'Story'
   author?: Maybe<AuthorEntityResponse>
+  authors?: Maybe<AuthorRelationResponseCollection>
   child_stories?: Maybe<StoryRelationResponseCollection>
   components?: Maybe<Array<Maybe<StoryComponentsDynamicZone>>>
   createdAt?: Maybe<Scalars['DateTime']>
@@ -1818,6 +1824,13 @@ export type Story = {
   title: Scalars['String']
   triplyRecords?: Maybe<TriplyRecordRelationResponseCollection>
   updatedAt?: Maybe<Scalars['DateTime']>
+}
+
+export type StoryAuthorsArgs = {
+  filters?: InputMaybe<AuthorFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
+  publicationState?: InputMaybe<PublicationState>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>
 }
 
 export type StoryChild_StoriesArgs = {
@@ -1890,6 +1903,7 @@ export type StoryEntityResponseCollection = {
 export type StoryFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<StoryFiltersInput>>>
   author?: InputMaybe<AuthorFiltersInput>
+  authors?: InputMaybe<AuthorFiltersInput>
   child_stories?: InputMaybe<StoryFiltersInput>
   createdAt?: InputMaybe<DateTimeFilterInput>
   description?: InputMaybe<StringFilterInput>
@@ -1914,6 +1928,7 @@ export type StoryFiltersInput = {
 
 export type StoryInput = {
   author?: InputMaybe<Scalars['ID']>
+  authors?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
   child_stories?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
   components?: InputMaybe<Array<Scalars['StoryComponentsDynamicZoneInput']>>
   description?: InputMaybe<Scalars['String']>
@@ -5654,12 +5669,12 @@ export type StoryParentAndChildrenQuery = {
   } | null
 }
 
-export type StoriesWithAuthorQueryVariables = Exact<{
+export type StoriesWithAuthorsQueryVariables = Exact<{
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
 
-export type StoriesWithAuthorQuery = {
+export type StoriesWithAuthorsQuery = {
   __typename?: 'Query'
   stories?: {
     __typename?: 'StoryEntityResponseCollection'
@@ -5668,9 +5683,9 @@ export type StoriesWithAuthorQuery = {
       id?: string | null
       attributes?: {
         __typename?: 'Story'
-        author?: {
-          __typename?: 'AuthorEntityResponse'
-          data?: {
+        authors?: {
+          __typename?: 'AuthorRelationResponseCollection'
+          data: Array<{
             __typename?: 'AuthorEntity'
             id?: string | null
             attributes?: {
@@ -5679,7 +5694,7 @@ export type StoriesWithAuthorQuery = {
               lastName: string
               insertion?: string | null
             } | null
-          } | null
+          }>
         } | null
       } | null
     }>
@@ -8806,13 +8821,13 @@ export const StoryParentAndChildrenDocument = gql`
     }
   }
 `
-export const StoriesWithAuthorDocument = gql`
-  query storiesWithAuthor($ids: [ID]!, $lang: I18NLocaleCode = "all") {
+export const StoriesWithAuthorsDocument = gql`
+  query storiesWithAuthors($ids: [ID]!, $lang: I18NLocaleCode = "all") {
     stories(filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
-          author {
+          authors {
             data {
               id
               attributes {
@@ -9581,17 +9596,17 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
         'query'
       )
     },
-    storiesWithAuthor(
-      variables: StoriesWithAuthorQueryVariables,
+    storiesWithAuthors(
+      variables: StoriesWithAuthorsQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<StoriesWithAuthorQuery> {
+    ): Promise<StoriesWithAuthorsQuery> {
       return withWrapper(
         wrappedRequestHeaders =>
-          client.request<StoriesWithAuthorQuery>(StoriesWithAuthorDocument, variables, {
+          client.request<StoriesWithAuthorsQuery>(StoriesWithAuthorsDocument, variables, {
             ...requestHeaders,
             ...wrappedRequestHeaders,
           }),
-        'storiesWithAuthor',
+        'storiesWithAuthors',
         'query'
       )
     },

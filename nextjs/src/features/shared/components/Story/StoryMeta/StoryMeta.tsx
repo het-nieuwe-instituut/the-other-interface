@@ -34,7 +34,7 @@ export const StoryMeta: React.FC = () => {
 
   if (!data?.storyByLocale.data) return null
 
-  const { publicationDate, author, themes, locations, timeframe } = data.storyByLocale.data
+  const { publicationDate, themes, locations, timeframe, authors } = data.storyByLocale.data
   const { parent_story, child_stories, triplyRecords } = data.storyByLocale.data
   const { shortDescription } = data.storyByLocale.data.attributes || {}
 
@@ -43,12 +43,24 @@ export const StoryMeta: React.FC = () => {
     publicationDate?.displayType,
     publicationDate?.date
   )
-  const authorFormatted = author
-    ? {
-        name: formatAuthor(author?.data?.attributes),
-        id: author.data?.id,
-      }
-    : ''
+
+  const authorsFormatted = authors?.data.map(author => {
+    const name = formatAuthor(author.attributes)
+    return {
+      id: author.id,
+      name,
+      href: addLocaleToUrl(
+        `/landingpage?category=stories&filters=${encodeFilters([
+          {
+            key: 'author',
+            value: name || '',
+            id: author.id || '',
+          },
+        ])}&searchResult=true`,
+        lang
+      ),
+    }
+  })
 
   const formattedTimeframe = formatTimeframe(timeframe)
 
@@ -92,6 +104,7 @@ export const StoryMeta: React.FC = () => {
                   key={child.id}
                   variant={'metaData'}
                   href={`/detail/${CATEGORIES.stories}/${child.id}?lang=${lang}`}
+                  className="mb-0 [&:not(:last-child)]:mb-1"
                 >
                   {child.attributes?.title}
                 </NavLinkButton>
@@ -200,7 +213,7 @@ export const StoryMeta: React.FC = () => {
   )
 
   function dateAndAuthor() {
-    if (publicationDateFormatted && authorFormatted) {
+    if (publicationDateFormatted && authorsFormatted && authorsFormatted.length > 0) {
       return (
         <div className="flex w-1/2 flex-col pb-4 pr-4 md:w-1/3 lg:w-full">
           <p className={TypographyVariants({ socialLarge: 'md', className: 'font-bold' })}>
@@ -215,33 +228,27 @@ export const StoryMeta: React.FC = () => {
             >
               {storiesT.t('by')}
             </p>
-            <NextLink
-              href={addLocaleToUrl(
-                `/landingpage?category=stories&filters=${encodeFilters([
-                  {
-                    key: 'author',
-                    value: authorFormatted.name || '',
-                    id: authorFormatted.id || '',
-                  },
-                ])}&searchResult=true`,
-                lang
-              )}
-              className="hover:opacity-50"
-            >
-              <p
-                className={TypographyVariants({
-                  socialLarge: 'md',
-                  className: 'font-bold underline pl-1',
-                })}
-              >
-                {authorFormatted.name}
-              </p>
-            </NextLink>
+            <div className="flex flex-row flex-wrap">
+              {authorsFormatted.map(author => {
+                return (
+                  <NextLink key={author.id} href={author.href} className="hover:opacity-50">
+                    <p
+                      className={TypographyVariants({
+                        socialLarge: 'md',
+                        className: 'font-bold underline pl-1',
+                      })}
+                    >
+                      {author.name}
+                    </p>
+                  </NextLink>
+                )
+              })}
+            </div>
           </span>
         </div>
       )
     }
-    if (!publicationDateFormatted && authorFormatted) {
+    if (!publicationDateFormatted && authorsFormatted && authorsFormatted.length > 0) {
       return (
         <div className="flex w-1/2 flex-col pb-4 pr-4 md:w-1/3 lg:w-full">
           <span className="flex">
@@ -253,33 +260,27 @@ export const StoryMeta: React.FC = () => {
             >
               {storiesT.t('storyBy')}
             </p>
-            <NextLink
-              href={addLocaleToUrl(
-                `/landingpage?category=stories&filters=${encodeFilters([
-                  {
-                    key: 'author',
-                    value: authorFormatted.name || '',
-                    id: authorFormatted.id || '',
-                  },
-                ])}&searchResult=true`,
-                lang
-              )}
-              className="hover:opacity-50"
-            >
-              <p
-                className={TypographyVariants({
-                  socialLarge: 'md',
-                  className: 'font-bold underline pl-1',
-                })}
-              >
-                {authorFormatted.name}
-              </p>
-            </NextLink>
+            <div className="flex flex-row flex-wrap">
+              {authorsFormatted.map(author => {
+                return (
+                  <NextLink key={author.id} href={author.href} className="hover:opacity-50">
+                    <p
+                      className={TypographyVariants({
+                        socialLarge: 'md',
+                        className: 'font-bold underline pl-1',
+                      })}
+                    >
+                      {author.name}
+                    </p>
+                  </NextLink>
+                )
+              })}
+            </div>
           </span>
         </div>
       )
     }
-    if (!authorFormatted && publicationDateFormatted) {
+    if ((!authorsFormatted || authorsFormatted?.length === 0) && publicationDateFormatted) {
       return (
         <div className="flex w-1/2 flex-col pb-4 pr-4 md:w-1/3 lg:w-full">
           <p className={TypographyVariants({ socialLarge: 'md', className: 'font-bold' })}>

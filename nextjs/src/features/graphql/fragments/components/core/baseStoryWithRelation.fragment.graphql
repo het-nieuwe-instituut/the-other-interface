@@ -35,7 +35,7 @@ fragment StoryFragment on StoryEntity {
       ...subtitleModuleFragment
     }
   }
-  author {
+  authors {
     data {
       id
     }

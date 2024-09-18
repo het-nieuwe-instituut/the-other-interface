@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common'
 import { Sdk } from '../../generated/strapi-sdk'
 import { EntityNames } from '../util/entityNames.type'
 import { Locale } from '../util/locale.type'
-import { AuthorEntityResponse } from 'src/modules/author/author.type'
+import { AuthorEntityResponseCollection } from 'src/modules/author/author.type'
 import { LocationEntity } from 'src/modules/location/location.type'
 import { StoryComponentsDynamicZone, StoryEntity } from 'src/modules/story/story.type'
 import { StoryEntityResponse } from 'src/modules/story/story.types.circular'
@@ -30,23 +30,26 @@ export class StoryService {
     return story.story
   }
 
-  public getAuthors = async (ids: readonly string[]): Promise<(AuthorEntityResponse | null)[]> => {
+  public getMultipleAuthors = async (
+    ids: readonly string[]
+  ): Promise<(AuthorEntityResponseCollection | null)[]> => {
     if (!ids.length) {
       return []
     }
 
-    const res = await this.strapiGqlSdk.storiesWithAuthor({ ids: [...ids] })
+    const res = await this.strapiGqlSdk.storiesWithAuthors({ ids: [...ids] })
     if (!res.stories) {
       return []
     }
 
     return ids.map(id => {
-      const author = res.stories?.data.find(s => s.id === id)?.attributes?.author
-      if (!author) {
+      const authors = res.stories?.data.find(s => s.id === id)?.attributes?.authors
+
+      if (!authors) {
         return null
       }
 
-      return author as AuthorEntityResponse
+      return authors as AuthorEntityResponseCollection
     })
   }
 

@@ -18,11 +18,11 @@ export class StoryFieldResolver {
   }
 
   @ResolveField()
-  public async author(
+  public async authors(
     @Parent() story: StoryEntity,
     @Context() { loaders }: GraphqlContext
-  ): Promise<StoryEntity['author'] | null> {
-    return loaders.storyAuthor.load(story.id)
+  ): Promise<StoryEntity['authors'] | null> {
+    return loaders.storyAuthors.load(story.id)
   }
 
   @ResolveField()
