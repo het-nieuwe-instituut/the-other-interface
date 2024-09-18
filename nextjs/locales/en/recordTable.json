@@ -11,5 +11,9 @@
   "role": "Role",
   "peoplePeriod": "Period",
   "realtedObjects": "Related objects",
-  "creationPeriod": "Creation period"
+  "creationPeriod": "Creation period",
+  "peopleFirstColumn": "Name",
+  "objectsFirstColumn": "Object number",
+  "publicationsFirstColumn": "Title",
+  "archivesFirstColumn": "Reference code"
 }
