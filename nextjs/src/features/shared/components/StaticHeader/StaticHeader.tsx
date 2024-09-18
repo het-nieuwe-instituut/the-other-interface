@@ -43,6 +43,7 @@ export const StaticHeader = ({
         className={cn(
           'ease-toi-cubic-bezier',
           'duration-100 transition-colors fixed top-0 right-0 z-[var(--z-index)] h-auto overflow-hidden py-4 w-full pointer-events-auto',
+          'will-change-[background-color]',
           className
         )}
       >
@@ -106,7 +107,7 @@ export const StaticPageHeader = () => {
   )
 }
 
-export const Logo = ({ text }: { text?: string }) => {
+const Logo = ({ text }: { text?: string }) => {
   const dispatch = useDispatch()
   const lang = useLocale()
   const containerRef = useRef<HTMLDivElement>(null)
@@ -114,43 +115,37 @@ export const Logo = ({ text }: { text?: string }) => {
   const galaxyHeight = useSelector((state: State) => state.shared.galaxyHeight)
   const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
 
-  const updateClipPercentage = useCallback((currentGalaxyHeight: number) => {
-    const currentScrollY = parseInt(document.documentElement.dataset.scroll || '0')
-    if (currentScrollY !== lastScrollY.current) {
-      lastScrollY.current = currentScrollY
-      const scrollProgress = Math.max(0, currentScrollY - currentGalaxyHeight)
-      const navbarScrollProgress = Math.max(0, currentScrollY - currentGalaxyHeight + 200)
-      const newClipPercentage = Math.min(scrollProgress / 1.3, 100)
-      const navbarPercentage = Math.min(navbarScrollProgress / 1.3, 100)
-      const text1 = document.getElementById('text-1')
-      const text2 = document.getElementById('text-2')
-      const navbar = document.getElementById('navbar')
+  const updateClipPercentage = useCallback(() => {
+    requestAnimationFrame(() => {
+      const currentScrollY = window.scrollY
+      if (currentScrollY !== lastScrollY.current) {
+        lastScrollY.current = currentScrollY
+        const scrollProgress = Math.max(0, currentScrollY - galaxyHeight)
+        const navbarScrollProgress = Math.max(0, currentScrollY - galaxyHeight + 200)
+        const newClipPercentage = Math.min(scrollProgress / 1.3, 100)
+        const navbarPercentage = Math.min(navbarScrollProgress / 1.3, 100)
+        const text1 = document.getElementById('text-1')
+        const text2 = document.getElementById('text-2')
+        const navbar = document.getElementById('navbar')
 
-      if (text2) {
-        text2.style.display = scrollProgress > 0 ? 'block' : 'none'
+        if (text1 && text2 && navbar) {
+          // Batch DOM writes
+          text2.style.display = scrollProgress > 0 ? 'block' : 'none'
+          text1.style.clipPath = `inset(0 0 ${newClipPercentage}% 0)`
+          text2.style.clipPath = `inset(${100 - newClipPercentage}% 0 0 0)`
+          navbar.style.backgroundColor = `rgba(255, 230, 221, ${navbarPercentage / 100})`
+        }
       }
-
-      if (text1 && text2 && navbar) {
-        text1.style.clipPath = `inset(0 0 ${newClipPercentage}% 0)`
-        text2.style.clipPath = `inset(${100 - newClipPercentage}% 0 0 0)`
-        // set background opacity based on scroll progress
-        navbar.style.backgroundColor = `rgba(255, 230, 221, ${navbarPercentage}%)`
-      }
-    }
-  }, [])
+    })
+  }, [galaxyHeight])
 
   useEffect(() => {
-    const handleScroll = debounce(() => {
-      document.documentElement.dataset.scroll = `${window.scrollY}`
-      updateClipPercentage(galaxyHeight)
-    })
-
-    document.addEventListener('scroll', handleScroll, { passive: true })
+    document.addEventListener('scroll', updateClipPercentage, { passive: true })
 
     return () => {
-      document.removeEventListener('scroll', handleScroll)
+      document.removeEventListener('scroll', updateClipPercentage)
     }
-  }, [galaxyHeight, updateClipPercentage])
+  }, [updateClipPercentage])
 
   return (
     <div className="h-full items-center">
@@ -161,17 +156,22 @@ export const Logo = ({ text }: { text?: string }) => {
         href={lang ? `/?lang=${lang}` : '/?lang=nl'}
         className={cn('cursor-pointer h-full flex m-0 relative')}
       >
-        <div ref={containerRef} className="relative flex items-center" style={{ height: '42px' }}>
+        <div
+          ref={containerRef}
+          className="relative flex items-center overflow-hidden"
+          style={{ height: '42px' }}
+        >
           <p
             id={'text-2'}
             className={cn(
               MenuTypogrpahyVariants({ default: 'secondary' }),
               isMenuOpen && MenuTypogrpahyVariants({ inverted: 'secondary' }),
-              'mr-2 max-sm:overflow-visible max-sm:whitespace-normal max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px] text-nowrap flex-nowrap transition-[clip-path] duration-200 ease-out',
-              'absolute w-full'
+              'mr-2 max-sm:overflow-visible max-sm:whitespace-normal max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px] text-nowrap flex-nowrap',
+              'absolute w-full will-change-[clip-path]'
             )}
             style={{
               display: 'none',
+              clipPath: 'inset(100% 0 0 0)',
             }}
           >
             {text}
@@ -181,10 +181,11 @@ export const Logo = ({ text }: { text?: string }) => {
             className={cn(
               MenuTypogrpahyVariants({ default: 'primary' }),
               isMenuOpen && MenuTypogrpahyVariants({ inverted: 'primary' }),
-              'mr-2 max-sm:overflow-visible max-sm:whitespace-normal max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px] text-nowrap flex-nowrap transition-[clip-path] duration-200 ease-out'
+              'mr-2 max-sm:overflow-visible max-sm:whitespace-normal max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px] text-nowrap flex-nowrap',
+              'will-change-[clip-path]'
             )}
             style={{
-              clipPath: `inset(0 0 0 0)`,
+              clipPath: 'inset(0 0 0% 0)',
             }}
           >
             {text}
@@ -193,19 +194,4 @@ export const Logo = ({ text }: { text?: string }) => {
       </DelayedNextLinkWithZoomAnimationsContext>
     </div>
   )
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const debounce = <T extends (...args: any[]) => void>(fn: T) => {
-  let frame: number | null = null
-
-  return (...params: Parameters<T>): void => {
-    if (frame) {
-      cancelAnimationFrame(frame)
-    }
-
-    frame = requestAnimationFrame(() => {
-      fn(...params)
-    })
-  }
 }
