@@ -119,7 +119,7 @@ export const CategoryGalaxyContent = React.memo(() => {
   const renderMainContent = () => {
     if (isError) {
       return (
-        <div className="flex h-full items-center justify-center">
+        <div className="flex h-full items-center justify-center px-5 md:px-6">
           <div className="flex flex-col gap-2">
             <p
               className={TypographyVariants({
