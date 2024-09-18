@@ -85,6 +85,20 @@ export function useHorizontalSnappingList({
     })
   }
 
+  const scrollToIndex = (index: number) => {
+    const itemWidthWithGap = itemWidth + (gap ?? 0)
+    const targetScroll = index * itemWidthWithGap
+    const containerWidth = scrollContainerRef.current?.clientWidth || 0
+    const maxScroll = (scrollContainerRef.current?.scrollWidth || 0) - containerWidth
+
+    const scrollPosition = Math.min(targetScroll, maxScroll)
+
+    scrollContainerRef.current?.scrollTo({
+      left: scrollPosition - 64,
+      behavior: 'smooth',
+    })
+  }
+
   return {
     scrollContainerRef,
     pages,
@@ -93,5 +107,7 @@ export function useHorizontalSnappingList({
     prevPage,
     canScrollPrev,
     canScrollNext,
+    scrollToIndex, // Add this new function to the return object
+    itemsFitInWidth, // Add this to the return object as well
   }
 }
