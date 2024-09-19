@@ -99,6 +99,7 @@ export const Story: React.FC<Props> = ({
             description={data?.description ?? undefined}
             className="size-full"
             color="blue"
+            floating={true}
           >
             <div className=" flex size-full flex-col gap-[12px] transition-transform duration-[.4] ease-toi-cubic-bezier group-hover:scale-105">
               <StoryOrRecordResponsiveImage

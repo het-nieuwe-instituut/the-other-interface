@@ -72,6 +72,7 @@ export const Record: React.FC<RecordComponentProps> = ({
         )}
       >
         <ReadMoreTooltip
+          floating={true}
           isLoading={isLoading}
           hideTooltip={animationState === 'forward' || animationState === 'backwards'}
           error={isError ? t('couldNotFetchHover') : ''}

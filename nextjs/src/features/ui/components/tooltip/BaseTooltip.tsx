@@ -9,6 +9,7 @@ export interface BaseTooltipProps extends PropsWithChildren {
   offset?: number
   place: PlacesType
   className?: string
+  floating?: boolean
 }
 
 export const BaseTooltip = ({
@@ -17,6 +18,7 @@ export const BaseTooltip = ({
   offset = 16,
   place = 'bottom',
   className,
+  floating = false,
 }: BaseTooltipProps) => {
   return (
     <div
@@ -26,6 +28,7 @@ export const BaseTooltip = ({
       data-tooltip-html={html}
       data-tooltip-offset={offset ?? 0}
       data-tooltip-place={place}
+      data-tooltip-float={floating}
     >
       {children}
     </div>
