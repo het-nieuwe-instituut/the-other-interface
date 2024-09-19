@@ -68,7 +68,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
         `grid pl-4 relative h-auto grid-cols-[160px,minmax(20px,1fr),minmax(95px,auto)] gap-4 z-[var(--z-index)] bottom-[var(--offset)]
         max-[1280px]:gap-2 max-[1280px]:grid-cols-[100px,minmax(20px,1fr),minmax(95px,auto)]
         `,
-        'group text-blue-100 border border-blue focus-within:text-pink-100 focus-within:bg-blue-100',
+        'group bg-pink-100 text-blue-100 border border-blue focus-within:text-pink-100 focus-within:bg-blue-100',
         !isSearchModeActive ? 'cursor-pointer' : 'cursor-default',
         className
       )}
