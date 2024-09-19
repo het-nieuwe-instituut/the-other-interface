@@ -1274,7 +1274,6 @@ export interface ApiStoryStory extends Schema.CollectionType {
           localized: true
         }
       }>
-    author: Attribute.Relation<'api::story.story', 'oneToOne', 'api::author.author'>
     description: Attribute.RichText &
       Attribute.SetPluginOptions<{
         i18n: {
