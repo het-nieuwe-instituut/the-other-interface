@@ -21,14 +21,27 @@ export const GalaxyInterface: React.FC<Props> = ({ children }) => {
   const dispatch = useDispatch()
   const HEADER_HEIGHT = 68
   const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
+  const prevLookOnRef = useRef<typeof USER_LOOKS_ON.GALAXY | typeof USER_LOOKS_ON.EDITORIAL>(
+    USER_LOOKS_ON.GALAXY
+  )
 
   useEffect(() => {
-    if (sizes?.height && scrollPosition >= sizes?.height - HEADER_HEIGHT) {
-      dispatch(sharedActions?.userChangeLooksOn({ lookOn: USER_LOOKS_ON.EDITORIAL }))
-    } else {
-      dispatch(sharedActions?.userChangeLooksOn({ lookOn: USER_LOOKS_ON.GALAXY }))
+    if (!sizes?.height) return
+
+    const threshold = sizes.height - HEADER_HEIGHT - 12
+    const currentLookOn =
+      scrollPosition >= threshold ? USER_LOOKS_ON.EDITORIAL : USER_LOOKS_ON.GALAXY
+
+    if (currentLookOn !== prevLookOnRef.current) {
+      dispatch(sharedActions?.userChangeLooksOn({ lookOn: currentLookOn }))
+      prevLookOnRef.current = currentLookOn
     }
   }, [dispatch, scrollPosition, sizes?.height])
+
+  useEffect(() => {
+    if (!sizes?.height) return
+    dispatch(sharedActions?.setGalaxyHeight({ galaxyHeight: sizes.height }))
+  }, [dispatch, sizes?.height])
 
   return (
     <PulseProvider>
