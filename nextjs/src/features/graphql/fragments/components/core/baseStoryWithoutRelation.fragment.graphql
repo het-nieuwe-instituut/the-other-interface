@@ -7,6 +7,15 @@ fragment StoryWithoutRelationsFragment on StoryEntity {
       }
     }
   }
+  thumbnail {
+    id
+    alt_text
+    imageThumbnail {
+      data {
+        ...UploadFileFragment
+      }
+    }
+  }
   attributes {
     title
     slug
