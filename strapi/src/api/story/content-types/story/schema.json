@@ -146,6 +146,16 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::author.author"
+    },
+    "thumbnail": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "core.image-thumbnail"
     }
   }
 }

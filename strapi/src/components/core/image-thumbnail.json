@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_core_image_thumbnails",
+  "info": {
+    "displayName": "Image Thumbnail"
+  },
+  "options": {},
+  "attributes": {
+    "imageThumbnail": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "alt_text": {
+      "type": "string"
+    }
+  }
+}
