@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config'
 import { catchError, lastValueFrom, map } from 'rxjs'
 import { Config } from 'src/config/config'
 import { PaginationArgs } from '../util/paginationArgs.type'
-import { RollbarService } from '../util/rollbar.service'
+import { ErrorReporterService } from '../util/errorReporter.service'
 import { get } from 'lodash'
 import { Locale } from '../util/locale.type'
 import { TriplyUtils } from './triply.utils'
@@ -54,7 +54,7 @@ export class TriplyService {
   public constructor(
     private configService: ConfigService<Config>,
     private readonly httpService: HttpService,
-    private readonly rollbarService: RollbarService,
+    private readonly errorReporterService: ErrorReporterService,
     private readonly slackService: SlackService
   ) {
     this.endpointBaseURL = configService.getOrThrow('TRIPLY_API_BASEURL')
@@ -191,14 +191,15 @@ export class TriplyService {
         if (!receivedKeys.includes(k)) {
           const message = `"${k}" is not returned in ${JSON.stringify(receivedKeys)}`
 
-          this.rollbarService.logError(message)
+          this.errorReporterService.logError(new Error(message))
         }
       })
-    } catch (err) {
-      const message = `Unable to test keys ${JSON.stringify(
-        keysToVerify
-      )} in response ${JSON.stringify(responseData)}`
-      this.rollbarService.logError(message)
+    } catch (err: Error | unknown) {
+      const keys = JSON.stringify(keysToVerify)
+      const message = `Unable to test keys ${keys} in response ${JSON.stringify(responseData)}`
+      console.error(message)
+
+      this.errorReporterService.logError(err instanceof Error ? err : new Error(message))
     }
   }
 }
