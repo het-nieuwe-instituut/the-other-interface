@@ -10,5 +10,5 @@ export class ComponentCoreImageThumbnail {
   public alt_text?: string
 
   @Field(() => UploadFileEntityResponse, { nullable: true })
-  public thumbnail?: UploadFileEntityResponse
+  public imageThumbnail?: UploadFileEntityResponse
 }

@@ -59,4 +59,13 @@ fragment StoryFragment on StoryEntity {
   localizations {
     id
   }
+  thumbnail {
+    id
+    alt_text
+    imageThumbnail {
+      data {
+        ...UploadFileFragment
+      }
+    }
+  }
 }
