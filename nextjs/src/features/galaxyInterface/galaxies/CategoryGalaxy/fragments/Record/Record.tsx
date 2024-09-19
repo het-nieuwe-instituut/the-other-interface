@@ -119,33 +119,37 @@ const RecordData = ({
       href={url}
       className={cn(
         'ease-toi-cubic-bezier',
-        'flex size-full cursor-pointer flex-col items-center justify-center gap-[5px]',
-        animationState === 'forward' ||
-          (animationState === 'backwards' &&
-            'group-hover-blur-item transition-all duration-300 hover:scale-105')
+        'flex size-full cursor-pointer flex-col items-center justify-center gap-[5px]'
       )}
       onClick={onClick}
     >
-      <ResponsiveImage
-        onLoad={onLoad}
-        src={thumbnail}
-        alt={title ?? ''}
-        className="max-h-[calc(100%-2.6vw-7px)]" // where 2.6vw are a texts' line heights, 15px are gaps
-        imageClassName="object-bottom"
-        size={'16vw'}
-        style={{
-          flex: `1 1 calc(100% - 2.6vw - 7px)`,
-        }}
-      />
-
-      <RecordText
+      <div
         className={cn(
-          'ease-toi-cubic-bezier',
-          animationState === 'forward' && 'animate-[toBlurAndHide_300ms_forwards]'
+          'group-hover-blur-item duration-300 flex size-full flex-col items-center justify-center gap-[5px] transition-all ease-toi-cubic-bezier',
+          !(animationState === 'forward' || animationState === 'backwards') && 'hover:scale-105'
         )}
-        title={title}
-        categoryType={category.toLocaleLowerCase() as Category}
-      />
+      >
+        <ResponsiveImage
+          onLoad={onLoad}
+          src={thumbnail}
+          alt={title ?? ''}
+          className="max-h-[calc(100%-2.6vw-7px)]" // where 2.6vw are a texts' line heights, 15px are gaps
+          imageClassName="object-bottom"
+          size={'16vw'}
+          style={{
+            flex: `1 1 calc(100% - 2.6vw - 7px)`,
+          }}
+        />
+
+        <RecordText
+          className={cn(
+            'ease-toi-cubic-bezier',
+            animationState === 'forward' && 'animate-[toBlurAndHide_300ms_forwards]'
+          )}
+          title={title}
+          categoryType={category.toLocaleLowerCase() as Category}
+        />
+      </div>
     </DelayedNextLinkWithZoomAnimationsContext>
   )
 }

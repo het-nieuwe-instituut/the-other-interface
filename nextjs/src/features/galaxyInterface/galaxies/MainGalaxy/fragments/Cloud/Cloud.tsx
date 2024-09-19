@@ -75,7 +75,11 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
         className="z-50 max-w-xs p-0 shadow-lg"
       >
         <div
-          className={cn(sizeClassNames, cloudClassNames, 'absolute')}
+          className={cn(
+            sizeClassNames,
+            cloudClassNames,
+            'absolute group-hover-blur-except-self transition-all duration-300'
+          )}
           style={
             {
               zIndex: HOMEPAGE_Z_INDEXES.CLOUD,
@@ -117,6 +121,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
 
       <p
         className={cn(
+          'group-hover-blur-item ',
           'ease-toi-cubic-bezier',
           TypographyVariants({
             timesDot: 'lg',

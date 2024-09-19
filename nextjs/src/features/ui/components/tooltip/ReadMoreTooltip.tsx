@@ -37,7 +37,7 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
     readMoreHref,
     readMoreText,
     color = 'black',
-    offset,
+    offset = 64,
     isLoading,
     place,
     error,
