@@ -22,6 +22,7 @@ export class DataloaderService {
       storyStoryLinks: new DataLoader(this.storyService.getStoryLinks),
       storyTimeframe: new DataLoader(this.storyService.getTimeframe),
       storyPublicationDate: new DataLoader(this.storyService.getPublicationDate),
+      storyThumbnail: new DataLoader(this.storyService.getThumbnail),
     }
   }
 }
