@@ -11,5 +11,9 @@
   "role": "Rol",
   "peoplePeriod": "Periode",
   "realtedObjects": "Gerelateerde objecten",
-  "creationPeriod": "Creatie periode"
+  "creationPeriod": "Creatie periode",
+  "peopleFirstColumn": "Naam",
+  "objectsFirstColumn": "Objectnummer",
+  "publicationsFirstColumn": "Titel",
+  "archivesFirstColumn": "Inventarisnummer"
 }
