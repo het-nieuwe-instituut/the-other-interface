@@ -121,9 +121,9 @@ const ReadMoreTooltipContent = ({
     <div
       role="tooltip"
       className={cn(
-        'w-[243.76px] justify-start p-4 text-start',
+        'w-[243.76px] justify-start p-4 text-start relative overflow-hidden',
         color === 'black' && 'bg-black-100',
-        color === 'blue' && 'bg-blue-95 backdrop-blur-[30px]'
+        color === 'blue' && 'bg-blue-95'
       )}
     >
       {renderContent()}

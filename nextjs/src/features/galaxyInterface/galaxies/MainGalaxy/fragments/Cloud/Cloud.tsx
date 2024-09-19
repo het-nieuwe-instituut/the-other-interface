@@ -44,6 +44,13 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
     objects: t('objects'),
     people: t('people'),
   }
+  const place = {
+    publications: 'top',
+    archives: 'right',
+    objects: 'left',
+    people: 'bottom',
+  } as const
+
   const hoverTitleTranslation = hoverTitleTranslations[category]
   const hoverTranslation = hoverTranslations[category]
   const { animationState } = useContext(GalaxyZoomAnimationStateContext)
@@ -61,7 +68,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
     <div className="group">
       <ReadMoreTooltip
         floating={true}
-        place={'left'}
+        place={place[category]}
         title={hoverTitleTranslation}
         description={hoverTranslation}
         color="blue"
