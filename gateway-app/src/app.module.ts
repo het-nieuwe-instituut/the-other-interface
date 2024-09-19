@@ -1,3 +1,4 @@
+import { SentryModule } from '@sentry/nestjs/setup'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
@@ -32,6 +33,7 @@ export interface GraphqlContext {
 
 @Module({
   imports: [
+    SentryModule.forRoot(),
     AuthModule,
     UtilModule,
     StoryModule,
