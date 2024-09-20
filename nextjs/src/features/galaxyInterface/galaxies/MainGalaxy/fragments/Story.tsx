@@ -66,8 +66,7 @@ export const Story: React.FC<Props> = ({
         className={cn(
           'absolute flex size-4/5 cursor-pointer flex-col items-center justify-center gap-[2px]',
           !animationState && isClickable && 'group',
-          'use-calculate-line-element',
-          !animationState && 'group-hover-blur-item'
+          'use-calculate-line-element'
         )}
       >
         <DelayedNextLinkWithZoomAnimationsContext
@@ -99,8 +98,14 @@ export const Story: React.FC<Props> = ({
             description={data?.description ?? undefined}
             className="size-full"
             color="blue"
+            floating={true}
           >
-            <div className=" flex size-full flex-col gap-[12px] transition-transform duration-[.4] ease-toi-cubic-bezier group-hover:scale-105">
+            <div
+              className={cn(
+                'flex size-full flex-col gap-[12px] transition-all duration-300 ease-toi-cubic-bezier group-hover:scale-105',
+                !animationState && 'group-hover-blur-item'
+              )}
+            >
               <StoryOrRecordResponsiveImage
                 recordOrStoryId={story.id}
                 src={image}
