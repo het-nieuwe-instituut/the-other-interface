@@ -2,8 +2,9 @@ import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/Re
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 import { Position } from '@/features/shared/types/position'
+import { Category } from '@/features/shared/utils/categories'
 import { getTriplyRecordPathForTypeAndId } from '@/features/shared/utils/links'
 import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/components/DelayedNextLink/DelayedNextLinkWithZoomAnimationsContext'
 import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
@@ -16,7 +17,6 @@ import {
   useMoveElementToCenterValues,
 } from '../../../hooks/GalaxyZoomAnimationStateProvider'
 import { RecordText } from '../RecordText'
-import { Category } from '@/features/shared/utils/categories'
 
 export type RecordComponentProps = {
   className?: string
@@ -40,7 +40,7 @@ export const Record: React.FC<RecordComponentProps> = ({
 }) => {
   const { id, category } = record
   const { t } = useTypeSafeTranslation('category')
-  const { lang } = useZoom2Params()
+  const lang = useLocale()
   const { data, isLoading, isError } = useZoomHoverRecordResultQuery({ id, category })
   const [imageLoaded, setImageLoaded] = useState(false)
   const { animationState } = useContext(GalaxyZoomAnimationStateContext)
