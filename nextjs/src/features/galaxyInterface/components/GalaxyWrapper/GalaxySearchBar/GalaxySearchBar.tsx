@@ -26,6 +26,8 @@ import SearchResults from './fragments/SearchResults'
 import { TotalResults } from './fragments/TotalResults'
 import { useSearchBarPosition } from './useSearchBarPosition'
 import { COLLECTION_HILIGHT_ID } from '../Suggestions/suggestions.constants'
+import { usePathname } from 'next/navigation'
+import { getCurrentZoomNumber } from '@/features/shared/helpers/getCurrentZoomNumber'
 
 type Props = {
   total?: number
@@ -45,6 +47,8 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
   const selectedFilters = useSelectedFilters()
   const { offset, searchBarHeight, wrapRef } = useSearchBarPosition(selectedFilters)
   const { isSearchModeActive, searchValue } = useSelector((state: State) => state.shared)
+  const pathname = usePathname()
+  const currentZoomNumber = getCurrentZoomNumber(pathname)
 
   const handleGoClick = useCallback(() => {
     setIsUserTyping(false)
@@ -55,7 +59,6 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
     closeSearchMode(true)
   })
   useCloseSearchOnPathnameChange()
-
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <form
@@ -65,9 +68,12 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
       }}
       style={{ '--z-index': FOOTER_Z_INDEX, '--offset': `${offset}px` } as CSSProperties}
       className={cn(
-        `grid pl-4 relative h-auto grid-cols-[160px,minmax(20px,1fr),minmax(95px,auto)] gap-4 bg-blue-100 z-[var(--z-index)] text-pink-100 bottom-[var(--offset)]
+        `group grid pl-4 relative h-auto grid-cols-[160px,minmax(20px,1fr),minmax(95px,auto)] gap-4 z-[var(--z-index)] bottom-[var(--offset)]
         max-[1280px]:gap-2 max-[1280px]:grid-cols-[100px,minmax(20px,1fr),minmax(95px,auto)]
         `,
+        currentZoomNumber === 1 || currentZoomNumber === 3
+          ? 'border border-blue bg-blue-100 text-pink-100'
+          : 'border border-blue text-blue-100 focus-within:text-pink-100 focus-within:bg-blue-100 bg-pink-100',
         !isSearchModeActive ? 'cursor-pointer' : 'cursor-default',
         className
       )}
@@ -75,7 +81,18 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
       ref={searchBarRef}
     >
       <div className=" flex h-[60px] flex-col items-start justify-center self-end pt-1">
-        {isNoActiveSearch ? <TotalResults text={searchValue} /> : <SearchResults />}
+        {isNoActiveSearch ? (
+          <TotalResults
+            text={searchValue}
+            className={cn(
+              currentZoomNumber === 1 || currentZoomNumber === 3
+                ? 'text-pink-100'
+                : 'group-focus-within:text-pink-100'
+            )}
+          />
+        ) : (
+          <SearchResults />
+        )}
       </div>
 
       <InputBar
@@ -84,12 +101,20 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
         onFocus={focus}
         ref={wrapRef}
         filterInputRef={filterInputRef}
+        currentZoomNumber={currentZoomNumber}
       />
 
       <div className="flex h-[60px] items-center gap-[12px] self-end">
         {isSearchModeActive ? (
           <>
-            <GoButton onGoClick={handleGoClick} />
+            <GoButton
+              onGoClick={handleGoClick}
+              className={cn(
+                'text-blue-100 group-focus-within:text-pink-100 group-focus-within:hover:text-blue-100',
+                currentZoomNumber === 1 || currentZoomNumber === 3 ? '' : '',
+                currentZoomNumber === 2 ? '' : ''
+              )}
+            />
             <CloseButton onClick={clearAllSearch} />
           </>
         ) : isNoActiveSearch ? (
@@ -126,8 +151,9 @@ export const InputBar = React.forwardRef<
     openSearch: () => void
     onFocus: () => void
     filterInputRef: React.RefObject<HTMLInputElement>
+    currentZoomNumber: number
   }
->(({ onTyping, openSearch, onFocus, filterInputRef }, ref) => {
+>(({ onTyping, openSearch, onFocus, filterInputRef, currentZoomNumber }, ref) => {
   const { t } = useTypeSafeTranslation('category')
   const selectedFilters = useSelectedFilters()
   const { searchCategory, isCategorySuggestionsOpen, searchValue } = useSelector(
@@ -154,6 +180,11 @@ export const InputBar = React.forwardRef<
           }
           isOpen={isCategorySuggestionsOpen}
           selectedOption={searchCategory ? t(searchCategory) : ''}
+          className={cn(
+            currentZoomNumber === 1 || currentZoomNumber === 3
+              ? 'border border-blue text-pink-100 border-pink-100 border'
+              : 'group-focus-within:border group-focus-within:border-pink-100 group-focus-within:text-pink-100 border-blue border'
+          )}
         />
       </div>
       {selectedFilters.map(filter => (
