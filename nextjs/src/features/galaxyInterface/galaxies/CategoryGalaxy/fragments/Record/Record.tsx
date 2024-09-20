@@ -1,4 +1,4 @@
-import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
+import { StoryOrRecordResponsiveImage } from '@/features/shared/components/ResponsiveImage/StoryOrRecordResponsiveImage'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
@@ -129,7 +129,8 @@ const RecordData = ({
           !(animationState === 'forward' || animationState === 'backwards') && 'hover:scale-105'
         )}
       >
-        <ResponsiveImage
+        <StoryOrRecordResponsiveImage
+          recordOrStoryId={id}
           onLoad={onLoad}
           src={thumbnail}
           alt={title ?? ''}

@@ -1,5 +1,7 @@
 'use client'
 import { cn } from '@/features/ui/utils/cn'
+import Head from 'next/head'
+
 import Image from 'next/image'
 import React, { CSSProperties, useLayoutEffect, useRef, useState } from 'react'
 import { isUrl } from '../../utils/links'
@@ -14,6 +16,7 @@ export type ResponsiveImageProps = {
   style?: CSSProperties
   onClick?: () => void
   onLoad?: () => void
+  priority?: boolean
 }
 
 export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
@@ -25,6 +28,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   onLoad,
   className,
   imageClassName,
+  priority = false,
 }) => {
   const [showFallback, setShowFallback] = useState(!src)
   const [isLoaded, setIsLoaded] = useState(!src)
@@ -38,6 +42,11 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   return (
     <div style={style} className={cn('relative max-h-[var(--height)] w-full', className)}>
       {/* Fallback Image */}
+      {processedSrc && (
+        <Head>
+          <link rel="preload" href={processedSrc} as="image" />
+        </Head>
+      )}
       <Image
         src={fallbackImageRef.current}
         alt={alt || 'Fallback image'}
@@ -66,6 +75,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           quality={100}
           onClick={onClick}
           fill={true}
+          priority={priority}
           onContextMenu={e => e.preventDefault()}
           onLoadingComplete={() => {
             onLoad?.()

@@ -87,6 +87,12 @@ export const TypographyVariants = cva('', {
         'lg:text-[20px] lg:leading-[21px]',
       ],
       detailedStoryOrRecordSubTitle: ['hyphens-auto font-times-dot text-[9px]', 'lg:text-[12px]'],
+      cardTitle: [
+        'self-stretch font-bold not-italic',
+        'font-social-large',
+        'text-[21px] leading-[120%] tracking-[-0.21px]',
+        'lg:text-[32px] lg:leading-[120%] lg:tracking-[-0.32px]',
+      ],
     },
   },
 })
