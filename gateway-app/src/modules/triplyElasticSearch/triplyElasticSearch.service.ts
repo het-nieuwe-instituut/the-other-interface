@@ -9,6 +9,7 @@ import { TriplyUtils } from '../triply/triply.utils'
 import { map } from 'rxjs'
 import { Locale } from '../util/locale.type'
 import { get } from 'lodash'
+import { SlackService } from '../util/slack.service'
 
 export interface ElasticsearchResult {
   hits: {
@@ -35,7 +36,8 @@ export class TriplyElasticSearchService {
 
   public constructor(
     private readonly configService: ConfigService<Config>,
-    private readonly httpService: HttpService
+    private readonly httpService: HttpService,
+    private readonly slackService: SlackService
   ) {
     const endpointBaseURL = configService.getOrThrow('TRIPLY_API_BASEURL')
     this.apiKey = configService.getOrThrow('TRIPLY_API_KEY')
@@ -64,10 +66,19 @@ export class TriplyElasticSearchService {
       size: limit,
       query: this.getQuery(search),
     }
-    const res = await this.post<ElasticsearchResult>(
-      new URL(this.elasticSearchURL[locale]),
-      elasticQuery
-    )
+    const date = new Date()
+
+    const endpoint = new URL(this.elasticSearchURL[locale])
+    const res = await this.post<ElasticsearchResult>(endpoint, elasticQuery)
+
+    const elapsedMs = new Date().getTime() - date.getTime()
+    if (elapsedMs > 3000) {
+      const message = `Triply query for ${endpoint} took ${elapsedMs}ms`
+      console.warn(message)
+      this.slackService
+        .postMessageToChannel(this.slackService.channels.systemNotification, message)
+        .catch(err => console.error(err))
+    }
 
     const formattedResult = res.hits.hits.map(h => this.formatSearchResult(h))
 
@@ -84,7 +95,11 @@ export class TriplyElasticSearchService {
     return lastValueFrom(
       res.pipe(
         catchError(err => {
-          console.error(get(err, 'message') || err)
+          const message = get(err, 'message') || err
+          console.error(message)
+          this.slackService
+            .postMessageToChannel(this.slackService.channels.systemNotification, message)
+            .catch(err => console.error(err))
           return []
         }),
         map(res => res.data)
