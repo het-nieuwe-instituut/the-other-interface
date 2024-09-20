@@ -184,7 +184,7 @@ export const InputBar = React.forwardRef<
           className={cn(
             currentZoomNumber === 1 || currentZoomNumber === 3
               ? 'border border-blue text-pink-100 border-pink-100 border'
-              : 'group-focus-within:border group-focus-within:border-pink-100 group-focus-within:text-pink-100'
+              : 'group-focus-within:border group-focus-within:border-pink-100 group-focus-within:text-pink-100 border-blue border'
           )}
         />
       </div>
