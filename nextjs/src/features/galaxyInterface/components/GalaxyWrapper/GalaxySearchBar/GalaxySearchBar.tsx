@@ -59,7 +59,6 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
     closeSearchMode(true)
   })
   useCloseSearchOnPathnameChange()
-  console.log(currentZoomNumber)
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <form
@@ -184,7 +183,7 @@ export const InputBar = React.forwardRef<
           className={cn(
             currentZoomNumber === 1 || currentZoomNumber === 3
               ? 'border border-blue text-pink-100'
-              : 'group-focus-within:border group-focus-within:border-pink-100 group-focus-within:text-pink-100'
+              : 'group-focus-within:border group-focus-within:border-pink-100 group-focus-within:text-pink-100 border border-transparent'
           )}
         />
       </div>
