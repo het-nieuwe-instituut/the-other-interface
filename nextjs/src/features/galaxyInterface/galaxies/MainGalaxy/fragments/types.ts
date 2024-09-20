@@ -1,5 +1,6 @@
 import { CloudCategory } from '@/features/shared/utils/categories'
 import { GridParams, Position } from '@/features/shared/types/position'
+import { ComponentCoreImageThumbnail } from 'src/generated/graphql'
 
 export type CloudPositionValue = {
   base: `${string}vw` | `${string}vh` | `${string}%` | 0 | `calc(${string})`
@@ -31,6 +32,7 @@ export type MappedStory = {
   locale: string
   id: string
   hasImage: boolean
+  thumbnail?: ComponentCoreImageThumbnail | null
 }
 
 export type PositionedStory = MappedStory & {

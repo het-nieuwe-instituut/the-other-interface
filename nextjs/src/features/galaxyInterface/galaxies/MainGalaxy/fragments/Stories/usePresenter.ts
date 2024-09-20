@@ -22,7 +22,9 @@ const mapStory = (story: StoryData) => {
   const imageUrl = findImageUrl(story?.components ?? [])
   return {
     title: story?.attributes?.title ?? '',
-    image: findImageUrl(story?.components ?? []),
+    image: !!imageUrl
+      ? story.thumbnail?.imageThumbnail?.data?.attributes?.url
+      : findImageUrl(story?.components ?? []),
     locale: storyLocale || 'nl',
     id: storyId || `${Math.floor(Math.random() * (99999 + 1))}`,
     hasImage: !!imageUrl,
