@@ -22,18 +22,17 @@ export const DelayedNextLink = React.forwardRef<HTMLAnchorElement, DelayedNextLi
         timeout.current && clearTimeout(timeout.current)
       }
     }, [stop])
-
     return (
       <NextLink
         {...restProps}
         ref={ref}
-        onClick={e => {
+        onClick={async e => {
           e.preventDefault()
           if (!disabled) {
             onClick?.(e)
             const url = e.currentTarget.getAttribute('href')
-
             if (url) {
+              router.prefetch(url)
               setTimeout(() => {
                 router.push(url)
                 timeout.current = setTimeout(() => {

@@ -17,6 +17,7 @@ import {
 } from '../../../hooks/GalaxyZoomAnimationStateProvider'
 import { RecordText } from '../RecordText'
 import { Category } from '@/features/shared/utils/categories'
+import { StoryOrRecordResponsiveImage } from '@/features/shared/components/ResponsiveImage/StoryOrRecordResponsiveImage'
 
 export type RecordComponentProps = {
   className?: string
@@ -129,7 +130,8 @@ const RecordData = ({
           !(animationState === 'forward' || animationState === 'backwards') && 'hover:scale-105'
         )}
       >
-        <ResponsiveImage
+        <StoryOrRecordResponsiveImage
+          recordOrStoryId={id}
           onLoad={onLoad}
           src={thumbnail}
           alt={title ?? ''}
