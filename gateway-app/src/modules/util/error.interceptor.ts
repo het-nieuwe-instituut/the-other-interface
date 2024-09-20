@@ -1,19 +1,20 @@
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common'
+import { get } from 'lodash'
 import { catchError, Observable } from 'rxjs'
 import { CustomErrorType } from './customError'
-import { RollbarService } from './rollbar.service'
+import { ErrorReporterService } from './errorReporter.service'
 
 @Injectable()
-export class RollbarInterceptor implements NestInterceptor {
+export class ErrorInterceptor implements NestInterceptor {
   private readonly typesToIgnore = [CustomErrorType.internal, CustomErrorType.external]
 
-  public constructor(private readonly rollbarService: RollbarService) {}
+  public constructor(private readonly errorReporterService: ErrorReporterService) {}
 
   public intercept(_context: ExecutionContext, next: CallHandler): Observable<unknown> {
     return next.handle().pipe(
       catchError(e => {
         if (this.shouldReport(e)) {
-          this.rollbarService.logError(e)
+          this.errorReporterService.logError(e)
         }
 
         throw e
@@ -22,16 +23,11 @@ export class RollbarInterceptor implements NestInterceptor {
   }
 
   private shouldReport(e: unknown) {
-    if (!e || typeof e !== 'object' || !('message' in e) || typeof e.message !== 'string') {
+    const msg = get(e, 'message') as string | undefined
+    if (!msg) {
       return true
     }
 
-    for (const typeToIgnore of this.typesToIgnore) {
-      if (e.message.startsWith(`[${typeToIgnore}]: `)) {
-        return false
-      }
-    }
-
-    return true
+    return !this.typesToIgnore.some(t => msg.startsWith(`[${t}]: `))
   }
 }
