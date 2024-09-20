@@ -17,8 +17,8 @@ const MobileOverlayProvider = (props: Props) => {
 
   return (
     <div className="overflow-hidden">
-      {isMobile && <MobileOverlay />}
       {props.children}
+      {isMobile && <MobileOverlay />}
     </div>
   )
 }
