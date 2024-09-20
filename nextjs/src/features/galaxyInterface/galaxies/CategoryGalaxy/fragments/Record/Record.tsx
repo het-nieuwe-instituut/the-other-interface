@@ -1,9 +1,10 @@
-import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
+import { StoryOrRecordResponsiveImage } from '@/features/shared/components/ResponsiveImage/StoryOrRecordResponsiveImage'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
 import { Position } from '@/features/shared/types/position'
+import { Category } from '@/features/shared/utils/categories'
 import { getTriplyRecordPathForTypeAndId } from '@/features/shared/utils/links'
 import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/components/DelayedNextLink/DelayedNextLinkWithZoomAnimationsContext'
 import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
@@ -16,8 +17,6 @@ import {
   useMoveElementToCenterValues,
 } from '../../../hooks/GalaxyZoomAnimationStateProvider'
 import { RecordText } from '../RecordText'
-import { Category } from '@/features/shared/utils/categories'
-import { StoryOrRecordResponsiveImage } from '@/features/shared/components/ResponsiveImage/StoryOrRecordResponsiveImage'
 
 export type RecordComponentProps = {
   className?: string
