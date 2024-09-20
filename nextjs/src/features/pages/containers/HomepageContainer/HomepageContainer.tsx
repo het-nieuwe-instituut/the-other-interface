@@ -11,6 +11,12 @@ import SuspenseLoader from '@/features/shared/components/SuspenseLoader/Suspense
 import { EditorialSkeleton } from '@/features/ui/components/Skeletons/EditorialSkeleton'
 import { HomepageQuery, ThemesQuery } from 'src/generated/graphql'
 import { CategoryGalaxy } from '../../../galaxyInterface/galaxies/CategoryGalaxy/CategoryGalaxy'
+import {
+  useSearchParamCategory,
+  useSearchParamFilters,
+  useSearchParamSearchValue,
+} from '@/features/shared/hooks/useZoom2Params'
+import { GalaxyZoomAnimationStateProvider } from '@/features/galaxyInterface/galaxies/hooks/GalaxyZoomAnimationStateProvider'
 
 export type Props = {
   homepage?: HomepageQuery
@@ -22,12 +28,22 @@ export type Props = {
 
 export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }) => {
   const editorialData = homepage?.homepage?.data?.attributes
-
+  const category = useSearchParamCategory()
+  const searchValue = useSearchParamSearchValue()
+  const encodedFilters = useSearchParamFilters()
   return (
     <>
       <GalaxyInterface>
         <MobileOverlayProvider>
-          {isStoriesGalaxy ? <CategoryGalaxy /> : <MainGalaxy />}
+          {isStoriesGalaxy ? (
+            <GalaxyZoomAnimationStateProvider
+              key={`${category}-${searchValue}-${encodedFilters ?? ''}`}
+            >
+              <CategoryGalaxy />
+            </GalaxyZoomAnimationStateProvider>
+          ) : (
+            <MainGalaxy />
+          )}
         </MobileOverlayProvider>
       </GalaxyInterface>
 
