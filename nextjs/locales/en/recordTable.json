@@ -15,5 +15,5 @@
   "peopleFirstColumn": "Name",
   "objectsFirstColumn": "Object number",
   "publicationsFirstColumn": "Title",
-  "archivesFirstColumn": "Reference code"
+  "archivesFirstColumn": "Title"
 }
