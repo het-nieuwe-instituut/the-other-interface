@@ -104,7 +104,7 @@ export class TriplyService {
         .catch(err => console.error(err))
     }
 
-    this.checkResponseType(data, keysToVerify)
+    this.checkResponseType(data, keysToVerify, endpoint)
 
     return { data }
   }
@@ -177,7 +177,8 @@ export class TriplyService {
 
   private checkResponseType<ReturnDataType>(
     responseData: unknown,
-    keysToVerify: KeysToVerify<ReturnDataType>
+    keysToVerify: KeysToVerify<ReturnDataType>,
+    endpoint: URL
   ) {
     if (!responseData || !Array.isArray(responseData) || !responseData.length) {
       return
@@ -189,7 +190,9 @@ export class TriplyService {
 
       expectedKeys.forEach(k => {
         if (!receivedKeys.includes(k)) {
-          const message = `"${k}" is not returned in ${JSON.stringify(receivedKeys)}`
+          const message = `"${k}" is not returned in ${JSON.stringify(
+            receivedKeys
+          )} from ${endpoint.toString()}`
 
           this.errorReporterService.logError(new Error(message))
         }
