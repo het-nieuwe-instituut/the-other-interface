@@ -45,7 +45,7 @@ export const storiesToCarouselDataMapper = (
     if (story?.thumbnail) {
       return images.push({
         url: story?.thumbnail?.imageThumbnail?.data?.attributes?.url,
-        id: story?.thumbnail.id,
+        id: story?.id,
         height: story?.thumbnail?.imageThumbnail?.data?.attributes?.height,
         width: story?.thumbnail?.imageThumbnail?.data?.attributes?.width,
         title: story?.attributes?.title,
