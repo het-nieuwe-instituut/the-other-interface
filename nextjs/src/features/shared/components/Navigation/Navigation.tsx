@@ -3,7 +3,7 @@ import { NavLinkButton } from '@/features/ui/components/nav-link-button/componen
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 import useTranslation from 'next-translate/useTranslation'
-import { headers } from 'next/headers'
+import { cookies } from 'next/headers'
 import { CSSProperties } from 'react'
 import { Locale } from 'src/generated/graphql'
 import { MAX_Z_INDEX, NAVIGATION_OVERLAY_Z_INDEX } from '../../constants/mainConstants'
@@ -15,10 +15,9 @@ import { NavigationContainer } from './NavigationContainer'
 
 export const Navigation = () => {
   const { t: tNavigation } = useTranslation('navigation')
-  const headersList = headers()
-  const acceptLanguage = headersList.get('accept-language')
-  const acceptLanguageLocale = acceptLanguage && acceptLanguage.split('-')[0]
-  const locale = acceptLanguageLocale === 'en' ? 'en' : 'nl'
+  const cookieList = cookies()
+  const acceptLanguage = cookieList.get('NEXT_LOCALE')
+  const locale = acceptLanguage?.value === 'en' ? 'en' : 'nl'
 
   return (
     <NavigationContainer>

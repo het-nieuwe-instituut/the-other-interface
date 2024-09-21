@@ -72,7 +72,7 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
 
     return (
       <>
-        <div className="h-[290px]">
+        <div className="relative aspect-[4/3]">
           <LightBoxNextImageByIcon src={image} fill alt={alt} className="object-cover" />
         </div>
         <div className="group flex flex-col">
@@ -81,7 +81,7 @@ export const Card = ({ title, description, image, className, href, alt }: CardPr
               <p
                 lang="nl"
                 className={TypographyVariants({
-                  socialLarge: 'xl',
+                  responsive: 'cardTitle',
                   className: cn(
                     'hyphens-auto inline-block inline-flex relative z-10',
                     'after:absolute after:z-[-1]',

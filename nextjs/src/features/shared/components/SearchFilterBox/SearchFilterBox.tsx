@@ -37,7 +37,7 @@ export const SearchFilterBox: React.FC<Props> = ({
       <div style={{ zIndex: zIndex || 'inherit' }} className="relative">
         <button
           className={
-            'flex h-[52px] w-fit max-w-full flex-col bg-pink-100 px-2 text-blue-100 hover:bg-pink-100 hover:text-blue-100'
+            'flex h-[52px] w-fit max-w-full flex-col border border-blue bg-pink-100 px-2 text-blue-100 hover:bg-pink-100 hover:text-blue-100'
           }
           onClick={onClick}
           aria-label={`Select filter ${category}`}

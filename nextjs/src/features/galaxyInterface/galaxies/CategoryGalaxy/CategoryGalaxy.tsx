@@ -46,7 +46,6 @@ export const CategoryGalaxy = () => {
     positioningTemplates,
     pageNumber
   )
-
   const category = useSearchParamCategory()
 
   if (!isSearchCategory(category)) {
@@ -67,7 +66,7 @@ export const CategoryGalaxy = () => {
   )
 }
 
-export const CategoryGalaxyContent = React.memo(() => {
+const CategoryGalaxyContent = React.memo(() => {
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
   const category = useSearchParamCategory()
   const search = useSearchParamSearchValue()

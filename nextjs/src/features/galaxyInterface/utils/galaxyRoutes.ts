@@ -7,13 +7,18 @@ import { Locale } from 'src/generated/graphql'
 import { CollectionHighlightsFilter } from '../components/GalaxyWrapper/Suggestions/suggestions.constants'
 
 export const getUrlLandingPageUrl = (lang: Locale, category: CloudCategory | 'stories') => {
-  let url = `/landingpage?category=${category}&filters=${encodeFilters([
-    CollectionHighlightsFilter,
-  ])}&searchResult=true&fallback=true`
+  const url = new URL(process.env.NEXT_PUBLIC_URL + `/landingpage`)
 
-  url = addLocaleToUrl(url, lang)
+  url.searchParams.set('category', category)
+  if (category !== 'stories') {
+    url.searchParams.set('filters', encodeFilters([CollectionHighlightsFilter]))
+    url.searchParams.set('fallback', 'true')
+  }
+  url.searchParams.set('searchResult', 'true')
 
-  return url
+  const urlWithLocale = addLocaleToUrl(url.toString(), lang)
+
+  return urlWithLocale
 }
 
 export const useGetUrlLandingPageUrl = (category: CloudCategory) => {

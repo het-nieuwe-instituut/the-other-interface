@@ -42,11 +42,16 @@ export const StaticHeader = ({
         style={{ '--z-index': `${STATIC_HEADER_Z_INDEX}` } as CSSProperties}
         className={cn(
           'ease-toi-cubic-bezier',
-          'duration-100 transition-colors fixed top-0 right-0 z-[var(--z-index)] h-auto overflow-hidden py-4 w-full pointer-events-auto',
-          'will-change-[background-color]',
+          'duration-100 transition-[transform] fixed top-0 right-0 z-[var(--z-index)] h-auto overflow-hidden py-4 w-full pointer-events-auto',
+          'will-change-[transform]',
           className
         )}
       >
+        <div
+          id="navbar-background"
+          className="absolute inset-0 origin-bottom bg-[#FFE6DD] ease-toi-cubic-bezier"
+          style={{ transform: 'scaleY(0)', transformOrigin: 'bottom' }}
+        ></div>
         <div
           className="container mx-auto flex size-full max-w-[90em] items-center justify-between px-6"
           role="button"
@@ -56,7 +61,7 @@ export const StaticHeader = ({
           onKeyDown={handleKeyDown}
         >
           <Logo text={tNavigation('headerTitle')} />
-          <div>
+          <div className="z-10">
             <GalaxyTopRight />
           </div>
         </div>
@@ -107,6 +112,7 @@ export const StaticPageHeader = () => {
   )
 }
 
+const HEADER_HEIGHT = 74
 const Logo = ({ text }: { text?: string }) => {
   const dispatch = useDispatch()
   const lang = useLocale()
@@ -120,20 +126,24 @@ const Logo = ({ text }: { text?: string }) => {
       const currentScrollY = window.scrollY
       if (currentScrollY !== lastScrollY.current) {
         lastScrollY.current = currentScrollY
-        const scrollProgress = Math.max(0, currentScrollY - galaxyHeight)
-        const navbarScrollProgress = Math.max(0, currentScrollY - galaxyHeight + 200)
-        const newClipPercentage = Math.min(scrollProgress / 1.3, 100)
-        const navbarPercentage = Math.min(navbarScrollProgress / 1.3, 100)
+        const scrollProgress = Math.max(
+          0,
+          currentScrollY - galaxyHeight + HEADER_HEIGHT + HEADER_HEIGHT / 2
+        )
+        const navbarScrollProgress = Math.max(0, currentScrollY - galaxyHeight + HEADER_HEIGHT)
+        const newClipPercentage = Math.min(scrollProgress / 0.6, 100)
+        const navbarPercentage = Math.min(navbarScrollProgress / 0.6, 100)
         const text1 = document.getElementById('text-1')
         const text2 = document.getElementById('text-2')
-        const navbar = document.getElementById('navbar')
+        const navbarBackground = document.getElementById('navbar-background')
 
-        if (text1 && text2 && navbar) {
+        if (text1 && text2 && navbarBackground) {
           // Batch DOM writes
           text2.style.display = scrollProgress > 0 ? 'block' : 'none'
           text1.style.clipPath = `inset(0 0 ${newClipPercentage}% 0)`
           text2.style.clipPath = `inset(${100 - newClipPercentage}% 0 0 0)`
-          navbar.style.backgroundColor = `rgba(255, 230, 221, ${navbarPercentage / 100})`
+          navbarBackground.style.transform = `scaleY(${navbarPercentage / 100})`
+          navbarBackground.style.bottom = `${-navbarPercentage}%`
         }
       }
     })
@@ -158,7 +168,7 @@ const Logo = ({ text }: { text?: string }) => {
       >
         <div
           ref={containerRef}
-          className="relative flex items-center overflow-hidden"
+          className="relative flex flex-wrap items-center overflow-hidden max-sm:w-[200px]  "
           style={{ height: '42px' }}
         >
           <p
@@ -166,7 +176,7 @@ const Logo = ({ text }: { text?: string }) => {
             className={cn(
               MenuTypogrpahyVariants({ default: 'secondary' }),
               isMenuOpen && MenuTypogrpahyVariants({ inverted: 'secondary' }),
-              'mr-2 max-sm:overflow-visible max-sm:whitespace-normal max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px] text-nowrap flex-nowrap',
+              'mr-2 max-sm:overflow-visible  max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px] sm:text-nowrap sm:flex-nowrap',
               'absolute w-full will-change-[clip-path]'
             )}
             style={{
@@ -181,7 +191,7 @@ const Logo = ({ text }: { text?: string }) => {
             className={cn(
               MenuTypogrpahyVariants({ default: 'primary' }),
               isMenuOpen && MenuTypogrpahyVariants({ inverted: 'primary' }),
-              'mr-2 max-sm:overflow-visible max-sm:whitespace-normal max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px] text-nowrap flex-nowrap',
+              'mr-2 max-sm:overflow-visible max-sm:text-[20px]  max-sm:font-normal max-sm:leading-[21px] sm:text-nowrap sm:flex-nowrap',
               'will-change-[clip-path]'
             )}
             style={{

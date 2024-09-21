@@ -71,6 +71,7 @@ export const Record = React.memo(
           )}
         >
           <ReadMoreTooltip
+            floating={true}
             hideTooltip={animationState === 'forward'}
             isLoading={isLoadingHover}
             error={isLoadingHoverError ? t('couldNotFetchHover') : ''}

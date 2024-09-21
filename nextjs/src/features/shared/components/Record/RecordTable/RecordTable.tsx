@@ -46,13 +46,6 @@ export const RecordTable: React.FC = () => {
 
   return (
     <div className="flex max-w-[64em] flex-col gap-20 pb-20 pt-0">
-      {publicationTableData && (
-        <PaginatedTable
-          data={publicationTableData}
-          hasNextPage={hasNextPagePublication}
-          fetchNextPage={fetchNextPagePublications}
-        />
-      )}
       {archivesTableData && (
         <PaginatedTable
           data={archivesTableData}
@@ -65,6 +58,13 @@ export const RecordTable: React.FC = () => {
           data={objectsTableData}
           hasNextPage={hasNextPageObject}
           fetchNextPage={fetchNextPageObject}
+        />
+      )}
+      {publicationTableData && (
+        <PaginatedTable
+          data={publicationTableData}
+          hasNextPage={hasNextPagePublication}
+          fetchNextPage={fetchNextPagePublications}
         />
       )}
       {peoplenTableData && (

@@ -1,9 +1,10 @@
-import { ResponsiveImage } from '@/features/shared/components/ResponsiveImage/ResponsiveImage'
+import { StoryOrRecordResponsiveImage } from '@/features/shared/components/ResponsiveImage/StoryOrRecordResponsiveImage'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
-import { useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 import { Position } from '@/features/shared/types/position'
+import { Category } from '@/features/shared/utils/categories'
 import { getTriplyRecordPathForTypeAndId } from '@/features/shared/utils/links'
 import { DelayedNextLinkWithZoomAnimationsContext } from '@/features/ui/components/DelayedNextLink/DelayedNextLinkWithZoomAnimationsContext'
 import { ReadMoreTooltip } from '@/features/ui/components/tooltip/ReadMoreTooltip'
@@ -16,7 +17,6 @@ import {
   useMoveElementToCenterValues,
 } from '../../../hooks/GalaxyZoomAnimationStateProvider'
 import { RecordText } from '../RecordText'
-import { Category } from '@/features/shared/utils/categories'
 
 export type RecordComponentProps = {
   className?: string
@@ -40,7 +40,7 @@ export const Record: React.FC<RecordComponentProps> = ({
 }) => {
   const { id, category } = record
   const { t } = useTypeSafeTranslation('category')
-  const { lang } = useZoom2Params()
+  const lang = useLocale()
   const { data, isLoading, isError } = useZoomHoverRecordResultQuery({ id, category })
   const [imageLoaded, setImageLoaded] = useState(false)
   const { animationState } = useContext(GalaxyZoomAnimationStateContext)
@@ -72,6 +72,7 @@ export const Record: React.FC<RecordComponentProps> = ({
         )}
       >
         <ReadMoreTooltip
+          floating={true}
           isLoading={isLoading}
           hideTooltip={animationState === 'forward' || animationState === 'backwards'}
           error={isError ? t('couldNotFetchHover') : ''}
@@ -118,33 +119,38 @@ const RecordData = ({
       href={url}
       className={cn(
         'ease-toi-cubic-bezier',
-        'flex size-full cursor-pointer flex-col items-center justify-center gap-[5px]',
-        animationState === 'forward' ||
-          (animationState === 'backwards' &&
-            'group-hover-blur-item transition-all duration-300 hover:scale-105')
+        'flex size-full cursor-pointer flex-col items-center justify-center gap-[5px]'
       )}
       onClick={onClick}
     >
-      <ResponsiveImage
-        onLoad={onLoad}
-        src={thumbnail}
-        alt={title ?? ''}
-        className="max-h-[calc(100%-2.6vw-7px)]" // where 2.6vw are a texts' line heights, 15px are gaps
-        imageClassName="object-bottom"
-        size={'16vw'}
-        style={{
-          flex: `1 1 calc(100% - 2.6vw - 7px)`,
-        }}
-      />
-
-      <RecordText
+      <div
         className={cn(
-          'ease-toi-cubic-bezier',
-          animationState === 'forward' && 'animate-[toBlurAndHide_300ms_forwards]'
+          'group-hover-blur-item duration-300 flex size-full flex-col items-center justify-center gap-[5px] transition-all ease-toi-cubic-bezier',
+          !(animationState === 'forward' || animationState === 'backwards') && 'hover:scale-105'
         )}
-        title={title}
-        categoryType={category.toLocaleLowerCase() as Category}
-      />
+      >
+        <StoryOrRecordResponsiveImage
+          recordOrStoryId={id}
+          onLoad={onLoad}
+          src={thumbnail}
+          alt={title ?? ''}
+          className="max-h-[calc(100%-2.6vw-7px)]" // where 2.6vw are a texts' line heights, 15px are gaps
+          imageClassName="object-bottom"
+          size={'16vw'}
+          style={{
+            flex: `1 1 calc(100% - 2.6vw - 7px)`,
+          }}
+        />
+
+        <RecordText
+          className={cn(
+            'ease-toi-cubic-bezier',
+            animationState === 'forward' && 'animate-[toBlurAndHide_300ms_forwards]'
+          )}
+          title={title}
+          categoryType={category.toLocaleLowerCase() as Category}
+        />
+      </div>
     </DelayedNextLinkWithZoomAnimationsContext>
   )
 }

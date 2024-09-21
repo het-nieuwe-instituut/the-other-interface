@@ -13,9 +13,10 @@ import { useSelector } from 'react-redux'
 type Props = {
   hide?: boolean
   onGoClick?: () => void
+  className?: string
 }
 
-export const GoButton: React.FC<Props> = ({ hide = false, onGoClick }) => {
+export const GoButton: React.FC<Props> = ({ hide = false, onGoClick, className }) => {
   const { t } = useTypeSafeTranslation('common')
   const rawPath = useGetRawPath()
   const lang = useLocale()
@@ -50,7 +51,8 @@ export const GoButton: React.FC<Props> = ({ hide = false, onGoClick }) => {
         'inline-block px-[7px] py-[6px] text-pink-100 transition-colors duration-200',
         searchUrlChanged && 'hover:bg-pink-100 hover:text-blue-100',
         'disabled:cursor-not-allowed disabled:opacity-60',
-        hide ? 'hidden' : 'visible'
+        hide ? 'hidden' : 'visible',
+        className
       )}
     >
       <span className={cn('text-pink.100', TypographyVariants({ socialLarge: 'md' }))}>

@@ -88,6 +88,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
 
       <svg
         ref={svgRef}
+        className={'group-hover-blur-except-self transition-all duration-300 ease-toi-cubic-bezier'}
         style={{
           display: zoomAnimationState === 'forward' ? 'none' : 'block',
           position: 'fixed',

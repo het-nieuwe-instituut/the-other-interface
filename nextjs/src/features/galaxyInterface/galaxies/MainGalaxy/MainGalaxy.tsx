@@ -132,7 +132,7 @@ const MainGalaxyContent = React.memo(() => {
   }
 
   return (
-    <div className={'w-screen bg-pink-100'}>
+    <div className={'group-hover-blur w-screen bg-pink-100'}>
       <BlurOverlay hide={!isSearchModeActive} />
       <div className="relative mx-auto h-screen w-screen max-w-[1440px]">
         {!isError && categoryClouds.map(cloud => <Cloud key={cloud.title} cloud={cloud} />)}

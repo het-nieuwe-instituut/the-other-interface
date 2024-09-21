@@ -26,6 +26,7 @@ export interface ReadMoreTooltipProps extends PropsWithChildren {
   error?: string
   className?: string
   hideTooltip?: boolean
+  floating?: boolean
 }
 
 export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
@@ -36,13 +37,14 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
     readMoreHref,
     readMoreText,
     color = 'black',
-    offset,
+    offset = 64,
     isLoading,
     place,
     error,
     isEmpty,
     className,
     hideTooltip,
+    floating,
   } = props
   const content = useMemo(
     () =>
@@ -76,7 +78,13 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
 
   return (
     <>
-      <BaseTooltip className={className} offset={offset} html={content} place={place}>
+      <BaseTooltip
+        floating={floating}
+        className={className}
+        offset={offset}
+        html={content}
+        place={place}
+      >
         {children}
       </BaseTooltip>
     </>
@@ -113,9 +121,9 @@ const ReadMoreTooltipContent = ({
     <div
       role="tooltip"
       className={cn(
-        'w-[243.76px] justify-start p-4 text-start',
+        'w-[243.76px] justify-start p-4 text-start relative overflow-hidden',
         color === 'black' && 'bg-black-100',
-        color === 'blue' && 'bg-blue-100'
+        color === 'blue' && 'bg-blue-95'
       )}
     >
       {renderContent()}

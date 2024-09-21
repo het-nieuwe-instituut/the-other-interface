@@ -15,7 +15,7 @@ export const CollpsedSearch = ({ toggleSearchBar, className }: Props) => {
         intent={'ghost'}
         size={'small'}
         icon={<SearchIconCollapsed />}
-        className="z-20 flex size-[60px] border border-blue"
+        className="z-20 flex size-[61px] border border-blue"
         onClick={toggleSearchBar}
       />
     </div>
