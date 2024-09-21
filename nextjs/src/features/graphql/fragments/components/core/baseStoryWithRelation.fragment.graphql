@@ -40,6 +40,15 @@ fragment StoryFragment on StoryEntity {
       id
     }
   }
+  thumbnail {
+    id
+    alt_text
+    imageThumbnail {
+      data {
+        ...UploadFileFragment
+      }
+    }
+  }
   timeframe {
     id
     yearStart
@@ -58,14 +67,5 @@ fragment StoryFragment on StoryEntity {
   }
   localizations {
     id
-  }
-  thumbnail {
-    id
-    alt_text
-    imageThumbnail {
-      data {
-        ...UploadFileFragment
-      }
-    }
   }
 }
