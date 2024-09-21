@@ -34,6 +34,15 @@ query storyById($locale: Locale!, $id: String!, $publicationState: String) {
       themes {
         id
       }
+      thumbnail {
+        id
+        alt_text
+        imageThumbnail {
+          data {
+            ...UploadFileFragment
+          }
+        }
+      }
       components {
         ... on ComponentModulesTextModule {
           ...textModuleFragment
