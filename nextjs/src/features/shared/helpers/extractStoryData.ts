@@ -26,11 +26,12 @@ export const extractStoryData = (story: StoryById) => {
 
   const storyId = story?.id
   const storyLocale = story?.attributes?.locale
+  const thumbnail = story.thumbnail?.imageThumbnail?.data?.attributes?.url
   return {
     ...story,
     // TODO property 'description' and 'locale' are not present in all types, so we need to add them to mutch the type Zoom3Record
     title: story?.attributes?.title ?? '',
-    thumbnail: [findImageUrl(story?.components ?? [])] ?? [],
+    thumbnail: thumbnail ? [thumbnail] : [findImageUrl(story?.components ?? [])] ?? [],
     locale: storyLocale || 'nl',
     id: storyId || `${Math.floor(Math.random() * (99999 + 1))}`,
     description: story?.attributes?.description ?? '',
