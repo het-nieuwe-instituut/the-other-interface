@@ -35,6 +35,9 @@ export const extractStoryData = (story: StoryById) => {
     locale: storyLocale || 'nl',
     id: storyId || `${Math.floor(Math.random() * (99999 + 1))}`,
     description: story?.attributes?.description ?? '',
+    alt: story?.thumbnail?.alt_text
+      ? story?.thumbnail?.alt_text
+      : story?.attributes?.title ?? 'image',
   }
 }
 
