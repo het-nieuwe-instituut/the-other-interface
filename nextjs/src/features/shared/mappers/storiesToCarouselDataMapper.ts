@@ -15,6 +15,7 @@ export type StoryImageInfo = {
   title?: string
   description: string | null
   id?: Maybe<string> | undefined
+  alt?: string | null
 }
 
 type StoryMeta = NonNullable<StoryMetaByIdQuery['storyByLocale']['data']>
@@ -50,6 +51,7 @@ export const storiesToCarouselDataMapper = (
         width: story?.thumbnail?.imageThumbnail?.data?.attributes?.width,
         title: story?.attributes?.title,
         description: authorName ?? null,
+        alt: story?.thumbnail?.alt_text,
       })
     }
 

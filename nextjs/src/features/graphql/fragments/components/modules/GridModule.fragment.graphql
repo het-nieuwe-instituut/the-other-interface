@@ -34,15 +34,6 @@ fragment gridModuleFragment on ComponentModulesGridModule {
             }
           }
         }
-        thumbnail {
-          id
-          alt_text
-          imageThumbnail {
-            data {
-              ...UploadFileFragment
-            }
-          }
-        }
       }
     }
     triplyRecord {
