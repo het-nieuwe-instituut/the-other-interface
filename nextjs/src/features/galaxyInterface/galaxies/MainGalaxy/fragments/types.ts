@@ -33,6 +33,7 @@ export type MappedStory = {
   id: string
   hasImage: boolean
   thumbnail?: ComponentCoreImageThumbnail | null
+  alt?: string
 }
 
 export type PositionedStory = MappedStory & {

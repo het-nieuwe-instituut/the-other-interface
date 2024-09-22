@@ -28,6 +28,7 @@ const mapStory = (story: StoryData) => {
     locale: storyLocale || 'nl',
     id: storyId || `${Math.floor(Math.random() * (99999 + 1))}`,
     hasImage: !!story.thumbnail?.imageThumbnail?.data?.attributes?.url || !!imageUrl,
+    alt: story?.thumbnail?.alt_text ? story?.thumbnail?.alt_text : story?.attributes?.title ?? '',
   }
 }
 

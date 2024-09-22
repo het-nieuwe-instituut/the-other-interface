@@ -33,7 +33,7 @@ export const Story: React.FC<Props> = ({
   const { t: hoverT } = useTypeSafeTranslation('category')
   const lang = useLocale()
 
-  const { id, title, image, position, grid } = story
+  const { id, title, image, position, grid, alt } = story
 
   const {
     data,
@@ -109,7 +109,7 @@ export const Story: React.FC<Props> = ({
               <StoryOrRecordResponsiveImage
                 recordOrStoryId={story.id}
                 src={image}
-                alt={title}
+                alt={alt ?? title}
                 className={cn(
                   'size-full max-h-[calc(100%-2vw-5px)]',
                   isMainGrid ? 'story-grid-item' : ''
