@@ -1318,6 +1318,12 @@ export interface ApiStoryStory extends Schema.CollectionType {
     child_stories: Attribute.Relation<'api::story.story', 'oneToMany', 'api::story.story'>
     parent_story: Attribute.Relation<'api::story.story', 'manyToOne', 'api::story.story'>
     authors: Attribute.Relation<'api::story.story', 'oneToMany', 'api::author.author'>
+    thumbnail: Attribute.Component<'core.image-thumbnail'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime

@@ -22,6 +22,15 @@ query storiesWithinTheme(
           }
         }
       }
+      thumbnail {
+        id
+        alt_text
+        imageThumbnail {
+          data {
+            ...UploadFileFragment
+          }
+        }
+      }
     }
     meta {
       pagination {

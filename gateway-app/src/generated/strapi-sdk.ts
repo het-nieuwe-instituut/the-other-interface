@@ -219,6 +219,26 @@ export type ComponentCoreImageCarouselItemInput = {
   url?: InputMaybe<Scalars['String']>
 }
 
+export type ComponentCoreImageThumbnail = {
+  __typename?: 'ComponentCoreImageThumbnail'
+  alt_text?: Maybe<Scalars['String']>
+  id: Scalars['ID']
+  imageThumbnail?: Maybe<UploadFileEntityResponse>
+}
+
+export type ComponentCoreImageThumbnailFiltersInput = {
+  alt_text?: InputMaybe<StringFilterInput>
+  and?: InputMaybe<Array<InputMaybe<ComponentCoreImageThumbnailFiltersInput>>>
+  not?: InputMaybe<ComponentCoreImageThumbnailFiltersInput>
+  or?: InputMaybe<Array<InputMaybe<ComponentCoreImageThumbnailFiltersInput>>>
+}
+
+export type ComponentCoreImageThumbnailInput = {
+  alt_text?: InputMaybe<Scalars['String']>
+  id?: InputMaybe<Scalars['ID']>
+  imageThumbnail?: InputMaybe<Scalars['ID']>
+}
+
 export type ComponentCoreMuxAudio = {
   __typename?: 'ComponentCoreMuxAudio'
   caption?: Maybe<Scalars['String']>
@@ -572,6 +592,7 @@ export type GenericMorph =
   | ComponentCoreFeaturedFields
   | ComponentCoreGridFeaturedFields
   | ComponentCoreImageCarouselItem
+  | ComponentCoreImageThumbnail
   | ComponentCoreMuxAudio
   | ComponentCoreMuxVideo
   | ComponentCorePublicationDate
@@ -1720,7 +1741,6 @@ export type ResponseCollectionMeta = {
 
 export type Story = {
   __typename?: 'Story'
-  author?: Maybe<AuthorEntityResponse>
   authors?: Maybe<AuthorRelationResponseCollection>
   child_stories?: Maybe<StoryRelationResponseCollection>
   components?: Maybe<Array<Maybe<StoryComponentsDynamicZone>>>
@@ -1736,6 +1756,7 @@ export type Story = {
   slug: Scalars['String']
   storyLinks?: Maybe<ComponentModulesButtonsModule>
   themes?: Maybe<ThemeRelationResponseCollection>
+  thumbnail?: Maybe<ComponentCoreImageThumbnail>
   timeframe?: Maybe<ComponentCoreTimeframe>
   title: Scalars['String']
   triplyRecords?: Maybe<TriplyRecordRelationResponseCollection>
@@ -1818,7 +1839,6 @@ export type StoryEntityResponseCollection = {
 
 export type StoryFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<StoryFiltersInput>>>
-  author?: InputMaybe<AuthorFiltersInput>
   authors?: InputMaybe<AuthorFiltersInput>
   child_stories?: InputMaybe<StoryFiltersInput>
   createdAt?: InputMaybe<DateTimeFilterInput>
@@ -1836,6 +1856,7 @@ export type StoryFiltersInput = {
   slug?: InputMaybe<StringFilterInput>
   storyLinks?: InputMaybe<ComponentModulesButtonsModuleFiltersInput>
   themes?: InputMaybe<ThemeFiltersInput>
+  thumbnail?: InputMaybe<ComponentCoreImageThumbnailFiltersInput>
   timeframe?: InputMaybe<ComponentCoreTimeframeFiltersInput>
   title?: InputMaybe<StringFilterInput>
   triplyRecords?: InputMaybe<TriplyRecordFiltersInput>
@@ -1843,7 +1864,6 @@ export type StoryFiltersInput = {
 }
 
 export type StoryInput = {
-  author?: InputMaybe<Scalars['ID']>
   authors?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
   child_stories?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
   components?: InputMaybe<Array<Scalars['StoryComponentsDynamicZoneInput']>>
@@ -1856,6 +1876,7 @@ export type StoryInput = {
   slug?: InputMaybe<Scalars['String']>
   storyLinks?: InputMaybe<ComponentModulesButtonsModuleInput>
   themes?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
+  thumbnail?: InputMaybe<ComponentCoreImageThumbnailInput>
   timeframe?: InputMaybe<ComponentCoreTimeframeInput>
   title?: InputMaybe<Scalars['String']>
   triplyRecords?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>
@@ -6256,6 +6277,56 @@ export type StoriesWithPublicationDateQuery = {
   } | null
 }
 
+export type StoriesWithThumbnailQueryVariables = Exact<{
+  ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
+  lang?: InputMaybe<Scalars['I18NLocaleCode']>
+}>
+
+export type StoriesWithThumbnailQuery = {
+  __typename?: 'Query'
+  stories?: {
+    __typename?: 'StoryEntityResponseCollection'
+    data: Array<{
+      __typename?: 'StoryEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'Story'
+        thumbnail?: {
+          __typename?: 'ComponentCoreImageThumbnail'
+          id: string
+          alt_text?: string | null
+          imageThumbnail?: {
+            __typename?: 'UploadFileEntityResponse'
+            data?: {
+              __typename?: 'UploadFileEntity'
+              id?: string | null
+              attributes?: {
+                __typename?: 'UploadFile'
+                hash: string
+                mime: string
+                name: string
+                provider: string
+                size: number
+                url: string
+                alternativeText?: string | null
+                caption?: string | null
+                createdAt?: any | null
+                ext?: string | null
+                formats?: any | null
+                height?: number | null
+                previewUrl?: string | null
+                provider_metadata?: any | null
+                updatedAt?: any | null
+                width?: number | null
+              } | null
+            } | null
+          } | null
+        } | null
+      } | null
+    }>
+  } | null
+}
+
 export type StoryFragmentFragment = {
   __typename?: 'StoryEntity'
   id?: string | null
@@ -6338,6 +6409,38 @@ export type ComponentCorePublicationDateFragmentFragment = {
   id: string
   date?: any | null
   displayType?: Enum_Componentcorepublicationdate_Displaytype | null
+}
+
+export type ComponentCoreImageThumbnailFragmentFragment = {
+  __typename?: 'ComponentCoreImageThumbnail'
+  id: string
+  alt_text?: string | null
+  imageThumbnail?: {
+    __typename?: 'UploadFileEntityResponse'
+    data?: {
+      __typename?: 'UploadFileEntity'
+      id?: string | null
+      attributes?: {
+        __typename?: 'UploadFile'
+        hash: string
+        mime: string
+        name: string
+        provider: string
+        size: number
+        url: string
+        alternativeText?: string | null
+        caption?: string | null
+        createdAt?: any | null
+        ext?: string | null
+        formats?: any | null
+        height?: number | null
+        previewUrl?: string | null
+        provider_metadata?: any | null
+        updatedAt?: any | null
+        width?: number | null
+      } | null
+    } | null
+  } | null
 }
 
 export type ComponentCoreTimeframeFragmentFragment = {
@@ -7945,6 +8048,16 @@ export const ComponentCorePublicationDateFragmentFragmentDoc = gql`
     displayType
   }
 `
+export const ComponentCoreImageThumbnailFragmentFragmentDoc = gql`
+  fragment ComponentCoreImageThumbnailFragment on ComponentCoreImageThumbnail {
+    id
+    alt_text
+    imageThumbnail {
+      ...UploadFileEntityResponseFragment
+    }
+  }
+  ${UploadFileEntityResponseFragmentFragmentDoc}
+`
 export const ComponentCoreTimeframeFragmentFragmentDoc = gql`
   fragment ComponentCoreTimeframeFragment on ComponentCoreTimeframe {
     id
@@ -9004,6 +9117,21 @@ export const StoriesWithPublicationDateDocument = gql`
   }
   ${ComponentCorePublicationDateFragmentFragmentDoc}
 `
+export const StoriesWithThumbnailDocument = gql`
+  query storiesWithThumbnail($ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(filters: { id: { in: $ids } }, locale: $lang) {
+      data {
+        id
+        attributes {
+          thumbnail {
+            ...ComponentCoreImageThumbnailFragment
+          }
+        }
+      }
+    }
+  }
+  ${ComponentCoreImageThumbnailFragmentFragmentDoc}
+`
 export const ThemeDocument = gql`
   query theme($id: ID, $locale: I18NLocaleCode) {
     theme(id: $id, locale: $locale) {
@@ -9680,6 +9808,20 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
             { ...requestHeaders, ...wrappedRequestHeaders }
           ),
         'storiesWithPublicationDate',
+        'query'
+      )
+    },
+    storiesWithThumbnail(
+      variables: StoriesWithThumbnailQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<StoriesWithThumbnailQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<StoriesWithThumbnailQuery>(StoriesWithThumbnailDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'storiesWithThumbnail',
         'query'
       )
     },

@@ -40,6 +40,15 @@ fragment StoryFragment on StoryEntity {
       id
     }
   }
+  thumbnail {
+    id
+    alt_text
+    imageThumbnail {
+      data {
+        ...UploadFileFragment
+      }
+    }
+  }
   timeframe {
     id
     yearStart

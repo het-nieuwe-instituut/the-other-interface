@@ -102,7 +102,7 @@ export const RelatedStoriesCarouselContent = ({
               description={item?.description ?? ''}
               image={item.url}
               href={url}
-              alt={item.title ?? 'image'}
+              alt={item.alt ? item.alt : item.title ?? 'image'}
             ></CarouselGridCard>
           )
         })}

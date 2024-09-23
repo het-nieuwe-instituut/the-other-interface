@@ -104,6 +104,14 @@ export class StoryFieldResolver {
   ): Promise<StoryEntity['publicationDate'] | null> {
     return loaders.storyPublicationDate.load(story.id)
   }
+
+  @ResolveField()
+  public async thumbnail(
+    @Parent() story: StoryEntity,
+    @Context() { loaders }: GraphqlContext
+  ): Promise<StoryEntity['thumbnail'] | null> {
+    return loaders.storyThumbnail.load(story.id)
+  }
 }
 
 @Resolver()

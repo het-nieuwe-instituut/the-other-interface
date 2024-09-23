@@ -249,6 +249,17 @@ export interface CoreMuxAudio extends Schema.Component {
   }
 }
 
+export interface CoreImageThumbnail extends Schema.Component {
+  collectionName: 'components_core_image_thumbnails'
+  info: {
+    displayName: 'Image Thumbnail'
+  }
+  attributes: {
+    imageThumbnail: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>
+    alt_text: Attribute.String
+  }
+}
+
 export interface CoreImageCarouselItem extends Schema.Component {
   collectionName: 'components_core_image_carousel_items'
   info: {
@@ -350,6 +361,7 @@ declare module '@strapi/types' {
       'core.publication-date': CorePublicationDate
       'core.mux-video': CoreMuxVideo
       'core.mux-audio': CoreMuxAudio
+      'core.image-thumbnail': CoreImageThumbnail
       'core.image-carousel-item': CoreImageCarouselItem
       'core.grid-featured-fields': CoreGridFeaturedFields
       'core.featured-fields': CoreFeaturedFields

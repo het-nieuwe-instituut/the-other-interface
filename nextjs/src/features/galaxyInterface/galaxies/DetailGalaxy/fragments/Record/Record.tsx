@@ -142,7 +142,7 @@ export const Record = React.memo(
                     <StoryOrRecordResponsiveImage
                       recordOrStoryId={id}
                       src={recordDetails?.thumbnail?.[0]}
-                      alt={recordDetails?.title}
+                      alt={recordDetails?.title ?? 'image'}
                       className="size-full"
                       imageClassName={cn('object-bottom')}
                       size={'11vw'}

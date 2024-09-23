@@ -11,6 +11,7 @@ import { ComponentCoreTimeframe } from 'src/modules/strapi/components/core/timef
 import { ComponentModulesButtonsModule } from 'src/modules/strapi/components/modules/buttonsModule'
 import { ThemeEntity } from 'src/modules/theme/theme.type'
 import { TriplyRecordEntity } from 'src/modules/triplyRecord/triplyRecord.type'
+import { ComponentCoreImageThumbnail } from '../strapi/components/core/imageThumbnail'
 
 @Injectable()
 export class StoryService {
@@ -269,6 +270,25 @@ export class StoryService {
       }
 
       return pubDate as ComponentCorePublicationDate
+    })
+  }
+
+  public getThumbnail = async (
+    ids: readonly string[]
+  ): Promise<(ComponentCoreImageThumbnail | null)[]> => {
+    const res = await this.strapiGqlSdk.storiesWithThumbnail({ ids: [...ids] })
+    if (!res.stories) {
+      return []
+    }
+
+    return ids.map(id => {
+      const thumbnail = res.stories?.data.find(s => s.id === id)?.attributes?.thumbnail
+
+      if (!thumbnail) {
+        return null
+      }
+
+      return thumbnail as ComponentCoreImageThumbnail
     })
   }
 }

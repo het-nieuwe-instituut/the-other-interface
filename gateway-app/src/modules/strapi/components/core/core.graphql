@@ -33,6 +33,14 @@ fragment ComponentCorePublicationDateFragment on ComponentCorePublicationDate {
   displayType
 }
 
+fragment ComponentCoreImageThumbnailFragment on ComponentCoreImageThumbnail {
+  id
+  alt_text
+  imageThumbnail {
+    ...UploadFileEntityResponseFragment
+  }
+}
+
 fragment ComponentCoreTimeframeFragment on ComponentCoreTimeframe {
   id
   yearEnd

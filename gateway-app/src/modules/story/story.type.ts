@@ -35,6 +35,7 @@ import { ComponentCoreMuxAudio } from '../strapi/components/core/muxAudio'
 import { ComponentCoreMuxVideo } from '../strapi/components/core/muxVideo'
 import { ComponentModulesSideImageWithText } from '../strapi/components/modules/sideImageWithText'
 import { ComponentModulesStandaloneLinks } from '../strapi/components/modules/standAloneLinks'
+import { ComponentCoreImageThumbnail } from '../strapi/components/core/imageThumbnail'
 
 @ObjectType()
 export class StoryRelationResponseCollection {
@@ -138,6 +139,9 @@ export class StoryEntity {
 
   @Field(() => ComponentCorePublicationDate, { nullable: true })
   public publicationDate?: ComponentCorePublicationDate
+
+  @Field(() => ComponentCoreImageThumbnail, { nullable: true })
+  public thumbnail?: ComponentCoreImageThumbnail
 }
 
 @ObjectType()

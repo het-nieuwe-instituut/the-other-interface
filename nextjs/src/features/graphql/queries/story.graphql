@@ -20,6 +20,15 @@ query storyById($locale: Locale!, $id: String!, $publicationState: String) {
           slug
           locale
         }
+        thumbnail {
+          id
+          alt_text
+          imageThumbnail {
+            data {
+              ...UploadFileFragment
+            }
+          }
+        }
       }
       parent_story {
         data {
@@ -29,10 +38,28 @@ query storyById($locale: Locale!, $id: String!, $publicationState: String) {
             slug
             locale
           }
+          thumbnail {
+            id
+            alt_text
+            imageThumbnail {
+              data {
+                ...UploadFileFragment
+              }
+            }
+          }
         }
       }
       themes {
         id
+      }
+      thumbnail {
+        id
+        alt_text
+        imageThumbnail {
+          data {
+            ...UploadFileFragment
+          }
+        }
       }
       components {
         ... on ComponentModulesTextModule {
@@ -115,6 +142,15 @@ query storyMetaById($locale: Locale!, $id: String!, $publicationState: String) {
           }
         }
       }
+      thumbnail {
+        id
+        alt_text
+        imageThumbnail {
+          data {
+            ...UploadFileFragment
+          }
+        }
+      }
       publicationDate {
         id
         date
@@ -162,6 +198,15 @@ query storyMetaById($locale: Locale!, $id: String!, $publicationState: String) {
             ...imageModuleFragment
           }
         }
+        thumbnail {
+          id
+          alt_text
+          imageThumbnail {
+            data {
+              ...UploadFileFragment
+            }
+          }
+        }
         authors {
           data {
             id
@@ -194,6 +239,15 @@ query storyMetaById($locale: Locale!, $id: String!, $publicationState: String) {
               }
             }
           }
+          thumbnail {
+            id
+            alt_text
+            imageThumbnail {
+              data {
+                ...UploadFileFragment
+              }
+            }
+          }
         }
       }
       siblings {
@@ -213,6 +267,15 @@ query storyMetaById($locale: Locale!, $id: String!, $publicationState: String) {
               firstName
               lastName
               insertion
+            }
+          }
+        }
+        thumbnail {
+          id
+          alt_text
+          imageThumbnail {
+            data {
+              ...UploadFileFragment
             }
           }
         }

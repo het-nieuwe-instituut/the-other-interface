@@ -481,6 +481,19 @@ query storiesWithPublicationDate($ids: [ID]!, $lang: I18NLocaleCode = "all") {
   }
 }
 
+query storiesWithThumbnail($ids: [ID]!, $lang: I18NLocaleCode = "all") {
+  stories(filters: { id: { in: $ids } }, locale: $lang) {
+    data {
+      id
+      attributes {
+        thumbnail {
+          ...ComponentCoreImageThumbnailFragment
+        }
+      }
+    }
+  }
+}
+
 fragment StoryFragment on StoryEntity {
   id
   attributes {
