@@ -8,12 +8,12 @@ import { Category } from '../../shared/utils/categories'
 import initApiClientService from '../../shared/utils/initApiClientService'
 import { getPublicationState } from '../../shared/utils/publication-state'
 
-export const getRecordDetailQueryKey = (id: string, lang: string, small?: boolean) => [
-  'record-detail',
-  id,
-  lang,
-  small,
-]
+export const getRecordDetailQueryKey = (
+  id: string,
+  lang: string,
+  small?: boolean,
+  page?: number
+) => ['record-detail', id, lang, small, page]
 
 export function useZoomLevel3Query({
   type,
@@ -21,6 +21,7 @@ export function useZoomLevel3Query({
   options,
   locale,
   small,
+  page,
 }: {
   type: Category
   id: string
@@ -30,12 +31,13 @@ export function useZoomLevel3Query({
   >
   locale: Locale
   small?: boolean
+  page: number
 }) {
   const { isDraftMode } = useSelector((state: State) => state.shared)
   const api = initApiClientService()
 
   return useQuery({
-    queryKey: getRecordDetailQueryKey(id, locale, small),
+    queryKey: getRecordDetailQueryKey(id, locale, small, page),
     queryFn: async () => {
       const res = await getZoom3RecordTask({
         type,
@@ -62,14 +64,15 @@ export function useZoomLevel3Queries({
     id: string
     locale: Locale
     small?: boolean
+    page: number
   }>
 }) {
   const { isDraftMode } = useSelector((state: State) => state.shared)
   const api = initApiClientService()
 
   return useQueries({
-    queries: data.map(({ id, locale, small, type }) => ({
-      queryKey: getRecordDetailQueryKey(id, locale, small),
+    queries: data.map(({ id, locale, small, type, page }) => ({
+      queryKey: getRecordDetailQueryKey(id, locale, small, page),
       queryFn: async () => {
         const res = await getZoom3RecordTask({
           type,
