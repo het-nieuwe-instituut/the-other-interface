@@ -5,7 +5,7 @@ import { Category } from '@/features/shared/utils/categories'
 import { toSingularCategory } from '@/features/shared/utils/toSingularCategory'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
-import { useParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
 import { useContext } from 'react'
 import { GalaxyZoomAnimationStateContext } from '../../hooks/GalaxyZoomAnimationStateProvider'
 import { useStoryOrRecordImageQuery } from '../../MainGalaxy/hooks/useStoryOrRecordImageQuery'
@@ -24,12 +24,15 @@ export const DetailedRecord: React.FC<Props> = ({ className }) => {
   const locale = useLocale()
   const { animationState } = useContext(GalaxyZoomAnimationStateContext)
   const { conditions } = useContext(GalaxyPaginationAnimationStateContext)
+  const searchParams = useSearchParams()
+  const page = Number(searchParams?.get('page') ?? '1')
 
   const { data: record, isLoading } = useZoomLevel3Query({
     type: category,
     id,
     options: { refetchOnWindowFocus: false },
     locale,
+    page,
   })
   const { data } = useStoryOrRecordImageQuery({
     id,

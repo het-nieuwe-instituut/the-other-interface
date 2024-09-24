@@ -15,7 +15,7 @@ import {
   ThumbnailCarouselItem,
 } from '@/features/ui/components/thumbnail-carousel/ThumbnailCarousel'
 import { VideoPlayer } from '@/features/ui/components/video/VideoPlayer'
-import { useParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
 import {
   ArchiveZoomLevel3DetailType,
   EnrichedBaseArchiveZoomLevel3DetailType,
@@ -55,8 +55,10 @@ function getEnrichedSources(
 export const RecordLayer = () => {
   const { t } = useTypeSafeTranslation('common')
   const params = useParams()
+  const searchParams = useSearchParams()
   const category = params?.category as Category
   const locale = useLocale()
+  const page = Number(searchParams?.get('page') ?? '1')
 
   const id = params?.id as string
   const {
@@ -69,6 +71,7 @@ export const RecordLayer = () => {
     id,
     options: { refetchOnWindowFocus: false, suspense: false },
     locale,
+    page,
   })
   const enrichedSources = getEnrichedSources(zoomLevel3) ?? []
   const enrichedTitles = enrichedSources?.filter(v => 'title' in v && !!v.title)
