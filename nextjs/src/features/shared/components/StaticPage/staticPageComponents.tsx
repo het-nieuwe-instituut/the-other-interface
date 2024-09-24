@@ -19,7 +19,7 @@ interface SectionTitleProps {
 }
 
 export const StaticPageSectionTitle = ({ children }: SectionTitleProps) => (
-  <Subtitle>{children as string}</Subtitle>
+  <Subtitle className="pt-20">{children as string}</Subtitle>
 )
 
 interface StaticPageListProps {
