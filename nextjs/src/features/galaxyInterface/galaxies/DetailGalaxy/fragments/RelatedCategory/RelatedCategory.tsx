@@ -148,6 +148,7 @@ const PositionedRecords = ({
           locale: lang,
           options: { refetchOnWindowFocus: false },
           small: true,
+          page,
         }
       }) ?? [],
   })
@@ -177,7 +178,7 @@ const PositionedRecords = ({
       // all the queries have executed successfully
       onComplete()
     }
-  }, [allFinished, isFetchingingRecords])
+  }, [allFinished, isFetchingingRecords, isPositionsedRecordLoading, onComplete])
 
   const {
     conditions: galaxyPaginationAnimationConditions,
@@ -266,6 +267,7 @@ const NextPositionedRecords = ({
           locale: lang,
           options: { refetchOnWindowFocus: false },
           small: true,
+          page: page + 1,
         }
       }) ?? [],
   })
@@ -277,7 +279,7 @@ const NextPositionedRecords = ({
       // all the queries have executed successfully
       onComplete()
     }
-  }, [allFinished, isFetchingingRecords])
+  }, [allFinished, isFetchingingRecords, isNextPositionedRecordLoading, onComplete])
 
   return (
     <>

@@ -169,6 +169,7 @@ const PositionedRecords = ({
           id,
           locale: lang,
           small: true,
+          page,
         }
       }) ?? [],
   })
@@ -180,7 +181,7 @@ const PositionedRecords = ({
       // all the queries have executed successfully
       onComplete()
     }
-  }, [allFinished, isFetchingingRecords])
+  }, [allFinished, isFetchingingRecords, isRelatedStoriesLoading, onComplete])
 
   const animations = useMemo(() => {
     const config = [
@@ -278,6 +279,7 @@ const NextPositionedRecords = ({
           locale: lang,
           options: { refetchOnWindowFocus: false },
           small: true,
+          page: page + 1,
         }
       }) ?? [],
   })

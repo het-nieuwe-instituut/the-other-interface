@@ -59,6 +59,7 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
     countData?.totalPages ?? 0,
     false
   )
+
   const isFetchingGalaxyItems = useIsFetching({
     predicate: query => {
       const key = query.queryKey.at(0) as string
@@ -72,7 +73,11 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
         return true
       }
 
-      return ['record-relations-count', 'record-detail'].includes(key)
+      if (key === 'record-detail' && query.queryKey.at(4) === page) {
+        return true
+      }
+
+      return ['record-relations-count'].includes(key)
     },
   })
 
