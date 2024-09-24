@@ -1,5 +1,5 @@
 import { getUrlLandingPageUrl } from '@/features/galaxyInterface/utils/galaxyRoutes'
-import { NavLinkButton } from '@/features/ui/components/nav-link-button/component'
+import { MenuNavLinkButton } from '@/features/ui/components/menu-nav-link-button/component'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 import useTranslation from 'next-translate/useTranslation'
@@ -72,46 +72,46 @@ export const Navigation = () => {
                 >
                   {tNavigation('aboutDescription')}
                 </p>
-                <NavLinkButton
+                <MenuNavLinkButton
                   href={'/readmore'}
                   variant={'menuPrimary'}
                   color={'invertedPaleHover'}
                 >
                   {tNavigation('readMore')}
-                </NavLinkButton>
+                </MenuNavLinkButton>
               </div>
               <div className="flex flex-col">
-                <NavLinkButton
+                <MenuNavLinkButton
                   href={'/collection'}
                   variant={'menuSecondary'}
                   color={'invertedPaleHover'}
                   className="mb-4"
                 >
                   {tNavigation('theCollection')}
-                </NavLinkButton>
-                <NavLinkButton
+                </MenuNavLinkButton>
+                <MenuNavLinkButton
                   href={'/asterisk'}
                   variant={'menuSecondary'}
                   color={'invertedPaleHover'}
                   className="mb-4"
                 >
                   {tNavigation('asterisk')}
-                </NavLinkButton>
-                <NavLinkButton
+                </MenuNavLinkButton>
+                <MenuNavLinkButton
                   href={'/externalSources'}
                   variant={'menuSecondary'}
                   color={'invertedPaleHover'}
                   className="mb-4"
                 >
                   {tNavigation('externalSources')}
-                </NavLinkButton>
-                <NavLinkButton
+                </MenuNavLinkButton>
+                <MenuNavLinkButton
                   href={'/contribute'}
                   variant={'menuSecondary'}
                   color={'invertedPaleHover'}
                 >
                   {tNavigation('contribute')}
-                </NavLinkButton>
+                </MenuNavLinkButton>
               </div>
             </div>
           </div>
