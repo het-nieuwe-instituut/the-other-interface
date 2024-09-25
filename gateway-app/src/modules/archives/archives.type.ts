@@ -166,7 +166,7 @@ export class ArchiveRelationsType extends ArchiveRelationsAsteriskType {
   public referenceNumber?: string | null
 
   @Field(() => String, { nullable: true })
-  public period?: string | null
+  public descriptionLevel?: string | null
 }
 
 @ObjectType()

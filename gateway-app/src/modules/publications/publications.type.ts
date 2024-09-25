@@ -78,6 +78,9 @@ export class PublicationRelationsType {
 
   @Field(() => String, { nullable: true })
   public externalSource?: string | null
+
+  @Field(() => String, { nullable: true })
+  public authors?: string | null
 }
 @ObjectType()
 export class PublicationsRelationsCountType {

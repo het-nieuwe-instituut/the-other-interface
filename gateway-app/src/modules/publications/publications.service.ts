@@ -37,6 +37,7 @@ export interface PublicationRelationsType {
   typePub?: string
   yearPub?: string
   externalSource?: string
+  authors?: string
 }
 
 const publicationRelationsKeys: KeysToVerify<PublicationRelationsType> = {
@@ -45,6 +46,7 @@ const publicationRelationsKeys: KeysToVerify<PublicationRelationsType> = {
   typePub: true,
   yearPub: true,
   externalSource: true,
+  authors: true,
 }
 
 export interface PublicationsRelationsCountType {

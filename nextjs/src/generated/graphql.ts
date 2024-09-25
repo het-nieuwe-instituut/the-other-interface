@@ -28,8 +28,8 @@ export type ArchiveRelationsType = {
   asterisk_name_person?: Maybe<Scalars['String']['output']>;
   /** asterisk value for the person field */
   asterisk_subject_person?: Maybe<Scalars['String']['output']>;
+  descriptionLevel?: Maybe<Scalars['String']['output']>;
   idRelation?: Maybe<Scalars['String']['output']>;
-  period?: Maybe<Scalars['String']['output']>;
   referenceNumber?: Maybe<Scalars['String']['output']>;
   titleR?: Maybe<Scalars['String']['output']>;
 };
@@ -1178,6 +1178,7 @@ export type PublicationRecordZoomLevel3TypeEnrichedSourcesArgs = {
 
 export type PublicationRelationsType = {
   __typename?: 'PublicationRelationsType';
+  authors?: Maybe<Scalars['String']['output']>;
   externalSource?: Maybe<Scalars['String']['output']>;
   idRelation?: Maybe<Scalars['String']['output']>;
   titleR?: Maybe<Scalars['String']['output']>;
@@ -2453,7 +2454,7 @@ export type ArchiveRecordRelationsQueryVariables = Exact<{
 }>;
 
 
-export type ArchiveRecordRelationsQuery = { __typename?: 'Query', archivesRecordRelations?: Array<{ __typename?: 'ArchiveRelationsType', idRelation?: string | null, titleR?: string | null, referenceNumber?: string | null, period?: string | null, asterisk_date_person?: string | null, asterisk_name_person?: string | null, asterisk_subject_person?: string | null }> | null };
+export type ArchiveRecordRelationsQuery = { __typename?: 'Query', archivesRecordRelations?: Array<{ __typename?: 'ArchiveRelationsType', idRelation?: string | null, titleR?: string | null, referenceNumber?: string | null, descriptionLevel?: string | null, asterisk_date_person?: string | null, asterisk_name_person?: string | null, asterisk_subject_person?: string | null }> | null };
 
 export type ObjectRecordRelationsQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -2486,7 +2487,7 @@ export type PublicationRecordRelationsQueryVariables = Exact<{
 }>;
 
 
-export type PublicationRecordRelationsQuery = { __typename?: 'Query', publicationRecordRelations?: Array<{ __typename?: 'PublicationRelationsType', idRelation?: string | null, titleR?: string | null, typePub?: string | null, yearPub?: string | null }> | null };
+export type PublicationRecordRelationsQuery = { __typename?: 'Query', publicationRecordRelations?: Array<{ __typename?: 'PublicationRelationsType', idRelation?: string | null, titleR?: string | null, typePub?: string | null, yearPub?: string | null, authors?: string | null }> | null };
 
 export type ArchivesRecordRelationsCountQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -4358,7 +4359,7 @@ export const ArchiveRecordRelationsDocument = gql`
     idRelation
     titleR
     referenceNumber
-    period
+    descriptionLevel
     asterisk_date_person
     asterisk_name_person
     asterisk_subject_person
@@ -4414,6 +4415,7 @@ export const PublicationRecordRelationsDocument = gql`
     titleR
     typePub
     yearPub
+    authors
   }
 }
     `;

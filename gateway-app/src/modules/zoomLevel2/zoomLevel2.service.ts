@@ -195,7 +195,7 @@ export class ZoomLevel2Service {
   }
 
   private getUriForLevel2TextSearch(type: EntityNames, { forCount }: { forCount: boolean }) {
-    const dataAmountUri = forCount ? '-Count' : ''
+    const dataAmountUri = forCount ? '-count' : ''
 
     switch (type) {
       case EntityNames.People:
