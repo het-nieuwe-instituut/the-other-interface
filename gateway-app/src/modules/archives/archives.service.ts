@@ -41,7 +41,7 @@ export interface ArchiveRelationsType {
   id?: string
   titleR?: string
   referenceNumber?: string
-  period?: string
+  descriptionLevel?: string
   asterisk_date_person?: string
   asterisk_name_person?: string
   asterisk_subject_person?: string
@@ -51,7 +51,7 @@ const archiveRelationsKeys: KeysToVerify<ArchiveRelationsType> = {
   id: true,
   titleR: true,
   referenceNumber: true,
-  period: true,
+  descriptionLevel: true,
   asterisk_date_person: true,
   asterisk_name_person: true,
   asterisk_subject_person: true,
