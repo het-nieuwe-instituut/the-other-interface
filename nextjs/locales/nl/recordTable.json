@@ -16,6 +16,6 @@
   "objectsFirstColumn": "Objectnummer",
   "publicationsFirstColumn": "Titel",
   "archivesFirstColumn": "Titel",
-  "recordLevel": "Beschrijvingsniveau",
+  "descriptionLevel": "Beschrijvingsniveau",
   "author": "Auteur(s)"
 }

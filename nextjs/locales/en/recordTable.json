@@ -16,6 +16,6 @@
   "objectsFirstColumn": "Object number",
   "publicationsFirstColumn": "Title",
   "archivesFirstColumn": "Title",
-  "recordLevel": "Record type",
+  "descriptionLevel": "Record type",
   "author": "Author(s)"
 }

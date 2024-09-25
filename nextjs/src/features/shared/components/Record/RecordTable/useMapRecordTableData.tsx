@@ -42,7 +42,7 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
             TableBodyItem: [
               { id: '1', value: record.titleR },
               { id: '2', value: record.referenceNumber },
-              { id: '3', value: record.period },
+              { id: '3', value: record.descriptionLevel },
             ],
           }
         })
@@ -54,7 +54,7 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
       tableHead: [
         { label: t('archivesFirstColumn') },
         { label: t('objectNumber') },
-        { label: t('recordLevel') },
+        { label: t('descriptionLevel') },
       ],
       tableBody: mapData,
       total: data[0]?.total ?? '0',
