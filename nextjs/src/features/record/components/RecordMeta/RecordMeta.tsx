@@ -68,9 +68,7 @@ export const RecordMeta = ({
     }
 
     if (category === CATEGORIES.people && data?.__typename === 'PeopleRecordZoomLevel3Type') {
-      console.log('data', data)
       recordMetaSectionData = mapPersonDataToSections(data, recordMetaPersonT)
-      console.log('recordMetaSectionData', recordMetaSectionData)
     }
 
     return recordMetaSectionData
