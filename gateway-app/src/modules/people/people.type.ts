@@ -36,8 +36,8 @@ class BasePeopleZoomLevel3DetailType {
   @Field(() => EntityNames, { nullable: true })
   public type: EntityNames
 
-  @Field(() => [String], { nullable: true })
-  public thumbnail: string[]
+  @Field(() => [String], { nullable: 'itemsAndList' })
+  public thumbnail?: (string | null)[]
 
   @Field(() => String, { nullable: true })
   public description?: string | null

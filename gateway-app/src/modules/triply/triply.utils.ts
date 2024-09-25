@@ -158,7 +158,7 @@ export class TriplyUtils {
 
   public static getExternalSourceUrlFromData(data: unknown, type: ExternalSource) {
     if (!data || typeof data !== 'object') return ''
-
+    console.log('type', type)
     let key: string
     switch (type) {
       case ExternalSource.getty:
@@ -175,6 +175,8 @@ export class TriplyUtils {
     }
 
     const keyValue = get(data, key)
+    console.log('keyValue', keyValue)
+    console.log(JSON.stringify(data))
     if (typeof keyValue !== 'string') {
       return ''
     }

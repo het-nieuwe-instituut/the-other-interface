@@ -562,7 +562,7 @@ export type EnrichedBaseObjectsZoomLevel3DetailType = {
   id: Scalars['String']['output'];
   mediaReference?: Maybe<Scalars['String']['output']>;
   mediaType?: Maybe<Scalars['String']['output']>;
-  thumbnail?: Maybe<Array<Scalars['String']['output']>>;
+  thumbnail?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   title?: Maybe<Scalars['String']['output']>;
   type?: Maybe<EntityNames>;
 };
@@ -593,7 +593,7 @@ export type EnrichedBasePeopleZoomLevel3DetailType = {
   externalSourceType: ExternalSource;
   externalSourceUrl: Scalars['String']['output'];
   id: Scalars['String']['output'];
-  thumbnail?: Maybe<Array<Scalars['String']['output']>>;
+  thumbnail?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   title?: Maybe<Scalars['String']['output']>;
   type?: Maybe<EntityNames>;
 };
@@ -1033,7 +1033,7 @@ export type ObjectsZoomLevel3DetailType = {
   id: Scalars['String']['output'];
   mediaReference?: Maybe<Scalars['String']['output']>;
   mediaType?: Maybe<Scalars['String']['output']>;
-  thumbnail?: Maybe<Array<Scalars['String']['output']>>;
+  thumbnail?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   title?: Maybe<Scalars['String']['output']>;
   type?: Maybe<EntityNames>;
 };
@@ -1120,7 +1120,7 @@ export type PeopleZoomLevel3DetailType = {
   description?: Maybe<Scalars['String']['output']>;
   enrichedSources?: Maybe<Array<EnrichedBasePeopleZoomLevel3DetailType>>;
   id: Scalars['String']['output'];
-  thumbnail?: Maybe<Array<Scalars['String']['output']>>;
+  thumbnail?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   title?: Maybe<Scalars['String']['output']>;
   type?: Maybe<EntityNames>;
 };
@@ -2062,8 +2062,6 @@ export type ImageModuleFragmentFragment = { __typename: 'ComponentModulesImage',
 
 export type PullquoteModuleFragmentFragment = { __typename: 'ComponentModulesPullquote', id: string, text?: string | null };
 
-export type SideImageWithTextModuleFragmentFragment = { __typename: 'ComponentModulesSideImageWithText', id: string, sideText: string, image_alt_text: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, height?: number | null, width?: number | null, caption?: string | null } | null } | null } };
-
 export type StandaloneLinksModuleFragmentFragment = { __typename: 'ComponentModulesStandaloneLinks', id: string, standaloneLinks?: Array<{ __typename: 'ComponentCoreStandAloneLink', id: string, label: string, url?: string | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, height?: number | null, width?: number | null } | null } | null } | null }> | null };
 
 export type SubtitleModuleFragmentFragment = { __typename: 'ComponentModulesSubtitle', id: string, text?: string | null };
@@ -2071,6 +2069,8 @@ export type SubtitleModuleFragmentFragment = { __typename: 'ComponentModulesSubt
 export type TextModuleFragmentFragment = { __typename: 'ComponentModulesTextModule', id: string, Richtext?: string | null };
 
 export type TitleModuleFragmentFragment = { __typename: 'ComponentModulesTitleModule', id: string, Title?: string | null };
+
+export type SideImageWithTextModuleFragmentFragment = { __typename: 'ComponentModulesSideImageWithText', id: string, sideText: string, image_alt_text: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, height?: number | null, width?: number | null, caption?: string | null } | null } | null } };
 
 export type Zoom3RelationsFragmentFragment = { __typename?: 'ZoomLevel3RelationsType', type: EntityNames, total?: number | null, paginatedRelations?: Array<string> | null };
 
@@ -2285,7 +2285,7 @@ export type SearchBySelectedHighlightsQueryVariables = Exact<{
 }>;
 
 
-export type SearchBySelectedHighlightsQuery = { __typename?: 'Query', triplyRecords: { __typename?: 'TriplyRecordRelationResponseCollection', data: Array<{ __typename?: 'TriplyRecordEntity', id?: string | null, attributes: { __typename?: 'TriplyRecord', label?: string | null, entityName: EntityNames, recordId: string, archive?: { __typename?: 'ArchiveZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null, people?: { __typename?: 'PeopleZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null, publication?: { __typename?: 'PublicationZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null, object?: { __typename?: 'ObjectsZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null } }>, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, total: number } } | null } };
+export type SearchBySelectedHighlightsQuery = { __typename?: 'Query', triplyRecords: { __typename?: 'TriplyRecordRelationResponseCollection', data: Array<{ __typename?: 'TriplyRecordEntity', id?: string | null, attributes: { __typename?: 'TriplyRecord', label?: string | null, entityName: EntityNames, recordId: string, archive?: { __typename?: 'ArchiveZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null, people?: { __typename?: 'PeopleZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string | null> | null } | null, publication?: { __typename?: 'PublicationZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null, object?: { __typename?: 'ObjectsZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string | null> | null } | null } }>, meta?: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, total: number } } | null } };
 
 export type Zoom2QueryVariables = Exact<{
   entityName: EntityNames;
@@ -2589,7 +2589,7 @@ export type ZoomLevel3ObjectQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3ObjectQuery = { __typename?: 'Query', zoomLevel3Object?: { __typename: 'ObjectsZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null, mediaType?: string | null, mediaReference?: string | null, asteriskSuggestions?: Array<{ __typename?: 'EnrichedBaseObjectsZoomLevel3AsteriskDetailType', asterisk_date_title?: string | null, asterisk_name_title?: string | null, asterisk_subject_title?: string | null, asterisk_date_description?: string | null, asterisk_name_description?: string | null, asterisk_subject_description?: string | null }> | null, enrichedSources?: Array<{ __typename: 'EnrichedBaseObjectsZoomLevel3DetailType', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null }> | null } | null };
+export type ZoomLevel3ObjectQuery = { __typename?: 'Query', zoomLevel3Object?: { __typename: 'ObjectsZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string | null> | null, description?: string | null, mediaType?: string | null, mediaReference?: string | null, asteriskSuggestions?: Array<{ __typename?: 'EnrichedBaseObjectsZoomLevel3AsteriskDetailType', asterisk_date_title?: string | null, asterisk_name_title?: string | null, asterisk_subject_title?: string | null, asterisk_date_description?: string | null, asterisk_name_description?: string | null, asterisk_subject_description?: string | null }> | null, enrichedSources?: Array<{ __typename: 'EnrichedBaseObjectsZoomLevel3DetailType', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, thumbnail?: Array<string | null> | null, description?: string | null }> | null } | null };
 
 export type ZoomLevel3ObjectSmallQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -2597,7 +2597,7 @@ export type ZoomLevel3ObjectSmallQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3ObjectSmallQuery = { __typename?: 'Query', zoomLevel3Object?: { __typename: 'ObjectsZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null };
+export type ZoomLevel3ObjectSmallQuery = { __typename?: 'Query', zoomLevel3Object?: { __typename: 'ObjectsZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string | null> | null } | null };
 
 export type ZoomLevel3PublicationQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -2621,7 +2621,7 @@ export type ZoomLevel3PeopleQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3PeopleQuery = { __typename?: 'Query', zoomLevel3People?: { __typename: 'PeopleZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null, asteriskSuggestions?: Array<{ __typename?: 'PeopleZoomLevel3DetailAsteriskType', asterisk_subject_description?: string | null, asterisk_date_description?: string | null, asterisk_name_description?: string | null }> | null, enrichedSources?: Array<{ __typename: 'EnrichedBasePeopleZoomLevel3DetailType', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, thumbnail?: Array<string> | null, description?: string | null }> | null } | null };
+export type ZoomLevel3PeopleQuery = { __typename?: 'Query', zoomLevel3People?: { __typename: 'PeopleZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string | null> | null, description?: string | null, asteriskSuggestions?: Array<{ __typename?: 'PeopleZoomLevel3DetailAsteriskType', asterisk_subject_description?: string | null, asterisk_date_description?: string | null, asterisk_name_description?: string | null }> | null, enrichedSources?: Array<{ __typename: 'EnrichedBasePeopleZoomLevel3DetailType', externalSourceType: ExternalSource, externalSourceUrl: string, id: string, title?: string | null, thumbnail?: Array<string | null> | null, description?: string | null }> | null } | null };
 
 export type ZoomLevel3PeopleSmallQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -2629,7 +2629,7 @@ export type ZoomLevel3PeopleSmallQueryVariables = Exact<{
 }>;
 
 
-export type ZoomLevel3PeopleSmallQuery = { __typename?: 'Query', zoomLevel3People?: { __typename: 'PeopleZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string> | null } | null };
+export type ZoomLevel3PeopleSmallQuery = { __typename?: 'Query', zoomLevel3People?: { __typename: 'PeopleZoomLevel3DetailType', id: string, title?: string | null, thumbnail?: Array<string | null> | null } | null };
 
 export const TextModuleFragmentFragmentDoc = gql`
     fragment textModuleFragment on ComponentModulesTextModule {

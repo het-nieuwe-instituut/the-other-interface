@@ -82,6 +82,7 @@ export const ThumbnailCarousel = ({ className, children }: ThumbnailCarouselProp
             {enrichedSource && enrichedSource.thumbnail && (
               <ExternalSourceBlockGroup className="mt-1">
                 {enrichedSource.thumbnail.map(v => {
+                  if (!v) return null
                   return (
                     <ExternalSourceTooltip
                       key={v}
@@ -181,7 +182,7 @@ interface ThumbnailCarouselItemProps extends ImageProps {
   enrichedSource?: {
     externalSourceType: ExternalSource
     externalSourceUrl: string
-    thumbnail?: string[] | null
+    thumbnail?: (string | null)[] | null
   } | null
 }
 export const ThumbnailCarouselItem = ({ src, alt, index }: ThumbnailCarouselItemProps) => {
