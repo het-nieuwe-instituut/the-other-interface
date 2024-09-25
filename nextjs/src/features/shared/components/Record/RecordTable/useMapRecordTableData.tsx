@@ -42,7 +42,7 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
             TableBodyItem: [
               { id: '1', value: record.titleR },
               { id: '2', value: record.referenceNumber },
-              { id: '3', value: record.period },
+              { id: '3', value: record.descriptionLevel },
             ],
           }
         })
@@ -54,7 +54,7 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
       tableHead: [
         { label: t('archivesFirstColumn') },
         { label: t('objectNumber') },
-        { label: t('archivePeriod') },
+        { label: t('descriptionLevel') },
       ],
       tableBody: mapData,
       total: data[0]?.total ?? '0',
@@ -113,7 +113,7 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
             TableBodyItem: [
               { id: record.idRelation + '1', value: record.titleR },
               { id: record.idRelation + '2', value: record.typePub },
-              { id: record.idRelation + '3', value: record.yearPub },
+              { id: record.idRelation + '3', value: record.authors },
             ],
           }
         })
@@ -125,7 +125,7 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
       tableHead: [
         { label: t('publicationsFirstColumn') },
         { label: t('type') },
-        { label: t('yearPublished') },
+        { label: t('author') },
       ],
       tableBody: mapData,
       total: data[0]?.total ?? '0',

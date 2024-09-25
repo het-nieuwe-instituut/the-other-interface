@@ -15,5 +15,7 @@
   "peopleFirstColumn": "Name",
   "objectsFirstColumn": "Object number",
   "publicationsFirstColumn": "Title",
-  "archivesFirstColumn": "Title"
+  "archivesFirstColumn": "Title",
+  "descriptionLevel": "Record type",
+  "author": "Author(s)"
 }
