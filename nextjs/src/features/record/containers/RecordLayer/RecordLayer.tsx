@@ -76,7 +76,6 @@ export const RecordLayer = () => {
   const enrichedSources = getEnrichedSources(zoomLevel3) ?? []
   const enrichedTitles = enrichedSources?.filter(v => 'title' in v && !!v.title)
   const enrichedDescriptions = enrichedSources?.filter(v => !!v.description)
-  const enrichedThumbnails = enrichedSources?.filter(v => !!v.thumbnail)
 
   return (
     <LayerWrapper
@@ -175,9 +174,9 @@ export const RecordLayer = () => {
                     <ThumbnailCarouselItem
                       key={index}
                       index={index}
-                      src={item}
+                      src={item || ''}
                       alt={`${zoomLevel3.title} image #${index + 1}` ?? ''}
-                      enrichedSource={enrichedThumbnails?.at(index)}
+                      enrichedSource={enrichedSources?.at(index)}
                     />
                   ))}
                 </ThumbnailCarousel>

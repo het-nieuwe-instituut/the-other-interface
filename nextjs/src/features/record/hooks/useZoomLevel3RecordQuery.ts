@@ -15,7 +15,7 @@ type Payload =
     }
   | { locale: Locale; publicationState: PublicationState; id: string }
 
-export async function getZoom3RecordMeta(type: Category, payload: Payload, api: Sdk) {
+async function getZoom3RecordMeta(type: Category, payload: Payload, api: Sdk) {
   const configByType = zoomLevel3RecordConfig(type, api)
 
   const data = await configByType?.zoomLevelQuery?.(payload)
