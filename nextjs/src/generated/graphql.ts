@@ -1178,6 +1178,7 @@ export type PublicationRecordZoomLevel3TypeEnrichedSourcesArgs = {
 
 export type PublicationRelationsType = {
   __typename?: 'PublicationRelationsType';
+  authors?: Maybe<Scalars['String']['output']>;
   externalSource?: Maybe<Scalars['String']['output']>;
   idRelation?: Maybe<Scalars['String']['output']>;
   titleR?: Maybe<Scalars['String']['output']>;
@@ -2486,7 +2487,7 @@ export type PublicationRecordRelationsQueryVariables = Exact<{
 }>;
 
 
-export type PublicationRecordRelationsQuery = { __typename?: 'Query', publicationRecordRelations?: Array<{ __typename?: 'PublicationRelationsType', idRelation?: string | null, titleR?: string | null, typePub?: string | null, yearPub?: string | null }> | null };
+export type PublicationRecordRelationsQuery = { __typename?: 'Query', publicationRecordRelations?: Array<{ __typename?: 'PublicationRelationsType', idRelation?: string | null, titleR?: string | null, typePub?: string | null, yearPub?: string | null, authors?: string | null }> | null };
 
 export type ArchivesRecordRelationsCountQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -4414,6 +4415,7 @@ export const PublicationRecordRelationsDocument = gql`
     titleR
     typePub
     yearPub
+    authors
   }
 }
     `;

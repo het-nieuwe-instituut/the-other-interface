@@ -15,5 +15,7 @@
   "peopleFirstColumn": "Naam",
   "objectsFirstColumn": "Objectnummer",
   "publicationsFirstColumn": "Titel",
-  "archivesFirstColumn": "Titel"
+  "archivesFirstColumn": "Titel",
+  "recordLevel": "Beschrijvingsniveau",
+  "author": "Auteur(s)"
 }
