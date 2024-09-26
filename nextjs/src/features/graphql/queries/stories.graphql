@@ -59,6 +59,15 @@ query searchByStories(
       attributes {
         title
       }
+      thumbnail {
+        id
+        alt_text
+        imageThumbnail {
+          data {
+            ...UploadFileFragment
+          }
+        }
+      }
       components {
         ... on ComponentModulesImage {
           ...imageModuleFragment
