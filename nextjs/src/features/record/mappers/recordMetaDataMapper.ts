@@ -162,23 +162,6 @@ export function mapArchivesDataToSections(
     const values = rawValue ? rawValue.split(';').filter(v => v.trim().length > 0) : null
     const isLink = key === 'permanentLink'
 
-    // TODO: commented out till we support content, location and subject
-    // if (key === 'content') {
-    //   const asteriskSuggestions = data.asteriskSuggestions
-    //     ?.map(suggestion => {
-    //       return {
-    //         date: suggestion.asterisk_date_content ?? '',
-    //         name: suggestion.asterisk_name_content ?? '',
-    //         subject: suggestion.asterisk_subject_content ?? '',
-    //       }
-    //     })
-    //     .filter(v => {
-    //         return v.date || v.name || v.subject
-    //     })
-
-    //   return { title, value: values, isLink, key, asteriskSuggestions }
-    // }
-
     const filteredEnrichedSources = filterEnrichedSources(
       data.enrichedSources ?? [],
       key,
