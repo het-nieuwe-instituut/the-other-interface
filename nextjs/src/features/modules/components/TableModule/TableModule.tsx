@@ -97,8 +97,8 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
               >
                 {item.TableBodyItem?.map((bodyItem, cellIndex) => (
                   <>
-                    {bodyItem.asterisk && cellIndex === 0 ? (
-                      <AsteriskTooltip place="bottom" title={'test'}>
+                    {bodyItem.asterisk && cellIndex === 0 ? ( // can be used later to asterisk relation
+                      <AsteriskTooltip place="bottom" title={''}>
                         <td
                           key={bodyItem.id}
                           className={cn(
@@ -137,12 +137,12 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
           <div key={rowIndex} className="tr-border-gradient flex flex-col justify-center py-4">
             {item.TableBodyItem?.map((bodyItem, cellIndex) => (
               <>
-                {bodyItem.asterisk && cellIndex === 0 ? (
+                {bodyItem.asterisk && cellIndex === 0 ? ( // can be used later to asterisk relation
                   <Link
                     href={`/detail/${component.type}/${item.id}?lang=${lang}`}
                     key={bodyItem.id}
                   >
-                    <AsteriskTooltip place="bottom" title={'test'} className="flex flex-row">
+                    <AsteriskTooltip place="bottom" title={''} className="flex flex-row">
                       <span
                         key={bodyItem.id}
                         className={TypographyVariants({
