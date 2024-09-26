@@ -139,15 +139,33 @@ export class TriplyElasticSearchService {
 
   private getQuery(searchText: string) {
     const sanitizedText = this.escapeElasticsearchQuery(searchText)
+    const filterValues = [
+      'https://www.ica.org/standards/RiC/ontology#RecordSet',
+      'https://schema.org/VisualArtwork',
+      'https://schema.org/Person',
+      'https://schema.org/Organization',
+      'https://schema.org/CreativeWork',
+    ]
 
     return {
-      multi_match: {
-        query: sanitizedText,
-        fields: [
-          'https://www ica org/standards/RiC/ontology#title', // archives title
-          'https://schema.org/name', // publications name & people name
-          'http://www.w3.org/2004/02/skos/core#prefLabel', // objects prefLabel
-        ],
+      bool: {
+        must: {
+          multi_match: {
+            query: sanitizedText,
+            fields: [
+              'https://www ica org/standards/RiC/ontology#title', // archives title
+              'https://schema org/name', // publications name & people name
+              'http://www w3 org/2004/02/skos/core#prefLabel', // objects prefLabel
+            ],
+          },
+        },
+        filter: {
+          bool: {
+            should: filterValues.map(v => ({
+              match_phrase: { 'http://www w3 org/1999/02/22-rdf-syntax-ns#type': v },
+            })),
+          },
+        },
       },
     }
   }
