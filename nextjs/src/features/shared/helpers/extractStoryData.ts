@@ -39,9 +39,10 @@ export const extractStoryData = (story: StoryById) => {
 }
 
 export const storyToRecordMapper = (story: SearchStory) => {
+  const thumbnail = story.thumbnail?.imageThumbnail?.data?.attributes?.url
   return {
     title: story?.attributes?.title ?? '',
-    thumbnail: findImageUrl(story?.components ?? []) ?? '',
+    thumbnail: thumbnail ? thumbnail : findImageUrl(story?.components ?? []) ?? '',
     id: story.id,
     type: EntityNames.Stories,
   }
