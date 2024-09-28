@@ -110,7 +110,7 @@ export const GalaxySearchBar: React.FC<Props> = ({ className, isNoActiveSearch }
             <GoButton
               onGoClick={handleGoClick}
               className={cn(
-                'text-blue-100 group-focus-within:text-pink-100 group-focus-within:hover:text-blue-100',
+                'group-focus-within:text-pink-100 group-focus-within:hover:text-blue-100',
                 currentZoomNumber === 1 || currentZoomNumber === 3 ? '' : '',
                 currentZoomNumber === 2 ? '' : ''
               )}
