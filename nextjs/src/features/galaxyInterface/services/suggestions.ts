@@ -146,7 +146,7 @@ const getTranslationConfig = (translate: typeof createTypeSafeTranslation) => [
     value: translate('suggestions').t('archiveGeography'),
   },
   {
-    key: 'photograhCreator',
+    key: 'photographCreator',
     type: CLOUD_CATEGORIES.archives,
     value: translate('suggestions').t('archivePhotograhCreator'),
   },
