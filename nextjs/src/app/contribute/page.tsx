@@ -24,8 +24,7 @@ export default async function Page() {
   const title = createTypeSafeTranslation('navigation').t('contribute')
   const { t } = createTypeSafeTranslation('contribute')
 
-  const contactFormUrl =
-    'https://forms.office.com/pages/responsepage.aspx?id=-nOvvAYyuU2cuMU4_1TahnU7jGT5k41AuJISCxkAcUdUNDdZRFQ5UjA4VDlUOVpISk1USzhHU0hMSi4u'
+  const contactFormUrl = 'https://forms.nieuweinstituut.nl/asterisk-suggestions-form/'
 
   return (
     <StaticPageContainer title={title || ''}>

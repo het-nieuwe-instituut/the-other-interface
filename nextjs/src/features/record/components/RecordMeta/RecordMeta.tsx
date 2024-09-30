@@ -268,7 +268,7 @@ function RightsLogo({ value }: { value?: string[] | null; key?: string }) {
 function SuggestionSection() {
   const { t } = useTypeSafeTranslation('recordMeta')
 
-  const contributeLink = 'https://forms.office.com/e/Y0bXYPicVw'
+  const contributeLink = 'https://forms.nieuweinstituut.nl/asterisk-suggestions-form/'
   const learnMoreLink = '/asterisk'
 
   return (

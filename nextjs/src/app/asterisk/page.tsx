@@ -42,7 +42,7 @@ export default async function Page() {
         <StaticPageLink
           external
           label={t('asteriskFormLink') || ''}
-          href="https://forms.office.com/pages/responsepage.aspx?id=-nOvvAYyuU2cuMU4_1TahnU7jGT5k41AuJISCxkAcUdUNDdZRFQ5UjA4VDlUOVpISk1USzhHU0hMSi4u"
+          href="https://forms.nieuweinstituut.nl/asterisk-suggestions-form/"
         ></StaticPageLink>{' '}
         {contribute2}
       </StaticPageParagraph>
