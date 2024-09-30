@@ -4,6 +4,7 @@ import { createTypeSafeTranslation } from '@/features/shared/utils/translations'
 import { AsteriskSourceBlock } from './AsteriskSource'
 import Asterisk from '../../icons/asterisk-thin.svg'
 import { useBoolean } from 'usehooks-ts'
+import { cn } from '../../utils/cn'
 
 export interface AsteriskAnnotationGroupProps {
   children: React.ReactNode
@@ -48,7 +49,12 @@ export const AsteriskAnnotationItem = ({ children, title }: AsteriskAnnotationIt
           </p>
         )}
 
-        <p className=" block font-times-niw-rimmin text-[22px] font-[600] leading-[22.7px] ">
+        <p
+          className={cn(
+            'block font-times-niw-rimmin text-[22px] font-[600] leading-[22.7px]',
+            title ? '' : 'pt-1'
+          )}
+        >
           {children}
         </p>
       </div>

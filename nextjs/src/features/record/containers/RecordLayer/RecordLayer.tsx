@@ -110,7 +110,9 @@ export const RecordLayer = () => {
                     return (
                       <AsteriskAnnotationItem
                         key={index}
-                        title={t('asteriskMeta', { author: name, date: date })}
+                        title={
+                          name && date ? t('asteriskMeta', { author: name, date: date }) : undefined
+                        }
                       >
                         {subject ?? ''}
                       </AsteriskAnnotationItem>
@@ -131,7 +133,9 @@ export const RecordLayer = () => {
 
                     return (
                       <AsteriskAnnotationItem
-                        title={t('asteriskMeta', { author: name, date })}
+                        title={
+                          name && date ? t('asteriskMeta', { author: name, date: date }) : undefined
+                        }
                         key={index}
                       >
                         {subject ?? ''}
@@ -151,7 +155,9 @@ export const RecordLayer = () => {
 
                     return (
                       <AsteriskAnnotationItem
-                        title={t('asteriskMeta', { author: name, date })}
+                        title={
+                          name && date ? t('asteriskMeta', { author: name, date: date }) : undefined
+                        }
                         key={index}
                       >
                         {subject ?? ''}
