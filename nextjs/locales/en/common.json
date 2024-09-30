@@ -36,6 +36,7 @@
   "showExternalSources": "Show external sources ({{count}})",
   "hideExternalSources": "Hide external sources ({{count}})",
   "asteriskMeta": "Added by {{author}} on {{date}}",
+  "asteriskMetaFallback": "Data failed to load",
   "pulledFrom": "Pulled from",
   "pulledFromGetty": "Getty ULAN",
   "pulledFromRKD": "RKD",

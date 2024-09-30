@@ -49,12 +49,7 @@ export const AsteriskAnnotationItem = ({ children, title }: AsteriskAnnotationIt
           </p>
         )}
 
-        <p
-          className={cn(
-            'block font-times-niw-rimmin text-[22px] font-[600] leading-[22.7px]',
-            title ? '' : 'pt-1'
-          )}
-        >
+        <p className={cn('block font-times-niw-rimmin text-[22px] font-[600] leading-[22.7px]')}>
           {children}
         </p>
       </div>

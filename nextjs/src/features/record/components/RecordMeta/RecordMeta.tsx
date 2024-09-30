@@ -156,7 +156,11 @@ export const RecordMeta = ({
                         <AsteriskTooltip
                           key={index}
                           place="left"
-                          title={t('asteriskMeta', { date: v.date, author: v.name })}
+                          title={
+                            !v.date || !v.name
+                              ? t('asteriskMetaFallback')
+                              : t('asteriskMeta', { date: v.date, author: v.name })
+                          }
                         >
                           <AsteriskSourceBlock key={v.date}>{v.subject}</AsteriskSourceBlock>
                         </AsteriskTooltip>

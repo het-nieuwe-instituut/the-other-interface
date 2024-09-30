@@ -76,6 +76,16 @@ export const RecordLayer = () => {
   const enrichedSources = getEnrichedSources(zoomLevel3) ?? []
   const enrichedTitles = enrichedSources?.filter(v => 'title' in v && !!v.title)
   const enrichedDescriptions = enrichedSources?.filter(v => !!v.description)
+  // const asterisk =
+  //   (zoomLevel3?.__typename === 'ArchiveZoomLevel3DetailType' ||
+  //     zoomLevel3?.__typename === 'ObjectsZoomLevel3DetailType' ||
+  //     zoomLevel3?.__typename === 'PeopleZoomLevel3DetailType') &&
+  //   (zoomLevel3?.asteriskSuggestions?.length ?? 0) > 0
+  if (
+    zoomLevel3?.__typename === 'ArchiveZoomLevel3DetailType' ||
+    zoomLevel3?.__typename === 'ObjectsZoomLevel3DetailType'
+  )
+    console.log(zoomLevel3)
 
   return (
     <LayerWrapper
@@ -94,6 +104,7 @@ export const RecordLayer = () => {
                   splitByHtmlBreaks
                   enrichedTitles={enrichedTitles}
                   enrichedDescriptions={enrichedDescriptions}
+                  // asterisk={asterisk ? '' : ''}
                 ></PageHeader>
               </div>
 
@@ -111,7 +122,9 @@ export const RecordLayer = () => {
                       <AsteriskAnnotationItem
                         key={index}
                         title={
-                          name && date ? t('asteriskMeta', { author: name, date: date }) : undefined
+                          name && date
+                            ? t('asteriskMeta', { author: name, date: date })
+                            : t('asteriskMetaFallback')
                         }
                       >
                         {subject ?? ''}
@@ -134,7 +147,9 @@ export const RecordLayer = () => {
                     return (
                       <AsteriskAnnotationItem
                         title={
-                          name && date ? t('asteriskMeta', { author: name, date: date }) : undefined
+                          name && date
+                            ? t('asteriskMeta', { author: name, date: date })
+                            : t('asteriskMetaFallback')
                         }
                         key={index}
                       >
@@ -156,7 +171,9 @@ export const RecordLayer = () => {
                     return (
                       <AsteriskAnnotationItem
                         title={
-                          name && date ? t('asteriskMeta', { author: name, date: date }) : undefined
+                          name && date
+                            ? t('asteriskMeta', { author: name, date: date })
+                            : t('asteriskMetaFallback')
                         }
                         key={index}
                       >

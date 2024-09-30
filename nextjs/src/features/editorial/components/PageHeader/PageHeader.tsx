@@ -43,6 +43,7 @@ interface Props {
 export const PageHeader: React.FC<Props> = props => {
   const {
     title,
+    // send asterisk title as well
     preface,
     constrainPreface,
     splitByHtmlBreaks,
