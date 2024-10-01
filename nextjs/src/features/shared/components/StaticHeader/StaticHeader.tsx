@@ -50,7 +50,7 @@ export const StaticHeader = ({
         <div
           id="navbar-background"
           className="absolute inset-0 origin-bottom bg-[#FFE6DD] ease-toi-cubic-bezier"
-          style={{ transform: 'scaleY(0)', transformOrigin: 'bottom' }}
+          style={{ transformOrigin: 'bottom' }}
         ></div>
         <div
           className="container mx-auto flex size-full max-w-[90em] items-center justify-between px-6"
@@ -130,9 +130,9 @@ const Logo = ({ text }: { text?: string }) => {
           0,
           currentScrollY - galaxyHeight + HEADER_HEIGHT + HEADER_HEIGHT / 2
         )
-        const navbarScrollProgress = Math.max(0, currentScrollY - galaxyHeight + HEADER_HEIGHT)
+        const navbarScrollProgress = Math.max(0, currentScrollY - galaxyHeight + HEADER_HEIGHT + 15)
         const newClipPercentage = Math.min(scrollProgress / 0.6, 100)
-        const navbarPercentage = Math.min(navbarScrollProgress / 0.6, 100)
+        const navbarPercentage = Math.min(navbarScrollProgress / 0.2, 100)
         const text1 = document.getElementById('text-1')
         const text2 = document.getElementById('text-2')
         const navbarBackground = document.getElementById('navbar-background')
@@ -142,8 +142,7 @@ const Logo = ({ text }: { text?: string }) => {
           text2.style.display = scrollProgress > 0 ? 'block' : 'none'
           text1.style.clipPath = `inset(0 0 ${newClipPercentage}% 0)`
           text2.style.clipPath = `inset(${100 - newClipPercentage}% 0 0 0)`
-          navbarBackground.style.transform = `scaleY(${navbarPercentage / 100})`
-          navbarBackground.style.bottom = `${-navbarPercentage}%`
+          navbarBackground.style.opacity = `${navbarPercentage / 100}`
         }
       }
     })
