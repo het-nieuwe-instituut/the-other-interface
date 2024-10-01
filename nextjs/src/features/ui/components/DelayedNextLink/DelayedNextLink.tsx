@@ -64,7 +64,6 @@ export const useDelayedNextRoutePush = (delay: number) => {
   }, [stop])
 
   useEffect(() => {
-    console.log(isPending)
     if (isPending === true) {
       start(uniqueIdRef.current)
     }
