@@ -6,7 +6,6 @@ import { AttributionIcon } from './AttributionIcon'
 import { PublicDomainIcon } from './PublicDomainIcon'
 
 export function recordRightsFieldMapper(record: string, translate: recordMetaT) {
-  console.log(record)
   switch (record) {
     case 'Copyright status not evaluated':
     case 'Auteursrechtelijke status niet geëvalueerd':
