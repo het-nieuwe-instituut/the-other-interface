@@ -72,13 +72,13 @@ export const StaticHeader = ({
 
 export const StaticPageHeader = () => {
   const { t: tNavigation } = useLooseTypeSafeTranslation('navigation')
-  const lang = useLocale()
 
   const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
 
   return (
     <>
       <div
+        id={'navbar'}
         style={{ '--z-index': `${STATIC_HEADER_Z_INDEX}` } as CSSProperties}
         className={cn(
           'ease-toi-cubic-bezier',
@@ -88,20 +88,7 @@ export const StaticPageHeader = () => {
       >
         <div className="container mx-auto flex size-full max-w-[90em] items-center justify-between px-6">
           <div className="h-full items-center">
-            <DelayedNextLinkWithZoomAnimationsContext
-              animation={'backwards'}
-              delay={300}
-              href={lang ? `/?lang=${lang}` : '/?lang=nl'}
-              className={cn(
-                !isMenuOpen && MenuTypogrpahyVariants({ default: 'secondary' }),
-                isMenuOpen && MenuTypogrpahyVariants({ inverted: 'secondary' }),
-                'cursor-pointer overflow-hidden h-full flex m-0 '
-              )}
-            >
-              <p className="mr-2 max-sm:overflow-visible max-sm:whitespace-normal max-sm:text-[20px] max-sm:font-normal max-sm:leading-[21px]">
-                {tNavigation('headerTitle')}
-              </p>
-            </DelayedNextLinkWithZoomAnimationsContext>
+            <Logo text={tNavigation('headerTitle')} isStatic />
           </div>
           <div>
             <GalaxyTopRight />
@@ -113,12 +100,12 @@ export const StaticPageHeader = () => {
 }
 
 const HEADER_HEIGHT = 74
-const Logo = ({ text }: { text?: string }) => {
+const Logo = ({ text, isStatic }: { text?: string; isStatic?: boolean }) => {
   const dispatch = useDispatch()
   const lang = useLocale()
   const containerRef = useRef<HTMLDivElement>(null)
   const lastScrollY = useRef(0)
-  const galaxyHeight = useSelector((state: State) => state.shared.galaxyHeight)
+  const galaxyHeight = useSelector((state: State) => (isStatic ? 120 : state.shared.galaxyHeight))
   const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
 
   const updateClipPercentage = useCallback(() => {
@@ -136,14 +123,15 @@ const Logo = ({ text }: { text?: string }) => {
         const text1 = document.getElementById('text-1')
         const text2 = document.getElementById('text-2')
         const navbarBackground = document.getElementById('navbar-background')
-
-        if (text1 && text2 && navbarBackground) {
+        if (text1 && text2) {
           // Batch DOM writes
           text2.style.display = scrollProgress > 0 ? 'block' : 'none'
           text1.style.clipPath = `inset(0 0 ${newClipPercentage}% 0)`
           text2.style.clipPath = `inset(${100 - newClipPercentage}% 0 0 0)`
-          navbarBackground.style.display = scrollProgress > 0 ? 'block' : 'none'
-          navbarBackground.style.opacity = `${navbarPercentage / 100}`
+          if (navbarBackground) {
+            navbarBackground.style.display = scrollProgress > 0 ? 'block' : 'none'
+            navbarBackground.style.opacity = `${navbarPercentage / 100}`
+          }
         }
       }
     })
@@ -162,7 +150,7 @@ const Logo = ({ text }: { text?: string }) => {
       <DelayedNextLinkWithZoomAnimationsContext
         onClick={() => dispatch(sharedActions.menuOpen({ isMenuOpen: false }))}
         animation={'backwards'}
-        delay={300}
+        delay={isStatic ? 0 : 300}
         href={lang ? `/?lang=${lang}` : '/?lang=nl'}
         className={cn('cursor-pointer h-full flex m-0 relative')}
       >
