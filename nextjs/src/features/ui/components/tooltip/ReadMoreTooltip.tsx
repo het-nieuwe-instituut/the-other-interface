@@ -27,6 +27,7 @@ export interface ReadMoreTooltipProps extends PropsWithChildren {
   className?: string
   hideTooltip?: boolean
   floating?: boolean
+  disableLineClamp?: boolean
 }
 
 export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
@@ -35,6 +36,7 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
     title,
     description,
     readMoreHref,
+    disableLineClamp,
     readMoreText,
     color = 'black',
     offset = 64,
@@ -50,6 +52,7 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
     () =>
       ReactDOMServer.renderToStaticMarkup(
         <ReadMoreTooltipContent
+          disableLineClamp={disableLineClamp}
           isLoading={isLoading}
           title={title}
           description={description}
@@ -101,6 +104,7 @@ const ReadMoreTooltipContent = ({
   readMoreHref,
   readMoreText,
   hideTooltip,
+  disableLineClamp,
 }: ReadMoreTooltipProps) => {
   const { t } = useTypeSafeTranslation('common')
   if (hideTooltip) {
@@ -177,7 +181,7 @@ const ReadMoreTooltipContent = ({
               className: cn(
                 color === 'black' && 'text-ivory-100',
                 color === 'blue' && 'text-pink-100',
-                'line-clamp-[7]',
+                !disableLineClamp && 'line-clamp-[7]',
                 readMoreHref && 'mb-2'
               ),
             })}

@@ -17,6 +17,8 @@ import {
 } from 'src/generated/graphql'
 import { useClientPagination } from './useClientPagination'
 import { getTriplyOrStoryHref } from './getTriplyOrStoryHref'
+import { useLocale } from '@/features/shared/hooks/useLocale'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 
 export type CarouselGrid = DeepPartial<ComponentModulesCarousel>
 
@@ -49,6 +51,7 @@ const Grid = ({
   cols?: 1 | 2 | 3 | 4
   className?: string
 }) => {
+  const locale = useLocale()
   const items = carousel.images ?? []
   const cols: 1 | 2 | 3 | 4 = useMemo(() => {
     if (forcedCols) {
@@ -86,16 +89,20 @@ const Grid = ({
             if (!item) {
               return null
             }
+            const url = addLocaleToUrl(
+              getTriplyOrStoryHref({
+                story: item.story ?? undefined,
+                triply_record: item.triply_record ?? undefined,
+              }) ?? '',
+              locale
+            )
             return (
               <CarouselGridCard
                 key={item.id}
                 title={item.title ?? undefined}
                 description={item.description ?? undefined}
                 image={item.image?.data?.attributes?.url ?? undefined}
-                href={getTriplyOrStoryHref({
-                  story: item.story ?? undefined,
-                  triply_record: item.triply_record ?? undefined,
-                })}
+                href={url}
                 alt={item.alt_text ?? ''}
               ></CarouselGridCard>
             )
