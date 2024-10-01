@@ -27,7 +27,7 @@ export interface ReadMoreTooltipProps extends PropsWithChildren {
   className?: string
   hideTooltip?: boolean
   floating?: boolean
-  disableLineClamp: boolean
+  disableLineClamp?: boolean
 }
 
 export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
