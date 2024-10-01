@@ -77,6 +77,9 @@ export const RecordLayer = () => {
   const enrichedTitles = enrichedSources?.filter(v => 'title' in v && !!v.title)
   const enrichedDescriptions = enrichedSources?.filter(v => !!v.description)
 
+  // 'asterisk_date_title',
+  // 'asterisk_name_title',
+  // 'asterisk_subject_title',
   return (
     <LayerWrapper
       suspense={true}
@@ -94,7 +97,7 @@ export const RecordLayer = () => {
                   splitByHtmlBreaks
                   enrichedTitles={enrichedTitles}
                   enrichedDescriptions={enrichedDescriptions}
-                  // asterisk={asterisk ? '' : ''}
+                  asterisk={true}
                 ></PageHeader>
               </div>
 

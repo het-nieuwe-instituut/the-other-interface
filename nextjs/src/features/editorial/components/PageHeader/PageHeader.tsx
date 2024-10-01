@@ -21,6 +21,8 @@ import { TypographyVariants } from '@/features/ui/components/typography/variants
 import { cn } from '@/features/ui/utils/cn'
 import { useState } from 'react'
 import { ExternalSource } from 'src/generated/graphql'
+import Asterisk from '../../../ui/icons/asterisk-thin-large.svg'
+import { AsteriskTooltip } from '@/features/ui/components/tooltip/AsteriskTooltip'
 
 interface Props {
   title?: string
@@ -28,6 +30,7 @@ interface Props {
   constrainPreface?: boolean
   splitByHtmlBreaks?: boolean
   showReadMore?: boolean
+  asterisk?: boolean
   enrichedTitles?: {
     externalSourceType: ExternalSource
     externalSourceUrl: string
@@ -43,7 +46,7 @@ interface Props {
 export const PageHeader: React.FC<Props> = props => {
   const {
     title,
-    // send asterisk title as well
+    asterisk,
     preface,
     constrainPreface,
     splitByHtmlBreaks,
@@ -64,11 +67,32 @@ export const PageHeader: React.FC<Props> = props => {
           'text-left flex flex-col gap-4  max-w-[calc(100vw-40px)]'
         )}
       >
-        {title && (
-          <h1 lang="nl" className={TypographyVariants({ responsive: 'title' })}>
-            {title}
-          </h1>
-        )}
+        {title &&
+          (asterisk ? (
+            <>
+              <div className="relative inline-block">
+                <h1
+                  lang="nl"
+                  className={`${TypographyVariants({
+                    responsive: 'title',
+                    className: 'inline-block',
+                  })} break-words`}
+                >
+                  <AsteriskTooltip place="bottom" title={'test'}>
+                    {title}
+
+                    <span className="absolute text-surface-asterisk-dark asterisk-icon pl-1">
+                      <Asterisk />
+                    </span>
+                  </AsteriskTooltip>
+                </h1>
+              </div>
+            </>
+          ) : (
+            <h1 lang="nl" className={TypographyVariants({ responsive: 'title' })}>
+              {title}
+            </h1>
+          ))}
       </button>
       {enrichedTitles && enrichedTitles.length > 0 && (
         <ExternalSourceBlockGroup className="mt-1">
