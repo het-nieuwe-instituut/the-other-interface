@@ -203,6 +203,9 @@ class BaseArchivesRecordZoomLevel3Type {
   @Field(() => String, { nullable: true })
   public referenceCode?: string
 
+  @Field({ nullable: true })
+  public title?: string
+
   @Field(() => String, { nullable: true })
   public titleType?: string
 

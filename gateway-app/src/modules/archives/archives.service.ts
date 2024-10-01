@@ -93,6 +93,7 @@ export interface ArchivesRecordZoomLevel3Data {
   sources?: string
   referenceCode?: string
   titleType?: string
+  title?: string
   descriptionLevel?: string
   size?: string
   period?: string
@@ -126,6 +127,7 @@ const archivesRecordZoomLevel3DataKeys: KeysToVerify<ArchivesRecordZoomLevel3Dat
   sources: true,
   referenceCode: true,
   titleType: true,
+  title: true,
   descriptionLevel: true,
   size: true,
   period: true,

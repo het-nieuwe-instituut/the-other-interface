@@ -76,16 +76,6 @@ export const RecordLayer = () => {
   const enrichedSources = getEnrichedSources(zoomLevel3) ?? []
   const enrichedTitles = enrichedSources?.filter(v => 'title' in v && !!v.title)
   const enrichedDescriptions = enrichedSources?.filter(v => !!v.description)
-  // const asterisk =
-  //   (zoomLevel3?.__typename === 'ArchiveZoomLevel3DetailType' ||
-  //     zoomLevel3?.__typename === 'ObjectsZoomLevel3DetailType' ||
-  //     zoomLevel3?.__typename === 'PeopleZoomLevel3DetailType') &&
-  //   (zoomLevel3?.asteriskSuggestions?.length ?? 0) > 0
-  if (
-    zoomLevel3?.__typename === 'ArchiveZoomLevel3DetailType' ||
-    zoomLevel3?.__typename === 'ObjectsZoomLevel3DetailType'
-  )
-    console.log(zoomLevel3)
 
   return (
     <LayerWrapper

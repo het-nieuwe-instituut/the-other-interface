@@ -40,7 +40,7 @@ function mapArchivesEnrichedSources(
     'descriptionLevel',
     'externalURI',
     'permanentLink',
-    'titleType',
+    // 'title',
   ]
   return getValidEnrichedSource(enrichedSource, key, keysToTry)
 }
@@ -95,6 +95,7 @@ function mapObjectEnrichedSources(
     'techniques',
     'title',
     'permanentLink',
+    'title',
   ]
   return getValidEnrichedSource(enrichedSource, key, keysToTry)
 }
@@ -167,6 +168,21 @@ export function mapArchivesDataToSections(
       key,
       mapArchivesEnrichedSources
     )
+
+    if (key === 'title') {
+      const titles = values
+        ?.filter(ti => ti.endsWith(' (old or rejected)'))
+        .map(til => til.replace(' (old or rejected)', ''))
+      if (titles && titles.length > 0) {
+        return {
+          title: t(`${key}`),
+          value: titles,
+          key,
+        }
+      } else {
+        delete data.title
+      }
+    }
 
     if (key === 'location') {
       const asteriskSuggestions = data.asteriskSuggestions
@@ -265,6 +281,21 @@ export function mapObjectDataToSections(
       key,
       mapObjectEnrichedSources
     )
+
+    if (key === 'title') {
+      const titles = values
+        ?.filter(ti => ti.endsWith(' (old or rejected)'))
+        .map(til => til.replace(' (old or rejected)', ''))
+      if (titles && titles.length > 0) {
+        return {
+          title: t(`${key}`),
+          value: titles,
+          key,
+        }
+      } else {
+        delete data.title
+      }
+    }
 
     if (key === 'relatedKeywords') {
       const asteriskSuggestions = data.asteriskSuggestions
