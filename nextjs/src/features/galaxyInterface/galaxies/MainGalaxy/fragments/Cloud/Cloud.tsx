@@ -67,6 +67,7 @@ export const Cloud: React.FC<Props> = ({ cloud }) => {
   return (
     <div className="group">
       <ReadMoreTooltip
+        disableLineClamp
         floating={true}
         place={place[category]}
         title={hoverTitleTranslation}
