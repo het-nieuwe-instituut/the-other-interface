@@ -5,10 +5,7 @@ import { tap } from 'rxjs/operators'
 @Injectable()
 export class PerformanceInterceptor implements NestInterceptor {
   // eslint-disable-next-line prettier/prettier
-  public constructor(
-    private readonly prefix: string,
-    private readonly threshold: number
-  ) {}
+  public constructor(private readonly prefix: string, private readonly threshold: number) {}
 
   public intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     const now = Date.now()

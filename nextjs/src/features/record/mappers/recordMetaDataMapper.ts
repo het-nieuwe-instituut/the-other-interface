@@ -353,7 +353,7 @@ function filterEnrichedSources<
     | EnrichedBaseObjectRecordZoomLevel3Type
     | EnrichedBasePublicationRecordZoomLevel3Type
     | EnrichedBaseArchivesRecordZoomLevel3Type
-  )[],
+  )[]
 >(
   data: T,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -386,7 +386,7 @@ function filterMappedValues<
     enrichedSources?: Array<Record<string, unknown>>
     value: string[] | null
     key: string
-  }>,
+  }>
 >(data: T): { [K in keyof T]: T[K] } {
   return data.filter(section => {
     const hasAsterisk =
