@@ -12,7 +12,8 @@
     "eslint": "eslint",
     "test": "jest",
     "type-check": "tsc --noEmit --skipLibCheck",
-    "prettier": "prettier --config ../prettier.config.ts",
+    "prettier:check": "prettier --check '**/*.{js,jsx,ts,tsx}' '!gateway-app/src/**/*' '!strapi/.strapi/**/*'",
+    "prettier:write": "prettier --write '**/*.{js,jsx,ts,tsx}' '!gateway-app/src/**/*' '!strapi/.strapi/**/*'",
     "clean": "rm -rf .next && rm -rf node_modules",
     "codegen": "graphql-codegen --config codegen.yml",
     "codegen:watch": "nodemon --watch ./src/features/graphql --ext graphql --exec \"npm run codegen\""
