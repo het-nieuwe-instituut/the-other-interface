@@ -103,9 +103,9 @@ export function getScaleAnimationClassName({
     galaxyPaginationAnimationConditions === 'firstRender'
     ? animation
     : !galaxyZoomAnimationState &&
-      !galaxyPaginationAnimationState &&
-      galaxyPaginationAnimationConditions !== 'previousAnimationWasBackwards' &&
-      galaxyPaginationAnimationConditions !== 'previousAnimationWasForward'
-    ? 'opacity-0'
-    : undefined
+        !galaxyPaginationAnimationState &&
+        galaxyPaginationAnimationConditions !== 'previousAnimationWasBackwards' &&
+        galaxyPaginationAnimationConditions !== 'previousAnimationWasForward'
+      ? 'opacity-0'
+      : undefined
 }

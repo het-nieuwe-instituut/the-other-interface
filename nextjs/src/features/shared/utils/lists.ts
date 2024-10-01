@@ -1,7 +1,7 @@
 export function keyExtractor<
   Item extends { id?: string | null } | string,
   Index extends number,
-  Array
+  Array,
 >(item?: Item | null, index?: Index, array?: Array[]) {
   if (typeof item === 'string') {
     return `${item}-${index}-${array?.length}`
