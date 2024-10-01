@@ -50,7 +50,7 @@ export const StaticHeader = ({
         <div
           id="navbar-background"
           className="absolute inset-0 origin-bottom bg-[#FFE6DD] ease-toi-cubic-bezier"
-          style={{ transformOrigin: 'bottom' }}
+          style={{ transformOrigin: 'bottom', display: 'none' }}
         ></div>
         <div
           className="container mx-auto flex size-full max-w-[90em] items-center justify-between px-6"
@@ -142,6 +142,7 @@ const Logo = ({ text }: { text?: string }) => {
           text2.style.display = scrollProgress > 0 ? 'block' : 'none'
           text1.style.clipPath = `inset(0 0 ${newClipPercentage}% 0)`
           text2.style.clipPath = `inset(${100 - newClipPercentage}% 0 0 0)`
+          navbarBackground.style.display = scrollProgress > 0 ? 'block' : 'none'
           navbarBackground.style.opacity = `${navbarPercentage / 100}`
         }
       }
