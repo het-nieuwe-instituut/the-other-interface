@@ -25,7 +25,7 @@ export const RelatedStoriesCarousel = () => {
 
   const { data, isLoading, isError } = useStoryMetaByIdQuery({
     id,
-    options: { fetchOnWindowFocus: false },
+    options: { fetchOnWindowFocus: false, suspense: true },
   })
 
   const story = data?.storyByLocale?.data
@@ -102,7 +102,7 @@ export const RelatedStoriesCarouselContent = ({
               description={item?.description ?? ''}
               image={item.url}
               href={url}
-              alt={item.alt ? item.alt : item.title ?? 'image'}
+              alt={item.alt ? item.alt : (item.title ?? 'image')}
             ></CarouselGridCard>
           )
         })}
