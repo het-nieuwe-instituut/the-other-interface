@@ -3,7 +3,7 @@ import { PulseContext } from '@/features/galaxyInterface/components/Pulse/Pulse'
 import uniqueId from 'lodash/uniqueId'
 import NextLink, { LinkProps } from 'next/link'
 import { useRouter } from 'next/navigation'
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useTransition } from 'react'
 
 export type DelayedNextLinkProps = LinkProps &
   React.AnchorHTMLAttributes<HTMLAnchorElement> & { delay: number; disabled?: boolean }
@@ -52,21 +52,34 @@ export const useDelayedNextRoutePush = (delay: number) => {
   const { stop, start } = useContext(PulseContext)
   const uniqueIdRef = React.useRef<string>(uniqueId())
   const timeout = useRef<NodeJS.Timeout>()
+  const [isPending, startTransition] = useTransition()
+
   useEffect(() => {
     const ref = uniqueIdRef.current
+    const timeoutRef = timeout.current
     return () => {
       stop(ref)
-      timeout.current && clearTimeout(timeout.current)
+      timeoutRef && clearTimeout(timeoutRef)
     }
   }, [stop])
 
+  useEffect(() => {
+    console.log(isPending)
+    if (isPending === true) {
+      start(uniqueIdRef.current)
+    }
+    if (isPending === false) {
+      stop(uniqueIdRef.current)
+    }
+  }, [isPending, start, stop])
+
   return (url: string) => {
-    setTimeout(() => {
-      router.push(url)
-      timeout.current = setTimeout(() => {
-        start(uniqueIdRef.current)
-      }, delay + 200)
-    }, delay)
+    router.prefetch(url)
+    startTransition(() => {
+      setTimeout(() => {
+        router.push(url)
+      }, delay)
+    })
   }
 }
 DelayedNextLink.displayName = 'DelayedNextLink'
