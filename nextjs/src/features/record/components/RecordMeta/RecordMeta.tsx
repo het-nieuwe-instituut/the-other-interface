@@ -158,7 +158,7 @@ export const RecordMeta = ({
                           place="left"
                           title={
                             !v.date || !v.name
-                              ? t('asteriskMetaFallback')
+                              ? null
                               : t('asteriskMeta', { date: v.date, author: v.name })
                           }
                         >

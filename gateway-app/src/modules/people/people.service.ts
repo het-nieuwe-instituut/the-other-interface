@@ -124,7 +124,7 @@ export class PeopleService {
     const result = await this.triplyService.queryTriplyData<PeopleDetailZoomLevel3Data>(
       this.ZoomLevel3Endpoint,
       peopleDetailZoomLevel3DataKeys,
-      { page: 1, pageSize: 1 },
+      { page: 1, pageSize: 1 }, // May need to set to 100 - temp fix to get the new data and get it working again
       { id, locale }
     )
 

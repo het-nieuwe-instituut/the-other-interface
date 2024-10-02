@@ -182,6 +182,10 @@ export class ArchivesService {
     'asterisk_date_content',
     'asterisk_name_content',
     'asterisk_subject_content',
+    // new
+    'asterisk_date_title',
+    'asterisk_name_title',
+    'asterisk_subject_title',
   ]
 
   public constructor(private triplyService: TriplyService) {}
@@ -190,7 +194,7 @@ export class ArchivesService {
     const result = await this.triplyService.queryTriplyData<ArchivesDetailZoomLevel3DataType>(
       this.ZoomLevel3Endpoint,
       archivesDetailZoomLevel3DataKeys,
-      { page: 1, pageSize: 2 },
+      { page: 1, pageSize: 100 }, // Setting to 100 - temp fix to get the new data and get it working again
       { id, language: locale }
     )
 
@@ -236,7 +240,7 @@ export class ArchivesService {
     const result = await this.triplyService.queryTriplyData<ArchivesRecordZoomLevel3Data>(
       this.ZoomLevel3RecordEndpoint,
       archivesRecordZoomLevel3DataKeys,
-      { page: 1, pageSize: 1 },
+      { page: 1, pageSize: 100 }, // Setting to 100 - temp fix to get the new data and get it working again
       { id, language: locale }
     )
 

@@ -115,7 +115,7 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
                           title={
                             !item.TableBodyAsteriskItem?.asteriskDate ||
                             !item.TableBodyAsteriskItem?.asteriskName
-                              ? t('asteriskMetaFallback')
+                              ? null
                               : t('asteriskMeta', {
                                   date: item.TableBodyAsteriskItem?.asteriskDate,
                                   author: item.TableBodyAsteriskItem?.asteriskName,

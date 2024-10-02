@@ -223,7 +223,7 @@ export class ObjectsService {
     const result = await this.triplyService.queryTriplyData<ObjectRecordZoomLevel3Data>(
       this.ZoomLevel3RecordEndpoint,
       objectRecordZoomLevel3DataKeys,
-      { page: 1, pageSize: 1 },
+      { page: 1, pageSize: 100 }, // Setting to 100 - temp fix to get the new data and get it working again
       { id, language: locale }
     )
 
