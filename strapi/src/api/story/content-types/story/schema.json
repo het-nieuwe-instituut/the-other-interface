@@ -150,7 +150,8 @@
           "localized": true
         }
       },
-      "component": "core.image-thumbnail"
+      "component": "core.image-thumbnail",
+      "required": true
     }
   }
 }
