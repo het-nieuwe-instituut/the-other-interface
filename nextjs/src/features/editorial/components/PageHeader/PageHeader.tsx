@@ -30,7 +30,11 @@ interface Props {
   constrainPreface?: boolean
   splitByHtmlBreaks?: boolean
   showReadMore?: boolean
-  asterisk?: boolean
+  asteriskTitle?: {
+    asterisk_date_title: string | null
+    asterisk_name_title: string | null
+    asterisk_subject_title: string | null
+  } | null
   enrichedTitles?: {
     externalSourceType: ExternalSource
     externalSourceUrl: string
@@ -46,7 +50,7 @@ interface Props {
 export const PageHeader: React.FC<Props> = props => {
   const {
     title,
-    asterisk,
+    asteriskTitle,
     preface,
     constrainPreface,
     splitByHtmlBreaks,
@@ -67,32 +71,43 @@ export const PageHeader: React.FC<Props> = props => {
           'text-left flex flex-col gap-4  max-w-[calc(100vw-40px)]'
         )}
       >
-        {title &&
-          (asterisk ? (
-            <>
-              <div className="relative inline-block">
-                <h1
-                  lang="nl"
-                  className={`${TypographyVariants({
-                    responsive: 'title',
-                    className: 'inline-block',
-                  })} break-words`}
+        {asteriskTitle?.asterisk_subject_title ? (
+          <>
+            <div className="relative inline-block">
+              <h1
+                lang="nl"
+                className={`${TypographyVariants({
+                  responsive: 'title',
+                  className: 'inline-block',
+                })} break-words`}
+              >
+                <AsteriskTooltip
+                  place="bottom"
+                  title={
+                    !asteriskTitle.asterisk_date_title || !asteriskTitle.asterisk_name_title
+                      ? null
+                      : commonT.t('asteriskMeta', {
+                          date: asteriskTitle.asterisk_date_title,
+                          author: asteriskTitle.asterisk_name_title,
+                        })
+                  }
                 >
-                  <AsteriskTooltip place="bottom" title={'test'}>
-                    {title}
+                  {asteriskTitle?.asterisk_subject_title}
 
-                    <span className="absolute text-surface-asterisk-dark asterisk-icon pl-1">
-                      <Asterisk />
-                    </span>
-                  </AsteriskTooltip>
-                </h1>
-              </div>
-            </>
-          ) : (
+                  <span className="absolute text-surface-asterisk-dark asterisk-icon pl-1">
+                    <Asterisk />
+                  </span>
+                </AsteriskTooltip>
+              </h1>
+            </div>
+          </>
+        ) : (
+          title && (
             <h1 lang="nl" className={TypographyVariants({ responsive: 'title' })}>
               {title}
             </h1>
-          ))}
+          )
+        )}
       </button>
       {enrichedTitles && enrichedTitles.length > 0 && (
         <ExternalSourceBlockGroup className="mt-1">

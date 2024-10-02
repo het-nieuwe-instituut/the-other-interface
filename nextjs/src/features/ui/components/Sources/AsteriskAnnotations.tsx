@@ -30,7 +30,7 @@ export const AsteriskAnnotationGroup = ({ children, count }: AsteriskAnnotationG
 
 export interface AsteriskAnnotationItemProps {
   children: string
-  title?: string
+  title?: string | null
 }
 
 export const AsteriskAnnotationItem = ({ children, title }: AsteriskAnnotationItemProps) => {
@@ -49,7 +49,12 @@ export const AsteriskAnnotationItem = ({ children, title }: AsteriskAnnotationIt
           </p>
         )}
 
-        <p className={cn('block font-times-niw-rimmin text-[22px] font-[600] leading-[22.7px]')}>
+        <p
+          className={cn(
+            'block font-times-niw-rimmin text-[22px] font-[600] leading-[22.7px]',
+            title ? '' : 'pt-1'
+          )}
+        >
           {children}
         </p>
       </div>
