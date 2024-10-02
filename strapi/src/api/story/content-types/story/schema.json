@@ -151,7 +151,7 @@
         }
       },
       "component": "core.image-thumbnail",
-      "required": true
+      "required": false
     }
   }
 }
