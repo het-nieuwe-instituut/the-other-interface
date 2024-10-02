@@ -32,6 +32,7 @@ export const ImageCarousel = ({ children }: ImageCarouselProps) => {
   const [loaded, setLoaded] = useState(false)
   const itemWidth = (containerWidth / 100) * 80
   const restWidth = (containerWidth / 100) * 20
+
   const { pages, width, nextPage, prevPage, scrollContainerRef, canScrollNext, canScrollPrev } =
     useHorizontalSnappingList({
       numberOfItems: children.length,
@@ -63,7 +64,7 @@ export const ImageCarousel = ({ children }: ImageCarouselProps) => {
             <div
               className="flex h-full flex-nowrap gap-4"
               style={{
-                width: pages === 0 ? width : pages * (itemWidth + 16) + restWidth - 16,
+                width: (pages === 0 ? width : pages * (itemWidth + 16) + restWidth - 16) || 0,
               }}
             >
               {children}

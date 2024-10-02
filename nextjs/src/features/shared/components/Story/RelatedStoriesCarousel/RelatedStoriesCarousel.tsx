@@ -25,7 +25,7 @@ export const RelatedStoriesCarousel = () => {
 
   const { data, isLoading, isError } = useStoryMetaByIdQuery({
     id,
-    options: { fetchOnWindowFocus: false },
+    options: { fetchOnWindowFocus: false, suspense: true },
   })
 
   const story = data?.storyByLocale?.data
