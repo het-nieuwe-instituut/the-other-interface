@@ -40,7 +40,7 @@ function mapArchivesEnrichedSources(
     'descriptionLevel',
     'externalURI',
     'permanentLink',
-    // 'title',
+    'title',
   ]
   return getValidEnrichedSource(enrichedSource, key, keysToTry)
 }
