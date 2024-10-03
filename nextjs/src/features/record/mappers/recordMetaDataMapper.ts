@@ -171,8 +171,9 @@ export function mapArchivesDataToSections(
 
     if (key === 'title') {
       const titles = values
-        ?.filter(ti => ti.endsWith(' (old or rejected)'))
+        ?.filter(ti => ti.endsWith(' (old or rejected)') || ti.endsWith(' (oud of verworpen)'))
         .map(til => til.replace(' (old or rejected)', ''))
+        .map(til => til.replace(' (oud of verworpen)', ''))
       if (titles && titles.length > 0) {
         return {
           title: t(`${key}`),
@@ -284,8 +285,9 @@ export function mapObjectDataToSections(
 
     if (key === 'title') {
       const titles = values
-        ?.filter(ti => ti.endsWith(' (old or rejected)'))
+        ?.filter(ti => ti.endsWith(' (old or rejected)') || ti.endsWith(' (oud of verworpen)'))
         .map(til => til.replace(' (old or rejected)', ''))
+        .map(til => til.replace(' (oud of verworpen)', ''))
       if (titles && titles.length > 0) {
         return {
           title: t(`${key}`),

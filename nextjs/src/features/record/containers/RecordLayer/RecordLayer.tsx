@@ -145,9 +145,9 @@ export const RecordLayer = () => {
               ) : null}
 
               {zoomLevel3?.__typename === 'PeopleZoomLevel3DetailType' && // might need to fix
-              (zoomLevel3?.asteriskSuggestions?.length ?? 0) > 0 ? (
-                <AsteriskAnnotationGroup count={zoomLevel3.asteriskSuggestions?.length ?? 0}>
-                  {zoomLevel3.asteriskSuggestions?.map((suggestion, index) => {
+              (asteriskDescriptionData?.length ?? 0) > 0 ? (
+                <AsteriskAnnotationGroup count={asteriskDescriptionData?.length ?? 0}>
+                  {asteriskDescriptionData?.map((suggestion, index) => {
                     const date = suggestion.asterisk_date_description ?? ''
                     const name = suggestion.asterisk_name_description ?? ''
                     const subject = suggestion.asterisk_subject_description ?? ''
@@ -241,9 +241,9 @@ type AsteriskHeaderDataType =
 function getAsteriskHeaderData(asteriskData?: AsterickProps | null): AsteriskHeaderDataType {
   if (
     (asteriskData?.__typename === 'ObjectsZoomLevel3DetailType' ||
-      asteriskData?.__typename === 'ArchiveZoomLevel3DetailType') &&
+      asteriskData?.__typename === 'ArchiveZoomLevel3DetailType' ||
+      asteriskData?.__typename === 'PeopleZoomLevel3DetailType') &&
     asteriskData?.asteriskSuggestions
-    // maybe add people here
   ) {
     const asteriskTitle = asteriskData.asteriskSuggestions.reduce(
       (acc: any, curr: any) => {
