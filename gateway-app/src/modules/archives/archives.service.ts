@@ -194,7 +194,7 @@ export class ArchivesService {
     const result = await this.triplyService.queryTriplyData<ArchivesDetailZoomLevel3DataType>(
       this.ZoomLevel3Endpoint,
       archivesDetailZoomLevel3DataKeys,
-      { page: 1, pageSize: 100 }, // Setting to 100 - temp fix to get the new data and get it working again
+      { page: 1, pageSize: 100 }, // TODO: Setting to 100 - temp fix to get the new data and get it working again - need a better solution
       { id, language: locale }
     )
 
