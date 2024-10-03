@@ -220,7 +220,7 @@ interface AsterickProps {
         asterisk_subject_description?: string | null
         asterisk_subject_title?: string | null
       }[]
-    | null[]
+    | null
 }
 
 type AsteriskHeaderDataType =
@@ -245,8 +245,8 @@ function getAsteriskHeaderData(asteriskData?: AsterickProps | null): AsteriskHea
       asteriskData?.__typename === 'PeopleZoomLevel3DetailType') &&
     asteriskData?.asteriskSuggestions
   ) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const asteriskTitle = asteriskData.asteriskSuggestions.reduce(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (acc: any, curr: any) => {
         if (curr.asterisk_subject_title && curr.asterisk_subject_title.endsWith(' (huidig)')) {
           return {
@@ -259,7 +259,6 @@ function getAsteriskHeaderData(asteriskData?: AsterickProps | null): AsteriskHea
       },
       { asterisk_date_title: null, asterisk_name_title: null, asterisk_subject_title: null }
     )
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const asteriskDescription = asteriskData.asteriskSuggestions.reduce((acc: any, curr: any) => {
       if (curr.asterisk_subject_description) {
