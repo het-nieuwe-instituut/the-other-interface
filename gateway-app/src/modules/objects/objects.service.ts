@@ -162,6 +162,13 @@ export class ObjectsService {
     'asterisk_date_relatedKeyword',
     'asterisk_name_relatedKeyword',
     'asterisk_subject_relatedKeyword',
+    // new keys
+    'asterisk_date_description',
+    'asterisk_date_title',
+    'asterisk_name_description',
+    'asterisk_name_title',
+    'asterisk_subject_description',
+    'asterisk_subject_title',
   ]
 
   public constructor(private triplyService: TriplyService) {}
@@ -170,7 +177,7 @@ export class ObjectsService {
     const result = await this.triplyService.queryTriplyData<ObjectsDetailZoomLevel3Data>(
       this.ZoomLevel3Endpoint,
       objectsDetailZoomLevel3DataKeys,
-      { page: 1, pageSize: 1 },
+      { page: 1, pageSize: 100 }, // TODO: Setting to 100 - temp fix to get the new data and get it working again - need a better solution
       { id, language: locale }
     )
 
@@ -216,7 +223,7 @@ export class ObjectsService {
     const result = await this.triplyService.queryTriplyData<ObjectRecordZoomLevel3Data>(
       this.ZoomLevel3RecordEndpoint,
       objectRecordZoomLevel3DataKeys,
-      { page: 1, pageSize: 1 },
+      { page: 1, pageSize: 100 }, // Setting to 100 - temp fix to get the new data and get it working again
       { id, language: locale }
     )
 

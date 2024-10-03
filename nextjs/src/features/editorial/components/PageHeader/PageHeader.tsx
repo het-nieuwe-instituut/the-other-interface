@@ -21,6 +21,8 @@ import { TypographyVariants } from '@/features/ui/components/typography/variants
 import { cn } from '@/features/ui/utils/cn'
 import { useState } from 'react'
 import { ExternalSource } from 'src/generated/graphql'
+import Asterisk from '../../../ui/icons/asterisk-thin-large.svg'
+import { AsteriskTooltip } from '@/features/ui/components/tooltip/AsteriskTooltip'
 
 interface Props {
   title?: string
@@ -28,6 +30,11 @@ interface Props {
   constrainPreface?: boolean
   splitByHtmlBreaks?: boolean
   showReadMore?: boolean
+  asteriskTitle?: {
+    asterisk_date_title: string | null
+    asterisk_name_title: string | null
+    asterisk_subject_title: string | null
+  } | null
   enrichedTitles?: {
     externalSourceType: ExternalSource
     externalSourceUrl: string
@@ -43,6 +50,7 @@ interface Props {
 export const PageHeader: React.FC<Props> = props => {
   const {
     title,
+    asteriskTitle,
     preface,
     constrainPreface,
     splitByHtmlBreaks,
@@ -63,10 +71,42 @@ export const PageHeader: React.FC<Props> = props => {
           'text-left flex flex-col gap-4  max-w-[calc(100vw-40px)]'
         )}
       >
-        {title && (
-          <h1 lang="nl" className={TypographyVariants({ responsive: 'title' })}>
-            {title}
-          </h1>
+        {asteriskTitle?.asterisk_subject_title ? (
+          <>
+            <div className="relative inline-block">
+              <h1
+                lang="nl"
+                className={`${TypographyVariants({
+                  responsive: 'title',
+                  className: 'inline-block',
+                })} break-words`}
+              >
+                <AsteriskTooltip
+                  place="bottom"
+                  title={
+                    !asteriskTitle.asterisk_date_title || !asteriskTitle.asterisk_name_title
+                      ? null
+                      : commonT.t('asteriskMeta', {
+                          date: asteriskTitle.asterisk_date_title,
+                          author: asteriskTitle.asterisk_name_title,
+                        })
+                  }
+                >
+                  {asteriskTitle?.asterisk_subject_title}
+
+                  <span className="absolute text-surface-asterisk-dark asterisk-icon pl-1">
+                    <Asterisk />
+                  </span>
+                </AsteriskTooltip>
+              </h1>
+            </div>
+          </>
+        ) : (
+          title && (
+            <h1 lang="nl" className={TypographyVariants({ responsive: 'title' })}>
+              {title}
+            </h1>
+          )
         )}
       </button>
       {enrichedTitles && enrichedTitles.length > 0 && (

@@ -73,9 +73,11 @@ export const RecordLayer = () => {
     locale,
     page,
   })
+
   const enrichedSources = getEnrichedSources(zoomLevel3) ?? []
   const enrichedTitles = enrichedSources?.filter(v => 'title' in v && !!v.title)
   const enrichedDescriptions = enrichedSources?.filter(v => !!v.description)
+  const [asteriskTitleData, asteriskDescriptionData] = getAsteriskHeaderData(zoomLevel3)
 
   return (
     <LayerWrapper
@@ -94,23 +96,24 @@ export const RecordLayer = () => {
                   splitByHtmlBreaks
                   enrichedTitles={enrichedTitles}
                   enrichedDescriptions={enrichedDescriptions}
+                  asteriskTitle={asteriskTitleData}
                 ></PageHeader>
               </div>
 
               {zoomLevel3?.__typename === 'ArchiveZoomLevel3DetailType' &&
-              (zoomLevel3?.asteriskSuggestions?.length ?? 0) > 0 ? (
-                <AsteriskAnnotationGroup count={zoomLevel3.asteriskSuggestions?.length ?? 0}>
-                  {zoomLevel3.asteriskSuggestions?.map((suggestion, index) => {
-                    const name = suggestion.asterisk_name_title ?? suggestion.asterisk_name_title
-                    const date =
-                      suggestion.asterisk_date_title ?? suggestion.asterisk_date_description
-                    const subject =
-                      suggestion.asterisk_subject_title ?? suggestion.asterisk_subject_description
+              (asteriskDescriptionData?.length ?? 0) > 0 ? (
+                <AsteriskAnnotationGroup count={asteriskDescriptionData?.length ?? 0}>
+                  {asteriskDescriptionData?.map((suggestion, index) => {
+                    const name = suggestion.asterisk_name_description ?? ''
+                    const date = suggestion.asterisk_date_description ?? ''
+                    const subject = suggestion.asterisk_subject_description ?? ''
 
                     return (
                       <AsteriskAnnotationItem
                         key={index}
-                        title={t('asteriskMeta', { author: name, date: date })}
+                        title={
+                          name && date ? t('asteriskMeta', { author: name, date: date }) : null
+                        }
                       >
                         {subject ?? ''}
                       </AsteriskAnnotationItem>
@@ -120,18 +123,18 @@ export const RecordLayer = () => {
               ) : null}
 
               {zoomLevel3?.__typename === 'ObjectsZoomLevel3DetailType' &&
-              (zoomLevel3?.asteriskSuggestions?.length ?? 0) > 0 ? (
-                <AsteriskAnnotationGroup count={zoomLevel3.asteriskSuggestions?.length ?? 0}>
-                  {zoomLevel3.asteriskSuggestions?.map((suggestion, index) => {
-                    const date =
-                      suggestion.asterisk_date_title ?? suggestion.asterisk_date_description ?? ''
-                    const name =
-                      suggestion.asterisk_name_title ?? suggestion.asterisk_name_description ?? ''
+              (asteriskDescriptionData?.length ?? 0) > 0 ? (
+                <AsteriskAnnotationGroup count={asteriskDescriptionData?.length ?? 0}>
+                  {asteriskDescriptionData?.map((suggestion, index) => {
+                    const date = suggestion.asterisk_date_description ?? ''
+                    const name = suggestion.asterisk_name_description ?? ''
                     const subject = suggestion.asterisk_subject_description ?? ''
 
                     return (
                       <AsteriskAnnotationItem
-                        title={t('asteriskMeta', { author: name, date })}
+                        title={
+                          name && date ? t('asteriskMeta', { author: name, date: date }) : null
+                        }
                         key={index}
                       >
                         {subject ?? ''}
@@ -141,17 +144,19 @@ export const RecordLayer = () => {
                 </AsteriskAnnotationGroup>
               ) : null}
 
-              {zoomLevel3?.__typename === 'PeopleZoomLevel3DetailType' &&
-              (zoomLevel3?.asteriskSuggestions?.length ?? 0) > 0 ? (
-                <AsteriskAnnotationGroup count={zoomLevel3.asteriskSuggestions?.length ?? 0}>
-                  {zoomLevel3.asteriskSuggestions?.map((suggestion, index) => {
+              {zoomLevel3?.__typename === 'PeopleZoomLevel3DetailType' && // might need to fix
+              (asteriskDescriptionData?.length ?? 0) > 0 ? (
+                <AsteriskAnnotationGroup count={asteriskDescriptionData?.length ?? 0}>
+                  {asteriskDescriptionData?.map((suggestion, index) => {
                     const date = suggestion.asterisk_date_description ?? ''
                     const name = suggestion.asterisk_name_description ?? ''
                     const subject = suggestion.asterisk_subject_description ?? ''
 
                     return (
                       <AsteriskAnnotationItem
-                        title={t('asteriskMeta', { author: name, date })}
+                        title={
+                          name && date ? t('asteriskMeta', { author: name, date: date }) : null
+                        }
                         key={index}
                       >
                         {subject ?? ''}
@@ -202,6 +207,100 @@ export const RecordLayer = () => {
       BottomContent={<RecordBottomContent />}
     />
   )
+}
+
+interface AsterickProps {
+  __typename?: string | null
+  asteriskSuggestions?:
+    | {
+        asterisk_date_description?: string | null
+        asterisk_date_title?: string | null
+        asterisk_name_description?: string | null
+        asterisk_name_title?: string | null
+        asterisk_subject_description?: string | null
+        asterisk_subject_title?: string | null
+      }[]
+    | null
+}
+
+type AsteriskHeaderDataType =
+  | [
+      {
+        asterisk_date_title: string | null
+        asterisk_name_title: string | null
+        asterisk_subject_title: string | null
+      },
+      {
+        asterisk_date_description: string | null
+        asterisk_name_description: string | null
+        asterisk_subject_description: string | null
+      }[]
+    ]
+  | [null, null]
+
+interface AsteriskTitle {
+  asterisk_date_title: string | null
+  asterisk_name_title: string | null
+  asterisk_subject_title: string | null
+}
+
+interface AsteriskDescription {
+  asterisk_date_description: string | null
+  asterisk_name_description: string | null
+  asterisk_subject_description: string | null
+}
+
+function getAsteriskHeaderData(asteriskData?: AsterickProps | null): AsteriskHeaderDataType {
+  if (
+    (asteriskData?.__typename === 'ObjectsZoomLevel3DetailType' ||
+      asteriskData?.__typename === 'ArchiveZoomLevel3DetailType' ||
+      asteriskData?.__typename === 'PeopleZoomLevel3DetailType') &&
+    asteriskData?.asteriskSuggestions
+  ) {
+    const asteriskTitle = asteriskData.asteriskSuggestions.reduce(
+      (
+        acc: AsteriskTitle,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        curr: any
+      ) => {
+        if (curr.asterisk_subject_title && curr.asterisk_subject_title.endsWith(' (huidig)')) {
+          return {
+            asterisk_date_title: curr.asterisk_date_title,
+            asterisk_name_title: curr.asterisk_name_title,
+            asterisk_subject_title: curr.asterisk_subject_title.replace(' (huidig)', ''),
+          }
+        }
+        return acc
+      },
+      {
+        asterisk_date_title: null,
+        asterisk_name_title: null,
+        asterisk_subject_title: null,
+      } as AsteriskTitle
+    )
+
+    const asteriskDescription = asteriskData.asteriskSuggestions.reduce(
+      (
+        acc: AsteriskDescription[],
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        curr: any
+      ) => {
+        if (curr.asterisk_subject_description) {
+          acc.push({
+            asterisk_date_description: curr.asterisk_date_description,
+            asterisk_name_description: curr.asterisk_name_description,
+            asterisk_subject_description: curr.asterisk_subject_description,
+          })
+          return acc
+        }
+        return acc
+      },
+      [] as AsteriskDescription[]
+    )
+    return [asteriskTitle, asteriskDescription]
+  }
+
+  return [null, null]
 }
 
 interface MediaPlayerProps {

@@ -156,7 +156,11 @@ export const RecordMeta = ({
                         <AsteriskTooltip
                           key={index}
                           place="left"
-                          title={t('asteriskMeta', { date: v.date, author: v.name })}
+                          title={
+                            !v.date || !v.name
+                              ? null
+                              : t('asteriskMeta', { date: v.date, author: v.name })
+                          }
                         >
                           <AsteriskSourceBlock key={v.date}>{v.subject}</AsteriskSourceBlock>
                         </AsteriskTooltip>
@@ -268,7 +272,7 @@ function RightsLogo({ value }: { value?: string[] | null; key?: string }) {
 function SuggestionSection() {
   const { t } = useTypeSafeTranslation('recordMeta')
 
-  const contributeLink = 'https://forms.office.com/e/Y0bXYPicVw'
+  const contributeLink = 'https://forms.nieuweinstituut.nl/asterisk-suggestions-form/'
   const learnMoreLink = '/asterisk'
 
   return (

@@ -28,6 +28,7 @@ type BasePublicationRecordZoomLevel3Type = OmitAsteriskSuggestions<
 
 const objectFieldOrder: Array<keyof BaseObjectRecordZoomLevel3Type> = [
   'objectNumber',
+  'title',
   'objectName',
   'objectType',
   'archiveCode',
@@ -48,7 +49,7 @@ const objectFieldOrder: Array<keyof BaseObjectRecordZoomLevel3Type> = [
 
 const archiveFieldOrder: Array<Partial<keyof BaseArchivesRecordZoomLevel3Type>> = [
   'referenceCode',
-  'titleType',
+  'title',
   'creators',
   'descriptionLevel',
   'size',

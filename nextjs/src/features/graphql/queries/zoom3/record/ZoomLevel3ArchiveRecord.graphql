@@ -4,6 +4,7 @@ query ZoomLevel3ArchiveRecord($id: String!, $locale: Locale!) {
     id
     referenceCode
     titleType
+    title
     descriptionLevel
     size
     period
