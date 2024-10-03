@@ -258,7 +258,11 @@ function getAsteriskHeaderData(asteriskData?: AsterickProps | null): AsteriskHea
     asteriskData?.asteriskSuggestions
   ) {
     const asteriskTitle = asteriskData.asteriskSuggestions.reduce(
-      (acc: any, curr: any) => {
+      (
+        acc: AsteriskTitle,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        curr: any
+      ) => {
         if (curr.asterisk_subject_title && curr.asterisk_subject_title.endsWith(' (huidig)')) {
           return {
             asterisk_date_title: curr.asterisk_date_title,
@@ -275,17 +279,24 @@ function getAsteriskHeaderData(asteriskData?: AsterickProps | null): AsteriskHea
       } as AsteriskTitle
     )
 
-    const asteriskDescription = asteriskData.asteriskSuggestions.reduce((acc: any, curr: any) => {
-      if (curr.asterisk_subject_description) {
-        acc.push({
-          asterisk_date_description: curr.asterisk_date_description,
-          asterisk_name_description: curr.asterisk_name_description,
-          asterisk_subject_description: curr.asterisk_subject_description,
-        })
+    const asteriskDescription = asteriskData.asteriskSuggestions.reduce(
+      (
+        acc: AsteriskDescription[],
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        curr: any
+      ) => {
+        if (curr.asterisk_subject_description) {
+          acc.push({
+            asterisk_date_description: curr.asterisk_date_description,
+            asterisk_name_description: curr.asterisk_name_description,
+            asterisk_subject_description: curr.asterisk_subject_description,
+          })
+          return acc
+        }
         return acc
-      }
-      return acc
-    }, [] as AsteriskDescription[])
+      },
+      [] as AsteriskDescription[]
+    )
     return [asteriskTitle, asteriskDescription]
   }
 
