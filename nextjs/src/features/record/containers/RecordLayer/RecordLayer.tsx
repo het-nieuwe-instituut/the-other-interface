@@ -238,6 +238,18 @@ type AsteriskHeaderDataType =
     ]
   | [null, null]
 
+interface AsteriskTitle {
+  asterisk_date_title: string | null
+  asterisk_name_title: string | null
+  asterisk_subject_title: string | null
+}
+
+interface AsteriskDescription {
+  asterisk_date_description: string | null
+  asterisk_name_description: string | null
+  asterisk_subject_description: string | null
+}
+
 function getAsteriskHeaderData(asteriskData?: AsterickProps | null): AsteriskHeaderDataType {
   if (
     (asteriskData?.__typename === 'ObjectsZoomLevel3DetailType' ||
@@ -245,7 +257,6 @@ function getAsteriskHeaderData(asteriskData?: AsterickProps | null): AsteriskHea
       asteriskData?.__typename === 'PeopleZoomLevel3DetailType') &&
     asteriskData?.asteriskSuggestions
   ) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const asteriskTitle = asteriskData.asteriskSuggestions.reduce(
       (acc: any, curr: any) => {
         if (curr.asterisk_subject_title && curr.asterisk_subject_title.endsWith(' (huidig)')) {
@@ -257,9 +268,13 @@ function getAsteriskHeaderData(asteriskData?: AsterickProps | null): AsteriskHea
         }
         return acc
       },
-      { asterisk_date_title: null, asterisk_name_title: null, asterisk_subject_title: null }
+      {
+        asterisk_date_title: null,
+        asterisk_name_title: null,
+        asterisk_subject_title: null,
+      } as AsteriskTitle
     )
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     const asteriskDescription = asteriskData.asteriskSuggestions.reduce((acc: any, curr: any) => {
       if (curr.asterisk_subject_description) {
         acc.push({
@@ -270,7 +285,7 @@ function getAsteriskHeaderData(asteriskData?: AsterickProps | null): AsteriskHea
         return acc
       }
       return acc
-    }, [])
+    }, [] as AsteriskDescription[])
     return [asteriskTitle, asteriskDescription]
   }
 
