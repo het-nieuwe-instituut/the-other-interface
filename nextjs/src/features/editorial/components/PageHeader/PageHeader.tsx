@@ -81,23 +81,28 @@ export const PageHeader: React.FC<Props> = props => {
                   className: 'inline-block',
                 })} break-words`}
               >
-                <AsteriskTooltip
-                  place="bottom"
-                  title={
-                    !asteriskTitle.asterisk_date_title || !asteriskTitle.asterisk_name_title
-                      ? null
-                      : commonT.t('asteriskMeta', {
-                          date: asteriskTitle.asterisk_date_title,
-                          author: asteriskTitle.asterisk_name_title,
-                        })
-                  }
-                >
-                  {asteriskTitle?.asterisk_subject_title}
+                {asteriskTitle.asterisk_date_title && asteriskTitle.asterisk_name_title ? (
+                  <AsteriskTooltip
+                    place="bottom"
+                    title={commonT.t('asteriskMeta', {
+                      date: asteriskTitle.asterisk_date_title,
+                      author: asteriskTitle.asterisk_name_title,
+                    })}
+                  >
+                    {asteriskTitle?.asterisk_subject_title}
 
-                  <span className="absolute text-surface-asterisk-dark asterisk-icon pl-1">
-                    <Asterisk />
-                  </span>
-                </AsteriskTooltip>
+                    <span className="absolute text-surface-asterisk-dark asterisk-icon pl-1">
+                      <Asterisk />
+                    </span>
+                  </AsteriskTooltip>
+                ) : (
+                  <>
+                    {asteriskTitle?.asterisk_subject_title}
+                    <span className="absolute text-surface-asterisk-dark asterisk-icon pl-1">
+                      <Asterisk />
+                    </span>
+                  </>
+                )}
               </h1>
             </div>
           </>

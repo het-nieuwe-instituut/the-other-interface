@@ -153,17 +153,23 @@ export const RecordMeta = ({
                   <AsteriskSourceBlockGroup>
                     {section.asteriskSuggestions?.map((v, index) => {
                       return (
-                        <AsteriskTooltip
-                          key={index}
-                          place="left"
-                          title={
-                            !v.date || !v.name
-                              ? null
-                              : t('asteriskMeta', { date: v.date, author: v.name })
-                          }
-                        >
-                          <AsteriskSourceBlock key={v.date}>{v.subject}</AsteriskSourceBlock>
-                        </AsteriskTooltip>
+                        <>
+                          {v.date && v.name ? (
+                            <AsteriskTooltip
+                              key={index}
+                              place="left"
+                              title={
+                                !v.date || !v.name
+                                  ? null
+                                  : t('asteriskMeta', { date: v.date, author: v.name })
+                              }
+                            >
+                              <AsteriskSourceBlock key={v.date}>{v.subject}</AsteriskSourceBlock>
+                            </AsteriskTooltip>
+                          ) : (
+                            <AsteriskSourceBlock key={v.date}>{v.subject}</AsteriskSourceBlock>
+                          )}
+                        </>
                       )
                     })}
                   </AsteriskSourceBlockGroup>
