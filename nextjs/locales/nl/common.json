@@ -36,6 +36,8 @@
   "showExternalSources": "Toon externe bronnen ({{count}})",
   "hideExternalSources": "Verberg externe bronnen ({{count}})",
   "asteriskMeta": "Toegevoegd door {{author}} op {{date}}",
+  "asteriskMetaDate": "Toegevoegd op {{date}}",
+  "asteriskMetaAuthor": "Toegevoegd door {{author}}",
   "asteriskMetaFallback": "Gegevens kunnen niet worden geladen",
   "pulledFrom": "Pulled from",
   "pulledFromGetty": "Getty ULAN",

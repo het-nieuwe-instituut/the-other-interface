@@ -23,6 +23,7 @@ import { useState } from 'react'
 import { ExternalSource } from 'src/generated/graphql'
 import Asterisk from '../../../ui/icons/asterisk-thin-large.svg'
 import { AsteriskTooltip } from '@/features/ui/components/tooltip/AsteriskTooltip'
+import { formateAsteriskText } from '@/features/record/components/RecordMeta/RecordMeta'
 
 interface Props {
   title?: string
@@ -81,13 +82,14 @@ export const PageHeader: React.FC<Props> = props => {
                   className: 'inline-block',
                 })} break-words`}
               >
-                {asteriskTitle.asterisk_date_title && asteriskTitle.asterisk_name_title ? (
+                {asteriskTitle.asterisk_date_title || asteriskTitle.asterisk_name_title ? (
                   <AsteriskTooltip
                     place="bottom"
-                    title={commonT.t('asteriskMeta', {
-                      date: asteriskTitle.asterisk_date_title,
-                      author: asteriskTitle.asterisk_name_title,
-                    })}
+                    title={formateAsteriskText(
+                      commonT.t,
+                      asteriskTitle.asterisk_date_title,
+                      asteriskTitle.asterisk_name_title
+                    )}
                   >
                     {asteriskTitle?.asterisk_subject_title}
 
