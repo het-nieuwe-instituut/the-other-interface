@@ -105,9 +105,9 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
               >
                 {item.TableBodyItem?.map((bodyItem, cellIndex) => {
                   const hasAsteriskData =
-                    (component.type === 'object' || component.type === 'archive') &&
-                    item.TableBodyAsteriskItem?.asteriskDate &&
-                    item
+                    (component.type === 'objects' || component.type === 'archives') &&
+                    item.TableBodyAsteriskItem?.asteriskSubject
+
                   return (
                     <>
                       {hasAsteriskData && cellIndex === 0 ? (
