@@ -2,7 +2,7 @@
 
 import { ScrollToContent } from '@/features/pages/utils/utils'
 import { getExternalSourceTranslation } from '@/features/record/utils/enrichedSources'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import useScroll from '@/features/shared/hooks/ui/useScroll'
 import { Paragraph } from '@/features/ui/components/Paragraph/Paragraph'
 import { ParagraphWithLineClamp } from '@/features/ui/components/Paragraph/ParagraphWithLineClamp'
@@ -59,7 +59,8 @@ export const PageHeader: React.FC<Props> = props => {
     enrichedTitles,
     enrichedDescriptions,
   } = props
-  const commonT = useTypeSafeTranslation('common')
+
+  const { t: commonT } = useLooseTypeSafeTranslation('common')
   const { scrollPosition } = useScroll()
   const [constrainPrefaceState, setConstrainPreface] = useState(constrainPreface)
 
@@ -86,7 +87,7 @@ export const PageHeader: React.FC<Props> = props => {
                   <AsteriskTooltip
                     place="bottom"
                     title={formateAsteriskText(
-                      commonT.t,
+                      commonT,
                       asteriskTitle.asterisk_date_title,
                       asteriskTitle.asterisk_name_title
                     )}
@@ -132,7 +133,7 @@ export const PageHeader: React.FC<Props> = props => {
                 title={
                   externalSourceUrl ? (
                     <div className=" inline-block">
-                      {commonT.t('pulledFrom')}{' '}
+                      {commonT('pulledFrom')}{' '}
                       <div className="inline-block">
                         <ExternalSourceLink
                           externalSourceType={externalSourceType}
@@ -162,7 +163,7 @@ export const PageHeader: React.FC<Props> = props => {
                 intent={'secondary'}
                 variant={'footerPrimary'}
               >
-                {constrainPrefaceState ? commonT.t('readMore') : commonT.t('readLess')}
+                {constrainPrefaceState ? commonT('readMore') : commonT('readLess')}
               </NavButton>
             }
           >
