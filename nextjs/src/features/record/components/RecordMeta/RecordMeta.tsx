@@ -33,6 +33,7 @@ import { recordRightsFieldMapper } from '../../mappers/recordRightsMapper'
 import { getExternalSourceTranslation } from '../../utils/enrichedSources'
 import { ExternalSource } from 'src/generated/graphql'
 import { useLocale } from '@/features/shared/hooks/useLocale'
+import { TranslationQuery } from 'next-translate'
 
 export const RecordMeta = ({
   data,
@@ -153,17 +154,19 @@ export const RecordMeta = ({
                   <AsteriskSourceBlockGroup>
                     {section.asteriskSuggestions?.map((v, index) => {
                       return (
-                        <AsteriskTooltip
-                          key={index}
-                          place="left"
-                          title={
-                            !v.date || !v.name
-                              ? null
-                              : t('asteriskMeta', { date: v.date, author: v.name })
-                          }
-                        >
-                          <AsteriskSourceBlock key={v.date}>{v.subject}</AsteriskSourceBlock>
-                        </AsteriskTooltip>
+                        <>
+                          {v.date || v.name ? (
+                            <AsteriskTooltip
+                              key={index}
+                              place="left"
+                              title={formateAsteriskText(t, v.date, v.name)}
+                            >
+                              <AsteriskSourceBlock key={v.date}>{v.subject}</AsteriskSourceBlock>
+                            </AsteriskTooltip>
+                          ) : (
+                            <AsteriskSourceBlock key={v.date}>{v.subject}</AsteriskSourceBlock>
+                          )}
+                        </>
                       )
                     })}
                   </AsteriskSourceBlockGroup>
@@ -229,6 +232,33 @@ export const RecordMeta = ({
       {data && data.__typename !== 'PublicationRecordZoomLevel3Type' && <SuggestionSection />}
     </div>
   )
+}
+
+type TranslationType = (
+  s: string,
+  q?: TranslationQuery,
+  o?:
+    | {
+        returnObjects?: boolean
+        fallback?: string | string[]
+        default?: string
+      }
+    | undefined
+) => string | undefined
+
+export function formateAsteriskText(
+  t: TranslationType,
+  date?: string | null,
+  author?: string | null
+) {
+  if (date && author) {
+    return t('asteriskMeta', { date, author })
+  } else if (date && !author) {
+    return t('asteriskMetaDate', { date })
+  } else if (author && !date) {
+    return t('asteriskMetaAuthor', { author })
+  }
+  return null
 }
 
 const MetaField = ({ name, children }: { name?: string; children: JSX.Element }) => {

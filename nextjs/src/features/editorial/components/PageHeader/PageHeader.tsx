@@ -2,7 +2,7 @@
 
 import { ScrollToContent } from '@/features/pages/utils/utils'
 import { getExternalSourceTranslation } from '@/features/record/utils/enrichedSources'
-import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import useScroll from '@/features/shared/hooks/ui/useScroll'
 import { Paragraph } from '@/features/ui/components/Paragraph/Paragraph'
 import { ParagraphWithLineClamp } from '@/features/ui/components/Paragraph/ParagraphWithLineClamp'
@@ -23,6 +23,7 @@ import { useState } from 'react'
 import { ExternalSource } from 'src/generated/graphql'
 import Asterisk from '../../../ui/icons/asterisk-thin-large.svg'
 import { AsteriskTooltip } from '@/features/ui/components/tooltip/AsteriskTooltip'
+import { formateAsteriskText } from '@/features/record/components/RecordMeta/RecordMeta'
 
 interface Props {
   title?: string
@@ -58,7 +59,8 @@ export const PageHeader: React.FC<Props> = props => {
     enrichedTitles,
     enrichedDescriptions,
   } = props
-  const commonT = useTypeSafeTranslation('common')
+
+  const { t: commonT } = useLooseTypeSafeTranslation('common')
   const { scrollPosition } = useScroll()
   const [constrainPrefaceState, setConstrainPreface] = useState(constrainPreface)
 
@@ -81,23 +83,29 @@ export const PageHeader: React.FC<Props> = props => {
                   className: 'inline-block',
                 })} break-words`}
               >
-                <AsteriskTooltip
-                  place="bottom"
-                  title={
-                    !asteriskTitle.asterisk_date_title || !asteriskTitle.asterisk_name_title
-                      ? null
-                      : commonT.t('asteriskMeta', {
-                          date: asteriskTitle.asterisk_date_title,
-                          author: asteriskTitle.asterisk_name_title,
-                        })
-                  }
-                >
-                  {asteriskTitle?.asterisk_subject_title}
+                {asteriskTitle.asterisk_date_title || asteriskTitle.asterisk_name_title ? (
+                  <AsteriskTooltip
+                    place="bottom"
+                    title={formateAsteriskText(
+                      commonT,
+                      asteriskTitle.asterisk_date_title,
+                      asteriskTitle.asterisk_name_title
+                    )}
+                  >
+                    {asteriskTitle?.asterisk_subject_title}
 
-                  <span className="absolute text-surface-asterisk-dark asterisk-icon pl-1">
-                    <Asterisk />
-                  </span>
-                </AsteriskTooltip>
+                    <span className="absolute text-surface-asterisk-dark asterisk-icon pl-1">
+                      <Asterisk />
+                    </span>
+                  </AsteriskTooltip>
+                ) : (
+                  <>
+                    {asteriskTitle?.asterisk_subject_title}
+                    <span className="absolute text-surface-asterisk-dark asterisk-icon pl-1">
+                      <Asterisk />
+                    </span>
+                  </>
+                )}
               </h1>
             </div>
           </>
@@ -125,7 +133,7 @@ export const PageHeader: React.FC<Props> = props => {
                 title={
                   externalSourceUrl ? (
                     <div className=" inline-block">
-                      {commonT.t('pulledFrom')}{' '}
+                      {commonT('pulledFrom')}{' '}
                       <div className="inline-block">
                         <ExternalSourceLink
                           externalSourceType={externalSourceType}
@@ -155,7 +163,7 @@ export const PageHeader: React.FC<Props> = props => {
                 intent={'secondary'}
                 variant={'footerPrimary'}
               >
-                {constrainPrefaceState ? commonT.t('readMore') : commonT.t('readLess')}
+                {constrainPrefaceState ? commonT('readMore') : commonT('readLess')}
               </NavButton>
             }
           >

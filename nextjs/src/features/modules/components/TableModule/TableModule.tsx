@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 import Asterisk from '../../../ui/icons/asterisk-thin-large.svg'
 import { AsteriskTooltip } from '@/features/ui/components/tooltip/AsteriskTooltip'
 import { useLooseTypeSafeTranslation } from '@/features/shared/hooks/translations'
+import { formateAsteriskText } from '@/features/record/components/RecordMeta/RecordMeta'
 
 interface Props {
   component?: TableModuleType
@@ -103,40 +104,58 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
                 className="tr-border-gradient hover:bg-black-100 hover:text-ivory-100 active:bg-black-100 active:text-ivory-100"
               >
                 {item.TableBodyItem?.map((bodyItem, cellIndex) => {
-                  const hasAsteriskData =
-                    (component.type === 'object' || component.type === 'archive') &&
-                    item.TableBodyAsteriskItem?.asteriskDate &&
-                    item
+                  const hasAsteriskData = Boolean(
+                    (component.type === 'objects' || component.type === 'archives') &&
+                      item.TableBodyAsteriskItem?.asteriskSubject
+                  )
                   return (
                     <>
                       {hasAsteriskData && cellIndex === 0 ? (
-                        <AsteriskTooltip
-                          place="bottom"
-                          title={
-                            !item.TableBodyAsteriskItem?.asteriskDate ||
-                            !item.TableBodyAsteriskItem?.asteriskName
-                              ? null
-                              : t('asteriskMeta', {
-                                  date: item.TableBodyAsteriskItem?.asteriskDate,
-                                  author: item.TableBodyAsteriskItem?.asteriskName,
-                                })
-                          }
-                        >
-                          <td
-                            key={bodyItem.id}
-                            className={cn(
-                              TypographyVariants({ socialLarge: cellIndex === 0 ? 'xl' : 'lg' }),
-                              'text-left, py-6 pr-2 cursor-pointer'
-                            )}
-                          >
-                            <div className="inline-block">
-                              {Boolean(bodyItem.value) ? bodyItem.value : 'n/a'}
-                              <div className="inline-block pl-1 pt-1 text-surface-asterisk-dark">
-                                <Asterisk />
+                        <>
+                          {item.TableBodyAsteriskItem?.asteriskDate ||
+                          item.TableBodyAsteriskItem?.asteriskName ? (
+                            <AsteriskTooltip
+                              place="bottom"
+                              title={formateAsteriskText(
+                                t,
+                                item.TableBodyAsteriskItem?.asteriskDate,
+                                item.TableBodyAsteriskItem?.asteriskName
+                              )}
+                            >
+                              <td
+                                key={bodyItem.id}
+                                className={cn(
+                                  TypographyVariants({
+                                    socialLarge: cellIndex === 0 ? 'xl' : 'lg',
+                                  }),
+                                  'text-left, py-6 pr-2 cursor-pointer'
+                                )}
+                              >
+                                <div className="inline-block">
+                                  {Boolean(bodyItem.value) ? bodyItem.value : 'n/a'}
+                                  <div className="inline-block pl-1 pt-1 text-surface-asterisk-dark">
+                                    <Asterisk />
+                                  </div>
+                                </div>
+                              </td>
+                            </AsteriskTooltip>
+                          ) : (
+                            <td
+                              key={bodyItem.id}
+                              className={cn(
+                                TypographyVariants({ socialLarge: cellIndex === 0 ? 'xl' : 'lg' }),
+                                'text-left, py-6 pr-2 cursor-pointer'
+                              )}
+                            >
+                              <div className="inline-block">
+                                {Boolean(bodyItem.value) ? bodyItem.value : 'n/a'}
+                                <div className="inline-block pl-1 pt-1 text-surface-asterisk-dark">
+                                  <Asterisk />
+                                </div>
                               </div>
-                            </div>
-                          </td>
-                        </AsteriskTooltip>
+                            </td>
+                          )}
+                        </>
                       ) : (
                         <td
                           key={bodyItem.id}

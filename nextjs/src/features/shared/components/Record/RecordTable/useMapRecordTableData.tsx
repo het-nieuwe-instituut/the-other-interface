@@ -40,7 +40,7 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
           return {
             id: record.idRelation ?? index + '',
             TableBodyItem: [
-              { id: '1', value: record.titleR },
+              { id: '1', value: record.titleR }, // here
               { id: '2', value: record.referenceNumber },
               { id: '3', value: record.descriptionLevel },
             ],
@@ -80,7 +80,7 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
           return {
             id: record.idRelation ?? index + '',
             TableBodyItem: [
-              { id: '1', value: record.titleR },
+              { id: '1', value: record.titleR }, // here
               { id: '2', value: record.referenceNumber },
               { id: '3', value: record.period },
             ],
