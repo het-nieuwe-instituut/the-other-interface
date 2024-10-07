@@ -104,10 +104,10 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
                 className="tr-border-gradient hover:bg-black-100 hover:text-ivory-100 active:bg-black-100 active:text-ivory-100"
               >
                 {item.TableBodyItem?.map((bodyItem, cellIndex) => {
-                  const hasAsteriskData =
+                  const hasAsteriskData = Boolean(
                     (component.type === 'objects' || component.type === 'archives') &&
-                    item.TableBodyAsteriskItem?.asteriskSubject
-
+                      item.TableBodyAsteriskItem?.asteriskSubject
+                  )
                   return (
                     <>
                       {hasAsteriskData && cellIndex === 0 ? (
