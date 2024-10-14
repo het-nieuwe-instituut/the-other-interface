@@ -5,33 +5,56 @@ import { TriplyUtils } from '../triply/triply.utils'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { EntityNames } from '../util/entityNames.type'
 import { Locale } from '../util/locale.type'
-import { EnrichedRecordBaseType } from '../triply/triply.type'
+import { ArchiveAsteriskType } from './archives.type'
+import { EnrichedRecordBaseType } from '../triplyRecord/triplyRecord.type'
 
 export interface ArchivesDetailZoomLevel3DataType {
   id?: string
   title?: string
   thumbnail?: string
   objectNumber?: string
+  asterisk_date_title?: string
+  asterisk_name_title?: string
+  asterisk_subject_title?: string
+  asterisk_date_description?: string
+  asterisk_name_description?: string
+  asterisk_subject_description?: string
+  mediaType?: string
+  mediaReference?: string
 }
 const archivesDetailZoomLevel3DataKeys: KeysToVerify<ArchivesDetailZoomLevel3DataType> = {
   id: true,
   title: true,
   thumbnail: true,
   objectNumber: true,
+  asterisk_date_title: true,
+  asterisk_name_title: true,
+  asterisk_subject_title: true,
+  asterisk_date_description: true,
+  asterisk_name_description: true,
+  asterisk_subject_description: true,
+  mediaReference: true,
+  mediaType: true,
 }
 
 export interface ArchiveRelationsType {
   id?: string
   titleR?: string
   referenceNumber?: string
-  period?: string
+  descriptionLevel?: string
+  asterisk_date_person?: string
+  asterisk_name_person?: string
+  asterisk_subject_person?: string
 }
 
 const archiveRelationsKeys: KeysToVerify<ArchiveRelationsType> = {
   id: true,
   titleR: true,
   referenceNumber: true,
-  period: true,
+  descriptionLevel: true,
+  asterisk_date_person: true,
+  asterisk_name_person: true,
+  asterisk_subject_person: true,
 }
 
 export interface ArchiveRelationsCountType {
@@ -70,6 +93,7 @@ export interface ArchivesRecordZoomLevel3Data {
   sources?: string
   referenceCode?: string
   titleType?: string
+  title?: string
   descriptionLevel?: string
   size?: string
   period?: string
@@ -77,7 +101,19 @@ export interface ArchivesRecordZoomLevel3Data {
   photographCreator?: string
   rights?: string
   permanentLink?: string
-  externalSource?: string
+  externalURI?: string
+  location?: string
+  subject?: string
+  creators?: string
+  asterisk_date_content?: string
+  asterisk_name_content?: string
+  asterisk_subject_content?: string
+  asterisk_date_subject?: string
+  asterisk_name_subject?: string
+  asterisk_subject_subject?: string
+  asterisk_date_location?: string
+  asterisk_name_location?: string
+  asterisk_subject_location?: string
 }
 
 const archivesRecordZoomLevel3DataKeys: KeysToVerify<ArchivesRecordZoomLevel3Data> = {
@@ -91,6 +127,7 @@ const archivesRecordZoomLevel3DataKeys: KeysToVerify<ArchivesRecordZoomLevel3Dat
   sources: true,
   referenceCode: true,
   titleType: true,
+  title: true,
   descriptionLevel: true,
   size: true,
   period: true,
@@ -98,7 +135,19 @@ const archivesRecordZoomLevel3DataKeys: KeysToVerify<ArchivesRecordZoomLevel3Dat
   photographCreator: true,
   rights: true,
   permanentLink: true,
-  externalSource: true,
+  externalURI: true,
+  location: true,
+  subject: true,
+  creators: true,
+  asterisk_date_subject: true,
+  asterisk_name_subject: true,
+  asterisk_subject_subject: true,
+  asterisk_date_location: true,
+  asterisk_name_location: true,
+  asterisk_subject_location: true,
+  asterisk_date_content: true,
+  asterisk_name_content: true,
+  asterisk_subject_content: true,
 }
 
 @Injectable()
@@ -117,21 +166,46 @@ export class ArchivesService {
     [ExternalSource.rkd]: 'archives-enrichment-rkd/run',
   }
 
+  private asteriskKeys: (keyof typeof ArchiveAsteriskType.prototype)[] = [
+    'asterisk_subject_person',
+    'asterisk_date_person',
+    'asterisk_name_person',
+    'asterisk_date_subject',
+    'asterisk_name_subject',
+    'asterisk_subject_subject',
+    'asterisk_date_location',
+    'asterisk_name_location',
+    'asterisk_subject_location',
+    'asterisk_date_description',
+    'asterisk_name_description',
+    'asterisk_subject_description',
+    'asterisk_date_content',
+    'asterisk_name_content',
+    'asterisk_subject_content',
+    // new
+    'asterisk_date_title',
+    'asterisk_name_title',
+    'asterisk_subject_title',
+  ]
+
   public constructor(private triplyService: TriplyService) {}
 
   public async getZoomLevel3Data(id: string, locale: Locale) {
     const result = await this.triplyService.queryTriplyData<ArchivesDetailZoomLevel3DataType>(
       this.ZoomLevel3Endpoint,
       archivesDetailZoomLevel3DataKeys,
-      { page: 1, pageSize: 2 },
+      { page: 1, pageSize: 100 }, // TODO: Setting to 100 - temp fix to get the new data and get it working again - need a better solution
       { id, language: locale }
     )
+
+    const asteriskSuggestions = this.formatAsteriskSuggestions(result.data)
 
     return {
       ...TriplyUtils.combineObjectArray(result.data),
       type: EntityNames.Archives,
       id,
       thumbnail: getHttpThumbnailOrNull(result.data[0]?.thumbnail)?.split(';'),
+      asteriskSuggestions,
     }
   }
 
@@ -147,13 +221,8 @@ export class ArchivesService {
       { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
       { id, type, language: locale }
     )
-    const output = TriplyUtils.sanitizeObjectArray(
-      result.data,
-      'relation',
-      'idRelation',
-      'thumbnail'
-    )
-    return output
+
+    return TriplyUtils.sanitizeObjectArray(result.data, 'relation', 'idRelation', 'thumbnail')
   }
 
   public async getRelationsDataCount(id: string, type: EntityNames) {
@@ -171,11 +240,21 @@ export class ArchivesService {
     const result = await this.triplyService.queryTriplyData<ArchivesRecordZoomLevel3Data>(
       this.ZoomLevel3RecordEndpoint,
       archivesRecordZoomLevel3DataKeys,
-      { page: 1, pageSize: 1 },
+      { page: 1, pageSize: 100 }, // Setting to 100 - temp fix to get the new data and get it working again
       { id, language: locale }
     )
 
-    return result?.data
+    const asteriskSuggestions = this.formatAsteriskSuggestions(result.data)
+    const data = TriplyUtils.combineObjectArray(result.data)
+    if (!data) {
+      return
+    }
+
+    return {
+      ...data,
+      id,
+      asteriskSuggestions,
+    }
   }
 
   public async getZoomRecordHover(id: string, locale: Locale) {
@@ -196,5 +275,18 @@ export class ArchivesService {
 
   public getEnrichedSources(id: string, locale: Locale): Promise<EnrichedRecordBaseType[]> {
     return this.triplyService.getEnrichedSourceData(this.EnrichedSourceEndpoints, id, locale)
+  }
+
+  private formatAsteriskSuggestions(data: ArchiveAsteriskType[]) {
+    return data.reduce<ArchiveAsteriskType[]>((acc, cur) => {
+      const hasValue = this.asteriskKeys.some(key => cur[key] !== undefined)
+      if (hasValue) {
+        acc.push({ ...cur })
+      }
+
+      this.asteriskKeys.forEach(key => delete cur[key])
+
+      return acc
+    }, [])
   }
 }

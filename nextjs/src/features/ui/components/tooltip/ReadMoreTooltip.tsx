@@ -26,6 +26,8 @@ export interface ReadMoreTooltipProps extends PropsWithChildren {
   error?: string
   className?: string
   hideTooltip?: boolean
+  floating?: boolean
+  disableLineClamp?: boolean
 }
 
 export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
@@ -34,20 +36,23 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
     title,
     description,
     readMoreHref,
+    disableLineClamp,
     readMoreText,
     color = 'black',
-    offset,
+    offset = 64,
     isLoading,
     place,
     error,
     isEmpty,
     className,
     hideTooltip,
+    floating,
   } = props
   const content = useMemo(
     () =>
       ReactDOMServer.renderToStaticMarkup(
         <ReadMoreTooltipContent
+          disableLineClamp={disableLineClamp}
           isLoading={isLoading}
           title={title}
           description={description}
@@ -76,7 +81,13 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
 
   return (
     <>
-      <BaseTooltip className={className} offset={offset} html={content} place={place}>
+      <BaseTooltip
+        floating={floating}
+        className={className}
+        offset={offset}
+        html={content}
+        place={place}
+      >
         {children}
       </BaseTooltip>
     </>
@@ -93,6 +104,7 @@ const ReadMoreTooltipContent = ({
   readMoreHref,
   readMoreText,
   hideTooltip,
+  disableLineClamp,
 }: ReadMoreTooltipProps) => {
   const { t } = useTypeSafeTranslation('common')
   if (hideTooltip) {
@@ -102,7 +114,7 @@ const ReadMoreTooltipContent = ({
   if (error) {
     return (
       <div role="tooltip" className={cn('w-[243.76px] justify-start p-4 text-start bg-error-100 ')}>
-        <p className={TypographyVariants({ socialLarge: 'sm', className: 'text-white' })}>
+        <p className={TypographyVariants({ socialLarge: 'sm', className: 'text-ivory-100' })}>
           {error}
         </p>
       </div>
@@ -113,9 +125,9 @@ const ReadMoreTooltipContent = ({
     <div
       role="tooltip"
       className={cn(
-        'w-[243.76px] justify-start p-4 text-start',
+        'w-[243.76px] justify-start p-4 text-start relative overflow-hidden',
         color === 'black' && 'bg-black-100',
-        color === 'blue' && 'bg-blue-100'
+        color === 'blue' && 'bg-blue-95'
       )}
     >
       {renderContent()}
@@ -150,7 +162,12 @@ const ReadMoreTooltipContent = ({
           <h2
             className={TypographyVariants({
               socialLarge: 'sm',
-              className: cn('text-pink-100 font-bold', description && 'pb-2'),
+              className: cn(
+                color === 'black' && 'text-ivory-100',
+                color === 'blue' && 'text-pink-100',
+                'font-bold line-clamp-4 overflow-hidden',
+                description && 'mb-2'
+              ),
             })}
           >
             {title}
@@ -161,7 +178,12 @@ const ReadMoreTooltipContent = ({
           <p
             className={TypographyVariants({
               socialLarge: 'sm',
-              className: cn('text-pink-100 line-clamp-[7]', readMoreHref && 'pb-2'),
+              className: cn(
+                color === 'black' && 'text-ivory-100',
+                color === 'blue' && 'text-pink-100',
+                !disableLineClamp && 'line-clamp-[7]',
+                readMoreHref && 'mb-2'
+              ),
             })}
           >
             {description}
@@ -171,7 +193,7 @@ const ReadMoreTooltipContent = ({
         {readMoreHref && (
           <NextLink href={readMoreHref}>
             <NavButton
-              color={color === 'black' ? 'invertedPinkHover' : 'inverted'}
+              color={color === 'black' ? 'invertedIvoryHover' : 'inverted'}
               variant={'textSecondary'}
             >
               {readMoreText}

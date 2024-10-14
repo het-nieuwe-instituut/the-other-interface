@@ -4,12 +4,17 @@ import { StoryHoverRecordRelationsQuery } from 'src/generated/graphql'
 export const zoomStoryHoverQueryTooltipDataMapper = (
   initialData: StoryHoverRecordRelationsQuery
 ) => {
-  const { title, shortDescription, author } =
-    initialData.storyWithoutRelations.data?.attributes || {}
-  const { firstName, lastName } = author?.data?.attributes || {}
+  const { title, shortDescription } = initialData.story.data?.attributes || {}
+  const { authors } = initialData.story.data || {}
 
-  const authorName = joinNullableStrings(' ', firstName, lastName)
-  const titleWithAuthor = joinNullableStrings(' ', title, `(${authorName})`)
+  const authorsList = authors?.data
+    .map(author => {
+      const { firstName, lastName, insertion } = author?.attributes || {}
+      return joinNullableStrings(' ', firstName, insertion, lastName)
+    })
+    .join(', ')
+
+  const titleWithAuthor = joinNullableStrings(' ', title, `(${authorsList})`)
 
   return {
     title: titleWithAuthor,

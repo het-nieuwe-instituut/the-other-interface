@@ -1,16 +1,75 @@
-import {
-  ArgsType,
-  Field,
-  IntersectionType,
-  ObjectType,
-  OmitType,
-  registerEnumType,
-} from '@nestjs/graphql'
+import { ArgsType, Field, ObjectType, OmitType, PickType, registerEnumType } from '@nestjs/graphql'
 import { ArchivesZoomLevel3Types } from './archives.service'
 import { IsString } from 'class-validator'
 import { EntityNames } from '../util/entityNames.type'
 import { Locale } from '../util/locale.type'
-import { EnrichedRecordBaseType } from '../triply/triply.type'
+import { ExternalSource } from '../triply/triply.service'
+
+@ObjectType()
+export class ArchiveAsteriskType {
+  @Field({
+    nullable: true,
+    description: 'asterisk value for the person field',
+  })
+  public asterisk_subject_person?: string
+
+  @Field({
+    nullable: true,
+    description: 'the date the asterisk value was added to the person field',
+  })
+  public asterisk_date_person?: string
+
+  @Field({
+    nullable: true,
+    description: 'the person that added the asterisk value for the person field',
+  })
+  public asterisk_name_person?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the content field' })
+  public asterisk_date_content?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the content field' })
+  public asterisk_name_content?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the content field' })
+  public asterisk_subject_content?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the location field' })
+  public asterisk_date_location?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the location field' })
+  public asterisk_name_location?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the location field' })
+  public asterisk_subject_location?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the subject field' })
+  public asterisk_date_subject?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the subject field' })
+  public asterisk_name_subject?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the subject field' })
+  public asterisk_subject_subject?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the title field' })
+  public asterisk_date_title?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the title field' })
+  public asterisk_name_title?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the title field' })
+  public asterisk_subject_title?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the description field' })
+  public asterisk_date_description?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the description field' })
+  public asterisk_name_description?: string
+
+  @Field({ nullable: true, description: 'asterisk value for the description field' })
+  public asterisk_subject_description?: string
+}
 
 @ObjectType()
 class BaseArchiveZoomLevel3DetailType {
@@ -24,26 +83,79 @@ class BaseArchiveZoomLevel3DetailType {
   public title: string
 
   @Field(() => [String], { nullable: true })
-  public thumbnail: string
+  public thumbnail: string[]
 
   @Field(() => String, { nullable: true })
   public objectNumber?: string
 
+  @Field({ nullable: true })
+  public mediaType?: string
+
+  @Field({ nullable: true })
+  public mediaReference?: string
+
   @Field(() => String, { nullable: true })
   public description?: string | null
+
+  @Field({ nullable: true })
+  public custodialHistory?: string
+
+  @Field({ nullable: true })
+  public systemOfArrangement?: string
+
+  @Field(() => String, { nullable: true })
+  public existence?: string | null
+
+  @Field(() => String, { nullable: true })
+  public existenceLocation?: string | null
+
+  @Field(() => String, { nullable: true })
+  public sources?: string | null
 }
 
 @ObjectType()
-export class ArchiveZoomLevel3DetailType extends IntersectionType(
-  EnrichedRecordBaseType,
-  BaseArchiveZoomLevel3DetailType
-) {
-  @Field(() => [BaseArchiveZoomLevel3DetailType], { nullable: true })
-  public enrichedSources?: BaseArchiveZoomLevel3DetailType[]
+class EnrichedBaseArchiveZoomLevel3DetailType extends BaseArchiveZoomLevel3DetailType {
+  @Field()
+  public id: string
+
+  @Field(() => ExternalSource)
+  public externalSourceType: ExternalSource
+
+  @Field()
+  public externalSourceUrl: string
 }
 
 @ObjectType()
-export class ArchiveRelationsType {
+export class EnrichedBaseOArchiveZoomLevel3AsteriskDetailType extends PickType(
+  ArchiveAsteriskType,
+  [
+    'asterisk_date_title',
+    'asterisk_name_title',
+    'asterisk_subject_title',
+    'asterisk_date_description',
+    'asterisk_name_description',
+    'asterisk_subject_description',
+  ]
+) {}
+
+@ObjectType()
+export class ArchiveZoomLevel3DetailType extends BaseArchiveZoomLevel3DetailType {
+  @Field(() => [EnrichedBaseArchiveZoomLevel3DetailType], { nullable: true })
+  public enrichedSources?: EnrichedBaseArchiveZoomLevel3DetailType[]
+
+  @Field(() => [EnrichedBaseOArchiveZoomLevel3AsteriskDetailType], { nullable: true })
+  public asteriskSuggestions?: EnrichedBaseOArchiveZoomLevel3AsteriskDetailType[]
+}
+
+@ObjectType()
+class ArchiveRelationsAsteriskType extends PickType(ArchiveAsteriskType, [
+  'asterisk_date_person',
+  'asterisk_name_person',
+  'asterisk_subject_person',
+]) {}
+
+@ObjectType()
+export class ArchiveRelationsType extends ArchiveRelationsAsteriskType {
   @Field(() => String, { nullable: true })
   public idRelation?: string | null
 
@@ -54,7 +166,7 @@ export class ArchiveRelationsType {
   public referenceNumber?: string | null
 
   @Field(() => String, { nullable: true })
-  public period?: string | null
+  public descriptionLevel?: string | null
 }
 
 @ObjectType()
@@ -85,8 +197,14 @@ export class ArchiveRecordRelationCountArgs extends OmitType(ArchiveRecordRelati
 
 @ObjectType()
 class BaseArchivesRecordZoomLevel3Type {
+  @Field()
+  public id: string
+
   @Field(() => String, { nullable: true })
   public referenceCode?: string
+
+  @Field({ nullable: true })
+  public title?: string
 
   @Field(() => String, { nullable: true })
   public titleType?: string
@@ -113,7 +231,7 @@ class BaseArchivesRecordZoomLevel3Type {
   public permanentLink?: string
 
   @Field(() => String, { nullable: true })
-  public externalSource?: string
+  public externalURI?: string
 
   @Field(() => String, { nullable: true })
   public description?: string
@@ -132,15 +250,49 @@ class BaseArchivesRecordZoomLevel3Type {
 
   @Field(() => String, { nullable: true })
   public existenceLocation?: string
+
+  @Field({ nullable: true })
+  public location?: string
+
+  @Field({ nullable: true })
+  public subject?: string
+
+  @Field({ nullable: true })
+  public creators?: string
 }
 
 @ObjectType()
-export class ArchivesRecordZoomLevel3Type extends IntersectionType(
-  EnrichedRecordBaseType,
-  BaseArchivesRecordZoomLevel3Type
-) {
-  @Field(() => [BaseArchivesRecordZoomLevel3Type], { nullable: true })
-  public enrichedSources?: BaseArchivesRecordZoomLevel3Type[]
+class EnrichedBaseArchivesRecordZoomLevel3Type extends BaseArchivesRecordZoomLevel3Type {
+  @Field()
+  public id: string
+
+  @Field(() => ExternalSource)
+  public externalSourceType: ExternalSource
+
+  @Field()
+  public externalSourceUrl: string
+}
+
+@ObjectType()
+class BaseArchiveRecordZoomLevel3AsteriskType extends PickType(ArchiveAsteriskType, [
+  'asterisk_date_subject',
+  'asterisk_name_subject',
+  'asterisk_subject_subject',
+  'asterisk_date_location',
+  'asterisk_name_location',
+  'asterisk_subject_location',
+  'asterisk_date_content',
+  'asterisk_name_content',
+  'asterisk_subject_content',
+]) {}
+
+@ObjectType()
+export class ArchivesRecordZoomLevel3Type extends BaseArchivesRecordZoomLevel3Type {
+  @Field(() => [EnrichedBaseArchivesRecordZoomLevel3Type], { nullable: true })
+  public enrichedSources?: EnrichedBaseArchivesRecordZoomLevel3Type[]
+
+  @Field(() => [BaseArchiveRecordZoomLevel3AsteriskType], { nullable: true })
+  public asteriskSuggestions?: BaseArchiveRecordZoomLevel3AsteriskType[]
 }
 
 @ArgsType()

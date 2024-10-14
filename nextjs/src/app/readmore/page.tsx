@@ -24,16 +24,26 @@ export async function generateMetadata(props: MetaDataProps): Promise<Metadata> 
 export default async function Page() {
   const { t } = createTypeSafeTranslation('readmore')
   const title = t('title')
-  const [p1, p2, p3] = [t('paragraph1'), t('paragraph2'), t('paragraph3')]
+  const [p1, p2, p3, p4] = [t('paragraph1'), t('paragraph2'), t('paragraph3'), t('paragraph4')]
 
   return (
     <StaticPageContainer title={title || ''}>
       <StaticPageParagraph>{p1}</StaticPageParagraph>
       <StaticPageParagraph>{p2}</StaticPageParagraph>
       <StaticPageParagraph>
-        {p3}
+        {p3}{' '}
         <StaticPageLink href="mailto:info@nieuweinstituut.nl" label="info@nieuweinstituut.nl" />.
       </StaticPageParagraph>
+      {p4 && p4.length > 0 && (
+        <StaticPageParagraph>
+          {p4}{' '}
+          <StaticPageLink
+            href="https://zoeken.nieuweinstituut.nl/nl/"
+            label="Zoekportaal"
+            external
+          />
+        </StaticPageParagraph>
+      )}
     </StaticPageContainer>
   )
 }

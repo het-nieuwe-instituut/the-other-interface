@@ -1,37 +1,31 @@
 'use client'
 
-import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
-import { LayerWrapper } from '../LayerWrapper'
-import { StoryBottomContent } from '../../Story/StoryBottomContent/StoryBottomContent'
-import { useStoryByIdQuery } from '@/features/shared/hooks/queries/useStoryByIdQuery'
-import { useParams } from 'next/navigation'
-
-import { useRedirectToErrorOnError } from '@/features/shared/hooks/useRedirectToErrorOnError'
-import { ThemedSpinner } from '../../Loading/ThemedSpinner/ThemedSpinner'
-import ErrorBoundaryWrapper from '../../Error/ErrorBoundary/ErrorBoundary'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
-import { StoryMeta } from '../../Story/StoryMeta/StoryMeta'
+import { DynamicComponentRenderer } from '@/features/modules/ModulesRenderer/ModulesRenderer'
+import { useStoryByIdQuery } from '@/features/shared/hooks/queries/useStoryByIdQuery'
+import { useRedirectToErrorOnError } from '@/features/shared/hooks/useRedirectToErrorOnError'
+import { useRedirectToLocale } from '@/features/shared/hooks/useRedirectToLocale'
 import { ButtonGroup } from '@/features/ui/components/button-group/component'
+import { useParams } from 'next/navigation'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
+import ErrorBoundaryWrapper from '../../Error/ErrorBoundary/ErrorBoundary'
+import { StoryBottomContent } from '../../Story/StoryBottomContent/StoryBottomContent'
+import { StoryMeta } from '../../Story/StoryMeta/StoryMeta'
+import { LayerWrapper } from '../LayerWrapper'
 
 export const StoryLayer = () => {
-  const params = useParams()
-  const id = params?.id as string
-  const { data, isLoading, error } = useStoryByIdQuery(id)
-  const story = data
+  const id = useParams()?.id as string
+
+  const { data: story, isLoading, error } = useStoryByIdQuery(id)
 
   useRedirectToErrorOnError(error)
+  useRedirectToLocale(story?.locale, story?.id)
 
-  if (isLoading) {
-    return (
-      <div className="flex h-full w-screen items-center justify-center p-12">
-        <ThemedSpinner />
-      </div>
-    )
-  }
+  const themeIds: string[] = (story?.themes?.map(t => t.id).filter(Boolean) as string[]) ?? []
 
   return (
     <LayerWrapper
+      isLoading={isLoading}
       LeftContent={
         <>
           <PageHeader
@@ -40,10 +34,10 @@ export const StoryLayer = () => {
             constrainPreface={true}
             showReadMore={false}
           />
-          <DynamicComponentRenderer components={story?.attributes?.components} isStoryPage={true} />
-          {story?.attributes?.storyLinks?.buttons && (
+          <DynamicComponentRenderer components={story?.components} isStoryPage={true} />
+          {story?.storyLinks?.buttons && (
             <ButtonGroup className="flex gap-4 pt-10">
-              {story?.attributes?.storyLinks?.buttons.map(link => {
+              {story?.storyLinks?.buttons.map(link => {
                 if (!link.url || !link.text) return null
 
                 return (
@@ -61,7 +55,7 @@ export const StoryLayer = () => {
           <StoryMeta />
         </ErrorBoundaryWrapper>
       }
-      BottomContent={<StoryBottomContent />}
+      BottomContent={<StoryBottomContent themeIds={themeIds} id={id} />}
     />
   )
 }

@@ -2,7 +2,6 @@ import { AppHead } from '@/features/shared/components/Head/AppHead'
 import { ReduxStoreProvider } from '@/features/shared/components/providers/ReduxStoreProdivder'
 import { ThemeProvider } from '@/features/shared/components/providers/ThemeProvider'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import Script from 'next/script'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { PreviewBlock } from '@/features/preview/PreviewBlock'
 import { ReduxDraftModeSync } from '@/features/shared/components/Redux/ReduxDraftModeSync'
@@ -15,6 +14,12 @@ import bootstrap from './_bootstrap'
 import { Bootstrap } from './_bootstrap/Bootstrap'
 import { LightboxProvider } from '@/features/ui/components/lightbox/LightboxProvider'
 import WelcomeOverlayProvider from '@/features/shared/components/WelcomeOverlayProvider/WelcomeOverlayProvider'
+import { GoogleTagManager } from '@next/third-parties/google'
+import dynamic from 'next/dynamic'
+const ScrollbarSpacing = dynamic(
+  () => import('@/features/ui/components/ScrollbarSpacing/ScrollbarSpacing'),
+  { ssr: false }
+)
 
 function MyApp({ children }: { children: React.ReactNode }) {
   const { isEnabled } = draftMode()
@@ -24,38 +29,8 @@ function MyApp({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <body>
         {isEnabled && <PreviewBlock />}
-        {process.env.parsed.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
-          <>
-            <Script
-              strategy="afterInteractive"
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.parsed.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${process.env.parsed.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
-            `}
-            </Script>
-          </>
-        )}
         {process.env.parsed.NEXT_PUBLIC_ENV === 'production' && (
-          <Script strategy="afterInteractive" id="matomo-tracker">
-            {`
-                var _paq = window._paq = window._paq || [];
-                /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-                _paq.push(['trackPageView']);
-                _paq.push(['enableLinkTracking']);
-                (function() {
-                    var u="https://stats.hetnieuweinstituut.nl/";
-                    _paq.push(['setTrackerUrl', u+'matomo.php']);
-                    _paq.push(['setSiteId', '7']);
-                    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-                    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-                })();
-            `}
-          </Script>
+          <GoogleTagManager gtmId={process.env.parsed.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         )}
         <Bootstrap />
         <LightboxProvider>
@@ -69,6 +44,7 @@ function MyApp({ children }: { children: React.ReactNode }) {
                     {children}
                     <ReactTooltipInitializer />
                     <BaseElementWrapper />
+                    <ScrollbarSpacing />
                   </div>
                 </WelcomeOverlayProvider>
               </ThemeProvider>

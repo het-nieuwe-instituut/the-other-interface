@@ -1,5 +1,6 @@
 import React, { CSSProperties, useContext, useState } from 'react'
-import { useRecordDetailQuery } from '@/features/record/hooks/useRecordDetailQuery'
+
+import { getZoom3RecordTask } from '@/features/pages/tasks/getZoom3Record'
 import { StoryOrRecordResponsiveImage } from '@/features/shared/components/ResponsiveImage/StoryOrRecordResponsiveImage'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 import { useZoomHoverRecordResultQuery } from '@/features/shared/hooks/queries/useZoomHoverRecordResultQuery'
@@ -26,29 +27,29 @@ type Props = {
   tooltipPlace?: ReadMoreTooltipProps['place']
   isIdLoading?: boolean
   className?: string
+  recordDetails: Awaited<ReturnType<typeof getZoom3RecordTask>>
+  positionClassName?: string
 }
 
 export const Record = React.memo(
-  ({ record, style, tabIndex = 0, tooltipPlace = 'bottom', className }: Props) => {
+  ({
+    record,
+    style,
+    positionClassName,
+    tabIndex = 0,
+    tooltipPlace = 'bottom',
+    className,
+    recordDetails,
+  }: Props) => {
     const { t } = useTypeSafeTranslation('category')
     const lang = useLocale()
     const { id, category, position, grid } = record
-    const {
-      data: recordDetails,
-      isLoading,
-      isError,
-    } = useRecordDetailQuery({
-      type: category,
-      id,
-      locale: lang,
-      options: { refetchOnWindowFocus: false },
-    })
     const {
       data,
       isError: isLoadingHoverError,
       isLoading: isLoadingHover,
     } = useZoomHoverRecordResultQuery({ id, category })
-    const { coordinates, ref } = useCalculateLine()
+    const { coordinates, ref } = useCalculateLine({ trigger: true })
     const [animationCssVariables, positionRef] = useMoveElementToCenterValues({
       scale: 1.65,
       offsetTop: -80,
@@ -63,14 +64,14 @@ export const Record = React.memo(
       <div className={cn(className)} style={{ ...grid, ...style }}>
         <div
           className={cn(
-            'peer relative size-full',
-            !clicked && 'transition-opacity opacity-0',
-            !clicked && !isLoading && !isError && 'opacity-100',
+            'group relative size-full opacity-0 transition-opacity',
+            clicked === true && 'opacity-100',
+            clicked === false && 'opacity-100',
             animationCssVariables
           )}
-          ref={ref}
         >
           <ReadMoreTooltip
+            floating={true}
             hideTooltip={animationState === 'forward'}
             isLoading={isLoadingHover}
             error={isLoadingHoverError ? t('couldNotFetchHover') : ''}
@@ -89,72 +90,76 @@ export const Record = React.memo(
               href={url}
               tabIndex={tabIndex}
               className={cn(
+                'ease-toi-cubic-bezier',
                 'fixed',
                 'absolute flex size-4/5 cursor-pointer flex-col items-center justify-center gap-[2px]',
-                !clicked &&
-                  'group-hover-blur-item transition-all duration-300 ease-in-out hover:scale-105',
+                !clicked && 'group-hover-blur-item transition-all duration-300',
                 !clicked && 'use-calculate-line-element',
                 !clicked && 'group-hover-blur-item',
                 animationState === 'forward' &&
                   !clicked &&
-                  'animate-[toBlurAndHide_300ms_ease-in-out_forwards]',
+                  'animate-[toBlurAndHide_300ms_forwards]',
                 animationState === 'forward' &&
                   clicked &&
-                  'animate-[toCenterOfGalaxy_500ms_ease-in-out_forwards] z-[1000]'
+                  'animate-[toCenterOfGalaxy_500ms_forwards] z-[1000]',
+                positionClassName
               )}
               onClick={() => setClicked(true)}
             >
-              <StoryOrRecordResponsiveImage
-                recordOrStoryId={id}
-                src={recordDetails?.thumbnail?.[0]}
-                alt={recordDetails?.title}
-                className="max-h-[calc(100%-2vw-5px)]" // where 1.6vw are a texts' line heights, 5px are gaps
-                size={'11vw'}
-                style={{
-                  flex: '1 1 calc(100% - 2vw - 5px)',
-                }}
-              />
-              <RecordText
-                className={cn(
-                  'animate-[fromHideToShow_1000ms_ease-in-out_forwards]',
-                  animationState === 'forward' &&
-                    'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
-                )}
-                title={recordDetails?.title}
-                categoryType={category}
-              />
+              <div ref={ref} className="relative size-full ">
+                <div className="flex size-full flex-col gap-[12px] transition-all  duration-300 ease-toi-cubic-bezier hover:scale-105">
+                  <div
+                    className="flex  size-full items-center  justify-center "
+                    style={{
+                      flex: '1 1 calc(100% - 2vw - 5px)',
+                    }}
+                  >
+                    <div
+                      style={{
+                        position: 'absolute',
+                        zIndex: -80,
+                      }}
+                      className={cn(
+                        'hidden group-hover:block size-full ',
+                        (animationState === 'forward' || animationState === 'backwards') &&
+                          'hidden group-hover:hidden'
+                      )}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="size-full overflow-visible"
+                      >
+                        <line
+                          x1={coordinates.x1}
+                          y1={coordinates.y1}
+                          x2={coordinates.x2}
+                          y2={coordinates.y2}
+                          strokeWidth={1}
+                          stroke={'RGBA(0, 81, 255, .4)'}
+                        />
+                      </svg>
+                    </div>
+                    <StoryOrRecordResponsiveImage
+                      recordOrStoryId={id}
+                      src={recordDetails?.thumbnail?.[0]}
+                      alt={recordDetails?.title ?? 'image'}
+                      className="size-full"
+                      imageClassName={cn('object-bottom')}
+                      size={'11vw'}
+                    />
+                  </div>
+                  <RecordText
+                    className={cn(
+                      'ease-toi-cubic-bezier',
+                      animationState === 'forward' && 'animate-[toBlurAndHide_300ms_forwards]'
+                    )}
+                    title={recordDetails?.title}
+                    categoryType={category}
+                  />
+                </div>
+              </div>
             </DelayedNextLinkWithZoomAnimationsContext>
           </ReadMoreTooltip>
-        </div>
-
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: -80,
-            marginTop: `-${coordinates.offsetTop ?? 0}px`,
-            marginLeft: `-${coordinates.offsetLeft ?? 0}px`,
-            width: '100vw',
-          }}
-          className={cn(
-            'hidden h-[calc(100vh-12vh)] peer-hover:block',
-            (animationState === 'forward' || animationState === 'backwards') &&
-              'hidden peer-hover:hidden'
-          )}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="size-full">
-            <line
-              x1={coordinates.x1}
-              y1={coordinates.y1}
-              x2={coordinates.x2}
-              y2={coordinates.y2}
-              strokeWidth={1}
-              stroke={'RGBA(0, 81, 255, .4)'}
-            />
-          </svg>
         </div>
       </div>
     )

@@ -4,13 +4,13 @@ import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
 import { State } from '@/features/shared/configs/store'
 import { useRecordRelationsCountQuery } from '@/features/shared/hooks/queries/useRecordRelationsCountQuery'
 import { GridParams } from '@/features/shared/types/position'
-import { CLOUD_CATEGORIES, Category, CloudCategory } from '@/features/shared/utils/categories'
+import { Category, CloudCategory, CLOUD_CATEGORIES } from '@/features/shared/utils/categories'
 import { useArrowNavigation } from '@/features/ui/hooks/useArrowNavigation'
 import { useSearchParamPagination } from '@/features/ui/hooks/useSearchParamPagination'
 import { cn } from '@/features/ui/utils/cn'
 import { useIsFetching } from '@tanstack/react-query'
 import { useParams, useSearchParams } from 'next/navigation'
-import React, { useContext } from 'react'
+import React, { useCallback, useContext } from 'react'
 import { useSelector } from 'react-redux'
 import { GalaxyFooter } from '../../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyPagination } from '../../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
@@ -39,6 +39,13 @@ export const DetailGalaxy = () => {
   )
 }
 
+const transformOriginSetup = {
+  [CLOUD_CATEGORIES.people]: cn('origin-bottom-right'),
+  [CLOUD_CATEGORIES.objects]: cn('origin-bottom-left'),
+  [CLOUD_CATEGORIES.publications]: cn('origin-top-left'),
+  [CLOUD_CATEGORIES.archives]: cn('origin-top-right'),
+}
+
 const DetailGalaxyContent: React.FC = React.memo(() => {
   const params = useParams()
 
@@ -52,12 +59,25 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
     countData?.totalPages ?? 0,
     false
   )
-  const isFetching = useIsFetching({
+
+  const isFetchingGalaxyItems = useIsFetching({
     predicate: query => {
       const key = query.queryKey.at(0) as string
-      return key
-        ? ['record-relations', 'record-relations-count', 'record-detail'].includes(key)
-        : false
+      if (!key) return false
+
+      if (key === 'record-relations-positons' && query.queryKey.at(4) === page) {
+        return true
+      }
+
+      if (key === 'related-stories' && query.queryKey.at(3) === page) {
+        return true
+      }
+
+      if (key === 'record-detail' && query.queryKey.at(4) === page) {
+        return true
+      }
+
+      return ['record-relations-count'].includes(key)
     },
   })
 
@@ -67,21 +87,34 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
     disabled: isSearchModeActive,
   })
 
-  const renderMainContent = () => {
-    return (
-      <>
-        <Pulse hide={!isFetching} />
+  const handleLeftClick = useCallback(() => {
+    setAnimationState('backwards')
+    decreasePageNumber()
+  }, [setAnimationState, decreasePageNumber])
+
+  const handleRightClick = useCallback(() => {
+    setAnimationState('forward')
+    increasePageNumber()
+  }, [setAnimationState, increasePageNumber])
+
+  return (
+    <div className={'w-screen bg-pink-100'}>
+      <div className="relative mx-auto h-screen w-screen max-w-[1440px] ">
+        <BlurOverlay hide={!isSearchModeActive} />
+
+        <Pulse hide={!isFetchingGalaxyItems} />
 
         <div
           id="detail-galaxy-grid"
           className={cn(
+            'ease-toi-cubic-bezier',
             'group-hover-blur relative inset-x-[2vw] top-[6%] grid h-[calc(80%-1rem-60px)] w-[96vw] max-w-[1382.4px] grid-cols-3 grid-rows-2 min-[1440px]:inset-x-[28.8px]',
-            galaxyZoomAnimationState === 'backwards' &&
-              'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+            galaxyZoomAnimationState === 'backwards' && 'animate-[toBlurAndHide_300ms_forwards]'
           )}
         >
           {relatedCategories.map(({ category: cloudCategory, grid }) => (
             <RelatedCategory
+              className={transformOriginSetup[cloudCategory]}
               key={cloudCategory}
               category={cloudCategory}
               gridRow={grid.gridRow}
@@ -92,15 +125,6 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
 
           <RelatedStories allRelationTotals={countData?.allRelationTotals} />
         </div>
-      </>
-    )
-  }
-
-  return (
-    <div className={'w-screen bg-pink-100'}>
-      <div className="relative mx-auto h-screen w-screen max-w-[1440px] overflow-hidden">
-        <BlurOverlay hide={!isSearchModeActive} />
-        {renderMainContent()}
 
         <GalaxyFooter
           galaxyPagination={
@@ -117,21 +141,5 @@ const DetailGalaxyContent: React.FC = React.memo(() => {
       </div>
     </div>
   )
-
-  function handleLeftClick() {
-    setAnimationState('backwards')
-    //hacky, we should actually listen for event when the animation ends
-    setTimeout(() => {
-      decreasePageNumber()
-    }, 500)
-  }
-
-  function handleRightClick() {
-    setAnimationState('forward')
-    setTimeout(() => {
-      //hacky, we should actually listen for event when the animation ends
-      increasePageNumber()
-    }, 500)
-  }
 })
 DetailGalaxyContent.displayName = 'DetailGalaxyContent'

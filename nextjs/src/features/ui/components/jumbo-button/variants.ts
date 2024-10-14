@@ -1,29 +1,30 @@
 import { cva } from 'class-variance-authority'
+import { cn } from '../../utils/cn'
 
 export const ButtonVariants = cva(
   [
-    'flex w-max flex-row items-center justify-center gap-2 border border-solid border-blue text-blue-100 transition-colors',
-    'hover:border-[rgba(0,0,0,0.2)] hover:bg-blue-100 hover:text-pink-100 ',
-    'active:border-[rgba(0,0,0,0.2)] active:bg-blue-100 active:text-pink-100 ',
-    'disabled:border-[rgba(0,0,0,0.2)] disabled:bg-transparent disabled:text-[rgba(0,0,0,0.2)]',
-    ' text-blue-600',
+    cn(
+      '-ml-1', // so it lines out perfectly with other components (typography)
+      'relative gap-1 border-0 px-1 align-text-bottom',
+      'after:absolute after:bottom-0 after:w-[calc(100%-8px)] after:border-b after:border-solid after:content-[""]',
+      'hover:bg-black-100 active:bg-black-100',
+      'text-center font-social-large text-[21px] font-normal leading-7 tracking-tight',
+      'rounded-sm border border-black bg-black-100 flex-wrap hyphen-auto py-[32px] text-ivory-100',
+      'font-social-large font-bold tracking-[-0.32px]',
+      'hover:border hover:border-black hover:bg-ivory-100',
+      ' after:border-transparent  [&:not(:last-child)]:mb-4'
+    ),
   ],
   {
     variants: {
-      intent: {
-        default: [''],
-      },
       state: {
         error: [
-          'border-error-100 bg-error-100 text-white',
-          'hover:border-error-100 hover:bg-error-100 hover:text-white',
-          'active:border-error-100 active:bg-error-100 active:text-white',
+          'border-error-100 bg-error-100 text-ivory-100',
+          'hover:border-error-100 hover:bg-error-100 hover:text-ivory-100',
+          'active:border-error-100 active:bg-error-100 active:text-ivory-100',
         ],
         loading: ['pointer-events-none'],
       },
-    },
-    defaultVariants: {
-      intent: 'default',
     },
   }
 )

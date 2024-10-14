@@ -1,12 +1,18 @@
-import ActionButton from './buttons/ActionButton/ActionButton'
-import { cn } from '@/features/ui/utils/cn'
+import { CollectionHighlightsFilter } from '@/features/galaxyInterface/components/GalaxyWrapper/Suggestions/suggestions.constants'
+import { useSuggestionsTranslations } from '@/features/galaxyInterface/services/suggestions'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { cn } from '@/features/ui/utils/cn'
+import { useSelector } from 'react-redux'
+import { State } from '../../configs/store'
+import { useTypeSafeTranslation } from '../../hooks/translations'
+import ActionButton from './buttons/ActionButton/ActionButton'
 
 interface Props {
   category?: string
   subCategory?: string
   actionButton?: React.ReactNode
   actionButtonClick?: (id: string) => void
+  actionButtonAriaLabel?: string
   zIndex?: number
   onClick?: () => void
   id?: string
@@ -18,35 +24,62 @@ export const SearchFilterBox: React.FC<Props> = ({
   onClick,
   zIndex,
   actionButtonClick,
+  actionButtonAriaLabel,
   id,
 }) => {
-  return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <div style={{ zIndex: zIndex || 'inherit' }} className="relative">
-      <button
-        className={
-          'flex h-[52px] w-fit max-w-full flex-col bg-pink-100 px-2 text-blue-100 hover:bg-pink-100 hover:text-blue-100'
-        }
-        onClick={onClick}
-      >
-        <div className="relative flex max-w-full items-center justify-between pt-1">
-          <p
-            className={cn(
-              'text-blue.100 mr-1 truncate',
-              TypographyVariants({ socialLarge: 'label' })
-            )}
-          >
-            {category ?? 'unknown'}
-          </p>
-        </div>
+  const { searchCategory } = useSelector((state: State) => state.shared)
+  const tSuggesitons = useTypeSafeTranslation('suggestions').t
+  const getTranslation = useSuggestionsTranslations()
+  const translation = getTranslation(category ?? '', searchCategory ?? 'all')
 
-        <p className={cn('truncate', TypographyVariants({ socialLarge: 'lg' }))}>{subCategory}</p>
-      </button>
-      {actionButton && (
+  return (
+    <div className="relative">
+      <div style={{ zIndex: zIndex || 'inherit' }} className="relative">
+        <button
+          className={
+            'flex h-[52px] w-fit max-w-full flex-col border border-blue bg-pink-100 px-2 text-blue-100 hover:bg-pink-100 hover:text-blue-100'
+          }
+          onClick={onClick}
+          aria-label={`Select filter ${category}`}
+        >
+          <div className="relative flex max-w-full items-center justify-between pt-1">
+            <p
+              className={cn(
+                'text-blue.100 mr-1 truncate',
+                TypographyVariants({ socialLarge: 'label' })
+              )}
+            >
+              {translation ?? category}
+            </p>
+          </div>
+
+          <p className={cn('truncate', TypographyVariants({ socialLarge: 'lg' }))}>
+            {CollectionHighlightsFilter.value === subCategory
+              ? tSuggesitons('subcategoryCollectionHighlight')
+              : subCategory}
+          </p>
+        </button>
+      </div>
+      {actionButton && actionButtonAriaLabel && (
         <ActionButton
           id={id}
           onClick={actionButtonClick}
-          className="absolute right-0 top-0 z-[9999] mt-px hover:bg-initial"
+          className={cn(
+            'absolute',
+            'right-0',
+            'top-0',
+            'z-[9999]',
+            'mt-px',
+            'hover:bg-initial',
+            'hover:text-blue-50',
+            'text-blue-100',
+            'size-10',
+            '-m-2',
+            'flex',
+            'items-center',
+            'justify-center'
+          )}
+          aria-label={actionButtonAriaLabel}
         >
           {actionButton}
         </ActionButton>

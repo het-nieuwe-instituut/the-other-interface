@@ -9,6 +9,24 @@ import { PositionedRecord } from '../types'
 import { positioningTemplate } from './positioningTemplates'
 import { GALAXY_QUERIES_STALE_TIME } from '../../../galaxies.constants'
 
+export const getPositionedRecordsQueryKey = ({
+  maxPages,
+  id,
+  locale,
+  page,
+  recordCategory,
+  category,
+  current,
+}: {
+  maxPages: number
+  id: string
+  locale: Locale
+  page: number
+  recordCategory: CloudCategory
+  category: CloudCategory
+  current?: number
+}) => ['record-relations-positons', maxPages, id, locale, page, recordCategory, category, current]
+
 export const usePositionedRecordsQuery = ({
   maxPages,
   id,
@@ -41,7 +59,15 @@ export const usePositionedRecordsQuery = ({
   }
 
   return useQuery({
-    queryKey: ['record-relations-positons', category, id, page, locale, maxPages],
+    queryKey: getPositionedRecordsQueryKey({
+      maxPages,
+      id,
+      locale,
+      page,
+      recordCategory,
+      category,
+      current,
+    }),
     queryFn,
     staleTime: GALAXY_QUERIES_STALE_TIME,
     refetchOnWindowFocus: false,

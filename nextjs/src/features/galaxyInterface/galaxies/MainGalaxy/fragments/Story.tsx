@@ -20,13 +20,20 @@ type Props = {
   story: PositionedStory
   isMainGrid?: boolean
   onLoad?: (storyId: string) => void
+  positionClassName?: string
 }
 
-export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className }) => {
+export const Story: React.FC<Props> = ({
+  story,
+  isMainGrid,
+  onLoad,
+  className,
+  positionClassName,
+}) => {
   const { t: hoverT } = useTypeSafeTranslation('category')
   const lang = useLocale()
 
-  const { id, title, image, position, grid } = story
+  const { id, title, image, position, grid, alt } = story
 
   const {
     data,
@@ -55,75 +62,94 @@ export const Story: React.FC<Props> = ({ story, isMainGrid, onLoad, className })
 
   return (
     <div className={cn('relative', className)} style={{ ...grid }}>
-      <ReadMoreTooltip
-        hideTooltip={animationState === 'forward'}
-        isLoading={isLoadingHover}
-        error={isLoadingHoverError ? hoverT('couldNotFetchHover') : ''}
-        place={'bottom'}
-        isEmpty={!data?.description && !data?.title}
-        title={data?.title ?? undefined}
-        description={data?.description ?? undefined}
-        className="size-full"
-        color="blue"
+      <div
+        className={cn(
+          'absolute flex size-4/5 cursor-pointer flex-col items-center justify-center gap-[2px]',
+          !animationState && isClickable && 'group',
+          'use-calculate-line-element'
+        )}
       >
-        <div
+        <DelayedNextLinkWithZoomAnimationsContext
+          delay={600}
+          animation="forward"
+          ref={positionRef}
+          href={url}
           className={cn(
-            'absolute flex size-4/5 cursor-pointer flex-col items-center justify-center gap-[2px]',
-            !animationState &&
-              isClickable &&
-              'hover:scale-105 ease-in-out duration-[.4] transition-transform ',
-            'use-calculate-line-element',
-            !animationState && 'group-hover-blur-item'
+            'ease-toi-cubic-bezier',
+            'absolute w-[154px] h-[198px] flex-col items-center justify-center gap-[5px] z-[20] transition-transform duration-[400ms] ',
+            animationState === 'forward' && !clicked && 'animate-[toBlurAndHide_300ms_forwards]',
+            animationState === 'forward' &&
+              clicked &&
+              'animate-[toCenterOfGalaxy_500ms_forwards] z-[1000]',
+            positionClassName
           )}
+          style={{ ...position, ...animationCssVariables }}
+          onClick={() => {
+            setClicked(true)
+          }}
         >
-          <DelayedNextLinkWithZoomAnimationsContext
-            delay={600}
-            animation="forward"
-            ref={positionRef}
-            href={url}
-            className={cn(
-              'absolute w-[154px] h-[198px] flex-col items-center justify-center gap-[5px] z-[20] transition-transform duration-[400ms] ease-in-out ',
-              isMainGrid ? 'story-grid-item' : '',
-              animationState === 'forward' &&
-                !clicked &&
-                'animate-[toBlurAndHide_300ms_ease-in-out_forwards]',
-              animationState === 'forward' &&
-                clicked &&
-                'animate-[toCenterOfGalaxy_500ms_ease-in-out_forwards] z-[1000]'
-            )}
-            style={{ ...position, ...animationCssVariables }}
-            onClick={() => {
-              setClicked(true)
-            }}
+          <ReadMoreTooltip
+            hideTooltip={animationState === 'forward'}
+            isLoading={isLoadingHover}
+            error={isLoadingHoverError ? hoverT('couldNotFetchHover') : ''}
+            place={'bottom'}
+            isEmpty={!data?.description && !data?.title}
+            title={data?.title ?? undefined}
+            description={data?.description ?? undefined}
+            className="size-full"
+            color="blue"
+            floating={true}
           >
-            <StoryOrRecordResponsiveImage
-              recordOrStoryId={story.id}
-              src={image}
-              alt={title}
-              className="size-full max-h-[calc(100%-2vw-5px)]" // where 2vw is a title's line height, 5px is gap
-              size={'12vw'}
-              style={{
-                flex: `1 1 calc(100% - 2vw - 5px)`,
-              }}
-              onLoad={handleImageLoad}
-            />
-            <div className="mt-1 w-full flex-1">
-              <p
+            <div
+              className={cn(
+                'flex size-full flex-col gap-[12px] transition-all duration-300 ease-toi-cubic-bezier group-hover:scale-105',
+                !animationState && 'group-hover-blur-item'
+              )}
+            >
+              <StoryOrRecordResponsiveImage
+                recordOrStoryId={story.id}
+                src={image}
+                alt={alt ?? title}
                 className={cn(
-                  animationState === 'forward' &&
-                    'animate-[toBlurAndHide_300ms_ease-in-out_forwards]',
-                  TypographyVariants({
-                    responsive: 'storyOrRecordTitle',
-                    className: 'line-clamp-1 overflow-hidden items-center text-blue-100 w-full',
-                  })
-                )}
-              >
-                {title}
-              </p>
+                  'size-full max-h-[calc(100%-2vw-5px)]',
+                  isMainGrid ? 'story-grid-item' : ''
+                )} // where 2vw is a title's line height, 5px is gap
+                imageClassName="object-bottom"
+                size={'12vw'}
+                style={{
+                  flex: `1 1 calc(100% - 2vw - 5px)`,
+                }}
+                onLoad={handleImageLoad}
+              />
+              <div className="w-full flex-1">
+                <p
+                  lang="nl"
+                  className={cn(
+                    'ease-toi-cubic-bezier',
+                    animationState === 'forward' && 'animate-[toBlurAndHide_300ms_forwards]',
+                    TypographyVariants({
+                      responsive: 'storyOrRecordTitle',
+                      className:
+                        'line-clamp-2 text-center hyphens-auto overflow-hidden items-center text-blue-100 w-full',
+                    })
+                  )}
+                >
+                  {title}
+                </p>
+                <p
+                  lang="nl"
+                  className={TypographyVariants({
+                    responsive: 'detailedStoryOrRecordSubTitle',
+                    className: 'text-center mt-1 text-blue-100',
+                  })}
+                >
+                  {hoverT('story')}
+                </p>
+              </div>
             </div>
-          </DelayedNextLinkWithZoomAnimationsContext>
-        </div>
-      </ReadMoreTooltip>
+          </ReadMoreTooltip>
+        </DelayedNextLinkWithZoomAnimationsContext>
+      </div>
     </div>
   )
 }

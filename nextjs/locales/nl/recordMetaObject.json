@@ -1,9 +1,10 @@
 {
   "__typename": "",
   "objectNumber": "Objectnummer",
+  "title": "Overige titel(s)",
   "titleType": "Overige titel(s)",
   "objectName": "Objectnaam",
-  "archiveCode": "Archief-/Collectiecode",
+  "archiveCode": "Archief/Verzameling",
   "date": "Datering",
   "relatedKeywords": "Gerelateerde trefwoorden",
   "materials": "Materialen",
@@ -14,5 +15,8 @@
   "creditLine": "Creditline",
   "rights": "Rechten",
   "permanentLink": "Permanente link",
-  "externalSource": "Externe bron"
+  "externalSource": "Externe bron",
+  "objectType": "Recordtype",
+  "maker": "Vervaardiger(s)",
+  "geoKeywords": "Geografische trefwoorden"
 }

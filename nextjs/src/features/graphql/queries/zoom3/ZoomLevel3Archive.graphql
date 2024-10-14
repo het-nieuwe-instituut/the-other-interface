@@ -5,5 +5,38 @@ query ZoomLevel3Archive($id: String!, $locale: Locale!) {
     title
     thumbnail
     description
+    mediaType
+    mediaReference
+    custodialHistory
+    systemOfArrangement
+    sources
+    existence
+    existenceLocation
+    asteriskSuggestions {
+      asterisk_date_title
+      asterisk_name_title
+      asterisk_subject_title
+      asterisk_date_description
+      asterisk_name_description
+      asterisk_subject_description
+    }
+    enrichedSources(locale: $locale) {
+      externalSourceType
+      externalSourceUrl
+      __typename
+      id
+      title
+      thumbnail
+      description
+    }
+  }
+}
+
+query ZoomLevel3ArchiveSmall($id: String!, $locale: Locale!) {
+  zoomLevel3Archive(id: $id, locale: $locale) {
+    __typename
+    id
+    title
+    thumbnail
   }
 }

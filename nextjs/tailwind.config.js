@@ -7,7 +7,55 @@ module.exports = {
 
   theme: {
     extend: {
+      screens: {
+        carouselDesktop: '1500px',
+      },
       keyframes: {
+        // PAGINATION
+        // current
+        paginationForward: {
+          '0%': { filter: 'blur(0px)', transform: 'scale(1)', opacity: 1 },
+          '100%': { transform: 'scale(var(--scale-max))', opacity: 0 },
+        },
+        paginationBackward: {
+          '0%': { filter: 'blur(1)', transform: 'scale(1)' },
+          '100%': { filter: 'blur(var(--blur))', transform: 'scale(var(--scale-min))' },
+        },
+        paginationHideToShow: {
+          initial: { opacity: 0 },
+          from: { opacity: 0, transform: 'scale(var(--scale-max))' },
+          to: { opacity: 1, filter: 'blur(0px)', transform: 'scale(1)' },
+        },
+
+        // next
+        nextPaginationHideToShow: {
+          from: { opacity: 0, filter: 'blur(var(--blur))', transform: 'scale(var(--scale-hide))' },
+          to: { opacity: 1, filter: 'blur(0px)', transform: 'scale(var(--scale-min))' },
+        },
+        nextPaginationHideToBlur: {
+          from: { opacity: 0, filter: 'blur(var(--blur))', transform: 'scale(var(--scale-hide))' },
+          to: { opacity: 1, filter: 'blur(var(--blur))', transform: 'scale(var(--scale-min))' },
+        },
+        nextPaginationToUnblur: {
+          '0%': { filter: 'blur(var(--blur))', transform: 'scale(var(--scale-min))' },
+          '100%': { filter: 'blur(0px)', transform: 'scale(1)' },
+        },
+        nextPaginationFromBlurredToHide: {
+          from: { opacity: 1, filter: 'blur(var(--blur))', transform: 'scale(var(--scale-min))' },
+          to: {
+            opacity: 0,
+            filter: 'blur(calc(var(--blur)*2))',
+            transform: 'scale(var(--scale-hide))',
+          },
+        },
+
+        zoomFirstRender: {
+          initial: { opacity: 0, scale: 0 },
+          '0%': { opacity: 0, scale: 0 },
+          '100%': { opacity: 1, scale: 1 },
+        },
+
+        // others
         toBlurAndHide: {
           from: { opacity: 1, filter: 'blur(0px)' },
           to: { opacity: 0, filter: 'blur(10px)' },
@@ -17,9 +65,28 @@ module.exports = {
           from: { opacity: 0, filter: 'blur(10px)' },
           to: { opacity: 1, filter: 'blur(0px)' },
         },
+        fromHideToShowExtraBlur50px: {
+          initial: { opacity: 0 },
+          from: { opacity: 0, filter: 'blur(50px)' },
+          to: { opacity: 1, filter: 'blur(0px)' },
+        },
+        fromHideToBlur: {
+          initial: { opacity: 0 },
+          from: { opacity: 0, filter: 'blur(10px)' },
+          to: { opacity: 1, filter: 'blur(10px)' },
+        },
+        fromHideToBlur50px: {
+          initial: { opacity: 0 },
+          from: { opacity: 0, filter: 'blur(50px)' },
+          to: { opacity: 1, filter: 'blur(50px)' },
+        },
         fromBlurredToHide: {
           from: { opacity: 1, filter: 'blur(10px)' },
           to: { opacity: 0, filter: 'blur(10px)' },
+        },
+        fromBlurredToHide50px: {
+          from: { opacity: 1, filter: 'blur(50px)' },
+          to: { opacity: 0, filter: 'blur(50px)' },
         },
         toBlur: {
           '0%': { filter: 'blur(0px)' },
@@ -27,6 +94,10 @@ module.exports = {
         },
         toUnblur: {
           '0%': { filter: 'blur(10px)' },
+          '100%': { filter: 'blur(0px)' },
+        },
+        toUnblur50px: {
+          '0%': { filter: 'blur(50px)' },
           '100%': { filter: 'blur(0px)' },
         },
         toFadeIn: {
@@ -37,20 +108,20 @@ module.exports = {
           '0%': { opacity: 1 },
           '100%': { opacity: 0 },
         },
-        toScaleFullPage: {
-          '0%': { transform: 'scale(1.1)', opacity: 1 },
-          '75%': { transform: 'scale(3)', opacity: 0.5 },
-          '100%': { transform: 'scale(4)', opacity: 0 },
-        },
         toCenterOfGalaxy: {
           '0%': {
             transform: 'translate(0, 0)',
+            opacity: 1,
           },
           '100%': {
             transform:
               'translate(var(--animation-translate-x), var(--animation-translate-y)) scale(var(--animation-scale))',
+            opacity: 'var(--animation-opacity)',
           },
         },
+      },
+      transitionTimingFunction: {
+        'toi-cubic-bezier': 'cubic-bezier(0.25, 0.1, 0.25, 0.1)',
       },
       gridTemplateAreas: {
         'editorial-large': ['left right', 'bottom right'],
@@ -64,6 +135,13 @@ module.exports = {
         DEFAULT: '0px 4px 4px rgba(0, 0, 0, 0.25)',
       },
       colors: {
+        surface: {
+          lod: 'rgba(242, 233, 200, 1)',
+          'lod-dark': 'rgba(118, 87, 43, 1)',
+
+          asterisk: 'rgba(222, 229, 236, 1)',
+          'asterisk-dark': 'rgba(111, 122, 156, 1)',
+        },
         pink: {
           100: 'rgba(255, 230, 221, 1)',
           60: 'rgba(255, 230, 221, .6)',
@@ -100,6 +178,9 @@ module.exports = {
         brown: '#49280B',
       },
       fontFamily: {
+        'arial-reboot-lines': ['"Arial Reboot Lines"', 'sans-serif'],
+        'times-niw-rimmin': ['"Tim Niw Rimmin"', 'sans-serif'],
+        'times-niw-rimmin-crisp': ['"Tim Niw Rimmin-crisp"', 'sans-serif'],
         'times-dot': ['"Times Dot"', 'sans-serif'],
         'times-large': ['Times', 'sans-serif'],
         'impact-large': ['"Impact"', 'sans-serif'],

@@ -1,8 +1,10 @@
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
-import { StaticHeader } from '../StaticHeader/StaticHeader'
-import { LayerWrapper } from '../Layers/LayerWrapper'
 import { PageHeader } from '@/features/editorial/components/PageHeader/PageHeader'
 import { Paragraph } from '@/features/ui/components/Paragraph/Paragraph'
+import { Subtitle } from '@/features/ui/components/subtitle/Subtitle'
+import { TypographyVariants } from '@/features/ui/components/typography/variants'
+import { cn } from '@/features/ui/utils/cn'
+import { LayerWrapper } from '../Layers/LayerWrapper'
+import { StaticPageHeader } from '../StaticHeader/StaticHeader'
 
 interface ParagraphProps {
   children: React.ReactNode
@@ -17,9 +19,7 @@ interface SectionTitleProps {
 }
 
 export const StaticPageSectionTitle = ({ children }: SectionTitleProps) => (
-  <p className={TypographyVariants({ socialLarge: 'lg', className: 'font-bold mt-2' })}>
-    {children}
-  </p>
+  <Subtitle className="pt-20">{children as string}</Subtitle>
 )
 
 interface StaticPageListProps {
@@ -33,21 +33,28 @@ export const StaticPageList = ({ items }: StaticPageListProps) => {
 }
 
 interface StaticPageContainerProps {
+  className?: string
   title: string
   children: React.ReactNode
+  disableBelowTheFold?: boolean
 }
 
-export const StaticPageContainer = ({ children, title }: StaticPageContainerProps) => (
-  <div className="h-full bg-ivory-100">
-    <div className="bg-ivory-100 pb-[42px]">
-      <StaticHeader />
+export const StaticPageContainer = ({
+  children,
+  title,
+  className,
+  disableBelowTheFold,
+}: StaticPageContainerProps) => (
+  <div className={cn('h-full bg-ivory-100', disableBelowTheFold && 'bg-pink-100', className)}>
+    <div className="pb-[42px] pt-5">
+      <StaticPageHeader />
     </div>
     <LayerWrapper
+      suspense={true}
+      disableBelowTheFold={disableBelowTheFold}
       LeftContent={<PageHeader title={title} />}
       BottomContent={
-        <div className={'mx-auto mb-10 flex max-w-[90em] flex-col gap-[10px] px-6 pt-6'}>
-          {children}
-        </div>
+        <div className={'mx-auto mb-10 flex max-w-[90em] flex-col gap-[10px] pt-6'}>{children}</div>
       }
     />
   </div>
@@ -65,14 +72,15 @@ interface StaticPageLinkProps {
   href: string
   label: string
   external?: boolean
+  className?: string
 }
 
-export const StaticPageLink = ({ href, label, external }: StaticPageLinkProps) => (
+export const StaticPageLink = ({ href, label, external, className }: StaticPageLinkProps) => (
   <a
     href={href}
     target={external ? '_blank' : '_self'}
     rel={external ? 'noreferrer' : ''}
-    className="underline"
+    className={cn('underline', className)}
   >
     {label}
   </a>

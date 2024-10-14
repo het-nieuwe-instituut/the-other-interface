@@ -57,11 +57,6 @@
         }
       }
     },
-    "author": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::author.author"
-    },
     "description": {
       "pluginOptions": {
         "i18n": {
@@ -141,6 +136,22 @@
       "relation": "manyToOne",
       "target": "api::story.story",
       "inversedBy": "child_stories"
+    },
+    "authors": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::author.author"
+    },
+    "thumbnail": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "core.image-thumbnail",
+      "required": false
     }
   }
 }

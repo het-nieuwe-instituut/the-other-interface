@@ -1,4 +1,3 @@
-'use client'
 import { initApiClient } from './api'
 
 const initApiClientService = () => initApiClient()

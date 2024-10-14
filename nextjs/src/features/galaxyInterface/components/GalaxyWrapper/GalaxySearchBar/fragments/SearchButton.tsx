@@ -6,7 +6,7 @@ type Props = {
 
 export const SearchButton: React.FC<Props> = ({ onClick }) => {
   return (
-    <button onClick={onClick}>
+    <button onClick={onClick} aria-label="search">
       <SearchIcon />
     </button>
   )

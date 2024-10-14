@@ -1,6 +1,5 @@
 'use client'
 import BlurOverlay from '@/features/shared/components/BlurOverlay/BlurOverlay'
-import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { State } from '@/features/shared/configs/store'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
@@ -68,6 +67,7 @@ export const MainGalaxy = () => {
 
 const MainGalaxyContent = React.memo(() => {
   const { t } = useTypeSafeTranslation('navigation')
+  const { t: commonT } = useTypeSafeTranslation('common')
   const galaxyPaginationAnimationState = useContext(GalaxyPaginationAnimationStateContext)
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
   const searchParams = useSearchParams()
@@ -79,11 +79,10 @@ const MainGalaxyContent = React.memo(() => {
     isError,
   } = useThemesQuery({ page: currentPage })
   const { data: nextData } = useThemesQuery({ page: currentPage + 1 })
-  const { data: prevData } = useThemesQuery({ page: currentPage - 1 })
 
   const pagination = mainData?.pagination
   const totalPages = pagination?.pageCount || 0
-  const storyTitle = mainData?.storyTitle
+  const storyTitle = mainData?.themeTitle
   const stories = mainData?.stories ?? []
   const nextStories = nextData?.stories ?? []
 
@@ -93,31 +92,35 @@ const MainGalaxyContent = React.memo(() => {
     onRight: handleRightClick,
     disabled: isSearchModeActive,
   })
+
   const renderMainContent = () => {
     if (isError) {
       return (
-        <div className="flex h-full items-center justify-center">
-          <p className={TypographyVariants({ times: 'md' })}>{t('errorLoadingThemes')}</p>
+        <div className="flex h-full items-center justify-center bg-pink-50 px-5 backdrop-blur-[2px] md:px-6">
+          <div className="flex flex-col gap-2">
+            <p
+              className={TypographyVariants({
+                timesDot: '2xl',
+                className: 'text-blue-100',
+              })}
+            >
+              {commonT('errorLoadingItems')}
+            </p>
+            <p
+              className={TypographyVariants({
+                socialLarge: 'lg',
+                className: 'text-blue-100',
+              })}
+            >
+              {commonT('errorTryAgain')}
+            </p>
+          </div>
         </div>
       )
     }
 
-    if (isMainLoading && prevData) {
-      return (
-        <>
-          <Pulse />
-          <Stories stories={prevData?.stories} nextStories={[]} />
-          <ThemeTitle title={storyTitle} />
-        </>
-      )
-    }
-
-    if (isMainLoading && !mainData) {
-      return (
-        <div className="flex h-full  items-center justify-center">
-          <ThemedSpinner />
-        </div>
-      )
+    if (isMainLoading) {
+      return <Pulse />
     }
 
     return (
@@ -129,19 +132,17 @@ const MainGalaxyContent = React.memo(() => {
   }
 
   return (
-    <div className={'w-screen bg-pink-100'}>
+    <div className={'group-hover-blur w-screen bg-pink-100'}>
       <BlurOverlay hide={!isSearchModeActive} />
       <div className="relative mx-auto h-screen w-screen max-w-[1440px]">
-        {categoryClouds.map(cloud => (
-          <Cloud key={cloud.title} cloud={cloud} />
-        ))}
+        {!isError && categoryClouds.map(cloud => <Cloud key={cloud.title} cloud={cloud} />)}
 
         {renderMainContent()}
 
         <GalaxyFooter
           galaxyPagination={
             <GalaxyPagination
-              currentPageNumber={pagination?.page || 0}
+              currentPageNumber={currentPage || 0} // IMPORTANT: This is a temporary fix for issues with pagination. Not to be used elsewhere.
               pageAmount={pagination?.pageCount || 0}
               isResultAmountLoading={isMainLoading}
               handleLeftClick={handleLeftClick}
@@ -157,18 +158,12 @@ const MainGalaxyContent = React.memo(() => {
 
   function handleLeftClick() {
     galaxyPaginationAnimationState.setAnimationState('backwards')
-    //hacky, we should actually listen for event when the animation ends
-    setTimeout(() => {
-      decreasePageNumber()
-    }, 500)
+    decreasePageNumber()
   }
 
   function handleRightClick() {
     galaxyPaginationAnimationState.setAnimationState('forward')
-    setTimeout(() => {
-      //hacky, we should actually listen for event when the animation ends
-      increasePageNumber()
-    }, 500)
+    increasePageNumber()
   }
 })
 MainGalaxyContent.displayName = 'MainGalaxyContent'

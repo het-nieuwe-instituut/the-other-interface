@@ -11,5 +11,12 @@
   "role": "Role",
   "peoplePeriod": "Period",
   "realtedObjects": "Related objects",
-  "creationPeriod": "Creation period"
+  "creationPeriod": "Creation period",
+  "peopleFirstColumn": "Name",
+  "objectsFirstColumn": "Title",
+  "objectReferenceNumber": "Object number",
+  "publicationsFirstColumn": "Title",
+  "archivesFirstColumn": "Title",
+  "descriptionLevel": "Record type",
+  "author": "Author(s)"
 }

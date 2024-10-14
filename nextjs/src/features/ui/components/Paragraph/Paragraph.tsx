@@ -8,7 +8,7 @@ export interface ParagraphProps {
 
 export const Paragraph = ({ children, className }: ParagraphProps) => {
   return (
-    <TailwindMarkdown className={cn('max-w-[808px] bg-inherit', className)}>
+    <TailwindMarkdown className={cn('max-w-[808px] bg-inherit w-full', className)}>
       {children}
     </TailwindMarkdown>
   )

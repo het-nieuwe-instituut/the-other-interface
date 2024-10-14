@@ -3,8 +3,8 @@ import { cva } from 'class-variance-authority'
 export const ButtonVariants = cva(
   [
     'flex w-max flex-row items-center justify-center gap-2 text-blue-100 transition-colors',
-    'hover:border-[rgba(0,0,0,0.2)] hover:bg-blue-100 hover:text-pink-100 ',
-    'active:border-[rgba(0,0,0,0.2)] active:bg-blue-100 active:text-pink-100 ',
+    'hover:border-[rgba(0,0,0,0.2)] hover:bg-blue-100 hover:text-ivory-100 ',
+    'active:border-[rgba(0,0,0,0.2)] active:bg-blue-100 active:text-ivory-100 ',
     'disabled:border-[rgba(0,0,0,0.2)] disabled:bg-transparent disabled:text-[rgba(0,0,0,0.2)]',
     'text-blue-600',
   ],
@@ -15,20 +15,20 @@ export const ButtonVariants = cva(
         secondary: [
           'border-b border-black',
           'h-12 text-left font-social-large text-[16px] font-normal leading-tight tracking-tight text-black-100',
-          'hover:border-black hover:bg-black-100',
+          'hover:border-black hover:bg-black-100 hover:text-ivory-100',
         ],
         tertiary: [
           'h-12 border-none px-5',
           'text-center font-social-large text-[16px] font-normal leading-tight tracking-tight text-black-100',
-          'hover:border-black hover:bg-black-100 hover:text-white',
+          'hover:border-black hover:bg-black-100 hover:text-ivory-100',
         ],
         inverted: [
-          'border-pink-100 text-white',
+          'border-pink-100 text-ivory-100',
           'hover:border-pink-100 hover:bg-pink-100 hover:text-blue-100',
-          '*:text-white',
+          '*:text-ivory-100',
         ],
         invertedSecondary: [
-          'border-blue bg-blue-100 text-pink-100 hover:border-blue active:border-blue',
+          'border-blue bg-blue-100 text-pink-100 hover:border hover:border-blue hover:bg-pink-100 hover:text-blue-100 active:border-blue',
         ],
       },
       size: {
@@ -40,9 +40,9 @@ export const ButtonVariants = cva(
       },
       state: {
         error: [
-          'border-error-100 bg-error-100 text-white',
-          'hover:border-error-100 hover:bg-error-100 hover:text-white',
-          'active:border-error-100 active:bg-error-100 active:text-white',
+          'border-error-100 bg-error-100 text-ivory-100',
+          'hover:border-error-100 hover:bg-error-100 hover:text-ivory-100',
+          'active:border-error-100 active:bg-error-100 active:text-ivory-100',
         ],
         loading: ['pointer-events-none'],
       },

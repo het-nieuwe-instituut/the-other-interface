@@ -1,0 +1,44 @@
+query storiesWithinTheme(
+  $locale: Locale!
+  $filters: StoryFiltersInput
+  $pagination: PaginationArg
+) {
+  stories(locale: $locale, filters: $filters, pagination: $pagination) {
+    data {
+      id
+      __typename
+      attributes {
+        title
+      }
+      components {
+        ...imageModuleFragment
+      }
+      authors {
+        data {
+          attributes {
+            firstName
+            lastName
+            insertion
+          }
+        }
+      }
+      thumbnail {
+        id
+        alt_text
+        imageThumbnail {
+          data {
+            ...UploadFileFragment
+          }
+        }
+      }
+    }
+    meta {
+      pagination {
+        page
+        pageSize
+        pageCount
+        total
+      }
+    }
+  }
+}

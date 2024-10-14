@@ -24,9 +24,11 @@ import externalSources from './en/externalSources.json'
 import contribute from './en/contribute.json'
 import developers from './en/developers.json'
 import disclaimer from './en/disclaimer.json'
+import suggestions from './en/suggestions.json'
 
 export type TranslationKeys = {
   common: Paths<typeof common>
+  suggestions: Paths<typeof suggestions>
   stories: Paths<typeof stories>
   homepage: Paths<typeof homepage>
   landingpage: Paths<typeof landingpage>

@@ -2,6 +2,8 @@ import {
   ComponentModulesImage,
   Maybe,
   StoriesRelationForRecordQuery,
+  StoriesWithinThemeQuery,
+  StoryComponentsDynamicZone,
   StoryMetaByIdQuery,
 } from 'src/generated/graphql'
 import { joinNullableStrings } from '../utils/text'
@@ -13,55 +15,68 @@ export type StoryImageInfo = {
   title?: string
   description: string | null
   id?: Maybe<string> | undefined
+  alt?: string | null
 }
 
-type StoryMeta = NonNullable<StoryMetaByIdQuery['storyMetaByLocale']['data']>['attributes']
+type StoryMeta = NonNullable<StoryMetaByIdQuery['storyByLocale']['data']>
+type MinimalStoryMeta = NonNullable<StoriesWithinThemeQuery['stories']['data']>
 
 export const storiesToCarouselDataMapper = (
   relatedStories:
     | NonNullable<StoriesRelationForRecordQuery['zoomLevel3StoriesRelationsForRecord']>['stories']
-    | NonNullable<NonNullable<StoryMeta>['child_stories']>['data']
+    | NonNullable<NonNullable<StoryMeta>['child_stories']>
     | NonNullable<NonNullable<StoryMeta>['siblings']>
     | NonNullable<NonNullable<NonNullable<NonNullable<StoryMeta>['parent_story']>>['data']>[]
+    | MinimalStoryMeta
 ): StoryImageInfo[] | undefined => {
-  const mappedStories = relatedStories
-    ?.flatMap(story => {
-      const { firstName, lastName } = story?.attributes?.author?.data?.attributes ?? {}
-      const authorName = joinNullableStrings(' ', firstName, lastName)
+  const images: StoryImageInfo[] = []
 
-      const images = story?.attributes?.components
-        ?.filter(
-          (component): component is ComponentModulesImage =>
-            component.__typename === 'ComponentModulesImage' && !!component.image
+  relatedStories?.forEach(story => {
+    const authorName = story?.authors?.data
+      .map(author => {
+        return joinNullableStrings(
+          ' ',
+          author?.attributes?.firstName,
+          author.attributes?.insertion,
+          author?.attributes?.lastName
         )
-        .map(component => ({
-          url: component.image.data?.attributes?.url,
-          height: component.image.data?.attributes?.height,
-          width: component.image.data?.attributes?.width,
-        }))
+      })
+      .join(', ')
 
-      if (!images || images.length === 0) {
-        return []
-      }
+    if (story?.thumbnail) {
+      return images.push({
+        url: story?.thumbnail?.imageThumbnail?.data?.attributes?.url,
+        id: story?.id,
+        height: story?.thumbnail?.imageThumbnail?.data?.attributes?.height,
+        width: story?.thumbnail?.imageThumbnail?.data?.attributes?.width,
+        title: story?.attributes?.title,
+        description: authorName ?? null,
+        alt: story?.thumbnail?.alt_text,
+      })
+    }
 
-      const image = images[0]
+    if (!story?.components) {
+      return
+    }
 
-      if (image.url === undefined) {
-        return []
-      }
+    const imageModule: ComponentModulesImage = (
+      story.components as StoryComponentsDynamicZone[]
+    ).find(c => c.__typename === 'ComponentModulesImage') as ComponentModulesImage
 
-      return [
-        {
-          url: image.url,
-          id: story?.id,
-          height: image.height,
-          width: image.width,
-          title: story?.attributes?.title,
-          description: authorName,
-        },
-      ]
+    const { url, height, width } = imageModule?.image.data?.attributes || {}
+    if (!url) {
+      return
+    }
+
+    return images.push({
+      url,
+      id: story?.id,
+      height,
+      width,
+      title: story?.attributes?.title,
+      description: authorName ?? null,
     })
-    .filter(Boolean)
+  })
 
-  return mappedStories && mappedStories.length > 0 ? mappedStories : undefined
+  return images
 }

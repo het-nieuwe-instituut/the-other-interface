@@ -11,10 +11,11 @@ export const CollpsedSearch = ({ toggleSearchBar, className }: Props) => {
   return (
     <div className={cn(className, 'flex justify-end items-center w-full h-full')}>
       <IconButton
+        aria-label="search"
         intent={'ghost'}
         size={'small'}
         icon={<SearchIconCollapsed />}
-        className="z-20 flex size-[60px] border border-blue"
+        className="z-20 flex size-[61px] border border-blue"
         onClick={toggleSearchBar}
       />
     </div>

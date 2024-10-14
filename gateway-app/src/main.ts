@@ -4,16 +4,25 @@ import { NestFactory } from '@nestjs/core'
 
 import { AppModule } from './app.module'
 import { Config } from './config/config'
-import { RollbarInterceptor } from './modules/util/rollbar.interceptor'
-import { RollbarService } from './modules/util/rollbar.service'
+import { ErrorInterceptor } from './modules/util/error.interceptor'
+import { ErrorReporterService } from './modules/util/errorReporter.service'
+import * as Sentry from '@sentry/node'
 
-// prettier-ignore
 async function bootstrap() {
+  const shouldMonitor = 'acceptance' === process.env.ENV || 'production' === process.env.ENV
+
+  if (shouldMonitor && process.env.SENTRY_DSN) {
+    Sentry.init({
+      dsn: process.env.SENTRY_DSN,
+      environment: process.env.ENV,
+    })
+  }
+
   const app = await NestFactory.create(AppModule)
   const configService = app.get<ConfigService<Config>>(ConfigService)
 
-  if (configService.get('ENV') === 'production') {
-    app.useGlobalInterceptors(new RollbarInterceptor(app.get<RollbarService>(RollbarService)))
+  if (shouldMonitor) {
+    app.useGlobalInterceptors(new ErrorInterceptor(app.get(ErrorReporterService)))
   }
 
   const appPort = parseInt(configService.get('APP_PORT', '5000'), 10)

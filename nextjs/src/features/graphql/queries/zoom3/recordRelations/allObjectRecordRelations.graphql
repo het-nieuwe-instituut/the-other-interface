@@ -1,8 +1,17 @@
-query ObjectRecordRelations($id: String!, $type: EntityNames!, $locale: Locale!, $page: Int!, $pageSize: Int!) {
-    objectRecordRelations(type: $type, id: $id, locale: $locale, page: $page, pageSize: $pageSize) {
-        idRelation
-        titleR
-        referenceNumber
-        period
-    }
+query ObjectRecordRelations(
+  $id: String!
+  $type: EntityNames!
+  $locale: Locale!
+  $page: Int!
+  $pageSize: Int!
+) {
+  objectRecordRelations(type: $type, id: $id, locale: $locale, page: $page, pageSize: $pageSize) {
+    idRelation
+    titleR
+    referenceNumber
+    period
+    asterisk_date_person
+    asterisk_name_person
+    asterisk_subject_person
+  }
 }

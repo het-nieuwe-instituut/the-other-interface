@@ -6,10 +6,17 @@
 </div>
 */
 .group-hover-blur {
-  transition: opacity 0.5s ease-in-out;
+  @apply ease-toi-cubic-bezier;
+  transition: opacity 0.5s;
 }
 .group-hover-blur:has(.group-hover-blur-item:hover)
   .group-hover-blur-item:not(.group-hover-blur-item:hover) {
+  filter: blur(10px);
+  opacity: 0.3;
+}
+
+/* New class for elements that blur on sibling hover but not on self-hover */
+.group-hover-blur:has(.group-hover-blur-item:hover) .group-hover-blur-except-self:not(:hover) {
   filter: blur(10px);
   opacity: 0.3;
 }

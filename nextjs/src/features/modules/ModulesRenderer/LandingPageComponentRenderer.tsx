@@ -32,26 +32,26 @@ interface Props {
 
 export function LandingPageComponentRenderer({ grid, highlight, imageCarousel, carousel }: Props) {
   const lang = useLocale()
+
   return (
-    <div className={cn('pt-10 flex flex-col gap-[40px] w-full')}>
+    <div className={cn('py-20 flex flex-col gap-20 w-full')}>
       {imageCarousel && (
         <ImageCarousel>
           {imageCarousel.items?.map(item => {
             const attributes = item?.image?.data?.attributes
-            const href = addLocaleToUrl(
-              getTriplyOrStoryHref({
-                story: item?.story ?? undefined,
-                triply_record: item?.triply_record ?? undefined,
-              }) ?? '',
-              lang
-            )
-            const url = item?.url ? imageBasePath(item.url.toString()) : undefined
+            const href = getTriplyOrStoryHref({
+              story: item?.story,
+              triply_record: item?.triply_record,
+            })
+            const hrefWithLang = href ? addLocaleToUrl(href, lang) : undefined
+
+            const url = attributes?.url ? imageBasePath(attributes?.url.toString()) : undefined
             if (!attributes || !attributes.height || !attributes.width || !attributes.url || !url) {
               return null
             }
             return (
               <ImageCarouselItem
-                href={href}
+                href={hrefWithLang}
                 key={item.id}
                 src={url}
                 // TODO: add alt text instead of caption

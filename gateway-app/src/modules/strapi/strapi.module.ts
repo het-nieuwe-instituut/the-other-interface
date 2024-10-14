@@ -2,6 +2,7 @@ import { GraphQLClientInject, GraphQLRequestModule } from '@golevelup/nestjs-gra
 import { Module } from '@nestjs/common'
 import { getSdk } from '../../generated/strapi-sdk'
 import { GraphQLClient } from 'graphql-request'
+import { PerformanceInterceptor } from '../util/performance.interceptor'
 
 @Module({
   imports: [
@@ -20,6 +21,11 @@ import { GraphQLClient } from 'graphql-request'
       provide: 'StrapiGqlSDK',
       inject: [GraphQLClientInject],
       useFactory: (client: GraphQLClient) => getSdk(client),
+    },
+    {
+      // Apply the interceptor with a threshold of 1000ms (1 second)
+      provide: 'APP_INTERCEPTOR',
+      useFactory: () => new PerformanceInterceptor('CMS', 1500),
     },
   ],
   exports: ['StrapiGqlSDK'],

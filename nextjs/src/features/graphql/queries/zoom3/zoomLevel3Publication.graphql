@@ -5,5 +5,28 @@ query ZoomLevel3Publication($id: String!, $locale: Locale!) {
     title
     thumbnail
     description
+    mediaType
+    mediaReference
+    enrichedSources(locale: $locale) {
+      externalSourceType
+      externalSourceUrl
+      __typename
+      id
+      title
+      thumbnail
+      description
+    }
+    holding
+    historyNotes
+    annotation
+  }
+}
+
+query ZoomLevel3PublicationSmall($id: String!, $locale: Locale!) {
+  zoomLevel3Publication(id: $id, locale: $locale) {
+    id
+    __typename
+    title
+    thumbnail
   }
 }

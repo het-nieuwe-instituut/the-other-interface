@@ -24,7 +24,11 @@ export const RecordDescription: React.FC<Props> = props => {
   return (
     <div className="flex max-w-[calc(100vw-40px)] flex-col gap-4">
       <div className={cn('text-left flex flex-col gap-4  max-w-[calc(100vw-40px)]')}>
-        {title && <h2 className={TypographyVariants({ responsive: 'title' })}>{title}</h2>}
+        {title && (
+          <h2 lang="nl" className={TypographyVariants({ responsive: 'subTitle' })}>
+            {title}
+          </h2>
+        )}
       </div>
       {preface && showReadMore && (
         <div className="relative flex flex-col items-start justify-start gap-5 ">

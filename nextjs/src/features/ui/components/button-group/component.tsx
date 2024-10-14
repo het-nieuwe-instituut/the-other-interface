@@ -1,11 +1,12 @@
 import { isExternalURL } from '@/features/shared/utils/links'
 import { NavButton } from '@/features/ui/components/nav-button/component'
 import ExternalLink from '@/features/ui/icons/external-link.svg'
+import { VariantProps } from 'class-variance-authority'
 import { ReactElement } from 'react'
 import { cn } from '../../utils/cn'
-import { NavLinkButton } from '../nav-link-button/component'
+import { JumboLinkButton } from '../jumbo-button/component'
 import { NavButtonVariants } from '../nav-button/variants'
-import { VariantProps } from 'class-variance-authority'
+import { NavLinkButton } from '../nav-link-button/component'
 
 export interface ButtonGroupProps {
   children:
@@ -22,20 +23,47 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, className })
 interface LinkButtonGroupItemProps extends VariantProps<typeof NavButtonVariants> {
   href: string
   children: string
+  className?: string
 }
 
 export const LinkButtonGroupItem: React.FC<LinkButtonGroupItemProps> = ({
   href,
   children,
   variant,
-  color = 'jumboText',
+  color = 'blue',
 }: LinkButtonGroupItemProps) => {
   const isExternal = isExternalURL(href, process.env.parsed.NEXT_PUBLIC_URL ?? '')
   return (
-    <NavLinkButton href={href} variant={variant} color={color}>
+    <NavLinkButton
+      href={href}
+      variant={variant}
+      color={color}
+      className="relative w-fit"
+      target={isExternal ? '_blank' : ''}
+    >
       {children}
-      {isExternal && <ExternalLink className="size-6" />}
+      <i>{isExternal && <ExternalLink className="size-6" />}</i>
     </NavLinkButton>
+  )
+}
+
+interface JumboLinkButtonGroupItemProps {
+  href: string
+  children: string
+  className?: string
+}
+
+export const JumboLinkButtonGroupItem: React.FC<JumboLinkButtonGroupItemProps> = ({
+  href,
+  children,
+  className,
+}: LinkButtonGroupItemProps) => {
+  const isExternal = isExternalURL(href, process.env.parsed.NEXT_PUBLIC_URL ?? '')
+  return (
+    <JumboLinkButton className={cn(className)} href={href} target={isExternal ? '_blank' : ''}>
+      {children}
+      <i>{isExternal && <ExternalLink className="ml-2 inline-flex size-6" />}</i>
+    </JumboLinkButton>
   )
 }
 

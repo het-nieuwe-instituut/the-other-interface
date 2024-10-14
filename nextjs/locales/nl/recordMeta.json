@@ -2,7 +2,7 @@
   "objectNumber": "Objectnummer",
   "titleType": "Overige titel(s)",
   "objectName": "Objectnaam",
-  "archiveCode": "Archief-/Collectiecode",
+  "archiveCode": "Archief/Verzameling",
   "date": "Datering",
   "materials": "Materialen",
   "techniques": "Technieken",
@@ -18,7 +18,7 @@
   "existence": "Bestaan en locatie van originelen",
   "existenceLocation": "Bestaan en locatie van reproducties",
   "referenceCode": "Inventarisnummer",
-  "descriptionLevel": "Beschrijvingsniveau/Recordtype",
+  "descriptionLevel": "Beschrijvingsniveau",
   "size": "Omvang",
   "period": "Periode",
   "access": "Openbaarheidsbeperkingen",
@@ -27,7 +27,7 @@
   "description": "Biografie",
   "type": "Type",
   "profession": "Beroep/Werkveld",
-  "nameVariation": "Naamsvarianten",
+  "nameVariations": "Naamsvarianten",
   "birthDate": "Geboortedatum",
   "birthPlace": "Geboorteplaats",
   "deathDate": "Overlijdensdatum",
@@ -47,5 +47,9 @@
   "rightsStatusPublicText": "Dit werk is geïdentificeerd als zijnde vrij van bekende beperkingen onder de auteursrechtwet, inclusief alle gerelateerde en naburige rechten",
   "suggestionTitle": "Heb je een suggestie?",
   "suggestionContributeLink": "Deel hier",
-  "suggestionLearnMoreLink": "Leer over Asterisk"
+  "suggestionLearnMoreLink": "Leer over Asterisk*",
+  "annotation": "Annotatie",
+  "historyNotes": "Opmerkingen",
+  "holding": "Bezit",
+  "asteriskSuggestions": "Asterisk suggesties"
 }

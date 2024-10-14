@@ -1,14 +1,21 @@
 version: '3'
 services:
-    postgres:
-        image: postgres:10
-        ports:
-            - 5432:5432
-        volumes:
-            - dbvolume:/var/lib/postgresql/data
-        environment:
-            - POSTGRES_DB=strapi
-            - POSTGRES_PASSWORD=strapi
-            - PGDATA=/var/lib/postgresql/data/pgdata
+  postgres:
+    image: postgres:10
+    ports:
+      - 5432:5432
+    volumes:
+      - dbvolume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=strapi
+      - POSTGRES_PASSWORD=strapi
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    # uncomment the following lines to enable query logging
+    # command: >
+    #   postgres -c log_statement=all
+    #            -c logging_collector=off
+    #            -c client_min_messages=log
+    #            -c log_min_messages=info
+
 volumes:
-    dbvolume: {}
+  dbvolume: {}

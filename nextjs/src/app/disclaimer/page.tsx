@@ -51,7 +51,7 @@ export default async function Page() {
         />
       </StaticPageParagraph>
 
-      <StaticPageSectionTitle>{t('disclaierTitle')}</StaticPageSectionTitle>
+      <StaticPageSectionTitle>{t('disclaimerTitle')}</StaticPageSectionTitle>
       <StaticPageParagraph>{t('disclaimerP1')}</StaticPageParagraph>
       <StaticPageParagraph>
         {t('disclaimerP2')}
@@ -66,6 +66,20 @@ export default async function Page() {
           href="mailto:webredactie@nieuweinstituut.nl"
           label="webredactie@nieuweinstituut.nl"
         />
+      </StaticPageParagraph>
+
+      <StaticPageSectionTitle>{t('aiTitle')}</StaticPageSectionTitle>
+      <StaticPageParagraph>{t('paragraphAI')}</StaticPageParagraph>
+
+      <StaticPageSectionTitle>{t('mediaTitle')}</StaticPageSectionTitle>
+      <StaticPageParagraph>
+        {t('mediaParagraph1')}
+        <StaticPageLink
+          href="https://creativecommons.org/publicdomain/zero/1.0/deed.nl"
+          label="CC-0 (1.0)"
+          external
+        />
+        .{t('mediaParagraph2')}
       </StaticPageParagraph>
 
       <StaticPageSectionTitle>{t('organizationTitle')}</StaticPageSectionTitle>

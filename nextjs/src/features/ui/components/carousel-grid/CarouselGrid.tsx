@@ -81,20 +81,20 @@ export const CarouselGridPagination = ({
   hidePrevious,
 }: CarouselGridPaginationProps) => {
   return (
-    <div className={cn('flex h-full items-center justify-center gap-2 -mr-3', className)}>
-      <button onClick={onPrevious} disabled={hidePrevious}>
+    <div className={cn('flex h-full items-center justify-center gap-2 -mr-3 ml-auto', className)}>
+      <button onClick={onPrevious} disabled={hidePrevious} aria-label="previous">
         <NavArrowLeft
           className={cn(
             hidePrevious && 'opacity-20',
-            !hidePrevious && 'hover:bg-black-100 hover:text-white'
+            !hidePrevious && 'hover:bg-black-100 hover:text-ivory-100'
           )}
         />
       </button>
-      <button onClick={onNext} disabled={hideNext}>
+      <button onClick={onNext} disabled={hideNext} aria-label="next">
         <NavArrowRight
           className={cn(
             hideNext && 'opacity-20',
-            !hideNext && 'hover:bg-black-100 hover:text-white'
+            !hideNext && 'hover:bg-black-100 hover:text-ivory-100'
           )}
         />
       </button>
@@ -109,9 +109,23 @@ export const CarouselGridLink = (props: CarouselGridLinkProps) => {
   return <NavLinkButton variant={'textPrimary'} {...props} />
 }
 
-export interface CarouselGridTitleProps extends SubtitleProps {}
+export interface CarouselGridTitleProps extends SubtitleProps {
+  superscript?: number
+}
+
 export const CarouselGridTitle = (props: CarouselGridTitleProps) => {
-  return <Subtitle {...props} />
+  return (
+    <div className="flex">
+      <div>
+        <Subtitle {...props} />
+      </div>
+      <span
+        className={cn(TypographyVariants({ socialLarge: 'xl' }), 'relative top-0 -right-2 bold')}
+      >
+        {props.superscript ? `${props.superscript}` : ''}
+      </span>
+    </div>
+  )
 }
 
 export interface CarouselGridDescriptionProps extends SubtitleProps {}

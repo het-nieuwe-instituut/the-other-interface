@@ -6,7 +6,11 @@ import { KeysToVerify, TriplyService } from '../triply/triply.service'
 import { getUniqueById } from '../util/helpers'
 import { Locale } from '../util/locale.type'
 import { Enum_Triplyrecord_Type } from 'src/generated/strapi-sdk'
-import { FilterSuggestionType, SelectedFilterSuggestion } from './zoomLevel2.type'
+import {
+  FilterSuggestionType,
+  SelectedFilterSuggestion,
+  ZoomLevel2ParentType,
+} from './zoomLevel2.type'
 
 interface ResultData {
   thumbnail: string
@@ -37,7 +41,7 @@ export class ZoomLevel2Service {
     paginationArgs: PaginationArgs,
     text?: string | null,
     selectedFilterSuggestions?: SelectedFilterSuggestion[] | null
-  ) {
+  ): Promise<ZoomLevel2ParentType> {
     switch (entity) {
       case EntityNames.Archives:
       case EntityNames.Objects:
@@ -114,7 +118,8 @@ export class ZoomLevel2Service {
     text?: string | null,
     selectedFilterSuggestions?: SelectedFilterSuggestion[] | null
   ) {
-    const uri = this.getUriForLevel2Data(type, text, { forCount: false })
+    const hasParams = !!selectedFilterSuggestions?.length
+    const uri = this.getUriForLevel2Data(type, text, { forCount: false, hasParams })
     const searchParams = this.getZoomLevel2SearchParams(selectedFilterSuggestions, text)
 
     const result = await this.triplyService.queryTriplyData<ResultData>(
@@ -124,11 +129,13 @@ export class ZoomLevel2Service {
       { ...searchParams, language: locale }
     )
 
-    const uniqueNodes = getUniqueById(result?.data).map(res => ({
-      thumbnail: res.thumbnail,
-      title: res.title,
-      id: res.id,
-    }))
+    const uniqueNodes = getUniqueById(result?.data)
+      .map(res => ({
+        thumbnail: res.thumbnail,
+        title: res.title,
+        id: res.id,
+      }))
+      .filter(r => !!r.id)
 
     return {
       page: paginationArgs.page ?? 1,
@@ -141,7 +148,8 @@ export class ZoomLevel2Service {
     text?: string | null,
     selectedFilterSuggestions?: SelectedFilterSuggestion[] | null
   ) {
-    const uri = this.getUriForLevel2Data(type, text, { forCount: true })
+    const hasParams = !!selectedFilterSuggestions?.length
+    const uri = this.getUriForLevel2Data(type, text, { forCount: true, hasParams })
     const searchParams = this.getZoomLevel2SearchParams(selectedFilterSuggestions, text)
 
     const countResult = await this.triplyService.queryTriplyData<{ total?: string }>(
@@ -161,9 +169,9 @@ export class ZoomLevel2Service {
   private getUriForLevel2Data(
     type: EntityNames,
     text: string | null = '',
-    { forCount }: { forCount: boolean }
+    { forCount, hasParams }: { forCount: boolean; hasParams: boolean }
   ) {
-    if (text) {
+    if (text || hasParams) {
       return this.getUriForLevel2TextSearch(type, { forCount })
     }
 
@@ -187,7 +195,7 @@ export class ZoomLevel2Service {
   }
 
   private getUriForLevel2TextSearch(type: EntityNames, { forCount }: { forCount: boolean }) {
-    const dataAmountUri = forCount ? '-Count' : ''
+    const dataAmountUri = forCount ? '-count' : ''
 
     switch (type) {
       case EntityNames.People:

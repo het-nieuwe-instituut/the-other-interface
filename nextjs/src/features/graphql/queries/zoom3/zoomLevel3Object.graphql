@@ -5,5 +5,33 @@ query ZoomLevel3Object($id: String!, $locale: Locale!) {
     title
     thumbnail
     description
+    mediaType
+    mediaReference
+    asteriskSuggestions {
+      asterisk_date_title
+      asterisk_name_title
+      asterisk_subject_title
+      asterisk_date_description
+      asterisk_name_description
+      asterisk_subject_description
+    }
+    enrichedSources(locale: $locale) {
+      externalSourceType
+      externalSourceUrl
+      __typename
+      id
+      title
+      thumbnail
+      description
+    }
+  }
+}
+
+query ZoomLevel3ObjectSmall($id: String!, $locale: Locale!) {
+  zoomLevel3Object(id: $id, locale: $locale) {
+    id
+    __typename
+    title
+    thumbnail
   }
 }

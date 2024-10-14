@@ -32,12 +32,19 @@ export class Zoom3TaskError extends Error {
   }
 }
 
-export async function getZoom3RecordTask(
-  type: Category,
-  payload: Payload,
-  api: Sdk,
+export async function getZoom3RecordTask({
+  type,
+  payload,
+  api,
+  throwOnError,
+  small,
+}: {
+  type: Category
+  payload: Payload
+  api: Sdk
   throwOnError?: boolean
-) {
+  small?: boolean
+}) {
   if (isStoryCategory(type)) {
     const detail = await api?.storyById(payload)
     const story = detail.storyByLocale.data
@@ -51,7 +58,9 @@ export async function getZoom3RecordTask(
 
   const configByType = getZoom3Queries(type, api)
 
-  const data = await configByType?.zoomLevelQuery?.(payload)
+  const data = small
+    ? await configByType?.zoomLevelQuerySmall?.(payload)
+    : await configByType?.zoomLevelQuery?.(payload)
 
   const item = configByType?.accesor?.(data)
 
@@ -60,5 +69,36 @@ export async function getZoom3RecordTask(
 
   if (!item?.id) return null
 
+  if (item.__typename === 'ArchiveZoomLevel3DetailType') {
+    const filteredAsteriskSuggesitons = item?.asteriskSuggestions?.filter(suggestion => {
+      const keys = Object.keys(suggestion) as (keyof typeof suggestion)[]
+      return keys.some(key => suggestion[key] !== null)
+    })
+    return {
+      ...item,
+      asteriskSuggestions: filteredAsteriskSuggesitons,
+    }
+  }
+
+  if (item.__typename === 'ObjectsZoomLevel3DetailType') {
+    const filteredAsteriskSuggesitons = item?.asteriskSuggestions?.filter(suggestion => {
+      const keys = Object.keys(suggestion) as (keyof typeof suggestion)[]
+      return keys.some(key => suggestion[key] !== null)
+    })
+    return {
+      ...item,
+      asteriskSuggestions: filteredAsteriskSuggesitons,
+    }
+  }
+  if (item.__typename === 'PeopleZoomLevel3DetailType') {
+    const filteredAsteriskSuggesitons = item?.asteriskSuggestions?.filter(suggestion => {
+      const keys = Object.keys(suggestion) as (keyof typeof suggestion)[]
+      return keys.some(key => suggestion[key] !== null)
+    })
+    return {
+      ...item,
+      asteriskSuggestions: filteredAsteriskSuggesitons,
+    }
+  }
   return item
 }

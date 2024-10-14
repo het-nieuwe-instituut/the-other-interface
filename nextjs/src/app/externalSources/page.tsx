@@ -35,8 +35,7 @@ export default async function Page({
   const wikiUrl = 'https://www.wikidata.org/wiki/Wikidata:Main_Page'
   const rkdUrl = 'https://www.rkd.nl/en'
   const gettyUrl = 'https://www.getty.edu/research/tools/vocabularies/aat/'
-  const suggestionUrl =
-    'https://forms.office.com/pages/responsepage.aspx?id=-nOvvAYyuU2cuMU4_1TahnU7jGT5k41AuJISCxkAcUdUNDdZRFQ5UjA4VDlUOVpISk1USzhHU0hMSi4u'
+  const suggestionUrl = 'https://forms.nieuweinstituut.nl/asterisk-suggestions-form/'
   const triplyUrl = 'https://triply.cc/triplydb/'
   const developersUrl = addLocaleToUrl('/developers', locale)
 

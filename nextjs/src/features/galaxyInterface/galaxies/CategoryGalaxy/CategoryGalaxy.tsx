@@ -4,16 +4,19 @@ import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { State } from '@/features/shared/configs/store'
 import { ZOOM2_RECORDS_PER_PAGE } from '@/features/shared/constants/mainConstants'
 import { useSearchByCategoryQuery } from '@/features/shared/hooks/queries/useSearchByCategoryQuery'
-import { useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
+import { useDecodedSearchFilters } from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { usePageNumber } from '@/features/shared/hooks/usePageNumber'
 import { usePositioningTemplates } from '@/features/shared/hooks/usePositioningTemplates'
-import { useSearchParamCategory, useZoom2Params } from '@/features/shared/hooks/useZoom2Params'
+import {
+  useSearchParamCategory,
+  useSearchParamFallback,
+  useSearchParamSearchValue,
+} from '@/features/shared/hooks/useZoom2Params'
 import { isSearchCategory } from '@/features/shared/utils/categories'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { useArrowNavigation } from '@/features/ui/hooks/useArrowNavigation'
 import { useSearchParamPagination } from '@/features/ui/hooks/useSearchParamPagination'
-import { useSearchParams } from 'next/navigation'
 import React, { useContext } from 'react'
 import { useSelector } from 'react-redux'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
@@ -43,9 +46,6 @@ export const CategoryGalaxy = () => {
     positioningTemplates,
     pageNumber
   )
-  const searchParams = useSearchParams()
-
-  const currentPage = parseInt(searchParams?.get('page') ?? '1')
   const category = useSearchParamCategory()
 
   if (!isSearchCategory(category)) {
@@ -60,26 +60,21 @@ export const CategoryGalaxy = () => {
           currentTemplate,
         }}
       >
-        <CategoryGalaxyContent key={currentPage} />
+        <CategoryGalaxyContent key={`${pageNumber ?? '1'}`} />
       </CategoryGalaxyTemplateContext.Provider>
     </GalaxyPaginationAnimationStateProvider>
   )
 }
 
-export const CategoryGalaxyContent = React.memo(() => {
+const CategoryGalaxyContent = React.memo(() => {
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
-  const { category, search, fallback } = useZoom2Params()
+  const category = useSearchParamCategory()
+  const search = useSearchParamSearchValue()
+  const fallback = useSearchParamFallback()
   const { pageNumber } = usePageNumber()
-  const selectedFilters = useSelectedFilters()
+  const { decodedFilters } = useDecodedSearchFilters()
   const { setAnimationState } = useContext(GalaxyPaginationAnimationStateContext)
 
-  const { data: prevData } = useSearchByCategoryQuery({
-    category,
-    text: search,
-    page: pageNumber - 1,
-    fallback,
-    selectedFilters,
-  })
   const {
     data: mainData,
     isLoading: isMainLoading,
@@ -89,7 +84,7 @@ export const CategoryGalaxyContent = React.memo(() => {
     text: search,
     page: pageNumber,
     fallback,
-    selectedFilters,
+    selectedFilters: decodedFilters,
   })
 
   const { total: resultAmount } = mainData || { total: 0 }
@@ -117,32 +112,40 @@ export const CategoryGalaxyContent = React.memo(() => {
   })
 
   const { t } = useTypeSafeTranslation('category')
+  const { t: tCommon } = useTypeSafeTranslation('common')
   const isResultEmpty = searchResultAmount === 0 && !isMainLoading && !isError
 
   const renderMainContent = () => {
     if (isError) {
       return (
-        <div className="flex h-full items-center justify-center">
-          <p className={TypographyVariants({ times: 'md' })}>{t('errorLoadingCategoryItems')}</p>
+        <div className="flex h-full items-center justify-center px-5 md:px-6">
+          <div className="flex flex-col gap-2">
+            <p
+              className={TypographyVariants({
+                timesDot: '2xl',
+                className: 'text-blue-100',
+              })}
+            >
+              {tCommon('errorLoadingItems')}
+            </p>
+            <p
+              className={TypographyVariants({
+                socialLarge: 'lg',
+                className: 'text-blue-100',
+              })}
+            >
+              {tCommon('errorTryAgain')}
+            </p>
+          </div>
         </div>
       )
     }
 
-    if (isMainLoading && prevData) {
+    if (isMainLoading || fallback) {
       return (
         <>
           <Pulse />
-
-          <Records pageAmount={pageAmount} records={records} />
         </>
-      )
-    }
-
-    if (isMainLoading) {
-      return (
-        <div className="absolute mx-auto flex h-full w-screen items-center justify-center ">
-          <Pulse />
-        </div>
       )
     }
 
@@ -189,18 +192,14 @@ export const CategoryGalaxyContent = React.memo(() => {
 
   function handleLeftClick() {
     setAnimationState('backwards')
-    //hacky, we should actually listen for event when the animation ends
-    setTimeout(() => {
-      decreasePageNumber()
-    }, 500)
+
+    decreasePageNumber()
   }
 
   function handleRightClick() {
     setAnimationState('forward')
-    setTimeout(() => {
-      //hacky, we should actually listen for event when the animation ends
-      increasePageNumber()
-    }, 500)
+
+    increasePageNumber()
   }
 })
 CategoryGalaxyContent.displayName = 'CategoryGalaxyContent'

@@ -4,11 +4,12 @@ import { ConfigService } from '@nestjs/config'
 import { catchError, lastValueFrom, map } from 'rxjs'
 import { Config } from 'src/config/config'
 import { PaginationArgs } from '../util/paginationArgs.type'
-import { RollbarService } from '../util/rollbar.service'
+import { ErrorReporterService } from '../util/errorReporter.service'
 import { get } from 'lodash'
 import { Locale } from '../util/locale.type'
 import { TriplyUtils } from './triply.utils'
-import { EnrichedRecordBaseType } from './triply.type'
+import { EnrichedRecordBaseType } from '../triplyRecord/triplyRecord.type'
+import { SlackService } from '../util/slack.service'
 
 export enum ExternalSource {
   getty = 'getty',
@@ -53,7 +54,8 @@ export class TriplyService {
   public constructor(
     private configService: ConfigService<Config>,
     private readonly httpService: HttpService,
-    private readonly rollbarService: RollbarService
+    private readonly errorReporterService: ErrorReporterService,
+    private readonly slackService: SlackService
   ) {
     this.endpointBaseURL = configService.getOrThrow('TRIPLY_API_BASEURL')
     this.apiKey = configService.getOrThrow('TRIPLY_API_KEY')
@@ -90,8 +92,19 @@ export class TriplyService {
       }
     }
 
+    const date = new Date()
     const data = await this.fetch<ReturnDataType>(endpoint)
-    this.checkResponseType(data, keysToVerify)
+
+    const elapsedMs = new Date().getTime() - date.getTime()
+    if (elapsedMs > 3000) {
+      const message = `Triply query for ${endpoint} took ${elapsedMs}ms`
+      console.warn(message)
+      this.slackService
+        .postMessageToChannel(this.slackService.channels.systemNotification, message)
+        .catch(err => console.error(err))
+    }
+
+    this.checkResponseType(data, keysToVerify, endpoint)
 
     return { data }
   }
@@ -109,8 +122,12 @@ export class TriplyService {
         const result = await this.queryTriplyData(endpoint, {}, undefined, params)
 
         const enrichedSource = TriplyUtils.combineObjectArray(result.data as object[])
+        if (!enrichedSource) {
+          return
+        }
+
         const externalSourceUrl = TriplyUtils.getExternalSourceUrlFromData(
-          result.data,
+          enrichedSource,
           source as ExternalSource
         )
 
@@ -123,17 +140,24 @@ export class TriplyService {
       })
     )
 
-    return enrichedSources
+    return enrichedSources.reduce<EnrichedRecordBaseType[]>(
+      (acc, curr) => (curr ? [...acc, curr] : acc),
+      []
+    )
   }
 
   private fetch<ReturnDataType>(endpoint: URL) {
-    const headers = { Authorization: `Bearer ${this.apiKey}` }
+    const headers = { Authorization: `Bearer ${this.apiKey}`, 'Accept-Encoding': '*' }
     const res = this.httpService.get<ReturnDataType[]>(endpoint.toString(), { headers })
 
     return lastValueFrom(
       res.pipe(
         catchError(err => {
-          console.error(get(err, 'message') || err)
+          const message = `Error fetching from Triply at ${endpoint}: ${get(err, 'message') || err}`
+          console.error(message)
+          this.slackService
+            .postMessageToChannel(this.slackService.channels.systemNotification, message)
+            .catch(err => console.error(err))
           return []
         }),
         map(res => res.data)
@@ -153,7 +177,8 @@ export class TriplyService {
 
   private checkResponseType<ReturnDataType>(
     responseData: unknown,
-    keysToVerify: KeysToVerify<ReturnDataType>
+    keysToVerify: KeysToVerify<ReturnDataType>,
+    endpoint: URL
   ) {
     if (!responseData || !Array.isArray(responseData) || !responseData.length) {
       return
@@ -165,16 +190,19 @@ export class TriplyService {
 
       expectedKeys.forEach(k => {
         if (!receivedKeys.includes(k)) {
-          const message = `"${k}" is not returned in ${JSON.stringify(receivedKeys)}`
+          const message = `"${k}" is not returned in ${JSON.stringify(
+            receivedKeys
+          )} from ${endpoint.toString()}`
 
-          this.rollbarService.logError(message)
+          this.errorReporterService.logError(new Error(message))
         }
       })
-    } catch (err) {
-      const message = `Unable to test keys ${JSON.stringify(
-        keysToVerify
-      )} in response ${JSON.stringify(responseData)}`
-      this.rollbarService.logError(message)
+    } catch (err: Error | unknown) {
+      const keys = JSON.stringify(keysToVerify)
+      const message = `Unable to test keys ${keys} in response ${JSON.stringify(responseData)}`
+      console.error(message)
+
+      this.errorReporterService.logError(err instanceof Error ? err : new Error(message))
     }
   }
 }

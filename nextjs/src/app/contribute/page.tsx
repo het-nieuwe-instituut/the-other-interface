@@ -24,13 +24,15 @@ export default async function Page() {
   const title = createTypeSafeTranslation('navigation').t('contribute')
   const { t } = createTypeSafeTranslation('contribute')
 
-  const contactFormUrl =
-    'https://forms.office.com/pages/responsepage.aspx?id=-nOvvAYyuU2cuMU4_1TahnU7jGT5k41AuJISCxkAcUdUNDdZRFQ5UjA4VDlUOVpISk1USzhHU0hMSi4u'
+  const contactFormUrl = 'https://forms.nieuweinstituut.nl/asterisk-suggestions-form/'
 
   return (
     <StaticPageContainer title={title || ''}>
       <StaticPageParagraph>{t('introP1')}</StaticPageParagraph>
       <StaticPageParagraph>{t('introP2')}</StaticPageParagraph>
+
+      <StaticPageSectionTitle>{t('whyTitle')}</StaticPageSectionTitle>
+      <StaticPageList items={[t('why1') || '', t('why2') || '', t('why3') || '']} />
 
       <StaticPageSectionTitle>{t('howToTitle')}</StaticPageSectionTitle>
       <StaticPageList items={[t('howTo1') || '', t('howTo2') || '', t('howTo3') || '']} />
@@ -45,11 +47,12 @@ export default async function Page() {
         ]}
       />
 
-      <StaticPageSectionTitle>{t('whyTitle')}</StaticPageSectionTitle>
-      <StaticPageList items={[t('why1') || '', t('why2') || '', t('why3') || '']} />
       <StaticPageParagraph>
         {t('whySection1')}
-        <StaticPageLink href="mailto:info@nieuweinstituut.nl" label="info@nieuweinstituut.nl" />
+        <StaticPageLink
+          href="mailto:collectieplatform@nieuweinstituut.nl"
+          label="collectieplatform@nieuweinstituut.nl"
+        />
         {t('whySection2')}
       </StaticPageParagraph>
 

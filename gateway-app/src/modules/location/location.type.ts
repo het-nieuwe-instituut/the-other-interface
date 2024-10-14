@@ -15,17 +15,11 @@ export class LocationFiltersInput {
   @Field(() => DateTimeFilterInput, { nullable: true })
   public createdAt?: DateTimeFilterInput
 
-  @Field(() => StringFilterInput, { nullable: true })
-  public firstName?: StringFilterInput
-
   @Field(() => IdFilterInput, { nullable: true })
   public id?: IdFilterInput
 
   @Field(() => StringFilterInput, { nullable: true })
-  public insertion?: StringFilterInput
-
-  @Field(() => StringFilterInput, { nullable: true })
-  public lastName?: StringFilterInput
+  public city?: StringFilterInput
 
   @Field(() => LocationFiltersInput, { nullable: true })
   public not?: LocationFiltersInput

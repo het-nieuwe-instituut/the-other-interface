@@ -29,20 +29,25 @@ query themes(
   }
 }
 
-query storiesRelatedToTheme(
-  $storyId: ID!
-  $lang: I18NLocaleCode
-  $publicationState: PublicationState = LIVE
+query themeIds(
+  $filters: ThemeFiltersInput
+  $pagination: PaginationArg
+  $sort: [String]
+  $publicationState: PublicationState
+  $locale: I18NLocaleCode
 ) {
   themes(
-    filters: {
-      stories: { or: [{ id: { eq: $storyId } }, { localizations: { id: { eq: $storyId } } }] }
-    }
-    locale: $lang
+    filters: $filters
+    pagination: $pagination
+    sort: $sort
     publicationState: $publicationState
+    locale: $locale
   ) {
     data {
-      ...ThemeFragment
+      id
+    }
+    meta {
+      ...ResponseCollectionMetaFragment
     }
   }
 }
@@ -72,24 +77,16 @@ fragment ThemeFragmentWithHighlightedStories on ThemeEntity {
   id
   attributes {
     name
-    stories {
-      data {
-        ...StoryFragment
-      }
-    }
-    highlightedStories {
-      data {
-        ...StoryFragment
-      }
-    }
-    createdAt
-    updatedAt
-    publishedAt
-    localizations {
-      data {
-        id
-      }
-    }
     locale
+    stories(pagination: $highlightedStoriesPaginationArgs) {
+      data {
+        ...StoryFragment
+      }
+    }
+    highlightedStories(pagination: $highlightedStoriesPaginationArgs) {
+      data {
+        ...StoryFragment
+      }
+    }
   }
 }

@@ -1,3 +1,4 @@
+import { SentryModule } from '@sentry/nestjs/setup'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
@@ -22,24 +23,39 @@ import { UtilModule } from './modules/util/util.module'
 import { AuthModule } from './modules/auth/auth.module'
 import { ThemeModule } from './modules/theme/theme.module'
 import { TriplyElasticSearchModule } from './modules/triplyElasticSearch/triplyElasticSearch.module'
+import { DataloaderModule } from './dataloader/dataloader.module'
+import { DataloaderService } from './dataloader/dataloader.service'
+import { IDataloaders } from './dataloader/dataloader.interface'
+
+export interface GraphqlContext {
+  loaders: IDataloaders
+}
 
 @Module({
   imports: [
+    SentryModule.forRoot(),
     AuthModule,
     UtilModule,
     StoryModule,
     TriplyModule,
     StrapiModule,
     ConfigModule.forRoot({ isGlobal: true }),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
+    GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: true,
-      debug: true,
-      playground: process.env.ENV === 'development',
-      buildSchemaOptions: {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        dateScalarMode: 'Date' as any,
-      },
+      imports: [DataloaderModule],
+      useFactory: (dataloaderService: DataloaderService) => ({
+        autoSchemaFile: true,
+        debug: process.env.ENV === 'development',
+        playground: process.env.ENV === 'development',
+        buildSchemaOptions: {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          dateScalarMode: 'Date' as any,
+        },
+        context: () => ({
+          loaders: dataloaderService.loaders,
+        }),
+      }),
+      inject: [DataloaderService],
     }),
     HttpModule,
     ArchivesModule,
@@ -56,6 +72,7 @@ import { TriplyElasticSearchModule } from './modules/triplyElasticSearch/triplyE
     LandingPageModule,
     UserModule,
     ThemeModule,
+    DataloaderModule,
   ],
 })
 export class AppModule {}

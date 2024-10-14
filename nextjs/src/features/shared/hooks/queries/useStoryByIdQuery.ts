@@ -9,7 +9,6 @@ import { useLocale } from '../useLocale'
 
 export function useStoryByIdQuery(id: string) {
   const { isDraftMode } = useSelector((state: State) => state.shared)
-
   const api = initApiClientService()
   const lang = useLocale()
 
@@ -32,7 +31,8 @@ export function useStoryByIdQuery(id: string) {
   return useQuery({
     queryKey: ['story-by-id', id, lang, isDraftMode],
     queryFn,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
     suspense: true,
+    staleTime: 1000 * 60,
   })
 }

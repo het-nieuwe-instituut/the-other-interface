@@ -7,15 +7,13 @@ import { ButtonVariants } from './variants'
 interface ButtonProps
   extends React.HtmlHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof ButtonVariants> {
-  as?: React.ElementType
   disabled?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, as = 'button', state, intent, children, size, ...props }, ref) => {
-    const Component = as
+  ({ className, state, intent, children, size, ...props }, ref) => {
     return (
-      <Component
+      <button
         className={cn(
           ButtonVariants({ className, intent, state, size }),
           state === 'loading' && 'text-blue-100'
@@ -35,7 +33,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ) : (
           children
         )}
-      </Component>
+      </button>
     )
   }
 )

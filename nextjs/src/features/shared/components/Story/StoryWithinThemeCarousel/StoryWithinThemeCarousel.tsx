@@ -13,27 +13,17 @@ import {
   CarouselGridPagination,
   CarouselGridTitle,
 } from '@/features/ui/components/carousel-grid/CarouselGrid'
-import { useParams } from 'next/navigation'
 import { useMemo } from 'react'
 import ErrorBox from '../../Error/ErrorBox'
 import { ThemedSpinner } from '../../Loading/ThemedSpinner/ThemedSpinner'
 
-const ITEMS_IN_PAGE = 4
-export const StoryWithinThemeCarousel = () => {
-  const params = useParams()
-  const id = params?.id as string
-  const lang = useLocale()
+interface StoryWithinThemeCarouselProps {
+  themeIds: string[]
+  id: string
+}
 
-  const { data, isLoading, isError } = useStoriesRelatedByThemeQuery(id)
-  const { t: tStories } = useTypeSafeTranslation('stories')
-  const stories = useMemo(
-    () => storiesToCarouselDataMapper(data?.storiesRealtedWithinTheme?.stories) ?? [],
-    [data?.storiesRealtedWithinTheme?.stories]
-  )
-  const { nodes, lastPage, page, next, previous } = useClientPagination({
-    items: stories,
-    itemsInPage: ITEMS_IN_PAGE,
-  })
+export const StoryWithinThemeCarousel = ({ themeIds, id }: StoryWithinThemeCarouselProps) => {
+  const { data, isLoading, isError } = useStoriesRelatedByThemeQuery(id, themeIds)
 
   if (isError) {
     return <ErrorBox />
@@ -47,15 +37,56 @@ export const StoryWithinThemeCarousel = () => {
     )
   }
 
+  if (!data.stories.data || !data.stories.data?.length) {
+    return null
+  }
+
+  // we don't need to memoize before loading the data, so no need to call this before the early returns
+  // if we are keen on sticking to hook rules, we can move the below part to a separate component
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const stories = useMemo(
+    () => storiesToCarouselDataMapper(data?.stories.data) ?? [],
+    [data?.stories.data]
+  )
+
+  return (
+    <>
+      <div className="hidden carouselDesktop:block">
+        <StoryWithinThemeCarouselContent cols={4} stories={stories} />
+      </div>
+      <div className="hidden md:block carouselDesktop:hidden">
+        <StoryWithinThemeCarouselContent cols={3} stories={stories} />
+      </div>
+      <div className="block md:hidden">
+        <StoryWithinThemeCarouselContent cols={1} stories={stories} />
+      </div>
+    </>
+  )
+}
+
+export const StoryWithinThemeCarouselContent = ({
+  cols,
+  stories,
+}: {
+  cols: 1 | 2 | 3 | 4
+  stories: NonNullable<ReturnType<typeof storiesToCarouselDataMapper>>
+}) => {
+  const lang = useLocale()
+
+  const { t: tStories } = useTypeSafeTranslation('stories')
+
+  const { nodes, lastPage, page, next, previous } = useClientPagination({
+    items: stories,
+    itemsInPage: cols,
+  })
+
   return (
     <div>
       {stories && stories.length > 0 && (
         <>
           <CarouselGrid>
-            <CarouselGridTitle>{`${tStories('moreOnTheme')} (${
-              stories.length
-            })`}</CarouselGridTitle>
-            <CarouselGridCardWrapper cols={ITEMS_IN_PAGE}>
+            <CarouselGridTitle>{`${tStories('moreOnTheme')}`}</CarouselGridTitle>
+            <CarouselGridCardWrapper cols={cols}>
               {nodes.map(item => {
                 const url = addLocaleToUrl(`/detail/stories/${item.id}`, lang)
                 return (
@@ -65,14 +96,13 @@ export const StoryWithinThemeCarousel = () => {
                     description={item?.description || ''}
                     image={item.url}
                     href={url}
-                    alt={item.title || 'image'}
+                    alt={item.alt ? item.alt : item.title || 'image'}
                   ></CarouselGridCard>
                 )
               })}
             </CarouselGridCardWrapper>
             <CarouselGridFooter>
-              <div />
-              {stories.length > 4 && (
+              {stories.length > cols && (
                 <CarouselGridPagination
                   onNext={next}
                   onPrevious={previous}

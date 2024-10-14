@@ -20,6 +20,8 @@ query searchByStories(
   $searchTerm: String
   $page: Int
   $pageSize: Int
+  $start: Int
+  $limit: Int
   $locationsFilterTerm: ID
   $themesFilterTerm: ID
   $authorFilterTerm: ID
@@ -32,7 +34,7 @@ query searchByStories(
           or: [
             { locations: { id: { eq: $locationsFilterTerm } } }
             { themes: { id: { eq: $themesFilterTerm } } }
-            { author: { id: { eq: $authorFilterTerm } } }
+            { authors: { id: { eq: $authorFilterTerm } } }
           ]
         }
         {
@@ -49,17 +51,26 @@ query searchByStories(
         { shortDescription: { containsi: $searchTerm } }
       ]
     }
-    pagination: { page: $page, pageSize: $pageSize }
+    pagination: { page: $page, pageSize: $pageSize, start: $start, limit: $limit }
     locale: $locale
   ) {
     data {
       id
       attributes {
         title
-        components {
-          ... on ComponentModulesImage {
-            ...imageModuleFragment
+      }
+      thumbnail {
+        id
+        alt_text
+        imageThumbnail {
+          data {
+            ...UploadFileFragment
           }
+        }
+      }
+      components {
+        ... on ComponentModulesImage {
+          ...imageModuleFragment
         }
       }
     }

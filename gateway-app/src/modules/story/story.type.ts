@@ -1,6 +1,6 @@
-import { ObjectType, Field, createUnionType, ID, InputType, PickType } from '@nestjs/graphql'
-import { AuthorEntityResponse, AuthorFiltersInput } from '../author/author.type'
-import { LocationFiltersInput, LocationRelationResponseCollection } from '../location/location.type'
+import { ObjectType, Field, createUnionType, ID, InputType } from '@nestjs/graphql'
+import { AuthorEntityResponseCollection, AuthorFiltersInput } from '../author/author.type'
+import { LocationFiltersInput, LocationEntity } from '../location/location.type'
 import {
   ComponentCorePublicationDate,
   ComponentCorePublicationDateFiltersInput,
@@ -27,17 +27,15 @@ import {
   ResponseCollectionMeta,
   StringFilterInput,
 } from '../strapi/shared-types'
-import {
-  TriplyRecordFiltersInput,
-  TriplyRecordRelationResponseCollection,
-} from '../triplyRecord/triplyRecord.type'
-import { ThemeFiltersInput, ThemeRelationResponseCollection } from '../theme/theme.type'
+import { TriplyRecordFiltersInput, TriplyRecordEntity } from '../triplyRecord/triplyRecord.type'
+import { ThemeFiltersInput, ThemeEntity } from '../theme/theme.type'
 import { StoryEntityResponse } from './story.types.circular'
 import { ComponentCoreStandAloneLink } from '../strapi/components/core/standAloneLink'
 import { ComponentCoreMuxAudio } from '../strapi/components/core/muxAudio'
 import { ComponentCoreMuxVideo } from '../strapi/components/core/muxVideo'
 import { ComponentModulesSideImageWithText } from '../strapi/components/modules/sideImageWithText'
 import { ComponentModulesStandaloneLinks } from '../strapi/components/modules/standAloneLinks'
+import { ComponentCoreImageThumbnail } from '../strapi/components/core/imageThumbnail'
 
 @ObjectType()
 export class StoryRelationResponseCollection {
@@ -46,19 +44,7 @@ export class StoryRelationResponseCollection {
 }
 
 @ObjectType()
-export class StoryWithoutRelationsRelationResponseCollection {
-  @Field(() => [StoryWithoutRelationsEntity], { nullable: true })
-  public data?: StoryWithoutRelationsEntity[]
-}
-
-@ObjectType()
 export class Story {
-  @Field(() => AuthorEntityResponse, { nullable: true })
-  public author?: AuthorEntityResponse
-
-  @Field(() => [StoryComponentsDynamicZone], { nullable: true })
-  public components?: typeof StoryComponentsDynamicZone[]
-
   @Field({ nullable: true })
   public createdAt: Date
 
@@ -68,64 +54,21 @@ export class Story {
   @Field({ nullable: true })
   public locale?: string
 
-  @Field(() => StoryRelationResponseCollection, { nullable: true })
-  public localizations?: StoryRelationResponseCollection
-
-  @Field(() => LocationRelationResponseCollection, { nullable: true })
-  public locations?: LocationRelationResponseCollection
-
-  @Field(() => ComponentCorePublicationDate, { nullable: true })
-  public publicationDate?: ComponentCorePublicationDate
-
   @Field({ nullable: true })
   public publishedAt: Date
 
-  @Field({ nullable: true })
-  public shortDescription?: string
+  @Field()
+  public shortDescription: string
 
   @Field({ nullable: true })
   public slug?: string
 
-  @Field(() => ComponentModulesButtonsModule, { nullable: true })
-  public storyLinks?: ComponentModulesButtonsModule
-
-  @Field({ nullable: true })
-  public timeframe?: ComponentCoreTimeframe
-
-  @Field({ nullable: false })
+  @Field()
   public title: string
-
-  @Field(() => TriplyRecordRelationResponseCollection, { nullable: true })
-  public triplyRecords?: TriplyRecordRelationResponseCollection
 
   @Field({ nullable: true })
   public updatedAt: Date
-
-  @Field(() => ThemeRelationResponseCollection, { nullable: true })
-  public themes?: ThemeRelationResponseCollection
-
-  @Field({ nullable: true })
-  public parent_story?: StoryEntityResponse
-
-  @Field({ nullable: true })
-  public child_stories?: StoryRelationResponseCollection
-
-  @Field(() => [StoryEntity], { nullable: true })
-  public siblings?: StoryEntity[]
 }
-
-@ObjectType()
-export class StoryWithoutRelations extends PickType(Story, [
-  'createdAt',
-  'description',
-  'locale',
-  'publishedAt',
-  'shortDescription',
-  'slug',
-  'title',
-  'updatedAt',
-  'author',
-] as const) {}
 
 export const StoryComponentsDynamicZone = createUnionType({
   name: 'StoryComponentsDynamicZone',
@@ -157,21 +100,48 @@ export class StoryEntity {
 
   @Field(() => ID)
   public id: string
-}
 
-@ObjectType()
-export class StoryWithoutRelationsEntity {
+  //////////////////// relations ////////////////////
+
+  @Field(() => AuthorEntityResponseCollection, { nullable: true })
+  public authors?: AuthorEntityResponseCollection
+
+  @Field(() => [LocationEntity], { nullable: true })
+  public locations?: LocationEntity[]
+
+  @Field(() => [ThemeEntity], { nullable: true })
+  public themes?: ThemeEntity[]
+
   @Field({ nullable: true })
-  public attributes?: StoryWithoutRelations
+  public parent_story?: StoryEntityResponse
 
-  @Field(() => ID, { nullable: true })
-  public id?: string
-}
+  @Field(() => [StoryEntity], { nullable: true })
+  public child_stories?: StoryEntity[]
 
-@ObjectType()
-export class StoryWithoutRelationsEntityResponse {
-  @Field({ nullable: true })
-  public data?: StoryWithoutRelationsEntity
+  @Field(() => [StoryEntity], { nullable: true })
+  public siblings?: StoryEntity[]
+
+  @Field(() => [StoryComponentsDynamicZone], { nullable: true })
+  // eslint-disable-next-line prettier/prettier
+  public components?: (typeof StoryComponentsDynamicZone)[]
+
+  @Field(() => [StoryEntity], { nullable: true })
+  public localizations?: StoryEntity[]
+
+  @Field(() => [TriplyRecordEntity], { nullable: true })
+  public triplyRecords?: TriplyRecordEntity[]
+
+  @Field(() => ComponentModulesButtonsModule, { nullable: true })
+  public storyLinks?: ComponentModulesButtonsModule
+
+  @Field(() => ComponentCoreTimeframe, { nullable: true })
+  public timeframe?: ComponentCoreTimeframe
+
+  @Field(() => ComponentCorePublicationDate, { nullable: true })
+  public publicationDate?: ComponentCorePublicationDate
+
+  @Field(() => ComponentCoreImageThumbnail, { nullable: true })
+  public thumbnail?: ComponentCoreImageThumbnail
 }
 
 @ObjectType()
@@ -187,15 +157,6 @@ export class StoryEntityResponseCollection {
 export class StoryMetaEntityResponseCollection {
   @Field(() => StoryEntity, { nullable: true })
   public data?: StoryEntity
-}
-
-@ObjectType()
-export class StoryWithoutRelationsEntityResponseCollection {
-  @Field(() => [StoryWithoutRelationsEntity], { nullable: true })
-  public data?: StoryWithoutRelationsEntity[]
-
-  @Field(() => ResponseCollectionMeta, { nullable: true })
-  public meta: ResponseCollectionMeta
 }
 
 @InputType()
@@ -231,7 +192,7 @@ export class StoryFiltersInput {
   public updatedAt?: DateTimeFilterInput
 
   @Field(() => AuthorFiltersInput, { nullable: true })
-  public author?: AuthorFiltersInput
+  public authors?: AuthorFiltersInput
 
   @Field(() => StringFilterInput, { nullable: true })
   public description?: StringFilterInput

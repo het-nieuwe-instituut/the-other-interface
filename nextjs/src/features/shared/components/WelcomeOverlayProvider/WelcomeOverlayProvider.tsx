@@ -12,9 +12,8 @@ interface Props {
 const WelcomeOverlayProvider: React.FC<Props> = ({ children }) => {
   return (
     <div className="relative size-full overflow-hidden">
-      <WelcomeOverlay />
-
       {children}
+      <WelcomeOverlay />
     </div>
   )
 }

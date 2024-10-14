@@ -25,20 +25,21 @@ fragment gridModuleFragment on ComponentModulesGridModule {
         id
         attributes {
           slug
-          author {
-            data {
-              attributes {
-                firstName
-              }
+          updatedAt
+        }
+        authors {
+          data {
+            attributes {
+              firstName
             }
           }
-          updatedAt
         }
       }
     }
     triplyRecord {
       data {
         attributes {
+          type
           recordId
         }
       }

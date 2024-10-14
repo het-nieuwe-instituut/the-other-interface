@@ -1,16 +1,28 @@
-import { ArgsType, Field, IntersectionType, ObjectType, OmitType } from '@nestjs/graphql'
+import { ArgsType, Field, ObjectType, OmitType } from '@nestjs/graphql'
 import { EntityNames } from '../util/entityNames.type'
 import { IsString } from 'class-validator'
 import { Locale } from '../util/locale.type'
-import { EnrichedRecordBaseType } from '../triply/triply.type'
+import { ExternalSource } from '../triply/triply.service'
 
 @ObjectType()
-class PeopleAssociationType {
-  @Field(() => String)
-  public association: string
+export class PeopleZoomLevel3DetailAsteriskType {
+  @Field({
+    nullable: true,
+    description: 'asterisk value for the description field',
+  })
+  public asterisk_subject_description?: string
 
-  @Field(() => String, { nullable: true })
-  public associationLabel?: string | null
+  @Field({
+    nullable: true,
+    description: 'the date the asterisk value was added to the description field',
+  })
+  public asterisk_date_description?: string
+
+  @Field({
+    nullable: true,
+    description: 'the person that added the asterisk value for the description field',
+  })
+  public asterisk_name_description?: string
 }
 
 @ObjectType()
@@ -24,96 +36,39 @@ class BasePeopleZoomLevel3DetailType {
   @Field(() => EntityNames, { nullable: true })
   public type: EntityNames
 
-  @Field(() => [String], { nullable: true })
-  public thumbnail: string
-
-  @Field(() => String, { nullable: true })
-  public name: string
-
-  @Field(() => [String], { nullable: true })
-  public nameTypes?: string[]
-
-  @Field(() => String, { nullable: true })
-  public nameVariation?: string | null
-
-  @Field(() => String, { nullable: true })
-  public birthDate?: string | null
-
-  @Field(() => String, { nullable: true })
-  public birthPlace?: string | null
-
-  @Field(() => String, { nullable: true })
-  public birthPlaceLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public deathDate?: string | null
-
-  @Field(() => String, { nullable: true })
-  public deathPlace?: string | null
-
-  @Field(() => String, { nullable: true })
-  public deathPlaceLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public place?: string | null
-
-  @Field(() => String, { nullable: true })
-  public placeLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public startDate?: string | null
-
-  @Field(() => String, { nullable: true })
-  public endDate?: string | null
-
-  @Field(() => String, { nullable: true })
-  public nationality?: string | null
-
-  @Field(() => String, { nullable: true })
-  public nationalityLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public institution?: string | null
-
-  @Field(() => String, { nullable: true })
-  public institutionLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public profession?: string | null
-
-  @Field(() => String, { nullable: true })
-  public professionLabel?: string | null
-
-  @Field(() => String, { nullable: true })
-  public gender?: string | null
-
-  @Field(() => [PeopleAssociationType], { nullable: true })
-  public associations?: PeopleAssociationType[]
-
-  @Field(() => String, { nullable: true })
-  public relatedItem?: string | null
-
-  @Field(() => String, { nullable: true })
-  public relatedItemLabel?: string | null
+  @Field(() => [String], { nullable: 'itemsAndList' })
+  public thumbnail?: (string | null)[]
 
   @Field(() => String, { nullable: true })
   public description?: string | null
-
-  @Field(() => String, { nullable: true })
-  public permanentLink?: string | null
 }
 
 @ObjectType()
-export class PeopleZoomLevel3DetailType extends IntersectionType(
-  EnrichedRecordBaseType,
-  BasePeopleZoomLevel3DetailType
-) {
-  @Field(() => [BasePeopleZoomLevel3DetailType], { nullable: true })
-  public enrichedSources?: BasePeopleZoomLevel3DetailType[]
+class EnrichedBasePeopleZoomLevel3DetailType extends BasePeopleZoomLevel3DetailType {
+  @Field()
+  public id: string
+
+  @Field(() => ExternalSource)
+  public externalSourceType: ExternalSource
+
+  @Field()
+  public externalSourceUrl: string
+}
+
+@ObjectType()
+export class PeopleZoomLevel3DetailType extends BasePeopleZoomLevel3DetailType {
+  @Field(() => [EnrichedBasePeopleZoomLevel3DetailType], { nullable: true })
+  public enrichedSources?: EnrichedBasePeopleZoomLevel3DetailType[]
+
+  @Field(() => [PeopleZoomLevel3DetailAsteriskType], { nullable: true })
+  public asteriskSuggestions?: PeopleZoomLevel3DetailAsteriskType[]
 }
 
 @ObjectType()
 class BasePeopleRecordZoomLevel3Type {
+  @Field()
+  public id: string
+
   @Field(() => String, { nullable: true })
   public type?: string
 
@@ -121,7 +76,7 @@ class BasePeopleRecordZoomLevel3Type {
   public profession?: string
 
   @Field(() => String, { nullable: true })
-  public nameVariation?: string
+  public nameVariations?: string
 
   @Field(() => String, { nullable: true })
   public birthDate?: string
@@ -155,12 +110,21 @@ class BasePeopleRecordZoomLevel3Type {
 }
 
 @ObjectType()
-export class PeopleRecordZoomLevel3Type extends IntersectionType(
-  EnrichedRecordBaseType,
-  BasePeopleRecordZoomLevel3Type
-) {
-  @Field(() => [BasePeopleRecordZoomLevel3Type], { nullable: true })
-  public enrichedSources?: BasePeopleRecordZoomLevel3Type[]
+class EnrichedBasePeopleRecordZoomLevel3Type extends BasePeopleRecordZoomLevel3Type {
+  @Field()
+  public id: string
+
+  @Field(() => ExternalSource)
+  public externalSourceType: ExternalSource
+
+  @Field()
+  public externalSourceUrl: string
+}
+
+@ObjectType()
+export class PeopleRecordZoomLevel3Type extends BasePeopleRecordZoomLevel3Type {
+  @Field(() => [EnrichedBasePeopleRecordZoomLevel3Type], { nullable: true })
+  public enrichedSources?: EnrichedBasePeopleRecordZoomLevel3Type[]
 }
 
 @ObjectType()

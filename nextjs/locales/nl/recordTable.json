@@ -5,11 +5,18 @@
   "externalSource": "Externe bron",
   "relatedArchive": "Gerelateerde archieven",
   "recordType": "Recordtype",
-  "objectNumber": "Referentienummer",
+  "objectNumber": "Referentie",
   "archivePeriod": "Datering",
   "realtedPeople": "Gerelateerde personen",
   "role": "Rol",
   "peoplePeriod": "Periode",
   "realtedObjects": "Gerelateerde objecten",
-  "creationPeriod": "Creatie periode"
+  "creationPeriod": "Creatie periode",
+  "peopleFirstColumn": "Naam",
+  "objectsFirstColumn": "Titel",
+  "objectReferenceNumber": "Referentienummer",
+  "publicationsFirstColumn": "Titel",
+  "archivesFirstColumn": "Titel",
+  "descriptionLevel": "Beschrijvingsniveau",
+  "author": "Auteur(s)"
 }

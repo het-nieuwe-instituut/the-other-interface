@@ -1,9 +1,9 @@
-import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { DeepPartial } from '@/features/shared/types/helpers'
 import {
   CarouselGrid,
   CarouselGridCard,
   CarouselGridCardWrapper,
+  CarouselGridDescription,
   CarouselGridFooter,
   CarouselGridLink,
   CarouselGridPagination,
@@ -17,6 +17,8 @@ import {
 } from 'src/generated/graphql'
 import { useClientPagination } from './useClientPagination'
 import { getTriplyOrStoryHref } from './getTriplyOrStoryHref'
+import { useLocale } from '@/features/shared/hooks/useLocale'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 
 export type CarouselGrid = DeepPartial<ComponentModulesCarousel>
 
@@ -27,10 +29,13 @@ export const GenericCarouselGridWithClientPagination = ({
 }) => {
   return (
     <>
-      <div className="hidden w-full lg:block">
-        <Grid carousel={carousel} />
+      <div className="hidden w-full carouselDesktop:block">
+        <Grid carousel={carousel} cols={4} />
       </div>
-      <div className="block w-full lg:hidden">
+      <div className="hidden w-full md:block carouselDesktop:hidden">
+        <Grid carousel={carousel} cols={3} />
+      </div>
+      <div className="block w-full md:hidden">
         <Grid carousel={carousel} cols={1} />
       </div>
     </>
@@ -46,6 +51,7 @@ const Grid = ({
   cols?: 1 | 2 | 3 | 4
   className?: string
 }) => {
+  const locale = useLocale()
   const items = carousel.images ?? []
   const cols: 1 | 2 | 3 | 4 = useMemo(() => {
     if (forcedCols) {
@@ -68,28 +74,35 @@ const Grid = ({
   })
 
   if (!items || items.length === 0) {
-    return <ErrorBox />
+    return null
   }
 
   return (
     <CarouselGrid className={cn('w-full', className)}>
       {carousel.title ? <CarouselGridTitle>{carousel.title}</CarouselGridTitle> : undefined}
+      {carousel.description ? (
+        <CarouselGridDescription>{carousel.description ?? ''}</CarouselGridDescription>
+      ) : undefined}
       {nodes && (
         <CarouselGridCardWrapper cols={cols}>
           {nodes.map(item => {
             if (!item) {
               return null
             }
+            const url = addLocaleToUrl(
+              getTriplyOrStoryHref({
+                story: item.story ?? undefined,
+                triply_record: item.triply_record ?? undefined,
+              }) ?? '',
+              locale
+            )
             return (
               <CarouselGridCard
                 key={item.id}
                 title={item.title ?? undefined}
                 description={item.description ?? undefined}
                 image={item.image?.data?.attributes?.url ?? undefined}
-                href={getTriplyOrStoryHref({
-                  story: item.story ?? undefined,
-                  triply_record: item.triply_record ?? undefined,
-                })}
+                href={url}
                 alt={item.alt_text ?? ''}
               ></CarouselGridCard>
             )

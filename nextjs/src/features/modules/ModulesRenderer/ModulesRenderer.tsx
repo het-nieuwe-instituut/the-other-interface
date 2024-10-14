@@ -1,4 +1,7 @@
+import { getTriplyOrStoryHref } from '@/features/editorial/components/getTriplyOrStoryHref'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
+import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
+import { useLocale } from '@/features/shared/hooks/useLocale'
 import { ImageParagraph } from '@/features/ui/components/ImageParagraph/ImageParagraph'
 import {
   ImageCarousel,
@@ -11,14 +14,11 @@ import { cn } from '@/features/ui/utils/cn'
 import { StandaloneLink } from 'src/app/ks/link/StandaloneLink'
 import { StoryByIdQuery } from 'src/generated/graphql'
 import { Paragraph } from '../../ui/components/Paragraph/Paragraph'
-import { ButtonGroup, LinkButtonGroupItem } from '../../ui/components/button-group/component'
+import { ButtonGroup, JumboLinkButtonGroupItem } from '../../ui/components/button-group/component'
 import { Subtitle } from '../../ui/components/subtitle/Subtitle'
 import { ImageModuleWrapper } from '../components/ImageModuleWrapper'
 import { Pullquote } from '../components/Pullquote/Pullquote'
-import { getTriplyOrStoryHref } from '@/features/editorial/components/getTriplyOrStoryHref'
 import { imageBasePath } from '../modulesConstants'
-import { useLocale } from '@/features/shared/hooks/useLocale'
-import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
 
 interface Props {
   components: DynamicComponents
@@ -26,7 +26,7 @@ interface Props {
 }
 
 export type DynamicComponents = NonNullable<
-  NonNullable<StoryByIdQuery['storyByLocale']['data']>['attributes']
+  NonNullable<StoryByIdQuery['storyByLocale']['data']>
 >['components']
 
 export function DynamicComponentRenderer({ components, isStoryPage = false }: Props) {
@@ -35,11 +35,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
 
   return (
     <div
-      className={cn(
-        'px-6 pt-0 flex flex-col gap-[40px]',
-        isStoryPage && 'px-0',
-        hasComponents && 'pt-10'
-      )}
+      className={cn('pt-0 flex flex-col gap-20', isStoryPage && 'px-0', hasComponents && 'pt-10')}
     >
       {[...(components || [])].map((component, index, array) => {
         const typeName = component?.__typename
@@ -79,13 +75,11 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
               <ImageCarousel key={keyExtractor(component.id, index, array)}>
                 {component.items?.map(item => {
                   const attributes = item.image.data?.attributes
-                  const href = addLocaleToUrl(
-                    getTriplyOrStoryHref({
-                      story: item.story ?? undefined,
-                      triply_record: item.triply_record ?? undefined,
-                    }) ?? '',
-                    lang
-                  )
+                  const href = getTriplyOrStoryHref({
+                    story: item?.story,
+                    triply_record: item?.triply_record,
+                  })
+                  const hrefWithLang = href ? addLocaleToUrl(href, lang) : undefined
                   const url = attributes?.url
                     ? imageBasePath(attributes?.url.toString())
                     : undefined
@@ -95,7 +89,7 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
                   }
                   return (
                     <ImageCarouselItem
-                      href={href}
+                      href={hrefWithLang}
                       key={item.id}
                       src={url}
                       // TODO: add alt text instead of caption
@@ -154,21 +148,20 @@ export function DynamicComponentRenderer({ components, isStoryPage = false }: Pr
             return (
               <ButtonGroup
                 key={keyExtractor(component.id, index, array)}
-                className={isStoryPage ? 'flex-wrap' : 'flex gap-4'}
+                className={isStoryPage ? 'flex-wrap' : 'flex gap-4 bg-red-100 pb-4'}
               >
                 {component.buttons.map(button => {
                   if (!button.text || !button.url) {
                     return null
                   }
                   return (
-                    <LinkButtonGroupItem
+                    <JumboLinkButtonGroupItem
                       key={button.id}
                       href={button.url}
-                      variant="jumbo"
-                      color={'jumboText'}
+                      className={cn((component?.buttons || []).length > 1 ? 'mb-4' : '')}
                     >
                       {button.text}
-                    </LinkButtonGroupItem>
+                    </JumboLinkButtonGroupItem>
                   )
                 })}
               </ButtonGroup>

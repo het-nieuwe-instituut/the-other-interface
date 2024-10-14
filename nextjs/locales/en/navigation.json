@@ -18,14 +18,14 @@
   "explore_collection": "Explore",
   "more": "More",
   "about": "About",
-  "aboutDescription": "The collectionplatform is the platform from the New Institute for discovering the National Collection of Dutch Architecture and Urbanism online. Search the collection and read the stories.",
+  "aboutDescription": "The collection platform is the platform from Nieuwe Instituut for discovering the National Collection of Dutch Architecture and Urban Planning online. Search the collection and read the stories.",
   "readMore": "Read more",
   "theCollection": "The Collection",
   "asterisk": "Asterisk* project",
   "externalSources": "External sources",
   "contribute": "Contribute",
 
-  "zoom": "Zoom",
+  "zoom": "Zoom level",
   "collection": "Collection",
   "category": "Category",
   "detail": "Detail",
@@ -34,5 +34,9 @@
   "of": "of",
   "theme": "Theme",
 
-  "errorLoadingThemes": "Something went wrong while loading themes. Please try again later."
+  "error500Title": "This page isn't working",
+  "error500Description": "The server encountered an error and could not complete your request.",
+  "error404Title": "Page not found",
+  "error404Description": "Something went wrong. Please start over from the ",
+  "error404Link": "homepage"
 }

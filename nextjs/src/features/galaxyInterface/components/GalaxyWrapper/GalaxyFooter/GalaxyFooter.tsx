@@ -10,7 +10,7 @@ import { useCallback, useContext, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { GalaxySearchBar } from '../GalaxySearchBar/GalaxySearchBar'
 import { CollpsedSearch } from '../GalaxySearchBar/fragments/CollpsedSearch'
-import { GalaxyZoomNavigation } from '../GalaxyZoomNavigation/GalaxyZoomNavigation'
+import { GalaxyZoomNavigator } from '../../GalaxyZoomNavigator'
 import { cn } from '@/features/ui/utils/cn'
 import { GalaxyZoomAnimationStateContext } from '@/features/galaxyInterface/galaxies/hooks/GalaxyZoomAnimationStateProvider'
 
@@ -55,9 +55,10 @@ export const GalaxyFooter: React.FC<Props> = ({ galaxyPagination }) => {
     <div
       style={{ bottom, zIndex }} // no other easy way to refactor to tailwind from previous code
       className={cn(
-        `absolute left-6 grid h-[60px] w-full grid-cols-[150px_auto_190px] gap-[5px] max-[1280px]:w-[97%] min-[1280px]:left-12 min-[1280px]:grid-cols-[170px_auto_230px]`,
+        'ease-toi-cubic-bezier',
+        `absolute left-6 grid h-[60px] w-full grid-cols-[auto_1fr_190px] gap-[5px] max-[1280px]:w-[97%] min-[1280px]:grid-cols-[auto_1fr_230px]`,
         (animationState === 'backwards' || animationState === 'forward') &&
-          'animate-[toBlurAndHide_300ms_ease-in-out_forwards]'
+          'animate-[toBlurAndHide_300ms_forwards]'
       )}
     >
       <div className="">{galaxyPagination}</div>
@@ -95,7 +96,7 @@ export const GalaxyFooter: React.FC<Props> = ({ galaxyPagination }) => {
       </div>
 
       <div className="flex h-full pl-4 align-top">
-        <GalaxyZoomNavigation />
+        <GalaxyZoomNavigator />
       </div>
     </div>
   )

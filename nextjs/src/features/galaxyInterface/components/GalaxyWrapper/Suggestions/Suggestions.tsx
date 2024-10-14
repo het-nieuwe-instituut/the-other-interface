@@ -1,31 +1,33 @@
-import { InlineThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { SearchFilterBox } from '@/features/shared/components/SearchFilterBox/SearchFilterBox'
 import { State } from '@/features/shared/configs/store'
 import { useFilterSuggestionsQuery } from '@/features/shared/hooks/queries/useFilterSuggestionsQuery'
 import { Filter, useSelectedFilters } from '@/features/shared/hooks/search/useFilters'
 import { useTypeSafeTranslation } from '@/features/shared/hooks/translations'
 import { SEARCH_CATEGORIES } from '@/features/shared/utils/categories'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { cn } from '@/features/ui/utils/cn'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { EnumTriplyrecordType } from 'src/generated/graphql'
 import { useDebounceValue } from 'usehooks-ts'
-
-export const COLLECTION_HILIGHT_ID = 'collection-highlights-id'
-
-export const CollectionHighlightsFilter = {
-  key: 'Subjects',
-  value: 'Collection Highlights',
-  id: COLLECTION_HILIGHT_ID,
-}
+import { SuggestionBar } from '../GalaxySearchBar/SuggestionBar/SuggestionBar'
+import { CollectionHighlightsFilter, COLLECTION_HILIGHT_ID } from './suggestions.constants'
 
 type Props = {
   handleSelectFilter: (filters: Filter) => void
   type: EnumTriplyrecordType
+  isUserInteracting: boolean
+  isCategorySuggestionsOpen: boolean
+  searchBarHeight: number
 }
 
-export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter, type }) => {
+export const SuggestionsContainer: React.FC<Props> = ({
+  handleSelectFilter,
+  type,
+  isCategorySuggestionsOpen,
+  isUserInteracting,
+  searchBarHeight,
+}) => {
+  const { t: categoryT } = useTypeSafeTranslation('category')
   const { t: commonT } = useTypeSafeTranslation('common')
   const { searchValue, searchCategory } = useSelector((state: State) => state.shared)
   const [debouncedSearchValue] = useDebounceValue(searchValue, 500)
@@ -64,40 +66,34 @@ export const SuggestionsContainer: React.FC<Props> = ({ handleSelectFilter, type
 
     return filteredSuggestions
   }, [searchCategory, searchIsMatchShowingCollectionHighlight, selectedFilters, suggestionsData])
+  const isEmpty = !items || items.length === 0 || !searchCategory
 
-  if (isLoading) {
-    return (
-      <div className="my-4">
-        <InlineThemedSpinner />
-      </div>
-    )
+  function getTranslation() {
+    if (isLoading) {
+      return commonT('loadingSuggestions')
+    }
+    if (isError) {
+      return commonT('somethingWentWrongAndRetry')
+    }
+    if (isEmpty) {
+      return commonT('noSuggestionsFound')
+    }
+    return categoryT('suggestions')
   }
 
-  if (isError) {
-    return (
-      <div className="my-4">
-        <p
-          className={TypographyVariants({
-            socialLarge: 'md',
-          })}
-        >
-          {commonT('somethingWentWrongAndRetry')}
-        </p>
-      </div>
-    )
-  }
-
-  if (!items || items.length === 0 || !searchCategory) {
-    return (
-      <div className="my-4">
-        <p className={cn('text-pink.100', TypographyVariants({ socialLarge: 'textfield' }))}>
-          {commonT('noSuggestionsFound')}
-        </p>
-      </div>
-    )
-  }
-
-  return <Suggestions suggestionsData={items} handleSelectFilter={handleSelectFilter} />
+  return (
+    <SuggestionBar
+      isOpen={isUserInteracting && !isCategorySuggestionsOpen}
+      label={getTranslation()}
+      offset={searchBarHeight}
+      className={cn((isLoading || isError || isEmpty) && 'grid-cols-1 grid')}
+      labelClassName={cn((isLoading || isError || isEmpty) && 'w-full')}
+    >
+      {!isLoading && !isError && !isEmpty ? (
+        <Suggestions suggestionsData={items} handleSelectFilter={handleSelectFilter} />
+      ) : null}
+    </SuggestionBar>
+  )
 }
 
 type SuggestionWithId = Suggestion & { id?: string }
@@ -114,9 +110,12 @@ export const Suggestions = ({
 }) => {
   return (
     <>
-      {suggestionsData.map(item => {
+      {suggestionsData.map((item, index, array) => {
         return (
-          <div className="max-w-full" key={item.value}>
+          <div
+            className="max-w-full"
+            key={`${item.key}-${item.id}-${item.value}-${index}-${array.length}`}
+          >
             <SearchFilterBox
               category={item.key}
               subCategory={item.value}

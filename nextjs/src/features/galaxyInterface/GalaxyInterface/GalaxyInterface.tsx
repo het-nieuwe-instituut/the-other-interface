@@ -5,9 +5,11 @@ import { USER_LOOKS_ON } from '@/features/shared/constants/mainConstants'
 import useScroll from '@/features/shared/hooks/ui/useScroll'
 import { sharedActions } from '@/features/shared/stores/shared.store'
 import { useEffect, useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useResizeObserver } from 'usehooks-ts'
 import { PulseProvider, PulseVisual } from '../components/Pulse/Pulse'
+import { State } from '@/features/shared/configs/store'
+import { cn } from '@/features/ui/utils/cn'
 interface Props {
   children: React.ReactNode
 }
@@ -18,19 +20,38 @@ export const GalaxyInterface: React.FC<Props> = ({ children }) => {
   const { scrollPosition } = useScroll()
   const dispatch = useDispatch()
   const HEADER_HEIGHT = 68
+  const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
+  const prevLookOnRef = useRef<typeof USER_LOOKS_ON.GALAXY | typeof USER_LOOKS_ON.EDITORIAL>(
+    USER_LOOKS_ON.GALAXY
+  )
 
   useEffect(() => {
-    if (sizes?.height && scrollPosition >= sizes?.height - HEADER_HEIGHT) {
-      dispatch(sharedActions?.userChangeLooksOn({ lookOn: USER_LOOKS_ON.EDITORIAL }))
-    } else {
-      dispatch(sharedActions?.userChangeLooksOn({ lookOn: USER_LOOKS_ON.GALAXY }))
+    if (!sizes?.height) return
+
+    const threshold = sizes.height - HEADER_HEIGHT - 12
+    const currentLookOn =
+      scrollPosition >= threshold ? USER_LOOKS_ON.EDITORIAL : USER_LOOKS_ON.GALAXY
+
+    if (currentLookOn !== prevLookOnRef.current) {
+      dispatch(sharedActions?.userChangeLooksOn({ lookOn: currentLookOn }))
+      prevLookOnRef.current = currentLookOn
     }
   }, [dispatch, scrollPosition, sizes?.height])
+
+  useEffect(() => {
+    if (!sizes?.height) return
+    dispatch(sharedActions?.setGalaxyHeight({ galaxyHeight: sizes.height }))
+  }, [dispatch, sizes?.height])
 
   return (
     <PulseProvider>
       <div className="relative block">
-        <div className="fixed inset-x-0 top-0 z-[9999] mx-auto flex max-w-[90em] justify-between">
+        <div
+          className={cn(
+            'fixed inset-x-0 top-0 z-[9999] mx-auto flex max-w-[90em] justify-between',
+            isMenuOpen && 'hidden'
+          )}
+        >
           <StaticHeader />
         </div>
 

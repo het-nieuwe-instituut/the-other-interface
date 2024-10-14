@@ -5,7 +5,7 @@ export const MenuTypogrpahyVariants = cva('', {
   variants: {
     default: {
       primary: [
-        TypographyVariants({ times: 'lg' }),
+        TypographyVariants({ timesDot: 'lg' }),
         'text-blue-100 ',
         'hover:text-blue-50',
         'focus:bg-blue-100 focus:text-pink-100 focus:outline-blue-100 active:bg-blue-100 active:text-pink-100',
@@ -19,7 +19,8 @@ export const MenuTypogrpahyVariants = cva('', {
         'disabled:text-[rgba(0,0,0.2)]',
       ],
       small: [
-        TypographyVariants({ socialLarge: 'lg' }),
+        'self-stretch not-italic leading-[130%_]',
+        'font-social-large text-[16px] tracking-[0.21px] sm:text-[21px]',
         'text-blue-100',
         'hover:text-blue-50',
         'focus:outline-blue-100',
@@ -44,7 +45,8 @@ export const MenuTypogrpahyVariants = cva('', {
         'disabled:text-[rgba(0,0,0.2)]',
       ],
       small: [
-        TypographyVariants({ socialLarge: 'lg' }),
+        'self-stretch not-italic leading-[130%_]',
+        'font-social-large text-[16px] tracking-[0.21px] sm:text-[21px]',
         'text-pink-100',
         'hover:text-blue-50',
         'focus:bg-pink-100 focus:text-blue-100 focus:outline-pink-100 active:bg-pink-100 active:text-blue-100',
@@ -54,17 +56,17 @@ export const MenuTypogrpahyVariants = cva('', {
     },
     menuItem: {
       primary: [
-        TypographyVariants({ times: '2xl' }),
+        'font-times-dot text-[70px] leading-[120%] tracking-[-1.92px] md:text-[84px] md:leading-[100%_] lg:text-[96px]',
         'text-pink-100 ',
         'hover:text-pink-50',
         'focus:bg-pink-100 focus:text-blue-100 focus:outline-blue-100',
         'disabled:text-[rgba(0,0,0.2)]',
       ],
       secondary: [
-        TypographyVariants({ impact: 'xl' }),
+        'font-impact-large text-[55px] leading-[120%] tracking-[-0.8px] md:text-[62px] md:leading-[110%_] lg:text-[80px]',
         'text-pink-100',
         'hover:text-pink-50',
-        'focus:bg-blue-100 focus:text-pink-100 focus:outline-pink-100',
+        'focus:bg-pink-100 focus:text-blue-100 focus:outline-blue-100',
         'disabled:text-[rgba(0,0,0.2)]',
       ],
     },

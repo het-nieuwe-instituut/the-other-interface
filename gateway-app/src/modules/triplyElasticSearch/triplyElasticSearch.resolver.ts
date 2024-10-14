@@ -9,8 +9,8 @@ export class TriplyElasticSearchResolver {
   @Query(() => SearchResultType)
   public searchTriply(@Args() args: SearchArgsType) {
     return this.triplyElasticSearchService.search(args.text, args.lang, {
-      page: args.page,
-      pageSize: args.pageSize,
+      start: args.start,
+      limit: args.limit,
     })
   }
 }

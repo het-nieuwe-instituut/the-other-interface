@@ -1,17 +1,18 @@
 query StoryHoverRecordRelations($id: String!, $locale: Locale!) {
-  storyWithoutRelations(id: $id, locale: $locale) {
+  story(id: $id, locale: $locale) {
     data {
       id
       attributes {
         title
         shortDescription
-        author {
-          data {
-            id
-            attributes {
-              firstName
-              lastName
-            }
+      }
+      authors {
+        data {
+          id
+          attributes {
+            firstName
+            lastName
+            insertion
           }
         }
       }

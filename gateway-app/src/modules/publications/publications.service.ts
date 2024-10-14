@@ -5,7 +5,7 @@ import { TriplyUtils } from '../triply/triply.utils'
 import { getHttpThumbnailOrNull } from '../util/helpers'
 import { PaginationArgs } from '../util/paginationArgs.type'
 import { Locale } from '../util/locale.type'
-import { EnrichedRecordBaseType } from '../triply/triply.type'
+import { EnrichedRecordBaseType } from '../triplyRecord/triplyRecord.type'
 
 interface PublicationsZoomLevel3Data {
   thumbnail?: string
@@ -13,6 +13,11 @@ interface PublicationsZoomLevel3Data {
   id: string
   yearOfPublication?: string
   objectNumber?: string
+  holding?: string
+  historyNotes?: string
+  annotation?: string
+  mediaType?: string
+  mediaReference?: string
 }
 const publicationsDetailZoomLevel3DataKeys: KeysToVerify<PublicationsZoomLevel3Data> = {
   thumbnail: true,
@@ -20,6 +25,11 @@ const publicationsDetailZoomLevel3DataKeys: KeysToVerify<PublicationsZoomLevel3D
   id: true,
   yearOfPublication: true,
   objectNumber: true,
+  holding: true,
+  historyNotes: true,
+  annotation: true,
+  mediaReference: true,
+  mediaType: true,
 }
 export interface PublicationRelationsType {
   idRelation?: string
@@ -27,6 +37,7 @@ export interface PublicationRelationsType {
   typePub?: string
   yearPub?: string
   externalSource?: string
+  authors?: string
 }
 
 const publicationRelationsKeys: KeysToVerify<PublicationRelationsType> = {
@@ -35,6 +46,7 @@ const publicationRelationsKeys: KeysToVerify<PublicationRelationsType> = {
   typePub: true,
   yearPub: true,
   externalSource: true,
+  authors: true,
 }
 
 export interface PublicationsRelationsCountType {
@@ -66,7 +78,6 @@ export interface PublicationRecordZoomLevel3Data {
   yearOfPublication?: string
   placeOfPublication?: string
   isbn?: string
-  annotation?: string
   codeOfArchive?: string
   illustration?: string
   pages?: string
@@ -84,6 +95,11 @@ export interface PublicationRecordZoomLevel3Data {
   issue?: string
   year?: string
   subject?: string[]
+  edition?: string
+  continuedFrom?: string
+  continuedAs?: string
+  geographicalKeywords?: string
+  pysicalCarrier?: string
 }
 
 const publicationRecordZoomLevel3DataKeys: KeysToVerify<PublicationRecordZoomLevel3Data> = {
@@ -95,7 +111,6 @@ const publicationRecordZoomLevel3DataKeys: KeysToVerify<PublicationRecordZoomLev
   yearOfPublication: true,
   placeOfPublication: true,
   isbn: true,
-  annotation: true,
   codeOfArchive: true,
   illustration: true,
   pages: true,
@@ -113,6 +128,11 @@ const publicationRecordZoomLevel3DataKeys: KeysToVerify<PublicationRecordZoomLev
   issue: true,
   year: true,
   subject: true,
+  edition: true,
+  continuedFrom: true,
+  continuedAs: true,
+  geographicalKeywords: true,
+  pysicalCarrier: true,
 }
 
 @Injectable()
@@ -189,7 +209,12 @@ export class PublicationsService {
       { id, language: locale }
     )
 
-    return { ...result.data, id }
+    const data = TriplyUtils.combineObjectArray(result.data)
+    if (!data) {
+      return
+    }
+
+    return { ...data, id }
   }
 
   public async getZoomRecordHover(id: string, locale: Locale) {

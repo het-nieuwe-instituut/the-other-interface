@@ -9,8 +9,8 @@ export function getTriplyOrStoryHref({
   story,
   triply_record,
 }: {
-  story?: DeepPartial<StoryEntityResponse>
-  triply_record?: DeepPartial<TriplyRecordEntityResponse>
+  story?: DeepPartial<StoryEntityResponse> | null
+  triply_record?: DeepPartial<TriplyRecordEntityResponse> | null
 }) {
   if (
     triply_record &&

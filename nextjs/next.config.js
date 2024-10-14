@@ -57,6 +57,17 @@ const nextConfig = {
   env: {
     parsed,
   },
+  experimental: {
+    serverActions: true,
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/robots.txt',
+        destination: '/api/robots',
+      },
+    ]
+  },
 }
 
 module.exports = nextTranslate(nextConfig)

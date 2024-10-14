@@ -1,5 +1,5 @@
 'use client'
-import { imageBasePath } from '@/features/modules/modulesConstants'
+import { useClientPagination } from '@/features/editorial/components/useClientPagination'
 import ErrorBox from '@/features/shared/components/Error/ErrorBox'
 import { ThemedSpinner } from '@/features/shared/components/Loading/ThemedSpinner/ThemedSpinner'
 import { addLocaleToUrl } from '@/features/shared/helpers/addLocaleToUrl'
@@ -13,10 +13,13 @@ import {
   Category,
 } from '@/features/shared/utils/categories'
 import {
-  ImageCarousel,
-  ImageCarouselItem,
-} from '@/features/ui/components/image-carousel/ImageCarousel'
-import { TypographyVariants } from '@/features/ui/components/typography/variants'
+  CarouselGrid,
+  CarouselGridCard,
+  CarouselGridCardWrapper,
+  CarouselGridFooter,
+  CarouselGridPagination,
+  CarouselGridTitle,
+} from '@/features/ui/components/carousel-grid/CarouselGrid'
 import { useParams } from 'next/navigation'
 import { useMemo } from 'react'
 
@@ -25,10 +28,8 @@ export const RecordStoriesCarousel = () => {
   const category = params?.category as Category
   const id = params?.id as string
   const type = CATEGORIES_TO_ENTITY_MAPPER[category]
-  const lang = useLocale()
 
   const { data: recordRelatedStories, isLoading, isError } = useStoriesRelationForRecord(type, id)
-  const { t: tRecord } = useTypeSafeTranslation('record')
 
   const stories = useMemo(
     () =>
@@ -38,10 +39,6 @@ export const RecordStoriesCarousel = () => {
     [recordRelatedStories?.zoomLevel3StoriesRelationsForRecord?.stories]
   )
 
-  if (isError) {
-    return <ErrorBox />
-  }
-
   if (isLoading) {
     return (
       <div className="flex h-[600px] w-full items-center justify-center">
@@ -50,32 +47,76 @@ export const RecordStoriesCarousel = () => {
     )
   }
 
+  if (isError) {
+    return <ErrorBox />
+  }
+
+  return (
+    <>
+      <div className="block md:hidden">
+        <RecordStoriesCarouselContent stories={stories ?? []} cols={1} />
+      </div>
+      <div className="hidden md:block carouselDesktop:hidden">
+        <RecordStoriesCarouselContent stories={stories ?? []} cols={3} />
+      </div>
+      <div className="hidden carouselDesktop:block">
+        <RecordStoriesCarouselContent stories={stories ?? []} cols={4} />
+      </div>
+    </>
+  )
+}
+
+const RecordStoriesCarouselContent = ({
+  stories,
+  cols,
+}: {
+  stories: NonNullable<ReturnType<typeof storiesToCarouselDataMapper>>
+  cols: 1 | 2 | 3 | 4
+}) => {
+  const lang = useLocale()
+
+  const { nodes, lastPage, page, next, previous } = useClientPagination({
+    items: stories ?? [],
+    itemsInPage: cols,
+  })
+
+  const { t: tRecord } = useTypeSafeTranslation('record')
+
+  const title = `${tRecord('relatedStoriesCarousel')}`
+
   return (
     <div>
       {stories && stories.length > 0 && (
-        <>
-          <h2 className={TypographyVariants({ responsive: 'title', className: 'mb-4' })}>
-            {tRecord('relatedStoriesCarousel')} ({stories.length})
-          </h2>
-          <ImageCarousel>
-            {stories.map(item => {
-              const href = addLocaleToUrl(`/detail/${CATEGORIES.stories}/${item.id}`, lang)
-              const url = item?.url ? imageBasePath(item.url.toString()) : undefined
-              if (!item || !item.height || !item.width || !item.url || !url) {
-                return null
-              }
+        <CarouselGrid>
+          <CarouselGridTitle superscript={stories.length}>{title}</CarouselGridTitle>
+          <CarouselGridCardWrapper cols={cols}>
+            {nodes.map(item => {
+              const url = addLocaleToUrl(`/detail/${CATEGORIES.stories}/${item.id}`, lang)
+
               return (
-                <ImageCarouselItem
-                  href={href}
+                <CarouselGridCard
                   key={item.id}
-                  src={url}
-                  alt={item.description ?? ''}
-                  caption={item.description ?? undefined}
-                />
+                  title={item.title}
+                  description={item?.description ?? ''}
+                  image={item.url}
+                  href={url}
+                  alt={item.alt ? item.alt : item.title ?? 'image'}
+                ></CarouselGridCard>
               )
-            }) ?? []}
-          </ImageCarousel>
-        </>
+            })}
+          </CarouselGridCardWrapper>
+          <CarouselGridFooter>
+            <div />
+            {stories.length > cols && (
+              <CarouselGridPagination
+                onNext={next}
+                onPrevious={previous}
+                hidePrevious={page === 1}
+                hideNext={page === lastPage || lastPage === 1}
+              />
+            )}
+          </CarouselGridFooter>
+        </CarouselGrid>
       )}
     </div>
   )

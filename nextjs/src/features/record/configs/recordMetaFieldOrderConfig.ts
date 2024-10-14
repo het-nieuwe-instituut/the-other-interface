@@ -11,18 +11,32 @@ export type OmitEnrichedData<T> = Omit<
   'enrichedSources' | 'externalSourceType' | 'externalSourceUrl' | 'id'
 >
 
-type BaseObjectRecordZoomLevel3Type = OmitEnrichedData<ObjectRecordZoomLevel3Type>
-type BaseArchivesRecordZoomLevel3Type = OmitEnrichedData<ArchivesRecordZoomLevel3Type>
-type BasePeopleRecordZoomLevel3Type = OmitEnrichedData<PeopleRecordZoomLevel3Type>
-type BasePublicationRecordZoomLevel3Type = OmitEnrichedData<PublicationRecordZoomLevel3Type>
+type OmitAsteriskSuggestions<T> = Omit<T, 'asteriskSuggestions'>
+
+type BaseObjectRecordZoomLevel3Type = OmitAsteriskSuggestions<
+  OmitEnrichedData<ObjectRecordZoomLevel3Type>
+>
+type BaseArchivesRecordZoomLevel3Type = OmitAsteriskSuggestions<
+  OmitEnrichedData<ArchivesRecordZoomLevel3Type>
+>
+type BasePeopleRecordZoomLevel3Type = OmitAsteriskSuggestions<
+  OmitEnrichedData<PeopleRecordZoomLevel3Type>
+>
+type BasePublicationRecordZoomLevel3Type = OmitAsteriskSuggestions<
+  OmitEnrichedData<PublicationRecordZoomLevel3Type>
+>
 
 const objectFieldOrder: Array<keyof BaseObjectRecordZoomLevel3Type> = [
   'objectNumber',
-  'titleType',
+  'title',
   'objectName',
+  'objectType',
   'archiveCode',
+  'maker',
   'date',
   'relatedKeywords',
+  'geoKeywords',
+  'materials',
   'techniques',
   'hasParts',
   'dimension',
@@ -35,21 +49,24 @@ const objectFieldOrder: Array<keyof BaseObjectRecordZoomLevel3Type> = [
 
 const archiveFieldOrder: Array<Partial<keyof BaseArchivesRecordZoomLevel3Type>> = [
   'referenceCode',
-  'titleType',
+  'title',
+  'creators',
   'descriptionLevel',
   'size',
   'period',
   'access',
+  'subject',
+  'location',
   'photographCreator',
   'rights',
   'permanentLink',
-  'externalSource',
+  'externalURI',
 ]
 
 const peopleFieldOrder: Array<keyof BasePeopleRecordZoomLevel3Type> = [
   'type',
   'profession',
-  'nameVariation',
+  'nameVariations',
   'birthDate',
   'birthPlace',
   'deathDate',
@@ -71,8 +88,8 @@ const publicationFieldOrder: Array<keyof BasePublicationRecordZoomLevel3Type> = 
   'yearOfPublication',
   'placeOfPublication',
   'isbn',
-  'annotation',
   'codeOfArchive',
+  'edition',
   'illustration',
   'pages',
   'language',
@@ -82,6 +99,13 @@ const publicationFieldOrder: Array<keyof BasePublicationRecordZoomLevel3Type> = 
   'relatedKeyword',
   'geoKeyword',
   'availability',
+  'continuedFrom',
+  'continuedAs',
+  'volume',
+  'issue',
+  'year',
+  'geographicalKeywords',
+  'pysicalCarrier',
   'permanentLink',
   'externalSource',
 ]
