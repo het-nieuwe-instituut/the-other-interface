@@ -646,11 +646,9 @@ export type EnrichedBasePublicationZoomLevel3DetailType = {
   id: Scalars['String']['output'];
   mediaReference?: Maybe<Scalars['String']['output']>;
   mediaType?: Maybe<Scalars['String']['output']>;
-  objectNumber?: Maybe<Scalars['String']['output']>;
   thumbnail?: Maybe<Array<Scalars['String']['output']>>;
   title?: Maybe<Scalars['String']['output']>;
   type?: Maybe<EntityNames>;
-  yearOfPublication?: Maybe<Scalars['String']['output']>;
 };
 
 export enum EntityNames {
@@ -1198,11 +1196,9 @@ export type PublicationZoomLevel3DetailType = {
   id: Scalars['String']['output'];
   mediaReference?: Maybe<Scalars['String']['output']>;
   mediaType?: Maybe<Scalars['String']['output']>;
-  objectNumber?: Maybe<Scalars['String']['output']>;
   thumbnail?: Maybe<Array<Scalars['String']['output']>>;
   title?: Maybe<Scalars['String']['output']>;
   type?: Maybe<EntityNames>;
-  yearOfPublication?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -2064,8 +2060,6 @@ export type ImageModuleFragmentFragment = { __typename: 'ComponentModulesImage',
 
 export type PullquoteModuleFragmentFragment = { __typename: 'ComponentModulesPullquote', id: string, text?: string | null };
 
-export type SideImageWithTextModuleFragmentFragment = { __typename: 'ComponentModulesSideImageWithText', id: string, sideText: string, image_alt_text: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, height?: number | null, width?: number | null, caption?: string | null } | null } | null } };
-
 export type StandaloneLinksModuleFragmentFragment = { __typename: 'ComponentModulesStandaloneLinks', id: string, standaloneLinks?: Array<{ __typename: 'ComponentCoreStandAloneLink', id: string, label: string, url?: string | null, attachment?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, height?: number | null, width?: number | null } | null } | null } | null }> | null };
 
 export type SubtitleModuleFragmentFragment = { __typename: 'ComponentModulesSubtitle', id: string, text?: string | null };
@@ -2073,6 +2067,8 @@ export type SubtitleModuleFragmentFragment = { __typename: 'ComponentModulesSubt
 export type TextModuleFragmentFragment = { __typename: 'ComponentModulesTextModule', id: string, Richtext?: string | null };
 
 export type TitleModuleFragmentFragment = { __typename: 'ComponentModulesTitleModule', id: string, Title?: string | null };
+
+export type SideImageWithTextModuleFragmentFragment = { __typename: 'ComponentModulesSideImageWithText', id: string, sideText: string, image_alt_text: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, height?: number | null, width?: number | null, caption?: string | null } | null } | null } };
 
 export type Zoom3RelationsFragmentFragment = { __typename?: 'ZoomLevel3RelationsType', type: EntityNames, total?: number | null, paginatedRelations?: Array<string> | null };
 

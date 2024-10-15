@@ -22,7 +22,7 @@ export class SearchResultItemType {
 @ObjectType()
 export class SearchResultType {
   @Field(() => [SearchResultItemType], { nullable: true })
-  public nodes?: (SearchResultItemType | null)[] | null
+  public nodes?: SearchResultItemType[] | null
 
   @Field(() => Int)
   public total: number

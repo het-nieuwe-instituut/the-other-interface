@@ -20,12 +20,6 @@ class BasePublicationZoomLevel3DetailType {
   public thumbnail: string
 
   @Field(() => String, { nullable: true })
-  public objectNumber: string
-
-  @Field(() => String, { nullable: true })
-  public yearOfPublication: string
-
-  @Field(() => String, { nullable: true })
   public description: string
 
   @Field({ nullable: true })

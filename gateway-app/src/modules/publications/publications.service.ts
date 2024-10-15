@@ -11,8 +11,6 @@ interface PublicationsZoomLevel3Data {
   thumbnail?: string
   title?: string
   id: string
-  yearOfPublication?: string
-  objectNumber?: string
   holding?: string
   historyNotes?: string
   annotation?: string
@@ -23,8 +21,6 @@ const publicationsDetailZoomLevel3DataKeys: KeysToVerify<PublicationsZoomLevel3D
   thumbnail: true,
   title: true,
   id: true,
-  yearOfPublication: true,
-  objectNumber: true,
   holding: true,
   historyNotes: true,
   annotation: true,

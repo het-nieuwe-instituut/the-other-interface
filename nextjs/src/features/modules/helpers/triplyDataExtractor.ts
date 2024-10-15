@@ -43,13 +43,11 @@ const extractTriplyFields = (
   }
 
   if (triplyType === 'Publication') {
-    const description = record.publication?.yearOfPublication ?? record?.publication?.objectNumber
     const title = record.publication?.title
 
     return {
       ...defaultFields,
       title: title ?? defaultFields?.title,
-      description: description ?? defaultFields?.description,
     }
   }
 
