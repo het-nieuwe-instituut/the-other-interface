@@ -42,9 +42,6 @@ export interface ArchiveRelationsType {
   titleR?: string
   referenceNumber?: string
   descriptionLevel?: string
-  asterisk_date_person?: string
-  asterisk_name_person?: string
-  asterisk_subject_person?: string
 }
 
 const archiveRelationsKeys: KeysToVerify<ArchiveRelationsType> = {
@@ -52,9 +49,6 @@ const archiveRelationsKeys: KeysToVerify<ArchiveRelationsType> = {
   titleR: true,
   referenceNumber: true,
   descriptionLevel: true,
-  asterisk_date_person: true,
-  asterisk_name_person: true,
-  asterisk_subject_person: true,
 }
 
 export interface ArchiveRelationsCountType {
@@ -167,9 +161,6 @@ export class ArchivesService {
   }
 
   private asteriskKeys: (keyof typeof ArchiveAsteriskType.prototype)[] = [
-    'asterisk_subject_person',
-    'asterisk_date_person',
-    'asterisk_name_person',
     'asterisk_date_subject',
     'asterisk_name_subject',
     'asterisk_subject_subject',
@@ -182,7 +173,6 @@ export class ArchivesService {
     'asterisk_date_content',
     'asterisk_name_content',
     'asterisk_subject_content',
-    // new
     'asterisk_date_title',
     'asterisk_name_title',
     'asterisk_subject_title',

@@ -31,6 +31,7 @@ export const HomepageContainer: React.FC<Props> = ({ homepage, isStoriesGalaxy }
   const category = useSearchParamCategory()
   const searchValue = useSearchParamSearchValue()
   const encodedFilters = useSearchParamFilters()
+
   return (
     <>
       <GalaxyInterface>

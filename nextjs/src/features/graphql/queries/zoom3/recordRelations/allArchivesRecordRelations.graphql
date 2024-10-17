@@ -10,8 +10,5 @@ query ArchiveRecordRelations(
     titleR
     referenceNumber
     descriptionLevel
-    asterisk_date_person
-    asterisk_name_person
-    asterisk_subject_person
   }
 }

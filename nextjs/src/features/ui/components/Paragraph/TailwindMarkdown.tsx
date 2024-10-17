@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import remarkGfm from 'remark-gfm'
 import { cn } from '../../utils/cn'
+import { LinkButton } from '../link-button/component'
 import { Subtitle } from '../subtitle/Subtitle'
 import { TypographyVariants } from '../typography/variants'
 import styles from './TailwindMarkdown.module.css'
@@ -48,4 +49,13 @@ const components = {
     <ol className={styles['md-ol-list']}>{children}</ol>
   ),
   u: ({ children }: { children: ReactNode }) => <u className={styles['md-u']}>{children}</u>,
+  a: ({ children, href }: { children: ReactNode; href?: string }) => (
+    <LinkButton
+      href={href || ''}
+      target="_blank"
+      className=" m-0 inline p-0 text-inherit underline"
+    >
+      {children}
+    </LinkButton>
+  ),
 }

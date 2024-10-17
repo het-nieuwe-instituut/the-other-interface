@@ -13,42 +13,6 @@
         "isOneOf": null,
         "fields": [
           {
-            "name": "asterisk_date_person",
-            "description": "the date the asterisk value was added to the person field",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "asterisk_name_person",
-            "description": "the person that added the asterisk value for the person field",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "asterisk_subject_person",
-            "description": "asterisk value for the person field",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "descriptionLevel",
             "description": null,
             "args": [],
@@ -5945,18 +5909,6 @@
             "deprecationReason": null
           },
           {
-            "name": "objectNumber",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "thumbnail",
             "description": null,
             "args": [],
@@ -5995,18 +5947,6 @@
             "type": {
               "kind": "ENUM",
               "name": "EntityNames",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "yearOfPublication",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -8950,42 +8890,6 @@
         "isOneOf": null,
         "fields": [
           {
-            "name": "asterisk_date_person",
-            "description": "the date the asterisk value was added to the person field",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "asterisk_name_person",
-            "description": "the person that added the asterisk value for the person field",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "asterisk_subject_person",
-            "description": "asterisk value for the person field",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "externalSource",
             "description": null,
             "args": [],
@@ -10575,18 +10479,6 @@
             "deprecationReason": null
           },
           {
-            "name": "objectNumber",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "thumbnail",
             "description": null,
             "args": [],
@@ -10625,18 +10517,6 @@
             "type": {
               "kind": "ENUM",
               "name": "EntityNames",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "yearOfPublication",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,

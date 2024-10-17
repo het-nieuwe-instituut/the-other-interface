@@ -94,14 +94,14 @@ export const PageHeader: React.FC<Props> = props => {
                   >
                     {asteriskTitle?.asterisk_subject_title}
 
-                    <span className="absolute text-surface-asterisk-dark asterisk-icon pl-1">
+                    <span className="asterisk-icon absolute pl-1 text-surface-asterisk-dark">
                       <Asterisk />
                     </span>
                   </AsteriskTooltip>
                 ) : (
                   <>
                     {asteriskTitle?.asterisk_subject_title}
-                    <span className="absolute text-surface-asterisk-dark asterisk-icon pl-1">
+                    <span className="asterisk-icon absolute pl-1 text-surface-asterisk-dark">
                       <Asterisk />
                     </span>
                   </>

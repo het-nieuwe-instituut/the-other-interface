@@ -10,8 +10,5 @@ query ObjectRecordRelations(
     titleR
     referenceNumber
     period
-    asterisk_date_person
-    asterisk_name_person
-    asterisk_subject_person
   }
 }

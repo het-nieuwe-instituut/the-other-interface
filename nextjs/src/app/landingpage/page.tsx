@@ -28,7 +28,7 @@ export default async function Page({ searchParams }: PageProps) {
   const { isEnabled } = draftMode()
   const api = initApiServerService()
 
-  if (category === SEARCH_CATEGORIES.stories) {
+  if (category === SEARCH_CATEGORIES.stories || category === SEARCH_CATEGORIES.all) {
     const data = await api?.homepage({ locale })
 
     return (

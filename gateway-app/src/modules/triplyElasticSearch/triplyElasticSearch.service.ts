@@ -22,8 +22,8 @@ export interface ElasticsearchResult {
         '@id': string
         'https://schema org/url'?: string[]
         'https://www ica org/standards/RiC/ontology#title'?: string[] // archives title
-        'https://schema.org/name'?: string[] // publications name & people name
-        'http://www.w3.org/2004/02/skos/core#prefLabel'?: string[] // objects prefLabel
+        'https://schema org/name'?: string[] // publications name & people name
+        'http://www w3 org/2004/02/skos/core#prefLabel'?: string[] // objects prefLabel
       }
     }[]
   }
@@ -80,7 +80,9 @@ export class TriplyElasticSearchService {
         .catch(err => console.error(err))
     }
 
-    const formattedResult = res.hits.hits.map(h => this.formatSearchResult(h))
+    const formattedResult = res.hits.hits
+      .map(h => this.formatSearchResult(h))
+      ?.filter(Boolean) as SearchResultItemType[]
 
     return {
       nodes: formattedResult,
@@ -89,7 +91,7 @@ export class TriplyElasticSearchService {
   }
 
   private post<ReturnDataType>(endpoint: URL, body: object) {
-    const headers = { Authorization: `Bearer ${this.apiKey}` }
+    const headers = { Authorization: `Bearer ${this.apiKey}`, 'Accept-Encoding': '*' }
     const res = this.httpService.post<ReturnDataType>(endpoint.toString(), body, { headers })
 
     return lastValueFrom(
@@ -121,8 +123,8 @@ export class TriplyElasticSearchService {
       const thumbnail = item._source['https://schema org/url']?.[0]
       const titleField =
         item._source['https://www ica org/standards/RiC/ontology#title'] ||
-        item._source['https://schema.org/name'] ||
-        item._source['http://www.w3.org/2004/02/skos/core#prefLabel']
+        item._source['https://schema org/name'] ||
+        item._source['http://www w3 org/2004/02/skos/core#prefLabel']
       const title = titleField?.join(', ') || ''
 
       return {
@@ -187,6 +189,7 @@ export class TriplyElasticSearchService {
               'https://www ica org/standards/RiC/ontology#hasEndDate', // archive subject
               // 'https://www.ica.org/standards/RiC/ontology#hasOrHadLocation > http://www.w3.org/2004/02/skos/core#prefLabel', // archive location  - wait
             ],
+            fuzziness: 'AUTO',
           },
         },
         filter: {

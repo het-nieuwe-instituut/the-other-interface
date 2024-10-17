@@ -46,9 +46,6 @@ export interface ObjectsRelationsType {
   referenceNumber?: string
   period?: string
   thumbnail?: string
-  asterisk_date_person?: string
-  asterisk_name_person?: string
-  asterisk_subject_person?: string
   externalSource?: string
 }
 
@@ -60,9 +57,6 @@ const objectsRelationsKeys: KeysToVerify<ObjectsRelationsType> = {
   referenceNumber: true,
   period: true,
   thumbnail: true,
-  asterisk_date_person: true,
-  asterisk_name_person: true,
-  asterisk_subject_person: true,
   externalSource: true,
 }
 
@@ -153,21 +147,17 @@ export class ObjectsService {
   }
 
   private asteriskKeys: (keyof typeof ObjectAsteriskType.prototype)[] = [
-    'asterisk_subject_person',
-    'asterisk_date_person',
-    'asterisk_name_person',
     'asterisk_date_geoKeywords',
     'asterisk_name_geoKeywords',
     'asterisk_subject_geoKeywords',
     'asterisk_date_relatedKeyword',
     'asterisk_name_relatedKeyword',
     'asterisk_subject_relatedKeyword',
-    // new keys
     'asterisk_date_description',
-    'asterisk_date_title',
     'asterisk_name_description',
-    'asterisk_name_title',
     'asterisk_subject_description',
+    'asterisk_date_title',
+    'asterisk_name_title',
     'asterisk_subject_title',
   ]
 

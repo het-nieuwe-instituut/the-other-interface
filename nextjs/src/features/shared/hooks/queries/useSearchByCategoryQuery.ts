@@ -336,13 +336,7 @@ function getSearchAllPaginationParams(storiesTotal: number, recordsTotal: number
 
   const partialRecordPageOffset = itemsPerPage - remainingStoryItems
   const start = partialRecordPageOffset + pageWithSingleTypeOnlyOffset + normalPageOffset
-  console.log({
-    start,
-    limit: itemsPerPage,
-    normalPageOffset,
-    pageWithSingleTypeOnlyOffset,
-    partialRecordPageOffset,
-  })
+
   return {
     stories: null,
     records: { start, limit: itemsPerPage },
