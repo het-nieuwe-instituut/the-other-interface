@@ -125,7 +125,7 @@ export class PeopleService {
       this.ZoomLevel3Endpoint,
       peopleDetailZoomLevel3DataKeys,
       { page: 1, pageSize: 100 }, // TODO: Setting to 100 - temp fix to get the new data and get it working again - need a better solution
-      { id, locale }
+      { id, language: locale }
     )
 
     const asteriskSuggestions = this.formatAsteriskSuggestions(result.data)
@@ -152,13 +152,7 @@ export class PeopleService {
       { id, type, language: locale }
     )
 
-    const output = TriplyUtils.sanitizeObjectArray(
-      result.data,
-      'idRelation',
-      'relation',
-      'thumbnail'
-    )
-    return output
+    return TriplyUtils.sanitizeObjectArray(result.data, 'idRelation', 'relation', 'thumbnail')
   }
 
   public async getRelationsDataCount(id: string, type: EntityNames) {
@@ -208,7 +202,7 @@ export class PeopleService {
     return this.triplyService.getEnrichedSourceData(this.EnrichedSourceEndpoints, id, locale)
   }
 
-  private formatAsteriskSuggestions(data: PeopleDetailZoomLevel3Data[]) {
+  private formatAsteriskSuggestions(data: PeopleZoomLevel3DetailAsteriskType[]) {
     return data.reduce<PeopleZoomLevel3DetailAsteriskType[]>((acc, cur) => {
       const hasValue = this.asteriskKeys.some(key => cur[key] !== undefined)
       if (hasValue) {

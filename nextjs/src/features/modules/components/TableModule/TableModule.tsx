@@ -109,7 +109,7 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
                       item.TableBodyAsteriskItem?.asteriskSubject
                   )
                   return (
-                    <>
+                    <React.Fragment key={bodyItem.id}>
                       {hasAsteriskData && cellIndex === 0 ? (
                         <>
                           {item.TableBodyAsteriskItem?.asteriskDate ||
@@ -123,7 +123,6 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
                               )}
                             >
                               <td
-                                key={bodyItem.id}
                                 className={cn(
                                   TypographyVariants({
                                     socialLarge: cellIndex === 0 ? 'xl' : 'lg',
@@ -141,7 +140,6 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
                             </AsteriskTooltip>
                           ) : (
                             <td
-                              key={bodyItem.id}
                               className={cn(
                                 TypographyVariants({ socialLarge: cellIndex === 0 ? 'xl' : 'lg' }),
                                 'text-left, py-6 pr-2 cursor-pointer'
@@ -158,7 +156,6 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
                         </>
                       ) : (
                         <td
-                          key={bodyItem.id}
                           className={cn(
                             TypographyVariants({ socialLarge: cellIndex === 0 ? 'xl' : 'lg' }),
                             'text-left, py-6 pr-2 cursor-pointer'
@@ -167,7 +164,7 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
                           {Boolean(bodyItem.value) ? bodyItem.value : 'n/a'}
                         </td>
                       )}
-                    </>
+                    </React.Fragment>
                   )
                 })}
               </tr>
@@ -184,12 +181,9 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
           return (
             <div key={rowIndex} className="tr-border-gradient flex flex-col justify-center py-4">
               {item.TableBodyItem?.map((bodyItem, cellIndex) => (
-                <>
+                <React.Fragment key={bodyItem.id}>
                   {hasAsteriskData && cellIndex === 0 ? (
-                    <Link
-                      href={`/detail/${component.type}/${item.id}?lang=${lang}`}
-                      key={bodyItem.id}
-                    >
+                    <Link href={`/detail/${component.type}/${item.id}?lang=${lang}`}>
                       <AsteriskTooltip
                         place="bottom"
                         title={
@@ -203,7 +197,6 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
                         }
                       >
                         <div
-                          key={bodyItem.id}
                           className={TypographyVariants({
                             socialLarge: cellIndex === 0 ? 'xl' : 'lg',
                             className: 'inline',
@@ -217,12 +210,8 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
                       </AsteriskTooltip>
                     </Link>
                   ) : (
-                    <Link
-                      href={`/detail/${component.type}/${item.id}?lang=${lang}`}
-                      key={bodyItem.id}
-                    >
+                    <Link href={`/detail/${component.type}/${item.id}?lang=${lang}`}>
                       <span
-                        key={bodyItem.id}
                         className={TypographyVariants({
                           socialLarge: cellIndex === 0 ? 'xl' : 'lg',
                         })}
@@ -231,7 +220,7 @@ const ResponsiveTable: React.FC<Props> = ({ component, LoadMore }: Props) => {
                       </span>
                     </Link>
                   )}
-                </>
+                </React.Fragment>
               ))}
             </div>
           )

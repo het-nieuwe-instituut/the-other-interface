@@ -22,12 +22,6 @@ export type Scalars = {
 
 export type ArchiveRelationsType = {
   __typename?: 'ArchiveRelationsType';
-  /** the date the asterisk value was added to the person field */
-  asterisk_date_person?: Maybe<Scalars['String']['output']>;
-  /** the person that added the asterisk value for the person field */
-  asterisk_name_person?: Maybe<Scalars['String']['output']>;
-  /** asterisk value for the person field */
-  asterisk_subject_person?: Maybe<Scalars['String']['output']>;
   descriptionLevel?: Maybe<Scalars['String']['output']>;
   idRelation?: Maybe<Scalars['String']['output']>;
   referenceNumber?: Maybe<Scalars['String']['output']>;
@@ -1012,12 +1006,6 @@ export type ObjectRelationsCountType = {
 
 export type ObjectRelationsType = {
   __typename?: 'ObjectRelationsType';
-  /** the date the asterisk value was added to the person field */
-  asterisk_date_person?: Maybe<Scalars['String']['output']>;
-  /** the person that added the asterisk value for the person field */
-  asterisk_name_person?: Maybe<Scalars['String']['output']>;
-  /** asterisk value for the person field */
-  asterisk_subject_person?: Maybe<Scalars['String']['output']>;
   externalSource?: Maybe<Scalars['String']['output']>;
   idRelation?: Maybe<Scalars['String']['output']>;
   period?: Maybe<Scalars['String']['output']>;
@@ -2452,7 +2440,7 @@ export type ArchiveRecordRelationsQueryVariables = Exact<{
 }>;
 
 
-export type ArchiveRecordRelationsQuery = { __typename?: 'Query', archivesRecordRelations?: Array<{ __typename?: 'ArchiveRelationsType', idRelation?: string | null, titleR?: string | null, referenceNumber?: string | null, descriptionLevel?: string | null, asterisk_date_person?: string | null, asterisk_name_person?: string | null, asterisk_subject_person?: string | null }> | null };
+export type ArchiveRecordRelationsQuery = { __typename?: 'Query', archivesRecordRelations?: Array<{ __typename?: 'ArchiveRelationsType', idRelation?: string | null, titleR?: string | null, referenceNumber?: string | null, descriptionLevel?: string | null }> | null };
 
 export type ObjectRecordRelationsQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -2463,7 +2451,7 @@ export type ObjectRecordRelationsQueryVariables = Exact<{
 }>;
 
 
-export type ObjectRecordRelationsQuery = { __typename?: 'Query', objectRecordRelations?: Array<{ __typename?: 'ObjectRelationsType', idRelation?: string | null, titleR?: string | null, referenceNumber?: string | null, period?: string | null, asterisk_date_person?: string | null, asterisk_name_person?: string | null, asterisk_subject_person?: string | null }> | null };
+export type ObjectRecordRelationsQuery = { __typename?: 'Query', objectRecordRelations?: Array<{ __typename?: 'ObjectRelationsType', idRelation?: string | null, titleR?: string | null, referenceNumber?: string | null, period?: string | null }> | null };
 
 export type PeopleRecordRelationsQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -4369,9 +4357,6 @@ export const ArchiveRecordRelationsDocument = gql`
     titleR
     referenceNumber
     descriptionLevel
-    asterisk_date_person
-    asterisk_name_person
-    asterisk_subject_person
   }
 }
     `;
@@ -4388,9 +4373,6 @@ export const ObjectRecordRelationsDocument = gql`
     titleR
     referenceNumber
     period
-    asterisk_date_person
-    asterisk_name_person
-    asterisk_subject_person
   }
 }
     `;

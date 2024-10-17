@@ -6,24 +6,6 @@ import { ExternalSource } from '../triply/triply.service'
 
 @ObjectType()
 export class ObjectAsteriskType {
-  @Field({
-    nullable: true,
-    description: 'asterisk value for the person field',
-  })
-  public asterisk_subject_person?: string
-
-  @Field({
-    nullable: true,
-    description: 'the date the asterisk value was added to the person field',
-  })
-  public asterisk_date_person?: string
-
-  @Field({
-    nullable: true,
-    description: 'the person that added the asterisk value for the person field',
-  })
-  public asterisk_name_person?: string
-
   @Field({ nullable: true, description: 'asterisk value for the geoKeywords field' })
   public asterisk_date_geoKeywords?: string
 
@@ -117,14 +99,7 @@ export class ObjectsZoomLevel3DetailType extends BaseObjectsZoomLevel3DetailType
 }
 
 @ObjectType()
-class ObjectRelationsAsteriskType extends PickType(ObjectAsteriskType, [
-  'asterisk_date_person',
-  'asterisk_name_person',
-  'asterisk_subject_person',
-]) {}
-
-@ObjectType()
-export class ObjectRelationsType extends ObjectRelationsAsteriskType {
+export class ObjectRelationsType {
   @Field(() => String, { nullable: true })
   public idRelation?: string | null
 

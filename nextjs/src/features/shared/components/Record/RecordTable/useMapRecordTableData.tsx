@@ -44,11 +44,11 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
               { id: '2', value: record.referenceNumber },
               { id: '3', value: record.descriptionLevel },
             ],
-            TableBodyAsteriskItem: {
-              asteriskDate: record.asterisk_date_person ?? null,
-              asteriskName: record.asterisk_name_person ?? null,
-              asteriskSubject: record.asterisk_subject_person ?? null,
-            },
+            // TableBodyAsteriskItem: {
+            //   asteriskDate: record.asterisk_date_relation ?? null,
+            //   asteriskName: record.asterisk_name_relation ?? null,
+            //   asteriskSubject: record.asterisk_subject_relation ?? null,
+            // },
           }
         })
       }
@@ -84,11 +84,11 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
               { id: '2', value: record.referenceNumber },
               { id: '3', value: record.period },
             ],
-            TableBodyAsteriskItem: {
-              asteriskDate: record.asterisk_date_person ?? null,
-              asteriskName: record.asterisk_name_person ?? null,
-              asteriskSubject: record.asterisk_subject_person ?? null,
-            },
+            // TableBodyAsteriskItem: {
+            //   asteriskDate: record.asterisk_date_relation ?? null,
+            //   asteriskName: record.asterisk_name_relation ?? null,
+            //   asteriskSubject: record.asterisk_subject_relation ?? null,
+            // },
           }
         })
       }
@@ -160,6 +160,11 @@ export const useMapRecordTableData = (data: DataType[] | undefined, category: Ca
               { id: '2', value: record.occupation },
               { id: '3', value: record.period },
             ],
+            // TableBodyAsteriskItem: {
+            //   asteriskDate: record.asterisk_date_relation ?? null,
+            //   asteriskName: record.asterisk_name_relation ?? null,
+            //   asteriskSubject: record.asterisk_subject_relation ?? null,
+            // },
           }
         })
       }

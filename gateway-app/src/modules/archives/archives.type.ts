@@ -7,24 +7,6 @@ import { ExternalSource } from '../triply/triply.service'
 
 @ObjectType()
 export class ArchiveAsteriskType {
-  @Field({
-    nullable: true,
-    description: 'asterisk value for the person field',
-  })
-  public asterisk_subject_person?: string
-
-  @Field({
-    nullable: true,
-    description: 'the date the asterisk value was added to the person field',
-  })
-  public asterisk_date_person?: string
-
-  @Field({
-    nullable: true,
-    description: 'the person that added the asterisk value for the person field',
-  })
-  public asterisk_name_person?: string
-
   @Field({ nullable: true, description: 'asterisk value for the content field' })
   public asterisk_date_content?: string
 
@@ -148,14 +130,7 @@ export class ArchiveZoomLevel3DetailType extends BaseArchiveZoomLevel3DetailType
 }
 
 @ObjectType()
-class ArchiveRelationsAsteriskType extends PickType(ArchiveAsteriskType, [
-  'asterisk_date_person',
-  'asterisk_name_person',
-  'asterisk_subject_person',
-]) {}
-
-@ObjectType()
-export class ArchiveRelationsType extends ArchiveRelationsAsteriskType {
+export class ArchiveRelationsType {
   @Field(() => String, { nullable: true })
   public idRelation?: string | null
 

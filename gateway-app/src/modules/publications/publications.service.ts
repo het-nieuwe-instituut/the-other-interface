@@ -154,7 +154,7 @@ export class PublicationsService {
       this.ZoomLevel3Endpoint,
       publicationsDetailZoomLevel3DataKeys,
       { page: 1, pageSize: 2 },
-      { id, locale }
+      { id, language: locale }
     )
 
     return {
@@ -175,7 +175,7 @@ export class PublicationsService {
       this.ZoomLevel3RelationsEndpoint,
       publicationRelationsKeys,
       { page: paginationArgs.page ?? 1, pageSize: paginationArgs.pageSize ?? 5 },
-      { id, type, locale }
+      { id, type, language: locale }
     )
     const output = TriplyUtils.sanitizeObjectArray(
       result.data,
