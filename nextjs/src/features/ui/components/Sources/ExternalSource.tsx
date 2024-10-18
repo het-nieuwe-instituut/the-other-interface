@@ -51,6 +51,8 @@ export const ExternalSourceLink = ({
     <div className="inline-block ">
       <NextLink
         href={externalSourceUrl}
+        target="_blank"
+        rel="noopener noreferrer"
         className={cn(
           className,
           'flex items-center relative',
