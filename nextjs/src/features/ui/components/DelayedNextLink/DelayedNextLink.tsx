@@ -12,7 +12,7 @@ export const DelayedNextLink = React.forwardRef<HTMLAnchorElement, DelayedNextLi
   (props: DelayedNextLinkProps, ref) => {
     const { delay, onClick, disabled = false, ...restProps } = props
     const router = useRouter()
-    const { stop, start } = useContext(PulseContext)
+    const { stop } = useContext(PulseContext)
     const uniqueIdRef = React.useRef<string>(uniqueId())
     const timeout = useRef<NodeJS.Timeout>()
     useEffect(() => {
@@ -35,9 +35,11 @@ export const DelayedNextLink = React.forwardRef<HTMLAnchorElement, DelayedNextLi
               router.prefetch(url)
               setTimeout(() => {
                 router.push(url)
-                timeout.current = setTimeout(() => {
-                  start(uniqueIdRef.current)
-                }, delay + 200)
+                // remove for now
+                // timeout.current = setTimeout(() => {
+                //   // timeout called someplace in lifecycle where it shouldn't and doesn't clean itself up
+                //   start(uniqueIdRef.current)
+                // }, delay + 200)
               }, delay)
             }
           }
