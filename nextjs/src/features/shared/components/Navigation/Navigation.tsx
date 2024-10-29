@@ -73,7 +73,7 @@ export const Navigation = () => {
                   {tNavigation('aboutDescription')}
                 </p>
                 <MenuNavLinkButton
-                  href={'/readmore'}
+                  href={`/readmore?lang=${locale}`}
                   variant={'menuPrimary'}
                   color={'invertedPaleHover'}
                 >
@@ -82,7 +82,7 @@ export const Navigation = () => {
               </div>
               <div className="flex flex-col">
                 <MenuNavLinkButton
-                  href={'/collection'}
+                  href={`/collection?lang=${locale}`}
                   variant={'menuSecondary'}
                   color={'invertedPaleHover'}
                   className="mb-4"
@@ -90,7 +90,7 @@ export const Navigation = () => {
                   {tNavigation('theCollection')}
                 </MenuNavLinkButton>
                 <MenuNavLinkButton
-                  href={'/asterisk'}
+                  href={`/asterisk?lang=${locale}`}
                   variant={'menuSecondary'}
                   color={'invertedPaleHover'}
                   className="mb-4"
@@ -98,7 +98,7 @@ export const Navigation = () => {
                   {tNavigation('asterisk')}
                 </MenuNavLinkButton>
                 <MenuNavLinkButton
-                  href={'/externalSources'}
+                  href={`/externalSources?lang=${locale}`}
                   variant={'menuSecondary'}
                   color={'invertedPaleHover'}
                   className="mb-4"
@@ -106,7 +106,7 @@ export const Navigation = () => {
                   {tNavigation('externalSources')}
                 </MenuNavLinkButton>
                 <MenuNavLinkButton
-                  href={'/contribute'}
+                  href={`/contribute?lang=${locale}`}
                   variant={'menuSecondary'}
                   color={'invertedPaleHover'}
                 >
