@@ -8,6 +8,7 @@ import { WELCOME_PAGE_Z_INDEX } from '../../constants/mainConstants'
 import { useLooseTypeSafeTranslation } from '../../hooks/translations'
 import { useLocale } from '../../hooks/useLocale'
 import StorageService from '../../services/storageService'
+import { GalaxyTopRight } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
 
 const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
   const { t: tCommon, lang } = useLooseTypeSafeTranslation('common')
@@ -64,6 +65,9 @@ const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
           transform: 'translateZ(0)', // Ensure GPU acceleration
         }}
       >
+        <div className="flex max-w-[90em] items-center justify-end px-10 py-5">
+          <GalaxyTopRight hideMenu={true} />
+        </div>
         <div
           key={`${locale}-${lang}`} // needed to force re-render the component when locale changes
           className="relative inset-x-0 flex h-screen max-w-screen-xl flex-col justify-center px-5 md:px-6"
