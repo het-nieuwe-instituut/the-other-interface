@@ -35,11 +35,6 @@ export const DelayedNextLink = React.forwardRef<HTMLAnchorElement, DelayedNextLi
               router.prefetch(url)
               setTimeout(() => {
                 router.push(url)
-                // remove for now
-                // timeout.current = setTimeout(() => {
-                //   // timeout called someplace in lifecycle where it shouldn't and doesn't clean itself up
-                //   start(uniqueIdRef.current)
-                // }, delay + 200)
               }, delay)
             }
           }
