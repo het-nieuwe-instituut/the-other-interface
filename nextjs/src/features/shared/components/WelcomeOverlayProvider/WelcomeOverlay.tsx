@@ -27,6 +27,10 @@ const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
 
   const closeOverlay = useCallback(() => {
     setShowOverlay(false)
+  }, [])
+
+  const closeOverlayPermanently = useCallback(() => {
+    setShowOverlay(false)
 
     StorageService.setItem('hasSeenWelcomeOverlay', 'true')
   }, [])
@@ -95,14 +99,24 @@ const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
           >
             {tCommon('welcomeWarning')}
           </p>
-          <Button
-            intent={'invertedSecondary'}
-            className="mt-8 w-[185px] font-times-dot"
-            onClick={closeOverlay}
-            tabIndex={0}
-          >
-            {tCommon('welcomeButton')}
-          </Button>
+          <div className="flex gap-4">
+            <Button
+              intent={'invertedSecondary'}
+              className="mt-8 w-[185px] font-times-dot"
+              onClick={closeOverlay}
+              tabIndex={0}
+            >
+              {tCommon('welcomeButton')}
+            </Button>
+            <Button
+              intent={'invertedSecondary'}
+              className="mt-8 w-[185px] font-times-dot"
+              onClick={closeOverlayPermanently}
+              tabIndex={0}
+            >
+              {tCommon('showAgainButton')}
+            </Button>
+          </div>
         </div>
       </div>
     </div>
