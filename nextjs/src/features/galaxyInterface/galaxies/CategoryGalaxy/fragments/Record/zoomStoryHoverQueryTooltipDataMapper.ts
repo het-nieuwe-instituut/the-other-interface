@@ -14,7 +14,7 @@ export const zoomStoryHoverQueryTooltipDataMapper = (
     })
     .join(', ')
 
-  const titleWithAuthor = joinNullableStrings(' ', title, `(${authorsList})`)
+  const titleWithAuthor = joinNullableStrings(' ', title, authorsList ? `(${authorsList})` : '')
 
   return {
     title: titleWithAuthor,
