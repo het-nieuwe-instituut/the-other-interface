@@ -10,7 +10,7 @@ import React, { useContext } from 'react'
 import { useSelector } from 'react-redux'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
-import { Pulse } from '../../components/Pulse/Pulse'
+import { Pulse, PulseContext } from '../../components/Pulse/Pulse'
 import { ThemeTitle } from '../../components/ThemeTitle/ThemeTitle'
 import {
   GalaxyPaginationAnimationStateContext,
@@ -69,6 +69,7 @@ const MainGalaxyContent = React.memo(() => {
   const { t } = useTypeSafeTranslation('navigation')
   const { t: commonT } = useTypeSafeTranslation('common')
   const galaxyPaginationAnimationState = useContext(GalaxyPaginationAnimationStateContext)
+  const pulseContext = React.useContext(PulseContext)
   const isSearchModeActive = useSelector((state: State) => state.shared.isSearchModeActive)
   const searchParams = useSearchParams()
   const currentPage = parseInt(searchParams?.get('page') ?? '1')
@@ -86,11 +87,14 @@ const MainGalaxyContent = React.memo(() => {
   const stories = mainData?.stories ?? []
   const nextStories = nextData?.stories ?? []
 
-  const { increasePageNumber, decreasePageNumber } = useSearchParamPagination(totalPages, false)
+  const { increasePageNumber, decreasePageNumber } = useSearchParamPagination(
+    totalPages,
+    isMainLoading
+  )
   useArrowNavigation({
     onLeft: handleLeftClick,
     onRight: handleRightClick,
-    disabled: isSearchModeActive,
+    disabled: isSearchModeActive || isMainLoading,
   })
 
   const renderMainContent = () => {
@@ -122,6 +126,8 @@ const MainGalaxyContent = React.memo(() => {
     if (isMainLoading) {
       return <Pulse />
     }
+
+    pulseContext.activePulses.forEach(pulseContext.stop)
 
     return (
       <>
