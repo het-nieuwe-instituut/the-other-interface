@@ -79,7 +79,7 @@ const MainGalaxyContent = React.memo(() => {
     isLoading: isMainLoading,
     isError,
   } = useThemesQuery({ page: currentPage })
-  const { data: nextData } = useThemesQuery({ page: currentPage + 1 })
+  const { data: nextData, isLoading: isNextLoading } = useThemesQuery({ page: currentPage + 1 })
 
   const pagination = mainData?.pagination
   const totalPages = pagination?.pageCount || 0
@@ -94,10 +94,17 @@ const MainGalaxyContent = React.memo(() => {
   useArrowNavigation({
     onLeft: handleLeftClick,
     onRight: handleRightClick,
-    disabled: isSearchModeActive || isMainLoading,
+    disabled: isSearchModeActive || isMainLoading || isNextLoading,
   })
 
   const renderMainContent = () => {
+    if (isMainLoading) {
+      return <Pulse />
+    }
+
+    // there might be some pulses left that should be stopped
+    pulseContext.activePulses.forEach(pulseContext.stop)
+
     if (isError) {
       return (
         <div className="flex h-full items-center justify-center bg-pink-50 px-5 backdrop-blur-[2px] md:px-6">
@@ -123,12 +130,6 @@ const MainGalaxyContent = React.memo(() => {
       )
     }
 
-    if (isMainLoading) {
-      return <Pulse />
-    }
-
-    pulseContext.activePulses.forEach(pulseContext.stop)
-
     return (
       <>
         <Stories stories={stories} nextStories={nextStories} />
@@ -150,7 +151,7 @@ const MainGalaxyContent = React.memo(() => {
             <GalaxyPagination
               currentPageNumber={currentPage || 0} // IMPORTANT: This is a temporary fix for issues with pagination. Not to be used elsewhere.
               pageAmount={pagination?.pageCount || 0}
-              isResultAmountLoading={isMainLoading}
+              isResultAmountLoading={isSearchModeActive || isMainLoading || isNextLoading}
               handleLeftClick={handleLeftClick}
               handleRightClick={handleRightClick}
               isResultEmpty={stories.length === 0}

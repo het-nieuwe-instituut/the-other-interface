@@ -21,7 +21,7 @@ export type StoriesData = NonNullable<
 export type StoryData = NonNullable<StoriesData>[0]
 export type StoryComponentsDynamicZone = NonNullable<NonNullable<StoryData>['components']>
 
-export function useThemesQuery({ page }: { page: number; fromCacheOnly?: boolean }) {
+export function useThemesQuery({ page }: { page: number }) {
   const lang = useLocale()
   const { isDraftMode } = useSelector((state: State) => state.shared)
 
