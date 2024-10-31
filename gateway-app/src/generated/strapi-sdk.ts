@@ -6278,6 +6278,7 @@ export type StoriesWithPublicationDateQuery = {
 }
 
 export type StoriesWithThumbnailQueryVariables = Exact<{
+  pageSize?: InputMaybe<Scalars['Int']>
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
@@ -9118,8 +9119,8 @@ export const StoriesWithPublicationDateDocument = gql`
   ${ComponentCorePublicationDateFragmentFragmentDoc}
 `
 export const StoriesWithThumbnailDocument = gql`
-  query storiesWithThumbnail($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-    stories(filters: { id: { in: $ids } }, locale: $lang) {
+  query storiesWithThumbnail($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {

@@ -276,7 +276,10 @@ export class StoryService {
   public getThumbnail = async (
     ids: readonly string[]
   ): Promise<(ComponentCoreImageThumbnail | null)[]> => {
-    const res = await this.strapiGqlSdk.storiesWithThumbnail({ ids: [...ids] })
+    const res = await this.strapiGqlSdk.storiesWithThumbnail({
+      pageSize: ids.length,
+      ids: [...ids],
+    })
     if (!res.stories) {
       return []
     }
