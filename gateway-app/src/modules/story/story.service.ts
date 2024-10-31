@@ -38,7 +38,7 @@ export class StoryService {
       return []
     }
 
-    const res = await this.strapiGqlSdk.storiesWithAuthors({ ids: [...ids] })
+    const res = await this.strapiGqlSdk.storiesWithAuthors({ pageSize: ids.length, ids: [...ids] })
     if (!res.stories) {
       return []
     }
@@ -59,7 +59,10 @@ export class StoryService {
       return []
     }
 
-    const res = await this.strapiGqlSdk.storiesWithLocations({ ids: [...ids] })
+    const res = await this.strapiGqlSdk.storiesWithLocations({
+      pageSize: ids.length,
+      ids: [...ids],
+    })
     if (!res.stories) {
       return []
     }
@@ -79,7 +82,7 @@ export class StoryService {
       return []
     }
 
-    const res = await this.strapiGqlSdk.storiesWithThemes({ ids: [...ids] })
+    const res = await this.strapiGqlSdk.storiesWithThemes({ pageSize: ids.length, ids: [...ids] })
     if (!res.stories) {
       return []
     }
@@ -101,7 +104,10 @@ export class StoryService {
       return []
     }
 
-    const res = await this.strapiGqlSdk.storiesWithParentStory({ ids: [...ids] })
+    const res = await this.strapiGqlSdk.storiesWithParentStory({
+      pageSize: ids.length,
+      ids: [...ids],
+    })
     if (!res.stories) {
       return []
     }
@@ -121,7 +127,10 @@ export class StoryService {
       return []
     }
 
-    const res = await this.strapiGqlSdk.storiesWithChildStories({ ids: [...ids] })
+    const res = await this.strapiGqlSdk.storiesWithChildStories({
+      pageSize: ids.length,
+      ids: [...ids],
+    })
 
     return ids.map(id => {
       const childStories = res.stories?.data.find(d => d.id === id)?.attributes?.child_stories
@@ -148,7 +157,7 @@ export class StoryService {
       return []
     }
 
-    const res = await this.strapiGqlSdk.storiesWithSiblings({ ids: [...ids] })
+    const res = await this.strapiGqlSdk.storiesWithSiblings({ pageSize: ids.length, ids: [...ids] })
 
     return ids.map(id => {
       const sbilings = res.stories?.data.find(d => d.id === id)?.attributes?.parent_story?.data
@@ -169,7 +178,10 @@ export class StoryService {
       return []
     }
 
-    const res = await this.strapiGqlSdk.storiesWithComponents({ ids: [...ids] })
+    const res = await this.strapiGqlSdk.storiesWithComponents({
+      pageSize: ids.length,
+      ids: [...ids],
+    })
 
     return ids.map(id => {
       const componenets = res.stories?.data.find(d => d.id === id)?.attributes?.components
@@ -187,7 +199,10 @@ export class StoryService {
       return []
     }
 
-    const res = await this.strapiGqlSdk.storiesWithLocalizations({ ids: [...ids] })
+    const res = await this.strapiGqlSdk.storiesWithLocalizations({
+      pageSize: ids.length,
+      ids: [...ids],
+    })
 
     return ids.map(id => {
       const localizations = res.stories?.data.find(d => d.id === id)?.attributes?.localizations
@@ -204,7 +219,10 @@ export class StoryService {
       return []
     }
 
-    const res = await this.strapiGqlSdk.storiesWithTriplyRecords({ ids: [...ids] })
+    const res = await this.strapiGqlSdk.storiesWithTriplyRecords({
+      pageSize: ids.length,
+      ids: [...ids],
+    })
 
     return ids.map(id => {
       const triplyRecords = res.stories?.data.find(d => d.id === id)?.attributes?.triplyRecords
@@ -223,7 +241,10 @@ export class StoryService {
       return []
     }
 
-    const res = await this.strapiGqlSdk.storiesWithStoryLinks({ ids: [...ids] })
+    const res = await this.strapiGqlSdk.storiesWithStoryLinks({
+      pageSize: ids.length,
+      ids: [...ids],
+    })
 
     return ids.map(id => {
       const links = res.stories?.data.find(d => d.id === id)?.attributes?.storyLinks
@@ -242,7 +263,10 @@ export class StoryService {
       return []
     }
 
-    const res = await this.strapiGqlSdk.storiesWithTimeframe({ ids: [...ids] })
+    const res = await this.strapiGqlSdk.storiesWithTimeframe({
+      pageSize: ids.length,
+      ids: [...ids],
+    })
 
     return ids.map(id => {
       const timeframe = res.stories?.data.find(d => d.id === id)?.attributes?.timeframe
@@ -261,7 +285,10 @@ export class StoryService {
       return []
     }
 
-    const res = await this.strapiGqlSdk.storiesWithPublicationDate({ ids: [...ids] })
+    const res = await this.strapiGqlSdk.storiesWithPublicationDate({
+      pageSize: ids.length,
+      ids: [...ids],
+    })
 
     return ids.map(id => {
       const pubDate = res.stories?.data.find(d => d.id === id)?.attributes?.publicationDate

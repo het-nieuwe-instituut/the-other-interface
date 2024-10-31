@@ -247,8 +247,8 @@ query storyParentAndChildren($id: ID!) {
   }
 }
 
-query storiesWithAuthors($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-  stories(filters: { id: { in: $ids } }, locale: $lang) {
+query storiesWithAuthors($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+  stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
     data {
       id
       attributes {
@@ -267,8 +267,8 @@ query storiesWithAuthors($ids: [ID]!, $lang: I18NLocaleCode = "all") {
   }
 }
 
-query storiesWithLocations($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-  stories(filters: { id: { in: $ids } }, locale: $lang) {
+query storiesWithLocations($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+  stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
     data {
       id
       attributes {
@@ -285,8 +285,8 @@ query storiesWithLocations($ids: [ID]!, $lang: I18NLocaleCode = "all") {
   }
 }
 
-query storiesWithThemes($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-  stories(filters: { id: { in: $ids } }, locale: $lang) {
+query storiesWithThemes($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+  stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
     data {
       id
       attributes {
@@ -303,8 +303,8 @@ query storiesWithThemes($ids: [ID]!, $lang: I18NLocaleCode = "all") {
   }
 }
 
-query storiesWithParentStory($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-  stories(filters: { id: { in: $ids } }, locale: $lang) {
+query storiesWithParentStory($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+  stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
     data {
       id
       attributes {
@@ -318,8 +318,8 @@ query storiesWithParentStory($ids: [ID]!, $lang: I18NLocaleCode = "all") {
   }
 }
 
-query storiesWithChildStories($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-  stories(filters: { id: { in: $ids } }, locale: $lang) {
+query storiesWithChildStories($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+  stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
     data {
       id
       attributes {
@@ -333,8 +333,8 @@ query storiesWithChildStories($ids: [ID]!, $lang: I18NLocaleCode = "all") {
   }
 }
 
-query storiesWithSiblings($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-  stories(filters: { id: { in: $ids } }, locale: $lang) {
+query storiesWithSiblings($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+  stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
     data {
       id
       attributes {
@@ -355,8 +355,8 @@ query storiesWithSiblings($ids: [ID]!, $lang: I18NLocaleCode = "all") {
   }
 }
 
-query storiesWithComponents($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-  stories(filters: { id: { in: $ids } }, locale: $lang) {
+query storiesWithComponents($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+  stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
     data {
       id
       attributes {
@@ -408,11 +408,17 @@ query storiesWithComponents($ids: [ID]!, $lang: I18NLocaleCode = "all") {
 }
 
 query storiesWithLocalizations(
+  $pageSize: Int
   $ids: [ID]!
   $publicationState: PublicationState = LIVE
   $lang: I18NLocaleCode = "all"
 ) {
-  stories(filters: { id: { in: $ids } }, publicationState: $publicationState, locale: $lang) {
+  stories(
+    pagination: { pageSize: $pageSize }
+    filters: { id: { in: $ids } }
+    publicationState: $publicationState
+    locale: $lang
+  ) {
     data {
       id
       ...StoryFragment
@@ -427,8 +433,8 @@ query storiesWithLocalizations(
   }
 }
 
-query storiesWithTriplyRecords($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-  stories(filters: { id: { in: $ids } }, locale: $lang) {
+query storiesWithTriplyRecords($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+  stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
     data {
       id
       attributes {
@@ -442,8 +448,8 @@ query storiesWithTriplyRecords($ids: [ID]!, $lang: I18NLocaleCode = "all") {
   }
 }
 
-query storiesWithStoryLinks($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-  stories(filters: { id: { in: $ids } }, locale: $lang) {
+query storiesWithStoryLinks($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+  stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
     data {
       id
       attributes {
@@ -455,8 +461,8 @@ query storiesWithStoryLinks($ids: [ID]!, $lang: I18NLocaleCode = "all") {
   }
 }
 
-query storiesWithTimeframe($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-  stories(filters: { id: { in: $ids } }, locale: $lang) {
+query storiesWithTimeframe($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+  stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
     data {
       id
       attributes {
@@ -468,8 +474,8 @@ query storiesWithTimeframe($ids: [ID]!, $lang: I18NLocaleCode = "all") {
   }
 }
 
-query storiesWithPublicationDate($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-  stories(filters: { id: { in: $ids } }, locale: $lang) {
+query storiesWithPublicationDate($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+  stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
     data {
       id
       attributes {
