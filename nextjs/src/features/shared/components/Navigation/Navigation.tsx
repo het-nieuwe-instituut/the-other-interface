@@ -62,7 +62,7 @@ export const Navigation = () => {
                     className: 'text-pink-100 mb-5',
                   })}
                 >
-                  {tNavigation('explore_collection')}
+                  {tNavigation('about')}
                 </p>
                 <p
                   className={TypographyVariants({
