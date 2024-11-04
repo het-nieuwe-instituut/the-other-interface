@@ -60,7 +60,7 @@ export const CategoryGalaxy = () => {
           currentTemplate,
         }}
       >
-        <CategoryGalaxyContent key={`${pageNumber ?? '1'}`} />
+        <CategoryGalaxyContent key={`${category}-${pageNumber ?? '1'}`} />
       </CategoryGalaxyTemplateContext.Provider>
     </GalaxyPaginationAnimationStateProvider>
   )
