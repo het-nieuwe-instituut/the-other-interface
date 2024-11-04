@@ -5607,6 +5607,7 @@ export type StoryParentAndChildrenQuery = {
 }
 
 export type StoriesWithAuthorsQueryVariables = Exact<{
+  pageSize?: InputMaybe<Scalars['Int']>
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
@@ -5639,6 +5640,7 @@ export type StoriesWithAuthorsQuery = {
 }
 
 export type StoriesWithLocationsQueryVariables = Exact<{
+  pageSize?: InputMaybe<Scalars['Int']>
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
@@ -5666,6 +5668,7 @@ export type StoriesWithLocationsQuery = {
 }
 
 export type StoriesWithThemesQueryVariables = Exact<{
+  pageSize?: InputMaybe<Scalars['Int']>
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
@@ -5693,6 +5696,7 @@ export type StoriesWithThemesQuery = {
 }
 
 export type StoriesWithParentStoryQueryVariables = Exact<{
+  pageSize?: InputMaybe<Scalars['Int']>
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
@@ -5730,6 +5734,7 @@ export type StoriesWithParentStoryQuery = {
 }
 
 export type StoriesWithChildStoriesQueryVariables = Exact<{
+  pageSize?: InputMaybe<Scalars['Int']>
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
@@ -5767,6 +5772,7 @@ export type StoriesWithChildStoriesQuery = {
 }
 
 export type StoriesWithSiblingsQueryVariables = Exact<{
+  pageSize?: InputMaybe<Scalars['Int']>
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
@@ -5814,6 +5820,7 @@ export type StoriesWithSiblingsQuery = {
 }
 
 export type StoriesWithComponentsQueryVariables = Exact<{
+  pageSize?: InputMaybe<Scalars['Int']>
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
@@ -6122,6 +6129,7 @@ export type StoriesWithComponentsQuery = {
 }
 
 export type StoriesWithLocalizationsQueryVariables = Exact<{
+  pageSize?: InputMaybe<Scalars['Int']>
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   publicationState?: InputMaybe<PublicationState>
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
@@ -6168,6 +6176,7 @@ export type StoriesWithLocalizationsQuery = {
 }
 
 export type StoriesWithTriplyRecordsQueryVariables = Exact<{
+  pageSize?: InputMaybe<Scalars['Int']>
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
@@ -6199,6 +6208,7 @@ export type StoriesWithTriplyRecordsQuery = {
 }
 
 export type StoriesWithStoryLinksQueryVariables = Exact<{
+  pageSize?: InputMaybe<Scalars['Int']>
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
@@ -6228,6 +6238,7 @@ export type StoriesWithStoryLinksQuery = {
 }
 
 export type StoriesWithTimeframeQueryVariables = Exact<{
+  pageSize?: InputMaybe<Scalars['Int']>
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
@@ -6253,6 +6264,7 @@ export type StoriesWithTimeframeQuery = {
 }
 
 export type StoriesWithPublicationDateQueryVariables = Exact<{
+  pageSize?: InputMaybe<Scalars['Int']>
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
@@ -6278,6 +6290,7 @@ export type StoriesWithPublicationDateQuery = {
 }
 
 export type StoriesWithThumbnailQueryVariables = Exact<{
+  pageSize?: InputMaybe<Scalars['Int']>
   ids: Array<InputMaybe<Scalars['ID']>> | InputMaybe<Scalars['ID']>
   lang?: InputMaybe<Scalars['I18NLocaleCode']>
 }>
@@ -8851,8 +8864,8 @@ export const StoryParentAndChildrenDocument = gql`
   }
 `
 export const StoriesWithAuthorsDocument = gql`
-  query storiesWithAuthors($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-    stories(filters: { id: { in: $ids } }, locale: $lang) {
+  query storiesWithAuthors($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -8872,8 +8885,8 @@ export const StoriesWithAuthorsDocument = gql`
   }
 `
 export const StoriesWithLocationsDocument = gql`
-  query storiesWithLocations($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-    stories(filters: { id: { in: $ids } }, locale: $lang) {
+  query storiesWithLocations($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -8891,8 +8904,8 @@ export const StoriesWithLocationsDocument = gql`
   }
 `
 export const StoriesWithThemesDocument = gql`
-  query storiesWithThemes($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-    stories(filters: { id: { in: $ids } }, locale: $lang) {
+  query storiesWithThemes($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -8910,8 +8923,8 @@ export const StoriesWithThemesDocument = gql`
   }
 `
 export const StoriesWithParentStoryDocument = gql`
-  query storiesWithParentStory($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-    stories(filters: { id: { in: $ids } }, locale: $lang) {
+  query storiesWithParentStory($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -8927,8 +8940,8 @@ export const StoriesWithParentStoryDocument = gql`
   ${StoryFragmentFragmentDoc}
 `
 export const StoriesWithChildStoriesDocument = gql`
-  query storiesWithChildStories($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-    stories(filters: { id: { in: $ids } }, locale: $lang) {
+  query storiesWithChildStories($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -8944,8 +8957,8 @@ export const StoriesWithChildStoriesDocument = gql`
   ${StoryFragmentFragmentDoc}
 `
 export const StoriesWithSiblingsDocument = gql`
-  query storiesWithSiblings($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-    stories(filters: { id: { in: $ids } }, locale: $lang) {
+  query storiesWithSiblings($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -8968,8 +8981,8 @@ export const StoriesWithSiblingsDocument = gql`
   ${StoryFragmentFragmentDoc}
 `
 export const StoriesWithComponentsDocument = gql`
-  query storiesWithComponents($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-    stories(filters: { id: { in: $ids } }, locale: $lang) {
+  query storiesWithComponents($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -9035,11 +9048,17 @@ export const StoriesWithComponentsDocument = gql`
 `
 export const StoriesWithLocalizationsDocument = gql`
   query storiesWithLocalizations(
+    $pageSize: Int
     $ids: [ID]!
     $publicationState: PublicationState = LIVE
     $lang: I18NLocaleCode = "all"
   ) {
-    stories(filters: { id: { in: $ids } }, publicationState: $publicationState, locale: $lang) {
+    stories(
+      pagination: { pageSize: $pageSize }
+      filters: { id: { in: $ids } }
+      publicationState: $publicationState
+      locale: $lang
+    ) {
       data {
         id
         ...StoryFragment
@@ -9056,8 +9075,8 @@ export const StoriesWithLocalizationsDocument = gql`
   ${StoryFragmentFragmentDoc}
 `
 export const StoriesWithTriplyRecordsDocument = gql`
-  query storiesWithTriplyRecords($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-    stories(filters: { id: { in: $ids } }, locale: $lang) {
+  query storiesWithTriplyRecords($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -9073,8 +9092,8 @@ export const StoriesWithTriplyRecordsDocument = gql`
   ${BaseTriplyRecordFragmentFragmentDoc}
 `
 export const StoriesWithStoryLinksDocument = gql`
-  query storiesWithStoryLinks($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-    stories(filters: { id: { in: $ids } }, locale: $lang) {
+  query storiesWithStoryLinks($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -9088,8 +9107,8 @@ export const StoriesWithStoryLinksDocument = gql`
   ${ComponentModulesButtonsModuleFragmentFragmentDoc}
 `
 export const StoriesWithTimeframeDocument = gql`
-  query storiesWithTimeframe($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-    stories(filters: { id: { in: $ids } }, locale: $lang) {
+  query storiesWithTimeframe($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -9103,8 +9122,8 @@ export const StoriesWithTimeframeDocument = gql`
   ${ComponentCoreTimeframeFragmentFragmentDoc}
 `
 export const StoriesWithPublicationDateDocument = gql`
-  query storiesWithPublicationDate($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-    stories(filters: { id: { in: $ids } }, locale: $lang) {
+  query storiesWithPublicationDate($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {
@@ -9118,8 +9137,8 @@ export const StoriesWithPublicationDateDocument = gql`
   ${ComponentCorePublicationDateFragmentFragmentDoc}
 `
 export const StoriesWithThumbnailDocument = gql`
-  query storiesWithThumbnail($ids: [ID]!, $lang: I18NLocaleCode = "all") {
-    stories(filters: { id: { in: $ids } }, locale: $lang) {
+  query storiesWithThumbnail($pageSize: Int, $ids: [ID]!, $lang: I18NLocaleCode = "all") {
+    stories(pagination: { pageSize: $pageSize }, filters: { id: { in: $ids } }, locale: $lang) {
       data {
         id
         attributes {

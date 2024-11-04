@@ -17,9 +17,10 @@ export const DelayedNextLink = React.forwardRef<HTMLAnchorElement, DelayedNextLi
     const timeout = useRef<NodeJS.Timeout>()
     useEffect(() => {
       const ref = uniqueIdRef.current
+      const timeoutRef = timeout.current
       return () => {
         stop(ref)
-        timeout.current && clearTimeout(timeout.current)
+        timeoutRef && clearTimeout(timeoutRef)
       }
     }, [stop])
     return (

@@ -90,7 +90,7 @@ export const useDrawLines = ({
     return () => {
       window.removeEventListener('resize', drawAfterLayout)
     }
-  }, [template, drawLinesForTemplate, selector, page, lang, stories])
+  }, [template, delay, drawLinesForTemplate, selector, page, lang, stories])
 
   useEffect(() => {
     if (hideLines) {
