@@ -7,7 +7,7 @@ import { Locale } from 'src/generated/graphql'
 import { CollectionHighlightsFilter } from '../components/GalaxyWrapper/Suggestions/suggestions.constants'
 
 export const getUrlLandingPageUrl = (lang: Locale, category: CloudCategory | 'stories') => {
-  const url = new URL(process.env.NEXT_PUBLIC_URL + `/landingpage`)
+  const url = new URL(process.env.NEXT_PUBLIC_URL + `landingpage`)
 
   url.searchParams.set('category', category)
   if (category !== 'stories') {
