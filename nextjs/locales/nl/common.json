@@ -31,6 +31,7 @@
   "welcomeDescription": "Het collectieplatform is hét platform van Nieuwe Instituut om de Rijkscollectie voor Nederlandse Architectuur en Stedenbouw online te ontdekken. Zoek in de collectie en lees de verhalen.",
   "welcomeWarning": "Let op: Alle collectiedata op het platform zijn automatisch naar het Engels vertaald.",
   "welcomeButton": "Start hier",
+  "showAgainButton": "Niet meer tonen",
   "learnAboutAsterisk": "Leer over Asterisk*",
   "learnAboutExternalDataSources": "Leer meer over externe bronnen",
   "showExternalSources": "Toon externe bronnen ({{count}})",
