@@ -263,11 +263,17 @@ function getAsteriskHeaderData(asteriskData?: AsterickProps | null): AsteriskHea
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         curr: any
       ) => {
-        if (curr.asterisk_subject_title && curr.asterisk_subject_title.endsWith(' (huidig)')) {
+        if (
+          curr.asterisk_subject_title &&
+          (curr.asterisk_subject_title.endsWith(' (huidig)') ||
+            curr.asterisk_subject_title.endsWith(' (current)'))
+        ) {
           return {
             asterisk_date_title: curr.asterisk_date_title,
             asterisk_name_title: curr.asterisk_name_title,
-            asterisk_subject_title: curr.asterisk_subject_title.replace(' (huidig)', ''),
+            asterisk_subject_title: curr.asterisk_subject_title.endsWith(' (huidig)')
+              ? curr.asterisk_subject_title.replace(' (huidig)', '')
+              : curr.asterisk_subject_title.replace(' (current)', ''),
           }
         }
         return acc
