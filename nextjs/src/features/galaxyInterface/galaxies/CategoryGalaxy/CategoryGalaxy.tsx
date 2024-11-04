@@ -47,6 +47,7 @@ export const CategoryGalaxy = () => {
     pageNumber
   )
   const category = useSearchParamCategory()
+  const search = useSearchParamSearchValue()
 
   if (!isSearchCategory(category)) {
     return <ErrorBox />
@@ -60,7 +61,7 @@ export const CategoryGalaxy = () => {
           currentTemplate,
         }}
       >
-        <CategoryGalaxyContent key={`${category}-${pageNumber ?? '1'}`} />
+        <CategoryGalaxyContent key={`${pageNumber ?? '1'}-${category}-${search}`} />
       </CategoryGalaxyTemplateContext.Provider>
     </GalaxyPaginationAnimationStateProvider>
   )
