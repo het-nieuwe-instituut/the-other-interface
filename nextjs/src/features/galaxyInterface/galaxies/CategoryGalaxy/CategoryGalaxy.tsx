@@ -48,6 +48,7 @@ export const CategoryGalaxy = () => {
     pageNumber
   )
   const category = useSearchParamCategory()
+  const search = useSearchParamSearchValue()
   const router = useRouter()
 
   useEffect(() => {
@@ -66,7 +67,7 @@ export const CategoryGalaxy = () => {
           currentTemplate,
         }}
       >
-        <CategoryGalaxyContent key={`${pageNumber ?? '1'}`} />
+        <CategoryGalaxyContent key={`${pageNumber ?? '1'}-${category}-${search}`} />
       </CategoryGalaxyTemplateContext.Provider>
     </GalaxyPaginationAnimationStateProvider>
   )
