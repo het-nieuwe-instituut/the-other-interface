@@ -42,6 +42,7 @@ export default async function Page() {
         {t('dataPartner')}
         <StaticPageLink external href={triplyUrl} label="Triply" />
       </StaticPageParagraph>
+      <StaticPageParagraph>{t('informationDesigner')}</StaticPageParagraph>
       <StaticPageParagraph>{t('visualIdentity')}</StaticPageParagraph>
       <StaticPageParagraph>
         {t('editorial')}
