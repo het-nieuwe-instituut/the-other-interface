@@ -108,7 +108,11 @@ const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
             >
               {tCommon('welcomeButton')}
             </Button>
-            <Checkbox label={tCommon('showAgainButton') || ''} onChange={setDontShowAgain} />
+            <Checkbox
+              className="text-blue-100"
+              label={tCommon('showAgainButton') || ''}
+              onChange={setDontShowAgain}
+            />
           </div>
         </div>
       </div>
