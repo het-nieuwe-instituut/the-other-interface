@@ -140,7 +140,6 @@ export class TriplyElasticSearchService {
   }
 
   private getQuery(searchText: string) {
-    const sanitizedText = this.escapeElasticsearchQuery(searchText)
     const filterValues = [
       'https://www.ica.org/standards/RiC/ontology#RecordSet',
       'https://schema.org/VisualArtwork',
@@ -151,53 +150,63 @@ export class TriplyElasticSearchService {
 
     return {
       bool: {
-        must: {
-          multi_match: {
-            query: sanitizedText,
-            fields: [
-              'https://www ica org/standards/RiC/ontology#title', // archives title
-              'https://schema org/name', // publications name & people name
-              'http://www w3 org/2004/02/skos/core#prefLabel', // objects prefLabel
-              'https://schema org/description', // people & object & publication description
-              'https://schema org/birthDate', // people birthDate
-              'https://schema org/startDate', // people & publication startDate
-              'https://schema org/foundingDate', // people foundingDate
-              // 'https://schema org/birthPlace', // people birthplace - wait
-              // https://schema.org/birthPlace > http://www.w3.org/2004/02/skos/core#prefLabel - wait
-              'https://schema org/foundingLocation', // people foundingLocation
-              'https://schema org/deathDate', // people deathDate
-              'https://schema org/endDate', // people endDate
-              'https://schema org/dissolutionDate', // people dissolutionDate
-              // 'https://schema org/deathPlace', // people deathPlace  - wait
-              // 'https://schema.org/deathPlace > http://www.w3.org/2004/02/skos/core#prefLabel'  - wait
-              // 'https://schema org/location', // people & publication location  - wait
-              // 'https://schema.org/location > http://www.w3.org/2004/02/skos/core#prefLabel'  - wait
-              // 'https://schema org/memberOf', // people association  - wait
-              // 'https://schema.org/memberOf > https://schema.org/name'  - wait
-              'https://schema org/creator', // object & article creator
-              // 'https://schema.org/creator > https://schema.org/name'  - wait
-              // 'https://schema.org/dateCreated > http://www.cidoc-crm.org/cidoc-crm/P82a_begin_of_the_begin', // object start date  - wait
-              // 'https://schema.org/dateCreated > http://www.cidoc-crm.org/cidoc-crm/P82b_end_of_the_end', // object end date  - wait
-              // 'https://schema.org/about > http://www.w3.org/2004/02/skos/core#prefLabel', // object related keywords  - wait
-              'https://www ica org/standards/RiC/ontology#hasOrHadLocation', // object geoKeyword
-              // 'https://schema.org/contentLocation > http://www.w3.org/2004/02/skos/core#prefLabel', // object geoKeyword  - wait
-              'https://schema org/publishedBy', // publication publisher
-              // 'https://schema.org/keywords > http://www.w3.org/2004/02/skos/core#prefLabel', // publication related keywords  - wait
-              // 'https://schema.org/contentLocation > http://www.w3.org/2004/02/skos/core#prefLabel', // publication geoKeyword  - wait
-              'https://www ica org/standards/RiC/ontology#scopeAndContent', // archive description
-              'https://www ica org/standards/RiC/ontology#hasBeginningDate', // archive period
-              'https://www ica org/standards/RiC/ontology#hasEndDate', // archive subject
-              // 'https://www.ica.org/standards/RiC/ontology#hasOrHadLocation > http://www.w3.org/2004/02/skos/core#prefLabel', // archive location  - wait
-            ],
-            fuzziness: 'AUTO',
-          },
-        },
+        ...this.getMatchQuery(searchText),
         filter: {
           bool: {
             should: filterValues.map(v => ({
               match_phrase: { 'http://www w3 org/1999/02/22-rdf-syntax-ns#type': v },
             })),
           },
+        },
+      },
+    }
+  }
+
+  private getMatchQuery(searchText: string) {
+    if (!searchText) {
+      return {}
+    }
+
+    return {
+      must: {
+        multi_match: {
+          query: this.escapeElasticsearchQuery(searchText),
+          fields: [
+            'https://www ica org/standards/RiC/ontology#title', // archives title
+            'https://schema org/name', // publications name & people name
+            'http://www w3 org/2004/02/skos/core#prefLabel', // objects prefLabel
+            'https://schema org/description', // people & object & publication description
+            'https://schema org/birthDate', // people birthDate
+            'https://schema org/startDate', // people & publication startDate
+            'https://schema org/foundingDate', // people foundingDate
+            // 'https://schema org/birthPlace', // people birthplace - wait
+            // https://schema.org/birthPlace > http://www.w3.org/2004/02/skos/core#prefLabel - wait
+            'https://schema org/foundingLocation', // people foundingLocation
+            'https://schema org/deathDate', // people deathDate
+            'https://schema org/endDate', // people endDate
+            'https://schema org/dissolutionDate', // people dissolutionDate
+            // 'https://schema org/deathPlace', // people deathPlace  - wait
+            // 'https://schema.org/deathPlace > http://www.w3.org/2004/02/skos/core#prefLabel'  - wait
+            // 'https://schema org/location', // people & publication location  - wait
+            // 'https://schema.org/location > http://www.w3.org/2004/02/skos/core#prefLabel'  - wait
+            // 'https://schema org/memberOf', // people association  - wait
+            // 'https://schema.org/memberOf > https://schema.org/name'  - wait
+            'https://schema org/creator', // object & article creator
+            // 'https://schema.org/creator > https://schema.org/name'  - wait
+            // 'https://schema.org/dateCreated > http://www.cidoc-crm.org/cidoc-crm/P82a_begin_of_the_begin', // object start date  - wait
+            // 'https://schema.org/dateCreated > http://www.cidoc-crm.org/cidoc-crm/P82b_end_of_the_end', // object end date  - wait
+            // 'https://schema.org/about > http://www.w3.org/2004/02/skos/core#prefLabel', // object related keywords  - wait
+            'https://www ica org/standards/RiC/ontology#hasOrHadLocation', // object geoKeyword
+            // 'https://schema.org/contentLocation > http://www.w3.org/2004/02/skos/core#prefLabel', // object geoKeyword  - wait
+            'https://schema org/publishedBy', // publication publisher
+            // 'https://schema.org/keywords > http://www.w3.org/2004/02/skos/core#prefLabel', // publication related keywords  - wait
+            // 'https://schema.org/contentLocation > http://www.w3.org/2004/02/skos/core#prefLabel', // publication geoKeyword  - wait
+            'https://www ica org/standards/RiC/ontology#scopeAndContent', // archive description
+            'https://www ica org/standards/RiC/ontology#hasBeginningDate', // archive period
+            'https://www ica org/standards/RiC/ontology#hasEndDate', // archive subject
+            // 'https://www.ica.org/standards/RiC/ontology#hasOrHadLocation > http://www.w3.org/2004/02/skos/core#prefLabel', // archive location  - wait
+          ],
+          fuzziness: 'AUTO',
         },
       },
     }
