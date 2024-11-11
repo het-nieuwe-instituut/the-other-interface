@@ -8,11 +8,14 @@ import { WELCOME_PAGE_Z_INDEX } from '../../constants/mainConstants'
 import { useLooseTypeSafeTranslation } from '../../hooks/translations'
 import { useLocale } from '../../hooks/useLocale'
 import StorageService from '../../services/storageService'
+import { GalaxyTopRight } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
+import { Checkbox } from '@/features/ui/components/checkbox/component'
 
 const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
   const { t: tCommon, lang } = useLooseTypeSafeTranslation('common')
   const hasOpened = useRef(false)
   const [showOverlay, setShowOverlay] = useState(false)
+  const [dontShowAgain, setDontShowAgain] = useState(false)
   const locale = useLocale()
   const [, forceUpdate] = useState(0)
 
@@ -27,8 +30,10 @@ const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
   const closeOverlay = useCallback(() => {
     setShowOverlay(false)
 
-    StorageService.setItem('hasSeenWelcomeOverlay', 'true')
-  }, [])
+    if (dontShowAgain) {
+      StorageService.setItem('hasSeenWelcomeOverlay', 'true')
+    }
+  }, [dontShowAgain])
 
   // disable scroll when overlay is open
   useEffect(() => {
@@ -64,6 +69,9 @@ const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
           transform: 'translateZ(0)', // Ensure GPU acceleration
         }}
       >
+        <div className="flex max-w-[90em] items-center justify-end px-10 py-5">
+          <GalaxyTopRight hideMenu={true} />
+        </div>
         <div
           key={`${locale}-${lang}`} // needed to force re-render the component when locale changes
           className="relative inset-x-0 flex h-screen max-w-screen-xl flex-col justify-center px-5 md:px-6"
@@ -91,14 +99,21 @@ const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
           >
             {tCommon('welcomeWarning')}
           </p>
-          <Button
-            intent={'invertedSecondary'}
-            className="mt-8 w-[185px] font-times-dot"
-            onClick={closeOverlay}
-            tabIndex={0}
-          >
-            {tCommon('welcomeButton')}
-          </Button>
+          <div>
+            <Button
+              intent={'invertedSecondary'}
+              className="mb-4 mt-8 w-[185px] font-times-dot"
+              onClick={closeOverlay}
+              tabIndex={0}
+            >
+              {tCommon('welcomeButton')}
+            </Button>
+            <Checkbox
+              className="text-blue-100"
+              label={tCommon('showAgainButton') || ''}
+              onChange={setDontShowAgain}
+            />
+          </div>
         </div>
       </div>
     </div>

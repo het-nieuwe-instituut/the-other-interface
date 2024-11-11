@@ -17,7 +17,7 @@ import { isSearchCategory } from '@/features/shared/utils/categories'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import { useArrowNavigation } from '@/features/ui/hooks/useArrowNavigation'
 import { useSearchParamPagination } from '@/features/ui/hooks/useSearchParamPagination'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { GalaxyFooter } from '../../components/GalaxyWrapper/GalaxyFooter/GalaxyFooter'
 import { GalaxyPagination } from '../../components/GalaxyWrapper/GalaxyPagination/GalaxyPagination'
@@ -29,6 +29,7 @@ import {
 import { Records } from './fragments'
 import { PositioningTemplate, positioningTemplates } from './fragments/Records/positioningTemplates'
 import { useRemoveFallbackSearchParam } from './useRemoveFallbackSearchParam'
+import { useRouter } from 'next/navigation'
 
 export const CategoryGalaxyTemplateContext = React.createContext<{
   previousTemplate?: PositioningTemplate
@@ -47,6 +48,12 @@ export const CategoryGalaxy = () => {
     pageNumber
   )
   const category = useSearchParamCategory()
+  const search = useSearchParamSearchValue()
+  const router = useRouter()
+
+  useEffect(() => {
+    router.refresh()
+  }, [router])
 
   if (!isSearchCategory(category)) {
     return <ErrorBox />
@@ -60,7 +67,7 @@ export const CategoryGalaxy = () => {
           currentTemplate,
         }}
       >
-        <CategoryGalaxyContent key={`${pageNumber ?? '1'}`} />
+        <CategoryGalaxyContent key={`${pageNumber ?? '1'}-${category}-${search}`} />
       </CategoryGalaxyTemplateContext.Provider>
     </GalaxyPaginationAnimationStateProvider>
   )

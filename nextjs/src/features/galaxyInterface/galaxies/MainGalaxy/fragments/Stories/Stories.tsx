@@ -37,6 +37,7 @@ export const Stories: React.FC<Props> = ({ stories, nextStories }) => {
     selector: '.story-grid-item',
     template: originalTemplateIndex,
     stories: positionedStories,
+    delay: 350,
   })
 
   const animations = useMemo(() => {

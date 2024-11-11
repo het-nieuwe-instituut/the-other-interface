@@ -10,7 +10,11 @@ import { Fragment, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { MenuButton } from '../../../../shared/components/MenuButton/MenuButton'
 
-export const GalaxyTopRight: React.FC = () => {
+interface Props {
+  hideMenu?: boolean
+}
+
+export const GalaxyTopRight: React.FC<Props> = ({ hideMenu = false }) => {
   const isMenuOpen = useSelector((state: State) => state.shared.isMenuOpen)
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -72,7 +76,9 @@ export const GalaxyTopRight: React.FC = () => {
           )
         })}
       </div>
-      <MenuButton />
+      <div className={cn(hideMenu ? 'invisible' : 'visible')}>
+        <MenuButton />
+      </div>
     </div>
   )
 }

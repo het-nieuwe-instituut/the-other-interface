@@ -3,7 +3,7 @@ import { NavButton } from '@/features/ui/components/nav-button/component'
 import { TypographyVariants } from '@/features/ui/components/typography/variants'
 import ExternalLink from '@/features/ui/icons/external-link.svg'
 import NextLink, { LinkProps } from 'next/link'
-import { PropsWithChildren, useMemo } from 'react'
+import { PropsWithChildren, useEffect, useMemo, useState } from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { PlacesType } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
@@ -31,6 +31,29 @@ export interface ReadMoreTooltipProps extends PropsWithChildren {
 }
 
 export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
+  const [isVisible, setIsVisible] = useState(true)
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout
+
+    const handleScroll = () => {
+      setIsVisible(false)
+
+      clearTimeout(timeout)
+
+      timeout = setTimeout(() => {
+        setIsVisible(true)
+      }, 100)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      clearTimeout(timeout)
+    }
+  }, [])
+
   const {
     children,
     title,
@@ -48,6 +71,7 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
     hideTooltip,
     floating,
   } = props
+
   const content = useMemo(
     () =>
       ReactDOMServer.renderToStaticMarkup(
@@ -62,10 +86,11 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
           error={error}
           color={color}
           place={place}
-          hideTooltip={hideTooltip}
+          hideTooltip={hideTooltip || !isVisible}
         />
       ),
     [
+      disableLineClamp,
       isLoading,
       title,
       description,
@@ -76,6 +101,7 @@ export const ReadMoreTooltip = (props: ReadMoreTooltipProps) => {
       color,
       place,
       hideTooltip,
+      isVisible,
     ]
   )
 

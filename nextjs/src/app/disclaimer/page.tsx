@@ -42,6 +42,10 @@ export default async function Page() {
         {t('dataPartner')}
         <StaticPageLink external href={triplyUrl} label="Triply" />
       </StaticPageParagraph>
+      <StaticPageParagraph>
+        {t('informationDesigner')}
+        <StaticPageLink href="https://theworldasflatland.net/" label="Gerlinde Schuller" external />
+      </StaticPageParagraph>
       <StaticPageParagraph>{t('visualIdentity')}</StaticPageParagraph>
       <StaticPageParagraph>
         {t('editorial')}
