@@ -9,11 +9,13 @@ import { useLooseTypeSafeTranslation } from '../../hooks/translations'
 import { useLocale } from '../../hooks/useLocale'
 import StorageService from '../../services/storageService'
 import { GalaxyTopRight } from '@/features/galaxyInterface/components/GalaxyWrapper/GalaxyTopRight/GalaxyTopRight'
+import { Checkbox } from '@/features/ui/components/checkbox/component'
 
 const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
   const { t: tCommon, lang } = useLooseTypeSafeTranslation('common')
   const hasOpened = useRef(false)
   const [showOverlay, setShowOverlay] = useState(false)
+  const [dontShowAgain, setDontShowAgain] = useState(false)
   const locale = useLocale()
   const [, forceUpdate] = useState(0)
 
@@ -27,13 +29,11 @@ const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
 
   const closeOverlay = useCallback(() => {
     setShowOverlay(false)
-  }, [])
 
-  const closeOverlayPermanently = useCallback(() => {
-    setShowOverlay(false)
-
-    StorageService.setItem('hasSeenWelcomeOverlay', 'true')
-  }, [])
+    if (dontShowAgain) {
+      StorageService.setItem('hasSeenWelcomeOverlay', 'true')
+    }
+  }, [dontShowAgain])
 
   // disable scroll when overlay is open
   useEffect(() => {
@@ -99,23 +99,16 @@ const WelcomeOverlay = React.memo(({ className }: { className?: string }) => {
           >
             {tCommon('welcomeWarning')}
           </p>
-          <div className="flex gap-4">
+          <div>
             <Button
               intent={'invertedSecondary'}
-              className="mt-8 w-[185px] font-times-dot"
+              className="mb-4 mt-8 w-[185px] font-times-dot"
               onClick={closeOverlay}
               tabIndex={0}
             >
               {tCommon('welcomeButton')}
             </Button>
-            <Button
-              intent={'invertedSecondary'}
-              className="mt-8 w-[185px] font-times-dot"
-              onClick={closeOverlayPermanently}
-              tabIndex={0}
-            >
-              {tCommon('showAgainButton')}
-            </Button>
+            <Checkbox label={tCommon('showAgainButton') || ''} onChange={setDontShowAgain} />
           </div>
         </div>
       </div>
